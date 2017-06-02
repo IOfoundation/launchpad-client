@@ -2,11 +2,18 @@ import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
 import {connect} from 'react-redux';
 
-import Layout from 'components/home/Layout';
+import MainLayout from '../components/layouts/Main'
+import HomeView from 'components/home/Main';
 
 class Home extends Component {
   render() {
-    return <Layout />;
+    return (
+      <MainLayout>
+        <section>
+          <HomeView />
+        </section>
+      </MainLayout>
+    );
   }
 }
 
