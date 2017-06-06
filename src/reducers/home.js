@@ -1,4 +1,4 @@
-import {HomeTypes as types} from 'action-types';
+import {HomeTypes as types} from '../action-types';
 
 type STATE = {};
 type ACTION = {};
@@ -9,11 +9,11 @@ const initialState: STATE = {
 
 export default function(state: STATE = initialState, action: ACTION): STATE {
   switch (action.type) {
-    case types.FETCH_SOME_DATA: {
-      const {data} = action;
+    case types.FETCH_SERVICES: {
+      const {services} = action;
       return {
         ...state,
-        data,
+        services,
       };
     }
 

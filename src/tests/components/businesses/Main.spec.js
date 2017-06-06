@@ -1,11 +1,10 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import {shallow} from 'enzyme';
 
-import BusinessesPage from './Main';
-import { Link } from 'react-router';
+import BusinessesPage from '../../../components/businesses/Main';
+import {Link} from 'react-router';
 
 describe('<BusinessesPage />', () => {
-
   it('Renders a ResultInfo component', () => {
     const wrapper = shallow(<BusinessesPage />);
     expect(wrapper.find('ResultInfo').length).toEqual(1);
@@ -25,5 +24,4 @@ describe('<BusinessesPage />', () => {
     const wrapper = shallow(<BusinessesPage />);
     expect(wrapper.find('MapView').length).toEqual(1);
   });
-
 });

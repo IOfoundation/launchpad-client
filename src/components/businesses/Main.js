@@ -15,7 +15,7 @@ const Main = ({businesses}) => {
       </div>
       <div className="">
         <div className="">
-          <BusinessesList businesses={businesses}/>
+          <BusinessesList businesses={businesses} />
           <Pagination />
         </div>
         <div className="">
@@ -24,10 +24,10 @@ const Main = ({businesses}) => {
       </div>
     </div>
   );
-}
+};
 
 Main.propTypes = {
-  businesses: PropTypes.array
+  businesses: PropTypes.array,
 };
 
 export default Main;

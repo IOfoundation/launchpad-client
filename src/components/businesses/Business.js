@@ -10,13 +10,14 @@ const Business = ({business}) => {
           <ul>
             <li>
               <span>{'Service Provides: '}</span>
-              {
-                business.services.map(
-                  (service) => {
-                    return <span className='service' key={service.id}>{`${service.name}, `}</span>
-                  }
-                )
-              }
+              {business.services.map(service => {
+                return (
+                  <span
+                    className="service"
+                    key={service.id}
+                  >{`${service.name}, `}</span>
+                );
+              })}
             </li>
             <li>
               <span>{'Business Stage: '}</span>
@@ -24,13 +25,14 @@ const Business = ({business}) => {
             </li>
             <li>
               <span>{'Underserved Communities: '}</span>
-              {
-                business.communities.map(
-                  (community) => {
-                    return <span className='community' key={community.id}>{`${community.name}, `}</span>
-                  }
-                )
-              }
+              {business.communities.map(community => {
+                return (
+                  <span
+                    className="community"
+                    key={community.id}
+                  >{`${community.name}, `}</span>
+                );
+              })}
             </li>
           </ul>
         </div>
@@ -54,10 +56,10 @@ const Business = ({business}) => {
       </section>
     </div>
   );
-}
+};
 
 Business.propTypes = {
-  business: PropTypes.object
+  business: PropTypes.object,
 };
 
 export default Business;

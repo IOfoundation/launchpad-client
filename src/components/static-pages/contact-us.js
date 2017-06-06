@@ -10,6 +10,6 @@ const ContactUs = () => {
       </h1>
     </MainLayout>
   );
-}
+};
 
 export default ContactUs;

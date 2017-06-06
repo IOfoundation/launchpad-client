@@ -10,6 +10,6 @@ const PrivacyPolicy = () => {
       </h1>
     </MainLayout>
   );
-}
+};
 
 export default PrivacyPolicy;

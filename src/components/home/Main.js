@@ -1,11 +1,11 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
-import { Link } from 'react-router'
+import {Link} from 'react-router';
 
-import MainLayout from '../layouts/Main'
-import ServicesBox from '../services/ServicesBox'
+import MainLayout from '../layouts/Main';
+import ServicesBox from '../services/ServicesBox';
 
-const Main = () => {
+const Main = ({services}) => {
   return (
     <div>
       <section>
@@ -17,12 +17,14 @@ const Main = () => {
       </section>
       <section>
         <h2>Browse By Service</h2>
-        <ServicesBox />
+        <ServicesBox services={services} />
       </section>
     </div>
   );
-}
+};
 
-Main.propTypes = {};
+Main.propTypes = {
+  services: PropTypes.array,
+};
 
 export default Main;

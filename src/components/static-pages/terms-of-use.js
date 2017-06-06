@@ -10,6 +10,6 @@ const TermsOfUse = () => {
       </h1>
     </MainLayout>
   );
-}
+};
 
 export default TermsOfUse;
