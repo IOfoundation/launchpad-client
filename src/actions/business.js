@@ -10,7 +10,6 @@ const businessesDataObject = businesses => {
 };
 
 export function fetchBusinesses(filters) {
-
   return async (dispatch: Function) => {
     const httpResponse = await httpRequest.get('/businesses', {
       params: filters
