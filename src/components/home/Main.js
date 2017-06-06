@@ -5,7 +5,7 @@ import {Link} from 'react-router';
 import MainLayout from '../layouts/Main';
 import ServicesBox from '../services/ServicesBox';
 
-const Main = ({services}) => {
+const Main = ({services, handleClickOnServiceTag}) => {
   return (
     <div>
       <section>
@@ -17,14 +17,15 @@ const Main = ({services}) => {
       </section>
       <section>
         <h2>Browse By Service</h2>
-        <ServicesBox services={services} />
+        <ServicesBox services={services} handleClickOnServiceTag={handleClickOnServiceTag} />
       </section>
     </div>
   );
 };
 
 Main.propTypes = {
-  services: PropTypes.array,
+  services: PropTypes.array.isRequired,
+  handleClickOnServiceTag: PropTypes.func.isRequired,
 };
 
 export default Main;

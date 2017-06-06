@@ -10,7 +10,7 @@ const Business = ({business}) => {
           <ul>
             <li>
               <span>{'Service Provides: '}</span>
-              {business.services.map(service => {
+              {business.Services.map(service => {
                 return (
                   <span
                     className="service"
@@ -21,11 +21,18 @@ const Business = ({business}) => {
             </li>
             <li>
               <span>{'Business Stage: '}</span>
-              <span>{'Growth and Expansion'}</span>
+              {business.Stages.map(stage => {
+                return (
+                  <span
+                    className="stage"
+                    key={stage.id}
+                  >{`${stage.name}, `}</span>
+                );
+              })}
             </li>
             <li>
               <span>{'Underserved Communities: '}</span>
-              {business.communities.map(community => {
+              {business.Communities.map(community => {
                 return (
                   <span
                     className="community"
@@ -38,11 +45,11 @@ const Business = ({business}) => {
         </div>
         <div>
           <ul>
-            <li>{'123 Capitol Mall'}</li>
-            <li>{'Sacramento, CA 95811'}</li>
-            <li>{'(916)424-5848'}</li>
-            <li>{'daltic@thegmail.com'}</li>
-            <li><img src="" alt="businessLogo" /></li>
+            <li>{business.address}</li>
+            <li>{`${business.city}, ${business.country_code} ${business.zip_code}`}</li>
+            <li>{business.phone}</li>
+            <li>{business.email}</li>
+            <li><img src="{business.logo}" alt="businessLogo" /></li>
           </ul>
         </div>
       </section>
@@ -59,7 +66,7 @@ const Business = ({business}) => {
 };
 
 Business.propTypes = {
-  business: PropTypes.object,
+  businesses: PropTypes.object,
 };
 
 export default Business;
