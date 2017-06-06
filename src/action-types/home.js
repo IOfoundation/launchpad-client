@@ -1,5 +1,5 @@
 const HomeTypes = {
-  FETCH_SOME_DATA: 'FETCH_SOME_DATA',
+  FETCH_SERVICES: 'FETCH_SERVICES',
 };
 
 export default HomeTypes;

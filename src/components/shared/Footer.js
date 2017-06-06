@@ -1,6 +1,6 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
-import { Link } from 'react-router'
+import {Link} from 'react-router';
 
 const Footer = () => {
   return (
@@ -8,7 +8,7 @@ const Footer = () => {
       {'The footer'}
     </footer>
   );
-}
+};
 
 Footer.propTypes = {};
 

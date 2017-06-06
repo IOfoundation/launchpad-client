@@ -1,15 +1,17 @@
-import {HomeTypes as types} from 'action-types';
+import {HomeTypes as types} from '../action-types';
+import httpRequest from '../services/httpRequest';
 
-const someReduxObject = data => {
+const servicesDataObject = services => {
   return {
-    type: types.FETCH_SOME_DATA,
-    data,
+    type: types.FETCH_SERVICES,
+    services,
   };
 };
 
-export function fetchSomeThing() {
-  return async (_dispatch: Function) => {
-    // TODO this is where you will make your api call
-    // dispatch(someReduxObject(data));
+export function fetchServices() {
+  return async (dispatch: Function) => {
+    const httpResponse = await httpRequest.get('/services');
+    const {services} = httpResponse.data;
+    dispatch(servicesDataObject(services));
   };
 }

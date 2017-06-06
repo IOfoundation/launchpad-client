@@ -1,19 +1,19 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import {shallow} from 'enzyme';
 
-import BusinessesList from './BusinessesList';
+import BusinessesList from '../../../components/businesses/BusinessesList';
 
 function mockBusinesses(overrides) {
   return [
     {
       id: 1,
-      name: 'Businesses1'
+      name: 'Businesses1',
     },
     {
       id: 1,
-      name: 'Businesses2'
-    }
-  ]
+      name: 'Businesses2',
+    },
+  ];
 }
 
 describe('<BusinessesList />', () => {

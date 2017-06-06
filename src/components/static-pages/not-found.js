@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import {Link} from 'react-router';
 
 const NotFound = () => {
   return (
@@ -10,6 +10,6 @@ const NotFound = () => {
       <Link to="/"> {'Go back to homepage'} </Link>
     </div>
   );
-}
+};
 
 export default NotFound;

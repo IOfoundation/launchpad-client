@@ -1,14 +1,15 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import {shallow} from 'enzyme';
 
-import HomePage from './Main';
-import { Link } from 'react-router';
+import HomePage from '../../../components/home/Main';
+import {Link} from 'react-router';
 
 describe('<HomePage />', () => {
-
   it('Renders a Link to Businesses page with the "View All Resources"', () => {
     const wrapper = shallow(<HomePage />);
-    expect(wrapper.contains(<Link to="/businesses">{'View All Resources'}</Link>)).toBe(true);
+    expect(
+      wrapper.contains(<Link to="/businesses">{'View All Resources'}</Link>)
+    ).toBe(true);
   });
 
   it('Renders a form"', () => {
@@ -20,5 +21,4 @@ describe('<HomePage />', () => {
     const wrapper = shallow(<HomePage />);
     expect(wrapper.find('ServicesBox').length).toEqual(1);
   });
-
 });

@@ -11,17 +11,17 @@ import PrivacyPolicy from './components/static-pages/privacy-policy';
 import NotFound from './components/static-pages/not-found';
 
 //Containers components
-import HomeContainers from './containers/Home';
-import BusinessesContainers from './containers/Businesses';
+import HomeContainer from './containers/Home';
+import BusinessesContainer from './containers/Businesses';
 
 export default (
   <Route path="/" component={App}>
-    <IndexRoute component={HomeContainers} />
-    <Route path="/" component={HomeContainers} />
-    <Route path="/businesses" component={BusinessesContainers} />
+    <IndexRoute component={HomeContainer} />
+    <Route path="/" component={HomeContainer} />
+    <Route path="/businesses" component={BusinessesContainer} />
     <Route path="contact-us" component={ContactUs} />
     <Route path="terms-of-use" component={TermsOfUse} />
     <Route path="privacy-policy" component={PrivacyPolicy} />
-    <Route path="*" component={NotFound}/>
+    <Route path="*" component={NotFound} />
   </Route>
 );

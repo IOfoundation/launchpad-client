@@ -1,16 +1,22 @@
 import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
-import MainLayout from '../components/layouts/Main'
-import HomeView from 'components/home/Main';
+import MainLayout from '../components/layouts/Main';
+import HomeView from '../components/home/Main';
+import * as actions from '../actions/home';
 
-class Home extends Component {
+export class Home extends Component {
+  componentWillMount(_nextProps) {
+    this.props.actions.fetchServices();
+  }
+
   render() {
     return (
       <MainLayout>
         <section>
-          <HomeView />
+          <HomeView services={this.props.services} />
         </section>
       </MainLayout>
     );
@@ -20,11 +26,16 @@ class Home extends Component {
 Home.propTypes = {};
 
 const mapStateToProps = _state => {
-  return {};
+  const {home} = _state;
+  return {
+    services: home.services,
+  };
 };
 
 const mapDispatchToProps = _dispatch => {
-  return {};
+  return {
+    actions: bindActionCreators(actions, _dispatch),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -1,31 +1,33 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import {shallow} from 'enzyme';
 
-import Business from './Business';
+import Business from '../../../components/businesses/Business';
 
 function mockBusiness(overrides) {
   return {
     id: 1,
     name: 'Businesses1',
-    services: [{
+    services: [
+      {
         id: 1,
-        name: 'Service1'
+        name: 'Service1',
       },
       {
         id: 1,
-        name: 'Service2'
-      }
+        name: 'Service2',
+      },
     ],
-    communities: [{
+    communities: [
+      {
         id: 1,
-        name: 'Community1'
+        name: 'Community1',
       },
       {
         id: 1,
-        name: 'Community2'
-      }
-    ]
-  }
+        name: 'Community2',
+      },
+    ],
+  };
 }
 
 describe('<Business />', () => {
