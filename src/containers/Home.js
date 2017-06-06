@@ -12,11 +12,15 @@ export class Home extends Component {
     this.props.actions.fetchServices();
   }
 
+  handleClickOnServiceTag(service){
+    this.props.actions.filterBusinessesByService(service);
+  }
+
   render() {
     return (
       <MainLayout>
         <section>
-          <HomeView services={this.props.services} />
+          <HomeView services={this.props.services} handleClickOnServiceTag={this.handleClickOnServiceTag.bind(this)} />
         </section>
       </MainLayout>
     );
