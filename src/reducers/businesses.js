@@ -25,6 +25,14 @@ export default function(state: STATE = initialState, action: ACTION): STATE {
       };
     }
 
+    case types.FETCH_BUSINESSES_METADATA: {
+      const {metadata} = action;
+      return {
+        ...state,
+        metadata,
+      };
+    }
+
     default:
       return state;
   }

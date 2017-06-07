@@ -48,7 +48,10 @@ export class Businesses extends Component {
               )}
             />
           </div>
-          <BusinessesView businesses={this.props.businesses} />
+          <BusinessesView
+            businesses={this.props.businesses}
+            businessesMetadata={this.props.metadata}
+          />
         </section>
       </MainLayout>
     );
@@ -60,6 +63,7 @@ const mapStateToProps = _state => {
   return {
     businesses: businesses.businesses,
     filters: businesses.filters,
+    metadata: businesses.metadata,
   };
 };
 
