@@ -18,8 +18,8 @@ const Main = ({businesses}) => {
           <BusinessesList businesses={businesses} />
           <Pagination />
         </div>
-        <div className="">
-          <MapView />
+        <div style={{width: '500px', height: '500px'}}>
+          <MapView businesses={businesses} />
         </div>
       </div>
     </div>
