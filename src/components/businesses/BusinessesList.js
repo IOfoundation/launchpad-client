@@ -14,7 +14,7 @@ const BusinessesList = ({businesses}) => {
 };
 
 BusinessesList.propTypes = {
-  businesses: PropTypes.array,
+  businesses: PropTypes.array.isRequired,
 };
 
 export default BusinessesList;

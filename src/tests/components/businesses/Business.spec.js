@@ -7,7 +7,7 @@ function mockBusiness(overrides) {
   return {
     id: 1,
     name: 'Businesses1',
-    services: [
+    Services: [
       {
         id: 1,
         name: 'Service1',
@@ -17,7 +17,7 @@ function mockBusiness(overrides) {
         name: 'Service2',
       },
     ],
-    communities: [
+    Communities: [
       {
         id: 1,
         name: 'Community1',
@@ -27,6 +27,16 @@ function mockBusiness(overrides) {
         name: 'Community2',
       },
     ],
+    Stages: [
+      {
+        id: 1,
+        name: 'Community1',
+      },
+      {
+        id: 1,
+        name: 'Community2',
+      },
+    ]
   };
 }
 
