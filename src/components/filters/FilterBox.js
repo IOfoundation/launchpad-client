@@ -1,12 +1,12 @@
 import React from 'react';
-
+import {PropTypes} from 'prop-types';
 import FilterByText from './FilterByText';
 import FilterByOptions from './FilterByOptions';
 
-const FilterBox = () => {
+const FilterBox = ({handleTextSearchBusinesses}) => {
   return (
     <div>
-      <FilterByText />
+      <FilterByText handleTextSearchBusinesses={handleTextSearchBusinesses}/>
       <FilterByOptions filterType="Assistance Needed" />
       <FilterByOptions filterType="Industry" />
       <FilterByOptions filterType="Business Stage" />
@@ -15,5 +15,9 @@ const FilterBox = () => {
     </div>
   );
 };
+
+FilterBox.PropTypes = {
+  handleTextSearchBusinesses: PropTypes.func.isRequired,
+}
 
 export default FilterBox;
