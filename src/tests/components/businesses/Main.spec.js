@@ -39,7 +39,7 @@ function mockBusiness(overrides) {
         id: 1,
         name: 'Community2',
       },
-    ]
+    ],
   };
 }
 

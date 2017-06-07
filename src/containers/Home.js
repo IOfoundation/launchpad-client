@@ -12,11 +12,11 @@ export class Home extends Component {
     this.props.actions.fetchServices();
   }
 
-  handleClickOnServiceTag(service){
+  handleClickOnServiceTag(service) {
     this.props.actions.filterBusinessesByService(service);
   }
 
-  handleSubmitSearchBusinessesForm(businessName){
+  handleSubmitSearchBusinessesForm(businessName) {
     this.props.actions.filterBusinessesByName(businessName);
   }
 
@@ -27,7 +27,10 @@ export class Home extends Component {
           <HomeView
             services={this.props.services}
             handleClickOnServiceTag={this.handleClickOnServiceTag.bind(this)}
-            handleSubmitSearchBusinessesForm={this.handleSubmitSearchBusinessesForm.bind(this)} />
+            handleSubmitSearchBusinessesForm={this.handleSubmitSearchBusinessesForm.bind(
+              this
+            )}
+          />
         </section>
       </MainLayout>
     );

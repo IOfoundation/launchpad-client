@@ -12,11 +12,24 @@ export class Businesses extends Component {
   componentWillMount(_nextProps) {
     const businessesFilters = this.props.location.query;
     this.props.actions.fetchBusinesses(businessesFilters);
+    this.props.actions.fetchFilterOptions();
   }
 
-  handleTextSearchBusinesses(businessName){
-    let businessesFilters = this.props.location.query;
+  handleTextSearchBusinesses(businessName) {
+    const businessesFilters = this.props.location.query;
     this.props.actions.filterBusinessesByName(businessName, businessesFilters);
+  }
+
+  handleOnChangeFilterOptions(event) {
+    event.preventDefault();
+    const businessesFilters = this.props.location.query;
+    const filterType = event.target.name;
+    const filterValue = event.target.value;
+    this.props.actions.filterBusinesses(
+      filterType,
+      filterValue,
+      businessesFilters
+    );
   }
 
   render() {
@@ -26,7 +39,13 @@ export class Businesses extends Component {
           <div>
             <Logo />
             <FilterBox
-              handleTextSearchBusinesses={this.handleTextSearchBusinesses.bind(this)}
+              handleTextSearchBusinesses={this.handleTextSearchBusinesses.bind(
+                this
+              )}
+              filterOptions={this.props.filters}
+              handleOnChangeFilterOptions={this.handleOnChangeFilterOptions.bind(
+                this
+              )}
             />
           </div>
           <BusinessesView businesses={this.props.businesses} />
@@ -40,6 +59,7 @@ const mapStateToProps = _state => {
   const {businesses} = _state;
   return {
     businesses: businesses.businesses,
+    filters: businesses.filters,
   };
 };
 

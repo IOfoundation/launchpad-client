@@ -7,7 +7,11 @@ const ServicesBox = ({services, handleClickOnServiceTag}) => {
     <div>
       <ul>
         {services.map(service => (
-          <Service key={service.id} service={service} handleClickOnServiceTag={handleClickOnServiceTag} />
+          <Service
+            key={service.id}
+            service={service}
+            handleClickOnServiceTag={handleClickOnServiceTag}
+          />
         ))}
       </ul>
     </div>
@@ -16,7 +20,7 @@ const ServicesBox = ({services, handleClickOnServiceTag}) => {
 
 ServicesBox.propTypes = {
   services: PropTypes.array.isRequired,
-  handleClickOnServiceTag: PropTypes.func.isRequired
+  handleClickOnServiceTag: PropTypes.func.isRequired,
 };
 
 export default ServicesBox;

@@ -11,31 +11,37 @@ const handleSubmitSearchBusinessesForm = jest.fn();
 
 describe('<HomePage />', () => {
   it('Renders a Link to Businesses page with the "View All Resources"', () => {
-    const wrapper = shallow(<HomePage
-      services={services}
-      handleClickOnServiceTag={handleClickOnServiceTag}
-      handleSubmitSearchBusinessesForm={handleSubmitSearchBusinessesForm}
-    />);
+    const wrapper = shallow(
+      <HomePage
+        services={services}
+        handleClickOnServiceTag={handleClickOnServiceTag}
+        handleSubmitSearchBusinessesForm={handleSubmitSearchBusinessesForm}
+      />
+    );
     expect(
       wrapper.contains(<Link to="/businesses">{'View All Resources'}</Link>)
     ).toBe(true);
   });
 
   it('Renders a BusinessesForm"', () => {
-    const wrapper = shallow(<HomePage
-      services={services}
-      handleClickOnServiceTag={handleClickOnServiceTag}
-      handleSubmitSearchBusinessesForm={handleSubmitSearchBusinessesForm}
-    />);
+    const wrapper = shallow(
+      <HomePage
+        services={services}
+        handleClickOnServiceTag={handleClickOnServiceTag}
+        handleSubmitSearchBusinessesForm={handleSubmitSearchBusinessesForm}
+      />
+    );
     expect(wrapper.find(BusinessesForm).length).toEqual(1);
   });
 
   it('Renders a ServicesBox"', () => {
-    const wrapper = shallow(<HomePage
-      services={services}
-      handleClickOnServiceTag={handleClickOnServiceTag}
-      handleSubmitSearchBusinessesForm={handleSubmitSearchBusinessesForm}
-    />);
+    const wrapper = shallow(
+      <HomePage
+        services={services}
+        handleClickOnServiceTag={handleClickOnServiceTag}
+        handleSubmitSearchBusinessesForm={handleSubmitSearchBusinessesForm}
+      />
+    );
     expect(wrapper.find('ServicesBox').length).toEqual(1);
   });
 });

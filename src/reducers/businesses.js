@@ -17,6 +17,14 @@ export default function(state: STATE = initialState, action: ACTION): STATE {
       };
     }
 
+    case types.FETCH_FILTERS_OPTIONS: {
+      const {filters} = action;
+      return {
+        ...state,
+        filters,
+      };
+    }
+
     default:
       return state;
   }

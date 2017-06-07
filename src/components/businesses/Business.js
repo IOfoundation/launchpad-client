@@ -46,7 +46,8 @@ const Business = ({business}) => {
         <div>
           <ul>
             <li>{business.address}</li>
-            <li>{`${business.city}, ${business.country_code} ${business.zip_code}`}</li>
+            <li
+            >{`${business.city}, ${business.country_code} ${business.zip_code}`}</li>
             <li>{business.phone}</li>
             <li>{business.email}</li>
             <li><img src="{business.logo}" alt="businessLogo" /></li>

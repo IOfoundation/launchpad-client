@@ -2,7 +2,6 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 import {Link} from 'react-router';
 
-
 class FilterByText extends React.Component {
   constructor(props) {
     super(props);
@@ -18,7 +17,12 @@ class FilterByText extends React.Component {
   render() {
     return (
       <form>
-        <input type="text" value={this.state.value} onChange={this.handleChange} placeholder=""/>
+        <input
+          type="text"
+          value={this.state.value}
+          onChange={this.handleChange}
+          placeholder=""
+        />
       </form>
     );
   }
@@ -26,6 +30,6 @@ class FilterByText extends React.Component {
 
 FilterByText.PropTypes = {
   handleTextSearchBusinesses: PropTypes.func.isRequired,
-}
+};
 
 export default FilterByText;
