@@ -16,7 +16,7 @@ class Pagination extends React.Component {
     }
 
     let nextPageArrow = null;
-    if (nextPage) {
+    if (nextPage && nextPage > 1) {
       nextPageArrow = (
         <span onClick={() => this.props.handleChangePage(nextPage)}>{'>'}</span>
       );

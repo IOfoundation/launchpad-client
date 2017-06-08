@@ -2,10 +2,6 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 
 class MetaInfoBusinesses extends React.Component {
-  totalResources(businessesMetadata) {
-    return businessesMetadata.totalBusinesses;
-  }
-
   resourcesStartOn(businessesMetadata) {
     return (
       (businessesMetadata.pagination.currentPage - 1) *

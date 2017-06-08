@@ -23,12 +23,13 @@ class BusinessesForm extends React.Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <input
+          className={'businessesName'}
           type="text"
           value={this.state.value}
           onChange={this.handleChange}
           placeholder="Find..."
         />
-        <input type="submit" value="SEARCH" />
+        <input type="submit" value="SEARCH" className={'submit'} />
       </form>
     );
   }
