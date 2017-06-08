@@ -3,11 +3,17 @@ import {PropTypes} from 'prop-types';
 
 import Business from './Business';
 
-const BusinessesList = ({businesses}) => {
+const BusinessesList = ({businesses, handleClickOnBusiness}) => {
   return (
     <div>
       {businesses.map(business => {
-        return <Business business={business} key={business.id} />;
+        return (
+          <Business
+            business={business}
+            key={business.id}
+            handleClickOnBusiness={handleClickOnBusiness}
+          />
+        );
       })}
     </div>
   );
@@ -15,6 +21,7 @@ const BusinessesList = ({businesses}) => {
 
 BusinessesList.propTypes = {
   businesses: PropTypes.array.isRequired,
+  handleClickOnBusiness: PropTypes.func.isRequired,
 };
 
 export default BusinessesList;

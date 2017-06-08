@@ -30,6 +30,32 @@ describe('DEFAULT', () => {
   });
 });
 
+describe('FETCH_BUSINESS', () => {
+  let fetchBusiness;
+  let initialState;
+  let business;
+
+  beforeEach(() => {
+    initialState = {business: []};
+    business = {
+      id: 1,
+      name: 'Business 1',
+    }
+
+    fetchBusiness = {
+      type: 'FETCH_BUSINESS',
+      business,
+    };
+  });
+
+  it('Return the state with the list of the services', () => {
+    deepFreeze(initialState);
+    expect(BusinessReducer(initialState, fetchBusiness).business).toEqual(
+      business
+    );
+  });
+});
+
 describe('FETCH_BUSINESSESS', () => {
   let fetchBusinesses;
   let initialState;

@@ -7,24 +7,32 @@ class Pagination extends React.Component {
     const {currentPage} = this.props.businessesMetadata.pagination;
     const {nextPage} = this.props.businessesMetadata.pagination;
     let prevPageArrow = null;
-    if ( currentPage > 1 ){
-      prevPageArrow = <span onClick={() => this.props.handleChangePage(currentPage - 1)}>{'<'}</span>
+    if (currentPage > 1) {
+      prevPageArrow = (
+        <span onClick={() => this.props.handleChangePage(currentPage - 1)}>
+          {'<'}
+        </span>
+      );
     }
 
     let nextPageArrow = null;
-    if ( nextPage ){
-      nextPageArrow = <span onClick={() => this.props.handleChangePage(nextPage)}>{'>'}</span>
+    if (nextPage) {
+      nextPageArrow = (
+        <span onClick={() => this.props.handleChangePage(nextPage)}>{'>'}</span>
+      );
     }
     return (
       <div>
-        <MetaInfoBusinesses businessesMetadata={this.props.businessesMetadata} />
+        <MetaInfoBusinesses
+          businessesMetadata={this.props.businessesMetadata}
+        />
         {prevPageArrow}
         <span>{' '}</span>
         {nextPageArrow}
       </div>
     );
   }
-};
+}
 
 Pagination.PropTypes = {
   businessesMetadata: PropTypes.object.isRequired,

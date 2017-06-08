@@ -1,7 +1,8 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 
-import Business from '../../../components/businesses/Business';
+import BusinessView from '../../../components/business/Main';
+import MapView from '../../../components/map-view/Main';
 
 const handleClickOnBusiness = jest.fn();
 
@@ -9,6 +10,7 @@ function mockBusiness(overrides) {
   return {
     id: 1,
     name: 'Businesses1',
+    description: 'Lorem Ipsum ...',
     Services: [
       {
         id: 1,
@@ -42,37 +44,45 @@ function mockBusiness(overrides) {
   };
 }
 
-describe('<Business />', () => {
+describe('<BusinessView />', () => {
   it('Renders the name of the Business', () => {
     const businessItem = mockBusiness();
     const wrapper = shallow(
-      <Business
+      <BusinessView
         business={businessItem}
-        handleClickOnBusiness={handleClickOnBusiness}
       />
     );
-    expect(wrapper.contains(<h3>Businesses1</h3>)).toBe(true);
+    expect(wrapper.contains('Businesses1')).toBe(true);
   });
 
-  it('Renders a service span for every service of a Business', () => {
+  it('Renders the description of the Business', () => {
     const businessItem = mockBusiness();
     const wrapper = shallow(
-      <Business
+      <BusinessView
         business={businessItem}
-        handleClickOnBusiness={handleClickOnBusiness}
       />
     );
-    expect(wrapper.find('.service').length).toBe(2);
+    expect(wrapper.contains('Lorem Ipsum ...')).toBe(true);
   });
 
-  it('Renders a community span for every community of a Business', () => {
+  it('Renders a list of services offered', () => {
     const businessItem = mockBusiness();
     const wrapper = shallow(
-      <Business
+      <BusinessView
         business={businessItem}
-        handleClickOnBusiness={handleClickOnBusiness}
       />
     );
-    expect(wrapper.find('.community').length).toBe(2);
+    expect(wrapper.find('.services').length).toEqual(2);
   });
+
+  it('Renders a MapView component', () => {
+    const businessItem = mockBusiness();
+    const wrapper = shallow(
+      <BusinessView
+        business={businessItem}
+      />
+    );
+    expect(wrapper.find(MapView).length).toEqual(1);
+  });
+
 });

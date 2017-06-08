@@ -3,6 +3,8 @@ import {shallow} from 'enzyme';
 
 import BusinessesList from '../../../components/businesses/BusinessesList';
 
+const handleClickOnBusiness = jest.fn();
+
 function mockBusinesses(overrides) {
   return [
     {
@@ -19,7 +21,12 @@ function mockBusinesses(overrides) {
 describe('<BusinessesList />', () => {
   it('Renders a Business component for every Bussiness in the array', () => {
     const Businesses = mockBusinesses();
-    const wrapper = shallow(<BusinessesList businesses={Businesses} />);
+    const wrapper = shallow(
+      <BusinessesList
+        businesses={Businesses}
+        handleClickOnBusiness={handleClickOnBusiness}
+      />
+    );
     expect(wrapper.find('Business').length).toEqual(2);
   });
 });

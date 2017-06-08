@@ -17,6 +17,14 @@ export default function(state: STATE = initialState, action: ACTION): STATE {
       };
     }
 
+    case types.FETCH_BUSINESS: {
+      const {business} = action;
+      return {
+        ...state,
+        business,
+      };
+    }
+
     case types.FETCH_FILTERS_OPTIONS: {
       const {filters} = action;
       return {

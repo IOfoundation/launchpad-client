@@ -3,6 +3,10 @@ const initialState = {
     services: [],
   },
   businesses: {
+    business: {
+      id: 'id',
+      Services: [],
+    },
     businesses: [],
     metadata: {
       pagination: {},

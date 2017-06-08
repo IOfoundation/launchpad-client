@@ -5,13 +5,13 @@ import {bindActionCreators} from 'redux';
 import MainLayout from '../components/layouts/Main';
 import Logo from '../components/shared/Logo';
 import FilterBox from '../components/filters/FilterBox';
-import BusinessesView from 'components/businesses/Main';
+import BusinessView from '../components/business/Main';
 import * as actions from '../actions/business';
 
-export class Businesses extends Component {
+export class Business extends Component {
   componentWillMount(_nextProps) {
-    const businessesFilters = this.props.location.query;
-    this.props.actions.fetchBusinesses(businessesFilters);
+    const businessId = this.props.params.id;
+    this.props.actions.fetchBusiness(businessId);
     this.props.actions.fetchFilterOptions();
   }
 
@@ -32,15 +32,6 @@ export class Businesses extends Component {
     );
   }
 
-  handleChangePage(page) {
-    const businessesFilters = this.props.location.query;
-    this.props.actions.changePage(page, businessesFilters);
-  }
-
-  handleClickOnBusiness(business) {
-    this.props.actions.showBusiness(business);
-  }
-
   render() {
     return (
       <MainLayout>
@@ -57,12 +48,7 @@ export class Businesses extends Component {
               )}
             />
           </div>
-          <BusinessesView
-            businesses={this.props.businesses}
-            businessesMetadata={this.props.metadata}
-            handleChangePage={this.handleChangePage.bind(this)}
-            handleClickOnBusiness={this.handleClickOnBusiness.bind(this)}
-          />
+          <BusinessView business={this.props.business} />
         </section>
       </MainLayout>
     );
@@ -75,6 +61,7 @@ const mapStateToProps = _state => {
     businesses: businesses.businesses,
     filters: businesses.filters,
     metadata: businesses.metadata,
+    business: businesses.business,
   };
 };
 
@@ -84,4 +71,4 @@ const mapDispatchToProps = _dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Businesses);
+export default connect(mapStateToProps, mapDispatchToProps)(Business);

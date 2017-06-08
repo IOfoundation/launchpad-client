@@ -2,10 +2,13 @@ import React from 'react';
 import {shallow} from 'enzyme';
 
 import BusinessesPage from '../../../components/businesses/Main';
+import MapView from '../../../components/map-view/Main';
 import {Link} from 'react-router';
 
 const businesses = [];
 const businessesMetadata = {};
+const handleChangePage = jest.fn();
+const handleClickOnBusiness = jest.fn();
 
 function mockBusiness(overrides) {
   return {
@@ -50,6 +53,8 @@ describe('<BusinessesPage />', () => {
       <BusinessesPage
         businesses={businesses}
         businessesMetadata={businessesMetadata}
+        handleChangePage={handleChangePage}
+        handleClickOnBusiness={handleClickOnBusiness}
       />
     );
     expect(wrapper.find('ResultInfo').length).toEqual(1);
@@ -60,6 +65,8 @@ describe('<BusinessesPage />', () => {
       <BusinessesPage
         businesses={businesses}
         businessesMetadata={businessesMetadata}
+        handleChangePage={handleChangePage}
+        handleClickOnBusiness={handleClickOnBusiness}
       />
     );
     expect(wrapper.find('BusinessesList').length).toEqual(1);
@@ -70,6 +77,8 @@ describe('<BusinessesPage />', () => {
       <BusinessesPage
         businesses={businesses}
         businessesMetadata={businessesMetadata}
+        handleChangePage={handleChangePage}
+        handleClickOnBusiness={handleClickOnBusiness}
       />
     );
     expect(wrapper.find('Pagination').length).toEqual(1);
@@ -80,8 +89,10 @@ describe('<BusinessesPage />', () => {
       <BusinessesPage
         businesses={businesses}
         businessesMetadata={businessesMetadata}
+        handleChangePage={handleChangePage}
+        handleClickOnBusiness={handleClickOnBusiness}
       />
     );
-    expect(wrapper.find('MapView').length).toEqual(1);
+    expect(wrapper.find(MapView).length).toEqual(1);
   });
 });
