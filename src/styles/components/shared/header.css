@@ -1,0 +1,21 @@
+.header {
+  background-color: #3F51B5;
+  height: 40px;
+  color: white;
+  font-size: 12px;
+  padding: 0 24px;
+}
+.header_title {
+  margin-right: 16px;
+}
+.header_leftLink {
+  color: white;
+  margin-right: 16px;
+  font-weight: bold;
+  line-height: 16px;
+}
+.header_link {
+  color: white;
+  margin-left: 24px;
+  line-height: 16px;
+}

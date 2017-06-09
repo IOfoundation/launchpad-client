@@ -6,3 +6,11 @@ body {
   font-family: 'Roboto', sans-serif;
   color: #293544;
 }
+a {
+  text-decoration: none;
+  color: black;
+}
+.row {
+  margin: 0;
+}
+@import './components/shared/header.css';
