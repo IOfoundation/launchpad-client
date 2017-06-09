@@ -3,8 +3,15 @@ const initialState = {
     services: [],
   },
   businesses: {
-    businesses: []
-  }
+    businesses: [],
+    filters: {
+      communities: [],
+      stages: [],
+      offers: [],
+      businessTypes: [],
+      industries: [],
+    },
+  },
 };
 
 export default initialState;

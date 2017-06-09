@@ -11,24 +11,23 @@ describe('DEFAULT', () => {
     businesses = [
       {
         id: 1,
-        name: 'Business 1'
+        name: 'Business 1',
       },
       {
         id: 2,
-        name: 'Business 2'
-      }
-    ]
+        name: 'Business 2',
+      },
+    ];
 
     _default = {
-      businesses
-    }
+      businesses,
+    };
   });
 
   it('Return the original state', () => {
     deepFreeze(initialState);
     expect(BusinessReducer(initialState, _default).businesses).toEqual([]);
   });
-
 });
 
 describe('FETCH_BUSINESSESS', () => {
@@ -41,23 +40,49 @@ describe('FETCH_BUSINESSESS', () => {
     businesses = [
       {
         id: 1,
-        name: 'Business 1'
+        name: 'Business 1',
       },
       {
         id: 2,
-        name: 'Business 2'
-      }
-    ]
+        name: 'Business 2',
+      },
+    ];
 
     fetchBusinesses = {
       type: 'FETCH_BUSINESSESS',
-      businesses
-    }
+      businesses,
+    };
   });
 
   it('Return the state with the list of the services', () => {
     deepFreeze(initialState);
-    expect(BusinessReducer(initialState, fetchBusinesses).businesses).toEqual(businesses);
+    expect(BusinessReducer(initialState, fetchBusinesses).businesses).toEqual(
+      businesses
+    );
+  });
+});
+
+describe('FETCH_FILTERS_OPTIONS', () => {
+  let fetchFilters;
+  let initialState;
+  let filters;
+
+  beforeEach(() => {
+    initialState = {filters: {}};
+    filters = {
+      communities: []
+    }
+
+    fetchFilters = {
+      type: 'FETCH_FILTERS_OPTIONS',
+      filters,
+    };
   });
 
+  it('Return the state with the list of the services', () => {
+    deepFreeze(initialState);
+    expect(BusinessReducer(initialState, fetchFilters).filters).toEqual(
+      filters
+    );
+  });
 });

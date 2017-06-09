@@ -2,7 +2,6 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 import {Link} from 'react-router';
 
-
 class BusinessesForm extends React.Component {
   constructor(props) {
     super(props);
@@ -23,7 +22,12 @@ class BusinessesForm extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <input type="text" value={this.state.value} onChange={this.handleChange} placeholder="Find..."/>
+        <input
+          type="text"
+          value={this.state.value}
+          onChange={this.handleChange}
+          placeholder="Find..."
+        />
         <input type="submit" value="SEARCH" />
       </form>
     );
@@ -32,6 +36,6 @@ class BusinessesForm extends React.Component {
 
 BusinessesForm.PropTypes = {
   handleSubmitSearchBusinessesForm: PropTypes.func.isRequired,
-}
+};
 
 export default BusinessesForm;

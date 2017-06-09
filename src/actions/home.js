@@ -1,6 +1,6 @@
 import {HomeTypes as types} from '../action-types';
 import httpRequest from '../services/httpRequest';
-import { browserHistory } from 'react-router'
+import {browserHistory} from 'react-router';
 
 const servicesDataObject = services => {
   return {
@@ -21,8 +21,8 @@ export function filterBusinessesByService(service) {
   return (dispatch: Function) => {
     browserHistory.push({
       pathname: '/businesses',
-      search: `?filters[services_id_eq]=${service}`
-    })
+      search: `?filters[services_id_eq]=${service}`,
+    });
   };
 }
 
@@ -30,7 +30,7 @@ export function filterBusinessesByName(businessName) {
   return (dispatch: Function) => {
     browserHistory.push({
       pathname: '/businesses',
-      search: `?filters[name_cont]=${businessName}`
-    })
+      search: `?filters[name_cont]=${businessName}`,
+    });
   };
 }

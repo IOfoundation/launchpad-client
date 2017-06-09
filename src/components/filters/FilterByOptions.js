@@ -1,17 +1,26 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 
-const FilterByOptions = ({filterType}) => {
-  return (
-    <select name="">
-      <option value="">{filterType}</option>
-      <option value="1">Option1</option>
-    </select>
-  );
-};
+class FilterByOptions extends React.Component {
+  render() {
+    return (
+      <select
+        name={this.props.filterType}
+        onChange={this.props.handleOnChangeFilterOptions}
+      >
+        <option value="">{this.props.filterName}</option>
+        {this.props.filterOptions.map(filterOption => (
+          <option key={filterOption.id} value={filterOption.id}>
+            {filterOption.name}
+          </option>
+        ))}
+      </select>
+    );
+  }
+}
 
-FilterByOptions.propTypes = {
-  filterType: PropTypes.string,
+FilterByOptions.PropTypes = {
+  filterName: PropTypes.string.isRequired,
 };
 
 export default FilterByOptions;

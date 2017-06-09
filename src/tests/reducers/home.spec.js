@@ -11,24 +11,23 @@ describe('DEFAULT', () => {
     services = [
       {
         id: 1,
-        name: 'Service 1'
+        name: 'Service 1',
       },
       {
         id: 2,
-        name: 'Service 2'
-      }
-    ]
+        name: 'Service 2',
+      },
+    ];
 
     _default = {
-      services
-    }
+      services,
+    };
   });
 
   it('Return the original state', () => {
     deepFreeze(initialState);
     expect(HomeReducer(initialState, _default).services).toEqual([]);
   });
-
 });
 
 describe('FETCH_SERVICES', () => {
@@ -41,23 +40,22 @@ describe('FETCH_SERVICES', () => {
     services = [
       {
         id: 1,
-        name: 'Service 1'
+        name: 'Service 1',
       },
       {
         id: 2,
-        name: 'Service 2'
-      }
-    ]
+        name: 'Service 2',
+      },
+    ];
 
     fetchServices = {
       type: 'FETCH_SERVICES',
-      services
-    }
+      services,
+    };
   });
 
   it('Return the state with the list of the services', () => {
     deepFreeze(initialState);
     expect(HomeReducer(initialState, fetchServices).services).toEqual(services);
   });
-
 });

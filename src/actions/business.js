@@ -1,6 +1,6 @@
 import {BusinessTypes as types} from '../action-types';
 import httpRequest from '../services/httpRequest';
-import { browserHistory } from 'react-router';
+import {browserHistory} from 'react-router';
 import queryString from 'query-string';
 import _ from 'lodash';
 
@@ -11,10 +11,34 @@ const businessesDataObject = businesses => {
   };
 };
 
+const filtersDataObject = filters => {
+  return {
+    type: types.FETCH_FILTERS_OPTIONS,
+    filters,
+  };
+};
+
+const filtersObject = (filterType, filterValue, currentFilters) => {
+  let newFilter = {};
+  newFilter[`filters[${filterType}]`] = filterValue;
+  let filters = Object.assign({}, currentFilters, newFilter);
+  if (!filterValue) {
+    filters = _.omit(filters, `filters[${filterType}]`);
+  }
+  return filters;
+};
+
+const pushBrowserHistory = filters => {
+  return browserHistory.push({
+    pathname: '/businesses',
+    search: `?${queryString.stringify(filters, {encode: false})}`,
+  });
+};
+
 export function fetchBusinesses(filters) {
   return async (dispatch: Function) => {
     const httpResponse = await httpRequest.get('/businesses', {
-      params: filters
+      params: filters,
     });
     const {businesses} = httpResponse.data;
     dispatch(businessesDataObject(businesses));
@@ -23,20 +47,36 @@ export function fetchBusinesses(filters) {
 
 export function filterBusinessesByName(name, currentFilters) {
   return async (dispatch: Function) => {
-    let filterByName = {};
-    filterByName['filters[name_cont]'] = name;
-    let filters = Object.assign({}, currentFilters, filterByName);
-    if (!name){
-      filters = _.omit(filters, 'filters[name_cont]');
-    }
+    const filters = filtersObject('name_cont', name, currentFilters);
     const httpResponse = await httpRequest.get('/businesses', {
-      params: filters
+      params: filters,
     });
     const {businesses} = httpResponse.data;
     dispatch(businessesDataObject(businesses));
-    browserHistory.push({
-      pathname: '/businesses',
-      search: `?${queryString.stringify(filters, {encode: false})}`
+    pushBrowserHistory(filters);
+  };
+}
+
+export function filterBusinesses(filterType, filterValue, currentFilters) {
+  return async (dispatch: Function) => {
+    const filters = filtersObject(
+      `${filterType}_id_eq`,
+      filterValue,
+      currentFilters
+    );
+    const httpResponse = await httpRequest.get('/businesses', {
+      params: filters,
     });
+    const {businesses} = httpResponse.data;
+    dispatch(businessesDataObject(businesses));
+    pushBrowserHistory(filters);
+  };
+}
+
+export function fetchFilterOptions() {
+  return async (dispatch: Function) => {
+    const httpResponse = await httpRequest.get('/businesses-filters');
+    const filters = httpResponse.data;
+    dispatch(filtersDataObject(filters));
   };
 }

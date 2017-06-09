@@ -6,5 +6,5 @@ export {BusinessTypes};
 
 export default {
   HomeTypes,
-  BusinessTypes
+  BusinessTypes,
 };

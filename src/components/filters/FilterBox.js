@@ -3,21 +3,51 @@ import {PropTypes} from 'prop-types';
 import FilterByText from './FilterByText';
 import FilterByOptions from './FilterByOptions';
 
-const FilterBox = ({handleTextSearchBusinesses}) => {
-  return (
-    <div>
-      <FilterByText handleTextSearchBusinesses={handleTextSearchBusinesses}/>
-      <FilterByOptions filterType="Assistance Needed" />
-      <FilterByOptions filterType="Industry" />
-      <FilterByOptions filterType="Business Stage" />
-      <FilterByOptions filterType="Business Type" />
-      <FilterByOptions filterType="Comunities" />
-    </div>
-  );
-};
+class FilterBox extends React.Component {
+  render() {
+    return (
+      <div>
+        <FilterByText
+          handleTextSearchBusinesses={this.props.handleTextSearchBusinesses}
+        />
+        <FilterByOptions
+          filterName="Assistance Needed"
+          filterType={''}
+          filterOptions={[]}
+        />
+        <FilterByOptions
+          filterName="Industry"
+          filterType={'industries'}
+          filterOptions={this.props.filterOptions.industries}
+          handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
+        />
+        <FilterByOptions
+          filterName="Business Stage"
+          filterType={'stages'}
+          filterOptions={this.props.filterOptions.stages}
+          handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
+        />
+        <FilterByOptions
+          filterName="Business Type"
+          filterType={'businessTypes'}
+          filterOptions={this.props.filterOptions.businessTypes}
+          handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
+        />
+        <FilterByOptions
+          filterName="Communities"
+          filterType={'communities'}
+          filterOptions={this.props.filterOptions.communities}
+          handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
+        />
+      </div>
+    );
+  }
+}
 
 FilterBox.PropTypes = {
   handleTextSearchBusinesses: PropTypes.func.isRequired,
-}
+  filterOptions: PropTypes.object.isRequired,
+  handleOnChangeFilterOptions: PropTypes.func.isRequired,
+};
 
 export default FilterBox;
