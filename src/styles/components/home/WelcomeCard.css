@@ -1,0 +1,30 @@
+.welcomeCard {
+  background: #3F51B5;
+  padding: 25px 25px 50px 25px;
+  color: white;
+}
+.welcomeCard_title {
+  font-size: 24px;
+  font-weight: normal;
+  line-height: 36px;
+  margin: 0 0 16px 0;
+}
+.welcomeCard_text {
+  font-size: 14px;
+  line-height: 20px;
+  margin: 0 0 24px 0;
+}
+.closeIcon {
+  background: none;
+  border: none;
+  outline: none;
+}
+.closeIcon img {
+  color: white;
+  height: 24px;
+  width: 24px;
+  margin-right: 12px;
+}
+.closeIcon:hover {
+  cursor: pointer;
+}
