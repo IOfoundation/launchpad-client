@@ -4,6 +4,13 @@ import {browserHistory} from 'react-router';
 import queryString from 'query-string';
 import _ from 'lodash';
 
+const businessDataObject = business => {
+  return {
+    type: types.FETCH_BUSINESS,
+    business,
+  };
+};
+
 const businessesDataObject = businesses => {
   return {
     type: types.FETCH_BUSINESSESS,
@@ -41,6 +48,14 @@ const pushBrowserHistory = filters => {
     search: `?${queryString.stringify(filters, {encode: false})}`,
   });
 };
+
+export function fetchBusiness(businessId) {
+  return async (dispatch: Function) => {
+    const httpResponse = await httpRequest.get(`/businesses/${businessId}`);
+    const business = httpResponse.data;
+    dispatch(businessDataObject(business));
+  };
+}
 
 export function fetchBusinesses(currentParams) {
   return async (dispatch: Function) => {
@@ -90,8 +105,8 @@ export function changePage(page, currentParams) {
   return async (dispatch: Function) => {
     const params = {
       ...currentParams,
-      page: page
-    }
+      page: page,
+    };
     const httpResponse = await httpRequest.get('/businesses', {
       params: params,
     });
@@ -100,6 +115,14 @@ export function changePage(page, currentParams) {
     dispatch(businessesDataObject(businesses));
     dispatch(businessesMetaDataObject(metadata));
     pushBrowserHistory(params);
+  };
+}
+
+export function showBusiness(business) {
+  return async (dispatch: Function) => {
+    browserHistory.push({
+      pathname: `/businesses/${business.id}`,
+    });
   };
 }
 

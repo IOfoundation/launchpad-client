@@ -2,7 +2,7 @@ import React from 'react';
 import GoogleMapReact from 'google-map-react';
 import Marker from './PointMarker';
 
-class MapView extends React.Component {
+class Main extends React.Component {
   render() {
     return (
       <GoogleMapReact
@@ -24,4 +24,4 @@ class MapView extends React.Component {
   }
 }
 
-export default MapView;
+export default Main;

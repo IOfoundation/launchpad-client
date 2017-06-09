@@ -1,9 +1,9 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 
-const Business = ({business}) => {
+const Business = ({business, handleClickOnBusiness}) => {
   return (
-    <div className="">
+    <div className="" onClick={() => handleClickOnBusiness(business)}>
       <h3>{business.name}</h3>
       <section>
         <div>
@@ -67,7 +67,8 @@ const Business = ({business}) => {
 };
 
 Business.propTypes = {
-  businesses: PropTypes.object,
+  business: PropTypes.object.isRequired,
+  handleClickOnBusiness: PropTypes.func.isRequired,
 };
 
 export default Business;
