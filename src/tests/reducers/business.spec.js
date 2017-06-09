@@ -70,8 +70,8 @@ describe('FETCH_FILTERS_OPTIONS', () => {
   beforeEach(() => {
     initialState = {filters: {}};
     filters = {
-      communities: []
-    }
+      communities: [],
+    };
 
     fetchFilters = {
       type: 'FETCH_FILTERS_OPTIONS',

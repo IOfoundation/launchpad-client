@@ -33,6 +33,7 @@
   "dependencies": {
     "axios": "^0.16.2",
     "deep-freeze": "^0.0.1",
+    "google-map-react": "^0.24.0",
     "object-assign": "4.1.0",
     "query-string": "^4.3.4",
     "react": "15.5.4",
