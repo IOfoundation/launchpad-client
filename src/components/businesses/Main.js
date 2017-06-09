@@ -7,7 +7,7 @@ import MapView from './MapView';
 import Pagination from './Pagination';
 import ResultInfo from './ResultInfo';
 
-const Main = ({businesses, businessesMetadata}) => {
+const Main = ({businesses, businessesMetadata, handleChangePage}) => {
   return (
     <div className="">
       <div className="">
@@ -16,7 +16,7 @@ const Main = ({businesses, businessesMetadata}) => {
       <div className="">
         <div className="">
           <BusinessesList businesses={businesses} />
-          <Pagination businessesMetadata={businessesMetadata} />
+          <Pagination businessesMetadata={businessesMetadata} handleChangePage={handleChangePage}/>
         </div>
         <div style={{width: '500px', height: '500px'}}>
           <MapView businesses={businesses} />
@@ -29,6 +29,7 @@ const Main = ({businesses, businessesMetadata}) => {
 Main.propTypes = {
   businesses: PropTypes.array.isRequired,
   businessesMetadata: PropTypes.object.isRequired,
+  handleChangePage: PropTypes.func.isRequired,
 };
 
 export default Main;

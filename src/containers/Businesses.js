@@ -32,6 +32,11 @@ export class Businesses extends Component {
     );
   }
 
+  handleChangePage(page){
+    const businessesFilters = this.props.location.query;
+    this.props.actions.changePage(page, businessesFilters);
+  }
+
   render() {
     return (
       <MainLayout>
@@ -51,6 +56,7 @@ export class Businesses extends Component {
           <BusinessesView
             businesses={this.props.businesses}
             businessesMetadata={this.props.metadata}
+            handleChangePage={this.handleChangePage.bind(this)}
           />
         </section>
       </MainLayout>

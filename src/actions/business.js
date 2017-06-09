@@ -86,6 +86,23 @@ export function filterBusinesses(filterType, filterValue, currentParams) {
   };
 }
 
+export function changePage(page, currentParams) {
+  return async (dispatch: Function) => {
+    const params = {
+      ...currentParams,
+      page: page
+    }
+    const httpResponse = await httpRequest.get('/businesses', {
+      params: params,
+    });
+    const {businesses} = httpResponse.data;
+    const {metadata} = httpResponse.data;
+    dispatch(businessesDataObject(businesses));
+    dispatch(businessesMetaDataObject(metadata));
+    pushBrowserHistory(params);
+  };
+}
+
 export function fetchFilterOptions() {
   return async (dispatch: Function) => {
     const httpResponse = await httpRequest.get('/businesses-filters');
