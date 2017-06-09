@@ -7,10 +7,10 @@ const Header = () => {
     <header className="header row between-xs middle-xs">
       <div>
         <span className="header_title">{'Welcome to [project-name]'}</span>
-        <Link className="header_leftLink" to="/contact-us">
+        <Link className="header_leftLink">
           {'Back to Lorem'}
         </Link>
-        <Link className="header_leftLink" to="/contact-us">
+        <Link className="header_leftLink">
           {'Global Nav 02'}
         </Link>
       </div>
