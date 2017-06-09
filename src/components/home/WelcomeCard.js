@@ -2,15 +2,16 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 
 class WelcomeCard extends React.Component {
+  _handleClose() {}
   render() {
     return (
       <div className="welcomeCard">
         <div className="row end-xs">
-          <button className="closeIcon">
+          <button className="closeIcon" onClick={() => this._handleClose()}>
             <img src="static-data/images/close.svg" />
           </button>
         </div>
-        <div className="col-md-5 col-md-offset-4">
+        <div className="col-lg-5 col-lg-offset-4 col-sm-7 col-sm-offset-3">
           <h1 className="welcomeCard_title">
             {'Welcome to Startup Navigator'}
           </h1>
