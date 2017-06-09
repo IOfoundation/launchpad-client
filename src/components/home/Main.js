@@ -5,6 +5,7 @@ import BusinessesForm from './BusinessesForm';
 
 import MainLayout from '../layouts/Main';
 import ServicesBox from '../services/ServicesBox';
+import WelcomeCard from './WelcomeCard';
 
 const Main = ({
   services,
@@ -19,6 +20,7 @@ const Main = ({
         />
         <Link to="/businesses">{'View All Resources'}</Link>
       </section>
+      <WelcomeCard />
       <section>
         <h2>Browse By Service</h2>
         <ServicesBox
