@@ -24,21 +24,31 @@ describe('<Header />', () => {
     it('Must have a link to contact-us page', () => {
       const wrapper = shallow(<Header />);
       expect(
-        wrapper.contains(<Link to="/contact-us">{'Contact Us'}</Link>)
+        wrapper.contains(
+          <Link className="header_link" to="/contact-us">{'Contact Us'}</Link>
+        )
       ).toBe(true);
     });
 
     it('Must have a link to terms-of-use page', () => {
       const wrapper = shallow(<Header />);
       expect(
-        wrapper.contains(<Link to="/terms-of-use">{'Terms of Use'}</Link>)
+        wrapper.contains(
+          <Link className="header_link" to="/terms-of-use">
+            {'Terms of Use'}
+          </Link>
+        )
       ).toBe(true);
     });
 
     it('Must have a link to terms-of-use page', () => {
       const wrapper = shallow(<Header />);
       expect(
-        wrapper.contains(<Link to="/terms-of-use">{'Terms of Use'}</Link>)
+        wrapper.contains(
+          <Link className="header_link" to="/terms-of-use">
+            {'Terms of Use'}
+          </Link>
+        )
       ).toBe(true);
     });
 
