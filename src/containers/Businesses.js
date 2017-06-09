@@ -14,13 +14,20 @@ export class Businesses extends Component {
     this.props.actions.fetchBusinesses(businessesFilters);
   }
 
+  handleTextSearchBusinesses(businessName){
+    let businessesFilters = this.props.location.query;
+    this.props.actions.filterBusinessesByName(businessName, businessesFilters);
+  }
+
   render() {
     return (
       <MainLayout>
         <section>
           <div>
             <Logo />
-            <FilterBox />
+            <FilterBox
+              handleTextSearchBusinesses={this.handleTextSearchBusinesses.bind(this)}
+            />
           </div>
           <BusinessesView businesses={this.props.businesses} />
         </section>
