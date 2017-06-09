@@ -3,7 +3,7 @@ import {PropTypes} from 'prop-types';
 
 const Business = ({business, handleClickOnBusiness}) => {
   return (
-    <div className="" onClick={() => handleClickOnBusiness(business)}>
+    <div className="Business" onClick={() => handleClickOnBusiness(business)}>
       <h3>{business.name}</h3>
       <section>
         <div>

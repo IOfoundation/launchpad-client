@@ -1,6 +1,12 @@
 import BusinessReducer from '../../reducers/businesses';
 import deepFreeze from 'deep-freeze';
 
+describe('BusinessReducer', () => {
+  it('must be defined', () => {
+    expect(BusinessReducer).toBeDefined();
+  });
+});
+
 describe('DEFAULT', () => {
   let _default;
   let initialState;
@@ -40,7 +46,7 @@ describe('FETCH_BUSINESS', () => {
     business = {
       id: 1,
       name: 'Business 1',
-    }
+    };
 
     fetchBusiness = {
       type: 'FETCH_BUSINESS',
@@ -84,6 +90,32 @@ describe('FETCH_BUSINESSESS', () => {
     deepFreeze(initialState);
     expect(BusinessReducer(initialState, fetchBusinesses).businesses).toEqual(
       businesses
+    );
+  });
+});
+
+describe('FETCH_BUSINESSES_METADATA', () => {
+  let fetchMetadata;
+  let initialState;
+  let metadata;
+
+  beforeEach(() => {
+    initialState = {metadata: {}};
+    metadata = {
+      totalBusinesses: 10,
+      pagination: {},
+    };
+
+    fetchMetadata = {
+      type: 'FETCH_BUSINESSES_METADATA',
+      metadata,
+    };
+  });
+
+  it('Return the state with the list of the services', () => {
+    deepFreeze(initialState);
+    expect(BusinessReducer(initialState, fetchMetadata).metadata).toEqual(
+      metadata
     );
   });
 });

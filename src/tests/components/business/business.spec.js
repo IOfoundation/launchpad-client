@@ -47,42 +47,25 @@ function mockBusiness(overrides) {
 describe('<BusinessView />', () => {
   it('Renders the name of the Business', () => {
     const businessItem = mockBusiness();
-    const wrapper = shallow(
-      <BusinessView
-        business={businessItem}
-      />
-    );
+    const wrapper = shallow(<BusinessView business={businessItem} />);
     expect(wrapper.contains('Businesses1')).toBe(true);
   });
 
   it('Renders the description of the Business', () => {
     const businessItem = mockBusiness();
-    const wrapper = shallow(
-      <BusinessView
-        business={businessItem}
-      />
-    );
+    const wrapper = shallow(<BusinessView business={businessItem} />);
     expect(wrapper.contains('Lorem Ipsum ...')).toBe(true);
   });
 
   it('Renders a list of services offered', () => {
     const businessItem = mockBusiness();
-    const wrapper = shallow(
-      <BusinessView
-        business={businessItem}
-      />
-    );
+    const wrapper = shallow(<BusinessView business={businessItem} />);
     expect(wrapper.find('.services').length).toEqual(2);
   });
 
   it('Renders a MapView component', () => {
     const businessItem = mockBusiness();
-    const wrapper = shallow(
-      <BusinessView
-        business={businessItem}
-      />
-    );
+    const wrapper = shallow(<BusinessView business={businessItem} />);
     expect(wrapper.find(MapView).length).toEqual(1);
   });
-
 });
