@@ -4,6 +4,9 @@ const initialState = {
   },
   businesses: {
     businesses: [],
+    metadata: {
+      pagination: {},
+    },
     filters: {
       communities: [],
       stages: [],

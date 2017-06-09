@@ -11,6 +11,13 @@ const businessesDataObject = businesses => {
   };
 };
 
+const businessesMetaDataObject = metadata => {
+  return {
+    type: types.FETCH_BUSINESSES_METADATA,
+    metadata,
+  };
+};
+
 const filtersDataObject = filters => {
   return {
     type: types.FETCH_FILTERS_OPTIONS,
@@ -35,40 +42,46 @@ const pushBrowserHistory = filters => {
   });
 };
 
-export function fetchBusinesses(filters) {
+export function fetchBusinesses(currentParams) {
   return async (dispatch: Function) => {
     const httpResponse = await httpRequest.get('/businesses', {
-      params: filters,
+      params: currentParams,
     });
     const {businesses} = httpResponse.data;
+    const {metadata} = httpResponse.data;
     dispatch(businessesDataObject(businesses));
+    dispatch(businessesMetaDataObject(metadata));
   };
 }
 
-export function filterBusinessesByName(name, currentFilters) {
+export function filterBusinessesByName(filterValue, currentParams) {
   return async (dispatch: Function) => {
-    const filters = filtersObject('name_cont', name, currentFilters);
+    const filters = filtersObject('name_cont', filterValue, currentParams);
     const httpResponse = await httpRequest.get('/businesses', {
       params: filters,
     });
     const {businesses} = httpResponse.data;
+    const {metadata} = httpResponse.data;
     dispatch(businessesDataObject(businesses));
+    dispatch(businessesMetaDataObject(metadata));
     pushBrowserHistory(filters);
   };
 }
 
-export function filterBusinesses(filterType, filterValue, currentFilters) {
+export function filterBusinesses(filterType, filterValue, currentParams) {
   return async (dispatch: Function) => {
     const filters = filtersObject(
       `${filterType}_id_eq`,
       filterValue,
-      currentFilters
+      currentParams
     );
     const httpResponse = await httpRequest.get('/businesses', {
       params: filters,
     });
     const {businesses} = httpResponse.data;
+    const {metadata} = httpResponse.data;
     dispatch(businessesDataObject(businesses));
+    dispatch(businessesMetaDataObject(metadata));
     pushBrowserHistory(filters);
   };
 }

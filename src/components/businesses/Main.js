@@ -7,16 +7,16 @@ import MapView from './MapView';
 import Pagination from './Pagination';
 import ResultInfo from './ResultInfo';
 
-const Main = ({businesses}) => {
+const Main = ({businesses, businessesMetadata}) => {
   return (
     <div className="">
       <div className="">
-        <ResultInfo />
+        <ResultInfo businessesMetadata={businessesMetadata} />
       </div>
       <div className="">
         <div className="">
           <BusinessesList businesses={businesses} />
-          <Pagination />
+          <Pagination businessesMetadata={businessesMetadata} />
         </div>
         <div style={{width: '500px', height: '500px'}}>
           <MapView businesses={businesses} />
@@ -28,6 +28,7 @@ const Main = ({businesses}) => {
 
 Main.propTypes = {
   businesses: PropTypes.array.isRequired,
+  businessesMetadata: PropTypes.object.isRequired,
 };
 
 export default Main;
