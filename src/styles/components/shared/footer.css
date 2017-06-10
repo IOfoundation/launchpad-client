@@ -1,0 +1,17 @@
+footer {
+  background: #0C0033;
+  padding: 40px;
+  color: white;
+  font-size: 12px;
+}
+.footer_subtitle{
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+}
+footer a {
+  color: white;
+  display: block;
+  opacity: .75;
+  margin-bottom: 16px;
+}
