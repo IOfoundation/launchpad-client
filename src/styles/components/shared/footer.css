@@ -15,3 +15,7 @@ footer a {
   opacity: .75;
   margin-bottom: 16px;
 }
+.footer_socialIcon {
+  display: inline-block;
+  margin-right: 5px;
+}

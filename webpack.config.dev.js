@@ -56,7 +56,11 @@ export default {
   ],
   module: {
     rules: [
-      {test: /\.jsx?$/, exclude: /node_modules/, loaders: ['babel-loader']},
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loaders: ['babel-loader'],
+      },
       {test: /\.eot(\?v=\d+.\d+.\d+)?$/, loader: 'file-loader'},
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
@@ -72,6 +76,13 @@ export default {
       },
       {test: /\.(jpe?g|png|gif)$/i, loader: 'file-loader?name=[name].[ext]'},
       {test: /\.ico$/, loader: 'file-loader?name=[name].[ext]'},
+      {
+        test: /react-icons\/(.)*(.js)$/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2015', 'react'],
+        },
+      },
       {
         test: /(\.css)$/,
         loaders: ['style-loader', 'css-loader?sourceMap', 'postcss-loader'],
