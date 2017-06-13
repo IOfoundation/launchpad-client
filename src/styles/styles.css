@@ -5,6 +5,8 @@ body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
   color: #293544;
+  max-width: 1350px;
+  margin: 0 auto;
 }
 a {
   text-decoration: none;
@@ -13,4 +15,13 @@ a {
 .row {
   margin: 0;
 }
+
+/* Useful Classes */
+
+.opacity75 {
+  opacity: .75;
+}
+
+/* Import Components */
 @import './components/shared/header.css';
+@import './components/home/WelcomeCard.css';
