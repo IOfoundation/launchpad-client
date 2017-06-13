@@ -2,19 +2,21 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 
 class MetaInfoBusinesses extends React.Component {
-  resourcesStartOn(businessesMetadata) {
+  resourcesStartOn() {
+    const _businessesMetadata = this.props.businessesMetadata;
     return (
-      (businessesMetadata.pagination.currentPage - 1) *
-        businessesMetadata.pagination.perPage +
+      (_businessesMetadata.pagination.currentPage - 1) *
+        _businessesMetadata.pagination.perPage +
       1
     );
   }
 
-  resourcesEndOn(businessesMetadata) {
+  resourcesEndOn() {
+    const _businessesMetadata = this.props.businessesMetadata;
     let resourcesEndOn =
-      businessesMetadata.pagination.currentPage *
-      businessesMetadata.pagination.perPage;
-    const totalResources = businessesMetadata.totalBusinesses;
+      _businessesMetadata.pagination.currentPage *
+      _businessesMetadata.pagination.perPage;
+    const totalResources = _businessesMetadata.totalBusinesses;
     if (totalResources < resourcesEndOn) {
       resourcesEndOn = totalResources;
     }
@@ -24,12 +26,12 @@ class MetaInfoBusinesses extends React.Component {
   render() {
     return (
       <span
-      >{`Showing Results ${this.resourcesStartOn(this.props.businessesMetadata)}-${this.resourcesEndOn(this.props.businessesMetadata)}`}</span>
+      >{`Showing Results ${this.resourcesStartOn()}-${this.resourcesEndOn()}`}</span>
     );
   }
 }
 
-MetaInfoBusinesses.PropTypes = {
+MetaInfoBusinesses.propTypes = {
   businessesMetadata: PropTypes.object.isRequired,
 };
 

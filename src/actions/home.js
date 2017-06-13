@@ -18,7 +18,7 @@ export function fetchServices() {
 }
 
 export function filterBusinessesByService(service) {
-  return (dispatch: Function) => {
+  return () => {
     browserHistory.push({
       pathname: '/businesses',
       search: `?filters[services_id_eq]=${service}`,
@@ -27,7 +27,7 @@ export function filterBusinessesByService(service) {
 }
 
 export function filterBusinessesByName(businessName) {
-  return (dispatch: Function) => {
+  return () => {
     browserHistory.push({
       pathname: '/businesses',
       search: `?filters[name_cont]=${businessName}`,

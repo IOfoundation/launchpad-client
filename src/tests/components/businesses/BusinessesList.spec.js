@@ -5,7 +5,7 @@ import BusinessesList from '../../../components/businesses/BusinessesList';
 
 const handleClickOnBusiness = jest.fn();
 
-function mockBusinesses(overrides) {
+function mockBusinesses() {
   return [
     {
       id: 1,

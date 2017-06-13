@@ -1,4 +1,4 @@
-import HomeReducer from '../../reducers/home';
+import homeReducer from '../../reducers/home';
 import deepFreeze from 'deep-freeze';
 
 describe('DEFAULT', () => {
@@ -26,7 +26,7 @@ describe('DEFAULT', () => {
 
   it('Return the original state', () => {
     deepFreeze(initialState);
-    expect(HomeReducer(initialState, _default).services).toEqual([]);
+    expect(homeReducer(initialState, _default).services).toEqual([]);
   });
 });
 
@@ -56,6 +56,6 @@ describe('FETCH_SERVICES', () => {
 
   it('Return the state with the list of the services', () => {
     deepFreeze(initialState);
-    expect(HomeReducer(initialState, fetchServices).services).toEqual(services);
+    expect(homeReducer(initialState, fetchServices).services).toEqual(services);
   });
 });

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import {PropTypes} from 'prop-types';
 
 import MainLayout from '../components/layouts/Main';
 import Logo from '../components/shared/Logo';
@@ -68,6 +69,15 @@ export class Businesses extends Component {
     );
   }
 }
+
+Businesses.propTypes = {
+  actions: PropTypes.object,
+  businesses: PropTypes.array.isRequired,
+  filters: PropTypes.object.isRequired,
+  location: PropTypes.object,
+  metadata: PropTypes.object.isRequired,
+  params: PropTypes.object,
+};
 
 const mapStateToProps = _state => {
   const {businesses} = _state;

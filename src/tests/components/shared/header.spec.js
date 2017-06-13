@@ -51,7 +51,5 @@ describe('<Header />', () => {
         )
       ).toBe(true);
     });
-
-    <Link to="/privacy-policy">{'Privacy Policy'}</Link>;
   });
 });

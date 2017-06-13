@@ -2,8 +2,6 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 import {Link} from 'react-router';
 import BusinessesForm from './BusinessesForm';
-
-import MainLayout from '../layouts/Main';
 import ServicesBox from '../services/ServicesBox';
 import WelcomeCard from './WelcomeCard';
 
@@ -22,7 +20,7 @@ const Main = ({
       </section>
       <WelcomeCard />
       <section>
-        <h2>Browse By Service</h2>
+        <h2>{'Browse By Service'}</h2>
         <ServicesBox
           services={services}
           handleClickOnServiceTag={handleClickOnServiceTag}
@@ -33,9 +31,9 @@ const Main = ({
 };
 
 Main.propTypes = {
-  services: PropTypes.array.isRequired,
   handleClickOnServiceTag: PropTypes.func.isRequired,
   handleSubmitSearchBusinessesForm: PropTypes.func.isRequired,
+  services: PropTypes.array.isRequired,
 };
 
 export default Main;

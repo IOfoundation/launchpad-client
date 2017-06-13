@@ -11,7 +11,7 @@ const ResultInfo = ({businessesMetadata}) => {
   );
 };
 
-ResultInfo.PropTypes = {
+ResultInfo.propTypes = {
   businessesMetadata: PropTypes.object.isRequired,
 };
 

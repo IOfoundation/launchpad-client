@@ -44,10 +44,10 @@ class FilterBox extends React.Component {
   }
 }
 
-FilterBox.PropTypes = {
-  handleTextSearchBusinesses: PropTypes.func.isRequired,
+FilterBox.propTypes = {
   filterOptions: PropTypes.object.isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
+  handleTextSearchBusinesses: PropTypes.func.isRequired,
 };
 
 export default FilterBox;

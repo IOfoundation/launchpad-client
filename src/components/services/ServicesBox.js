@@ -19,8 +19,8 @@ const ServicesBox = ({services, handleClickOnServiceTag}) => {
 };
 
 ServicesBox.propTypes = {
-  services: PropTypes.array.isRequired,
   handleClickOnServiceTag: PropTypes.func.isRequired,
+  services: PropTypes.array.isRequired,
 };
 
 export default ServicesBox;

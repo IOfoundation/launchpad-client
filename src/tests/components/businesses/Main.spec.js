@@ -3,49 +3,11 @@ import {shallow} from 'enzyme';
 
 import BusinessesPage from '../../../components/businesses/Main';
 import MapView from '../../../components/map-view/Main';
-import {Link} from 'react-router';
 
 const businesses = [];
 const businessesMetadata = {};
 const handleChangePage = jest.fn();
 const handleClickOnBusiness = jest.fn();
-
-function mockBusiness(overrides) {
-  return {
-    id: 1,
-    name: 'Businesses1',
-    Services: [
-      {
-        id: 1,
-        name: 'Service1',
-      },
-      {
-        id: 1,
-        name: 'Service2',
-      },
-    ],
-    Communities: [
-      {
-        id: 1,
-        name: 'Community1',
-      },
-      {
-        id: 1,
-        name: 'Community2',
-      },
-    ],
-    Stages: [
-      {
-        id: 1,
-        name: 'Community1',
-      },
-      {
-        id: 1,
-        name: 'Community2',
-      },
-    ],
-  };
-}
 
 describe('<BusinessesPage />', () => {
   it('Renders a ResultInfo component', () => {

@@ -8,8 +8,8 @@ const Service = ({service, handleClickOnServiceTag}) => {
 };
 
 Service.propTypes = {
-  service: PropTypes.object.isRequired,
   handleClickOnServiceTag: PropTypes.func.isRequired,
+  service: PropTypes.object.isRequired,
 };
 
 export default Service;

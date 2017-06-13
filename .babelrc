@@ -24,7 +24,7 @@
       ],
       "plugins": [
         "transform-react-constant-elements",
-        "transform-react-remove-prop-types"
+        "transform-react-remove-prop-types",
       ]
     },
     "test": {
@@ -36,6 +36,7 @@
   "plugins": [
     "syntax-flow",
     "transform-flow-strip-types",
+    "transform-class-properties",
     "transform-decorators-legacy",
     [
       "transform-runtime", {

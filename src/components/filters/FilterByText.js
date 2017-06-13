@@ -1,6 +1,5 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
-import {Link} from 'react-router';
 
 class FilterByText extends React.Component {
   constructor(props) {
@@ -28,7 +27,7 @@ class FilterByText extends React.Component {
   }
 }
 
-FilterByText.PropTypes = {
+FilterByText.propTypes = {
   handleTextSearchBusinesses: PropTypes.func.isRequired,
 };
 

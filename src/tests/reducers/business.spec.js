@@ -1,9 +1,9 @@
-import BusinessReducer from '../../reducers/businesses';
+import businessReducer from '../../reducers/businesses';
 import deepFreeze from 'deep-freeze';
 
-describe('BusinessReducer', () => {
+describe('businessReducer', () => {
   it('must be defined', () => {
-    expect(BusinessReducer).toBeDefined();
+    expect(businessReducer).toBeDefined();
   });
 });
 
@@ -32,7 +32,7 @@ describe('DEFAULT', () => {
 
   it('Return the original state', () => {
     deepFreeze(initialState);
-    expect(BusinessReducer(initialState, _default).businesses).toEqual([]);
+    expect(businessReducer(initialState, _default).businesses).toEqual([]);
   });
 });
 
@@ -56,7 +56,7 @@ describe('FETCH_BUSINESS', () => {
 
   it('Return the state with the list of the services', () => {
     deepFreeze(initialState);
-    expect(BusinessReducer(initialState, fetchBusiness).business).toEqual(
+    expect(businessReducer(initialState, fetchBusiness).business).toEqual(
       business
     );
   });
@@ -88,7 +88,7 @@ describe('FETCH_BUSINESSESS', () => {
 
   it('Return the state with the list of the services', () => {
     deepFreeze(initialState);
-    expect(BusinessReducer(initialState, fetchBusinesses).businesses).toEqual(
+    expect(businessReducer(initialState, fetchBusinesses).businesses).toEqual(
       businesses
     );
   });
@@ -114,7 +114,7 @@ describe('FETCH_BUSINESSES_METADATA', () => {
 
   it('Return the state with the list of the services', () => {
     deepFreeze(initialState);
-    expect(BusinessReducer(initialState, fetchMetadata).metadata).toEqual(
+    expect(businessReducer(initialState, fetchMetadata).metadata).toEqual(
       metadata
     );
   });
@@ -139,7 +139,7 @@ describe('FETCH_FILTERS_OPTIONS', () => {
 
   it('Return the state with the list of the services', () => {
     deepFreeze(initialState);
-    expect(BusinessReducer(initialState, fetchFilters).filters).toEqual(
+    expect(businessReducer(initialState, fetchFilters).filters).toEqual(
       filters
     );
   });

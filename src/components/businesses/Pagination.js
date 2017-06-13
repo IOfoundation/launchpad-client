@@ -34,7 +34,7 @@ class Pagination extends React.Component {
   }
 }
 
-Pagination.PropTypes = {
+Pagination.propTypes = {
   businessesMetadata: PropTypes.object.isRequired,
   handleChangePage: PropTypes.func.isRequired,
 };

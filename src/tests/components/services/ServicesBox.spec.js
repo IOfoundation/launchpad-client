@@ -3,7 +3,7 @@ import {shallow} from 'enzyme';
 
 import ServicesBox from '../../../components/services/ServicesBox';
 
-function mockServices(overrides) {
+function mockServices() {
   return [
     {
       id: 1,

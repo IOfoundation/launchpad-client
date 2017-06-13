@@ -33,7 +33,7 @@ const filtersDataObject = filters => {
 };
 
 const filtersObject = (filterType, filterValue, currentFilters) => {
-  let newFilter = {};
+  const newFilter = {};
   newFilter[`filters[${filterType}]`] = filterValue;
   let filters = Object.assign({}, currentFilters, newFilter);
   if (!filterValue) {
@@ -105,10 +105,10 @@ export function changePage(page, currentParams) {
   return async (dispatch: Function) => {
     const params = {
       ...currentParams,
-      page: page,
+      page,
     };
     const httpResponse = await httpRequest.get('/businesses', {
-      params: params,
+      params,
     });
     const {businesses} = httpResponse.data;
     const {metadata} = httpResponse.data;
@@ -119,7 +119,7 @@ export function changePage(page, currentParams) {
 }
 
 export function showBusiness(business) {
-  return async (dispatch: Function) => {
+  return async () => {
     browserHistory.push({
       pathname: `/businesses/${business.id}`,
     });

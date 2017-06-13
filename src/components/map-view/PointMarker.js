@@ -1,4 +1,5 @@
 import React from 'react';
+import {PropTypes} from 'prop-types';
 
 const PointMarker = ({text}) => {
   return (
@@ -13,6 +14,10 @@ const PointMarker = ({text}) => {
       {text}
     </div>
   );
+};
+
+PointMarker.propTypes = {
+  text: PropTypes.string,
 };
 
 export default PointMarker;

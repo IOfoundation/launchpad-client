@@ -1,6 +1,5 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
-import {Link} from 'react-router';
 
 class BusinessesForm extends React.Component {
   constructor(props) {
@@ -35,7 +34,7 @@ class BusinessesForm extends React.Component {
   }
 }
 
-BusinessesForm.PropTypes = {
+BusinessesForm.propTypes = {
   handleSubmitSearchBusinessesForm: PropTypes.func.isRequired,
 };
 

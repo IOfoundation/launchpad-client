@@ -37,7 +37,10 @@ export class Home extends Component {
   }
 }
 
-Home.propTypes = {};
+Home.propTypes = {
+  actions: PropTypes.object,
+  services: PropTypes.array.isRequired,
+};
 
 const mapStateToProps = _state => {
   const {home} = _state;

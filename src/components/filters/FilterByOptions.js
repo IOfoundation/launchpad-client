@@ -19,8 +19,11 @@ class FilterByOptions extends React.Component {
   }
 }
 
-FilterByOptions.PropTypes = {
+FilterByOptions.propTypes = {
   filterName: PropTypes.string.isRequired,
+  filterOptions: PropTypes.array.isRequired,
+  filterType: PropTypes.string.isRequired,
+  handleOnChangeFilterOptions: PropTypes.func,
 };
 
 export default FilterByOptions;

@@ -9,13 +9,13 @@ const Main = ({business}) => {
   return (
     <div className="">
       <div>
-        <span onClick={browserHistory.goBack}>Back To Resources</span>
+        <span onClick={browserHistory.goBack}>{'Back To Resources'}</span>
       </div>
       <div className="">
         <img src={business.log} alt={`${business.name} logo`} />
         <div>
           <h2>{business.name}</h2>
-          <span>CONTACT</span>
+          <span>{'CONTACT'}</span>
           <ul>
             <li>{business.address}</li>
             <li
@@ -33,11 +33,11 @@ const Main = ({business}) => {
           </ul>
         </div>
         <div>
-          <h3>SERVICE DESCRIPTION</h3>
+          <h3>{'SERVICE DESCRIPTION'}</h3>
           <p>{business.description}</p>
         </div>
         <div>
-          <h3>SERVICES OFFERED</h3>
+          <h3>{'SERVICES OFFERED'}</h3>
           <ul>
             {business.Services.map(service => (
               <li key={service.id} className={'services'}>{service.name}</li>

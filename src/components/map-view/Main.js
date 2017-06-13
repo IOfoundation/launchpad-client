@@ -1,6 +1,7 @@
 import React from 'react';
 import GoogleMapReact from 'google-map-react';
 import Marker from './PointMarker';
+import {PropTypes} from 'prop-types';
 
 class Main extends React.Component {
   render() {
@@ -23,5 +24,9 @@ class Main extends React.Component {
     );
   }
 }
+
+Main.propTypes = {
+  businesses: PropTypes.array.isRequired,
+};
 
 export default Main;
