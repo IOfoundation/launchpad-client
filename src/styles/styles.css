@@ -32,9 +32,14 @@ h1,h2,h3,h4,h5,p, a {
 .opacity75 {
   opacity: .75;
 }
+.noPadding {
+  padding: 0;
+}
 
 /* Import Components */
 @import './components/shared/header.css';
 @import './components/home/WelcomeCard.css';
 @import './components/shared/footer.css';
+
+@import './components/businesses/businessList.css';
 @import './components/businesses/resultInfo.css';

@@ -13,24 +13,23 @@ const Main = ({
   handleClickOnBusiness,
 }) => {
   return (
-    <div className="">
-      <div className="">
+    <div className="row ">
+      <div className="col-xs-5 noPadding businessList">
         <ResultInfo businessesMetadata={businessesMetadata} />
+        <BusinessesList
+          businesses={businesses}
+          handleClickOnBusiness={handleClickOnBusiness}
+        />
+        <Pagination
+          businessesMetadata={businessesMetadata}
+          handleChangePage={handleChangePage}
+        />
       </div>
-      <div className="">
-        <div className="">
-          <BusinessesList
-            businesses={businesses}
-            handleClickOnBusiness={handleClickOnBusiness}
-          />
-          <Pagination
-            businessesMetadata={businessesMetadata}
-            handleChangePage={handleChangePage}
-          />
-        </div>
-        <div style={{width: '500px', height: '500px'}}>
-          <MapView businesses={businesses} />
-        </div>
+      <div
+        className="col-xs-7 noPadding"
+        style={{width: '500px', height: '500px'}}
+      >
+        <MapView businesses={businesses} />
       </div>
     </div>
   );
