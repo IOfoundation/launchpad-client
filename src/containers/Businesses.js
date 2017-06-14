@@ -9,6 +9,8 @@ import FilterBox from '../components/filters/FilterBox';
 import BusinessesView from 'components/businesses/Main';
 import * as actions from '../actions/business';
 
+import WelcomeCard from '../components/shared/WelcomeCard';
+
 export class Businesses extends Component {
   componentWillMount(_nextProps) {
     const businessesFilters = this.props.location.query;
@@ -58,6 +60,7 @@ export class Businesses extends Component {
               )}
             />
           </div>
+          <WelcomeCard />
           <BusinessesView
             businesses={this.props.businesses}
             businessesMetadata={this.props.metadata}

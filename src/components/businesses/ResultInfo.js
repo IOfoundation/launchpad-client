@@ -4,8 +4,8 @@ import MetaInfoBusinesses from './MetaInfoBusinesses';
 
 const ResultInfo = ({businessesMetadata}) => {
   return (
-    <div>
-      <span>{`${businessesMetadata.totalBusinesses} Resources Available`}</span>
+    <div className="businessList_top row between-xs">
+      <span className="secondary bold bodyFont">{`${businessesMetadata.totalBusinesses} Resources Available`}</span>
       <MetaInfoBusinesses businessesMetadata={businessesMetadata} />
     </div>
   );

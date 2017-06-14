@@ -25,8 +25,7 @@ class MetaInfoBusinesses extends React.Component {
 
   render() {
     return (
-      <span
-      >{`Showing Results ${this.resourcesStartOn()}-${this.resourcesEndOn()}`}</span>
+      <span className="secondary bodyFont">{`Showing Results ${this.resourcesStartOn()}-${this.resourcesEndOn()}`}</span>
     );
   }
 }

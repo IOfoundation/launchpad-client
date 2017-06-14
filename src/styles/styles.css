@@ -20,7 +20,15 @@ h1,h2,h3,h4,h5,p, a {
 }
 
 /* Useful Classes */
-
+.secondary {
+  color: #0C0033;
+}
+.bold {
+  font-weight: bold;
+}
+.bodyFont {
+  font-size: 14px;
+}
 .opacity75 {
   opacity: .75;
 }
@@ -29,3 +37,4 @@ h1,h2,h3,h4,h5,p, a {
 @import './components/shared/header.css';
 @import './components/home/WelcomeCard.css';
 @import './components/shared/footer.css';
+@import './components/businesses/resultInfo.css';
