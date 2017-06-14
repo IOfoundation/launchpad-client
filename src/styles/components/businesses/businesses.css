@@ -1,4 +1,7 @@
-.businessesContainer .businessesRow--reduced, .businessesContainer .businessList_top_content {
+.businessesContainer {
+  border-top: 1px solid #3F51B5;
+}
+.businessesContainerReduced .businessesRow--reduced, .businessesContainerReduced .businessList_top_content {
   max-width: 80%;
   margin: 0 auto;
 }

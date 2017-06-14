@@ -54,7 +54,12 @@ class Main extends Component {
       handleChangePage,
     } = this.props;
     return (
-      <div className={this.state.expanded ? '' : 'businessesContainer'}>
+      <div
+        className={
+          'businessesContainer ' +
+          (this.state.expanded ? '' : 'businessesContainerReduced')
+        }
+      >
         {this.state.expanded ? null : this._renderResultsInfo()}
         <div
           className={
