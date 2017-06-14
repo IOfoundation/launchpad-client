@@ -1,0 +1,18 @@
+.business_block--reduced {
+  border-top: 1px solid rgba(0,0,0,.2);
+  padding: 16px 20px;
+  line-height: 16px;
+}
+.business_block--reduced h3 {
+  margin-bottom: 8px;
+}
+
+.business_block--reduced_bottom {
+  margin-top: 8px;
+}
+
+.socialIcon_icon {
+  height: 14px;
+  width: 14px;
+  margin-right: 8px;
+}

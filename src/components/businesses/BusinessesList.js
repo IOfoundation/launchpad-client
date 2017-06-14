@@ -3,11 +3,7 @@ import {PropTypes} from 'prop-types';
 
 import Business from './Business';
 
-const businessEx = {
-  name: 'Lorem',
-};
-
-const BusinessesList = ({businesses, handleClickOnBusiness}) => {
+const BusinessesList = ({businesses, handleClickOnBusiness, expanded}) => {
   return (
     <div>
 

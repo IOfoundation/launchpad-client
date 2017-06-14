@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
 
 import BusinessesList from './BusinessesList';
@@ -6,7 +6,7 @@ import MapView from '../map-view/Main';
 import Pagination from './Pagination';
 import ResultInfo from './ResultInfo';
 
-class Main extends React.Component {
+class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -72,6 +72,7 @@ class Main extends React.Component {
             <BusinessesList
               businesses={businesses}
               handleClickOnBusiness={handleClickOnBusiness}
+              expanded={this.state.expanded}
             />
             <Pagination
               businessesMetadata={businessesMetadata}
