@@ -4,7 +4,10 @@
   position: relative;
   transition: .3s ease all;
 }
-.mapReduced div {
+.mapReduced {
+  margin-top: 16px;
+}
+.mapReduced > div {
   max-height: 300px;
 }
 .reduceMapBtn {
@@ -39,6 +42,9 @@
   cursor: pointer;
 }
 
+.reducedMapBottom_checkContainer {
+  margin: 0;
+}
 .reducedMapBottom_check {
   -webkit-appearance: none;
   height: 20px;

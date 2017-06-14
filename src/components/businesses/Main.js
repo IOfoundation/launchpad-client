@@ -34,7 +34,7 @@ class Main extends Component {
         <button className="expandMapBtn" onClick={() => this._expandMap()}>
           {'Expand Map'}
         </button>
-        <div>
+        <div className="reducedMapBottom_checkContainer">
           <input className="reducedMapBottom_check" type="checkbox" />
           <label className="reducedMapeBottom_checklabel">
             {'Update when map moves'}
