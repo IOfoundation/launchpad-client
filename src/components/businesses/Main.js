@@ -30,10 +30,16 @@ class Main extends React.Component {
   }
   _renderExpandButton() {
     return (
-      <div className="reducedMapBottom">
+      <div className="row between-xs middle-xs reducedMapBottom">
         <button className="expandMapBtn" onClick={() => this._expandMap()}>
           {'Expand Map'}
         </button>
+        <div>
+          <input className="reducedMapBottom_check" type="checkbox" />
+          <label className="reducedMapeBottom_checklabel">
+            {'Update when map moves'}
+          </label>
+        </div>
       </div>
     );
   }
