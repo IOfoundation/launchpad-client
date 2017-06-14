@@ -88,7 +88,7 @@ class Business extends Component {
     const {business} = this.props;
     return (
       <div className="row between-xs middle-xs business_block--reduced">
-        <div className="col-xs-9">
+        <div className="col-xs-9 noPadding">
           <h3 className="primary bold bodyFont">{business.name}</h3>
           <div>
             <p className="smallFont opacity50">{business.description}</p>
@@ -135,6 +135,7 @@ class Business extends Component {
 
 Business.propTypes = {
   business: PropTypes.object.isRequired,
+  expanded: PropTypes.bool,
   handleClickOnBusiness: PropTypes.func.isRequired,
 };
 

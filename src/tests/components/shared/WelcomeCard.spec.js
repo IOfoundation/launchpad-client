@@ -1,7 +1,7 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 
-import WelcomeCard from '../../../components/home/WelcomeCard';
+import WelcomeCard from '../../../components/shared/WelcomeCard';
 
 describe('<WelcomeCard />', () => {
   it('Render a close button tag', () => {

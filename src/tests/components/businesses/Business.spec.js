@@ -51,7 +51,7 @@ describe('<Business />', () => {
         handleClickOnBusiness={handleClickOnBusiness}
       />
     );
-    expect(wrapper.contains(<h3>Businesses1</h3>)).toBe(true);
+    expect(wrapper.contains('Businesses1')).toBe(true);
   });
 
   it('Renders a service span for every service of a Business', () => {

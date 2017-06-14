@@ -64,3 +64,4 @@ h1,h2,h3,h4,h5,p, a {
 @import './components/businesses/resultInfo.css';
 @import './components/businesses/businesses.css';
 @import './components/businesses/businessBlock.css';
+@import './components/businesses/pagination.css';

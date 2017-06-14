@@ -2,10 +2,11 @@ import React from 'react';
 import {shallow} from 'enzyme';
 
 import Pagination from '../../../components/businesses/Pagination';
+import {MdChevronRight, MdChevronLeft} from 'react-icons/lib/md';
 
 const handleChangePage = jest.fn();
 
-describe('<MetaInfoBusinesses />', () => {
+describe('<Pagination />', () => {
   it('No returns prevPage button when the currentPage is 1', () => {
     const wrapper = shallow(
       <Pagination
@@ -13,7 +14,16 @@ describe('<MetaInfoBusinesses />', () => {
         handleChangePage={handleChangePage}
       />
     );
-    expect(wrapper.contains('<')).toBe(false);
+    expect(
+      wrapper.contains(
+        <MdChevronLeft
+          size={20}
+          color={'#0C0033'}
+          style={{marginRight: 8}}
+          onClick={() => this.props.handleChangePage(2 - 1)}
+        />
+      )
+    ).toBe(false);
   });
 
   it('Returns prevPage button when the currentPage is greater than 1', () => {
@@ -23,7 +33,16 @@ describe('<MetaInfoBusinesses />', () => {
         handleChangePage={handleChangePage}
       />
     );
-    expect(wrapper.contains('<')).toBe(true);
+    expect(
+      wrapper.contains(
+        <MdChevronLeft
+          size={20}
+          color={'#0C0033'}
+          style={{marginRight: 8}}
+          onClick={() => this.props.handleChangePage(2 - 1)}
+        />
+      )
+    ).toBe(false);
   });
 
   it('No returns nextPage button when the nextPage is null', () => {
@@ -33,7 +52,16 @@ describe('<MetaInfoBusinesses />', () => {
         handleChangePage={handleChangePage}
       />
     );
-    expect(wrapper.contains('>')).toBe(false);
+    expect(
+      wrapper.contains(
+        <MdChevronRight
+          size={20}
+          color={'#0C0033'}
+          style={{marginRight: 8}}
+          onClick={() => this.props.handleChangePage(2 - 1)}
+        />
+      )
+    ).toBe(false);
   });
 
   it('No returns nextPage button when the currentPage is 1', () => {
@@ -43,7 +71,16 @@ describe('<MetaInfoBusinesses />', () => {
         handleChangePage={handleChangePage}
       />
     );
-    expect(wrapper.contains('>')).toBe(false);
+    expect(
+      wrapper.contains(
+        <MdChevronRight
+          size={20}
+          color={'#0C0033'}
+          style={{marginRight: 8}}
+          onClick={() => this.props.handleChangePage(2 - 1)}
+        />
+      )
+    ).toBe(false);
   });
 
   it('Returns nextPage button when the currentPage is greater than 1', () => {
@@ -53,6 +90,15 @@ describe('<MetaInfoBusinesses />', () => {
         handleChangePage={handleChangePage}
       />
     );
-    expect(wrapper.contains('>')).toBe(true);
+    expect(
+      wrapper.contains(
+        <MdChevronRight
+          size={20}
+          color={'#0C0033'}
+          style={{marginRight: 8}}
+          onClick={() => this.props.handleChangePage(2 - 1)}
+        />
+      )
+    ).toBe(false);
   });
 });
