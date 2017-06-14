@@ -1,0 +1,23 @@
+.map {
+  width: 500px;
+  height: 500px;
+  position: relative;
+}
+
+.reduceMapBtn {
+  background-color: rgba(245,245,245,1);
+  border: none;
+  outline: none;
+  color: #3F51B5;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 10px 15px;
+  box-shadow: 0 2px 3px -1px grey;
+  position: absolute;
+  z-index: 1;
+  right: 20px;
+  top: 20px;
+}
+.reduceMapBtn:hover {
+  cursor: pointer;
+}

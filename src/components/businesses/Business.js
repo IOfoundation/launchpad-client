@@ -6,7 +6,7 @@ const Business = ({business, handleClickOnBusiness}) => {
     <div className="Business" onClick={() => handleClickOnBusiness(business)}>
       <h3>{business.name}</h3>
       <section>
-        <div>
+        <div className="hidden">
           <ul>
             <li>
               <span>{'Service Provides: '}</span>

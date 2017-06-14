@@ -3,9 +3,14 @@ import {PropTypes} from 'prop-types';
 
 import Business from './Business';
 
+const businessEx = {
+  name: 'Lorem',
+};
+
 const BusinessesList = ({businesses, handleClickOnBusiness}) => {
   return (
     <div>
+
       {businesses.map(business => {
         return (
           <Business
