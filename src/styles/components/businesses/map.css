@@ -2,8 +2,11 @@
   width: 500px;
   height: 500px;
   position: relative;
+  transition: .3s ease all;
 }
-
+.mapReduced div {
+  max-height: 300px;
+}
 .reduceMapBtn {
   background-color: rgba(245,245,245,1);
   border: none;
@@ -20,4 +23,15 @@
 }
 .reduceMapBtn:hover {
   cursor: pointer;
+}
+.reducedMapBottom {
+  margin-top: 15px;
+}
+.expandMapBtn {
+  color: #3F51B5;
+  background: none;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  font-size: 14px;
 }

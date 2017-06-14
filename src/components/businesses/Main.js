@@ -21,7 +21,25 @@ class Main extends React.Component {
   _expandMap() {
     this.setState({expanded: true});
   }
-
+  _renderReduceButton() {
+    return (
+      <button className="reduceMapBtn" onClick={() => this._reduceMap()}>
+        {'Reduce Map'}
+      </button>
+    );
+  }
+  _renderExpandButton() {
+    return (
+      <div className="reducedMapBottom">
+        <button className="expandMapBtn" onClick={() => this._expandMap()}>
+          {'Expand Map'}
+        </button>
+      </div>
+    );
+  }
+  _renderResultsInfo() {
+    return <ResultInfo businessesMetadata={this.props.businessesMetadata} />;
+  }
   render() {
     const {
       businessesMetadata,
@@ -30,23 +48,43 @@ class Main extends React.Component {
       handleChangePage,
     } = this.props;
     return (
-      <div className="row ">
-        <div className="col-xs-5 noPadding businessList">
-          <ResultInfo businessesMetadata={businessesMetadata} />
-          <BusinessesList
-            businesses={businesses}
-            handleClickOnBusiness={handleClickOnBusiness}
-          />
-          <Pagination
-            businessesMetadata={businessesMetadata}
-            handleChangePage={handleChangePage}
-          />
-        </div>
-        <div className="col-xs-7 noPadding map">
-          <button className="reduceMapBtn" onClick={() => this._reduceMap()}>
-            {'Reduce Map'}
-          </button>
-          <MapView businesses={businesses} />
+      <div className={this.state.expanded ? '' : 'businessesContainer'}>
+        {this.state.expanded ? null : this._renderResultsInfo()}
+        <div
+          className={
+            'row ' + (this.state.expanded ? '' : 'businessesRow--reduced')
+          }
+        >
+          <div
+            className={
+              this.state.expanded
+                ? 'col-xs-5 businessList noPadding'
+                : 'col-xs-8'
+            }
+          >
+            {this.state.expanded ? this._renderResultsInfo() : null}
+            <BusinessesList
+              businesses={businesses}
+              handleClickOnBusiness={handleClickOnBusiness}
+            />
+            <Pagination
+              businessesMetadata={businessesMetadata}
+              handleChangePage={handleChangePage}
+            />
+          </div>
+          <div
+            className={
+              'map ' +
+              (this.state.expanded
+                ? 'col-xs-7 noPadding '
+                : 'col-xs-4 mapReduced')
+            }
+          >
+            <MapView businesses={businesses} />
+            {this.state.expanded
+              ? this._renderReduceButton()
+              : this._renderExpandButton()}
+          </div>
         </div>
       </div>
     );
