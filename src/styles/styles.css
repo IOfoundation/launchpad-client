@@ -26,6 +26,9 @@ h1,h2,h3,h4,h5,p, a {
 .secondary {
   color: #0C0033;
 }
+.white {
+  color: #ffffff;
+}
 .bold {
   font-weight: bold;
 }
@@ -50,7 +53,6 @@ h1,h2,h3,h4,h5,p, a {
 
 /* Shared */
 .visitWebsite {
-  color: #3F51B5;
   text-transform: uppercase;
   margin-right: 16px;
 }

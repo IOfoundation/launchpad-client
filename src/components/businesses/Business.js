@@ -44,7 +44,7 @@ class Business extends Component {
             </div>
           </div>
           <section className="row business_block--expanded_bottom">
-            <a className="visitWebsite bold smallFont" href="#">
+            <a className="visitWebsite bold smallFont primary" href="#">
               {'VISIT WEBSITE'}
             </a>
             <a className="socialIcon" href="#">
@@ -94,7 +94,7 @@ class Business extends Component {
             <p className="smallFont opacity50">{business.description}</p>
           </div>
           <section className="row business_block--reduced_bottom">
-            <a className="visitWebsite bold smallFont" href="#">
+            <a className="visitWebsite bold smallFont primary" href="#">
               {'VISIT WEBSITE'}
             </a>
             <a className="socialIcon" href="#">
