@@ -72,12 +72,21 @@ export default {
       },
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        exclude: /node_modules/,
         loader: 'url-loader?limit=10000&mimetype=image/svg+xml',
       },
-      {test: /\.(jpe?g|png|gif)$/i, loader: 'file-loader?name=[name].[ext]'},
+      {
+        test: /\.(jpe?g|png|gif)$/i,
+        loader: 'file-loader?name=[name].[ext]',
+      },
       {test: /\.ico$/, loader: 'file-loader?name=[name].[ext]'},
       {
         test: /react-icons\/(.)*(.js)$/,
+        include: [
+          path.resolve(__dirname, './node_modules/react-icons/fa'),
+          path.resolve(__dirname, './node_modules/react-icons/md'),
+        ],
+        exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
           presets: ['es2015', 'react'],
