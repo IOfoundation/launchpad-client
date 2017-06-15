@@ -1,0 +1,18 @@
+.businessTopBar {
+  color: #3F51B5;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 18px;
+}
+.businessTopBar_btn {
+  vertical-align: middle;
+}
+.businessTopBar_btn:hover {
+  cursor: pointer;
+}
+.businessTopBar_btn_icon {
+  margin-right: 8px;
+}
+.businessTopBar_share {
+  margin-right: 8px;
+}

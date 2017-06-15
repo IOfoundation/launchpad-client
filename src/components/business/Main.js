@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
 import {browserHistory} from 'react-router';
 
-import {MdShare} from 'react-icons/lib/md';
+import {MdShare, MdKeyboardBackspace} from 'react-icons/lib/md';
 import ContentMap from '../layouts/ContentMap';
 
 class Main extends Component {
@@ -24,11 +24,21 @@ class Main extends Component {
   }
   _renderTopBar() {
     return (
-      <div className="row between-xs middle-xs">
-        <span onClick={browserHistory.goBack}>{'Back To Resources'}</span>
-        <div>
-          <span>{'Share'}</span>
-          <MdShare size={22} color={'black'} />
+      <div className="row between-xs middle-xs businessList_top businessTopBar">
+        <div
+          onClick={browserHistory.goBack}
+          className="businessTopBar_btn middle-xs"
+        >
+          <MdKeyboardBackspace
+            size={22}
+            color={'#3F51B5'}
+            className="businessTopBar_btn_icon"
+          />
+          <span>{'Back To Resources'}</span>
+        </div>
+        <div className="businessTopBar_btn middle-xs">
+          <span className="businessTopBar_share">{'SHARE'}</span>
+          <MdShare size={22} color={'#3F51B5'} />
         </div>
       </div>
     );
@@ -44,9 +54,9 @@ class Main extends Component {
         reduceMap={this.reduceMap}
         topBar={this._renderTopBar()}
       >
-        <div className="">
+        <div className="bussinessView">
           <div>
-            <img src={business.logo} alt={`${business.name} logo`} />
+            <img src={` ${business.logo}`} alt={`${business.name} logo`} />
           </div>
           <div>
             <h2>{business.name}</h2>
@@ -91,9 +101,9 @@ class Main extends Component {
           <div>
             <h3>{'SERVICES OFFERED'}</h3>
             <ul>
-              {business.Services.map(service =>
+              {business.Services.map(service => (
                 <li key={service.id} className={'services'}>{service.name}</li>
-              )}
+              ))}
             </ul>
           </div>
         </div>
