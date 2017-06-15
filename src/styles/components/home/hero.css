@@ -1,0 +1,55 @@
+.hero {
+  background: linear-gradient(rgba(12,0,51,0.6),rgba(12,0,51,0.6)),url("/static-data/images/hero.jpg");
+  background-size: cover;
+  background-position: 50% 25%;
+  padding: 90px 0;
+  color: white;
+}
+.hero_content {
+  width: 50%;
+  margin: 0 auto;
+}
+.hero h2 {
+  margin-top: 32px;
+  font-size: 36px;
+  line-height: 54px;
+  font-weight: normal;
+}
+.hero p {
+  font-size: 14px;
+  line-height: 20px;
+  width: 80%;
+  margin: 8px auto 0 auto;
+}
+.hero_inputContainer {
+  margin-top: 48px;
+}
+.hero_input {
+  background: white;
+  padding: 9px;
+  border-radius: 2px;
+  width: 320px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  margin-right: 16px;
+}
+.hero_input_btn {
+  background: #ffc000;
+  border: none;
+  outline: none;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 9px 24px;
+  border-radius: 2px;
+}
+.hero_input_btn:hover {
+  cursor: pointer;
+}
+.hero_link {
+  margin-top: 20px;
+  color: white;
+  display: block;
+  font-weight: bold;
+}
