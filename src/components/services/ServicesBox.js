@@ -5,15 +5,13 @@ import Service from './Service';
 const ServicesBox = ({services, handleClickOnServiceTag}) => {
   return (
     <div>
-      <ul>
-        {services.map(service => (
-          <Service
-            key={service.id}
-            service={service}
-            handleClickOnServiceTag={handleClickOnServiceTag}
-          />
-        ))}
-      </ul>
+      {services.map(service =>
+        <Service
+          key={service.id}
+          service={service}
+          handleClickOnServiceTag={handleClickOnServiceTag}
+        />
+      )}
     </div>
   );
 };

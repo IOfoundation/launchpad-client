@@ -3,7 +3,12 @@ import {PropTypes} from 'prop-types';
 
 const Service = ({service, handleClickOnServiceTag}) => {
   return (
-    <li onClick={() => handleClickOnServiceTag(service.id)}>{service.name}</li>
+    <button
+      className="browseBy_btn"
+      onClick={() => handleClickOnServiceTag(service.id)}
+    >
+      {service.name}
+    </button>
   );
 };
 
