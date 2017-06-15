@@ -41,6 +41,7 @@ h1,h2,h3,h4,h5,p, a {
 .opacity75 {
   opacity: .75;
 }
+
 .opacity50 {
   opacity: .5;
 }
@@ -71,3 +72,4 @@ h1,h2,h3,h4,h5,p, a {
 @import './components/home/hero.css';
 @import './components/home/browseBy.css';
 @import './components/business/business.css';
+@import './components/filters/filters.css';

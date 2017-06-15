@@ -15,14 +15,16 @@ class FilterByText extends React.Component {
 
   render() {
     return (
-      <form>
-        <input
-          type="text"
-          value={this.state.value}
-          onChange={this.handleChange}
-          placeholder=""
-        />
-      </form>
+      <div className="col-xs-2 noPadding">
+        <form>
+          <input
+            type="text"
+            value={this.state.value}
+            onChange={this.handleChange}
+            placeholder=""
+          />
+        </form>
+      </div>
     );
   }
 }

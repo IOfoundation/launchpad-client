@@ -5,7 +5,6 @@ import BusinessesForm from './BusinessesForm';
 import ServicesBox from '../services/ServicesBox';
 import Logo from '../shared/Logo';
 
-import Logo from '../shared/Logo';
 const Main = ({
   services,
   handleClickOnServiceTag,

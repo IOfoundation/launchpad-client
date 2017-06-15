@@ -6,10 +6,7 @@ import FilterByOptions from './FilterByOptions';
 class FilterBox extends React.Component {
   render() {
     return (
-      <div>
-        <FilterByText
-          handleTextSearchBusinesses={this.props.handleTextSearchBusinesses}
-        />
+      <div className="row bottom-xs between-xs">
         <FilterByOptions
           filterName="Assistance Needed"
           filterType={''}
@@ -38,6 +35,9 @@ class FilterBox extends React.Component {
           filterType={'communities'}
           filterOptions={this.props.filterOptions.communities}
           handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
+        />
+        <FilterByText
+          handleTextSearchBusinesses={this.props.handleTextSearchBusinesses}
         />
       </div>
     );

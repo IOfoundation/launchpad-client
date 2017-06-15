@@ -1,0 +1,29 @@
+.navTwo {
+  padding: 20px 0;
+}
+.navTwo_logo {
+  max-width: 20%;
+  flex-basis: 20%;
+}
+.navTwo_filters {
+  max-width: 80%;
+  flex-basis: 80%;
+  padding-top: 35px;
+}
+
+.filterSelect {
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(12,0,51, .5);
+  text-align: left;
+  padding: 4px 0;
+  width: 90%;
+  color: rgba(12,0,51, .5);
+  font-size: 14px;
+}
+.filterSelect:hover {
+  cursor: pointer;
+}
+.filterSelect:active, .filterSelect:focus {
+  outline: none;
+}
