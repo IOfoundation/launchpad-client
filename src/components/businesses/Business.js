@@ -50,19 +50,19 @@ class Business extends Component {
             <a className="socialIcon" href="#">
               <img
                 className="socialIcon_icon"
-                src="static-data/images/twitter.svg"
+                src="../static-data/images/twitter.svg"
               />
             </a>
             <a className="socialIcon" href="#">
               <img
                 className="socialIcon_icon"
-                src="static-data/images/facebook.svg"
+                src="../static-data/images/facebook.svg"
               />
             </a>
             <a className="socialIcon" href="#">
               <img
                 className="socialIcon_icon"
-                src="static-data/images/linkedin.svg"
+                src="../static-data/images/linkedin.svg"
               />
             </a>
           </section>

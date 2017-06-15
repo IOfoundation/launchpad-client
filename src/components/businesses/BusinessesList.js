@@ -25,6 +25,7 @@ const BusinessesList = ({businesses, handleClickOnBusiness, expanded}) => {
       <Business
         business={businessEx}
         handleClickOnBusiness={handleClickOnBusiness}
+        expanded={expanded}
       />
       {businesses.map(business => {
         return (
