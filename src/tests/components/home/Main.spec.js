@@ -19,7 +19,11 @@ describe('<HomePage />', () => {
       />
     );
     expect(
-      wrapper.contains(<Link to="/businesses">{'View All Resources'}</Link>)
+      wrapper.contains(
+        <Link className="hero_link" to="/businesses">
+          {'View All Resources'}
+        </Link>
+      )
     ).toBe(true);
   });
 
