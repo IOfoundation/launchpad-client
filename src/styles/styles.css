@@ -4,7 +4,7 @@
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
-  color: #293544;
+  color: #0C0033;
   max-width: 1350px;
   margin: 0 auto;
 }
@@ -20,12 +20,48 @@ h1,h2,h3,h4,h5,p, a {
 }
 
 /* Useful Classes */
-
+.primary {
+  color: #3F51B5;
+}
+.secondary {
+  color: #0C0033;
+}
+.bold {
+  font-weight: bold;
+}
+.bodyFont {
+  font-size: 14px;
+}
+.smallFont {
+  font-size: 12px;
+}
 .opacity75 {
   opacity: .75;
 }
+.opacity50 {
+  opacity: .5;
+}
+.noPadding {
+  padding: 0;
+}
+.hidden {
+  display: none;
+}
 
+/* Shared */
+.visitWebsite {
+  color: #3F51B5;
+  text-transform: uppercase;
+  margin-right: 16px;
+}
 /* Import Components */
 @import './components/shared/header.css';
 @import './components/home/WelcomeCard.css';
 @import './components/shared/footer.css';
+
+@import './components/businesses/map.css';
+@import './components/businesses/businessList.css';
+@import './components/businesses/resultInfo.css';
+@import './components/businesses/businesses.css';
+@import './components/businesses/businessBlock.css';
+@import './components/businesses/pagination.css';

@@ -3,7 +3,7 @@ import {PropTypes} from 'prop-types';
 
 import Business from './Business';
 
-const BusinessesList = ({businesses, handleClickOnBusiness}) => {
+const BusinessesList = ({businesses, handleClickOnBusiness, expanded}) => {
   return (
     <div>
       {businesses.map(business => {
@@ -22,6 +22,7 @@ const BusinessesList = ({businesses, handleClickOnBusiness}) => {
 BusinessesList.propTypes = {
   businesses: PropTypes.array.isRequired,
   handleClickOnBusiness: PropTypes.func.isRequired,
+  expanded: PropTypes.bool,
 };
 
 export default BusinessesList;

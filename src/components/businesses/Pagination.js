@@ -1,6 +1,7 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 import MetaInfoBusinesses from './MetaInfoBusinesses';
+import {MdChevronRight, MdChevronLeft} from 'react-icons/lib/md';
 
 class Pagination extends React.Component {
   render() {
@@ -9,26 +10,34 @@ class Pagination extends React.Component {
     let prevPageArrow = null;
     if (currentPage > 1) {
       prevPageArrow = (
-        <span onClick={() => this.props.handleChangePage(currentPage - 1)}>
-          {'<'}
-        </span>
+        <MdChevronLeft
+          size={20}
+          color={'#0C0033'}
+          style={{marginRight: 8}}
+          onClick={() => this.props.handleChangePage(currentPage - 1)}
+        />
       );
     }
 
     let nextPageArrow = null;
     if (nextPage && nextPage > 1) {
       nextPageArrow = (
-        <span onClick={() => this.props.handleChangePage(nextPage)}>{'>'}</span>
+        <MdChevronRight
+          size={20}
+          color={'#0C0033'}
+          onClick={() => this.props.handleChangePage(nextPage)}
+        />
       );
     }
     return (
-      <div>
+      <div className="pagination row between-xs middle-xs">
         <MetaInfoBusinesses
           businessesMetadata={this.props.businessesMetadata}
         />
-        {prevPageArrow}
-        <span>{' '}</span>
-        {nextPageArrow}
+        <div>
+          {prevPageArrow}
+          {nextPageArrow}
+        </div>
       </div>
     );
   }

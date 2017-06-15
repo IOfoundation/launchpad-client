@@ -1,0 +1,65 @@
+.map {
+  width: 500px;
+  height: 500px;
+  position: relative;
+  transition: .3s ease all;
+}
+.mapReduced {
+  margin-top: 16px;
+}
+.mapReduced > div {
+  max-height: 300px;
+}
+.reduceMapBtn {
+  background-color: rgba(245,245,245,1);
+  border: none;
+  outline: none;
+  color: #3F51B5;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 10px 15px;
+  box-shadow: 0 2px 3px -1px grey;
+  position: absolute;
+  z-index: 1;
+  right: 20px;
+  top: 20px;
+}
+.reduceMapBtn:hover {
+  cursor: pointer;
+}
+.reducedMapBottom {
+  margin-top: 15px;
+}
+.expandMapBtn {
+  color: #3F51B5;
+  background: none;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  font-size: 14px;
+}
+.expandMapBtn:hover {
+  cursor: pointer;
+}
+
+.reducedMapBottom_checkContainer {
+  margin: 0;
+}
+.reducedMapBottom_check {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border: 2px solid #0C0033;
+  vertical-align: middle;
+}
+.reducedMapBottom_check:hover {
+    cursor: pointer;
+}
+.reducedMapBottom_check:active, .reducedMapBottom_check:focus, .reducedMapBottom_check:checked {
+  background: #0c0033;
+  outline: none;
+}
+.reducedMapeBottom_checklabel {
+  font-size: 14px;
+  margin-left: 10px;
+}
