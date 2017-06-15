@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
+import {CategoriesConstants} from '../../constants';
 import {browserHistory} from 'react-router';
 
 import {MdShare, MdKeyboardBackspace} from 'react-icons/lib/md';
@@ -53,6 +54,14 @@ class Main extends Component {
   render() {
     const {business} = this.props;
     const businesses = [business];
+
+    const businessTypeCategory = business.categories.find(
+      category => category.name === CategoriesConstants.BUSINESS_TYPE
+    );
+    const businessTypeCategories = businessTypeCategory
+      ? businessTypeCategory.children
+      : [];
+
     return (
       <ContentMap
         businesses={businesses}
@@ -134,7 +143,7 @@ class Main extends Component {
             <p>{business.description}</p>
             <h3 className="smallFont">{'SERVICES OFFERED'}</h3>
             <ul>
-              {business.Services.map(service => (
+              {businessTypeCategories.map(service => (
                 <li key={service.id} className={'services'}>
                   <span className="bussinessView_service_text">
                     {service.name}

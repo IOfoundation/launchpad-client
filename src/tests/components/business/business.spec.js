@@ -8,34 +8,49 @@ function mockBusiness() {
     id: 1,
     name: 'Businesses1',
     description: 'Lorem Ipsum ...',
-    Services: [
+    location: {
+      latitude: 0,
+      longitude: 0,
+    },
+    categories: [
       {
-        id: 1,
-        name: 'Service1',
+        name: 'BusinessType',
+        children: [
+          {
+            id: 1,
+            name: 'Service1',
+          },
+          {
+            id: 1,
+            name: 'Service2',
+          },
+        ],
       },
       {
-        id: 1,
-        name: 'Service2',
-      },
-    ],
-    Communities: [
-      {
-        id: 1,
-        name: 'Community1',
-      },
-      {
-        id: 1,
-        name: 'Community2',
-      },
-    ],
-    Stages: [
-      {
-        id: 1,
-        name: 'Community1',
+        name: 'Community',
+        children: [
+          {
+            id: 1,
+            name: 'Community1',
+          },
+          {
+            id: 1,
+            name: 'Community2',
+          },
+        ],
       },
       {
-        id: 1,
-        name: 'Community2',
+        name: 'Stage',
+        children: [
+          {
+            id: 1,
+            name: 'Stage1',
+          },
+          {
+            id: 1,
+            name: 'Stage1',
+          },
+        ],
       },
     ],
   };

@@ -17,8 +17,8 @@ describe('<MetaInfoBusinesses />', () => {
       const wrapper = shallow(
         <MetaInfoBusinesses
           businessesMetadata={{
-            totalBusinesses: 3,
-            pagination: {currentPage: 1, totalPage: 1, perPage: 10},
+            total_organizations: 3,
+            pagination: {current_page: 1, total_page: 1, per_page: 10},
           }}
         />
       );
@@ -29,8 +29,8 @@ describe('<MetaInfoBusinesses />', () => {
       const wrapper = shallow(
         <MetaInfoBusinesses
           businessesMetadata={{
-            totalBusinesses: 13,
-            pagination: {currentPage: 1, totalPage: 1, perPage: 10},
+            total_organizations: 13,
+            pagination: {current_page: 1, total_page: 1, per_page: 10},
           }}
         />
       );
@@ -41,8 +41,8 @@ describe('<MetaInfoBusinesses />', () => {
       const wrapper = shallow(
         <MetaInfoBusinesses
           businessesMetadata={{
-            totalBusinesses: 13,
-            pagination: {currentPage: 1, totalPage: 1, perPage: 10},
+            total_organizations: 13,
+            pagination: {current_page: 1, total_page: 1, per_page: 10},
           }}
         />
       );
@@ -53,8 +53,8 @@ describe('<MetaInfoBusinesses />', () => {
       const wrapper = shallow(
         <MetaInfoBusinesses
           businessesMetadata={{
-            totalBusinesses: 13,
-            pagination: {currentPage: 2, totalPage: 1, perPage: 10},
+            total_organizations: 13,
+            pagination: {current_page: 2, total_page: 1, per_page: 10},
           }}
         />
       );

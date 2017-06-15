@@ -11,8 +11,12 @@ const servicesDataObject = services => {
 
 export function fetchServices() {
   return async (dispatch: Function) => {
-    const httpResponse = await httpRequest.get('/services');
-    const {services} = httpResponse.data;
+    const httpResponse = await httpRequest.get('api/categories', {
+      params: {
+        'filters[name_cont]': 'BusinessType',
+      },
+    });
+    const services = httpResponse.data[0].children;
     dispatch(servicesDataObject(services));
   };
 }
@@ -21,7 +25,7 @@ export function filterBusinessesByService(service) {
   return () => {
     browserHistory.push({
       pathname: '/businesses',
-      search: `?filters[services_id_eq]=${service}`,
+      search: `?filters[categories_id_eq]=${service}`,
     });
   };
 }

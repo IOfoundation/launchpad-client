@@ -1,9 +1,30 @@
 import React, {Component} from 'react';
+import {CategoriesConstants} from '../../constants';
 import {PropTypes} from 'prop-types';
 
 class Business extends Component {
   _renderReduced() {
     const {business} = this.props;
+
+    const businessTypeCategory = business.categories.find(
+      category => category.name === CategoriesConstants.BUSINESS_TYPE
+    );
+    const businessTypeCategories = businessTypeCategory
+      ? businessTypeCategory.children
+      : [];
+
+    const stageCategory = business.categories.find(
+      category => category.name === CategoriesConstants.STAGE
+    );
+    const stageCategories = stageCategory ? stageCategory.children : [];
+
+    const communityCategory = business.categories.find(
+      category => category.name === CategoriesConstants.COMMUNITY
+    );
+    const communityCategories = communityCategory
+      ? communityCategory.children
+      : [];
+
     return (
       <div className="row between-xs business_block--expanded">
         <section className="col-xs-9 noPadding">
@@ -11,7 +32,7 @@ class Business extends Component {
           <div>
             <div className="business_block--expanded_services">
               <span>{'Service Provides: '}</span>
-              {business.Services.map(service => {
+              {businessTypeCategories.map(service => {
                 return (
                   <span
                     className="primary service"
@@ -22,7 +43,7 @@ class Business extends Component {
             </div>
             <div className="business_block--expanded_services">
               <span>{'Business Stage: '}</span>
-              {business.Stages.map(stage => {
+              {stageCategories.map(stage => {
                 return (
                   <span
                     className="primary stage"
@@ -33,7 +54,7 @@ class Business extends Component {
             </div>
             <div className="business_block--expanded_services">
               <span>{'Underserved Communities: '}</span>
-              {business.Communities.map(community => {
+              {communityCategories.map(community => {
                 return (
                   <span
                     className="primary community"

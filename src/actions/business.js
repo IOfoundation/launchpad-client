@@ -1,4 +1,5 @@
 import {BusinessTypes as types} from '../action-types';
+import {CategoriesConstants} from '../constants';
 import httpRequest from '../services/httpRequest';
 import {browserHistory} from 'react-router';
 import queryString from 'query-string';
@@ -51,7 +52,9 @@ const pushBrowserHistory = filters => {
 
 export function fetchBusiness(businessId) {
   return async (dispatch: Function) => {
-    const httpResponse = await httpRequest.get(`/businesses/${businessId}`);
+    const httpResponse = await httpRequest.get(
+      `/api/organizations/${businessId}`
+    );
     const business = httpResponse.data;
     dispatch(businessDataObject(business));
   };
@@ -59,10 +62,10 @@ export function fetchBusiness(businessId) {
 
 export function fetchBusinesses(currentParams) {
   return async (dispatch: Function) => {
-    const httpResponse = await httpRequest.get('/businesses', {
+    const httpResponse = await httpRequest.get('/api/organizations', {
       params: currentParams,
     });
-    const {businesses} = httpResponse.data;
+    const businesses = httpResponse.data.organizations;
     const {metadata} = httpResponse.data;
     dispatch(businessesDataObject(businesses));
     dispatch(businessesMetaDataObject(metadata));
@@ -72,10 +75,10 @@ export function fetchBusinesses(currentParams) {
 export function filterBusinessesByName(filterValue, currentParams) {
   return async (dispatch: Function) => {
     const filters = filtersObject('name_cont', filterValue, currentParams);
-    const httpResponse = await httpRequest.get('/businesses', {
+    const httpResponse = await httpRequest.get('/api/organizations', {
       params: filters,
     });
-    const {businesses} = httpResponse.data;
+    const businesses = httpResponse.data.organizations;
     const {metadata} = httpResponse.data;
     dispatch(businessesDataObject(businesses));
     dispatch(businessesMetaDataObject(metadata));
@@ -86,14 +89,14 @@ export function filterBusinessesByName(filterValue, currentParams) {
 export function filterBusinesses(filterType, filterValue, currentParams) {
   return async (dispatch: Function) => {
     const filters = filtersObject(
-      `${filterType}_id_eq`,
+      `categories_id_eq`,
       filterValue,
       currentParams
     );
-    const httpResponse = await httpRequest.get('/businesses', {
+    const httpResponse = await httpRequest.get('/api/organizations', {
       params: filters,
     });
-    const {businesses} = httpResponse.data;
+    const businesses = httpResponse.data.organizations;
     const {metadata} = httpResponse.data;
     dispatch(businessesDataObject(businesses));
     dispatch(businessesMetaDataObject(metadata));
@@ -107,10 +110,10 @@ export function changePage(page, currentParams) {
       ...currentParams,
       page,
     };
-    const httpResponse = await httpRequest.get('/businesses', {
+    const httpResponse = await httpRequest.get('/api/organizations', {
       params,
     });
-    const {businesses} = httpResponse.data;
+    const businesses = httpResponse.data.organizations;
     const {metadata} = httpResponse.data;
     dispatch(businessesDataObject(businesses));
     dispatch(businessesMetaDataObject(metadata));
@@ -128,8 +131,39 @@ export function showBusiness(business) {
 
 export function fetchFilterOptions() {
   return async (dispatch: Function) => {
-    const httpResponse = await httpRequest.get('/businesses-filters');
-    const filters = httpResponse.data;
-    dispatch(filtersDataObject(filters));
+    const httpResponse = await httpRequest.get('/api/categories');
+    const categories = httpResponse.data;
+
+    const businessTypeCategory = categories.find(
+      category => category.name === CategoriesConstants.BUSINESS_TYPE
+    );
+    const businessTypes = businessTypeCategory
+      ? businessTypeCategory.children
+      : [];
+
+    const stageCategory = categories.find(
+      category => category.name === CategoriesConstants.STAGE
+    );
+    const stages = stageCategory ? stageCategory.children : [];
+
+    const communityCategory = categories.find(
+      category => category.name === CategoriesConstants.COMMUNITY
+    );
+    const communities = communityCategory ? communityCategory.children : [];
+
+    const industryCategory = categories.find(
+      category => category.name === CategoriesConstants.INDUSTRY
+    );
+    const industries = industryCategory ? industryCategory.children : [];
+
+    dispatch(
+      filtersDataObject({
+        categories,
+        businessTypes,
+        stages,
+        communities,
+        industries,
+      })
+    );
   };
 }

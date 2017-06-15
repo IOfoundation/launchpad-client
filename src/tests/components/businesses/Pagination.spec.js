@@ -10,7 +10,7 @@ describe('<Pagination />', () => {
   it('No returns prevPage button when the currentPage is 1', () => {
     const wrapper = shallow(
       <Pagination
-        businessesMetadata={{pagination: {currentPage: 1}}}
+        businessesMetadata={{pagination: {current_page: 1}}}
         handleChangePage={handleChangePage}
       />
     );
@@ -29,7 +29,7 @@ describe('<Pagination />', () => {
   it('Returns prevPage button when the currentPage is greater than 1', () => {
     const wrapper = shallow(
       <Pagination
-        businessesMetadata={{pagination: {currentPage: 2}}}
+        businessesMetadata={{pagination: {current_page: 2}}}
         handleChangePage={handleChangePage}
       />
     );
@@ -48,7 +48,7 @@ describe('<Pagination />', () => {
   it('No returns nextPage button when the nextPage is null', () => {
     const wrapper = shallow(
       <Pagination
-        businessesMetadata={{pagination: {currentPage: 1, nextPage: null}}}
+        businessesMetadata={{pagination: {current_page: 1, next_page: null}}}
         handleChangePage={handleChangePage}
       />
     );
@@ -67,7 +67,7 @@ describe('<Pagination />', () => {
   it('No returns nextPage button when the currentPage is 1', () => {
     const wrapper = shallow(
       <Pagination
-        businessesMetadata={{pagination: {currentPage: 2, nextPage: 1}}}
+        businessesMetadata={{pagination: {current_page: 2, next_page: 1}}}
         handleChangePage={handleChangePage}
       />
     );
@@ -86,7 +86,7 @@ describe('<Pagination />', () => {
   it('Returns nextPage button when the currentPage is greater than 1', () => {
     const wrapper = shallow(
       <Pagination
-        businessesMetadata={{pagination: {currentPage: 2, nextPage: 2}}}
+        businessesMetadata={{pagination: {current_page: 2, next_page: 2}}}
         handleChangePage={handleChangePage}
       />
     );

@@ -13,7 +13,13 @@ describe('<MainLayout />', () => {
 
   it('Render a Marker for every bussiness', () => {
     const wrapper = shallow(
-      <MapView businesses={[{id: 1}, {id: 2}, {id: 3}]} />
+      <MapView
+        businesses={[
+          {id: 1, location: {}},
+          {id: 2, location: {}},
+          {id: 3, location: {}},
+        ]}
+      />
     );
     expect(wrapper.find(Marker).length).toEqual(3);
   });
