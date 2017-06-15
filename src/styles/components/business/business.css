@@ -16,3 +16,24 @@
 .businessTopBar_share {
   margin-right: 8px;
 }
+
+.bussinessView_logoContainer {
+  margin: 15px auto;
+}
+.bussinessView_logo {
+  max-height: 80px;
+  min-height: 60px;
+}
+
+
+.bussinessView_contact {
+  background: #3F51B5;
+  color: white;
+  padding: 26px 24px;
+}
+.bussinessView_name {
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 32px;
+  margin-bottom: 8px;
+}

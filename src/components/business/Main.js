@@ -55,12 +55,16 @@ class Main extends Component {
         topBar={this._renderTopBar()}
       >
         <div className="bussinessView">
-          <div>
-            <img src={` ${business.logo}`} alt={`${business.name} logo`} />
+          <div className="center-xs bussinessView_logoContainer">
+            <img
+              className="bussinessView_logo"
+              src={` ${business.logo}`}
+              alt={`${business.name} logo`}
+            />
           </div>
-          <div>
-            <h2>{business.name}</h2>
-            <span>{'CONTACT'}</span>
+          <div className="bussinessView_contact">
+            <h2 className="bussinessView_name">{business.name}</h2>
+            <span className="bold smallFont">{'CONTACT'}</span>
             <ul>
               <li>{business.address}</li>
               <li
