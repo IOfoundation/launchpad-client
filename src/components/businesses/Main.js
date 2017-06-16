@@ -57,7 +57,7 @@ class Main extends Component {
       <div
         className={
           'businessesContainer ' +
-          (this.state.expanded ? '' : 'businessesContainerReduced')
+            (this.state.expanded ? '' : 'businessesContainerReduced')
         }
       >
         {this.state.expanded ? null : this._renderResultsInfo()}
@@ -87,9 +87,9 @@ class Main extends Component {
           <div
             className={
               'map ' +
-              (this.state.expanded
-                ? 'col-xs-7 noPadding '
-                : 'col-xs-4 mapReduced')
+                (this.state.expanded
+                  ? 'col-xs-7 noPadding '
+                  : 'col-xs-4 mapReduced')
             }
           >
             <MapView businesses={businesses} />
