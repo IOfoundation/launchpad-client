@@ -64,6 +64,9 @@
   margin-left: 10px;
 }
 
+.map_markerContainer {
+  position: relative;
+}
 .map_marker {
   color: #3F51B5;
 }
@@ -73,5 +76,11 @@
   stroke: #3F51B5;
   stroke-width:2px;
   stroke-linejoin: round;
-  stroke: 1px solid blue;
+}
+.map_modal {
+  position: absolute;
+  top: 0;
+  text-align: center;
+  margin-bottom: 100px;
+
 }
