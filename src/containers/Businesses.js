@@ -24,6 +24,7 @@ export class Businesses extends Component {
   }
 
   handleOnChangeFilterOptions(event) {
+    console.log(event);
     event.preventDefault();
     const businessesFilters = this.props.location.query;
     const filterType = event.target.name;
