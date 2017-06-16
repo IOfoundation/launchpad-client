@@ -1,6 +1,7 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 import CheckBox from '../shared/CheckBox';
+import {FaSortDesc} from 'react-icons/lib/fa';
 
 class FilterByOptions extends React.Component {
   constructor(props) {
@@ -46,9 +47,13 @@ class FilterByOptions extends React.Component {
         className="col-xs-2 noPadding filterSelectContainer"
         onBlur={() => this.setState({showOptions: false})}
       >
-        <button className="filterSelect" onClick={() => this._toggleOptions()}>
+        <button
+          className="filterInput filterSelect"
+          onClick={() => this._toggleOptions()}
+        >
           {this.props.filterName}
         </button>
+        <FaSortDesc className="filterSelect_icon" size={14} color={'#000'} />
         {this.state.showOptions ? this._renderOptions() : null}
       </div>
     );

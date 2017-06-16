@@ -1,10 +1,14 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
+import {MdSearch} from 'react-icons/lib/md';
 
 class FilterByText extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {value: ''};
+    this.state = {
+      labelTop: false,
+      value: '',
+    };
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -12,17 +16,31 @@ class FilterByText extends React.Component {
     this.setState({value: event.target.value});
     this.props.handleTextSearchBusinesses(event.target.value);
   }
-
+  _inputClicked() {
+    this.setState({labelTop: true});
+  }
   render() {
     return (
       <div className="col-xs-2 noPadding">
-        <form>
+        <form className="filterTextForm">
+          <label
+            className={
+              this.state.value
+                ? 'filterText_label--content'
+                : 'filterText_label'
+            }
+          >
+            {'Search for a Resource'}
+          </label>
           <input
             type="text"
             value={this.state.value}
             onChange={this.handleChange}
+            onClick={() => this._inputClicked()}
             placeholder=""
+            className="filterInput filterText"
           />
+          <MdSearch className="filterText_icon" size={20} color={'#3F51B5'} />
         </form>
       </div>
     );
