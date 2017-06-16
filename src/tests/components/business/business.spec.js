@@ -2,7 +2,6 @@ import React from 'react';
 import {shallow} from 'enzyme';
 
 import BusinessView from '../../../components/business/Main';
-import MapView from '../../../components/map-view/Main';
 
 function mockBusiness() {
   return {

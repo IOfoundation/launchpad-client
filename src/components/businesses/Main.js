@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
 
 import BusinessesList from './BusinessesList';
-import MapView from '../map-view/Main';
 import Pagination from './Pagination';
 import ResultInfo from './ResultInfo';
 import ContentMap from '../layouts/ContentMap';

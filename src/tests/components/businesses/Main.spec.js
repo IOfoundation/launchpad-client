@@ -2,7 +2,6 @@ import React from 'react';
 import {shallow} from 'enzyme';
 
 import BusinessesPage from '../../../components/businesses/Main';
-import MapView from '../../../components/map-view/Main';
 
 const businesses = [];
 const businessesMetadata = {};
