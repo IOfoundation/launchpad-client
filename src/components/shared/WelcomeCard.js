@@ -1,8 +1,19 @@
 import React from 'react';
 
 class WelcomeCard extends React.Component {
-  _handleClose() {}
+  constructor() {
+    super();
+    this.state = {
+      show: true,
+    };
+  }
+  _handleClose() {
+    this.setState({show: false});
+  }
   render() {
+    if (!this.state.show) {
+      return null;
+    }
     return (
       <div className="welcomeCard">
         <div className="row end-xs">
