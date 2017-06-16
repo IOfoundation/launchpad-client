@@ -9,47 +9,31 @@ class FilterByOptions extends React.Component {
       showOptions: false,
     };
   }
-  _handleOptionClick() {
-    this.props.handleOnChangeFilterOptions(filterOption.id);
-    this.setState({showOptions: true});
-  }
   _toggleOptions() {
     this.setState({showOptions: !this.state.showOptions});
   }
   _renderOptions() {
+    let checkbox = null;
+    if (this.props.filterName !== 'Business Type') {
+      checkbox = <CheckBox size={16} />;
+    }
     return (
-      <div
-        className="filterSelect_dropdown"
-        onBlur={() => this._toggleOptions()}
-      >
+      <div className="filterSelect_dropdown">
         <p className="smallFont primary filterSelect_dropdown_title">
           {this.props.filterName}
         </p>
-        <button
-          className={'filterSelect_option' + ' filterSelect_option--selected'}
-          onClick={() => this._handleOptionClick(filterOption.id)}
-        >
-          <CheckBox size={16} />
-          <span className="filterSelect_text">{'Option 1'}</span>
-
-        </button>
-        <button
-          className="filterSelect_option"
-          onClick={() =>
-            this.props.handleOnChangeFilterOptions(filterOption.id)}
-        >
-          <CheckBox size={16} />
-          <span className="filterSelect_text">{'Option 2'}</span>
-        </button>
-
         {this.props.filterOptions.map(filterOption => (
           <button
-            className="filterSelect_text"
+            className="filterSelect_option"
             key={filterOption.id}
             onClick={() =>
-              this.props.handleOnChangeFilterOptions(filterOption.id)}
+              this.props.handleOnChangeFilterOptions(
+                this.props.filterType,
+                filterOption.name
+              )}
           >
-            {filterOption.name}
+            {checkbox}
+            <span className="filterSelect_text">{filterOption.name}</span>
           </button>
         ))}
         <div className="filterSelect_clear">{'Clear'}</div>
@@ -58,7 +42,10 @@ class FilterByOptions extends React.Component {
   }
   render() {
     return (
-      <div className="col-xs-2 noPadding filterSelectContainer">
+      <div
+        className="col-xs-2 noPadding filterSelectContainer"
+        onBlur={() => this.setState({showOptions: false})}
+      >
         <button className="filterSelect" onClick={() => this._toggleOptions()}>
           {this.props.filterName}
         </button>

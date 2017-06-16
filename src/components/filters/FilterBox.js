@@ -14,6 +14,7 @@ class FilterBox extends React.Component {
           filterName="Assistance Needed"
           filterType={''}
           filterOptions={[]}
+          handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
         />
         <FilterByOptions
           filterName="Industry"

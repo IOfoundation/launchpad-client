@@ -23,12 +23,8 @@ export class Businesses extends Component {
     this.props.actions.filterBusinessesByName(businessName, businessesFilters);
   }
 
-  handleOnChangeFilterOptions(event) {
-    console.log(event);
-    event.preventDefault();
+  handleOnChangeFilterOptions(filterType, filterValue) {
     const businessesFilters = this.props.location.query;
-    const filterType = event.target.name;
-    const filterValue = event.target.value;
     this.props.actions.filterBusinesses(
       filterType,
       filterValue,
