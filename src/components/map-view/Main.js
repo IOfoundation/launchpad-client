@@ -14,8 +14,8 @@ class Main extends React.Component {
           return (
             <Marker
               key={business.id}
-              lat={business.latitude}
-              lng={business.longitude}
+              lat={business.location.latitude}
+              lng={business.location.longitude}
               text={''}
             />
           );

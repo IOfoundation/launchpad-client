@@ -5,17 +5,18 @@ class MetaInfoBusinesses extends React.Component {
   resourcesStartOn() {
     const _businessesMetadata = this.props.businessesMetadata;
     return (
-      (_businessesMetadata.pagination.currentPage - 1) *
-      (_businessesMetadata.pagination.perPage + 1)
+      (_businessesMetadata.pagination.current_page - 1) *
+        _businessesMetadata.pagination.per_page +
+      1
     );
   }
 
   resourcesEndOn() {
     const _businessesMetadata = this.props.businessesMetadata;
     let resourcesEndOn =
-      _businessesMetadata.pagination.currentPage *
-      _businessesMetadata.pagination.perPage;
-    const totalResources = _businessesMetadata.totalBusinesses;
+      _businessesMetadata.pagination.current_page *
+      _businessesMetadata.pagination.per_page;
+    const totalResources = _businessesMetadata.total_organizations;
     if (totalResources < resourcesEndOn) {
       resourcesEndOn = totalResources;
     }

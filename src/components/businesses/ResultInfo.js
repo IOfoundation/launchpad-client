@@ -6,7 +6,7 @@ const ResultInfo = ({businessesMetadata}) => {
   return (
     <div className="businessList_top ">
       <div className="row between-xs middle-xs businessList_top_content">
-        <span className="secondary bold bodyFont">{`${businessesMetadata.totalBusinesses} Resources Available`}</span>
+        <span className="secondary bold bodyFont">{`${businessesMetadata.total_organizations} Resources Available`}</span>
         <MetaInfoBusinesses businessesMetadata={businessesMetadata} />
       </div>
     </div>

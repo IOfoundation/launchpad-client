@@ -8,7 +8,7 @@ import MetaInfoBusinesses
 describe('<ResultInfo />', () => {
   it('Renders MetaInfoBusinesses component', () => {
     const wrapper = shallow(
-      <ResultInfo businessesMetadata={{pagination: {currentPage: 1}}} />
+      <ResultInfo businessesMetadata={{pagination: {current_page: 1}}} />
     );
     expect(wrapper.find(MetaInfoBusinesses).length).toEqual(1);
   });
@@ -16,7 +16,10 @@ describe('<ResultInfo />', () => {
   it('Display the total Businesses found', () => {
     const wrapper = shallow(
       <ResultInfo
-        businessesMetadata={{totalBusinesses: 10, pagination: {currentPage: 1}}}
+        businessesMetadata={{
+          total_organizations: 10,
+          pagination: {current_page: 1},
+        }}
       />
     );
     expect(wrapper.contains('10 Resources Available')).toBe(true);

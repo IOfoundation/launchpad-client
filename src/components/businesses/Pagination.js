@@ -5,27 +5,27 @@ import {MdChevronRight, MdChevronLeft} from 'react-icons/lib/md';
 
 class Pagination extends React.Component {
   render() {
-    const {currentPage} = this.props.businessesMetadata.pagination;
-    const {nextPage} = this.props.businessesMetadata.pagination;
+    const {current_page} = this.props.businessesMetadata.pagination;
+    const {next_page} = this.props.businessesMetadata.pagination;
     let prevPageArrow = null;
-    if (currentPage > 1) {
+    if (current_page > 1) {
       prevPageArrow = (
         <MdChevronLeft
           size={20}
           color={'#0C0033'}
           style={{marginRight: 8}}
-          onClick={() => this.props.handleChangePage(currentPage - 1)}
+          onClick={() => this.props.handleChangePage(current_page - 1)}
         />
       );
     }
 
     let nextPageArrow = null;
-    if (nextPage && nextPage > 1) {
+    if (next_page && next_page > 1) {
       nextPageArrow = (
         <MdChevronRight
           size={20}
           color={'#0C0033'}
-          onClick={() => this.props.handleChangePage(nextPage)}
+          onClick={() => this.props.handleChangePage(next_page)}
         />
       );
     }
