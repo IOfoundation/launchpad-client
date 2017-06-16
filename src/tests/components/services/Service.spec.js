@@ -13,7 +13,7 @@ function mockService() {
 const handleClickOnServiceTag = jest.fn();
 
 describe('<ServicesBox />', () => {
-  it('Render a li tag', () => {
+  it('Render a button tag', () => {
     const serviceItem = mockService();
     const wrapper = shallow(
       <Service
@@ -21,7 +21,7 @@ describe('<ServicesBox />', () => {
         handleClickOnServiceTag={handleClickOnServiceTag}
       />
     );
-    expect(wrapper.find('li').length).toEqual(1);
+    expect(wrapper.find('button').length).toEqual(1);
   });
 
   it('Render the name of the service in the li tag', () => {
@@ -32,7 +32,7 @@ describe('<ServicesBox />', () => {
         handleClickOnServiceTag={handleClickOnServiceTag}
       />
     );
-    const liTag = wrapper.find('li');
-    expect(liTag.text()).toEqual('Service1');
+    const button = wrapper.find('button');
+    expect(button.text()).toEqual('Service1');
   });
 });

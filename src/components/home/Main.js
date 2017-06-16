@@ -37,12 +37,14 @@ const Main = ({
           </Link>
         </div>
       </section>
-      <section>
-        <h2>{'Browse By Service'}</h2>
-        <ServicesBox
-          services={services}
-          handleClickOnServiceTag={handleClickOnServiceTag}
-        />
+      <section className="browseBy">
+        <div className="browseBy_content">
+          <h2 className="browseBy_title">{'Browse By Service'}</h2>
+          <ServicesBox
+            services={services}
+            handleClickOnServiceTag={handleClickOnServiceTag}
+          />
+        </div>
       </section>
     </div>
   );

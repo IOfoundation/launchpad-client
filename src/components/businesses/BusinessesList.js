@@ -12,6 +12,7 @@ const BusinessesList = ({businesses, handleClickOnBusiness, expanded}) => {
             business={business}
             key={business.id}
             handleClickOnBusiness={handleClickOnBusiness}
+            expanded={expanded}
           />
         );
       })}
@@ -21,8 +22,8 @@ const BusinessesList = ({businesses, handleClickOnBusiness, expanded}) => {
 
 BusinessesList.propTypes = {
   businesses: PropTypes.array.isRequired,
-  handleClickOnBusiness: PropTypes.func.isRequired,
   expanded: PropTypes.bool,
+  handleClickOnBusiness: PropTypes.func.isRequired,
 };
 
 export default BusinessesList;

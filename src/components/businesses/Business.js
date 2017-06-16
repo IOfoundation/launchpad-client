@@ -124,7 +124,7 @@ class Business extends Component {
     );
   }
   render() {
-    const {handleClickOnBusiness, expanded} = this.props;
+    const {business, handleClickOnBusiness, expanded} = this.props;
     return (
       <div className="Business" onClick={() => handleClickOnBusiness(business)}>
         {expanded ? this._renderExpanded() : this._renderReduced()}

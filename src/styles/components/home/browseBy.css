@@ -1,0 +1,26 @@
+.browseBy {
+  padding: 68px 0px 90px 0px;
+}
+.browseBy_content {
+  width: 60%;
+  margin: 0 auto;
+  text-align: center;
+}
+.browseBy_title {
+  font-size: 36px;
+  color: #3F51B5;
+  text-align: center;
+  margin-bottom: 25px;
+  font-weight: normal;
+}
+.browseBy_btn {
+  background: #3F51B5;
+  padding: 10px 16px;
+  color: white;
+  line-height: 20px;
+  font-size: 14px;
+  border: none;
+  outline: none;
+  margin-right: 16px;
+  margin-bottom: 16px;
+}

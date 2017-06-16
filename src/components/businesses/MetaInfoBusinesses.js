@@ -6,8 +6,7 @@ class MetaInfoBusinesses extends React.Component {
     const _businessesMetadata = this.props.businessesMetadata;
     return (
       (_businessesMetadata.pagination.currentPage - 1) *
-        _businessesMetadata.pagination.perPage +
-      1
+      (_businessesMetadata.pagination.perPage + 1)
     );
   }
 
