@@ -1,0 +1,82 @@
+.businessTopBar {
+  color: #3F51B5;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 18px;
+}
+.businessTopBar_btn {
+  vertical-align: middle;
+}
+.businessTopBar_btn:hover {
+  cursor: pointer;
+}
+.businessTopBar_btn_icon {
+  margin-right: 8px;
+}
+.businessTopBar_share {
+  margin-right: 8px;
+}
+
+.bussinessView_logoContainer {
+  margin: 15px auto;
+}
+.bussinessView_logo {
+  max-height: 80px;
+  min-height: 60px;
+}
+
+
+.bussinessView_contact {
+  background: #3F51B5;
+  color: white;
+  padding: 26px 24px;
+  font-size: 14px;
+  margin-top: 8px;
+  line-height: 20px;
+}
+.bussinessView_name {
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 32px;
+  margin-bottom: 8px;
+}
+.bussinessView_address {
+  margin: 8px 0 15px 0;
+}
+.bussinessView_contactInfo {
+  position: relative;
+  text-align: right;
+}
+.bussinessView_contactInfo_items {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.bussinessView_description {
+  padding: 25px;
+}
+.bussinessView_description h3 {
+  margin-bottom: 8px;
+}
+.bussinessView_description p, .bussinessView_description li {
+  opacity: .5;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+.bussinessView_service_text {
+  position: relative;
+  margin-left: 10px;
+}
+.businessView_related {
+  padding: 25px;
+  border-top: .5px solid #bbb;
+}
+.businessView_related a {
+  text-decoration: underline;
+  color: #3F51B5;
+}
+.businessView_related_images {
+  margin-top: 16px;
+  text-align: center;
+}

@@ -2,7 +2,6 @@ import React from 'react';
 import {shallow} from 'enzyme';
 
 import BusinessView from '../../../components/business/Main';
-import MapView from '../../../components/map-view/Main';
 
 function mockBusiness() {
   return {
@@ -59,11 +58,5 @@ describe('<BusinessView />', () => {
     const businessItem = mockBusiness();
     const wrapper = shallow(<BusinessView business={businessItem} />);
     expect(wrapper.find('.services').length).toEqual(2);
-  });
-
-  it('Renders a MapView component', () => {
-    const businessItem = mockBusiness();
-    const wrapper = shallow(<BusinessView business={businessItem} />);
-    expect(wrapper.find(MapView).length).toEqual(1);
   });
 });
