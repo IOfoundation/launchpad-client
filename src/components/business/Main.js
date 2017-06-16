@@ -143,6 +143,26 @@ class Main extends Component {
               ))}
             </ul>
           </div>
+          <div className="businessView_related">
+            <div className="row between-xs">
+              <h3 className="smallFont">{'Related Resources'}</h3>
+              <a className="smallFont" href="">{'VIEW MORE'}</a>
+            </div>
+            <div className="row between-xs businessView_related_images">
+              <div>
+                <img src="../static-data/images/test-logo.png" />
+                <p className="smallFont">{'1 Million Cups'}</p>
+              </div>
+              <div>
+                <img src="../static-data/images/test-logo.png" />
+                <p className="smallFont">{'1 Million Cups'}</p>
+              </div>
+              <div>
+                <img src="../static-data/images/test-logo.png" />
+                <p className="smallFont">{'1 Million Cups'}</p>
+              </div>
+            </div>
+          </div>
         </div>
       </ContentMap>
     );

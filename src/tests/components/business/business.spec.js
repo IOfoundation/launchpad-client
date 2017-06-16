@@ -60,10 +60,4 @@ describe('<BusinessView />', () => {
     const wrapper = shallow(<BusinessView business={businessItem} />);
     expect(wrapper.find('.services').length).toEqual(2);
   });
-
-  it('Renders a MapView component', () => {
-    const businessItem = mockBusiness();
-    const wrapper = shallow(<BusinessView business={businessItem} />);
-    expect(wrapper.find(MapView).length).toEqual(1);
-  });
 });

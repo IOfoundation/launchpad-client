@@ -68,3 +68,15 @@
   position: relative;
   margin-left: 10px;
 }
+.businessView_related {
+  padding: 25px;
+  border-top: .5px solid #bbb;
+}
+.businessView_related a {
+  text-decoration: underline;
+  color: #3F51B5;
+}
+.businessView_related_images {
+  margin-top: 16px;
+  text-align: center;
+}

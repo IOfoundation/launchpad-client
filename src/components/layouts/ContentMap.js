@@ -72,10 +72,11 @@ class ContentMap extends Component {
 
 ContentMap.propTypes = {
   businesses: PropTypes.array.isRequired,
-  childredn: PropTypes.node,
+  children: PropTypes.node,
   expanded: PropTypes.bool,
   expandMap: PropTypes.func.isRequired,
   reduceMap: PropTypes.func.isRequired,
+  topBar: PropTypes.node,
 };
 
 export default ContentMap;
