@@ -29,7 +29,7 @@ class FilterByOptions extends React.Component {
             key={filterOption.id}
             onClick={() =>
               this.props.handleOnChangeFilterOptions(
-                this.props.filterType,
+                filterOption.name,
                 filterOption.id
               )}
           >
