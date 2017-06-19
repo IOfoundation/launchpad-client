@@ -18,7 +18,38 @@ class Main extends React.Component {
   _renderModal() {
     return (
       <div className="map_modal">
-        <h1>{'test'}</h1>
+        <div className="row between-xs top-xs map_modal_top">
+          <h1 className="map_modal_title">{'AlphaPoint'}</h1>
+          <img
+            className="map_modal_logo"
+            src="/static-data/images/test-logo.png"
+          />
+        </div>
+        <section className="row between-xs map_modal_social business_block--expanded_bottom">
+          <a className="visitWebsite bold smallFont primary" href="#">
+            {'VISIT WEBSITE'}
+          </a>
+          <div>
+            <a className="socialIcon" href="#">
+              <img
+                className="socialIcon_icon"
+                src="../static-data/images/twitter.svg"
+              />
+            </a>
+            <a className="socialIcon" href="#">
+              <img
+                className="socialIcon_icon"
+                src="../static-data/images/facebook.svg"
+              />
+            </a>
+            <a className="socialIcon" href="#">
+              <img
+                className="socialIcon_icon"
+                src="../static-data/images/linkedin.svg"
+              />
+            </a>
+          </div>
+        </section>
       </div>
     );
   }
