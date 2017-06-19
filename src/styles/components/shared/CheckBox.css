@@ -1,0 +1,20 @@
+.checkBox {
+  -webkit-appearance: none;
+  height: 16px;
+  width: 16px;
+  border: 2px solid #0C0033;
+  vertical-align: bottom;
+  margin: 0;
+}
+.checkBox:hover {
+    cursor: pointer;
+}
+.checkBox:active, .checkBox:focus, .checkBox:checked {
+  background: #0c0033;
+  outline: none;
+}
+
+input[type=checkbox]:checked {
+    content: '✔';
+    background-color:white;
+}

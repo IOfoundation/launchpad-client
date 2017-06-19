@@ -89,7 +89,7 @@ export function filterBusinessesByName(filterValue, currentParams) {
 export function filterBusinesses(filterType, filterValue, currentParams) {
   return async (dispatch: Function) => {
     const filters = filtersObject(
-      `categories_id_eq`,
+      'categories_id_eq',
       filterValue,
       currentParams
     );
