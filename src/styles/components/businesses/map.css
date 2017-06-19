@@ -63,3 +63,47 @@
   font-size: 14px;
   margin-left: 10px;
 }
+
+.map_markerContainer {
+  position: relative;
+  height: 40px;
+  width: 40px;
+}
+.map_marker {
+  color: #3F51B5;
+
+}
+.map_marker:hover {
+  cursor: pointer;
+  color: white;
+  stroke: #3F51B5;
+  stroke-width:2px;
+  stroke-linejoin: round;
+}
+.map_modal {
+  position: absolute;
+  text-align: center;
+  width: 200px;
+  margin-left: -90px;
+  bottom: 50px;
+  box-shadow: 0 0 2px 0 rgba(0,0,0,0.12), 0 2px 2px 0 rgba(12,0,51,0.1);
+  background: white;
+}
+.map_modal_top {
+  padding: 15px 15px 0 15px;
+}
+.map_modal_logo {
+  height: 44px;
+  display: block;
+  margin-top: -5px;
+}
+.map_modal_title {
+  color: #3F51B5;
+  font-weight: bold;
+  font-size: 14px;
+  margin: 0;
+}
+.map_modal_social {
+  border-top: .5px solid rgba(0,0,0,0.12);
+  padding: 11px 15px 11px 15px;
+}

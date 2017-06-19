@@ -1,22 +1,21 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
+import {MdPlace} from 'react-icons/lib/md';
 
-const PointMarker = ({text}) => {
-  return (
-    <div
-      style={{
-        backgroundColor: 'red',
-        width: '15px',
-        height: '15px',
-        borderRadius: '50%',
-      }}
-    >
-      {text}
-    </div>
-  );
-};
+class PointMarker extends React.Component {
+  render() {
+    return (
+      <MdPlace
+        className="map_marker"
+        size={40}
+        onClick={() => this.props.showModal()}
+      />
+    );
+  }
+}
 
 PointMarker.propTypes = {
+  showModal: PropTypes.func,
   text: PropTypes.string,
 };
 
