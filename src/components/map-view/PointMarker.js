@@ -15,6 +15,7 @@ class PointMarker extends React.Component {
 }
 
 PointMarker.propTypes = {
+  showModal: PropTypes.func,
   text: PropTypes.string,
 };
 

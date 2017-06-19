@@ -12,18 +12,14 @@ class Main extends React.Component {
     };
   }
   openModal() {
-    console.log('tet');
     this.setState({showModal: !this.state.showModal});
   }
-  _renderModal() {
+  _renderModal(business) {
     return (
       <div className="map_modal">
         <div className="row between-xs top-xs map_modal_top">
-          <h1 className="map_modal_title">{'AlphaPoint'}</h1>
-          <img
-            className="map_modal_logo"
-            src="/static-data/images/test-logo.png"
-          />
+          <h1 className="map_modal_title">{business.name}</h1>
+          <img className="map_modal_logo" src={business.logo} />
         </div>
         <section className="row between-xs map_modal_social business_block--expanded_bottom">
           <a className="visitWebsite bold smallFont primary" href="#">
@@ -59,18 +55,17 @@ class Main extends React.Component {
         defaultCenter={{lat: 38.581572, lng: -121.4944}}
         defaultZoom={15}
       >
-        <div className="map_markerContainer" lat={38.581572} lng={-121.4944}>
-          {this.state.showModal ? this._renderModal() : null}
-          <Marker showModal={this.openModal} />
-        </div>
         {this.props.businesses.map(business => {
           return (
-            <Marker
+            <div
               key={business.id}
+              className="map_markerContainer"
               lat={business.location.latitude}
               lng={business.location.longitude}
-              text={''}
-            />
+            >
+              {this.state.showModal ? this._renderModal(business) : null}
+              <Marker showModal={this.openModal} />
+            </div>
           );
         })}
       </GoogleMapReact>
