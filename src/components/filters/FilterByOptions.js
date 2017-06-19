@@ -30,7 +30,7 @@ class FilterByOptions extends React.Component {
             onClick={() =>
               this.props.handleOnChangeFilterOptions(
                 this.props.filterType,
-                filterOption.name
+                filterOption.id
               )}
           >
             {checkbox}
