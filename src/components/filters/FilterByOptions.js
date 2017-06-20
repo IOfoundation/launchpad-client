@@ -2,6 +2,7 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 import CheckBox from '../shared/CheckBox';
 import {FaSortDesc} from 'react-icons/lib/fa';
+import onClickOutside from 'react-onclickoutside';
 
 class FilterByOptions extends React.Component {
   constructor(props) {
@@ -13,6 +14,9 @@ class FilterByOptions extends React.Component {
   _toggleOptions() {
     this.setState({showOptions: !this.state.showOptions});
   }
+  handleClickOutside() {
+    this.setState({showOptions: false});
+  }
   _renderOptions() {
     let checkbox = null;
     checkbox = <CheckBox size={16} />;
@@ -22,27 +26,6 @@ class FilterByOptions extends React.Component {
         <p className="smallFont primary filterSelect_dropdown_title">
           {this.props.filterName}
         </p>
-        <button
-          className="filterSelect_option"
-          onClick={() => this.props.handleOnChangeFilterOptions('test', 'test')}
-        >
-          {checkbox}
-          <span className="filterSelect_text">{'Test filter'}</span>
-        </button>
-        <button
-          className="filterSelect_option"
-          onClick={() => this.props.handleOnChangeFilterOptions('test', 'test')}
-        >
-          {checkbox}
-          <span className="filterSelect_text">{'Test filter'}</span>
-        </button>
-        <button
-          className="filterSelect_option"
-          onClick={() => this.props.handleOnChangeFilterOptions('test', 'test')}
-        >
-          {checkbox}
-          <span className="filterSelect_text">{'Test filter'}</span>
-        </button>
         {this.props.filterOptions.map(filterOption => (
           <button
             className="filterSelect_option"
@@ -63,10 +46,7 @@ class FilterByOptions extends React.Component {
   }
   render() {
     return (
-      <div
-        className="col-md-2 col-xs-10 noPadding filterSelectContainer text-xs-margin"
-        onBlur={() => this.setState({showOptions: false})}
-      >
+      <div className="col-md-2 col-xs-10 noPadding filterSelectContainer text-xs-margin">
         <button
           className="filterInput filterSelect"
           onClick={() => this._toggleOptions()}
@@ -87,4 +67,4 @@ FilterByOptions.propTypes = {
   handleOnChangeFilterOptions: PropTypes.func,
 };
 
-export default FilterByOptions;
+export default onClickOutside(FilterByOptions);

@@ -14,7 +14,7 @@ const Header = () => {
             {'Global Nav 02'}
           </span>
         </div>
-        <nav>
+        <nav className="header_links">
           <Link className="header_link" to="/contact-us">{'Contact Us'}</Link>
           <Link className="header_link" to="/terms-of-use">
             {'Terms of Use'}

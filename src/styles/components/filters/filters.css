@@ -88,6 +88,7 @@
   font-size: 12px;
   padding: 6px 6px 6px 12px;
   text-align: left;
+  z-index: 10;
 }
 .filterSelect_option:hover {
   cursor: pointer;
@@ -113,8 +114,37 @@
 .filterSelect_clear:hover {
   cursor: pointer;
 }
-
-@media (max-width: 48em) {
+@media (max-width: 1247px) {
+  .navTwo_logo {
+    max-width: 100%;
+    flex-basis:auto;
+    margin: auto;
+    width: 100%;
+  }
+  .navTwo_filters {
+    max-width: 100%;
+    flex-basis:auto;
+    margin: 10px auto;
+    width: 100%;
+    padding: 0 20px;
+  }
+}
+@media(max-width: 994px) {
+  .navTwo_logo .logo {
+    margin: 0 auto;
+    display: block;
+  }
+  .filterSelectContainer, .filterTextContainer {
+    margin: 10px auto;
+  }
+  .filterInput {
+    width: 100%;
+  }
+  .filterSelect_icon, .filterText_icon {
+    right: 0;
+  }
+}
+@media (max-width: 770px) {
   .navTwo_logo {
     max-width: 100%;
     flex-basis:auto;
