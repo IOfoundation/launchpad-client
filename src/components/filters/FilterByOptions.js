@@ -15,14 +15,34 @@ class FilterByOptions extends React.Component {
   }
   _renderOptions() {
     let checkbox = null;
-    if (this.props.filterName !== 'Business Type') {
-      checkbox = <CheckBox size={16} />;
-    }
+    checkbox = <CheckBox size={16} />;
+
     return (
       <div className="filterSelect_dropdown">
         <p className="smallFont primary filterSelect_dropdown_title">
           {this.props.filterName}
         </p>
+        <button
+          className="filterSelect_option"
+          onClick={() => this.props.handleOnChangeFilterOptions('test', 'test')}
+        >
+          {checkbox}
+          <span className="filterSelect_text">{'Test filter'}</span>
+        </button>
+        <button
+          className="filterSelect_option"
+          onClick={() => this.props.handleOnChangeFilterOptions('test', 'test')}
+        >
+          {checkbox}
+          <span className="filterSelect_text">{'Test filter'}</span>
+        </button>
+        <button
+          className="filterSelect_option"
+          onClick={() => this.props.handleOnChangeFilterOptions('test', 'test')}
+        >
+          {checkbox}
+          <span className="filterSelect_text">{'Test filter'}</span>
+        </button>
         {this.props.filterOptions.map(filterOption => (
           <button
             className="filterSelect_option"

@@ -3,3 +3,24 @@
   padding: 25px;
   border-bottom: .5px solid rgba(50,50,50,.3);
 }
+
+.businessList_top_filter {
+  color: #0C0033;
+  position: relative;
+  padding: 2px 5px;
+}
+.businessList_top_filter:hover {
+  cursor: pointer;
+}
+.businessList_top_filter_text {
+  opacity: .5;
+  font-size: 14px;
+}
+.businessList_top_filter_icon {
+  margin-left: 15px;
+  position: relative;
+  margin-bottom: 5px;
+}
+.businessList_top .filterSelect_text {
+  margin-left: 0;
+}

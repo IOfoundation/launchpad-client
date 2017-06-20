@@ -35,7 +35,7 @@ class ContentMap extends Component {
             (this.props.expanded ? '' : 'businessesContainerReduced')
         }
       >
-        {this.props.expanded ? null : this.props.topBar}
+        {this.props.topBar}
         <div
           className={
             'row ' + (this.props.expanded ? '' : 'businessesRow--reduced')
@@ -44,18 +44,17 @@ class ContentMap extends Component {
           <div
             className={
               this.props.expanded
-                ? 'col-xs-5 businessList noPadding'
-                : 'col-xs-8'
+                ? 'col-xs-6 businessList noPadding'
+                : 'col-xs-8 businessList--reduced'
             }
           >
-            {this.props.expanded ? this.props.topBar : null}
             {this.props.children}
           </div>
           <div
             className={
               'map ' +
                 (this.props.expanded
-                  ? 'col-xs-7 noPadding '
+                  ? 'col-xs-6 noPadding '
                   : 'col-xs-4 mapReduced')
             }
           >
