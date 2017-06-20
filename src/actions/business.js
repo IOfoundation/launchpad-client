@@ -33,11 +33,14 @@ const filtersDataObject = filters => {
   };
 };
 
-const filtersObject = (filterType, filterValue, currentFilters) => {
+const filtersObject = (filterType, filterValue, currentFilters, filterMultiple = false) => {
   const newFilter = {};
+  if (filterMultiple && currentFilters[`filters[${filterType}]`]){
+    filterValue = currentFilters[`filters[${filterType}]`] + `,${filterValue}`
+  }
   newFilter[`filters[${filterType}]`] = filterValue;
   let filters = Object.assign({}, currentFilters, newFilter);
-  if (!filterValue) {
+  if (!filterValue && !filterMultiple) {
     filters = _.omit(filters, `filters[${filterType}]`);
   }
   return filters;
@@ -86,12 +89,14 @@ export function filterBusinessesByName(filterValue, currentParams) {
   };
 }
 
-export function filterBusinesses(filterType, filterValue, currentParams) {
+export function filterBusinesses(filterType, filterValue, currentParams, filterMultiple = false) {
+  const filterOptionName = filterMultiple ? `${filterType}_id_in` : `${filterType}_id_eq`;
   return async (dispatch: Function) => {
     const filters = filtersObject(
-      'categories_id_eq',
+      filterOptionName,
       filterValue,
-      currentParams
+      currentParams,
+      filterMultiple,
     );
     const httpResponse = await httpRequest.get('/api/organizations', {
       params: filters,

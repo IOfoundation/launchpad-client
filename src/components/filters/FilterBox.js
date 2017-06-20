@@ -17,12 +17,14 @@ class FilterBox extends React.Component {
           handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
         />
         <FilterByOptions
-          filterName="Industry"
+          filterMultiple={true}
+          filterName={"Industry"}
           filterType={'industries'}
           filterOptions={this.props.filterOptions.industries}
           handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
         />
         <FilterByOptions
+          filterMultiple={true}
           filterName="Business Stage"
           filterType={'stages'}
           filterOptions={this.props.filterOptions.stages}
@@ -30,7 +32,7 @@ class FilterBox extends React.Component {
         />
         <FilterByOptions
           filterName="Business Type"
-          filterType={'businessTypes'}
+          filterType={'business_types'}
           filterOptions={this.props.filterOptions.businessTypes}
           handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
         />
