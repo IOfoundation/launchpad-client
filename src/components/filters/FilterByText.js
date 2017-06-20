@@ -40,7 +40,7 @@ class FilterByText extends React.Component {
             placeholder=""
             className="filterInput filterText"
           />
-          <MdSearch className="filterText_icon" size={20} color={'#3F51B5'} />
+          <MdSearch className="filterText_icon" size={17} color={'#3F51B5'} />
         </form>
       </div>
     );

@@ -32,21 +32,23 @@ class Main extends Component {
   }
   _renderTopBar() {
     return (
-      <div className="row between-xs middle-xs businessList_top businessTopBar">
-        <div
-          onClick={browserHistory.goBack}
-          className="businessTopBar_btn middle-xs"
-        >
-          <MdKeyboardBackspace
-            size={22}
-            color={'#3F51B5'}
-            className="businessTopBar_btn_icon"
-          />
-          <span>{'Back To Resources'}</span>
-        </div>
-        <div className="businessTopBar_btn middle-xs">
-          <span className="businessTopBar_share">{'SHARE'}</span>
-          <MdShare size={22} color={'#3F51B5'} />
+      <div className=" businessList_top businessTopBar">
+        <div className="contentContainer row between-xs middle-xs">
+          <div
+            onClick={browserHistory.goBack}
+            className="businessTopBar_btn middle-xs"
+          >
+            <MdKeyboardBackspace
+              size={22}
+              color={'#3F51B5'}
+              className="businessTopBar_btn_icon"
+            />
+            <span>{'Back To Resources'}</span>
+          </div>
+          <div className="businessTopBar_btn middle-xs">
+            <span className="businessTopBar_share">{'SHARE'}</span>
+            <MdShare size={22} color={'#3F51B5'} />
+          </div>
         </div>
       </div>
     );

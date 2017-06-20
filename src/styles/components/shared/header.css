@@ -1,9 +1,12 @@
-.header {
+.headerContainer {
   background-color: #3F51B5;
   height: 40px;
+
+}
+.header {
   color: white;
   font-size: 12px;
-  padding: 0 24px;
+  padding: 12px 0;
 }
 .header_title {
   margin-right: 16px;

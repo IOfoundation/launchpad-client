@@ -38,7 +38,8 @@ class ContentMap extends Component {
         {this.props.topBar}
         <div
           className={
-            'row ' + (this.props.expanded ? '' : 'businessesRow--reduced')
+            'row contentContainer ' +
+              (this.props.expanded ? '' : 'businessesRow--reduced')
           }
         >
           <div

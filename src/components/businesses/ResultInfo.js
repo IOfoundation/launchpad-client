@@ -28,22 +28,24 @@ class ResultInfo extends Component {
     const {businessesMetadata} = this.props;
     return (
       <div className="businessList_top">
-        <div className="row between-xs middle-xs businessList_top_content col-xs-6">
-          <span className="secondary bold bodyFont">{`${businessesMetadata.total_organizations} Resources Available`}</span>
-          <div
-            className="businessList_top_filter row middle-xs noPadding"
-            onClick={() => this._toggleOptions()}
-          >
-            <p className="businessList_top_filter_text">
-              {'Sort Results'}
-            </p>
-            <FaSortDesc
-              className="businessList_top_filter_icon"
-              size={16}
-              color={'#000'}
-            />
+        <div className="contentContainer">
+          <div className="row between-xs middle-xs businessList_top_content col-xs-6">
+            <span className="secondary bold bodyFont">{`${businessesMetadata.total_organizations} Resources Available`}</span>
+            <div
+              className="businessList_top_filter row middle-xs noPadding"
+              onClick={() => this._toggleOptions()}
+            >
+              <p className="businessList_top_filter_text">
+                {'Sort Results'}
+              </p>
+              <FaSortDesc
+                className="businessList_top_filter_icon"
+                size={16}
+                color={'#000'}
+              />
 
-            {this.state.showOptions ? this._renderOptions() : null}
+              {this.state.showOptions ? this._renderOptions() : null}
+            </div>
           </div>
         </div>
       </div>

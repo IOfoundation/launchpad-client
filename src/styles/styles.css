@@ -2,10 +2,8 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
 body {
-  margin: 0;
   font-family: 'Roboto', sans-serif;
   color: #0C0033;
-  max-width: 1350px;
   margin: 0 auto;
 }
 a {
@@ -17,6 +15,10 @@ h1,h2,h3,h4,h5,p, a {
 }
 .row {
   margin: 0;
+}
+.contentContainer {
+  max-width: 1300px;
+  margin: 0 auto;
 }
 
 /* Useful Classes */

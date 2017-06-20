@@ -45,20 +45,22 @@ export class Businesses extends Component {
     return (
       <MainLayout>
         <section>
-          <div className="row navTwo">
-            <div className="col-xs-3 navTwo_logo noPadding">
-              <Logo />
-            </div>
-            <div className="col-xs-9 navTwo_filters noPadding">
-              <FilterBox
-                handleTextSearchBusinesses={this.handleTextSearchBusinesses.bind(
-                  this
-                )}
-                filterOptions={this.props.filters}
-                handleOnChangeFilterOptions={this.handleOnChangeFilterOptions.bind(
-                  this
-                )}
-              />
+          <div className="navTwo">
+            <div className="row contentContainer">
+              <div className="col-xs-3 navTwo_logo noPadding">
+                <Logo />
+              </div>
+              <div className="col-xs-9 navTwo_filters noPadding">
+                <FilterBox
+                  handleTextSearchBusinesses={this.handleTextSearchBusinesses.bind(
+                    this
+                  )}
+                  filterOptions={this.props.filters}
+                  handleOnChangeFilterOptions={this.handleOnChangeFilterOptions.bind(
+                    this
+                  )}
+                />
+              </div>
             </div>
           </div>
           <WelcomeCard />
