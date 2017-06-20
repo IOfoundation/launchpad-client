@@ -14,10 +14,13 @@ class ContentMap extends Component {
   _renderExpandButton() {
     return (
       <div className="row between-xs middle-xs reducedMapBottom">
-        <button className="expandMapBtn" onClick={this.props.expandMap}>
+        <button
+          className="expandMapBtn text-xs-margin"
+          onClick={this.props.expandMap}
+        >
           {'Expand Map'}
         </button>
-        <div className="reducedMapBottom_checkContainer">
+        <div className="reducedMapBottom_checkContainer text-xs-margin">
           <input className="reducedMapBottom_check" type="checkbox" />
           <label className="reducedMapeBottom_checklabel">
             {'Update when map moves'}
@@ -45,8 +48,8 @@ class ContentMap extends Component {
           <div
             className={
               this.props.expanded
-                ? 'col-xs-6 businessList noPadding'
-                : 'col-xs-8 businessList--reduced'
+                ? 'col-md-6 col-xs-12 businessList noPadding'
+                : 'col-md-8 col-xs-12 businessList--reduced'
             }
           >
             {this.props.children}
@@ -55,8 +58,8 @@ class ContentMap extends Component {
             className={
               'map ' +
                 (this.props.expanded
-                  ? 'col-xs-6 noPadding '
-                  : 'col-xs-4 mapReduced')
+                  ? 'col-md-6 col-xs-12 noPadding '
+                  : 'col-md-4 col-xs-12 mapReduced')
             }
           >
             <MapView businesses={businesses} />

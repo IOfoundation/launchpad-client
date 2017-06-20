@@ -29,10 +29,10 @@ class ResultInfo extends Component {
     return (
       <div className="businessList_top">
         <div className="contentContainer">
-          <div className="row between-xs middle-xs businessList_top_content col-xs-6">
-            <span className="secondary bold bodyFont">{`${businessesMetadata.total_organizations} Resources Available`}</span>
+          <div className="row between-xs middle-xs businessList_top_content col-sm-6 ">
+            <span className="secondary bold bodyFont text-xs-margin">{`${businessesMetadata.total_organizations} Resources Available`}</span>
             <div
-              className="businessList_top_filter row middle-xs noPadding"
+              className="businessList_top_filter row middle-xs noPadding text-xs-margin"
               onClick={() => this._toggleOptions()}
             >
               <p className="businessList_top_filter_text">

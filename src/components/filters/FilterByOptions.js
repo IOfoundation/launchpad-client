@@ -64,7 +64,7 @@ class FilterByOptions extends React.Component {
   render() {
     return (
       <div
-        className="col-xs-2 noPadding filterSelectContainer"
+        className="col-md-2 col-xs-10 noPadding filterSelectContainer text-xs-margin"
         onBlur={() => this.setState({showOptions: false})}
       >
         <button

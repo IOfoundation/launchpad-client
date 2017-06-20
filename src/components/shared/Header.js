@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <header className="headerContainer">
       <div className="contentContainer header row between-xs middle-xs">
-        <div>
+        <div className="header_links">
           <span className="header_title">{'Welcome to [project-name]'}</span>
           <span className="header_leftLink">
             {'Back to Lorem'}

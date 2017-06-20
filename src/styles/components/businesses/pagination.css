@@ -5,4 +5,10 @@
   bottom: 0;
   width: 100%;
   font-size: 12px;
+  background: white;
+}
+@media (max-width: 48em) {
+  .pagination {
+    padding: 25px 10px;
+  }
 }

@@ -21,7 +21,7 @@ class FilterByText extends React.Component {
   }
   render() {
     return (
-      <div className="col-xs-2 noPadding">
+      <div className="col-md-2 col-xs-10 text-xs-margin noPadding">
         <form className="filterTextForm">
           <label
             className={

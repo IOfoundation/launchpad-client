@@ -54,6 +54,12 @@ h1,h2,h3,h4,h5,p, a {
   display: none;
 }
 
+@media (max-width: 48em) {
+  .text-xs-margin {
+    margin: 10px auto;
+  }
+}
+
 /* Shared */
 .visitWebsite {
   text-transform: uppercase;

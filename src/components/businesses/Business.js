@@ -27,7 +27,7 @@ class Business extends Component {
     return (
       <div className="Business" onClick={() => handleClickOnBusiness(business)}>
         <div className="row between-xs business_block--expanded">
-          <section className="col-xs-9 noPadding">
+          <section className="col-sm-9 col-xs-12 text-xs-margin noPadding">
             <h3 className="business_block--expanded_title">{business.name}</h3>
             <div>
               <div className="business_block--expanded_services">
@@ -88,7 +88,7 @@ class Business extends Component {
               </a>
             </section>
           </section>
-          <div className="col-xs-3 business_block_contact">
+          <div className="col-sm-3 col-xs-12 text-xs-margin business_block_contact">
             <div>
               <p>{business.address}</p>
               <p

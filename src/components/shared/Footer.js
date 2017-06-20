@@ -7,28 +7,28 @@ const Footer = () => {
   return (
     <footer className="">
       <div className="contentContainer row">
-        <div className="col-md-2">
+        <div className="col-md-2 col-xs-12 text-xs-margin">
           <Logo />
         </div>
-        <div className="col-md-2 col-md-offset-1">
+        <div className="col-md-2 col-md-offset-1 col-xs-6 text-xs-margin">
           <p className="footer_subtitle">{'FOOTER NAV'}</p>
           <Link to="">{'About'}</Link>
           <Link to="">{'Fermentum Ultricies'}</Link>
           <Link to="">{'Nullam'}</Link>
         </div>
-        <div className="col-md-2">
+        <div className="col-md-2 col-xs-6 text-xs-margin">
           <p className="footer_subtitle">{'FOOTER NAV'}</p>
           <Link to="">{'About'}</Link>
           <Link to="">{'Fermentum Ultricies'}</Link>
           <Link to="">{'Nullam'}</Link>
         </div>
-        <div className="col-md-2">
+        <div className="col-md-2 col-xs-6 text-xs-margin">
           <p className="footer_subtitle">{'FOOTER NAV'}</p>
           <Link to="">{'About'}</Link>
           <Link to="">{'Fermentum Ultricies'}</Link>
           <Link to="">{'Nullam'}</Link>
         </div>
-        <div className="col-md-1 col-md-offset-2">
+        <div className="col-md-1 col-md-offset-2 col-xs-6 text-xs-margin">
           <p className="footer_subtitle">{'SOCIAL'}</p>
           <Link className="footer_socialIcon" to="">
             <FaTwitter size={12} color={'white'} />

@@ -23,3 +23,9 @@
 .businessList_top .filterSelect_text {
   margin-left: 0;
 }
+
+@media (max-width: 48em) {
+  .businessList_top {
+    text-align: center;
+  }
+}

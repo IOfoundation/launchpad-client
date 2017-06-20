@@ -47,10 +47,10 @@ export class Businesses extends Component {
         <section>
           <div className="navTwo">
             <div className="row contentContainer">
-              <div className="col-xs-3 navTwo_logo noPadding">
+              <div className="col-md-3 col-xs-12 navTwo_logo noPadding">
                 <Logo />
               </div>
-              <div className="col-xs-9 navTwo_filters noPadding">
+              <div className="col-md-9 col-xs-12 navTwo_filters noPadding">
                 <FilterBox
                   handleTextSearchBusinesses={this.handleTextSearchBusinesses.bind(
                     this

@@ -19,3 +19,9 @@ footer a {
   display: inline-block;
   margin-right: 5px;
 }
+
+@media (max-width: 48em) {
+  footer {
+    padding: 20px 10px;
+  }
+}

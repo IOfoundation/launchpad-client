@@ -113,3 +113,16 @@
 .filterSelect_clear:hover {
   cursor: pointer;
 }
+
+@media (max-width: 48em) {
+  .navTwo_logo {
+    max-width: 100%;
+    flex-basis:auto;
+    margin: auto;
+  }
+  .navTwo_filters {
+    max-width: 100%;
+    flex-basis:auto;
+    margin: auto;
+  }
+}

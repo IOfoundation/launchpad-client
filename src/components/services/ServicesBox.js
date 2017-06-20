@@ -11,6 +11,22 @@ const ServicesBox = ({services, handleClickOnServiceTag}) => {
         service={service1}
         handleClickOnServiceTag={handleClickOnServiceTag}
       />
+      <Service
+        service={service1}
+        handleClickOnServiceTag={handleClickOnServiceTag}
+      />
+      <Service
+        service={service1}
+        handleClickOnServiceTag={handleClickOnServiceTag}
+      />
+      <Service
+        service={service1}
+        handleClickOnServiceTag={handleClickOnServiceTag}
+      />
+      <Service
+        service={service1}
+        handleClickOnServiceTag={handleClickOnServiceTag}
+      />
       {services.map(service => (
         <Service
           key={service.id}
