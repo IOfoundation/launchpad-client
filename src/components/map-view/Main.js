@@ -1,6 +1,6 @@
 import React from 'react';
-import GoogleMapReact from 'google-map-react';
 import {PropTypes} from 'prop-types';
+import GoogleMapReact from 'google-map-react';
 import MapMarker from './MapMarker';
 
 class Main extends React.Component {
@@ -64,13 +64,8 @@ class Main extends React.Component {
           {this.props.businesses.map(business => {
             const [lng, lat] = this.getCoordinates(business);
             return (
-              <MapMarker
-                key={business.id}
-                className=""
-                lat={lat}
-                lng={lng}
-              />
-            );
+              <MapMarker key={business.id} lat={lat} lng={lng}/>
+           );
           })}
         </GoogleMapReact>
       );

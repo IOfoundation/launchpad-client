@@ -6,8 +6,7 @@ class MetaInfoBusinesses extends React.Component {
     const _businessesMetadata = this.props.businessesMetadata;
     return (
       (_businessesMetadata.pagination.current_page - 1) *
-        _businessesMetadata.pagination.per_page +
-      1
+      (_businessesMetadata.pagination.per_page + 1)
     );
   }
 
@@ -16,7 +15,7 @@ class MetaInfoBusinesses extends React.Component {
     let resourcesEndOn =
       _businessesMetadata.pagination.current_page *
       _businessesMetadata.pagination.per_page;
-    const totalResources = _businessesMetadata.total_organizations;
+    const totalResources = _businessesMetadata.totalOrganizations;
     if (totalResources < resourcesEndOn) {
       resourcesEndOn = totalResources;
     }

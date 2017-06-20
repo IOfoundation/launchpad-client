@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {PropTypes} from 'prop-types';
 import {MdPlace} from 'react-icons/lib/md';
 const K_WIDTH = 40;
 const K_HEIGHT = 40;

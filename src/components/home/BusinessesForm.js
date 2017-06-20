@@ -18,7 +18,7 @@ class BusinessesForm extends React.Component {
   handleChange(event) {
     this.setState({value: event.target.value});
   }
-  showDropdown(e) {
+  showDropdown() {
     this.setState({showDropdown: !this.state.showDropdown});
   }
 

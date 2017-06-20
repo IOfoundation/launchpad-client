@@ -5,7 +5,6 @@ import {PropTypes} from 'prop-types';
 import {Link} from 'react-router';
 
 import MainLayout from '../components/layouts/Main';
-import Logo from '../components/shared/Logo';
 import FilterBox from '../components/filters/FilterBox';
 import BusinessesView from 'components/businesses/Main';
 import * as actions from '../actions/business';
@@ -54,8 +53,9 @@ export class Businesses extends Component {
               </Link>
               <div className="col-lg-9 col-xs-12 container--full margin-0">
                 <h2>
-                  Where startups and small businesses connect in California's
-                  Central Valley
+                  {
+                    "Where startups and small businesses connect in California's Central Valley"
+                  }
                 </h2>
                 <FilterBox
                   handleTextSearchBusinesses={this.handleTextSearchBusinesses.bind(

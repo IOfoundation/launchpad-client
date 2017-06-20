@@ -23,9 +23,12 @@ export default {
   entry: path.resolve(__dirname, 'src/index'),
   // necessary per https://webpack.github.io/docs/testing.html#compile-and-test
   target: 'web',
+  node: {
+    fs: 'empty',
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/',
+    publicPath: './',
     filename: '[name].[chunkhash].js',
   },
   plugins: [
@@ -99,7 +102,17 @@ export default {
         loader:
           'url-loader?limit=10000&mimetype=image/svg+xml&name=[name].[ext]',
       },
-      {test: /\.(jpe?g|png|gif)$/i, loader: 'file-loader?name=[name].[ext]'},
+      {
+        test: /\.(png|jpg)$/,
+        loader: 'url-loader',
+      },
+      {
+        test: /\.(jpe?g|png|gif)$/i,
+        loader: 'file-loader',
+        options: {
+          name: './static-data/images/[name].[ext]',
+        }
+      },
       {test: /\.ico$/, loader: 'file-loader?name=[name].[ext]'},
       {
         test: /(\.css)$/,

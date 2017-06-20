@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "engines": {
-    "npm": ">=3"
+    "npm": ">=3",
+    "node": "8.2.1"
   },
   "scripts": {
     "preinstall": "node tools/nodeVersionCheck.js",
@@ -16,13 +17,15 @@
     "lint:watch": "npm run lint -- --watch",
     "clean-dist": "npm run remove-dist && mkdir dist",
     "remove-dist": "rimraf ./dist",
-    "prebuild": "npm run clean-dist && npm run lint && npm run test",
-    "build": "./node_modules/.bin/babel-node tools/build.js && npm run open:dist",
+    "prebuild": "npm run clean-dist && npm run test",
+    "build": "babel-node tools/build.js",
     "test": "jest",
     "test:CI": "./node_modules/.bin/babel-node tools/testCi.js",
     "test:cover": "npm run test -- --coverage ",
     "test:cover:CI": "npm run test:CI -- --coverage && cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js",
     "test:watch": "npm run test -- --watch",
+    "heroku-postbuild": "npm run build",
+    "start:prod": "node ./deploy/index.js",
     "open:cover": "npm run test:cover && opn ./coverage/lcov-report/index.html",
     "analyze-bundle": "babel-node ./tools/analyzeBundle.js",
     "eslint": "node_modules/.bin/eslint --fix --ext \".js\" --ignore-pattern node_modules --quiet .",
@@ -33,6 +36,7 @@
   "dependencies": {
     "axios": "^0.16.2",
     "deep-freeze": "^0.0.1",
+    "express": "^4.15.3",
     "flexboxgrid": "6.3.1",
     "google-map-react": "^0.24.0",
     "jsonapi-serializer": "3.5.5",

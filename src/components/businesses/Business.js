@@ -10,7 +10,7 @@ class Business extends Component {
     };
   }
 
-  toggleCard(e) {
+  toggleCard() {
     this.setState({expanded: !this.state.expanded});
   }
   render() {

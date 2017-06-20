@@ -2,14 +2,9 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 import {Link} from 'react-router';
 import BusinessesForm from './BusinessesForm';
-import ServicesBox from '../services/ServicesBox';
 import Logo from '../shared/Logo';
 
-const Main = ({
-  services,
-  handleClickOnServiceTag,
-  handleSubmitSearchBusinessesForm,
-}) => {
+const Main = ({handleSubmitSearchBusinessesForm}) => {
   return (
     <div>
       <section className="hero center-xs">
@@ -33,16 +28,24 @@ const Main = ({
             />
           </div>
           <div className="grid container-center--middle mt-20">
-            <Link className="link col-xs-12 col-md-6 col-lg-4 m-bot-16" to="/businesses">
+            <Link
+              className="link col-xs-12 col-md-6 col-lg-4 m-bot-16"
+              to="/businesses">
               Bussines Planning/Managment
             </Link>
-            <Link className="link col-xs-12 col-md-6 col-lg-3 m-bot-16" to="/businesses">
+            <Link
+              className="link col-xs-12 col-md-6 col-lg-3 m-bot-16"
+              to="/businesses">
               Capital Legal Services
             </Link>
-            <Link className="link col-xs-12 col-md-6 col-lg-2 m-bot-16" to="/businesses">
+            <Link
+              className="link col-xs-12 col-md-6 col-lg-2 m-bot-16"
+              to="/businesses">
               Marketing/Sales
             </Link>
-            <Link className="link col-xs-12 col-md-6 col-lg-3 m-bot-16" to="/businesses">
+            <Link
+              className="link col-xs-12 col-md-6 col-lg-3 m-bot-16"
+              to="/businesses">
               Physical Space
             </Link>
           </div>
