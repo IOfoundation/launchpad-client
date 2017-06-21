@@ -44,6 +44,7 @@
 
 .reducedMapBottom_checkContainer {
   margin: 0;
+  display: block;
 }
 .reducedMapBottom_check {
   -webkit-appearance: none;
@@ -106,4 +107,14 @@
 .map_modal_social {
   border-top: .5px solid rgba(0,0,0,0.12);
   padding: 11px 15px 11px 15px;
+}
+
+@media (max-width: 48em) {
+  .reduceMapBtn {
+    left: 10px;
+    right: auto;
+  }
+  .reducedMapBottom_checkContainer {
+    margin: 10px auto;
+  }
 }

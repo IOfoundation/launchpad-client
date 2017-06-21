@@ -3,4 +3,9 @@
   box-shadow: 8px 0px 8px -8px rgba(0,0,0,0.5);
   z-index: 1;
   transition: .3s ease all;
+  position: relative;
+}
+
+.businessList--reduced {
+  position: relative;
 }

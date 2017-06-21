@@ -1,3 +1,14 @@
 .pagination {
-  padding: 25px;
+  padding: 25px 0;
+  position: absolute;
+  box-shadow: inset 0 1px 0 0 rgba(12,0,51, .1);
+  bottom: 0;
+  width: 95%;
+  font-size: 12px;
+  background: white;
+}
+@media (max-width: 48em) {
+  .pagination {
+    padding: 25px 10px;
+  }
 }

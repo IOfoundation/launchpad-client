@@ -2,6 +2,7 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 import CheckBox from '../shared/CheckBox';
 import {FaSortDesc} from 'react-icons/lib/fa';
+import onClickOutside from 'react-onclickoutside';
 
 class FilterByOptions extends React.Component {
   constructor(props) {
@@ -13,11 +14,13 @@ class FilterByOptions extends React.Component {
   _toggleOptions() {
     this.setState({showOptions: !this.state.showOptions});
   }
+  handleClickOutside() {
+    this.setState({showOptions: false});
+  }
   _renderOptions() {
     let checkbox = null;
-    if (this.props.filterName !== 'Business Type') {
-      checkbox = <CheckBox size={16} />;
-    }
+    checkbox = <CheckBox size={16} />;
+
     return (
       <div className="filterSelect_dropdown">
         <p className="smallFont primary filterSelect_dropdown_title">
@@ -43,10 +46,7 @@ class FilterByOptions extends React.Component {
   }
   render() {
     return (
-      <div
-        className="col-xs-2 noPadding filterSelectContainer"
-        onBlur={() => this.setState({showOptions: false})}
-      >
+      <div className="col-md-2 col-xs-10 noPadding filterSelectContainer text-xs-margin">
         <button
           className="filterInput filterSelect"
           onClick={() => this._toggleOptions()}
@@ -67,4 +67,4 @@ FilterByOptions.propTypes = {
   handleOnChangeFilterOptions: PropTypes.func,
 };
 
-export default FilterByOptions;
+export default onClickOutside(FilterByOptions);

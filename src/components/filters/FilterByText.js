@@ -21,7 +21,7 @@ class FilterByText extends React.Component {
   }
   render() {
     return (
-      <div className="col-xs-2 noPadding">
+      <div className="col-md-2 col-xs-10 text-xs-margin filterTextContainer noPadding">
         <form className="filterTextForm">
           <label
             className={
@@ -40,7 +40,7 @@ class FilterByText extends React.Component {
             placeholder=""
             className="filterInput filterText"
           />
-          <MdSearch className="filterText_icon" size={20} color={'#3F51B5'} />
+          <MdSearch className="filterText_icon" size={17} color={'#3F51B5'} />
         </form>
       </div>
     );

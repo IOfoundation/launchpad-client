@@ -21,7 +21,7 @@ class WelcomeCard extends React.Component {
             <img src="static-data/images/close.svg" />
           </button>
         </div>
-        <div className="col-lg-5 col-lg-offset-4 col-sm-7 col-sm-offset-3">
+        <div className="col-lg-5 col-lg-offset-3 col-sm-9 col-sm-offset-1">
           <h1 className="welcomeCard_title">
             {'Welcome to Startup Navigator'}
           </h1>

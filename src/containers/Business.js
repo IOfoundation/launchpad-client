@@ -37,17 +37,23 @@ export class Business extends Component {
     return (
       <MainLayout>
         <section>
-          <div>
-            <Logo />
-            <FilterBox
-              handleTextSearchBusinesses={this.handleTextSearchBusinesses.bind(
-                this
-              )}
-              filterOptions={this.props.filters}
-              handleOnChangeFilterOptions={this.handleOnChangeFilterOptions.bind(
-                this
-              )}
-            />
+          <div className="navTwo">
+            <div className="row contentContainer between-xs">
+              <div className="col-xs-3 navTwo_logo noPadding">
+                <Logo />
+              </div>
+              <div className="col-xs-9 navTwo_filters noPadding">
+                <FilterBox
+                  handleTextSearchBusinesses={this.handleTextSearchBusinesses.bind(
+                    this
+                  )}
+                  filterOptions={this.props.filters}
+                  handleOnChangeFilterOptions={this.handleOnChangeFilterOptions.bind(
+                    this
+                  )}
+                />
+              </div>
+            </div>
           </div>
           <BusinessView business={this.props.business} />
         </section>

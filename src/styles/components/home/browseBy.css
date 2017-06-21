@@ -24,3 +24,9 @@
   margin-right: 16px;
   margin-bottom: 16px;
 }
+
+@media (max-width: 457px) {
+  .browseBy_btn {
+    margin-right: 0;
+  }
+}
