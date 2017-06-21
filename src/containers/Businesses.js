@@ -23,12 +23,13 @@ export class Businesses extends Component {
     this.props.actions.filterBusinessesByName(businessName, businessesFilters);
   }
 
-  handleOnChangeFilterOptions(filterType, filterValue) {
+  handleOnChangeFilterOptions(filterType, filterValue, filterMultiple = false) {
     const businessesFilters = this.props.location.query;
     this.props.actions.filterBusinesses(
       filterType,
       filterValue,
-      businessesFilters
+      businessesFilters,
+      filterMultiple,
     );
   }
 

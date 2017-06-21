@@ -32,8 +32,9 @@ class FilterByOptions extends React.Component {
             key={filterOption.id}
             onClick={() =>
               this.props.handleOnChangeFilterOptions(
-                filterOption.name,
-                filterOption.id
+                this.props.filterType,
+                filterOption.id,
+                this.props.filterMultiple,
               )}
           >
             {checkbox}
@@ -61,6 +62,7 @@ class FilterByOptions extends React.Component {
 }
 
 FilterByOptions.propTypes = {
+  filterMultiple: PropTypes.bool,
   filterName: PropTypes.string.isRequired,
   filterOptions: PropTypes.array.isRequired,
   filterType: PropTypes.string.isRequired,
