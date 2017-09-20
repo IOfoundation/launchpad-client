@@ -35,6 +35,7 @@
     "deep-freeze": "^0.0.1",
     "flexboxgrid": "6.3.1",
     "google-map-react": "^0.24.0",
+    "jsonapi-serializer": "3.5.5",
     "material-ui": "0.18.3",
     "object-assign": "4.1.0",
     "query-string": "^4.3.4",

@@ -1,5 +1,5 @@
 import {HomeTypes as types} from '../action-types';
-import httpRequest from '../services/httpRequest';
+import httpRequest from '../utils/httpRequest';
 import {browserHistory} from 'react-router';
 
 const servicesDataObject = services => {
