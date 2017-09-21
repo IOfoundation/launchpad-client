@@ -25,7 +25,7 @@ class Main extends Component {
   }
 
   _renderResultsInfo() {
-    return <ResultInfo businessesMetadata={this.props.businessesMetadata} />;
+    //return <ResultInfo businessesMetadata={this.props.businessesMetadata} />;
   }
   render() {
     const {
