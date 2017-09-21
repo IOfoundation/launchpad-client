@@ -50,8 +50,9 @@ function configureStoreDev(initialState) {
   return store;
 }
 
-const configureStore = process.env.NODE_ENV === 'production'
-  ? configureStoreProd
-  : configureStoreDev;
+const configureStore =
+  process.env.NODE_ENV === 'production'
+    ? configureStoreProd
+    : configureStoreDev;
 
 export default configureStore;

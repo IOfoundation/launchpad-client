@@ -3,6 +3,8 @@
   height: 500px;
   position: relative;
   transition: .3s ease all;
+  padding-right: 0px;
+  float: left;
 }
 .mapReduced {
   margin-top: 16px;
@@ -21,8 +23,6 @@
   box-shadow: 0 2px 3px -1px grey;
   position: absolute;
   z-index: 1;
-  right: 20px;
-  top: 20px;
 }
 .reduceMapBtn:hover {
   cursor: pointer;
@@ -71,13 +71,13 @@
   width: 40px;
 }
 .map_marker {
-  color: #3F51B5;
+  color: #4A4A4A;
 
 }
 .map_marker:hover {
   cursor: pointer;
-  color: white;
-  stroke: #3F51B5;
+  color: #4A4A4A;
+  stroke: #4A4A4A;
   stroke-width:2px;
   stroke-linejoin: round;
 }

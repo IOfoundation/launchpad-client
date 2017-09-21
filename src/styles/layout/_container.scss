@@ -1,0 +1,120 @@
+@mixin container($bg-color, $ft-color, $invert){
+  @if $invert == true {
+    max-width: 1140px;
+    margin: 24px auto;
+    position: relative;
+    background-color: $bg-color;
+    color: $ft-color;
+    font-weight: normal;
+    padding: 24px;
+  } @else {
+    max-width: 1140px;
+    margin: 24px auto;
+    position: relative;
+    background-color: $bg-color;
+    color: $ft-color;
+    font-weight: normal;
+    padding: 24px;
+  }
+}
+.container {
+  @include container ($white-color, $primary-color, false);
+  h3 {
+    font-weight: $font-family-sans-serif;
+  }
+  p {
+    font-family: $font-family-thin;
+  }
+}
+.container-invert {
+  @include container ($primary-color, $white-color, true);
+  h3 {
+    font-weight: $font-family-sans-serif;
+  }
+  p {
+    font-family: $font-family-thin;
+  }
+}
+
+.container-center {
+  width: 55%;
+  margin: 0 auto;
+  .logo {
+    width: 60px;
+  }
+  p {
+    font-family: $font-family-thin;
+  }
+}
+
+
+$width: (
+  "full":         100%,
+  "half":         50%,
+  "middle":       80%,
+  "medium":       960px,
+);
+
+@each $name, $value in $width {
+    //Css class
+    #{$css-class}container-center--#{$name} {
+        width: $value;
+        margin: auto;
+        p {
+          font-size: 14px;
+        }
+        a {
+          font-size: 16px;
+          font-family: $font-family-thin;
+        }
+    };
+    #{$css-class}container--#{$name} {
+        width: $value;
+        padding-right: 1rem;
+        padding-left: 1rem;
+        p {
+          font-size: 14px;
+        }
+        a {
+          font-size: 16px;
+          font-family: $font-family-thin;
+        }
+    };
+    //Silent class
+    @if $use-silent-classes == true {
+      #{$silent-class}container-center--#{$name} {
+          width: $value;
+          margin: auto;
+          p {
+            font-size: 14px;
+          }
+          a {
+            font-size: 16px;
+            font-family: $font-family-thin;
+          }
+      };
+      #{$silent-class}container--#{$name} {
+          width: $value;
+          padding-right: 1rem;
+          padding-left: 1rem;
+          p {
+            font-size: 14px;
+          }
+          a {
+            font-size: 16px;
+            font-family: $font-family-thin;
+          }
+      };
+   };
+};
+
+//map
+.map-container-expand{
+  width: 220px;
+  height: 220px;
+}
+
+.map-container-collapse {
+  width: 372px;
+  height: 372px;
+}

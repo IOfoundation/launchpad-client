@@ -3,18 +3,47 @@ import {CategoriesConstants} from '../../constants';
 import {PropTypes} from 'prop-types';
 
 class Business extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      expanded: false,
+    };
+  }
+
+  toggleCard(e) {
+    this.setState({expanded: !this.state.expanded});
+  }
   render() {
     const {business: {categories}, handleClickOnBusiness} = this.props;
     const {business} = this.props;
-    if (!categories) return (
-      <div className="Business">
-        <div className="row between-xs business_block--expanded">
-          <section className="col-sm-9 col-xs-12 text-xs-margin noPadding">
-            <h3 className="business_block--expanded_title">{business.name}</h3>
-            </section>
+    if (!categories) {
+      return (
+        <div className="business-card">
+          <div
+            className={
+              this.state.expanded ? (
+                'business-card-expand'
+              ) : (
+                'business-card-collapse'
+              )
+            }
+          >
+            <h3 className="title">
+              {business.name}
+              <img
+                className="business-card-icon"
+                onClick={e => this.toggleCard(e)}
+                style={{float: 'right'}}
+                src="static-data/images/expand-icon.png"
+              />
+            </h3>
+            <p className="preview-details">{business.description}</p>
+            <p className="details" />
+            <p className="location">{'1 location | Sacramento, CA'}</p>
           </div>
         </div>
-    );
+      );
+    }
     const businessTypeCategory = business.categories.find(
       category => category.name === CategoriesConstants.BUSINESS_TYPE
     );

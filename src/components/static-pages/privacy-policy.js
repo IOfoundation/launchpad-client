@@ -5,9 +5,7 @@ import MainLayout from '../layouts/Main';
 const PrivacyPolicy = () => {
   return (
     <MainLayout>
-      <h1>
-        {'Privacy Policy'}
-      </h1>
+      <h1>{'Privacy Policy'}</h1>
     </MainLayout>
   );
 };

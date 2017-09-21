@@ -1,11 +1,6 @@
 /* Set defaults */
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
-body {
-  font-family: 'Roboto', sans-serif;
-  color: #0C0033;
-  margin: 0 auto;
-}
 a {
   text-decoration: none;
   color: black;
@@ -67,8 +62,6 @@ h1,h2,h3,h4,h5,p, a {
 }
 /* Import Components */
 @import './components/shared/header.css';
-@import './components/home/WelcomeCard.css';
-@import './components/shared/footer.css';
 @import './components/shared/CheckBox.css';
 
 @import './components/businesses/map.css';
@@ -81,4 +74,3 @@ h1,h2,h3,h4,h5,p, a {
 @import './components/home/hero.css';
 @import './components/home/browseBy.css';
 @import './components/business/business.css';
-@import './components/filters/filters.css';

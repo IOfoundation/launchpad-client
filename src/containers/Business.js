@@ -37,7 +37,7 @@ export class Business extends Component {
     return (
       <MainLayout>
         <section>
-          <div className="navTwo">
+          <div className="search-nav">
             <div className="row contentContainer between-xs">
               <div className="col-xs-3 navTwo_logo noPadding">
                 <Logo />

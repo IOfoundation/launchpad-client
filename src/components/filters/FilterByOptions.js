@@ -3,6 +3,7 @@ import {PropTypes} from 'prop-types';
 import CheckBox from '../shared/CheckBox';
 import {FaSortDesc} from 'react-icons/lib/fa';
 import onClickOutside from 'react-onclickoutside';
+import {MdKeyboardArrowRight} from 'react-icons/lib/md';
 
 class FilterByOptions extends React.Component {
   constructor(props) {
@@ -23,8 +24,12 @@ class FilterByOptions extends React.Component {
 
     return (
       <div className="filterSelect_dropdown">
-        <p className="smallFont primary filterSelect_dropdown_title">
+        <p className="filterSelect_dropdown_title">
           {this.props.filterName}
+          <MdKeyboardArrowRight
+            className="filterSelect_dropdown_icon"
+            size="20"
+          />
         </p>
         {this.props.filterOptions.map(filterOption => (
           <button
@@ -34,11 +39,12 @@ class FilterByOptions extends React.Component {
               this.props.handleOnChangeFilterOptions(
                 this.props.filterType,
                 filterOption.id,
-                this.props.filterMultiple,
+                this.props.filterMultiple
               )}
           >
             {checkbox}
             <span className="filterSelect_text">{filterOption.name}</span>
+            <MdKeyboardArrowRight className="btn-search-icon" size="32" />
           </button>
         ))}
         <div className="filterSelect_clear">{'Clear'}</div>
@@ -47,14 +53,14 @@ class FilterByOptions extends React.Component {
   }
   render() {
     return (
-      <div className="col-md-2 col-xs-10 noPadding filterSelectContainer text-xs-margin">
+      <div className="col-md-3 col-xs-10 noPadding filterSelectContainer text-xs-margin">
         <button
           className="filterInput filterSelect"
           onClick={() => this._toggleOptions()}
         >
           {this.props.filterName}
         </button>
-        <FaSortDesc className="filterSelect_icon" size={14} color={'#000'} />
+        <FaSortDesc className="filterSelect_icon" size={14} color={'#fff'} />
         {this.state.showOptions ? this._renderOptions() : null}
       </div>
     );

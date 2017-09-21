@@ -8,34 +8,31 @@ class Pagination extends React.Component {
     const {current_page} = this.props.businessesMetadata.pagination;
     const {next_page} = this.props.businessesMetadata.pagination;
     let prevPageArrow = null;
-    if (current_page > 1) {
-      prevPageArrow = (
-        <MdChevronLeft
-          size={20}
-          color={'#0C0033'}
-          style={{marginRight: 8}}
-          onClick={() => this.props.handleChangePage(current_page - 1)}
-        />
-      );
-    }
+    prevPageArrow = (
+      <MdChevronLeft
+        className="pagination-arrow pagination-arrow-left"
+        size={15}
+        color={'#fff'}
+        style={{marginRight: 15}}
+        onClick={() => this.props.handleChangePage(current_page - 1)}
+      />
+    );
 
     let nextPageArrow = null;
-    if (next_page && next_page > 1) {
-      nextPageArrow = (
-        <MdChevronRight
-          size={20}
-          color={'#0C0033'}
-          onClick={() => this.props.handleChangePage(next_page)}
-        />
-      );
-    }
+    nextPageArrow = (
+      <MdChevronRight
+        className="pagination-arrow pagination-arrow-left"
+        size={15}
+        color={'#fff'}
+        style={{marginLeft: 15}}
+        onClick={() => this.props.handleChangePage(next_page)}
+      />
+    );
     return (
-      <div className="pagination row between-xs middle-xs">
-        <MetaInfoBusinesses
-          businessesMetadata={this.props.businessesMetadata}
-        />
+      <div className="text-center pagination between-xs middle-xs m-bot-100">
         <div>
           {prevPageArrow}
+          <span className="pagination-index">1</span>
           {nextPageArrow}
         </div>
       </div>

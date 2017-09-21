@@ -1,7 +1,7 @@
 import React from 'react';
 import GoogleMapReact from 'google-map-react';
-import Marker from './PointMarker';
 import {PropTypes} from 'prop-types';
+import MapMarker from './MapMarker';
 
 class Main extends React.Component {
   constructor(props) {
@@ -11,8 +11,12 @@ class Main extends React.Component {
       showModal: false,
     };
   }
+
   openModal() {
     this.setState({showModal: !this.state.showModal});
+  }
+  getCoordinates(business) {
+    return business.locations[0].coordinates;
   }
   _renderModal(business) {
     return (
@@ -50,17 +54,28 @@ class Main extends React.Component {
     );
   }
   render() {
-    return (
-      <GoogleMapReact
-        defaultCenter={{lat: 38.581572, lng: -121.4944}}
-        defaultZoom={15}
-      >
-        {this.props.businesses.map(business => {
-          return null;
-          // TODO: Fix with location relation --> use className="map_markerContainer"
-        })}
-      </GoogleMapReact>
-    );
+    const firstBusiness = this.props.businesses
+      ? this.props.businesses[0]
+      : null;
+    if (firstBusiness) {
+      const [centerLng, centerLat] = this.getCoordinates(firstBusiness);
+      return (
+        <GoogleMapReact center={{lat: centerLat, lng: centerLng}} zoom={15}>
+          {this.props.businesses.map(business => {
+            const [lng, lat] = this.getCoordinates(business);
+            return (
+              <MapMarker
+                key={business.id}
+                className=""
+                lat={lat}
+                lng={lng}
+              />
+            );
+          })}
+        </GoogleMapReact>
+      );
+    }
+    return <div>{'Loading'}</div>;
   }
 }
 

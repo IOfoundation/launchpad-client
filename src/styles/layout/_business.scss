@@ -1,0 +1,28 @@
+.business-card {
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 24px;
+  margin-bottom: 12px;
+  &-collapse,
+  &-expand {
+    position: relative;
+    .preview-details {
+    opacity: 0.5;
+    margin-top: 4px;
+   }
+   .details {
+     display: none;
+   }
+   .location {
+     font-weight: bold;
+     margin-top: 12px;
+     bottom: 0px;
+     position: absolute;
+   }
+  }
+  &-collapse {
+    height: 87px;
+  }
+   &-expand{
+    height: 613px;
+  }
+}

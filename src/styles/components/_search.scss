@@ -1,0 +1,56 @@
+.hero_inputContainer {
+  position: relative;
+  input::placeholder {
+    color: $white-color;
+    opacity: 0.75;
+    font-weight: normal;
+    font-size: 20px;
+    padding: 0px;
+    font-family: $font-family-thin;
+  }
+  .text-search-icon {
+    position: absolute;
+    right: 0px;
+    top: 19px;
+  }
+}
+.hero_input {
+  background-color: $primary-color;
+  height: 76px;
+  width: 100%;
+  border: none;
+  padding: 0 28px;
+  color: $secondary-color;
+  margin-bottom: 10px;
+  &:focus {
+    outline: none;
+  }
+  &-dropdown {
+    background-color: $primary-color;
+  }
+}
+.hero-dropdown-list{
+  list-style: none;
+  background-color: $primary-color;
+  width: 416px;
+  padding: 8px;
+  li {
+    padding: 8px;
+    text-align: left;
+  }
+  a {
+    color: $white-color;
+  }
+}
+
+.hero_input-hide {
+  display: none;
+  position: absolute;
+  transition: all 0.4s ease-in;
+}
+.hero_input-show {
+  display: initial;
+  position: absolute;
+  transition: all 0.4s ease-in;
+  left: 30px;
+}
