@@ -42,16 +42,15 @@ class ContentMap extends Component {
         className={
           'businessesContainer ' +
           (this.props.expanded ? '' : 'businessesContainerReduced')
-        }
-      >
+        }>
         {this.props.topBar}
-        <div className={'container-center--medium grid m-left-24 p-left-24'}>
+        <div
+          className={'container-center--medium grid m-left-24 p-left-24'}>
           <div
             className={
-              this.props.expanded ? (
-                'col-md-8 col-xs-12 businessList p-left-0') :
-                ('col-md-9 col-xs-12 businessList--reduced p-left-0')}
-          >
+              this.props.expanded
+                ? 'col-md-7 col-xs-12 businessList p-left-0'
+                : 'col-md-9 col-xs-12 businessList--reduced p-left-0'}>
             {this.props.children}
           </div>
           <div
