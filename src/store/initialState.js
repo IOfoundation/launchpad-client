@@ -5,11 +5,14 @@ const initialState = {
   businesses: {
     business: {
       id: 'id',
-      categories: [
-        {name: 'BusinessType', children: []},
-        {name: 'Community', children: []},
-        {name: 'Stage', children: []},
-      ],
+      name: 'name',
+      description: 'description',
+
+      // categories: [
+      //   {name: 'BusinessType', children: []},
+      //   {name: 'Community', children: []},
+      //   {name: 'Stage', children: []},
+      // ],
       location: {},
     },
     businesses: [],

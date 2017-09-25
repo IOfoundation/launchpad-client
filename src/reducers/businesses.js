@@ -9,8 +9,9 @@ const initialState: STATE = {
 
 export default function(state: STATE = initialState, action: ACTION): STATE {
   switch (action.type) {
-    case types.FETCH_BUSINESSESS: {
+    case types.FETCH_BUSINESSES: {
       const {businesses} = action;
+      console.log('$$$!', businesses);
       return {
         ...state,
         businesses,

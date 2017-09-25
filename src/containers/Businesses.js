@@ -14,8 +14,8 @@ import WelcomeCard from '../components/shared/WelcomeCard';
 export class Businesses extends Component {
   componentWillMount(_nextProps) {
     const businessesFilters = this.props.location.query;
-    this.props.actions.fetchBusinesses(businessesFilters);
-    this.props.actions.fetchFilterOptions();
+    this.props.actions.fetchBusinesses();
+    //this.props.actions.fetchFilterOptions();
   }
 
   handleTextSearchBusinesses(businessName) {

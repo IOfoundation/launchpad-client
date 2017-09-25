@@ -4,7 +4,8 @@ import {PropTypes} from 'prop-types';
 
 class Business extends Component {
   render() {
-    const {business, handleClickOnBusiness} = this.props;
+    const {business: {categories}, handleClickOnBusiness} = this.props;
+    if (!categories) return null;
     const businessTypeCategory = business.categories.find(
       category => category.name === CategoriesConstants.BUSINESS_TYPE
     );

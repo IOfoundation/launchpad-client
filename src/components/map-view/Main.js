@@ -56,17 +56,20 @@ class Main extends React.Component {
         defaultZoom={15}
       >
         {this.props.businesses.map(business => {
-          return (
-            <div
-              key={business.id}
-              className="map_markerContainer"
-              lat={business.location.latitude}
-              lng={business.location.longitude}
-            >
-              {this.state.showModal ? this._renderModal(business) : null}
-              <Marker showModal={this.openModal} />
-            </div>
-          );
+          return null;
+
+          // TODO: Fix with location relation
+          // return (
+          //   <div
+          //     key={business.id}
+          //     className="map_markerContainer"
+          //     lat={latitude}
+          //     lng={longitude}
+          //   >
+          //     {this.state.showModal ? this._renderModal(business) : null}
+          //     <Marker showModal={this.openModal} />
+          //   </div>
+          // );
         })}
       </GoogleMapReact>
     );

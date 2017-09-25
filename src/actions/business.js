@@ -14,7 +14,7 @@ const businessDataObject = business => {
 
 const businessesDataObject = businesses => {
   return {
-    type: types.FETCH_BUSINESSESS,
+    type: types.FETCH_BUSINESSES,
     businesses,
   };
 };
@@ -56,7 +56,7 @@ const pushBrowserHistory = filters => {
 export function fetchBusiness(businessId) {
   return async (dispatch: Function) => {
     const httpResponse = await httpRequest.get(
-      `/api/organizations/${businessId}`
+      `/api/locations/${businessId}`
     );
     const business = httpResponse.data;
     dispatch(businessDataObject(business));
@@ -65,13 +65,13 @@ export function fetchBusiness(businessId) {
 
 export function fetchBusinesses(currentParams) {
   return async (dispatch: Function) => {
-    const httpResponse = await httpRequest.get('/api/organizations', {
-      params: currentParams,
-    });
-    const businesses = httpResponse.data.organizations;
-    const {metadata} = httpResponse.data;
+    const httpResponse = await httpRequest.get('/api/organizations');
+    // {params: currentParams,});
+    const businesses = httpResponse.data;
+    console.log('$$!D', businesses);
+    //const {metadata} = httpResponse.data;
     dispatch(businessesDataObject(businesses));
-    dispatch(businessesMetaDataObject(metadata));
+    //dispatch(businessesMetaDataObject(metadata));
   };
 }
 
