@@ -68,7 +68,6 @@ export function fetchBusinesses(currentParams) {
     const httpResponse = await httpRequest.get('/api/organizations');
     // {params: currentParams,});
     const businesses = httpResponse.data;
-    console.log('$$!D', businesses);
     //const {metadata} = httpResponse.data;
     dispatch(businessesDataObject(businesses));
     //dispatch(businessesMetaDataObject(metadata));

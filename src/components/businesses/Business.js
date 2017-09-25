@@ -5,7 +5,16 @@ import {PropTypes} from 'prop-types';
 class Business extends Component {
   render() {
     const {business: {categories}, handleClickOnBusiness} = this.props;
-    if (!categories) return null;
+    const {business} = this.props;
+    if (!categories) return (
+      <div className="Business">
+        <div className="row between-xs business_block--expanded">
+          <section className="col-sm-9 col-xs-12 text-xs-margin noPadding">
+            <h3 className="business_block--expanded_title">{business.name}</h3>
+            </section>
+          </div>
+        </div>
+    );
     const businessTypeCategory = business.categories.find(
       category => category.name === CategoriesConstants.BUSINESS_TYPE
     );
