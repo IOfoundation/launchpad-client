@@ -15,7 +15,6 @@ export class Businesses extends Component {
   componentWillMount(_nextProps) {
     const businessesFilters = this.props.location.query;
     this.props.actions.fetchBusinesses();
-    //this.props.actions.fetchFilterOptions();
   }
 
   handleTextSearchBusinesses(businessName) {

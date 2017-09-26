@@ -7,12 +7,6 @@ const initialState = {
       id: 'id',
       name: 'name',
       description: 'description',
-
-      // categories: [
-      //   {name: 'BusinessType', children: []},
-      //   {name: 'Community', children: []},
-      //   {name: 'Stage', children: []},
-      // ],
       location: {},
     },
     businesses: [],

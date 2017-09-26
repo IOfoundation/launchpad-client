@@ -57,19 +57,7 @@ class Main extends React.Component {
       >
         {this.props.businesses.map(business => {
           return null;
-
-          // TODO: Fix with location relation
-          // return (
-          //   <div
-          //     key={business.id}
-          //     className="map_markerContainer"
-          //     lat={latitude}
-          //     lng={longitude}
-          //   >
-          //     {this.state.showModal ? this._renderModal(business) : null}
-          //     <Marker showModal={this.openModal} />
-          //   </div>
-          // );
+          // TODO: Fix with location relation --> use className="map_markerContainer"
         })}
       </GoogleMapReact>
     );

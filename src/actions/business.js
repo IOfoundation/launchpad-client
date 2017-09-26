@@ -56,7 +56,7 @@ const pushBrowserHistory = filters => {
 export function fetchBusiness(businessId) {
   return async (dispatch: Function) => {
     const httpResponse = await httpRequest.get(
-      `/api/locations/${businessId}`
+      `/api/organizations/${businessId}`
     );
     const business = httpResponse.data;
     dispatch(businessDataObject(business));
@@ -66,11 +66,8 @@ export function fetchBusiness(businessId) {
 export function fetchBusinesses(currentParams) {
   return async (dispatch: Function) => {
     const httpResponse = await httpRequest.get('/api/organizations');
-    // {params: currentParams,});
     const businesses = httpResponse.data;
-    //const {metadata} = httpResponse.data;
     dispatch(businessesDataObject(businesses));
-    //dispatch(businessesMetaDataObject(metadata));
   };
 }
 

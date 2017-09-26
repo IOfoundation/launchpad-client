@@ -2,6 +2,7 @@ import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import autoprefixer from 'autoprefixer';
 import path from 'path';
+import DotenvPlugin from 'webpack-dotenv-plugin';
 
 export default {
   resolve: {
@@ -19,6 +20,9 @@ export default {
   ],
   // necessary per https://webpack.github.io/docs/testing.html#compile-and-test
   target: 'web',
+  node: {
+    fs: 'empty'
+  },
   output: {
     // Note: Physical files are only output by the production build task `npm run build`.
     path: path.resolve(__dirname, 'dist'),
@@ -26,6 +30,10 @@ export default {
     filename: 'bundle.js',
   },
   plugins: [
+    new DotenvPlugin({
+      sample: './.env.default',
+      path: './.env'
+    }),
     new webpack.DefinePlugin({
       // Tells React to build in either dev or prod modes. https://facebook.github.io/react/downloads.html (See bottom)
       'process.env.NODE_ENV': JSON.stringify('development'),
