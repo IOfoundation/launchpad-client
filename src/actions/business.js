@@ -65,7 +65,7 @@ export function fetchBusiness(businessId) {
 
 export function fetchBusinesses(currentParams) {
   return async (dispatch: Function) => {
-    const httpResponse = await httpRequest.get('/api/locations');
+    const httpResponse = await httpRequest.get('/api/organizations');
     const businesses = httpResponse.data;
     dispatch(businessesDataObject(businesses));
   };
