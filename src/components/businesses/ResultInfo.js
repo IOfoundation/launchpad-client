@@ -17,33 +17,39 @@ class ResultInfo extends Component {
   render() {
     const {businessesMetadata: {total_organizations}} = this.props;
     return (
-      <div className="container-center--medium">
-        <p className="m-left-24 m-bot-16">
+      <div className="container-center--medium grid">
+        <p className="m-bot-16 col-xs-12 col-md-12 col-lg-12">
           {'Select a business type that represents you.'}
         </p>
-        <button className="btn btn-search btn-outline m-left-24">
-          <div className="btn-search-text">
-            <span>{'Startup or High'}</span>
-            <span>{'Growth Business'}</span>
-          </div>
-          <MdKeyboardArrowRight className="btn-search-icon" size="32" />
-        </button>
-        <button className="btn btn-search m-right-24 m-left-24 btn-outline">
-          <div className="btn-search-text">
-            <span>{'Main Street/'}</span>
-            <span>{'Small Business'}</span>
-          </div>
-          <MdKeyboardArrowRight className="btn-search-icon" size="32" />
-        </button>
-        <button className="btn btn-search btn-outline">
-          <div className="btn-search-text">
-            <span>{'Microenterprise or'}</span>
-            <span>{'Home-Based Business'}</span>
-          </div>
-          <MdKeyboardArrowRight className="btn-search-icon" size="32" />
-        </button>
-        <h3 className="m-left-24 m-top-24">{`${total_organizations} Resources Available`}</h3>
-        <hr className="m-left-24 m-bot-24" />
+        <div className="col-xs-12 col-md-4 col-lg-4 m-bot-16">
+          <button className="btn btn-search btn-outline">
+            <div className="btn-search-text">
+              <span>{'Startup or High'}</span>
+              <span>{'Growth Business'}</span>
+            </div>
+            <MdKeyboardArrowRight className="btn-search-icon" size="32" />
+          </button>
+        </div>
+        <div className="col-xs-12 col-md-4 col-lg-4 m-bot-16">
+          <button className="btn btn-search btn-outline">
+            <div className="btn-search-text">
+              <span>{'Main Street/'}</span>
+              <span>{'Small Business'}</span>
+            </div>
+            <MdKeyboardArrowRight className="btn-search-icon" size="32" />
+          </button>
+        </div>
+        <div className="col-xs-12 col-md-4 col-lg-4 m-bot-16">
+          <button className="btn btn-search btn-outline">
+            <div className="btn-search-text">
+              <span>{'Microenterprise or'}</span>
+              <span>{'Home-Based Business'}</span>
+            </div>
+            <MdKeyboardArrowRight className="btn-search-icon" size="32" />
+          </button>
+        </div>
+        <h3 className="m-left-24 m-top-24 col-xs-12 col-md-12 col-lg-12">{`${total_organizations} Resources Available`}</h3>
+        <hr className="m-left-24 m-bot-24 col-xs-12 col-md-12 col-lg-12" />
       </div>
     );
   }
