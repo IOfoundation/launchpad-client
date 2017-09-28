@@ -2,8 +2,8 @@ export const Colors = {
   // generic
   white: '#FFFFFF',
 
-  brandPrimary: '#3F51B5',
-  brandSecondary: '#0C0033',
+  brandPrimary: '#000000',
+  brandSecondary: '#2AD587',
 
   greyBg: '#ECEEF1',
 

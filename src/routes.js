@@ -1,7 +1,6 @@
 import React from 'react';
 import {Route, IndexRoute} from 'react-router';
-require('dotenv').config()
-
+require('dotenv').config();
 
 // Main Component
 import App from './components/App';

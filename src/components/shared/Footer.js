@@ -5,39 +5,43 @@ import {FaTwitter, FaFacebook, FaLinkedin} from 'react-icons/lib/fa';
 
 const Footer = () => {
   return (
-    <footer className="">
+    <footer className="main-footer">
       <div className="contentContainer row">
         <div className="col-md-2 col-xs-12 text-xs-margin">
-          <Logo />
+          <a className="logo-link" href="/">
+            <Logo />
+          </a>
         </div>
         <div className="col-md-2 col-md-offset-1 col-xs-6 text-xs-margin">
-          <p className="footer_subtitle">{'FOOTER NAV'}</p>
+          <p className="main-footer_subtitle">{'FOOTER NAV 01'}</p>
           <Link to="">{'About'}</Link>
           <Link to="">{'Fermentum Ultricies'}</Link>
           <Link to="">{'Nullam'}</Link>
         </div>
         <div className="col-md-2 col-xs-6 text-xs-margin">
-          <p className="footer_subtitle">{'FOOTER NAV'}</p>
-          <Link to="">{'About'}</Link>
-          <Link to="">{'Fermentum Ultricies'}</Link>
-          <Link to="">{'Nullam'}</Link>
+          <p className="main-footer_subtitle">{'SUPPORT'}</p>
+          <Link to="">{'Help Center'}</Link>
+          <Link to="">{'FAQ'}</Link>
+          <Link to="">{'Email Us'}</Link>
+          <Link to="">{'Terms'}</Link>
+          <Link to="">{'Privacy'}</Link>
         </div>
         <div className="col-md-2 col-xs-6 text-xs-margin">
-          <p className="footer_subtitle">{'FOOTER NAV'}</p>
+          <p className="main-footer_subtitle">{'FOOTER NAV 3'}</p>
           <Link to="">{'About'}</Link>
           <Link to="">{'Fermentum Ultricies'}</Link>
           <Link to="">{'Nullam'}</Link>
         </div>
         <div className="col-md-1 col-md-offset-2 col-xs-6 text-xs-margin">
-          <p className="footer_subtitle">{'SOCIAL'}</p>
-          <Link className="footer_socialIcon" to="">
+          <p className="main-footer_subtitle">{'SOCIAL'}</p>
+          <Link className="main-footer_icon" to="">
             <FaTwitter size={12} color={'white'} />
           </Link>
-          <Link className="footer_socialIcon" to="">
-            <FaFacebook size={12} color={'white'} /><img src="" />
+          <Link className="main-footer_icon" to="">
+            <FaFacebook size={12} color={'white'} />
           </Link>
-          <Link className="footer_socialIcon" to="">
-            <FaLinkedin size={12} color={'white'} /><img src="" />
+          <Link className="main-footer_icon" to="">
+            <FaLinkedin size={12} color={'white'} />
           </Link>
         </div>
       </div>

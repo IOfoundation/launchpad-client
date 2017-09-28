@@ -5,9 +5,7 @@ import MainLayout from '../layouts/Main';
 const TermsOfUse = () => {
   return (
     <MainLayout>
-      <h1>
-        {'Terms of Use'}
-      </h1>
+      <h1>{'Terms of Use'}</h1>
     </MainLayout>
   );
 };

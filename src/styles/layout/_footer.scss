@@ -1,0 +1,49 @@
+.main-footer {
+  background-color: #000;
+  padding: 40px;
+  color: white;
+  font-size: 12px;
+  height: auto;
+  min-height: 171px;
+  max-height: 320px;
+  .logo {
+    width: 50px;
+  }
+  .logo-link {
+    opacity: 1;
+  }
+  &_subtitle{
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+  }
+  p {
+    font-family: $font-family-bold;
+  }
+  a {
+    color: white;
+    display: block;
+    opacity: .75;
+    margin-bottom: 16px;
+    font-size: 12px;
+    font-family: $font-family-thin;
+  }
+  &_icon {
+    display: inline-block !important;
+    margin-right: 5px;
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+
+@media (max-width: 993px) {
+  footer {
+    padding: 20px 10px;
+  }
+  footer .logo {
+    width: auto;
+  }
+}

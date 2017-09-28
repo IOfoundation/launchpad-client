@@ -25,7 +25,9 @@ describe('<Header />', () => {
       const wrapper = shallow(<Header />);
       expect(
         wrapper.contains(
-          <Link className="header_link" to="/contact-us">{'Contact Us'}</Link>
+          <Link className="header_link" to="/contact-us">
+            {'Contact Us'}
+          </Link>
         )
       ).toBe(true);
     });

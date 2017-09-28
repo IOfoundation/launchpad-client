@@ -3,6 +3,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import autoprefixer from 'autoprefixer';
 import path from 'path';
 import DotenvPlugin from 'webpack-dotenv-plugin';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 export default {
   resolve: {
@@ -21,7 +22,7 @@ export default {
   // necessary per https://webpack.github.io/docs/testing.html#compile-and-test
   target: 'web',
   node: {
-    fs: 'empty'
+    fs: 'empty',
   },
   output: {
     // Note: Physical files are only output by the production build task `npm run build`.
@@ -32,7 +33,7 @@ export default {
   plugins: [
     new DotenvPlugin({
       sample: './.env.default',
-      path: './.env'
+      path: './.env',
     }),
     new webpack.DefinePlugin({
       // Tells React to build in either dev or prod modes. https://facebook.github.io/react/downloads.html (See bottom)
@@ -51,6 +52,8 @@ export default {
       },
       inject: true,
     }),
+    // Generate an external css file with a hash in the filename
+    new ExtractTextPlugin('[name].[contenthash].css'),
     new webpack.LoaderOptionsPlugin({
       minimize: false,
       debug: true,
@@ -103,6 +106,13 @@ export default {
       {
         test: /(\.css)$/,
         loaders: ['style-loader', 'css-loader?sourceMap', 'postcss-loader'],
+      },
+      {
+        test: /(\.scss)$/,
+        loader: ExtractTextPlugin.extract({
+          loader: ['css-loader', 'sass-loader'],
+          fallbackLoader: 'style-loader',
+        }),
       },
     ],
   },

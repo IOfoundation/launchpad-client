@@ -1,0 +1,29 @@
+.hero h2 {
+ font-size: $font-size-header;
+ font-weight: bold;
+ line-height: 54px;
+ width: 80%;
+ margin: auto;
+ margin-top: 32px;
+}
+.hero p {
+  font-size: $font-size-paragraphe;
+  line-height: 24px;
+  width: 50%;
+  margin: 5px auto;
+}
+h1, h2, h3 {
+  font-weight: normal !important;
+}
+
+.text-bold {
+  font-family: $font-family-bold;
+}
+
+.text-thin {
+  font-family: $font-family-thin;
+}
+
+.text-center {
+  text-align: center;
+}

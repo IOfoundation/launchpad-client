@@ -2,14 +2,13 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {PropTypes} from 'prop-types';
+import {Link} from 'react-router';
 
 import MainLayout from '../components/layouts/Main';
 import Logo from '../components/shared/Logo';
 import FilterBox from '../components/filters/FilterBox';
 import BusinessesView from 'components/businesses/Main';
 import * as actions from '../actions/business';
-
-import WelcomeCard from '../components/shared/WelcomeCard';
 
 export class Businesses extends Component {
   componentWillMount(_nextProps) {
@@ -28,7 +27,7 @@ export class Businesses extends Component {
       filterType,
       filterValue,
       businessesFilters,
-      filterMultiple,
+      filterMultiple
     );
   }
 
@@ -45,12 +44,19 @@ export class Businesses extends Component {
     return (
       <MainLayout>
         <section>
-          <div className="navTwo">
+          <div className="navTwo search-nav-invert">
             <div className="row contentContainer">
-              <div className="col-lg-3 col-xs-12 navTwo_logo noPadding">
-                <Logo />
-              </div>
-              <div className="col-lg-9 col-xs-12 navTwo_filters noPadding">
+              <Link to="/">
+                <img
+                  className="logo"
+                  src="static-data/images/ioLogoBlack.png"
+                />
+              </Link>
+              <div className="col-lg-9 col-xs-12 container--full margin-0">
+                <h2>
+                  Where startups and small businesses connect in California's
+                  Central Valley
+                </h2>
                 <FilterBox
                   handleTextSearchBusinesses={this.handleTextSearchBusinesses.bind(
                     this
@@ -63,7 +69,7 @@ export class Businesses extends Component {
               </div>
             </div>
           </div>
-          <WelcomeCard />
+
           <BusinessesView
             businesses={this.props.businesses}
             businessesMetadata={this.props.metadata}

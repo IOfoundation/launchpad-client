@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
-import {FaSortDesc} from 'react-icons/lib/fa';
+import {MdPlace} from 'react-icons/lib/md';
+import {MdKeyboardArrowRight} from 'react-icons/lib/md';
 
 class ResultInfo extends Component {
   constructor(props) {
@@ -12,42 +13,43 @@ class ResultInfo extends Component {
   _toggleOptions() {
     this.setState({showOptions: !this.state.showOptions});
   }
-  _renderOptions() {
-    return (
-      <div className="filterSelect_dropdown">
-        <p className="smallFont primary filterSelect_dropdown_title">
-          {'Sort Results'}
-        </p>
-        <button className="filterSelect_option">
-          <span className="filterSelect_text">{'Test filter'}</span>
-        </button>
-      </div>
-    );
-  }
+
   render() {
     const {businessesMetadata: {total_organizations}} = this.props;
     return (
-      <div className="businessList_top">
-        <div className="contentContainer">
-          <div className="row between-xs middle-xs businessList_top_content col-sm-6 ">
-            <span className="secondary bold bodyFont text-xs-margin">{`${total_organizations} Resources Available`}</span>
-            <div
-              className="businessList_top_filter row middle-xs noPadding text-xs-margin"
-              onClick={() => this._toggleOptions()}
-            >
-              <p className="businessList_top_filter_text">
-                {'Sort Results'}
-              </p>
-              <FaSortDesc
-                className="businessList_top_filter_icon"
-                size={16}
-                color={'#000'}
-              />
-
-              {this.state.showOptions ? this._renderOptions() : null}
+      <div className="container-center--medium grid">
+        <p className="m-bot-16 col-xs-12 col-md-12 col-lg-12">
+          {'Select a business type that represents you.'}
+        </p>
+        <div className="col-xs-12 col-md-4 col-lg-4 m-bot-16">
+          <button className="btn btn-search btn-outline">
+            <div className="btn-search-text">
+              <span>{'Startup or High'}</span>
+              <span>{'Growth Business'}</span>
             </div>
-          </div>
+            <MdKeyboardArrowRight className="btn-search-icon" size="32" />
+          </button>
         </div>
+        <div className="col-xs-12 col-md-4 col-lg-4 m-bot-16">
+          <button className="btn btn-search btn-outline">
+            <div className="btn-search-text">
+              <span>{'Main Street/'}</span>
+              <span>{'Small Business'}</span>
+            </div>
+            <MdKeyboardArrowRight className="btn-search-icon" size="32" />
+          </button>
+        </div>
+        <div className="col-xs-12 col-md-4 col-lg-4 m-bot-16">
+          <button className="btn btn-search btn-outline">
+            <div className="btn-search-text">
+              <span>{'Microenterprise or'}</span>
+              <span>{'Home-Based Business'}</span>
+            </div>
+            <MdKeyboardArrowRight className="btn-search-icon" size="32" />
+          </button>
+        </div>
+        <h3 className="m-left-24 m-top-24 col-xs-12 col-md-12 col-lg-12">{`${total_organizations} Resources Available`}</h3>
+        <hr className="m-left-24 m-bot-24 col-xs-12 col-md-12 col-lg-12" />
       </div>
     );
   }

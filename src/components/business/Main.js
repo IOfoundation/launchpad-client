@@ -157,7 +157,9 @@ class Main extends Component {
           <div className="businessView_related">
             <div className="row between-xs">
               <h3 className="smallFont">{'Related Resources'}</h3>
-              <a className="smallFont" href="">{'VIEW MORE'}</a>
+              <a className="smallFont" href="">
+                {'VIEW MORE'}
+              </a>
             </div>
             <div className="row between-xs businessView_related_images">
               <div>

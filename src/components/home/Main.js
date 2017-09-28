@@ -13,7 +13,7 @@ const Main = ({
   return (
     <div>
       <section className="hero center-xs">
-        <div className="hero_content">
+        <div className="container-center">
           <Logo />
           <h2>
             {
@@ -32,18 +32,20 @@ const Main = ({
               }
             />
           </div>
-          <Link className="hero_link" to="/businesses">
-            {'View All Resources'}
-          </Link>
-        </div>
-      </section>
-      <section className="browseBy">
-        <div className="browseBy_content">
-          <h2 className="browseBy_title">{'Browse By Service'}</h2>
-          <ServicesBox
-            services={services}
-            handleClickOnServiceTag={handleClickOnServiceTag}
-          />
+          <div className="grid container-center--middle mt-20">
+            <Link className="link col-xs-12 col-md-6 col-lg-4 m-bot-16" to="/businesses">
+              Bussines Planning/Managment
+            </Link>
+            <Link className="link col-xs-12 col-md-6 col-lg-3 m-bot-16" to="/businesses">
+              Capital Legal Services
+            </Link>
+            <Link className="link col-xs-12 col-md-6 col-lg-2 m-bot-16" to="/businesses">
+              Marketing/Sales
+            </Link>
+            <Link className="link col-xs-12 col-md-6 col-lg-3 m-bot-16" to="/businesses">
+              Physical Space
+            </Link>
+          </div>
         </div>
       </section>
     </div>

@@ -1,7 +1,4 @@
-.businessesContainer {
-  border-top: 1px solid #3F51B5;
-}
- .businessesContainerReduced .businessList_top_content {
+.businessesContainerReduced .businessList_top_content {
   max-width: 80%;
 }
 

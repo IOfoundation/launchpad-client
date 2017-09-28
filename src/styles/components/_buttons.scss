@@ -1,0 +1,51 @@
+.btn {
+  padding: 24px;
+  outline: none;
+  &:focus {
+    outline: none;
+  }
+  &-outline{
+    background-color: transparent;
+    border: 1px solid $primary-color;
+  }
+
+  &-search {
+    width: 100%;
+    .btn-outline{
+      background-color: transparent;
+      border: 1px solid $primary-color;
+    }
+    &-icon {
+      position: absolute;
+    }
+    &-text {
+      width: 70%;
+      display: inline-block;
+      float: left;
+    }
+    span {
+      display: inline-block;
+      width: 100%;
+      text-align: left;
+    }
+  }
+
+  &-link {
+    border: 0px;
+    background-color: transparent;
+    float:right;
+    font-size: 14px;
+    width: 100%;
+    text-align: right;
+    &:focus {
+      outline: none;
+    }
+    &-primary {
+      color: $primary-color;
+    }
+  }
+}
+.underline {
+  text-decoration: underline;
+  font-size: 12px;
+}

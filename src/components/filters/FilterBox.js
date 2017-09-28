@@ -6,43 +6,41 @@ import FilterByOptions from './FilterByOptions';
 class FilterBox extends React.Component {
   render() {
     return (
-      <div className="row bottom-xs between-xs">
-        <FilterByText
-          handleTextSearchBusinesses={this.props.handleTextSearchBusinesses}
-        />
-        <FilterByOptions
-          filterName="Assistance Needed"
-          filterType={''}
-          filterOptions={[]}
-          handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
-        />
-        <FilterByOptions
-          filterMultiple={true}
-          filterName={"Industry"}
-          filterType={'industries'}
-          filterOptions={this.props.filterOptions.industries}
-          handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
-        />
-        <FilterByOptions
-          filterMultiple={true}
-          filterName="Business Stage"
-          filterType={'stages'}
-          filterOptions={this.props.filterOptions.stages}
-          handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
-        />
-        <FilterByOptions
-          filterName="Business Type"
-          filterType={'business_types'}
-          filterOptions={this.props.filterOptions.businessTypes}
-          handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
-        />
-        <FilterByOptions
-          filterName="Communities"
-          filterType={'communities'}
-          filterOptions={this.props.filterOptions.communities}
-          handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
-        />
-
+      <div className="container-invert">
+        <div className="grid">
+          <FilterByText
+            filterName=""
+            handleTextSearchBusinesses={this.props.handleTextSearchBusinesses}
+          />
+        </div>
+        <div className="grid container--middle bottom-xs between-xs">
+          <FilterByOptions
+            filterName="Business Services"
+            filterType={'industries'}
+            filterOptions={this.props.filterOptions.industries}
+            handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
+          />
+          <FilterByOptions
+            filterName="Industry"
+            filterType={'industries'}
+            filterOptions={this.props.filterOptions.industries}
+            handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
+          />
+          <FilterByOptions
+            filterMultiple={true}
+            filterName={'Busines Stage'}
+            filterType={'stages'}
+            filterOptions={this.props.filterOptions.stages}
+            handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
+          />
+          <FilterByOptions
+            filterMultiple={true}
+            filterName="Underserved Com..."
+            filterType={'stages'}
+            filterOptions={this.props.filterOptions.stages}
+            handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
+          />
+        </div>
       </div>
     );
   }

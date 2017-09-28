@@ -9,6 +9,8 @@ import configureStore from './store/configureStore';
 import initialState from './store/initialState';
 import '../node_modules/flexboxgrid/css/flexboxgrid.min.css';
 import './styles/styles.css';
+import './fonts/fonts.min.css';
+
 // Tell webpack to load favicon.ico
 require('./favicon.ico');
 import {syncHistoryWithStore} from 'react-router-redux';

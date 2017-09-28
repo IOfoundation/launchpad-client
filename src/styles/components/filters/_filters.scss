@@ -1,5 +1,6 @@
 .navTwo {
   padding: 20px 0;
+  padding-bottom: 0px;
 }
 .navTwo_logo {
   max-width: 20%;
@@ -33,7 +34,7 @@
   padding-right: 26px;
 }
 .filterText_label {
-  font-size: 14px;
+  font-size: 16px;
   color: rgba(12,0,51, .5);
   position: absolute;
   bottom: 5px;
@@ -41,8 +42,10 @@
   transition: .3s ease all;
 }
 .filterText_label--content {
-  font-size: 12px;
-  color: rgba(12,0,51, .5);
+  font-family: 'proxima_nova_ltthin', Georgia, sans-serif;
+  font-size: 20px;
+  opacity: 0.75;
+  color: #fff;
   position: absolute;
   bottom: 24px;
   transition: .3s ease all;
@@ -72,13 +75,16 @@
   background: white;
   box-shadow: 0 0 3px 0 rgba(0,0,0,0.25), 0 4px 8px 0 rgba(12,0,51,0.1);
   border-radius: 2px;
-  width: 90%;
+  width: 140%;
   position: absolute;
-  top: 0;
+  top: 40px;
   z-index: 10;
 }
 .filterSelect_dropdown_title {
-  padding: 8px;
+  padding: 16px;
+  color: $primary-color;
+  font-family: $font-family-sans-serif !important;
+  font-size: 16px !important;
 }
 .filterSelect_option {
   background: none;
@@ -89,6 +95,9 @@
   padding: 6px 6px 6px 12px;
   text-align: left;
   z-index: 10;
+}
+.filterSelect_dropdown_icon {
+  float: right;
 }
 .filterSelect_option:hover {
   cursor: pointer;
@@ -106,7 +115,7 @@
   margin-top: 2px;
 }
 .filterSelect_clear {
-  border-top: .5px solid #aaa;
+  border: 0px;
   font-size: 12px;
   padding: 6px 6px 8px 12px;
   opacity: .5;

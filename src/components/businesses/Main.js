@@ -12,7 +12,7 @@ class Main extends Component {
     this.reduceMap = this.reduceMap.bind(this);
     this.expandMap = this.expandMap.bind(this);
     this.state = {
-      expanded: true,
+      expanded: false,
     };
   }
 
@@ -23,6 +23,7 @@ class Main extends Component {
   expandMap() {
     this.setState({expanded: true});
   }
+
   _renderResultsInfo() {
     return <ResultInfo businessesMetadata={this.props.businessesMetadata} />;
   }
@@ -45,7 +46,7 @@ class Main extends Component {
         <BusinessesList
           businesses={businesses}
           handleClickOnBusiness={handleClickOnBusiness}
-          expanded={this.state.expanded}
+          expanded={this.state.cardExpanded}
         />
         <Pagination
           businessesMetadata={businessesMetadata}
@@ -55,7 +56,6 @@ class Main extends Component {
     );
   }
 }
-
 Main.propTypes = {
   businesses: PropTypes.array.isRequired,
   businessesMetadata: PropTypes.object.isRequired,

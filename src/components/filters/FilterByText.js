@@ -1,6 +1,7 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 import {MdSearch} from 'react-icons/lib/md';
+import {MdClear} from 'react-icons/lib/md';
 
 class FilterByText extends React.Component {
   constructor(props) {
@@ -19,28 +20,57 @@ class FilterByText extends React.Component {
   _inputClicked() {
     this.setState({labelTop: true});
   }
+  _closeSearch() {
+    this.setState({labelTop: false});
+    this.setState({value: ''});
+  }
   render() {
     return (
-      <div className="col-md-2 col-xs-10 text-xs-margin filterTextContainer noPadding">
-        <form className="filterTextForm">
-          <label
+      <div className="col-md-12 col-xs-12 text-xs-margin m-bot-16 filterTextContainer noPadding">
+        <form className="grid filterTextForm">
+          <h3
             className={
-              this.state.value
-                ? 'filterText_label--content'
-                : 'filterText_label'
+              this.state.labelTop ? (
+                'col-lg-8 hide-filter'
+              ) : (
+                'show-filter col-lg-8'
+              )
             }
           >
-            {'Search for a Resource'}
-          </label>
+            Filter results with the selections below
+          </h3>
+
           <input
             type="text"
             value={this.state.value}
             onChange={this.handleChange}
             onClick={() => this._inputClicked()}
-            placeholder=""
-            className="filterInput filterText"
+            placeholder={
+              this.state.labelTop ? (
+                'Search by Resource Name or Ipsum'
+              ) : (
+                'Or search by name'
+              )
+            }
+            className={
+              this.state.labelTop ? (
+                'full-width-search'
+              ) : (
+                'text-search small-width-search col-md-4'
+              )
+            }
           />
-          <MdSearch className="filterText_icon" size={17} color={'#3F51B5'} />
+          {this.state.labelTop && (
+            <MdClear
+              className="text-search-icon"
+              size="32"
+              color="#2AD587"
+              onClick={() => this._closeSearch()}
+            />
+          )}
+          {!this.state.labelTop && (
+            <MdSearch className="text-search-icon" size="32" color="#2AD587" />
+          )}
         </form>
       </div>
     );
