@@ -12,10 +12,10 @@ const businessDataObject = business => {
   };
 };
 
-const businessesDataObject = businesses => {
+const locationsDataObject = locations => {
   return {
-    type: types.FETCH_BUSINESSES,
-    businesses,
+    type: types.FETCH_LOCATIONS,
+    locations,
   };
 };
 
@@ -40,13 +40,13 @@ const filtersObject = (
   filterMultiple = false
 ) => {
   const newFilter = {};
-  if (filterMultiple && currentFilters[`filters[${filterType}]`]) {
-    filterValue = currentFilters[`filters[${filterType}]`] + `,${filterValue}`;
+  if (filterMultiple && currentFilters[`category[]`]) {
+    filterValue = currentFilters[`category[]`] + `&category[]=${filterValue}`;
   }
-  newFilter[`filters[${filterType}]`] = filterValue;
+  newFilter[`category[]`] = filterValue;
   let filters = Object.assign({}, currentFilters, newFilter);
   if (!filterValue && !filterMultiple) {
-    filters = _.omit(filters, `filters[${filterType}]`);
+    filters = _.omit(filters, `category[]`);
   }
   return filters;
 };
@@ -68,50 +68,63 @@ export function fetchBusiness(businessId) {
   };
 }
 
-export function fetchBusinesses() {
+export function fetchLocations(currentParams) {
   return async (dispatch: Function) => {
-    const httpResponse = await httpRequest.get('/api/organizations');
-    const businesses = httpResponse.data;
-    dispatch(businessesDataObject(businesses));
+    const httpResponse = await httpRequest.get('/api/locations', {
+      params: currentParams,
+    });
+    const locations = httpResponse.data;
+    const metadata = {
+      pagination: {
+        current_page: currentParams.page,
+      }
+    };
+    dispatch(locationsDataObject(locations));
+    dispatch(businessesMetaDataObject(metadata));
   };
 }
 
 export function filterBusinessesByName(filterValue, currentParams) {
   return async (dispatch: Function) => {
     const filters = filtersObject('name_cont', filterValue, currentParams);
-    const httpResponse = await httpRequest.get('/api/organizations', {
+    const httpResponse = await httpRequest.get('/api/search', {
       params: filters,
     });
-    const businesses = httpResponse.data.organizations;
-    const {metadata} = httpResponse.data;
-    dispatch(businessesDataObject(businesses));
+    const locations = httpResponse.data;
+    const metadata = {
+      pagination: {
+        current_page: currentParams.page,
+      }
+    };
+    dispatch(locationsDataObject(locations));
     dispatch(businessesMetaDataObject(metadata));
     pushBrowserHistory(filters);
   };
 }
 
-export function filterBusinesses(
+export function filterLocations(
   filterType,
   filterValue,
   currentParams,
   filterMultiple = false
 ) {
-  const filterOptionName = filterMultiple
-    ? `${filterType}_id_in`
-    : `${filterType}_id_eq`;
   return async (dispatch: Function) => {
     const filters = filtersObject(
-      filterOptionName,
+      filterType,
       filterValue,
       currentParams,
       filterMultiple
     );
-    const httpResponse = await httpRequest.get('/api/organizations', {
+    const httpResponse = await httpRequest.get('/api/search', {
       params: filters,
     });
-    const businesses = httpResponse.data.organizations;
-    const {metadata} = httpResponse.data;
-    dispatch(businessesDataObject(businesses));
+    const locations = httpResponse.data;
+    const metadata = {
+      pagination: {
+        current_page: currentParams.page,
+      }
+    };
+    dispatch(locationsDataObject(locations));
     dispatch(businessesMetaDataObject(metadata));
     pushBrowserHistory(filters);
   };
@@ -126,9 +139,9 @@ export function changePage(page, currentParams) {
     const httpResponse = await httpRequest.get('/api/organizations', {
       params,
     });
-    const businesses = httpResponse.data.organizations;
+    const locations = httpResponse.data;
     const {metadata} = httpResponse.data;
-    dispatch(businessesDataObject(businesses));
+    dispatch(locationsDataObject(locations));
     dispatch(businessesMetaDataObject(metadata));
     pushBrowserHistory(params);
   };
@@ -150,24 +163,26 @@ export function fetchFilterOptions() {
     const businessTypeCategory = categories.find(
       category => category.name === CategoriesConstants.BUSINESS_TYPE
     );
-    const businessTypes = businessTypeCategory
-      ? businessTypeCategory.children
-      : [];
+    const businessTypeCategoryId = businessTypeCategory.taxonomy_id;
+    const businessTypes = businessTypeCategory ? getChildren(businessTypeCategoryId,categories) : [];
 
     const stageCategory = categories.find(
       category => category.name === CategoriesConstants.STAGE
     );
-    const stages = stageCategory ? stageCategory.children : [];
+    const stageCategoryId = stageCategory.taxonomy_id;
+    const stages = stageCategory ? getChildren(stageCategoryId, categories) : [];
 
     const communityCategory = categories.find(
       category => category.name === CategoriesConstants.COMMUNITY
     );
-    const communities = communityCategory ? communityCategory.children : [];
+    const communityCategoryId = communityCategory.taxonomy_id;
+    const communities = communityCategory ? getChildren(communityCategoryId, categories) : [];
 
     const industryCategory = categories.find(
       category => category.name === CategoriesConstants.INDUSTRY
     );
-    const industries = industryCategory ? industryCategory.children : [];
+    const industryCategoryId = industryCategory.taxonomy_id;
+    const industries = industryCategory ? getChildren(industryCategoryId, categories) : [];
 
     dispatch(
       filtersDataObject({
@@ -179,4 +194,12 @@ export function fetchFilterOptions() {
       })
     );
   };
+}
+
+function getChildren(id, categories) {
+  var regex = new RegExp("^" + id + "-");
+  const children = categories.filter(
+    category => regex.test(category.taxonomy_id)
+  );
+  return children;
 }

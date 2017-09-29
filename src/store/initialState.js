@@ -9,7 +9,8 @@ const initialState = {
       description: 'description',
       location: {},
     },
-    businesses: [],
+    locations: [],
+    organizations: [],
     metadata: {
       pagination: {},
     },
