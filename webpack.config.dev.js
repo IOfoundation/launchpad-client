@@ -111,15 +111,9 @@ export default {
         test: /(\.scss)$/,
         loader: ExtractTextPlugin.extract({
           loader: ['css-loader', 'sass-loader'],
-<<<<<<< HEAD
           fallbackLoader: 'style-loader',
         }),
       },
-=======
-          fallbackLoader: 'style-loader'
-        })
-      }
->>>>>>> CS-152 WIP
     ],
   },
 };

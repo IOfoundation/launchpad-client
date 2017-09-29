@@ -6,14 +6,14 @@ import Business from './Business';
 //const BusinessesList = ({businesses, handleClickOnBusiness, expanded}) => {
 class BusinessesList extends Component {
   render() {
-    const {handleClickOnBusiness, businesses} = this.props;
+    const {handleClickOnBusiness, organizations} = this.props;
     return (
       <div>
-        {businesses.map(business => {
+        {organizations.map(organization => {
           return (
             <Business
-              business={business}
-              key={business.id}
+              business={organization}
+              key={organization.id}
               handleClickOnBusiness={handleClickOnBusiness}
             />
           );
@@ -24,7 +24,8 @@ class BusinessesList extends Component {
 }
 
 BusinessesList.propTypes = {
-  businesses: PropTypes.array.isRequired,
+  locations: PropTypes.array.isRequired,
+  organizations: PropTypes.array.isRequired,
   expanded: PropTypes.bool,
   handleClickOnBusiness: PropTypes.func.isRequired,
 };

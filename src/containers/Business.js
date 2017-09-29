@@ -25,7 +25,8 @@ export class Business extends Component {
     event.preventDefault();
     const businessesFilters = this.props.location.query;
     const filterType = event.target.name;
-    const filterValue = event.target.value;
+    const filterValue = event.target.id;
+
     this.props.actions.filterBusinesses(
       filterType,
       filterValue,

@@ -5,6 +5,7 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import WebpackMd5Hash from 'webpack-md5-hash';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import autoprefixer from 'autoprefixer';
+import DotenvPlugin from 'webpack-dotenv-plugin';
 import path from 'path';
 
 const GLOBALS = {
@@ -23,12 +24,19 @@ export default {
   entry: path.resolve(__dirname, 'src/index'),
   // necessary per https://webpack.github.io/docs/testing.html#compile-and-test
   target: 'web',
+  node: {
+    fs: 'empty'
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
     filename: '[name].[chunkhash].js',
   },
   plugins: [
+    new DotenvPlugin({
+      sample: './.env.default',
+      path: './.env'
+    }),
     // Hash the files using MD5 so that their names change when the content changes.
     new WebpackMd5Hash(),
 
