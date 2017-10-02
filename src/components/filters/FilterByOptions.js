@@ -1,52 +1,61 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
-import CheckBox from '../shared/CheckBox';
 import {FaSortDesc} from 'react-icons/lib/fa';
 import onClickOutside from 'react-onclickoutside';
 import {MdKeyboardArrowRight} from 'react-icons/lib/md';
+import {MdClose} from 'react-icons/lib/md';
 
 class FilterByOptions extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       showOptions: false,
+      showSubOptions: false
     };
   }
   _toggleOptions() {
     this.setState({showOptions: !this.state.showOptions});
   }
+  _toggleSubOption() {
+    this.setState({showSubOptions: true});
+  }
   handleClickOutside() {
     this.setState({showOptions: false});
+    this.setState({showSubOptions: false});
+  }
+  _renderSubOptions() {
+    return (
+      <div className="dropdown-sub-container">
+        <button className="dropdown-options"><span className="">{'option'}</span></button>
+      </div>
+    );
   }
   _renderOptions() {
-    let checkbox = null;
-    checkbox = <CheckBox size={16} />;
-
     return (
-      <div className="filterSelect_dropdown">
-        <p className="filterSelect_dropdown_title">
-          {this.props.filterName}
-          <MdKeyboardArrowRight
-            className="filterSelect_dropdown_icon"
-            size="20"
-          />
-        </p>
+      <div
+        className={
+          this.state.showSubOptions
+          ? 'dropdown-container dropdown-container-expand'
+          : 'dropdown-container dropdown-container-collapse'
+        }
+      >
+      <div className={
+          this.state.showSubOptions
+          ? 'dropdown-btn-half'
+          : 'dropdown-btn-full'
+        }>
         {this.props.filterOptions.map(filterOption => (
-          <button
-            className="filterSelect_option"
-            key={filterOption.id}
-            onClick={() =>
-              this.props.handleOnChangeFilterOptions(
-                filterOption.name,
-                this.props.filterMultiple
-              )}
-          >
-            {checkbox}
-            <span className="filterSelect_text">{filterOption.name}</span>
-            <MdKeyboardArrowRight className="btn-search-icon" size="32" />
-          </button>
+            <button
+              className="dropdown-options"
+              key={filterOption.id}
+              onClick={() => this._toggleSubOption()}
+            >
+              <span className="">{filterOption.name}</span>
+              <MdKeyboardArrowRight className="dropdown-options-icon" size="20" />
+            </button>
         ))}
-        <div className="filterSelect_clear">{'Clear'}</div>
+      </div>
+        {this.state.showSubOptions ? this._renderSubOptions() : null}
       </div>
     );
   }
@@ -54,7 +63,7 @@ class FilterByOptions extends React.Component {
     return (
       <div className="col-md-3 col-xs-10 noPadding filterSelectContainer text-xs-margin">
         <button
-          className="filterInput filterSelect"
+          className="dropdown-btn filterSelect"
           onClick={() => this._toggleOptions()}
         >
           {this.props.filterName}

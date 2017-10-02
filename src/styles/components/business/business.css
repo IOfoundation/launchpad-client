@@ -80,3 +80,6 @@
   margin-top: 16px;
   text-align: center;
 }
+.business-card-icon {
+  cursor: pointer;
+}

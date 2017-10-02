@@ -8,11 +8,17 @@ class FilterByText extends React.Component {
     super(props);
     this.state = {
       labelTop: false,
+      showFilterLabel: false,
       value: '',
     };
     this.handleChange = this.handleChange.bind(this);
   }
-
+  handleKeyPress(target) {
+    if (target.charCode === 13 ) {
+      this.setState({showFilterLabel: true});
+      this.setState({labelTop: false});
+    }
+  }
   handleChange(event) {
     this.setState({value: event.target.value});
     this.props.handleTextSearchBusinesses(event.target.value);
@@ -27,13 +33,17 @@ class FilterByText extends React.Component {
   render() {
     return (
       <div className="col-md-12 col-xs-12 text-xs-margin m-bot-16 filterTextContainer noPadding">
-        <form className="grid filterTextForm">
+        <div className="grid search-text-form" >
+          <div className={this.state.showFilterLabel ? 'filter-label-container-show' : 'filter-label-container-hide'}>
+            <a className="search-filter-label">{this.state.value} <MdClear className="search-filter-icon"/></a>
+            <a className="search-filter-clear">Clear All</a>
+          </div>
           <h3
             className={
               this.state.labelTop ? (
                 'col-lg-8 hide-filter'
               ) : (
-                'show-filter col-lg-8'
+                'show-filter col-lg-8 p-left-0'
               )
             }
           >
@@ -45,6 +55,7 @@ class FilterByText extends React.Component {
             value={this.state.value}
             onChange={this.handleChange}
             onClick={() => this._inputClicked()}
+            onKeyPress={target => this.handleKeyPress(target)}
             placeholder={
               this.state.labelTop ? (
                 'Search by Resource Name or Ipsum'
@@ -71,7 +82,7 @@ class FilterByText extends React.Component {
           {!this.state.labelTop && (
             <MdSearch className="text-search-icon" size="32" color="#2AD587" />
           )}
-        </form>
+        </div>
       </div>
     );
   }

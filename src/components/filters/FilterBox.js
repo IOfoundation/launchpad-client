@@ -13,7 +13,7 @@ class FilterBox extends React.Component {
             handleTextSearchBusinesses={this.props.handleTextSearchBusinesses}
           />
         </div>
-        <div className="grid container--middle bottom-xs between-xs">
+        <div className="grid container--middle bottom-xs between-xs p-left-0">
           <FilterByOptions
             filterName={'Business Services'}
             filterOptions={this.props.filterOptions.businessServices}
