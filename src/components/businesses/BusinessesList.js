@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
+import {MdClear} from 'react-icons/lib/md';
 
 import Business from './Business';
 
@@ -18,6 +19,11 @@ class BusinessesList extends Component {
             />
           );
         })}
+        <button className="btn-link btn-link-primary">Clear Search Result
+          <MdClear
+            size={30}
+            color={'#2AD587'}/>
+        </button>
       </div>
     );
   }

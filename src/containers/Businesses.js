@@ -43,7 +43,7 @@ export class Businesses extends Component {
     return (
       <MainLayout>
         <section>
-          <div className="navTwo search-nav-invert">
+          <div className="search-nav search-nav-invert">
             <div className="row contentContainer">
               <Link to="/">
                 <img

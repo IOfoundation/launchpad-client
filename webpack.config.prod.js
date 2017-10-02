@@ -35,7 +35,7 @@ export default {
   plugins: [
     new DotenvPlugin({
       sample: './.env.default',
-      path: './.env.production'
+      path: './.env.production',
     }),
     // Hash the files using MD5 so that their names change when the content changes.
     new WebpackMd5Hash(),
@@ -91,21 +91,30 @@ export default {
       {
         test: /\.eot(\?v=\d+.\d+.\d+)?$/,
         loader: 'url-loader?name=[name].[ext]',
+        options: {
+          limit: 100,
+        },
       },
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader:
-          'url-loader?limit=10000&mimetype=application/font-woff&name=[name].[ext]',
+        loader: 'url-loader?name=[name].[ext]',
+        options: {
+          limit: 100,
+        },
       },
       {
         test: /\.[ot]tf(\?v=\d+.\d+.\d+)?$/,
-        loader:
-          'url-loader?limit=10000&mimetype=application/octet-stream&name=[name].[ext]',
+        loader: 'url-loader?name=[name].[ext]',
+        options: {
+          limit: 100,
+        },
       },
       {
         test: /\.svg(\?v=\d+.\d+.\d+)?$/,
-        loader:
-          'url-loader?limit=10000&mimetype=image/svg+xml&name=[name].[ext]',
+        loader: 'url-loader?name=[name].[ext]',
+        options: {
+          limit: 100,
+        },
       },
       {
         test: /\.(png|jpg)$/,
@@ -116,7 +125,7 @@ export default {
         loader: 'file-loader',
         options: {
           name: './static-data/images/[name].[ext]',
-        }
+        },
       },
       {test: /\.ico$/, loader: 'file-loader?name=[name].[ext]'},
       {
