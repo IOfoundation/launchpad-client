@@ -18,9 +18,6 @@
   position: relative;
   margin-bottom: 5px;
 }
-.businessList_top .filterSelect_text {
-  margin-left: 0;
-}
 
 @media (max-width: 48em) {
   .businessList_top {

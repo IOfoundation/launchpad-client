@@ -20,19 +20,19 @@
 .container {
   @include container ($white-color, $primary-color, false);
   h3 {
-    font-weight: $font-family-sans-serif;
+    font-weight: regular;
   }
   p {
-    font-family: $font-family-thin;
+    font-family: roboto;
   }
 }
 .container-invert {
   @include container ($primary-color, $white-color, true);
   h3 {
-    font-weight: $font-family-sans-serif;
+    font-weight: bold;
   }
   p {
-    font-family: $font-family-thin;
+    font-weight: lighter;
   }
 }
 
@@ -43,7 +43,7 @@
     width: 60px;
   }
   p {
-    font-family: $font-family-thin;
+    font-weight: 400;
   }
 }
 
@@ -65,7 +65,7 @@ $width: (
         }
         a {
           font-size: 16px;
-          font-family: $font-family-thin;
+          font-weight: 400;
         }
     };
     #{$css-class}container--#{$name} {
@@ -77,7 +77,7 @@ $width: (
         }
         a {
           font-size: 16px;
-          font-family: $font-family-thin;
+          font-weight: 400;
         }
     };
     //Silent class
@@ -90,7 +90,7 @@ $width: (
           }
           a {
             font-size: 16px;
-            font-family: $font-family-thin;
+            font-weight: 400;
           }
       };
       #{$silent-class}container--#{$name} {
@@ -102,7 +102,7 @@ $width: (
           }
           a {
             font-size: 16px;
-            font-family: $font-family-thin;
+            font-weight: 400;
           }
       };
    };
