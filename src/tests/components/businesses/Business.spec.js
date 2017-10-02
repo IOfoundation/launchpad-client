@@ -64,26 +64,4 @@ describe('<Business />', () => {
     );
     expect(wrapper.contains('Businesses1')).toBe(true);
   });
-
-  it('Renders a service span for every service of a Business', () => {
-    const businessItem = mockBusiness();
-    const wrapper = shallow(
-      <Business
-        business={businessItem}
-        handleClickOnBusiness={handleClickOnBusiness}
-      />
-    );
-    expect(wrapper.find('.service').length).toBe(2);
-  });
-
-  it('Renders a community span for every community of a Business', () => {
-    const businessItem = mockBusiness();
-    const wrapper = shallow(
-      <Business
-        business={businessItem}
-        handleClickOnBusiness={handleClickOnBusiness}
-      />
-    );
-    expect(wrapper.find('.community').length).toBe(2);
-  });
 });

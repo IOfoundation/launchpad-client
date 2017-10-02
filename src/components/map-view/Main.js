@@ -16,7 +16,7 @@ class Main extends React.Component {
     this.setState({showModal: !this.state.showModal});
   }
   getCoordinates(business) {
-    return business.locations[0].coordinates;
+    return business.coordinates;
   }
   _renderModal(business) {
     return (
@@ -54,17 +54,17 @@ class Main extends React.Component {
     );
   }
   render() {
-    const firstBusiness = this.props.businesses
-      ? this.props.businesses[0]
+    const firstBusiness = this.props.locations
+      ? this.props.locations[0]
       : null;
     if (firstBusiness) {
       const [centerLng, centerLat] = this.getCoordinates(firstBusiness);
       return (
         <GoogleMapReact center={{lat: centerLat, lng: centerLng}} zoom={15}>
-          {this.props.businesses.map(business => {
-            const [lng, lat] = this.getCoordinates(business);
+          {this.props.locations.map(location => {
+            const [lng, lat] = this.getCoordinates(location);
             return (
-              <MapMarker key={business.id} lat={lat} lng={lng}/>
+              <MapMarker key={location.id} lat={lat} lng={lng}/>
            );
           })}
         </GoogleMapReact>
@@ -75,7 +75,7 @@ class Main extends React.Component {
 }
 
 Main.propTypes = {
-  businesses: PropTypes.array.isRequired,
+  locations: PropTypes.array.isRequired,
 };
 
 export default Main;

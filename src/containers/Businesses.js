@@ -11,8 +11,9 @@ import * as actions from '../actions/business';
 
 export class Businesses extends Component {
   componentWillMount(_nextProps) {
-    const businessesFilters = this.props.location.query;
-    this.props.actions.fetchBusinesses();
+    const locationsFilters = this.props.location.query;
+    this.props.actions.fetchLocations(locationsFilters);
+    this.props.actions.fetchFilterOptions();
   }
 
   handleTextSearchBusinesses(businessName) {
@@ -21,11 +22,11 @@ export class Businesses extends Component {
   }
 
   handleOnChangeFilterOptions(filterType, filterValue, filterMultiple = false) {
-    const businessesFilters = this.props.location.query;
-    this.props.actions.filterBusinesses(
+    const locationsFilters = this.props.location.query;
+    this.props.actions.filterLocations(
       filterType,
       filterValue,
-      businessesFilters,
+      locationsFilters,
       filterMultiple
     );
   }
@@ -71,7 +72,8 @@ export class Businesses extends Component {
           </div>
 
           <BusinessesView
-            businesses={this.props.businesses}
+            locations={this.props.locations}
+            organizations={this.props.organizations}
             businessesMetadata={this.props.metadata}
             handleChangePage={this.handleChangePage.bind(this)}
             handleClickOnBusiness={this.handleClickOnBusiness.bind(this)}
@@ -84,7 +86,8 @@ export class Businesses extends Component {
 
 Businesses.propTypes = {
   actions: PropTypes.object,
-  businesses: PropTypes.array.isRequired,
+  locations: PropTypes.array.isRequired,
+  organizations: PropTypes.array.isRequired,
   filters: PropTypes.object.isRequired,
   location: PropTypes.object,
   metadata: PropTypes.object.isRequired,
@@ -94,7 +97,8 @@ Businesses.propTypes = {
 const mapStateToProps = _state => {
   const {businesses} = _state;
   return {
-    businesses: businesses.businesses,
+    locations: businesses.locations,
+    organizations: businesses.organizations,
     filters: businesses.filters,
     metadata: businesses.metadata,
   };

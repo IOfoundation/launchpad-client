@@ -43,7 +43,7 @@ class Main extends Component {
               color={'#3F51B5'}
               className="businessTopBar_btn_icon"
             />
-            <span>{'Back To Resources'}</span>
+          <span>{'Back To Resources'}</span>
           </div>
           <div className="businessTopBar_btn middle-xs">
             <span className="businessTopBar_share">{'SHARE'}</span>

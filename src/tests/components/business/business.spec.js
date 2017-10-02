@@ -68,10 +68,4 @@ describe('<BusinessView />', () => {
     const wrapper = shallow(<BusinessView business={businessItem} />);
     expect(wrapper.contains('Lorem Ipsum ...')).toBe(true);
   });
-
-  it('Renders a list of services offered', () => {
-    const businessItem = mockBusiness();
-    const wrapper = shallow(<BusinessView business={businessItem} />);
-    expect(wrapper.find('.services').length).toEqual(2);
-  });
 });

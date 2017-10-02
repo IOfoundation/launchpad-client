@@ -30,13 +30,15 @@ class Main extends Component {
   render() {
     const {
       businessesMetadata,
-      businesses,
+      locations,
+      organizations,
       handleClickOnBusiness,
       handleChangePage,
     } = this.props;
     return (
       <ContentMap
-        businesses={businesses}
+        locations={locations}
+        organizations={organizations}
         businessesMetadata={businessesMetadata}
         expanded={this.state.expanded}
         expandMap={this.expandMap}
@@ -44,7 +46,8 @@ class Main extends Component {
         topBar={this._renderResultsInfo()}
       >
         <BusinessesList
-          businesses={businesses}
+          locations={locations}
+          organizations={organizations}
           handleClickOnBusiness={handleClickOnBusiness}
           expanded={this.state.cardExpanded}
         />
@@ -57,7 +60,8 @@ class Main extends Component {
   }
 }
 Main.propTypes = {
-  businesses: PropTypes.array.isRequired,
+  locations: PropTypes.array.isRequired,
+  organizations: PropTypes.array.isRequired,
   businessesMetadata: PropTypes.object.isRequired,
   handleChangePage: PropTypes.func.isRequired,
   handleClickOnBusiness: PropTypes.func.isRequired,

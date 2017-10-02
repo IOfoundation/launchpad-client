@@ -5,7 +5,7 @@ import BusinessesList from '../../../components/businesses/BusinessesList';
 
 const handleClickOnBusiness = jest.fn();
 
-function mockBusinesses() {
+function mockOrganizations() {
   return [
     {
       id: 1,
@@ -19,11 +19,11 @@ function mockBusinesses() {
 }
 
 describe('<BusinessesList />', () => {
-  it('Renders a Business component for every Bussiness in the array', () => {
-    const Businesses = mockBusinesses();
+  it('Renders a Business component for every Business in the array', () => {
+    const organizations = mockOrganizations();
     const wrapper = shallow(
       <BusinessesList
-        businesses={Businesses}
+        organizations={organizations}
         handleClickOnBusiness={handleClickOnBusiness}
       />
     );
