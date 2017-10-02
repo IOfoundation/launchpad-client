@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
-import {MdPlace} from 'react-icons/lib/md';
 import {MdKeyboardArrowRight} from 'react-icons/lib/md';
 
 class ResultInfo extends Component {
@@ -15,7 +14,7 @@ class ResultInfo extends Component {
   }
 
   render() {
-    const {businessesMetadata: {total_organizations}} = this.props;
+    const {businessesMetadata: {totalOrganizations}} = this.props;
     return (
       <div className="container-center--medium grid">
         <p className="m-bot-16 col-xs-12 col-md-12 col-lg-12">
@@ -48,7 +47,7 @@ class ResultInfo extends Component {
             <MdKeyboardArrowRight className="btn-search-icon" size="32" />
           </button>
         </div>
-        <h3 className="m-left-24 m-top-24 col-xs-12 col-md-12 col-lg-12">{`${total_organizations} Resources Available`}</h3>
+        <h3 className="m-left-24 m-top-24 col-xs-12 col-md-12 col-lg-12">{`${totalOrganizations} Resources Available`}</h3>
         <hr className="m-left-24 m-bot-24 col-xs-12 col-md-12 col-lg-12" />
       </div>
     );

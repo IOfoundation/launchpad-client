@@ -37,7 +37,7 @@ class FilterByText extends React.Component {
               )
             }
           >
-            Filter results with the selections below
+            {'Filter results with the selections below'}
           </h3>
 
           <input

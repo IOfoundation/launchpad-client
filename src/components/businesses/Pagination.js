@@ -1,6 +1,5 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
-import MetaInfoBusinesses from './MetaInfoBusinesses';
 import {MdChevronRight, MdChevronLeft} from 'react-icons/lib/md';
 
 class Pagination extends React.Component {
@@ -32,7 +31,7 @@ class Pagination extends React.Component {
       <div className="text-center pagination between-xs middle-xs m-bot-100">
         <div>
           {prevPageArrow}
-          <span className="pagination-index">1</span>
+          <span className="pagination-index">{'1'}</span>
           {nextPageArrow}
         </div>
       </div>

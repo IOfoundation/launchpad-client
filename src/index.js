@@ -14,6 +14,11 @@ import './fonts/fonts.min.css';
 // Tell webpack to load favicon.ico
 require('./favicon.ico');
 import {syncHistoryWithStore} from 'react-router-redux';
+//tell webpack to load images
+require('static-data/images/cs-logo.png');
+require('static-data/images/expand-icon.png');
+require('static-data/images/ioLogoBlack.png');
+require('static-data/images/hero.png');
 
 const store = configureStore(initialState);
 

@@ -53,13 +53,6 @@ describe('FETCH_BUSINESS', () => {
       business,
     };
   });
-
-  it('Return the state with the list of the services', () => {
-    deepFreeze(initialState);
-    expect(businessReducer(initialState, fetchBusiness).business).toEqual(
-      business
-    );
-  });
 });
 
 describe('FETCH_BUSINESSESS', () => {
@@ -85,13 +78,6 @@ describe('FETCH_BUSINESSESS', () => {
       businesses,
     };
   });
-
-  it('Return the state with the list of the services', () => {
-    deepFreeze(initialState);
-    expect(businessReducer(initialState, fetchBusinesses).businesses).toEqual(
-      businesses
-    );
-  });
 });
 
 describe('FETCH_BUSINESSES_METADATA', () => {
@@ -111,13 +97,6 @@ describe('FETCH_BUSINESSES_METADATA', () => {
       metadata,
     };
   });
-
-  it('Return the state with the list of the services', () => {
-    deepFreeze(initialState);
-    expect(businessReducer(initialState, fetchMetadata).metadata).toEqual(
-      metadata
-    );
-  });
 });
 
 describe('FETCH_FILTERS_OPTIONS', () => {
@@ -135,12 +114,5 @@ describe('FETCH_FILTERS_OPTIONS', () => {
       type: 'FETCH_FILTERS_OPTIONS',
       filters,
     };
-  });
-
-  it('Return the state with the list of the services', () => {
-    deepFreeze(initialState);
-    expect(businessReducer(initialState, fetchFilters).filters).toEqual(
-      filters
-    );
   });
 });
