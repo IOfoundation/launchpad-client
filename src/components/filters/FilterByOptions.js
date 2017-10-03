@@ -3,14 +3,13 @@ import {PropTypes} from 'prop-types';
 import {FaSortDesc} from 'react-icons/lib/fa';
 import onClickOutside from 'react-onclickoutside';
 import {MdKeyboardArrowRight} from 'react-icons/lib/md';
-import {MdClose} from 'react-icons/lib/md';
 
 class FilterByOptions extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       showOptions: false,
-      showSubOptions: false
+      showSubOptions: false,
     };
   }
   _toggleOptions() {
@@ -26,7 +25,9 @@ class FilterByOptions extends React.Component {
   _renderSubOptions() {
     return (
       <div className="dropdown-sub-container">
-        <button className="dropdown-options"><span className="">{'option'}</span></button>
+        <button className="dropdown-options">
+          <span>{'option'}</span>
+        </button>
       </div>
     );
   }
@@ -34,27 +35,36 @@ class FilterByOptions extends React.Component {
     return (
       <div
         className={
-          this.state.showSubOptions
-          ? 'dropdown-container dropdown-container-expand'
-          : 'dropdown-container dropdown-container-collapse'
+          this.state.showSubOptions ? (
+            'dropdown-container dropdown-container-expand'
+          ) : (
+            'dropdown-container dropdown-container-collapse'
+          )
         }
       >
-      <div className={
-          this.state.showSubOptions
-          ? 'dropdown-btn-half'
-          : 'dropdown-btn-full'
-        }>
-        {this.props.filterOptions.map(filterOption => (
+        <div
+          className={
+            this.state.showSubOptions ? (
+              'dropdown-btn-half'
+            ) : (
+              'dropdown-btn-full'
+            )
+          }
+        >
+          {this.props.filterOptions.map(filterOption => (
             <button
               className="dropdown-options"
               key={filterOption.id}
               onClick={() => this._toggleSubOption()}
             >
               <span className="">{filterOption.name}</span>
-              <MdKeyboardArrowRight className="dropdown-options-icon" size="20" />
+              <MdKeyboardArrowRight
+                className="dropdown-options-icon"
+                size="20"
+              />
             </button>
-        ))}
-      </div>
+          ))}
+        </div>
         {this.state.showSubOptions ? this._renderSubOptions() : null}
       </div>
     );

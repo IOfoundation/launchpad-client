@@ -19,16 +19,21 @@
     }
     .small-width-search {
       width: 25%;
-      transition: all 0.4s ease-in;
+      transition: all 0.2s ease-in;
       float: right;
     }
     .full-width-search {
       border: none;
       background: none;
       text-align: left;
+      padding-top: 4px;
+      padding-bottom: 4px;
       color: $secondary-color;
       width: 100%;
-      transition: all 0.4s ease-in;
+      transition: all 0.2s ease-in;
+      position: absolute;
+      top: -6px;
+      background-color: #000;
       &::placeholder {
         color: $white-color;
         font-weight: lighter;
@@ -37,7 +42,7 @@
       }
       &-icon {
         position: absolute;
-        right: 21px;
+        right: 5px;
         top: -9px;
       }
     }
@@ -53,7 +58,7 @@
       }
       &-icon {
         position: absolute;
-        right: 21px;
+        right: 5px;
         top: -9px;
       }
     }
@@ -143,16 +148,18 @@
     position: relative;
   }
   &-filter{
-    font-weight: bold !important;
     &-label {
       background-color: $white-color;
       color: $primary-color;
       width: 15%;
       border-radius: 16px;
-      padding: 5px 11px 5px 9px;
+      padding: 2px 11px 2px 9px;
       font-size: 14px !important;
+      font-weight: bold !important;
+      margin-right: 8px;
     }
     &-icon {
+      margin-left: 12px;
     }
     &-clear {
       color: $white-color;
@@ -163,7 +170,7 @@
 }
 .filter-label {
   &-container-show {
-    width: 100%;
+    width: 66%;
     display: initial;
   }
   &-container-hide {

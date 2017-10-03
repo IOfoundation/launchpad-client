@@ -2,6 +2,7 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 import {MdSearch} from 'react-icons/lib/md';
 import {MdClear} from 'react-icons/lib/md';
+import Chip from '../filters/Chip';
 
 class FilterByText extends React.Component {
   constructor(props) {
@@ -17,13 +18,24 @@ class FilterByText extends React.Component {
   handleKeyPress(event) {
     if (event.charCode === 13) {
       const {filters} = this.state;
-      this.setState({
-        showFilterLabel: true,
-        labelTop: false,
-        filters: [...filters, this.state.value],
-      });
-      this.props.handleTextSearchBusinesses([...filters, this.state.value]);
+      if (filters.indexOf(this.state.value) === -1) {
+        this.setState({
+          showFilterLabel: true,
+          labelTop: false,
+          filters: [...filters, this.state.value],
+          value: '',
+        });
+        this.props.handleTextSearchBusinesses([...filters, this.state.value]);
+      } else {
+        this._closeSearch();
+      }
     }
+  }
+  deleteFilter(e) {
+    const filter = e.currentTarget.getAttribute('data-value');
+    const filters = this.state.filters.filter(item => item !== filter);
+    this.setState({filters});
+    this.props.handleTextSearchBusinesses(filters);
   }
   handleChange(event) {
     this.setState({value: event.target.value});
@@ -32,39 +44,45 @@ class FilterByText extends React.Component {
     this.setState({labelTop: true});
   }
   _closeSearch() {
-    this.setState({labelTop: false});
-    this.setState({value: ''});
+    this.setState({labelTop: false, value: ''});
   }
   clearAll() {
-    this.setState({filters: []})
+    this.setState({filters: []});
     this.props.handleTextSearchBusinesses([]);
   }
   renderFilter() {
     return this.state.filters.map(filter => (
-      <a
-        className={`
-          search-filter-label
-       `}
-      >
-        {filter}
-        <MdClear className="search-filter-icon"/>
-      </a>
+      <Chip
+        key={filter}
+        text={filter}
+        handleClick={this.deleteFilter.bind(this)}
+      />
     ));
   }
   render() {
     return (
-      <div className="col-md-12 col-xs-12 text-xs-margin m-bot-16 filterTextContainer noPadding">
-        <div className="grid search-text-form" >
-          <div className={this.state.filters.length > 0 ? ('filter-label-container-show') : ('filter-label-container-hide')}>
+      <div className="col-md-12 col-xs-12 text-xs-margin filterTextContainer noPadding">
+        <div className="grid search-text-form p-bot-16">
+          <div
+            className={
+              this.state.filters.length > 0 ? (
+                'filter-label-container-show'
+              ) : (
+                'filter-label-container-hide'
+              )
+            }
+          >
             {this.renderFilter()}
-            <a className="search-filter-clear" onClick={() => this.clearAll()}>Clear All</a>
+            <a className="search-filter-clear" onClick={() => this.clearAll()}>
+              {'Clear All'}
+            </a>
           </div>
           <h3
             className={
-              this.state.labelTop ? (
-                'col-lg-8 hide-filter'
+              this.state.labelTop || this.state.filters.length > 0 ? (
+                'col-lg-9 hide-filter'
               ) : (
-                'show-filter col-lg-8 p-left-0'
+                'show-filter col-lg-9 p-left-0'
               )
             }
           >
@@ -88,7 +106,7 @@ class FilterByText extends React.Component {
               this.state.labelTop ? (
                 'full-width-search'
               ) : (
-                'text-search small-width-search col-md-4'
+                'text-search small-width-search col-md-3'
               )
             }
           />
