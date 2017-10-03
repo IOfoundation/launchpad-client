@@ -35,7 +35,7 @@ export default {
   plugins: [
     new DotenvPlugin({
       sample: './.env.default',
-      path: './.env'
+      path: './.env.production'
     }),
     // Hash the files using MD5 so that their names change when the content changes.
     new WebpackMd5Hash(),
