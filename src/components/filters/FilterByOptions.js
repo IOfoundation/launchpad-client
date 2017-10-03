@@ -37,7 +37,6 @@ class FilterByOptions extends React.Component {
             key={filterOption.id}
             onClick={() =>
               this.props.handleOnChangeFilterOptions(
-                this.props.filterType,
                 filterOption.name,
                 this.props.filterMultiple
               )}
@@ -71,7 +70,6 @@ FilterByOptions.propTypes = {
   filterMultiple: PropTypes.bool,
   filterName: PropTypes.string.isRequired,
   filterOptions: PropTypes.array.isRequired,
-  filterType: PropTypes.string.isRequired,
   handleOnChangeFilterOptions: PropTypes.func,
 };
 

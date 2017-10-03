@@ -15,29 +15,25 @@ class FilterBox extends React.Component {
         </div>
         <div className="grid container--middle bottom-xs between-xs">
           <FilterByOptions
-            filterName="Business Services"
-            filterType={'industries'}
-            filterOptions={this.props.filterOptions.industries}
+            filterName={'Business Services'}
+            filterOptions={this.props.filterOptions.businessServices}
             handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
           />
           <FilterByOptions
             filterName="Industry"
-            filterType={'industries'}
             filterOptions={this.props.filterOptions.industries}
             handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
           />
           <FilterByOptions
             filterMultiple={true}
-            filterName={'Busines Stage'}
-            filterType={'stages'}
+            filterName={'Business Stage'}
             filterOptions={this.props.filterOptions.stages}
             handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
           />
           <FilterByOptions
             filterMultiple={true}
             filterName="Underserved Com..."
-            filterType={'stages'}
-            filterOptions={this.props.filterOptions.stages}
+            filterOptions={this.props.filterOptions.communities}
             handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
           />
         </div>

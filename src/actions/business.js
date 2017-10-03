@@ -3,7 +3,7 @@ import {CategoriesConstants} from '../constants';
 import httpRequest from '../utils/httpRequest';
 import {browserHistory} from 'react-router';
 import queryString from 'query-string';
-import _ from 'lodash';
+import {isEmpty, isString} from 'lodash';
 
 const businessDataObject = business => {
   return {
@@ -33,28 +33,27 @@ const filtersDataObject = filters => {
   };
 };
 
-const filtersObject = (
-  filterType,
-  filterValue,
-  currentFilters,
-  filterMultiple = false
-) => {
-  const newFilter = {};
-  if (filterMultiple && currentFilters[`category[]`]) {
-    filterValue = currentFilters[`category[]`] + `&category[]=${filterValue}`;
+const filtersObject = (filterValue, filters, filterMultiple) => {
+  if (!filterValue) {
+    return filters;
   }
-  newFilter[`category[]`] = filterValue;
-  let filters = Object.assign({}, currentFilters, newFilter);
-  if (!filterValue && !filterMultiple) {
-    filters = _.omit(filters, `category[]`);
+  let newFilters = {...filters};
+  if (isEmpty(filters)) {
+    newFilters.category = [filterValue];
+  } else if (isString(newFilters.category)) {
+    newFilters.category = [newFilters.category, filterValue];
+  } else {
+    newFilters.category.push(filterValue);
   }
-  return filters;
+  return newFilters;
 };
 
 const pushBrowserHistory = filters => {
+  const filterString = queryString.stringify(filters, {encode: false});
+
   return browserHistory.push({
     pathname: '/businesses',
-    search: `?${queryString.stringify(filters, {encode: false})}`,
+    search: `?${filterString}`,
   });
 };
 
@@ -68,22 +67,6 @@ export function fetchBusiness(businessId) {
   };
 }
 
-export function fetchLocations(currentParams) {
-  return async (dispatch: Function) => {
-    const httpResponse = await httpRequest.get('/api/locations', {
-      params: currentParams,
-    });
-    const locations = httpResponse.data;
-    const metadata = {
-      pagination: {
-        current_page: currentParams.page,
-      }
-    };
-    dispatch(locationsDataObject(locations));
-    dispatch(businessesMetaDataObject(metadata));
-  };
-}
-
 export function filterBusinessesByName(filterValue, currentParams) {
   return async (dispatch: Function) => {
     const filters = filtersObject('name_cont', filterValue, currentParams);
@@ -94,7 +77,7 @@ export function filterBusinessesByName(filterValue, currentParams) {
     const metadata = {
       pagination: {
         current_page: currentParams.page,
-      }
+      },
     };
     dispatch(locationsDataObject(locations));
     dispatch(businessesMetaDataObject(metadata));
@@ -102,19 +85,10 @@ export function filterBusinessesByName(filterValue, currentParams) {
   };
 }
 
-export function filterLocations(
-  filterType,
-  filterValue,
-  currentParams,
-  filterMultiple = false
-) {
+export function filterLocations(filterValue, currentParams, filterMultiple) {
   return async (dispatch: Function) => {
-    const filters = filtersObject(
-      filterType,
-      filterValue,
-      currentParams,
-      filterMultiple
-    );
+    const filters = filtersObject(filterValue, currentParams, filterMultiple);
+
     const httpResponse = await httpRequest.get('/api/search', {
       params: filters,
     });
@@ -122,7 +96,7 @@ export function filterLocations(
     const metadata = {
       pagination: {
         current_page: currentParams.page,
-      }
+      },
     };
     dispatch(locationsDataObject(locations));
     dispatch(businessesMetaDataObject(metadata));
@@ -160,33 +134,38 @@ export function fetchFilterOptions() {
     const httpResponse = await httpRequest.get('/api/categories');
     const categories = httpResponse.data;
 
+    const businessServiceCategory = categories.find(
+      category => category.name === CategoriesConstants.BUSINESS_SERVICES
+    );
+    const businessServices = businessServiceCategory
+      ? businessServiceCategory.children
+      : [];
+
     const businessTypeCategory = categories.find(
       category => category.name === CategoriesConstants.BUSINESS_TYPE
     );
-    const businessTypeCategoryId = businessTypeCategory.taxonomy_id;
-    const businessTypes = businessTypeCategory ? getChildren(businessTypeCategoryId,categories) : [];
+    const businessTypes = businessTypeCategory
+      ? businessTypeCategory.children
+      : [];
 
     const stageCategory = categories.find(
       category => category.name === CategoriesConstants.STAGE
     );
-    const stageCategoryId = stageCategory.taxonomy_id;
-    const stages = stageCategory ? getChildren(stageCategoryId, categories) : [];
+    const stages = stageCategory ? stageCategory.children : [];
 
     const communityCategory = categories.find(
       category => category.name === CategoriesConstants.COMMUNITY
     );
-    const communityCategoryId = communityCategory.taxonomy_id;
-    const communities = communityCategory ? getChildren(communityCategoryId, categories) : [];
+    const communities = communityCategory ? communityCategory.children : [];
 
     const industryCategory = categories.find(
       category => category.name === CategoriesConstants.INDUSTRY
     );
-    const industryCategoryId = industryCategory.taxonomy_id;
-    const industries = industryCategory ? getChildren(industryCategoryId, categories) : [];
+    const industries = industryCategory ? industryCategory.children : [];
 
     dispatch(
       filtersDataObject({
-        categories,
+        businessServices,
         businessTypes,
         stages,
         communities,
@@ -194,12 +173,4 @@ export function fetchFilterOptions() {
       })
     );
   };
-}
-
-function getChildren(id, categories) {
-  var regex = new RegExp("^" + id + "-");
-  const children = categories.filter(
-    category => regex.test(category.taxonomy_id)
-  );
-  return children;
 }
