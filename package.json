@@ -29,7 +29,7 @@
     "open:cover": "npm run test:cover && opn ./coverage/lcov-report/index.html",
     "analyze-bundle": "babel-node ./tools/analyzeBundle.js",
     "eslint": "node_modules/.bin/eslint --fix --ext \".js\" --ignore-pattern node_modules --quiet .",
-    "prettier": "prettier --single-quote --bracket-spacing false --trailing-comma es5 --write '{src,__{tests,mocks}__}/**/*.js'"
+    "prettier": "node_modules/.bin/prettier --single-quote --bracket-spacing false --trailing-comma es5 --write '{src,__{tests,mocks}__}/**/*.js'"
   },
   "author": "",
   "license": "MIT",

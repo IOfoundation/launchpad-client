@@ -15,6 +15,7 @@ export default function(state: STATE = initialState, action: ACTION): STATE {
   switch (action.type) {
     case types.FETCH_LOCATIONS: {
       const {locations} = action;
+
       return {
         ...state,
         locations,
@@ -56,8 +57,8 @@ function getOrganizationsFromLocations(locations) {
 }
 
 function filterById(arr) {
-  var f = []
-  return arr.filter(function(n) {
-    return f.indexOf(n.id) == -1 && f.push(n.id)
-  })
+  var f = [];
+  return arr.filter(n => {
+    return f.indexOf(n.id) == -1 && f.push(n.id);
+  });
 }

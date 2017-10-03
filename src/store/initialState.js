@@ -15,9 +15,9 @@ const initialState = {
       pagination: {},
     },
     filters: {
+      businessServices: [],
       communities: [],
       stages: [],
-      offers: [],
       businessTypes: [],
       industries: [],
     },

@@ -12,7 +12,7 @@ import * as actions from '../actions/business';
 export class Businesses extends Component {
   componentWillMount(_nextProps) {
     const locationsFilters = this.props.location.query;
-    this.props.actions.fetchLocations(locationsFilters);
+    this.props.actions.filterLocations(null, locationsFilters);
     this.props.actions.fetchFilterOptions();
   }
 
@@ -21,10 +21,9 @@ export class Businesses extends Component {
     this.props.actions.filterBusinessesByName(businessName, businessesFilters);
   }
 
-  handleOnChangeFilterOptions(filterType, filterValue, filterMultiple = false) {
+  handleOnChangeFilterOptions(filterValue, filterMultiple = true) {
     const locationsFilters = this.props.location.query;
     this.props.actions.filterLocations(
-      filterType,
       filterValue,
       locationsFilters,
       filterMultiple
