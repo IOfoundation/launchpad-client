@@ -10,18 +10,23 @@ class FilterByText extends React.Component {
       labelTop: false,
       showFilterLabel: false,
       value: '',
+      filters: [],
     };
     this.handleChange = this.handleChange.bind(this);
   }
-  handleKeyPress(target) {
-    if (target.charCode === 13 ) {
-      this.setState({showFilterLabel: true});
-      this.setState({labelTop: false});
+  handleKeyPress(event) {
+    if (event.charCode === 13) {
+      const {filters} = this.state;
+      this.setState({
+        showFilterLabel: true,
+        labelTop: false,
+        filters: [...filters, this.state.value],
+      });
+      this.props.handleTextSearchBusinesses([...filters, this.state.value]);
     }
   }
   handleChange(event) {
     this.setState({value: event.target.value});
-    this.props.handleTextSearchBusinesses(event.target.value);
   }
   _inputClicked() {
     this.setState({labelTop: true});
@@ -30,13 +35,29 @@ class FilterByText extends React.Component {
     this.setState({labelTop: false});
     this.setState({value: ''});
   }
+  clearAll() {
+    this.setState({filters: []})
+    this.props.handleTextSearchBusinesses([]);
+  }
+  renderFilter() {
+    return this.state.filters.map(filter => (
+      <a
+        className={`
+          search-filter-label
+       `}
+      >
+        {filter}
+        <MdClear className="search-filter-icon"/>
+      </a>
+    ));
+  }
   render() {
     return (
       <div className="col-md-12 col-xs-12 text-xs-margin m-bot-16 filterTextContainer noPadding">
         <div className="grid search-text-form" >
-          <div className={this.state.showFilterLabel ? 'filter-label-container-show' : 'filter-label-container-hide'}>
-            <a className="search-filter-label">{this.state.value} <MdClear className="search-filter-icon"/></a>
-            <a className="search-filter-clear">Clear All</a>
+          <div className={this.state.filters.length > 0 ? ('filter-label-container-show') : ('filter-label-container-hide')}>
+            {this.renderFilter()}
+            <a className="search-filter-clear" onClick={() => this.clearAll()}>Clear All</a>
           </div>
           <h3
             className={
@@ -53,7 +74,7 @@ class FilterByText extends React.Component {
           <input
             type="text"
             value={this.state.value}
-            onChange={this.handleChange}
+            onChange={event => this.handleChange(event)}
             onClick={() => this._inputClicked()}
             onKeyPress={target => this.handleKeyPress(target)}
             placeholder={
