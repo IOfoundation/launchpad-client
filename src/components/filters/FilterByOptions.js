@@ -22,13 +22,15 @@ class FilterByOptions extends React.Component {
     this.setState({showOptions: false});
     this.setState({showSubOptions: false});
   }
-  _renderSubOptions() {
+  _renderSubOptions(filterOption) {
     return (
-      <div className="dropdown-sub-container">
-        <button className="dropdown-options">
-          <span>{'option'}</span>
-        </button>
-      </div>
+      {filterOption.children.map(child => (
+        <div className="dropdown-sub-container">
+          <button className="dropdown-options">
+            <span>{child.name}</span>
+          </button>
+        </div>
+      ))};
     );
   }
   _renderOptions() {
@@ -65,7 +67,7 @@ class FilterByOptions extends React.Component {
             </button>
           ))}
         </div>
-        {this.state.showSubOptions ? this._renderSubOptions() : null}
+        {this.state.showSubOptions ? this.props.filterOptions.map(filterOption => this._renderSubOptions(filterOption)) : null}
       </div>
     );
   }
