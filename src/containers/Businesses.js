@@ -23,11 +23,20 @@ export class Businesses extends Component {
 
   handleOnChangeFilterOptions(filterValue, filterMultiple = true) {
     const locationsFilters = this.props.location.query;
+    handleFilterChipUpdate()
     this.props.actions.filterLocations(
       filterValue,
       locationsFilters,
       filterMultiple
     );
+  }
+
+  handleClickOnClearFilters() {
+    this.props.actions.filterLocations('', '', true);
+  }
+
+  handleFilterChipUpdate() {
+    
   }
 
   handleChangePage(page) {
@@ -58,13 +67,9 @@ export class Businesses extends Component {
                   }
                 </h2>
                 <FilterBox
-                  handleTextSearchBusinesses={this.handleTextSearchBusinesses.bind(
-                    this
-                  )}
+                  handleTextSearchBusinesses={this.handleTextSearchBusinesses.bind(this)}
                   filterOptions={this.props.filters}
-                  handleOnChangeFilterOptions={this.handleOnChangeFilterOptions.bind(
-                    this
-                  )}
+                  handleOnChangeFilterOptions={this.handleOnChangeFilterOptions.bind(this)}
                 />
               </div>
             </div>
@@ -76,6 +81,7 @@ export class Businesses extends Component {
             businessesMetadata={this.props.metadata}
             handleChangePage={this.handleChangePage.bind(this)}
             handleClickOnBusiness={this.handleClickOnBusiness.bind(this)}
+            handleClickOnClearFilters={this.handleClickOnClearFilters.bind(this)}
           />
         </section>
       </MainLayout>

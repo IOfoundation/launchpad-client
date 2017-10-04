@@ -16,11 +16,10 @@ class FilterByOptions extends React.Component {
     this.setState({showOptions: !this.state.showOptions});
   }
   _toggleSubOption(filterOption) {
-    console.log(filterOption.children.length)
     if (filterOption.children.length != 0) {
       this.setState({showSubOptions: true});
       this.props.filterOptions.map(filterOption => this._renderSubOptions(filterOption))
-      
+
     } else {
       this.props.handleOnChangeFilterOptions(
         filterOption.name,
