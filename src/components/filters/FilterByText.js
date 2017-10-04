@@ -5,7 +5,6 @@ import {MdClear} from 'react-icons/lib/md';
 import Chip from '../filters/Chip';
 import {isEmpty, isString} from 'lodash';
 
-
 class FilterByText extends React.Component {
   constructor(props) {
     super(props);
@@ -21,7 +20,14 @@ class FilterByText extends React.Component {
     this.props.handleOnRemoveFilterOption(filter);
   }
   clearAll() {
+    this.setState({showFilterLabel: false, labelTop: false});
     this.props.handleTextSearchBusinesses([]);
+  }
+  _inputClicked() {
+    this.setState({labelTop: !this.state.expanded});
+  }
+  _closeSearch() {
+    this.setState({labelTop: false});
   }
   renderFilter() {
     const filters = this.props.getFilterChips()
@@ -46,6 +52,7 @@ class FilterByText extends React.Component {
     }
   }
   render() {
+    const filters = this.props.getFilterChips()
     return (
       <div
         className={
@@ -57,7 +64,14 @@ class FilterByText extends React.Component {
         }
       >
         <div className="grid search-text-form p-bot-16">
-          <div className="filter-label-container-show">
+          <div className={
+            isEmpty(filters) ? (
+              'filter-label-container-hide'
+            ) : (
+              'filter-label-container-show'
+            )
+          }
+        >
             {this.renderFilter()}
             <a className="search-filter-clear" onClick={() => this.clearAll()}>
               {'Clear All'}
@@ -65,10 +79,10 @@ class FilterByText extends React.Component {
           </div>
           <h3
             className={
-              this.state.labelTop ? (
-                'col-lg-9 hide-filter'
-              ) : (
+              isEmpty(filters) ? (
                 'show-filter col-lg-9 p-left-0'
+              ) : (
+                'col-lg-9 hide-filter'
               )
             }
           >
@@ -104,7 +118,8 @@ class FilterByText extends React.Component {
             />
           )}
           <div
-            className={this.state.labelTop ? (
+            className={
+              this.state.labelTop ? (
                 'option-dropdown-show'
               ) : (
                 'hero_input-hide'
