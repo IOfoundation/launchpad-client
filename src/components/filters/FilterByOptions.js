@@ -8,40 +8,43 @@ class FilterByOptions extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showOptions: false,
-      showSubOptions: false,
+      dropdownOpen: false,
+      subDropdownOpen: false,
+      selectedfilterOption: null,
     };
   }
-  _toggleOptions() {
-    this.setState({showOptions: !this.state.showOptions});
+  _toggleDropdownOptions() {
+    this.setState({dropdownOpen: !this.state.dropdownOpen});
   }
-  _toggleSubOption(filterOption) {
-    if (filterOption.children.length != 0) {
-      this.setState({showSubOptions: true});
-      this.props.filterOptions.map(filterOption => this._renderSubOptions(filterOption))
-
+  _toggleSubOption(event, selectedfilterOption) {
+    if (selectedfilterOption.children.length > 0) {
+      this.setState({selectedfilterOption, subDropdownOpen: true});
     } else {
       this.props.handleOnChangeFilterOptions(
-        filterOption.name,
+        selectedfilterOption.name,
         this.props.filterMultiple
       );
     }
   }
   handleClickOutside() {
-    this.setState({showOptions: false});
-    this.setState({showSubOptions: false});
+    this.setState({
+      dropdownOpen: false,
+      subDropdownOpen: false,
+      selectedfilterOption: null,
+    });
   }
   _renderSubOptions(filterOption) {
     return (
       <div className="dropdown-sub-container">
         {filterOption.children.map(child => (
-          <button className="dropdown-options"
+          <button
+            className="dropdown-options"
             key={child.id}
             onClick={() => this.props.handleOnChangeFilterOptions(
-              child.name,
-              this.props.filterMultiple
+               child.name,
+               this.props.filterMultiple
             )}
-            >
+        >
             <span>{child.name}</span>
           </button>
         ))}
@@ -52,7 +55,7 @@ class FilterByOptions extends React.Component {
     return (
       <div
         className={
-          this.state.showSubOptions ? (
+          this.state.subDropdownOpen ? (
             'dropdown-container dropdown-container-expand'
           ) : (
             'dropdown-container dropdown-container-collapse'
@@ -61,7 +64,7 @@ class FilterByOptions extends React.Component {
       >
         <div
           className={
-            this.state.showSubOptions ? (
+            this.state.subDropdownOpen ? (
               'dropdown-btn-half'
             ) : (
               'dropdown-btn-full'
@@ -72,17 +75,19 @@ class FilterByOptions extends React.Component {
             <button
               className="dropdown-options"
               key={filterOption.id}
-              onClick={() => this._toggleSubOption(filterOption)}
+              onClick={e => this._toggleSubOption(e, filterOption)}
             >
               <span className="">{filterOption.name}</span>
-              <MdKeyboardArrowRight
-                className="dropdown-options-icon"
-                size="20"
-              />
+              {filterOption.children.length > 0 && (
+                <MdKeyboardArrowRight
+                  className="dropdown-options-icon"
+                  size="20"
+                />
+              )}
             </button>
           ))}
         </div>
-        {this.state.showSubOptions ? this.props.filterOptions.map(filterOption => this._renderSubOptions(filterOption)) : null}
+        {this.state.selectedfilterOption && this._renderSubOptions(this.state.selectedfilterOption)}
       </div>
     );
   }
@@ -91,12 +96,12 @@ class FilterByOptions extends React.Component {
       <div className="col-md-3 col-xs-10 noPadding filterSelectContainer text-xs-margin">
         <button
           className="dropdown-btn filterSelect"
-          onClick={() => this._toggleOptions()}
+          onClick={() => this._toggleDropdownOptions()}
         >
           {this.props.filterName}
         </button>
         <FaSortDesc className="filterSelect_icon" size={14} color={'#fff'} />
-        {this.state.showOptions ? this._renderOptions() : null}
+        {this.state.dropdownOpen && this._renderOptions()}
       </div>
     );
   }
@@ -108,5 +113,4 @@ FilterByOptions.propTypes = {
   filterOptions: PropTypes.array.isRequired,
   handleOnChangeFilterOptions: PropTypes.func,
 };
-
 export default onClickOutside(FilterByOptions);
