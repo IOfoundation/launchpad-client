@@ -76,6 +76,7 @@ class FilterByOptions extends React.Component {
               className="dropdown-options"
               key={filterOption.id}
               onClick={e => this._toggleSubOption(e, filterOption)}
+              onMouseOver={e => this._toggleSubOption(e, filterOption)}
             >
               <span className="">{filterOption.name}</span>
               {filterOption.children.length > 0 && (
