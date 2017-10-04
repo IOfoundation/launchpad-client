@@ -54,22 +54,21 @@ class Main extends React.Component {
     );
   }
   render() {
-    const firstBusiness = this.props.locations
-      ? this.props.locations[0]
-      : null;
+    const firstBusiness = this.props.locations ? this.props.locations[0] : null;
     if (firstBusiness) {
       const [centerLng, centerLat] = this.getCoordinates(firstBusiness);
       return (
-        <GoogleMapReact center={{lat: centerLat, lng: centerLng}} zoom={15}>
+        <GoogleMapReact
+          center={{lat: centerLat, lng: centerLng}}
+          zoom={15}
+          bootstrapURLKeys={{
+            key: process.env.GOOGLE_MAP_API_KEY
+          }}
+        >
           {this.props.locations.map(location => {
             const [lng, lat] = this.getCoordinates(location);
             return (
-              <MapMarker
-                key={location.id}
-                className=""
-                lat={lat}
-                lng={lng}
-              />
+              <MapMarker key={location.id} className="" lat={lat} lng={lng} />
             );
           })}
         </GoogleMapReact>
