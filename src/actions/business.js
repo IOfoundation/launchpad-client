@@ -33,17 +33,26 @@ const filtersDataObject = filters => {
   };
 };
 
-const filtersObject = (filterValue, filters, _filterMultiple) => {
+const filtersObject = (filterValue, filters, removeFilter) => {
   const newFilters = cloneDeep(filters);
-  if (!filterValue) {
-    return newFilters;
-  }
-  if (isEmpty(filters)) {
-    newFilters.category = [filterValue];
-  } else if (isString(newFilters.category)) {
-    newFilters.category = [newFilters.category, filterValue];
+  if (removeFilter === true) {
+    if (isString(newFilters.category)) {
+      newFilters.category = [];
+    } else {
+      const filterIndex = newFilters.category.indexOf(filterValue);
+      newFilters.category.splice(filterIndex, 1);
+    }
   } else {
-    newFilters.category.push(filterValue);
+    if (!filterValue) {
+      return newFilters;
+    }
+    if (isEmpty(filters)) {
+      newFilters.category = [filterValue];
+    } else if (isString(newFilters.category)) {
+      newFilters.category = [newFilters.category, filterValue];
+    } else {
+      newFilters.category.push(filterValue);
+    }
   }
   return newFilters;
 };
@@ -69,7 +78,7 @@ export function fetchBusiness(businessId) {
 
 export function filterBusinessesByName(filterValue, currentParams) {
   return async (dispatch: Function) => {
-    const filters = filtersObject('name_cont', filterValue, currentParams);
+    const filters = filtersObject(null, filterValue, currentParams);
     const httpResponse = await httpRequest.get('/api/search', {
       params: filters,
     });
@@ -85,10 +94,11 @@ export function filterBusinessesByName(filterValue, currentParams) {
   };
 }
 
-export function filterLocations(filterValue, currentParams, filterMultiple) {
+export function filterLocations(filterValue, currentParams, removeFilter) {
   return async (dispatch: Function) => {
-    const filters = filtersObject(filterValue, currentParams, filterMultiple);
-
+    var filters;
+    filters = filtersObject(filterValue, currentParams, removeFilter);
+    console.log("postFilters: ",filters);
     const httpResponse = await httpRequest.get('/api/search', {
       params: filters,
     });

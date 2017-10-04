@@ -33,6 +33,7 @@ class Main extends Component {
       locations,
       organizations,
       handleClickOnBusiness,
+      handleClickOnClearAllFilters,
       handleChangePage,
     } = this.props;
     return (
@@ -49,6 +50,7 @@ class Main extends Component {
           locations={locations}
           organizations={organizations}
           handleClickOnBusiness={handleClickOnBusiness}
+          handleClickOnClearAllFilters={handleClickOnClearAllFilters}
           expanded={this.state.cardExpanded}
         />
         <Pagination
@@ -65,6 +67,7 @@ Main.propTypes = {
   businessesMetadata: PropTypes.object.isRequired,
   handleChangePage: PropTypes.func.isRequired,
   handleClickOnBusiness: PropTypes.func.isRequired,
+  handleClickOnClearAllFilters: PropTypes.func.isRequired,
 };
 
 export default Main;

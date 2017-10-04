@@ -21,8 +21,10 @@
   }
   &-collapse {
     height: 87px;
+    transition: all 0.4s ease-out;
   }
    &-expand{
     height: 613px;
+    transition: all 0.4s ease-in;
   }
 }

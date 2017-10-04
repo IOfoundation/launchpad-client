@@ -32,25 +32,25 @@ const Main = ({handleSubmitSearchBusinessesForm}) => {
               className="link col-xs-12 col-md-6 col-lg-4 m-bot-16"
               to="/businesses?category=Bussines%20Planning/Managment"
             >
-              Bussines Planning/Managment
+              {'Bussines Planning/Managment'}
             </Link>
             <Link
               className="link col-xs-12 col-md-6 col-lg-3 m-bot-16"
               to="/businesses?category=Capital"
             >
-              Capital Legal Services
+              {'Capital Legal Services'}
             </Link>
             <Link
               className="link col-xs-12 col-md-6 col-lg-2 m-bot-16"
               to="/businesses?category=Marketing/Sales"
             >
-              Marketing/Sales
+              {'Marketing/Sales'}
             </Link>
             <Link
               className="link col-xs-12 col-md-6 col-lg-3 m-bot-16"
               to="/businesses?category=Physical%20Space"
             >
-              Physical Space
+              {'Physical Space'}
             </Link>
           </div>
         </div>

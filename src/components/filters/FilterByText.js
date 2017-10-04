@@ -2,49 +2,98 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 import {MdSearch} from 'react-icons/lib/md';
 import {MdClear} from 'react-icons/lib/md';
+import Chip from '../filters/Chip';
+import {isEmpty, isString} from 'lodash';
 
 class FilterByText extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       labelTop: false,
+      showFilterLabel: false,
+      showDropdown: false,
       value: '',
     };
-    this.handleChange = this.handleChange.bind(this);
   }
-
-  handleChange(event) {
-    this.setState({value: event.target.value});
-    this.props.handleTextSearchBusinesses(event.target.value);
+  deleteFilter(e) {
+    const filter = e.currentTarget.getAttribute('data-value');
+    this.props.handleOnRemoveFilterOption(filter);
+  }
+  clearAll() {
+    this.setState({showFilterLabel: false, labelTop: false});
+    this.props.handleTextSearchBusinesses([]);
   }
   _inputClicked() {
-    this.setState({labelTop: true});
+    this.setState({labelTop: !this.state.expanded});
   }
   _closeSearch() {
     this.setState({labelTop: false});
-    this.setState({value: ''});
+  }
+  renderFilter() {
+    const filters = this.props.getFilterChips()
+    if (isEmpty(filters.category)) {
+      return (null);
+    } else if (isString(filters.category)) {
+      return (
+        <Chip
+          key={filters.category}
+          text={filters.category}
+          handleClick={this.deleteFilter.bind(this)}
+        />
+      )
+    } else {
+      return filters.category.map(filter => (
+        <Chip
+          key={filter}
+          text={filter}
+          handleClick={this.deleteFilter.bind(this)}
+        />
+      ));
+    }
   }
   render() {
+    const filters = this.props.getFilterChips()
     return (
-      <div className="col-md-12 col-xs-12 text-xs-margin m-bot-16 filterTextContainer noPadding">
-        <form className="grid filterTextForm">
+      <div
+        className={
+          this.state.labelTop ? (
+            'col-md-12 col-xs-12 text-xs-margin filterTextContainer noPadding m-bot-16'
+          ) : (
+            'col-md-12 col-xs-12 text-xs-margin filterTextContainer noPadding'
+          )
+        }
+      >
+        <div className="grid search-text-form p-bot-16">
+          <div className={
+            isEmpty(filters) ? (
+              'filter-label-container-hide'
+            ) : (
+              'filter-label-container-show'
+            )
+          }
+        >
+            {this.renderFilter()}
+            <a className="search-filter-clear" onClick={() => this.clearAll()}>
+              {'Clear All'}
+            </a>
+          </div>
           <h3
             className={
-              this.state.labelTop ? (
-                'col-lg-8 hide-filter'
+              isEmpty(filters) ? (
+                'show-filter col-lg-9 p-left-0'
               ) : (
-                'show-filter col-lg-8'
+                'col-lg-9 hide-filter'
               )
             }
           >
             {'Filter results with the selections below'}
           </h3>
-
           <input
             type="text"
             value={this.state.value}
-            onChange={this.handleChange}
+            onChange={event => this.handleChange(event)}
             onClick={() => this._inputClicked()}
+            onKeyPress={target => this.handleKeyPress(target)}
             placeholder={
               this.state.labelTop ? (
                 'Search by Resource Name or Ipsum'
@@ -56,7 +105,7 @@ class FilterByText extends React.Component {
               this.state.labelTop ? (
                 'full-width-search'
               ) : (
-                'text-search small-width-search col-md-4'
+                'text-search small-width-search col-md-3'
               )
             }
           />
@@ -68,10 +117,30 @@ class FilterByText extends React.Component {
               onClick={() => this._closeSearch()}
             />
           )}
+          <div
+            className={
+              this.state.labelTop ? (
+                'option-dropdown-show'
+              ) : (
+                'hero_input-hide'
+              )
+            }
+          >
+            <ul className="option-dropdown-list">
+              <li>
+                Business
+                <img src="../static-data/images/LocationBlack.png" />
+              </li>
+              <li>
+                Business
+                <img src="../static-data/images/LocationBlack.png" />
+              </li>
+            </ul>
+          </div>
           {!this.state.labelTop && (
             <MdSearch className="text-search-icon" size="32" color="#2AD587" />
           )}
-        </form>
+        </div>
       </div>
     );
   }
@@ -79,6 +148,7 @@ class FilterByText extends React.Component {
 
 FilterByText.propTypes = {
   handleTextSearchBusinesses: PropTypes.func.isRequired,
+  handleOnRemoveFilterOption: PropTypes.func.isRequired
 };
 
 export default FilterByText;

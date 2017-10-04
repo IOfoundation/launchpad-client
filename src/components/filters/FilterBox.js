@@ -11,28 +11,28 @@ class FilterBox extends React.Component {
           <FilterByText
             filterName=""
             handleTextSearchBusinesses={this.props.handleTextSearchBusinesses}
+            handleOnRemoveFilterOption={this.props.handleOnRemoveFilterOption}
+            getFilterChips={this.props.getFilterChips}
           />
         </div>
-        <div className="grid container--middle bottom-xs between-xs">
+        <div className="grid container--middle bottom-xs between-xs p-left-0">
           <FilterByOptions
             filterName={'Business Services'}
             filterOptions={this.props.filterOptions.businessServices}
             handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
           />
           <FilterByOptions
-            filterName="Industry"
+            filterName={'Industry'}
             filterOptions={this.props.filterOptions.industries}
             handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
           />
           <FilterByOptions
-            filterMultiple={true}
             filterName={'Business Stage'}
             filterOptions={this.props.filterOptions.stages}
             handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
           />
           <FilterByOptions
-            filterMultiple={true}
-            filterName="Underserved Com..."
+            filterName={'Underserved Com...'}
             filterOptions={this.props.filterOptions.communities}
             handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
           />
@@ -45,6 +45,7 @@ class FilterBox extends React.Component {
 FilterBox.propTypes = {
   filterOptions: PropTypes.object.isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
+  handleOnRemoveFilterOption: PropTypes.func.isRequired,
   handleTextSearchBusinesses: PropTypes.func.isRequired,
 };
 

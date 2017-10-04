@@ -77,7 +77,7 @@ html {
 
 body {
     margin: 0;
-    font-family: $font-family-sans-serif;
+    font-family: 'Proxima Nova';
     color: $primary-color;
 }
 
@@ -91,6 +91,7 @@ body {
 
 a {
     background: transparent;
+    cursor: pointer;
 }
 
 /**
