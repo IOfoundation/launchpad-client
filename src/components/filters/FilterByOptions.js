@@ -15,8 +15,17 @@ class FilterByOptions extends React.Component {
   _toggleOptions() {
     this.setState({showOptions: !this.state.showOptions});
   }
-  _toggleSubOption() {
-    this.setState({showSubOptions: true});
+  _toggleSubOption(filterOption) {
+    if (filterOption.children.length != 0) {
+      this.setState({showSubOptions: true});
+      this.props.filterOptions.map(filterOption => this._renderSubOptions(filterOption))
+
+    } else {
+      this.props.handleOnChangeFilterOptions(
+        filterOption.name,
+        this.props.filterMultiple
+      );
+    }
   }
   handleClickOutside() {
     this.setState({showOptions: false});
@@ -26,7 +35,13 @@ class FilterByOptions extends React.Component {
     return (
       <div className="dropdown-sub-container">
         {filterOption.children.map(child => (
-          <button className="dropdown-options">
+          <button className="dropdown-options"
+            key={child.id}
+            onClick={() => this.props.handleOnChangeFilterOptions(
+              child.name,
+              this.props.filterMultiple
+            )}
+            >
             <span>{child.name}</span>
           </button>
         ))}
@@ -57,7 +72,7 @@ class FilterByOptions extends React.Component {
             <button
               className="dropdown-options"
               key={filterOption.id}
-              onClick={() => this._toggleSubOption()}
+              onClick={() => this._toggleSubOption(filterOption)}
             >
               <span className="">{filterOption.name}</span>
               <MdKeyboardArrowRight

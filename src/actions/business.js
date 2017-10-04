@@ -174,3 +174,7 @@ export function fetchFilterOptions() {
     );
   };
 }
+
+export function clearFilters() {
+  
+}
