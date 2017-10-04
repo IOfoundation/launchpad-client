@@ -24,13 +24,13 @@ class FilterByOptions extends React.Component {
   }
   _renderSubOptions(filterOption) {
     return (
-      {filterOption.children.map(child => (
-        <div className="dropdown-sub-container">
+      <div className="dropdown-sub-container">
+        {filterOption.children.map(child => (
           <button className="dropdown-options">
             <span>{child.name}</span>
           </button>
-        </div>
-      ))};
+        ))}
+      </div>
     );
   }
   _renderOptions() {

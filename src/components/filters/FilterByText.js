@@ -137,8 +137,12 @@ class FilterByText extends React.Component {
           >
             <ul className="option-dropdown-list">
               <li>
-                  Business
-                  <img src="../static-data/images/LocationBlack.png" />
+                Business
+                <img src="../static-data/images/LocationBlack.png" />
+              </li>
+              <li>
+                Business
+                <img src="../static-data/images/LocationBlack.png" />
               </li>
             </ul>
           </div>
