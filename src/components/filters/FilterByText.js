@@ -61,7 +61,15 @@ class FilterByText extends React.Component {
   }
   render() {
     return (
-      <div className="col-md-12 col-xs-12 text-xs-margin filterTextContainer noPadding">
+      <div
+        className={
+          this.state.labelTop ? (
+            'col-md-12 col-xs-12 text-xs-margin filterTextContainer noPadding m-bot-16'
+          ) : (
+            'col-md-12 col-xs-12 text-xs-margin filterTextContainer noPadding'
+          )
+        }
+      >
         <div className="grid search-text-form p-bot-16">
           <div
             className={
