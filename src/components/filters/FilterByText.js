@@ -3,6 +3,8 @@ import {PropTypes} from 'prop-types';
 import {MdSearch} from 'react-icons/lib/md';
 import {MdClear} from 'react-icons/lib/md';
 import Chip from '../filters/Chip';
+import {isEmpty, isString} from 'lodash';
+
 
 class FilterByText extends React.Component {
   constructor(props) {
@@ -12,54 +14,36 @@ class FilterByText extends React.Component {
       showFilterLabel: false,
       showDropdown: false,
       value: '',
-      filters: [],
     };
-    this.handleChange = this.handleChange.bind(this);
-  }
-  handleKeyPress(event) {
-    if (event.charCode === 13) {
-      const {filters} = this.state;
-      if (filters.indexOf(this.state.value) === -1) {
-        this.setState({
-          showFilterLabel: true,
-          labelTop: false,
-          filters: [...filters, this.state.value],
-          value: '',
-        });
-        this.props.handleTextSearchBusinesses([...filters, this.state.value]);
-      } else {
-        this._closeSearch();
-      }
-    }
   }
   deleteFilter(e) {
     const filter = e.currentTarget.getAttribute('data-value');
-    const filters = this.state.filters.filter(item => item !== filter);
-    this.setState({filters});
-    this.props.handleTextSearchBusinesses(filters);
-  }
-  handleChange(event) {
-    this.setState({value: event.target.value});
-  }
-  _inputClicked() {
-    this.setState({labelTop: true});
-    this.setState({showDropdown: true});
-  }
-  _closeSearch() {
-    this.setState({labelTop: false, value: ''});
+    this.props.handleOnRemoveFilterOption(filter);
   }
   clearAll() {
-    this.setState({filters: []});
     this.props.handleTextSearchBusinesses([]);
   }
   renderFilter() {
-    return this.state.filters.map(filter => (
-      <Chip
-        key={filter}
-        text={filter}
-        handleClick={this.deleteFilter.bind(this)}
-      />
-    ));
+    const filters = this.props.getFilterChips()
+    if (isEmpty(filters.category)) {
+      return (null);
+    } else if (isString(filters.category)) {
+      return (
+        <Chip
+          key={filters.category}
+          text={filters.category}
+          handleClick={this.deleteFilter.bind(this)}
+        />
+      )
+    } else {
+      return filters.category.map(filter => (
+        <Chip
+          key={filter}
+          text={filter}
+          handleClick={this.deleteFilter.bind(this)}
+        />
+      ));
+    }
   }
   render() {
     return (
@@ -73,15 +57,7 @@ class FilterByText extends React.Component {
         }
       >
         <div className="grid search-text-form p-bot-16">
-          <div
-            className={
-              this.state.filters.length > 0 ? (
-                'filter-label-container-show'
-              ) : (
-                'filter-label-container-hide'
-              )
-            }
-          >
+          <div className="filter-label-container-show">
             {this.renderFilter()}
             <a className="search-filter-clear" onClick={() => this.clearAll()}>
               {'Clear All'}
@@ -89,7 +65,7 @@ class FilterByText extends React.Component {
           </div>
           <h3
             className={
-              this.state.labelTop || this.state.filters.length > 0 ? (
+              this.state.labelTop ? (
                 'col-lg-9 hide-filter'
               ) : (
                 'show-filter col-lg-9 p-left-0'
@@ -157,6 +133,7 @@ class FilterByText extends React.Component {
 
 FilterByText.propTypes = {
   handleTextSearchBusinesses: PropTypes.func.isRequired,
+  handleOnRemoveFilterOption: PropTypes.func.isRequired
 };
 
 export default FilterByText;
