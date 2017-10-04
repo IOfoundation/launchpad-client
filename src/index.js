@@ -19,6 +19,7 @@ require('static-data/images/cs-logo.png');
 require('static-data/images/expand-icon.png');
 require('static-data/images/ioLogoBlack.png');
 require('static-data/images/hero.png');
+require('static-data/images/LocationBlack.png');
 
 const store = configureStore(initialState);
 
