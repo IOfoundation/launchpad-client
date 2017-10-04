@@ -3,7 +3,7 @@ import {CategoriesConstants} from '../constants';
 import httpRequest from '../utils/httpRequest';
 import {browserHistory} from 'react-router';
 import queryString from 'query-string';
-import {isEmpty, isString} from 'lodash';
+import {isEmpty, isString, cloneDeep} from 'lodash';
 
 const businessDataObject = business => {
   return {
@@ -33,11 +33,11 @@ const filtersDataObject = filters => {
   };
 };
 
-const filtersObject = (filterValue, filters, filterMultiple) => {
+const filtersObject = (filterValue, filters, _filterMultiple) => {
+  const newFilters = cloneDeep(filters);
   if (!filterValue) {
-    return filters;
+    return newFilters;
   }
-  let newFilters = {...filters};
   if (isEmpty(filters)) {
     newFilters.category = [filterValue];
   } else if (isString(newFilters.category)) {
