@@ -67,6 +67,9 @@ $width: (
           font-size: 16px;
           font-weight: 400;
         }
+        hr {
+          width: 100%;
+        }
     };
     #{$css-class}container--#{$name} {
         width: $value;
@@ -78,6 +81,9 @@ $width: (
         a {
           font-size: 16px;
           font-weight: 400;
+        }
+        hr {
+          width: 100%;
         }
     };
     //Silent class
@@ -92,6 +98,9 @@ $width: (
             font-size: 16px;
             font-weight: 400;
           }
+          hr {
+            width: 100%;
+          }
       };
       #{$silent-class}container--#{$name} {
           width: $value;
@@ -103,6 +112,9 @@ $width: (
           a {
             font-size: 16px;
             font-weight: 400;
+          }
+          hr {
+            width: 100%;
           }
       };
    };
