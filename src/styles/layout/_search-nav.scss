@@ -201,3 +201,26 @@
   display: initial;
   transition: all 0.4s ease-in;
 }
+.option-dropdown-show {
+  display: initial;
+  position: absolute;
+  transition: all 0.4s ease-in;
+  left: 0px;
+  top: 100%;
+  z-index: 8;
+  background-color: #4A4A4A;
+  padding-left: 20px;
+  padding-right: 20px;
+  img {
+    float: right;
+  }
+}
+.option-dropdown-list {
+    list-style: none;
+    width: 416px;
+    padding: 8px;
+    color:#fff;
+    li {
+      margin-bottom: 16px;
+    }
+}
