@@ -10,6 +10,7 @@ class FilterByText extends React.Component {
     this.state = {
       labelTop: false,
       showFilterLabel: false,
+      showDropdown: false,
       value: '',
       filters: [],
     };
@@ -42,6 +43,7 @@ class FilterByText extends React.Component {
   }
   _inputClicked() {
     this.setState({labelTop: true});
+    this.setState({showDropdown: true});
   }
   _closeSearch() {
     this.setState({labelTop: false, value: ''});
@@ -96,7 +98,6 @@ class FilterByText extends React.Component {
           >
             {'Filter results with the selections below'}
           </h3>
-
           <input
             type="text"
             value={this.state.value}
@@ -126,6 +127,21 @@ class FilterByText extends React.Component {
               onClick={() => this._closeSearch()}
             />
           )}
+          <div
+            className={this.state.labelTop ? (
+                'option-dropdown-show'
+              ) : (
+                'hero_input-hide'
+              )
+            }
+          >
+            <ul className="option-dropdown-list">
+              <li>
+                  Business
+                  <img src="../static-data/images/LocationBlack.png" />
+              </li>
+            </ul>
+          </div>
           {!this.state.labelTop && (
             <MdSearch className="text-search-icon" size="32" color="#2AD587" />
           )}
