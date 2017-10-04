@@ -42,15 +42,19 @@ class ContentMap extends Component {
         className={
           'businessesContainer ' +
           (this.props.expanded ? '' : 'businessesContainerReduced')
-        }>
+        }
+      >
         {this.props.topBar}
-        <div
-          className={'container-center--medium grid m-left-24 p-left-24'}>
+        <div className={'container-center--medium grid m-left-24 p-left-16'}>
           <div
             className={
-              this.props.expanded
-                ? 'col-md-7 col-xs-12 businessList p-left-0'
-                : 'col-md-9 col-xs-12 businessList--reduced p-left-0'}>
+              this.props.expanded ? (
+                'col-md-7 col-xs-12 businessList p-left-0')
+              : (
+                'col-md-9 col-xs-12 businessList--reduced p-left-0'
+              )
+            }
+          >
             {this.props.children}
           </div>
           <div
@@ -61,17 +65,20 @@ class ContentMap extends Component {
                 : 'col-md-3 col-xs-12')
             }
           >
-            <div className={
+            <div
+              className={
                 (this.props.expanded
                   ? 'map-container-collapse'
-                  : 'map-container-expand')
-                }
-              >
+                  : 'map-container-expand'
+                )
+              }
+            >
               <MapView locations={locations} />
             </div>
             {this.props.expanded
               ? this._renderReduceButton()
-              : this._renderExpandButton()}
+              : this._renderExpandButton()
+            }
           </div>
         </div>
       </div>

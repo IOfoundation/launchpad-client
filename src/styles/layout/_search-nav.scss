@@ -120,6 +120,10 @@
     font-size: 16px !important;
     text-align: left;
     width: 100%;
+    span {
+      width: 90%;
+      float: left;
+    }
     &:hover {
       background-color: $seconday-color-opacity;
     }

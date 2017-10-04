@@ -47,8 +47,8 @@ class ResultInfo extends Component {
             <MdKeyboardArrowRight className="btn-search-icon" size="32" />
           </button>
         </div>
-        <h3 className="m-left-24 m-top-24 col-xs-12 col-md-12 col-lg-12">{`${totalOrganizations} Resources Available`}</h3>
-        <hr className="m-left-24 m-bot-24 col-xs-12 col-md-12 col-lg-12" />
+        <h3 className="m-left-16 m-top-24 col-xs-12 col-md-12 col-lg-12 noPadding">{`${totalOrganizations} Resources Available`}</h3>
+        <hr className="m-left-16 m-right-16 m-bot-24 col-xs-12 col-md-12 col-lg-12" />
       </div>
     );
   }
