@@ -7,7 +7,7 @@ import Business from './Business';
 //const BusinessesList = ({businesses, handleClickOnBusiness, expanded}) => {
 class BusinessesList extends Component {
   render() {
-    const {handleClickOnBusiness, handleClickOnClearFilters, organizations} = this.props;
+    const {handleClickOnBusiness, handleClickOnClearAllFilters, organizations} = this.props;
     return (
       <div>
         {organizations.map(organization => {
@@ -21,7 +21,7 @@ class BusinessesList extends Component {
         })}
         <button
           className="btn-link btn-link-primary"
-          onClick={handleClickOnClearFilters}
+          onClick={handleClickOnClearAllFilters}
           >
             Clear Search Result
           <MdClear
@@ -38,7 +38,7 @@ BusinessesList.propTypes = {
   organizations: PropTypes.array.isRequired,
   expanded: PropTypes.bool,
   handleClickOnBusiness: PropTypes.func.isRequired,
-  handleClickOnClearFilters: PropTypes.func,
+  handleClickOnClearAllFilters: PropTypes.func,
 };
 
 export default BusinessesList;
