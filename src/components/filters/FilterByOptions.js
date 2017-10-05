@@ -19,9 +19,10 @@ class FilterByOptions extends React.Component {
   _toggleSubOption(event, selectedfilterOption) {
     if (selectedfilterOption.children.length > 0) {
       this.setState({selectedfilterOption, subDropdownOpen: true});
-    } else {
-      this.props.handleOnChangeFilterOptions(selectedfilterOption.name);
     }
+  }
+  _onClick(selectedfilterOption) {
+    this.props.handleOnChangeFilterOptions(selectedfilterOption.name);
   }
   handleClickOutside() {
     this.setState({
@@ -69,8 +70,8 @@ class FilterByOptions extends React.Component {
             <button
               className="dropdown-options"
               key={filterOption.id}
-              onClick={e => this._toggleSubOption(e, filterOption)}
-              //onMouseOver={e => this._toggleSubOption(e, filterOption)}
+              onClick={e => this._onClick(filterOption)}
+              onMouseOver={e => this._toggleSubOption(e, filterOption)}
             >
               <span className="">{filterOption.name}</span>
               {filterOption.children.length > 0 && (
