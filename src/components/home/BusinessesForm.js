@@ -54,16 +54,25 @@ class BusinessesForm extends React.Component {
         >
           <ul className="hero-dropdown-list">
             <li>
-              <a href="/businesses">{'Business Planning/Management'}</a>
+              <a href="/businesses?category=Bussines%20Planning/Managment">
+                {'Business Planning/Management'}
+              </a>
             </li>
             <li>
-              <a href="/businesses">{'Capital Legal Services'}</a>
+              <a href="/businesses?category=Capital">{'Capital'}</a>
             </li>
             <li>
-              <a href="/businesses">{'Marketing/Sales'}</a>
+              <a href="/businesses?category=Legal%20Services">{'Legal Services'}</a>
             </li>
             <li>
-              <a href="/businesses">{'Physical Space'}</a>
+              <a href="/businesses?category=Marketing/Sales">
+                {'Marketing/Sales'}
+              </a>
+            </li>
+            <li>
+              <a href="/businesses?category=Physical%20Space">
+                {'Physical Space'}
+              </a>
             </li>
           </ul>
         </div>

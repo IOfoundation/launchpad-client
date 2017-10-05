@@ -2,6 +2,8 @@
   font-size: $font-size-paragraphe;
   font-weight: normal;
   color: $white-color;
+  white-space: nowrap;
+  display: inline-block;
 }
 
 .link-primary {

@@ -27,27 +27,33 @@ const Main = ({handleSubmitSearchBusinessesForm}) => {
               }
             />
           </div>
-          <div className="grid container-center--middle mt-20">
+          <div className="margin-auto margin-y-20">
             <Link
-              className="link col-xs-12 col-md-6 col-lg-4 m-bot-16"
+              className="link p-bot-10 margin-x-16 m-bot-16"
               to="/businesses?category=Bussines%20Planning/Managment"
             >
               {'Bussines Planning/Managment'}
             </Link>
             <Link
-              className="link col-xs-12 col-md-6 col-lg-3 m-bot-16"
+              className="link p-bot-10 margin-x-16"
               to="/businesses?category=Capital"
             >
-              {'Capital Legal Services'}
+              {'Capital'}
             </Link>
             <Link
-              className="link col-xs-12 col-md-6 col-lg-2 m-bot-16"
+              className="link p-bot-10 margin-x-16"
+              to="/businesses?category=Legal%20Services"
+            >
+              {'Legal Services'}
+            </Link>
+            <Link
+              className="link p-bot-10 margin-x-16"
               to="/businesses?category=Marketing/Sales"
             >
               {'Marketing/Sales'}
             </Link>
             <Link
-              className="link col-xs-12 col-md-6 col-lg-3 m-bot-16"
+              className="link p-bot-10 margin-x-16"
               to="/businesses?category=Physical%20Space"
             >
               {'Physical Space'}
