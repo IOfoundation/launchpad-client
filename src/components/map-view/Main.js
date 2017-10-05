@@ -62,14 +62,12 @@ class Main extends React.Component {
           center={{lat: centerLat, lng: centerLng}}
           zoom={15}
           bootstrapURLKeys={{
-            key: process.env.GOOGLE_MAP_API_KEY
+            key: process.env.GOOGLE_MAP_API_KEY,
           }}
         >
           {this.props.locations.map(location => {
             const [lng, lat] = this.getCoordinates(location);
-            return (
-              <MapMarker key={location.id} className="" lat={lat} lng={lng} />
-            );
+            return <MapMarker key={location.id} lat={lat} lng={lng} />;
           })}
         </GoogleMapReact>
       );

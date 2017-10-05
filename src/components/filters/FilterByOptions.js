@@ -20,8 +20,7 @@ class FilterByOptions extends React.Component {
     if (selectedfilterOption.children.length > 0) {
       this.setState({selectedfilterOption, subDropdownOpen: true});
     } else {
-      this.props.handleOnChangeFilterOptions(
-        selectedfilterOption.name);
+      this.props.handleOnChangeFilterOptions(selectedfilterOption.name);
     }
   }
   handleClickOutside() {
@@ -38,10 +37,8 @@ class FilterByOptions extends React.Component {
           <button
             className="dropdown-options"
             key={child.id}
-            onClick={() => this.props.handleOnChangeFilterOptions(
-               child.name,
-            )}
-        >
+            onClick={() => this.props.handleOnChangeFilterOptions(child.name)}
+          >
             <span>{child.name}</span>
           </button>
         ))}
@@ -85,7 +82,8 @@ class FilterByOptions extends React.Component {
             </button>
           ))}
         </div>
-        {this.state.selectedfilterOption && this._renderSubOptions(this.state.selectedfilterOption)}
+        {this.state.selectedfilterOption &&
+          this._renderSubOptions(this.state.selectedfilterOption)}
       </div>
     );
   }

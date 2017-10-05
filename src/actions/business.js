@@ -35,7 +35,7 @@ const filtersDataObject = filters => {
 
 const filtersObject = (filterValue, filters, removeFilter) => {
   const newFilters = cloneDeep(filters);
-  if (removeFilter === true) {
+  if (removeFilter) {
     if (isString(newFilters.category)) {
       newFilters.category = [];
     } else {
@@ -85,7 +85,7 @@ export function filterBusinessesByName(filterValue, currentParams) {
     const locations = httpResponse.data;
     const metadata = {
       pagination: {
-        current_page: currentParams.page,
+        currentPage: currentParams.page,
       },
     };
     dispatch(locationsDataObject(locations));
@@ -96,16 +96,14 @@ export function filterBusinessesByName(filterValue, currentParams) {
 
 export function filterLocations(filterValue, currentParams, removeFilter) {
   return async (dispatch: Function) => {
-    var filters;
-    filters = filtersObject(filterValue, currentParams, removeFilter);
-    console.log("postFilters: ",filters);
+    const filters = filtersObject(filterValue, currentParams, removeFilter);
     const httpResponse = await httpRequest.get('/api/search', {
       params: filters,
     });
     const locations = httpResponse.data;
     const metadata = {
       pagination: {
-        current_page: currentParams.page,
+        currentPage: currentParams.page,
       },
     };
     dispatch(locationsDataObject(locations));

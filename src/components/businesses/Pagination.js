@@ -4,8 +4,8 @@ import {MdChevronRight, MdChevronLeft} from 'react-icons/lib/md';
 
 class Pagination extends React.Component {
   render() {
-    const {current_page} = this.props.businessesMetadata.pagination;
-    const {next_page} = this.props.businessesMetadata.pagination;
+    const {currentPage} = this.props.businessesMetadata.pagination;
+    const {nextPage} = this.props.businessesMetadata.pagination;
     let prevPageArrow = null;
     prevPageArrow = (
       <MdChevronLeft
@@ -13,7 +13,7 @@ class Pagination extends React.Component {
         size={15}
         color={'#fff'}
         style={{marginRight: 15}}
-        onClick={() => this.props.handleChangePage(current_page - 1)}
+        onClick={() => this.props.handleChangePage(currentPage - 1)}
       />
     );
 
@@ -24,7 +24,7 @@ class Pagination extends React.Component {
         size={15}
         color={'#fff'}
         style={{marginLeft: 15}}
-        onClick={() => this.props.handleChangePage(next_page)}
+        onClick={() => this.props.handleChangePage(nextPage)}
       />
     );
     return (

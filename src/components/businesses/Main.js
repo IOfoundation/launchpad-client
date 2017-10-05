@@ -62,12 +62,12 @@ class Main extends Component {
   }
 }
 Main.propTypes = {
-  locations: PropTypes.array.isRequired,
-  organizations: PropTypes.array.isRequired,
   businessesMetadata: PropTypes.object.isRequired,
   handleChangePage: PropTypes.func.isRequired,
   handleClickOnBusiness: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
+  locations: PropTypes.array.isRequired,
+  organizations: PropTypes.array.isRequired,
 };
 
 export default Main;

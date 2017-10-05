@@ -57,8 +57,8 @@ function getOrganizationsFromLocations(locations) {
 }
 
 function filterById(arr) {
-  var f = [];
+  const f = [];
   return arr.filter(n => {
-    return f.indexOf(n.id) == -1 && f.push(n.id);
+    return f.indexOf(n.id) === -1 && f.push(n.id);
   });
 }

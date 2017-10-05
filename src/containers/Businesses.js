@@ -24,20 +24,12 @@ export class Businesses extends Component {
   handleOnChangeFilterOptions(filterValue) {
     const locationsFilters = this.props.location.query;
     this.getFilterChips();
-    this.props.actions.filterLocations(
-      filterValue,
-      locationsFilters,
-      false,
-    );
+    this.props.actions.filterLocations(filterValue, locationsFilters);
   }
 
   handleOnRemoveFilterOption(filterValue) {
     const locationsFilters = this.props.location.query;
-    this.props.actions.filterLocations(
-      filterValue,
-      locationsFilters,
-      true,
-    );
+    this.props.actions.filterLocations(filterValue, locationsFilters, true);
   }
 
   getFilterChips() {
@@ -45,7 +37,7 @@ export class Businesses extends Component {
   }
 
   handleClickOnClearAllFilters() {
-    this.props.actions.filterLocations('', '', false);
+    this.props.actions.filterLocations('', '');
   }
 
   handleChangePage(page) {
@@ -76,10 +68,19 @@ export class Businesses extends Component {
                   }
                 </h2>
                 <FilterBox
-                  handleTextSearchBusinesses={this.handleTextSearchBusinesses.bind(this)}
+                  handleTextSearchBusinesses={this.handleTextSearchBusinesses.bind(
+                    this
+                  )}
                   filterOptions={this.props.filters}
-                  handleOnChangeFilterOptions={this.handleOnChangeFilterOptions.bind(this)}
-                  handleOnRemoveFilterOption={this.handleOnRemoveFilterOption.bind(this)}
+                  handleClickOnClearAllFilters={this.handleClickOnClearAllFilters.bind(
+                    this
+                  )}
+                  handleOnChangeFilterOptions={this.handleOnChangeFilterOptions.bind(
+                    this
+                  )}
+                  handleOnRemoveFilterOption={this.handleOnRemoveFilterOption.bind(
+                    this
+                  )}
                   getFilterChips={this.getFilterChips.bind(this)}
                 />
               </div>
@@ -92,7 +93,9 @@ export class Businesses extends Component {
             businessesMetadata={this.props.metadata}
             handleChangePage={this.handleChangePage.bind(this)}
             handleClickOnBusiness={this.handleClickOnBusiness.bind(this)}
-            handleClickOnClearAllFilters={this.handleClickOnClearAllFilters.bind(this)}
+            handleClickOnClearAllFilters={this.handleClickOnClearAllFilters.bind(
+              this
+            )}
           />
         </section>
       </MainLayout>
@@ -102,11 +105,11 @@ export class Businesses extends Component {
 
 Businesses.propTypes = {
   actions: PropTypes.object,
-  locations: PropTypes.array.isRequired,
-  organizations: PropTypes.array.isRequired,
   filters: PropTypes.object.isRequired,
   location: PropTypes.object,
+  locations: PropTypes.array.isRequired,
   metadata: PropTypes.object.isRequired,
+  organizations: PropTypes.array.isRequired,
   params: PropTypes.object,
 };
 
@@ -117,7 +120,7 @@ const mapStateToProps = _state => {
     organizations: businesses.organizations,
     filters: businesses.filters,
     metadata: businesses.metadata,
-    queries: routing.locationBeforeTransitions.query
+    queries: routing.locationBeforeTransitions.query,
   };
 };
 

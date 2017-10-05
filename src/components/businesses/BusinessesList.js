@@ -1,13 +1,17 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {PropTypes} from 'prop-types';
 import {MdClear} from 'react-icons/lib/md';
 
 import Business from './Business';
 
 //const BusinessesList = ({businesses, handleClickOnBusiness, expanded}) => {
-class BusinessesList extends Component {
+class BusinessesList extends React.Component {
   render() {
-    const {handleClickOnBusiness, handleClickOnClearAllFilters, organizations} = this.props;
+    const {
+      handleClickOnBusiness,
+      handleClickOnClearAllFilters,
+      organizations,
+    } = this.props;
     return (
       <div>
         {organizations.map(organization => {
@@ -22,11 +26,9 @@ class BusinessesList extends Component {
         <button
           className="btn-link btn-link-primary"
           onClick={handleClickOnClearAllFilters}
-          >
-            Clear Search Result
-          <MdClear
-            size={30}
-            color={'#2AD587'}/>
+        >
+          {'Clear Search Result'}
+          <MdClear size={30} color={'#2AD587'} />
         </button>
       </div>
     );
@@ -34,11 +36,11 @@ class BusinessesList extends Component {
 }
 
 BusinessesList.propTypes = {
-  locations: PropTypes.array.isRequired,
-  organizations: PropTypes.array.isRequired,
   expanded: PropTypes.bool,
   handleClickOnBusiness: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func,
+  locations: PropTypes.array.isRequired,
+  organizations: PropTypes.array.isRequired,
 };
 
 export default BusinessesList;

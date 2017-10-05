@@ -26,10 +26,7 @@ export class Business extends Component {
     const businessesFilters = this.props.location.query;
     const filterValue = event.target.id;
 
-    this.props.actions.filterBusinesses(
-      filterValue,
-      businessesFilters
-    );
+    this.props.actions.filterBusinesses(filterValue, businessesFilters);
   }
 
   render() {

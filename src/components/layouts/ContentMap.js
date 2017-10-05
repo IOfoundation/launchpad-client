@@ -21,7 +21,6 @@ class ContentMap extends Component {
       <div className="row between-xs middle-xs reducedMapBottom">
         <button
           className="btn-link btn-link-primary text-bold text-xs-margin"
-          className="btn-link btn-link-primary text-xs-margin"
           onClick={this.props.expandMap}
         >
           {'Expand Map'}
@@ -49,8 +48,8 @@ class ContentMap extends Component {
           <div
             className={
               this.props.expanded ? (
-                'col-md-8 col-xs-12 businessList p-left-0')
-              : (
+                'col-md-8 col-xs-12 businessList p-left-0'
+              ) : (
                 'col-md-9 col-xs-12 businessList--reduced p-left-0'
               )
             }
@@ -67,18 +66,20 @@ class ContentMap extends Component {
           >
             <div
               className={
-                (this.props.expanded
-                  ? 'map-container-collapse'
-                  : 'map-container-expand'
+                this.props.expanded ? (
+                  'map-container-collapse'
+                ) : (
+                  'map-container-expand'
                 )
               }
             >
               <MapView locations={locations} />
             </div>
-            {this.props.expanded
-              ? this._renderReduceButton()
-              : this._renderExpandButton()
-            }
+            {this.props.expanded ? (
+              this._renderReduceButton()
+            ) : (
+              this._renderExpandButton()
+            )}
           </div>
         </div>
       </div>
@@ -87,11 +88,11 @@ class ContentMap extends Component {
 }
 
 ContentMap.propTypes = {
-  locations: PropTypes.array.isRequired,
-  organizations: PropTypes.array.isRequired,
   children: PropTypes.node,
   expanded: PropTypes.bool,
   expandMap: PropTypes.func.isRequired,
+  locations: PropTypes.array.isRequired,
+  organizations: PropTypes.array.isRequired,
   reduceMap: PropTypes.func.isRequired,
   topBar: PropTypes.node,
 };

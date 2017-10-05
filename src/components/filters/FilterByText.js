@@ -21,7 +21,7 @@ class FilterByText extends React.Component {
   }
   clearAll() {
     this.setState({showFilterLabel: false, labelTop: false});
-    this.props.handleTextSearchBusinesses([]);
+    this.props.handleClickOnClearAllFilters();
   }
   _inputClicked() {
     this.setState({labelTop: !this.state.expanded});
@@ -30,9 +30,9 @@ class FilterByText extends React.Component {
     this.setState({labelTop: false});
   }
   renderFilter() {
-    const filters = this.props.getFilterChips()
+    const filters = this.props.getFilterChips();
     if (isEmpty(filters.category)) {
-      return (null);
+      return null;
     } else if (isString(filters.category)) {
       return (
         <Chip
@@ -40,7 +40,7 @@ class FilterByText extends React.Component {
           text={filters.category}
           handleClick={this.deleteFilter.bind(this)}
         />
-      )
+      );
     } else {
       return filters.category.map(filter => (
         <Chip
@@ -52,7 +52,7 @@ class FilterByText extends React.Component {
     }
   }
   render() {
-    const filters = this.props.getFilterChips()
+    const filters = this.props.getFilterChips();
     return (
       <div
         className={
@@ -64,14 +64,15 @@ class FilterByText extends React.Component {
         }
       >
         <div className="grid search-text-form p-bot-16">
-          <div className={
-            isEmpty(filters) ? (
-              'filter-label-container-hide'
-            ) : (
-              'filter-label-container-show'
-            )
-          }
-        >
+          <div
+            className={
+              isEmpty(filters) ? (
+                'filter-label-container-hide'
+              ) : (
+                'filter-label-container-show'
+              )
+            }
+          >
             {this.renderFilter()}
             <a className="search-filter-clear" onClick={() => this.clearAll()}>
               {'Clear All'}
@@ -119,20 +120,16 @@ class FilterByText extends React.Component {
           )}
           <div
             className={
-              this.state.labelTop ? (
-                'option-dropdown-show'
-              ) : (
-                'hero_input-hide'
-              )
+              this.state.labelTop ? 'option-dropdown-show' : 'hero_input-hide'
             }
           >
             <ul className="option-dropdown-list">
               <li>
-                Business
+                {'Business'}
                 <img src="../static-data/images/LocationBlack.png" />
               </li>
               <li>
-                Business
+                {'Business'}
                 <img src="../static-data/images/LocationBlack.png" />
               </li>
             </ul>
@@ -147,8 +144,10 @@ class FilterByText extends React.Component {
 }
 
 FilterByText.propTypes = {
+  getFilterChips: PropTypes.func.isRequired,
+  handleClickOnClearAllFilters: PropTypes.func.isRequired,
+  handleOnRemoveFilterOption: PropTypes.func.isRequired,
   handleTextSearchBusinesses: PropTypes.func.isRequired,
-  handleOnRemoveFilterOption: PropTypes.func.isRequired
 };
 
 export default FilterByText;
