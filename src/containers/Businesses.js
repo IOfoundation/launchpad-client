@@ -88,12 +88,16 @@ export class Businesses extends Component {
           </div>
 
           <BusinessesView
+            filterOptions={this.props.filters}
             locations={this.props.locations}
             organizations={this.props.organizations}
             businessesMetadata={this.props.metadata}
             handleChangePage={this.handleChangePage.bind(this)}
             handleClickOnBusiness={this.handleClickOnBusiness.bind(this)}
             handleClickOnClearAllFilters={this.handleClickOnClearAllFilters.bind(
+              this
+            )}
+            handleOnChangeFilterOptions={this.handleOnChangeFilterOptions.bind(
               this
             )}
           />

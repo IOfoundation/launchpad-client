@@ -25,7 +25,11 @@ class Main extends Component {
   }
 
   _renderResultsInfo() {
-    return <ResultInfo businessesMetadata={this.props.businessesMetadata} />;
+    return <ResultInfo
+      businessesMetadata={this.props.businessesMetadata}
+      handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
+      filterOptions={this.props.filterOptions.businessTypes}
+    />;
   }
   render() {
     const {
@@ -63,9 +67,11 @@ class Main extends Component {
 }
 Main.propTypes = {
   businessesMetadata: PropTypes.object.isRequired,
+  filterOptions: PropTypes.array.isRequired,
   handleChangePage: PropTypes.func.isRequired,
   handleClickOnBusiness: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
+  handleOnChangeFilterOptions: PropTypes.func.isRequired,
   locations: PropTypes.array.isRequired,
   organizations: PropTypes.array.isRequired,
 };
