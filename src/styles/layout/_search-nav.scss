@@ -92,7 +92,7 @@
     &-half {
       width: 50%;
       display: inline-block;
-      border-right: 1px solid rgba(0, 0, 0, 0.15);
+      float: left;
     }
   }
   &-container {
@@ -136,13 +136,12 @@
   &-sub-container {
     background: white;
     border:0px;
-    position: absolute;
-    top: 0px;
-    right: 0px;
     z-index: 10;
     padding: 12px 4px 12px 4px;
     color: $primary-color;
-    width: 48%
+    width: 48%;
+    display: inline-block;
+    border-left: 1px solid rgba(0, 0, 0, 0.15);
   }
 }
 
