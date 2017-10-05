@@ -36,26 +36,14 @@ const filtersDataObject = filters => {
 const filtersObject = (filterValue, filters, removeFilter) => {
   const newFilters = cloneDeep(filters);
   if (removeFilter) {
-    if (isString(newFilters.category)) {
-      newFilters.category = [];
-    } else {
-      const filterIndex = newFilters.category.indexOf(filterValue);
-      newFilters.category.splice(filterIndex, 1);
-    }
+    _removeFilters(filterValue, newFilters)
   } else {
-    if (!filterValue) {
-      return newFilters;
-    }
-    if (isEmpty(filters)) {
-      newFilters.category = [filterValue];
-    } else if (isString(newFilters.category)) {
-      newFilters.category = [newFilters.category, filterValue];
-    } else {
-      newFilters.category.push(filterValue);
-    }
+    _addFilters(filterValue, newFilters)
   }
   return newFilters;
 };
+
+
 
 const pushBrowserHistory = filters => {
   const filterString = queryString.stringify(filters, {encode: false});
@@ -181,4 +169,28 @@ export function fetchFilterOptions() {
       })
     );
   };
+}
+
+function _removeFilters(filterValue, newFilters) {
+  if (isString(newFilters.category)) {
+    newFilters.category = [];
+  } else {
+    const filterIndex = newFilters.category.indexOf(filterValue);
+    newFilters.category.splice(filterIndex, 1);
+  }
+  return newFilters;
+}
+
+function _addFilters(filterValue, newFilters) {
+  if (!filterValue) {
+    return newFilters;
+  }
+  if (isEmpty(newFilters)) {
+    newFilters.category = [filterValue];
+  } else if (isString(newFilters.category)) {
+    newFilters.category = [newFilters.category, filterValue];
+  } else {
+    newFilters.category.push(filterValue);
+  }
+  return newFilters;
 }
