@@ -18,9 +18,8 @@
       outline: none;
     }
     .small-width-search {
-      width: 25%;
+      width: 100%;
       transition: all 0.2s ease-in;
-      float: right;
     }
     .full-width-search {
       border: none;
@@ -155,12 +154,14 @@
     &-label {
       background-color: $white-color;
       color: $primary-color;
-      width: 15%;
-      border-radius: 16px;
-      padding: 2px 11px 2px 9px;
+      border-radius: 21px;
+      padding: 4px 11px 4px 9px;
       font-size: 14px !important;
       font-weight: bold !important;
       margin-right: 8px;
+      margin-bottom: 7px;
+      white-space: nowrap;
+      display: inline-block;
     }
     &-icon {
       margin-left: 12px;
@@ -169,6 +170,8 @@
       color: $white-color;
       opacity: 0.75;
       padding-left: 8px;
+      white-space: nowrap;
+      display: inline-block;
     }
   }
 }
@@ -224,3 +227,7 @@
       margin-bottom: 16px;
     }
 }
+.full-width-text-filter {
+   position: absolute;
+   width: 100%;
+ }
