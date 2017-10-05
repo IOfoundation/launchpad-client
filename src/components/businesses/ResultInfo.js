@@ -13,6 +13,10 @@ class ResultInfo extends Component {
     this.setState({showOptions: !this.state.showOptions});
   }
 
+  _onClick(filter) {
+    this.props.handleOnChangeFilterOptions(filter.name)
+  }
+
   render() {
     const {businessesMetadata: {totalOrganizations}} = this.props;
     return (
@@ -21,7 +25,11 @@ class ResultInfo extends Component {
           {'Select a business type that represents you.'}
         </p>
         <div className="col-xs-12 col-md-4 col-lg-4 m-bot-16 p-right-0">
-          <button className="btn btn-search btn-outline">
+          <button
+            className="btn btn-search btn-outline"
+            key={this.props.filterOptions[0].id}
+            onClick={e => this._onClick(this.props.filterOptions[0])}
+            >
             <div className="btn-search-text">
               <span>{'Startup or High'}</span>
               <span>{'Growth Business'}</span>
@@ -30,7 +38,11 @@ class ResultInfo extends Component {
           </button>
         </div>
         <div className="col-xs-12 col-md-4 col-lg-4 m-bot-16 p-right-0">
-          <button className="btn btn-search btn-outline">
+          <button
+            className="btn btn-search btn-outline"
+            key={this.props.filterOptions[1].id}
+            onClick={e => this._onClick(this.props.filterOptions[1])}
+            >
             <div className="btn-search-text">
               <span>{'Main Street/'}</span>
               <span>{'Small Business'}</span>
@@ -39,7 +51,11 @@ class ResultInfo extends Component {
           </button>
         </div>
         <div className="col-xs-12 col-md-4 col-lg-4 m-bot-16 p-right-0">
-          <button className="btn btn-search btn-outline">
+          <button
+            className="btn btn-search btn-outline"
+            key={this.props.filterOptions[2].id}
+            onClick={e => this._onClick(this.props.filterOptions[2])}
+            >
             <div className="btn-search-text">
               <span>{'Microenterprise or'}</span>
               <span>{'Home-Based Business'}</span>
@@ -55,7 +71,9 @@ class ResultInfo extends Component {
 }
 
 ResultInfo.propTypes = {
+  filterOptions: PropTypes.array.isRequired,
   businessesMetadata: PropTypes.object.isRequired,
+  handleOnChangeFilterOptions: PropTypes.func.isRequired,
 };
 
 export default ResultInfo;
