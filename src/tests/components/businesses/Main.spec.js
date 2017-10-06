@@ -6,7 +6,16 @@ import BusinessesPage from '../../../components/businesses/Main';
 const locations = [];
 const organizations = [];
 const businessesMetadata = {};
-const filters = [];
+const filters = {
+  'businessServices': [],
+  'businessTypes':[
+    '0': {},
+    '1': {},
+    '2': {}
+  ],
+  'stages': [],
+  'communities': [],
+};
 
 const handleChangePage = jest.fn();
 const handleClickOnBusiness = jest.fn();
