@@ -25,11 +25,15 @@ class Main extends Component {
   }
 
   _renderResultsInfo() {
-    return <ResultInfo
-      businessesMetadata={this.props.businessesMetadata}
-      handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
-      filterOptions={this.props.filterOptions.businessTypes}
-    />;
+    if (this.props.filterOptions.businessTypes.length === 3) {
+      return <ResultInfo
+        businessesMetadata={this.props.businessesMetadata}
+        handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
+        filterOptions={this.props.filterOptions.businessTypes}
+      />;
+    } else {
+      return null;
+    }
   }
   render() {
     const {
@@ -67,7 +71,7 @@ class Main extends Component {
 }
 Main.propTypes = {
   businessesMetadata: PropTypes.object.isRequired,
-  filterOptions: PropTypes.array.isRequired,
+  filterOptions: PropTypes.object.isRequired,
   handleChangePage: PropTypes.func.isRequired,
   handleClickOnBusiness: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,

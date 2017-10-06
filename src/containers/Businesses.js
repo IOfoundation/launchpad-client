@@ -12,8 +12,8 @@ import * as actions from '../actions/business';
 export class Businesses extends Component {
   componentWillMount(_nextProps) {
     const locationsFilters = this.props.location.query;
-    this.props.actions.filterLocations(null, locationsFilters);
     this.props.actions.fetchFilterOptions();
+    this.props.actions.filterLocations(null, locationsFilters);
   }
 
   handleTextSearchBusinesses(businessName) {
