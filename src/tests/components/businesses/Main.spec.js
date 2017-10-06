@@ -3,19 +3,28 @@ import {shallow} from 'enzyme';
 
 import BusinessesPage from '../../../components/businesses/Main';
 
-const businesses = [];
+const locations = [];
+const organizations = [];
 const businessesMetadata = {};
+const filters = [];
+
 const handleChangePage = jest.fn();
 const handleClickOnBusiness = jest.fn();
+const handleClickOnClearAllFilters = jest.fn();
+const handleOnChangeFilterOptions = jest.fn();
 
 describe('<BusinessesPage />', () => {
   it('Renders a BusinessesList component', () => {
     const wrapper = shallow(
       <BusinessesPage
-        businesses={businesses}
+        filterOptions={filters}
+        locations={locations}
+        organizations={organizations}
         businessesMetadata={businessesMetadata}
         handleChangePage={handleChangePage}
         handleClickOnBusiness={handleClickOnBusiness}
+        handleClickOnClearAllFilters={handleClickOnClearAllFilters}
+        handleOnChangeFilterOptions={handleOnChangeFilterOptions}
       />
     );
     expect(wrapper.find('BusinessesList').length).toEqual(1);
@@ -24,10 +33,14 @@ describe('<BusinessesPage />', () => {
   it('Renders a Pagination component', () => {
     const wrapper = shallow(
       <BusinessesPage
-        businesses={businesses}
+        filterOptions={filters}
+        locations={locations}
+        organizations={organizations}
         businessesMetadata={businessesMetadata}
         handleChangePage={handleChangePage}
         handleClickOnBusiness={handleClickOnBusiness}
+        handleClickOnClearAllFilters={handleClickOnClearAllFilters}
+        handleOnChangeFilterOptions={handleOnChangeFilterOptions}
       />
     );
     expect(wrapper.find('Pagination').length).toEqual(1);
