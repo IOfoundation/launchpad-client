@@ -5,6 +5,29 @@ import {browserHistory} from 'react-router';
 import queryString from 'query-string';
 import {isEmpty, isString, cloneDeep} from 'lodash';
 
+const MaxItemsDisplayedPerPage = 1;
+
+const paginationMetadata = (links) => {
+  const _paginationMetadata = {};
+  Object.keys(links).forEach(type => {
+    const link = links[type];
+    if (Boolean(link)) {
+      _paginationMetadata[type] = {};
+      const urlParse = new URL(link);
+      urlParse.search.slice(1).split('&').forEach(pairs => {
+        const [param, value] = pairs.split('=');
+        if (param === 'page') {
+          _paginationMetadata[type].page = parseInt(value, 10);
+        }
+        if (param === 'per_page') {
+          _paginationMetadata[type].per_page = parseInt(value, 10);
+        }
+      });
+    }
+  });
+  return _paginationMetadata;
+}
+
 const businessDataObject = business => {
   return {
     type: types.FETCH_BUSINESS,
@@ -46,8 +69,8 @@ const filtersObject = (filterValue, filters, removeFilter) => {
 
 
 const pushBrowserHistory = filters => {
-  const filterString = queryString.stringify(filters, {encode: false});
-
+  let filterString = queryString.stringify(filters, {encode: false});
+  filterString = filterString.replace(/&per_page=\d+/, '');
   return browserHistory.push({
     pathname: '/businesses',
     search: `?${filterString}`,
@@ -82,19 +105,30 @@ export function filterBusinessesByName(filterValue, currentParams) {
   };
 }
 
-export function filterLocations(filterValue, currentParams, removeFilter) {
+export function filterBusinesses(filterValue, currentParams, removeFilter) {
   return async (dispatch: Function) => {
     const filters = filtersObject(filterValue, currentParams, removeFilter);
-    const httpResponse = await httpRequest.get('/api/search', {
-      params: filters,
+    const params = {
+      ...filters,
+      per_page: MaxItemsDisplayedPerPage,
+    }
+    if (!params.hasOwnProperty('page')){
+      Object.assign(params, {page: 1});
+    }
+
+    const httpResponse = await httpRequest.get('/api/organizations/search', {
+      params
     });
-    const locations = httpResponse.data;
-    const metadata = {
+
+    const organizations = httpResponse.data;
+    const metadata  = {
       pagination: {
-        currentPage: currentParams.page,
+        ...paginationMetadata(JSON.parse(httpResponse.headers.link)),
+        currentPage: params.page,
       },
+      totalOrganizations: httpResponse.headers['x-total-count'],
     };
-    dispatch(locationsDataObject(locations));
+    dispatch(locationsDataObject(organizations));
     dispatch(businessesMetaDataObject(metadata));
     pushBrowserHistory(filters);
   };
@@ -102,17 +136,28 @@ export function filterLocations(filterValue, currentParams, removeFilter) {
 
 export function changePage(page, currentParams) {
   return async (dispatch: Function) => {
+
     const params = {
       ...currentParams,
       page,
+      per_page: MaxItemsDisplayedPerPage,
     };
-    const httpResponse = await httpRequest.get('/api/organizations', {
+
+    const httpResponse = await httpRequest.get('/api/organizations/search', {
       params,
     });
-    const locations = httpResponse.data;
-    const {metadata} = httpResponse.data;
-    dispatch(locationsDataObject(locations));
+
+    const organizations = httpResponse.data;
+    const metadata  = {
+      pagination: {
+        ...paginationMetadata(JSON.parse(httpResponse.headers.link)),
+        currentPage: params.page,
+      },
+      totalOrganizations: httpResponse.headers['x-total-count'],
+    };
+    dispatch(locationsDataObject(organizations));
     dispatch(businessesMetaDataObject(metadata));
+
     pushBrowserHistory(params);
   };
 }
@@ -185,7 +230,7 @@ function _addFilters(filterValue, newFilters) {
   if (!filterValue) {
     return newFilters;
   }
-  if (isEmpty(newFilters)) {
+  if (isEmpty(newFilters.category)) {
     newFilters.category = [filterValue];
   } else if (isString(newFilters.category)) {
     newFilters.category = [newFilters.category, filterValue];

@@ -12,7 +12,13 @@ const initialState = {
     locations: [],
     organizations: [],
     metadata: {
-      pagination: {},
+      pagination: {
+        last: {
+          page: null,
+          per_page: null,
+        },
+        next: null,
+      },
     },
     filters: {
       businessServices: [],

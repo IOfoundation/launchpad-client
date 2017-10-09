@@ -55,7 +55,6 @@ class Main extends Component {
         topBar={this._renderResultsInfo()}
       >
         <BusinessesList
-          locations={locations}
           organizations={organizations}
           handleClickOnBusiness={handleClickOnBusiness}
           handleClickOnClearAllFilters={handleClickOnClearAllFilters}
@@ -76,7 +75,6 @@ Main.propTypes = {
   handleClickOnBusiness: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
-  locations: PropTypes.array.isRequired,
   organizations: PropTypes.array.isRequired,
 };
 

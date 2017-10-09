@@ -15,11 +15,9 @@ export default function(state: STATE = initialState, action: ACTION): STATE {
   switch (action.type) {
     case types.FETCH_LOCATIONS: {
       const {locations} = action;
-
       return {
         ...state,
-        locations,
-        organizations: getOrganizationsFromLocations(locations),
+        organizations: locations,
       };
     }
 

@@ -13,7 +13,7 @@ export function fetchServices() {
   return async (dispatch: Function) => {
     const httpResponse = await httpRequest.get('api/categories', {
       params: {
-        'filters[name_cont]': 'BusinessType',
+        'filters[name]': 'Business Type',
       },
     });
     const services = httpResponse.data[0].children;

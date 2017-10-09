@@ -13,7 +13,7 @@ export class Businesses extends Component {
   componentWillMount(_nextProps) {
     const locationsFilters = this.props.location.query;
     this.props.actions.fetchFilterOptions();
-    this.props.actions.filterLocations(null, locationsFilters);
+    this.props.actions.filterBusinesses(null, locationsFilters);
   }
 
   handleTextSearchBusinesses(businessName) {
@@ -22,14 +22,15 @@ export class Businesses extends Component {
   }
 
   handleOnChangeFilterOptions(filterValue) {
+    console.log(1)
     const locationsFilters = this.props.location.query;
     this.getFilterChips();
-    this.props.actions.filterLocations(filterValue, locationsFilters);
+    this.props.actions.filterBusinesses(filterValue, locationsFilters);
   }
 
   handleOnRemoveFilterOption(filterValue) {
     const locationsFilters = this.props.location.query;
-    this.props.actions.filterLocations(filterValue, locationsFilters, true);
+    this.props.actions.filterBusinesses(filterValue, locationsFilters, true);
   }
 
   getFilterChips() {
@@ -37,7 +38,7 @@ export class Businesses extends Component {
   }
 
   handleClickOnClearAllFilters() {
-    this.props.actions.filterLocations('', '');
+    this.props.actions.filterBusinesses('', '');
   }
 
   handleChangePage(page) {
@@ -89,7 +90,6 @@ export class Businesses extends Component {
 
           <BusinessesView
             filterOptions={this.props.filters}
-            locations={this.props.locations}
             organizations={this.props.organizations}
             businessesMetadata={this.props.metadata}
             handleChangePage={this.handleChangePage.bind(this)}
@@ -110,8 +110,6 @@ export class Businesses extends Component {
 Businesses.propTypes = {
   actions: PropTypes.object,
   filters: PropTypes.object.isRequired,
-  location: PropTypes.object,
-  locations: PropTypes.array.isRequired,
   metadata: PropTypes.object.isRequired,
   organizations: PropTypes.array.isRequired,
   params: PropTypes.object,
@@ -120,7 +118,6 @@ Businesses.propTypes = {
 const mapStateToProps = _state => {
   const {businesses, routing} = _state;
   return {
-    locations: businesses.locations,
     organizations: businesses.organizations,
     filters: businesses.filters,
     metadata: businesses.metadata,

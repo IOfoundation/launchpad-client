@@ -30,7 +30,7 @@ const Main = ({handleSubmitSearchBusinessesForm}) => {
           <div className="margin-auto margin-y-20">
             <Link
               className="link p-bot-10 margin-x-16 m-bot-16"
-              to="/businesses?category=Bussines%20Planning/Managment"
+              to="/businesses?category=Planning/Managment"
             >
               {'Bussines Planning/Managment'}
             </Link>

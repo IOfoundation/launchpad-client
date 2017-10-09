@@ -39,7 +39,6 @@ BusinessesList.propTypes = {
   expanded: PropTypes.bool,
   handleClickOnBusiness: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func,
-  locations: PropTypes.array.isRequired,
   organizations: PropTypes.array.isRequired,
 };
 
