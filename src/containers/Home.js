@@ -9,15 +9,15 @@ import * as actions from '../actions/home';
 
 export class Home extends Component {
   componentWillMount(_nextProps) {
-    this.props.actions.fetchServices();
+    //this.props.actions.fetchServices();
   }
 
   handleClickOnServiceTag(service) {
     this.props.actions.filterBusinessesByService(service);
   }
 
-  handleSubmitSearchBusinessesForm(businessName) {
-    this.props.actions.filterBusinessesByName(businessName);
+  handleTextSearchBusinessesForm(filter) {
+    this.props.actions.filterServices(filter);
   }
 
   render() {
@@ -27,7 +27,7 @@ export class Home extends Component {
           <HomeView
             services={this.props.services}
             handleClickOnServiceTag={this.handleClickOnServiceTag.bind(this)}
-            handleSubmitSearchBusinessesForm={this.handleSubmitSearchBusinessesForm.bind(
+            handleTextSearchBusinessesForm={this.handleTextSearchBusinessesForm.bind(
               this
             )}
           />

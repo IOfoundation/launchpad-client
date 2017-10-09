@@ -28,7 +28,25 @@ class BusinessesForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.handleSubmitSearchBusinessesForm(this.state.value);
+    this.props.handleTextSearchBusinessesForm(this.state.value);
+  }
+
+  handleKeyPress(value) {
+    this.props.handleTextSearchBusinessesForm(value);
+  }
+
+  renderDropdown() {
+    return (
+      <ul className="hero-dropdown-list">
+        {this.props.services.map(service => (
+          <li>
+            <a href='/businesses?category='>
+              <b>{service.name}</b>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )
   }
 
   render() {
@@ -38,6 +56,7 @@ class BusinessesForm extends React.Component {
           type="text"
           value={this.state.value}
           onChange={this.handleChange}
+          onKeyPress={e => this.handleKeyPress(e.target.value)}
           placeholder="Search for businesses and services"
           className="hero_input businessesName"
           onFocus={e => this.showDropdown(e)}
@@ -52,31 +71,7 @@ class BusinessesForm extends React.Component {
             )
           }
         >
-          <ul className="hero-dropdown-list">
-            <li>
-              <a href="/businesses?category=Bussines%20Planning/Managment">
-                {'Business Planning/Management'}
-              </a>
-            </li>
-            <li>
-              <a href="/businesses?category=Capital">{'Capital'}</a>
-            </li>
-            <li>
-              <a href="/businesses?category=Legal%20Services">
-                {'Legal Services'}
-              </a>
-            </li>
-            <li>
-              <a href="/businesses?category=Marketing/Sales">
-                {'Marketing/Sales'}
-              </a>
-            </li>
-            <li>
-              <a href="/businesses?category=Physical%20Space">
-                {'Physical Space'}
-              </a>
-            </li>
-          </ul>
+          {this.renderDropdown()}
         </div>
       </form>
     );
@@ -84,7 +79,8 @@ class BusinessesForm extends React.Component {
 }
 
 BusinessesForm.propTypes = {
-  handleSubmitSearchBusinessesForm: PropTypes.func.isRequired,
+  services: PropTypes.array,
+  handleTextSearchBusinessesForm: PropTypes.func.isRequired,
 };
 
 export default onClickOutside(BusinessesForm);

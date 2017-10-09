@@ -4,7 +4,7 @@ import {Link} from 'react-router';
 import BusinessesForm from './BusinessesForm';
 import Logo from '../shared/Logo';
 
-const Main = ({handleSubmitSearchBusinessesForm}) => {
+const Main = ({services, handleTextSearchBusinessesForm}) => {
   return (
     <div>
       <section className="hero center-xs">
@@ -22,8 +22,9 @@ const Main = ({handleSubmitSearchBusinessesForm}) => {
           </p>
           <div className="hero_inputContainer">
             <BusinessesForm
-              handleSubmitSearchBusinessesForm={
-                handleSubmitSearchBusinessesForm
+              services={services}
+              handleTextSearchBusinessesForm={
+                handleTextSearchBusinessesForm
               }
             />
           </div>
@@ -67,8 +68,8 @@ const Main = ({handleSubmitSearchBusinessesForm}) => {
 
 Main.propTypes = {
   handleClickOnServiceTag: PropTypes.func.isRequired,
-  handleSubmitSearchBusinessesForm: PropTypes.func.isRequired,
-  services: PropTypes.array.isRequired,
+  handleTextSearchBusinessesForm: PropTypes.func.isRequired,
+  services: PropTypes.array,
 };
 
 export default Main;

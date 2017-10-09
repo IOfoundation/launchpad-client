@@ -4,37 +4,35 @@ import {browserHistory} from 'react-router';
 
 const servicesDataObject = services => {
   return {
-    type: types.FETCH_SERVICES,
+    type: types.FILTER_SERVICES,
     services,
   };
 };
 
-export function fetchServices() {
+export function filterServices(filter) {
   return async (dispatch: Function) => {
-    const httpResponse = await httpRequest.get('api/categories', {
-      params: {
-        'filters[name]': 'Business Type',
-      },
+    const httpResponse = await httpRequest.get('api/categories/search', {
+      params: {'name': filter}
     });
-    const services = httpResponse.data[0].children;
+    const services = httpResponse.data;
     dispatch(servicesDataObject(services));
   };
 }
 
-export function filterBusinessesByService(service) {
+export function filterBusinessesByService(filterString) {
   return () => {
     browserHistory.push({
       pathname: '/businesses',
-      search: `?filters[categories_id_eq]=${service}`,
+      search: `?${filterString}`,
     });
   };
 }
 
-export function filterBusinessesByName(businessName) {
+export function filterBusinessesByName(filterString) {
   return () => {
     browserHistory.push({
       pathname: '/businesses',
-      search: `?filters[name_cont]=${businessName}`,
+      search: `?${filterString}`,
     });
   };
 }
