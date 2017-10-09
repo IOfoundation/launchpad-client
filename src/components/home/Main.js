@@ -23,9 +23,7 @@ const Main = ({services, handleTextSearchBusinessesForm}) => {
           <div className="hero_inputContainer">
             <BusinessesForm
               services={services}
-              handleTextSearchBusinessesForm={
-                handleTextSearchBusinessesForm
-              }
+              handleTextSearchBusinessesForm={handleTextSearchBusinessesForm}
             />
           </div>
           <div className="margin-auto margin-y-20">
@@ -68,8 +66,8 @@ const Main = ({services, handleTextSearchBusinessesForm}) => {
 
 Main.propTypes = {
   handleClickOnServiceTag: PropTypes.func.isRequired,
-  handleTextSearchBusinessesForm: PropTypes.func.isRequired,
-  services: PropTypes.array,
+  handleTextSearchBusinessesForm: PropTypes.func,
+  services: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default Main;

@@ -8,9 +8,7 @@ import HomeView from '../components/home/Main';
 import * as actions from '../actions/home';
 
 export class Home extends Component {
-  componentWillMount(_nextProps) {
-    //this.props.actions.fetchServices();
-  }
+  componentWillMount(_nextProps) {}
 
   handleClickOnServiceTag(service) {
     this.props.actions.filterBusinessesByService(service);
@@ -39,7 +37,7 @@ export class Home extends Component {
 
 Home.propTypes = {
   actions: PropTypes.object,
-  services: PropTypes.array.isRequired,
+  services: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 const mapStateToProps = _state => {

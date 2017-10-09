@@ -12,7 +12,6 @@ class BusinessesForm extends React.Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
@@ -26,12 +25,8 @@ class BusinessesForm extends React.Component {
     this.setState({showDropdown: false});
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    this.props.handleTextSearchBusinessesForm(this.state.value);
-  }
-
   handleKeyPress(value) {
+    this.showDropdown();
     this.props.handleTextSearchBusinessesForm(value);
   }
 
@@ -39,19 +34,19 @@ class BusinessesForm extends React.Component {
     return (
       <ul className="hero-dropdown-list">
         {this.props.services.map(service => (
-          <li>
-            <a href='/businesses?category='>
+          <li key={service.id}>
+            <a href={`/businesses?category=${service.name}`}>
               <b>{service.name}</b>
             </a>
           </li>
         ))}
       </ul>
-    )
+    );
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form>
         <input
           type="text"
           value={this.state.value}
@@ -59,7 +54,6 @@ class BusinessesForm extends React.Component {
           onKeyPress={e => this.handleKeyPress(e.target.value)}
           placeholder="Search for businesses and services"
           className="hero_input businessesName"
-          onFocus={e => this.showDropdown(e)}
         />
         <MdSearch className="text-search-icon" size={40} color={'#2AD587'} />
         <div
@@ -79,8 +73,8 @@ class BusinessesForm extends React.Component {
 }
 
 BusinessesForm.propTypes = {
-  services: PropTypes.array,
   handleTextSearchBusinessesForm: PropTypes.func.isRequired,
+  services: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default onClickOutside(BusinessesForm);

@@ -3,8 +3,8 @@
 1. Pull latest from fullstacklabs/Ohana-API
 2. Setup the API `bin/setup`
 3. Run `script/reset` to reset the DB and accept new data
-4. Run `script/import` to import the parsed csvs into the DB
-5. Run `bin/rake create_categories` to import the taxonomies
+4. Run `bin/rake create_categories` to import the taxonomies
+5. Run `script/import` to import the parsed csvs into the DB
 6. start api with `bundle exec puma -C ./config/puma.rb`
 7. cd back to the client, start client `npm start`
 8. go to http://localhost:3000/businesses
