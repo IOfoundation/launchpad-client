@@ -29,7 +29,7 @@ export class Businesses extends Component {
 
   handleOnRemoveFilterOption(filterValue) {
     const organizationsFilters = this.props.location.query;
-    this.props.actions.filterBusinesses(filterValue, organizationsFilters, true);
+    this.props.actions.filterOrganizations(filterValue, organizationsFilters, true);
   }
 
   getFilterChips() {
@@ -37,7 +37,7 @@ export class Businesses extends Component {
   }
 
   handleClickOnClearAllFilters() {
-    this.props.actions.filterBusinesses('', '');
+    this.props.actions.filterOrganizations('', '');
   }
 
   handleChangePage(page) {
