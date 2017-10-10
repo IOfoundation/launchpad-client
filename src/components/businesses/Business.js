@@ -16,6 +16,7 @@ class Business extends Component {
   render() {
     const {business: {categories}, handleClickOnBusiness} = this.props;
     const {business} = this.props;
+    const mainLocation = business.locations[0];
     if (!categories) {
       return (
         <div className="business-card">
@@ -39,7 +40,10 @@ class Business extends Component {
             </h3>
             <p className="preview-details">{business.description}</p>
             <p className="details" />
-            <p className="location">{'1 location | Sacramento, CA'}</p>
+            <p className="location">
+              <span>{business.locations.length} {business.locations.length == 1 ? 'location | ' : 'locations | '}</span>
+              <span>{mainLocation.address.city} {mainLocation.address.state_province}</span>
+            </p>
           </div>
         </div>
       );

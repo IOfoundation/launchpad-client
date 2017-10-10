@@ -155,7 +155,7 @@ export function changePage(page, currentParams) {
       },
       totalOrganizations: httpResponse.headers['x-total-count'],
     };
-    dispatch(locationsDataObject(organizations));
+    dispatch(organizationsDataObject(organizations));
     dispatch(businessesMetaDataObject(metadata));
 
     pushBrowserHistory(params);
