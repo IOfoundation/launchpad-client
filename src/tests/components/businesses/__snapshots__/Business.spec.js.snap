@@ -1,0 +1,266 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Business /> --- Snapshot capturing Snapshot of Business 1`] = `
+<div
+  className="business-card"
+  style={
+    Object {
+      "backgroundColor": "#F2F2F2",
+    }
+  }
+>
+  <div
+    className="business-card-expand grid"
+  >
+    <div
+      className="business col-lg-2 col-md-3 col-xs-12 p-0 m-bot-20"
+      onClick={[Function]}
+    >
+      <img
+        className="business-logo"
+        src="../static-data/images/orgs-placeholder.png"
+      />
+    </div>
+    <div
+      className="business expanded col-lg-10 col-md-9 col-xs-12 p-right-0"
+    >
+      <div
+        className="business-details-container"
+      >
+        <div
+          className="business-information"
+          onClick={[Function]}
+        >
+          <h3
+            className="title m-bot-8"
+          >
+            organization1
+          </h3>
+          <p
+            className="business-description"
+          >
+            orgDescription
+          </p>
+        </div>
+        <div
+          className="col-lg-12 social-icons p-0 m-top-20"
+        />
+      </div>
+      <img
+        className="business-card-icon"
+        onClick={[Function]}
+        src="static-data/images/collapse-icon.png"
+        style={
+          Object {
+            "float": "right",
+          }
+        }
+      />
+    </div>
+    <div
+      className="grid col-lg-12 col-md-12 col-xs-12 full-information p-0"
+    >
+      <div
+        className="grid col-lg-12 col-md-12 col-xs-12 p-0 m-bot-25"
+      >
+        <div
+          className="col-lg-4 col-md-4 col-xs-12 p-0 m-right-52 main-location"
+        >
+          <p
+            className="business-title"
+          >
+            Main Location:
+          </p>
+          <h4>
+            123 Road St
+          </h4>
+          
+          <h4>
+            Sacramento, CA
+          </h4>
+        </div>
+        <div
+          className="col-lg-5 col-md-5 col-xs-12 p-0 main-contact"
+        >
+          <p
+            className="business-title"
+          >
+            Contact:
+          </p>
+          <h4>
+            (530) 795-1520
+          </h4>
+          <h4
+            className="break-word"
+          >
+            jondoe@test.org
+          </h4>
+        </div>
+      </div>
+      <hr />
+      <p
+        className="business-title col-lg-12 col-md-12 col-xs-12 p-0"
+      >
+        Services
+      </p>
+      <div
+        className="col-lg-12 col-md-12 col-xs-12 grid p-0 business-service m-bot-28"
+      >
+        <div
+          className="service-description col-lg-12 col-md-12 col-xs-12 p-left-0"
+        >
+          <h4
+            className="text-bold"
+          >
+            service1
+          </h4>
+          <p>
+            lorem ipsum...
+          </p>
+        </div>
+        <div
+          className="col-lg-12 col-md-12 col-xs-12 p-0 m-top-16"
+        >
+          <a
+            className="
+      search-filter-label
+    "
+            data-value="category1"
+            onClick={[Function]}
+          >
+            <span
+              className="text"
+            >
+              category1
+            </span>
+          </a>
+          <a
+            className="
+      search-filter-label
+    "
+            data-value="category2"
+            onClick={[Function]}
+          >
+            <span
+              className="text"
+            >
+              category2
+            </span>
+          </a>
+          <a
+            className="
+      search-filter-label
+    "
+            data-value="category3"
+            onClick={[Function]}
+          >
+            <span
+              className="text"
+            >
+              category3
+            </span>
+          </a>
+        </div>
+      </div>
+      <div
+        className="col-lg-12 col-md-12 col-xs-12 grid p-0 business-service m-bot-28"
+      >
+        <div
+          className="service-description col-lg-12 col-md-12 col-xs-12 p-left-0"
+        >
+          <h4
+            className="text-bold"
+          >
+            service2
+          </h4>
+          <p>
+            lorem ipsum...
+          </p>
+        </div>
+        <div
+          className="col-lg-12 col-md-12 col-xs-12 p-0 m-top-16"
+        >
+          <a
+            className="
+      search-filter-label
+    "
+            data-value="category1"
+            onClick={[Function]}
+          >
+            <span
+              className="text"
+            >
+              category1
+            </span>
+          </a>
+        </div>
+      </div>
+      <div
+        className="col-lg-12 col-md-12 col-xs-12 grid p-0"
+      >
+        <div
+          className="col-lg-6 col-md-6 col-xs-6 p-0 m-right-54"
+        >
+          <p
+            className="business-title"
+          >
+            Other Locations
+          </p>
+        </div>
+        <div
+          className="col-lg-4 col-md-4 col-xs-6 p-0"
+        >
+          <p
+            className="business-title"
+          >
+            Contact:
+          </p>
+        </div>
+        <div
+          className="col-lg-12 col-md-12 col-xs-12 p-0 grid"
+        >
+          <div
+            className="col-lg-12 col-md-12 col-xs-12 m-bot-24 p-0 grid"
+          >
+            <div
+              className="col-lg-6 col-md-6 col-xs-6 p-0 m-right-54"
+            >
+              <h4>
+                456 Street Rd
+              </h4>
+              <h4>
+                Sacramento, CA 12345
+              </h4>
+            </div>
+            <div
+              className="col-lg-4 col-md-4 col-xs-6 p-0 m-top-24"
+            >
+              <h4>
+                (123) 456 - 7890
+              </h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p
+      className="location text-bold"
+    >
+      <span>
+        2  Locations
+      </span>
+      <span
+        className="m-x-7"
+      >
+        |
+      </span>
+      <span>
+        Main location in 
+        Sacramento
+        , 
+        CA
+      </span>
+    </p>
+  </div>
+</div>
+`;
