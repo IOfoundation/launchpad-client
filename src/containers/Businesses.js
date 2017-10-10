@@ -29,7 +29,11 @@ export class Businesses extends Component {
 
   handleOnRemoveFilterOption(filterValue) {
     const organizationsFilters = this.props.location.query;
-    this.props.actions.filterOrganizations(filterValue, organizationsFilters, true);
+    this.props.actions.filterOrganizations(
+      filterValue,
+      organizationsFilters,
+      true
+    );
   }
 
   getFilterChips() {
@@ -90,6 +94,7 @@ export class Businesses extends Component {
           <BusinessesView
             filterOptions={this.props.filters}
             organizations={this.props.organizations}
+            locations={this.props.locations}
             businessesMetadata={this.props.metadata}
             handleChangePage={this.handleChangePage.bind(this)}
             handleClickOnBusiness={this.handleClickOnBusiness.bind(this)}
@@ -118,6 +123,7 @@ const mapStateToProps = _state => {
   const {businesses, routing} = _state;
   return {
     organizations: businesses.organizations,
+    locations: businesses.locations,
     filters: businesses.filters,
     metadata: businesses.metadata,
     queries: routing.locationBeforeTransitions.query,

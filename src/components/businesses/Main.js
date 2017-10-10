@@ -33,21 +33,21 @@ class Main extends Component {
           filterOptions={this.props.filterOptions.businessTypes}
         />
       );
-    } else {
-      return null;
     }
+    return null;
   }
   render() {
     const {
       businessesMetadata,
       organizations,
+      locations,
       handleClickOnBusiness,
       handleClickOnClearAllFilters,
       handleChangePage,
     } = this.props;
     return (
       <ContentMap
-        organizations={organizations}
+        locations={locations}
         businessesMetadata={businessesMetadata}
         expanded={this.state.expanded}
         expandMap={this.expandMap}

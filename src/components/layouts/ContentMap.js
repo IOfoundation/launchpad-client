@@ -35,7 +35,7 @@ class ContentMap extends Component {
     );
   }
   render() {
-    const {organizations} = this.props;
+    const {locations} = this.props;
     return (
       <div
         className={
@@ -47,11 +47,9 @@ class ContentMap extends Component {
         <div className={'container-center--medium grid m-left-24 p-left-16'}>
           <div
             className={
-              this.props.expanded ? (
-                'col-md-8 col-xs-12 businessList p-left-0'
-              ) : (
-                'col-md-9 col-xs-12 businessList--reduced p-left-0'
-              )
+              this.props.expanded
+                ? 'col-md-8 col-xs-12 businessList p-left-0'
+                : 'col-md-9 col-xs-12 businessList--reduced p-left-0'
             }
           >
             {this.props.children}
@@ -66,20 +64,16 @@ class ContentMap extends Component {
           >
             <div
               className={
-                this.props.expanded ? (
-                  'map-container-collapse'
-                ) : (
-                  'map-container-expand'
-                )
+                this.props.expanded
+                  ? 'map-container-collapse'
+                  : 'map-container-expand'
               }
             >
-              {/* <MapView locations={organizations.locations} /> */}
+              <MapView locations={locations} />
             </div>
-            {this.props.expanded ? (
-              this._renderReduceButton()
-            ) : (
-              this._renderExpandButton()
-            )}
+            {this.props.expanded
+              ? this._renderReduceButton()
+              : this._renderExpandButton()}
           </div>
         </div>
       </div>
@@ -91,7 +85,7 @@ ContentMap.propTypes = {
   children: PropTypes.node,
   expanded: PropTypes.bool,
   expandMap: PropTypes.func.isRequired,
-  organizations: PropTypes.array.isRequired,
+  locations: PropTypes.array.isRequired,
   reduceMap: PropTypes.func.isRequired,
   topBar: PropTypes.node,
 };

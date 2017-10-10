@@ -5,13 +5,13 @@ import {browserHistory} from 'react-router';
 import queryString from 'query-string';
 import {isEmpty, isString, cloneDeep} from 'lodash';
 
-const MaxItemsDisplayedPerPage = 1;
+const MaxItemsDisplayedPerPage = 3;
 
 const paginationMetadata = links => {
   const _paginationMetadata = {};
   Object.keys(links).forEach(type => {
     const link = links[type];
-    if (Boolean(link)) {
+    if (link) {
       _paginationMetadata[type] = {};
       const urlParse = new URL(link);
       urlParse.search

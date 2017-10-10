@@ -9,18 +9,24 @@ class Pagination extends React.Component {
   }
   handlePageClick(data) {
     let selected = data.selected + 1;
-    this.props.handleChangePage(selected)
+    this.props.handleChangePage(selected);
   }
 
   render() {
     const {last} = this.props.businessesMetadata.pagination;
+    if (!last.page) {
+      return null;
+    }
     const pages = Array(last.page)
-     .fill(1)
-     .map((v, i) => v + i);
+      .fill(1)
+      .map((v, i) => v + i);
     return (
-      <div className={
-          pages.length <= 1 ?
-            'pagination-container-hide' : 'text-center pagination between-xs middle-xs m-bot-100'}
+      <div
+        className={
+          pages.length <= 1
+            ? 'pagination-container-hide'
+            : 'text-center pagination between-xs middle-xs m-bot-100'
+        }
       >
         <ReactPaginate
           previousLabel={
@@ -29,14 +35,16 @@ class Pagination extends React.Component {
               size={17}
               color={'#fff'}
               style={{marginLeft: 4}}
-            />}
+            />
+          }
           nextLabel={
             <MdChevronRight
               className="pagination-arrow"
               size={17}
               color={'#fff'}
               style={{marginLeft: 4}}
-            />}
+            />
+          }
           pageCount={last.page}
           marginPagesDisplayed={2}
           pageRangeDisplayed={5}
