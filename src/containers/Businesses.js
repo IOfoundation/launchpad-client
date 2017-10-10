@@ -11,9 +11,9 @@ import * as actions from '../actions/business';
 
 export class Businesses extends Component {
   componentWillMount(_nextProps) {
-    const locationsFilters = this.props.location.query;
+    const organizationsFilters = this.props.location.query;
     this.props.actions.fetchFilterOptions();
-    this.props.actions.filterBusinesses(null, locationsFilters);
+    this.props.actions.filterOrganizations(null, organizationsFilters);
   }
 
   handleTextSearchBusinesses(businessName) {
@@ -22,15 +22,14 @@ export class Businesses extends Component {
   }
 
   handleOnChangeFilterOptions(filterValue) {
-    console.log(1)
-    const locationsFilters = this.props.location.query;
+    const organizationsFilters = this.props.location.query;
     this.getFilterChips();
-    this.props.actions.filterBusinesses(filterValue, locationsFilters);
+    this.props.actions.filterOrganizations(filterValue, organizationsFilters);
   }
 
   handleOnRemoveFilterOption(filterValue) {
-    const locationsFilters = this.props.location.query;
-    this.props.actions.filterBusinesses(filterValue, locationsFilters, true);
+    const organizationsFilters = this.props.location.query;
+    this.props.actions.filterBusinesses(filterValue, organizationsFilters, true);
   }
 
   getFilterChips() {

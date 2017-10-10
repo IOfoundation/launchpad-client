@@ -35,7 +35,7 @@ class ContentMap extends Component {
     );
   }
   render() {
-    const {locations} = this.props;
+    const {organizations} = this.props;
     return (
       <div
         className={
@@ -73,7 +73,7 @@ class ContentMap extends Component {
                 )
               }
             >
-              <MapView locations={locations} />
+              {/* <MapView locations={organizations.locations} /> */}
             </div>
             {this.props.expanded ? (
               this._renderReduceButton()

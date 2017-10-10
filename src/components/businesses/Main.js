@@ -38,7 +38,6 @@ class Main extends Component {
   render() {
     const {
       businessesMetadata,
-      locations,
       organizations,
       handleClickOnBusiness,
       handleClickOnClearAllFilters,
@@ -46,7 +45,6 @@ class Main extends Component {
     } = this.props;
     return (
       <ContentMap
-        locations={locations}
         organizations={organizations}
         businessesMetadata={businessesMetadata}
         expanded={this.state.expanded}

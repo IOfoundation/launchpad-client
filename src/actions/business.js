@@ -35,10 +35,10 @@ const businessDataObject = business => {
   };
 };
 
-const locationsDataObject = locations => {
+const organizationsDataObject = organizations => {
   return {
-    type: types.FETCH_LOCATIONS,
-    locations,
+    type: types.FETCH_ORGANIZATIONS,
+    organizations,
   };
 };
 
@@ -105,7 +105,7 @@ export function filterBusinessesByName(filterValue, currentParams) {
   };
 }
 
-export function filterBusinesses(filterValue, currentParams, removeFilter) {
+export function filterOrganizations(filterValue, currentParams, removeFilter) {
   return async (dispatch: Function) => {
     const filters = filtersObject(filterValue, currentParams, removeFilter);
     const params = {
@@ -128,7 +128,7 @@ export function filterBusinesses(filterValue, currentParams, removeFilter) {
       },
       totalOrganizations: httpResponse.headers['x-total-count'],
     };
-    dispatch(locationsDataObject(organizations));
+    dispatch(organizationsDataObject(organizations));
     dispatch(businessesMetaDataObject(metadata));
     pushBrowserHistory(filters);
   };

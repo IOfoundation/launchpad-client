@@ -5,7 +5,6 @@ type ACTION = {};
 
 const initialState: STATE = {
   business: null,
-  locations: [],
   organizations: [],
   filters: null,
   metadata: null,
@@ -13,11 +12,11 @@ const initialState: STATE = {
 
 export default function(state: STATE = initialState, action: ACTION): STATE {
   switch (action.type) {
-    case types.FETCH_LOCATIONS: {
-      const {locations} = action;
+    case types.FETCH_ORGANIZATIONS: {
+      const {organizations} = action;
       return {
         ...state,
-        organizations: locations,
+        organizations,
       };
     }
 
@@ -48,15 +47,4 @@ export default function(state: STATE = initialState, action: ACTION): STATE {
     default:
       return state;
   }
-}
-
-function getOrganizationsFromLocations(locations) {
-  return filterById(locations.map(location => location.organization));
-}
-
-function filterById(arr) {
-  const f = [];
-  return arr.filter(n => {
-    return f.indexOf(n.id) === -1 && f.push(n.id);
-  });
 }
