@@ -62,7 +62,9 @@ class BusinessesForm extends React.Component {
               <a href="/businesses?category=Capital">{'Capital'}</a>
             </li>
             <li>
-              <a href="/businesses?category=Legal%20Services">{'Legal Services'}</a>
+              <a href="/businesses?category=Legal%20Services">
+                {'Legal Services'}
+              </a>
             </li>
             <li>
               <a href="/businesses?category=Marketing/Sales">

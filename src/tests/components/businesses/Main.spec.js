@@ -7,14 +7,10 @@ const locations = [];
 const organizations = [];
 const businessesMetadata = {};
 const filters = {
-  'businessServices': [],
-  'businessTypes':[
-    '0': {},
-    '1': {},
-    '2': {}
-  ],
-  'stages': [],
-  'communities': [],
+  businessServices: [],
+  businessTypes: [('0': {}), ('1': {}), ('2': {})],
+  stages: [],
+  communities: [],
 };
 
 const handleChangePage = jest.fn();

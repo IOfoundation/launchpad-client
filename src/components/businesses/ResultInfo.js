@@ -14,7 +14,7 @@ class ResultInfo extends Component {
   }
 
   _onClick(filter) {
-    this.props.handleOnChangeFilterOptions(filter.name)
+    this.props.handleOnChangeFilterOptions(filter.name);
   }
 
   render() {
@@ -29,7 +29,7 @@ class ResultInfo extends Component {
             className="btn btn-search btn-outline"
             key={this.props.filterOptions[0].id}
             onClick={e => this._onClick(this.props.filterOptions[0])}
-            >
+          >
             <div className="btn-search-text">
               <span>{'Startup or High'}</span>
               <span>{'Growth Business'}</span>
@@ -42,7 +42,7 @@ class ResultInfo extends Component {
             className="btn btn-search btn-outline"
             key={this.props.filterOptions[1].id}
             onClick={e => this._onClick(this.props.filterOptions[1])}
-            >
+          >
             <div className="btn-search-text">
               <span>{'Main Street/'}</span>
               <span>{'Small Business'}</span>
@@ -55,7 +55,7 @@ class ResultInfo extends Component {
             className="btn btn-search btn-outline"
             key={this.props.filterOptions[2].id}
             onClick={e => this._onClick(this.props.filterOptions[2])}
-            >
+          >
             <div className="btn-search-text">
               <span>{'Microenterprise or'}</span>
               <span>{'Home-Based Business'}</span>

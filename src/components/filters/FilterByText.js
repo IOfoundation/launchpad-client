@@ -55,17 +55,21 @@ class FilterByText extends React.Component {
     return (
       <div
         className={
-          this.state.labelTop
-            ? 'col-md-12 col-xs-12 text-xs-margin filterTextContainer noPadding m-bot-16'
-            : 'col-md-12 col-xs-12 text-xs-margin filterTextContainer noPadding'
+          this.state.labelTop ? (
+            'col-md-12 col-xs-12 text-xs-margin filterTextContainer noPadding m-bot-16'
+          ) : (
+            'col-md-12 col-xs-12 text-xs-margin filterTextContainer noPadding'
+          )
         }
       >
         <div className="grid search-text-form p-bot-16">
           <div
             className={
-              isEmpty(filters) || this.state.labelTop
-                ? 'filter-label-container-hide'
-                : 'filter-label-container-show col-lg-9 noPadding'
+              isEmpty(filters) || this.state.labelTop ? (
+                'filter-label-container-hide'
+              ) : (
+                'filter-label-container-show col-lg-9 noPadding'
+              )
             }
           >
             {this.renderFilter()}
@@ -75,18 +79,22 @@ class FilterByText extends React.Component {
           </div>
           <h3
             className={
-              isEmpty(filters)
-                ? 'show-filter col-lg-9 p-left-0'
-                : 'col-lg-9 hide-filter'
+              isEmpty(filters) ? (
+                'show-filter col-lg-9 p-left-0'
+              ) : (
+                'col-lg-9 hide-filter'
+              )
             }
           >
             {'Filter results with the selections below'}
           </h3>
           <div
             className={
-              this.state.labelTop
-                ? 'full-width-text-filter'
-                : 'col-lg-3 noPadding'
+              this.state.labelTop ? (
+                'full-width-text-filter'
+              ) : (
+                'col-lg-3 noPadding'
+              )
             }
           >
             <input
@@ -96,14 +104,18 @@ class FilterByText extends React.Component {
               onClick={() => this._inputClicked()}
               onKeyPress={target => this.handleKeyPress(target)}
               placeholder={
-                this.state.labelTop
-                  ? 'Search by Resource Name or Ipsum'
-                  : 'Or search by name'
+                this.state.labelTop ? (
+                  'Search by Resource Name or Ipsum'
+                ) : (
+                  'Or search by name'
+                )
               }
               className={
-                this.state.labelTop
-                  ? 'full-width-search'
-                  : 'text-search small-width-search'
+                this.state.labelTop ? (
+                  'full-width-search'
+                ) : (
+                  'text-search small-width-search'
+                )
               }
             />
             {this.state.labelTop && (

@@ -1,15 +1,45 @@
-.pagination-arrow {
-  width: 36px;
-  height: 36px;
-  border-radius: 2px;
-  &-left {
-    background-color: $primary-color;
+.pagination {
+  padding: 25px 0;
+  bottom: 0;
+  width: 95%;
+  font-size: 12px;
+  background: white;
+}
+@media (max-width: 48em) {
+  .pagination {
+    padding: 25px 10px;
   }
-  &-right {
+}
+.pagination-container {
+  &-hide {
+    display: none;
+  }
+}
+.pagination-arrow {
+  border-radius: 2px;
+  padding: 8px;
+  background-color: $primary-color;
+  cursor: pointer;
+  &-grey {
     background-color: $primary-color;
+    opacity: 0.3;
+  }
+  &-hide {
+    display: none;
   }
 }
 .pagination-index {
   font-size: 14px;
   font-weight: bold;
+  margin-left: 11px;
+  margin-right: 11px;
+  cursor: pointer;
+  color: $primary-color;
+  &-primary {
+    color: $primary-color;
+  }
+  &-primary-opacity {
+    color: $primary-color;
+    opacity: 0.3;
+  }
 }

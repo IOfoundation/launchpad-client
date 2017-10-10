@@ -7,26 +7,29 @@ import {isEmpty, isString, cloneDeep} from 'lodash';
 
 const MaxItemsDisplayedPerPage = 1;
 
-const paginationMetadata = (links) => {
+const paginationMetadata = links => {
   const _paginationMetadata = {};
   Object.keys(links).forEach(type => {
     const link = links[type];
     if (Boolean(link)) {
       _paginationMetadata[type] = {};
       const urlParse = new URL(link);
-      urlParse.search.slice(1).split('&').forEach(pairs => {
-        const [param, value] = pairs.split('=');
-        if (param === 'page') {
-          _paginationMetadata[type].page = parseInt(value, 10);
-        }
-        if (param === 'per_page') {
-          _paginationMetadata[type].per_page = parseInt(value, 10);
-        }
-      });
+      urlParse.search
+        .slice(1)
+        .split('&')
+        .forEach(pairs => {
+          const [param, value] = pairs.split('=');
+          if (param === 'page') {
+            _paginationMetadata[type].page = parseInt(value, 10);
+          }
+          if (param === 'per_page') {
+            _paginationMetadata[type].per_page = parseInt(value, 10);
+          }
+        });
     }
   });
   return _paginationMetadata;
-}
+};
 
 const businessDataObject = business => {
   return {
@@ -59,14 +62,12 @@ const filtersDataObject = filters => {
 const filtersObject = (filterValue, filters, removeFilter) => {
   const newFilters = cloneDeep(filters);
   if (removeFilter) {
-    _removeFilters(filterValue, newFilters)
+    _removeFilters(filterValue, newFilters);
   } else {
-    _addFilters(filterValue, newFilters)
+    _addFilters(filterValue, newFilters);
   }
   return newFilters;
 };
-
-
 
 const pushBrowserHistory = filters => {
   let filterString = queryString.stringify(filters, {encode: false});
@@ -111,17 +112,17 @@ export function filterOrganizations(filterValue, currentParams, removeFilter) {
     const params = {
       ...filters,
       per_page: MaxItemsDisplayedPerPage,
-    }
-    if (!params.hasOwnProperty('page')){
+    };
+    if (!params.hasOwnProperty('page')) {
       Object.assign(params, {page: 1});
     }
 
     const httpResponse = await httpRequest.get('/api/organizations/search', {
-      params
+      params,
     });
 
     const organizations = httpResponse.data;
-    const metadata  = {
+    const metadata = {
       pagination: {
         ...paginationMetadata(JSON.parse(httpResponse.headers.link)),
         currentPage: params.page,
@@ -136,7 +137,6 @@ export function filterOrganizations(filterValue, currentParams, removeFilter) {
 
 export function changePage(page, currentParams) {
   return async (dispatch: Function) => {
-
     const params = {
       ...currentParams,
       page,
@@ -148,7 +148,7 @@ export function changePage(page, currentParams) {
     });
 
     const organizations = httpResponse.data;
-    const metadata  = {
+    const metadata = {
       pagination: {
         ...paginationMetadata(JSON.parse(httpResponse.headers.link)),
         currentPage: params.page,

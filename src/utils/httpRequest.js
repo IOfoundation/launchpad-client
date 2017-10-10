@@ -4,7 +4,7 @@ const httpRequest = Axios.create({
   baseURL: process.env.API_URL,
   timeout: 10000,
   headers: {
-    'Accept': 'application/json',
+    Accept: 'application/json',
     'Content-Type': 'application/json',
   },
 });

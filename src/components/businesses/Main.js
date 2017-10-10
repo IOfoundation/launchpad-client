@@ -26,11 +26,13 @@ class Main extends Component {
 
   _renderResultsInfo() {
     if (this.props.filterOptions.businessTypes.length === 3) {
-      return <ResultInfo
-        businessesMetadata={this.props.businessesMetadata}
-        handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
-        filterOptions={this.props.filterOptions.businessTypes}
-      />;
+      return (
+        <ResultInfo
+          businessesMetadata={this.props.businessesMetadata}
+          handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
+          filterOptions={this.props.filterOptions.businessTypes}
+        />
+      );
     } else {
       return null;
     }
