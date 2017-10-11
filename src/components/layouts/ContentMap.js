@@ -85,7 +85,7 @@ ContentMap.propTypes = {
   children: PropTypes.node,
   expanded: PropTypes.bool,
   expandMap: PropTypes.func.isRequired,
-  locations: PropTypes.array.isRequired,
+  locations: PropTypes.array,
   reduceMap: PropTypes.func.isRequired,
   topBar: PropTypes.node,
 };

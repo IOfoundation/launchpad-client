@@ -1,4 +1,6 @@
 import {BusinessTypes as types} from '../action-types';
+import {isEmpty} from 'lodash';
+
 
 type STATE = {};
 type ACTION = {};
@@ -14,9 +16,14 @@ export default function(state: STATE = initialState, action: ACTION): STATE {
   switch (action.type) {
     case types.FETCH_ORGANIZATIONS: {
       const {organizations} = action;
-      const locations = organizations
-        .map(org => org.locations)
-        .reduce((a, b) => a.concat(b));
+      if (isEmpty(organizations)) {
+
+      }
+      const locations = isEmpty(organizations) ? (
+        null
+      ) : (
+        organizations.map(org => org.locations).reduce((a, b) => a.concat(b))
+      );
       return {
         ...state,
         organizations,

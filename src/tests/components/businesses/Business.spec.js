@@ -9,6 +9,7 @@ function mockBusiness() {
   return {
     id: 1,
     name: 'Businesses1',
+    locations: [],
     categories: [
       {
         name: 'BusinessType',

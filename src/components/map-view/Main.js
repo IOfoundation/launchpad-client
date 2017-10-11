@@ -55,6 +55,7 @@ class Main extends React.Component {
   }
   render() {
     const firstBusiness = this.props.locations ? this.props.locations[0] : null;
+    const sacCoordinates = {lat: 38.57, lng: -121.47};
     if (firstBusiness) {
       const [centerLng, centerLat] = this.getCoordinates(firstBusiness);
       return (
@@ -72,12 +73,21 @@ class Main extends React.Component {
         </GoogleMapReact>
       );
     }
-    return <div>{'Loading'}</div>;
+    return (
+      <GoogleMapReact
+        center={sacCoordinates}
+        zoom={10}
+        bootstrapURLKeys={{
+          key: process.env.GOOGLE_MAP_API_KEY,
+        }}
+      ></GoogleMapReact>
+
+    )
   }
 }
 
 Main.propTypes = {
-  locations: PropTypes.array.isRequired,
+  locations: PropTypes.array,
 };
 
 export default Main;
