@@ -16,9 +16,6 @@ export default function(state: STATE = initialState, action: ACTION): STATE {
   switch (action.type) {
     case types.FETCH_ORGANIZATIONS: {
       const {organizations} = action;
-      if (isEmpty(organizations)) {
-
-      }
       const locations = isEmpty(organizations) ? (
         null
       ) : (
