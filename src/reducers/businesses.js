@@ -6,7 +6,7 @@ type STATE = {};
 type ACTION = {};
 
 const initialState: STATE = {
-  business: null,
+  organization: null,
   organizations: [],
   filters: null,
   metadata: null,
@@ -28,11 +28,11 @@ export default function(state: STATE = initialState, action: ACTION): STATE {
       };
     }
 
-    case types.FETCH_BUSINESS: {
-      const {business} = action;
+    case types.FETCH_ORGANIZATION: {
+      const {organization} = action;
       return {
         ...state,
-        business,
+        organization,
       };
     }
 

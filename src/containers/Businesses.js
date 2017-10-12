@@ -11,14 +11,17 @@ import * as actions from '../actions/business';
 
 export class Businesses extends Component {
   componentWillMount(_nextProps) {
-    const organizationsFilters = this.props.location.query;
+    const params = this.props.location.query;
     this.props.actions.fetchFilterOptions();
-    this.props.actions.filterOrganizations(null, organizationsFilters);
+    if ('id' in params) {
+      this.props.actions.fetchOrganization(params.id);
+    } else {
+      this.props.actions.filterOrganizations(null, params);
+    }
   }
 
-  handleTextSearchBusinesses(businessName) {
-    const businessesFilters = this.props.location.query;
-    this.props.actions.filterBusinessesByName(businessName, businessesFilters);
+  handleTextSearchBusinesses(filter) {
+    this.props.actions.fetchServices(filter);
   }
 
   handleOnChangeFilterOptions(filterValue) {
@@ -115,7 +118,7 @@ Businesses.propTypes = {
   actions: PropTypes.object,
   filters: PropTypes.object.isRequired,
   metadata: PropTypes.object.isRequired,
-  organizations: PropTypes.array.isRequired,
+  organizations: PropTypes.arrayOf(PropTypes.object).isRequired,
   params: PropTypes.object,
 };
 

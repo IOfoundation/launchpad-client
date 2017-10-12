@@ -3,7 +3,7 @@ const initialState = {
     services: [],
   },
   businesses: {
-    business: {
+    organization: {
       id: 'id',
       name: 'name',
       description: 'description',

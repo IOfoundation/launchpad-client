@@ -5,7 +5,7 @@ import {browserHistory} from 'react-router';
 import queryString from 'query-string';
 import {isEmpty, isString, cloneDeep} from 'lodash';
 
-const MaxItemsDisplayedPerPage = 3;
+const MaxItemsDisplayedPerPage = 10;
 
 const paginationMetadata = links => {
   const _paginationMetadata = {};
@@ -31,10 +31,10 @@ const paginationMetadata = links => {
   return _paginationMetadata;
 };
 
-const businessDataObject = business => {
+const organizationDataObject = organization => {
   return {
-    type: types.FETCH_BUSINESS,
-    business,
+    type: types.FETCH_ORGANIZATION,
+    organization,
   };
 };
 
@@ -78,13 +78,13 @@ const pushBrowserHistory = filters => {
   });
 };
 
-export function fetchBusiness(businessId) {
+export function fetchOrganization(organizationId) {
   return async (dispatch: Function) => {
     const httpResponse = await httpRequest.get(
-      `/api/organizations/${businessId}`
+      `/api/organizations/${organizationId}`
     );
-    const business = httpResponse.data;
-    dispatch(businessDataObject(business));
+    const organization = httpResponse.data;
+    dispatch(organizationDataObject(organization));
   };
 }
 

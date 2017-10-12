@@ -11,8 +11,8 @@ import * as actions from '../actions/business';
 
 export class Business extends Component {
   componentWillMount(_nextProps) {
-    const businessId = this.props.params.id;
-    this.props.actions.fetchBusiness(businessId);
+    const organizationId = this.props.params.id;
+    this.props.actions.fetchOrganization(organizationId);
     this.props.actions.fetchFilterOptions();
   }
 
