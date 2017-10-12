@@ -19,16 +19,32 @@ class FilterByText extends React.Component {
     const filter = e.currentTarget.getAttribute('data-value');
     this.props.handleOnRemoveFilterOption(filter);
   }
+
   clearAll() {
     this.setState({showFilterLabel: false, labelTop: false});
     this.props.handleClickOnClearAllFilters();
   }
+
   _inputClicked() {
-    this.setState({labelTop: !this.state.expanded});
+    this.setState({labelTop: true});
   }
+
   _closeSearch() {
     this.setState({labelTop: false});
   }
+
+  handleKeyPress(value) {
+    this.setState({value: event.target.value, showDropdown: true});
+    this.props.handleTextSearchBusinesses(value);
+    if (isEmpty(value)) {
+      this.setState({showDropdown: false});
+    }
+  }
+
+  handleClickOutside() {
+    this.setState({labelTop: false});
+  }
+
   renderFilter() {
     const filters = this.props.getFilterChips();
     if (isEmpty(filters.category)) {
@@ -50,6 +66,25 @@ class FilterByText extends React.Component {
       />
     ));
   }
+
+  renderDropdown() {
+    return (
+      <ul className="option-dropdown-list">
+        {this.props.services.map(service => (
+          <li key={service.id}>
+            <a
+              href={service.searchable_type === 'id' && 
+                `/businesses?id=${service.searchable_id}`
+              }
+            >
+              {service.content}
+            </a>
+          </li>
+        ))}
+      </ul>
+    );
+  }
+
   render() {
     const filters = this.props.getFilterChips();
     return (
@@ -100,9 +135,8 @@ class FilterByText extends React.Component {
             <input
               type="text"
               value={this.state.value}
-              onChange={event => this.handleChange(event)}
               onClick={() => this._inputClicked()}
-              onKeyPress={target => this.handleKeyPress(target)}
+              onKeyUp={e => this.handleKeyPress(e.target.value)}
               placeholder={
                 this.state.labelTop ? (
                   'Search by Resource Name or Ipsum'
@@ -129,19 +163,10 @@ class FilterByText extends React.Component {
           </div>
           <div
             className={
-              this.state.labelTop ? 'option-dropdown-show' : 'hero_input-hide'
+              this.state.showDropdown ? 'option-dropdown-show' : 'hero_input-hide'
             }
           >
-            <ul className="option-dropdown-list">
-              <li>
-                {'Business'}
-                <img src="../static-data/images/LocationBlack.png" />
-              </li>
-              <li>
-                {'Business'}
-                <img src="../static-data/images/LocationBlack.png" />
-              </li>
-            </ul>
+            {this.renderDropdown()}
           </div>
           {!this.state.labelTop && (
             <MdSearch className="text-search-icon" size="32" color="#2AD587" />
@@ -157,6 +182,7 @@ FilterByText.propTypes = {
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
   handleOnRemoveFilterOption: PropTypes.func.isRequired,
   handleTextSearchBusinesses: PropTypes.func.isRequired,
+  services: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default FilterByText;

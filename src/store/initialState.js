@@ -11,6 +11,7 @@ const initialState = {
     },
     locations: [],
     organizations: [],
+    services: [],
     metadata: {
       pagination: {
         last: {

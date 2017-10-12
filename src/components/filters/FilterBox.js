@@ -9,13 +9,14 @@ class FilterBox extends React.Component {
       <div className="container-invert">
         <div className="grid">
           <FilterByText
-            filterName=""
+            filterName={'Search Box'}
             handleTextSearchBusinesses={this.props.handleTextSearchBusinesses}
             handleOnRemoveFilterOption={this.props.handleOnRemoveFilterOption}
             handleClickOnClearAllFilters={
               this.props.handleClickOnClearAllFilters
             }
             getFilterChips={this.props.getFilterChips}
+            services={this.props.services}
           />
         </div>
         <div className="grid container--middle bottom-xs between-xs p-left-0">
@@ -52,6 +53,7 @@ FilterBox.propTypes = {
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
   handleOnRemoveFilterOption: PropTypes.func.isRequired,
   handleTextSearchBusinesses: PropTypes.func.isRequired,
+  services: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default FilterBox;

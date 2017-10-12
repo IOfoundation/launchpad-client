@@ -79,6 +79,7 @@ export class Businesses extends Component {
                     this
                   )}
                   filterOptions={this.props.filters}
+                  services={this.props.services}
                   handleClickOnClearAllFilters={this.handleClickOnClearAllFilters.bind(
                     this
                   )}
@@ -120,16 +121,18 @@ Businesses.propTypes = {
   metadata: PropTypes.object.isRequired,
   organizations: PropTypes.arrayOf(PropTypes.object).isRequired,
   params: PropTypes.object,
+  services: PropTypes.arrayOf(PropTypes.object)
 };
 
 const mapStateToProps = _state => {
-  const {businesses, routing} = _state;
+  const {businesses, routing, home} = _state;
   return {
     organizations: businesses.organizations,
     locations: businesses.locations,
     filters: businesses.filters,
     metadata: businesses.metadata,
     queries: routing.locationBeforeTransitions.query,
+    services: home.services,
   };
 };
 

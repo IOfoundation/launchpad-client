@@ -59,6 +59,13 @@ const filtersDataObject = filters => {
   };
 };
 
+const servicesDataObject = services => {
+  return {
+    type: types.FETCH_SERVICES,
+    services,
+  };
+};
+
 const filtersObject = (filterValue, filters, removeFilter) => {
   const newFilters = cloneDeep(filters);
   if (removeFilter) {
@@ -213,6 +220,16 @@ export function fetchFilterOptions() {
         industries,
       })
     );
+  };
+}
+
+export function fetchServices(filter) {
+  return async (dispatch: Function) => {
+    const httpResponse = await httpRequest.get('api/categories/search', {
+      params: {'name': filter}
+    });
+    const services = httpResponse.data;
+    dispatch(servicesDataObject(services));
   };
 }
 
