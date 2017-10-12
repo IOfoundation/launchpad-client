@@ -4,12 +4,12 @@ import {browserHistory} from 'react-router';
 
 const servicesDataObject = services => {
   return {
-    type: types.FILTER_SERVICES,
+    type: types.FETCH_SERVICES,
     services,
   };
 };
 
-export function filterServices(filter) {
+export function fetchServices(filter) {
   return async (dispatch: Function) => {
     const httpResponse = await httpRequest.get('api/categories/search', {
       params: {'name': filter}

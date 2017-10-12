@@ -14,8 +14,8 @@ export class Home extends Component {
     this.props.actions.filterBusinessesByService(service);
   }
 
-  handleTextSearchBusinessesForm(filter) {
-    this.props.actions.filterServices(filter);
+  handleTextSearchBusinesses(filter) {
+    this.props.actions.fetchServices(filter);
   }
 
   render() {
@@ -25,7 +25,7 @@ export class Home extends Component {
           <HomeView
             services={this.props.services}
             handleClickOnServiceTag={this.handleClickOnServiceTag.bind(this)}
-            handleTextSearchBusinessesForm={this.handleTextSearchBusinessesForm.bind(
+            handleTextSearchBusinesses={this.handleTextSearchBusinesses.bind(
               this
             )}
           />

@@ -2,6 +2,7 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 import {MdSearch} from 'react-icons/lib/md';
 import onClickOutside from 'react-onclickoutside';
+import {isEmpty} from 'lodash';
 
 class BusinessesForm extends React.Component {
   constructor(props) {
@@ -18,7 +19,10 @@ class BusinessesForm extends React.Component {
 
   handleKeyPress(value) {
     this.setState({value: event.target.value, showDropdown: true});
-    this.props.handleTextSearchBusinessesForm(value);
+    this.props.handleTextSearchBusinesses(value);
+    if (isEmpty(value)) {
+      this.setState({showDropdown: false});
+    }
   }
 
   renderDropdown() {
@@ -26,8 +30,13 @@ class BusinessesForm extends React.Component {
       <ul className="hero-dropdown-list">
         {this.props.services.map(service => (
           <li key={service.id}>
-            <a href={`/businesses?category=${service.name}`}>
-              <b>{service.name}</b>
+            <a
+              href={service.searchable_type === 'Category'
+                ? `/businesses?category=${service.content}`
+                : `/businesses?id=${service.searchable_id}`
+              }
+            >
+              {service.content}
             </a>
           </li>
         ))}
@@ -61,7 +70,7 @@ class BusinessesForm extends React.Component {
 }
 
 BusinessesForm.propTypes = {
-  handleTextSearchBusinessesForm: PropTypes.func.isRequired,
+  handleTextSearchBusinesses: PropTypes.func.isRequired,
   services: PropTypes.arrayOf(PropTypes.object),
 };
 

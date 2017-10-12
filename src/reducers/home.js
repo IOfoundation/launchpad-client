@@ -9,7 +9,7 @@ const initialState: STATE = {
 
 export default function(state: STATE = initialState, action: ACTION): STATE {
   switch (action.type) {
-    case types.FILTER_SERVICES: {
+    case types.FETCH_SERVICES: {
       const {services} = action;
       return {
         ...state,
