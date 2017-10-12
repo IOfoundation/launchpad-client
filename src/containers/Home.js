@@ -5,17 +5,11 @@ import {bindActionCreators} from 'redux';
 
 import MainLayout from '../components/layouts/Main';
 import HomeView from '../components/home/Main';
-import * as actions from '../actions/home';
+import * as actions from '../actions/business';
 
 export class Home extends Component {
-  componentWillMount(_nextProps) {}
-
-  handleClickOnServiceTag(service) {
-    this.props.actions.filterBusinessesByService(service);
-  }
-
   handleTextSearchBusinesses(filter) {
-    this.props.actions.fetchServices(filter);
+    this.props.actions.fetchSearchResults(filter);
   }
 
   render() {
@@ -23,8 +17,7 @@ export class Home extends Component {
       <MainLayout>
         <section>
           <HomeView
-            services={this.props.services}
-            handleClickOnServiceTag={this.handleClickOnServiceTag.bind(this)}
+            search_results={this.props.search_results}
             handleTextSearchBusinesses={this.handleTextSearchBusinesses.bind(
               this
             )}
@@ -37,13 +30,13 @@ export class Home extends Component {
 
 Home.propTypes = {
   actions: PropTypes.object,
-  services: PropTypes.arrayOf(PropTypes.object).isRequired,
+  search_results: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 const mapStateToProps = _state => {
-  const {home} = _state;
+  const {businesses} = _state;
   return {
-    services: home.services,
+    search_results: businesses.search_results,
   };
 };
 

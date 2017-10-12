@@ -21,7 +21,7 @@ export class Businesses extends Component {
   }
 
   handleTextSearchBusinesses(filter) {
-    this.props.actions.fetchServices(filter);
+    this.props.actions.fetchSearchResults(filter);
   }
 
   handleOnChangeFilterOptions(filterValue) {
@@ -79,7 +79,7 @@ export class Businesses extends Component {
                     this
                   )}
                   filterOptions={this.props.filters}
-                  services={this.props.services}
+                  search_results={this.props.search_results}
                   handleClickOnClearAllFilters={this.handleClickOnClearAllFilters.bind(
                     this
                   )}
@@ -121,18 +121,18 @@ Businesses.propTypes = {
   metadata: PropTypes.object.isRequired,
   organizations: PropTypes.arrayOf(PropTypes.object).isRequired,
   params: PropTypes.object,
-  services: PropTypes.arrayOf(PropTypes.object)
+  search_results: PropTypes.arrayOf(PropTypes.object)
 };
 
 const mapStateToProps = _state => {
-  const {businesses, routing, home} = _state;
+  const {businesses, routing} = _state;
   return {
     organizations: businesses.organizations,
     locations: businesses.locations,
     filters: businesses.filters,
     metadata: businesses.metadata,
     queries: routing.locationBeforeTransitions.query,
-    services: home.services,
+    search_results: businesses.search_results,
   };
 };
 

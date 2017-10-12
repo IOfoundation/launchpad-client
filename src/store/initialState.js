@@ -1,7 +1,4 @@
 const initialState = {
-  home: {
-    services: [],
-  },
   businesses: {
     organization: {
       id: 'id',
@@ -11,7 +8,7 @@ const initialState = {
     },
     locations: [],
     organizations: [],
-    services: [],
+    search_results: [],
     metadata: {
       pagination: {
         last: {

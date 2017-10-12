@@ -70,14 +70,14 @@ class FilterByText extends React.Component {
   renderDropdown() {
     return (
       <ul className="option-dropdown-list">
-        {this.props.services.map(service => (
-          <li key={service.id}>
+        {this.props.search_results.map(search_result => (
+          <li key={search_result.id}>
             <a
-              href={service.searchable_type === 'id' && 
-                `/businesses?id=${service.searchable_id}`
+              href={search_result.searchable_type === 'id' &&
+                `/businesses?id=${search_result.searchable_id}`
               }
             >
-              {service.content}
+              {search_result.content}
             </a>
           </li>
         ))}
@@ -182,7 +182,7 @@ FilterByText.propTypes = {
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
   handleOnRemoveFilterOption: PropTypes.func.isRequired,
   handleTextSearchBusinesses: PropTypes.func.isRequired,
-  services: PropTypes.arrayOf(PropTypes.object),
+  search_results: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default FilterByText;

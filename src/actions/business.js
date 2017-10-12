@@ -59,10 +59,10 @@ const filtersDataObject = filters => {
   };
 };
 
-const servicesDataObject = services => {
+const searchResultsDataObject = search_results => {
   return {
-    type: types.FETCH_SERVICES,
-    services,
+    type: types.FETCH_SEARCH_RESULTS,
+    search_results,
   };
 };
 
@@ -223,13 +223,13 @@ export function fetchFilterOptions() {
   };
 }
 
-export function fetchServices(filter) {
+export function fetchSearchResults(filter) {
   return async (dispatch: Function) => {
     const httpResponse = await httpRequest.get('api/categories/search', {
       params: {'name': filter}
     });
-    const services = httpResponse.data;
-    dispatch(servicesDataObject(services));
+    const search_results = httpResponse.data;
+    dispatch(searchResultsDataObject(search_results));
   };
 }
 

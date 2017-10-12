@@ -4,7 +4,7 @@ import {Link} from 'react-router';
 import BusinessesForm from './BusinessesForm';
 import Logo from '../shared/Logo';
 
-const Main = ({services, handleTextSearchBusinesses}) => {
+const Main = ({search_results, handleTextSearchBusinesses}) => {
   return (
     <div>
       <section className="hero center-xs">
@@ -22,16 +22,16 @@ const Main = ({services, handleTextSearchBusinesses}) => {
           </p>
           <div className="hero_inputContainer">
             <BusinessesForm
-              services={services}
+              search_results={search_results}
               handleTextSearchBusinesses={handleTextSearchBusinesses}
             />
           </div>
           <div className="margin-auto margin-y-20">
             <Link
               className="link p-bot-10 margin-x-16 m-bot-16"
-              to="/businesses?category=Planning/Managment"
+              to="/businesses?category=Planning/Management"
             >
-              {'Bussines Planning/Managment'}
+              {'Business Planning/Managment'}
             </Link>
             <Link
               className="link p-bot-10 margin-x-16"
@@ -65,9 +65,8 @@ const Main = ({services, handleTextSearchBusinesses}) => {
 };
 
 Main.propTypes = {
-  handleClickOnServiceTag: PropTypes.func.isRequired,
   handleTextSearchBusinesses: PropTypes.func,
-  services: PropTypes.arrayOf(PropTypes.object),
+  search_results: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default Main;

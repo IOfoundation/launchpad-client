@@ -52,6 +52,14 @@ export default function(state: STATE = initialState, action: ACTION): STATE {
       };
     }
 
+    case types.FETCH_SEARCH_RESULTS: {
+      const {search_results} = action;
+      return {
+        ...state,
+        search_results,
+      };
+    }
+
     default:
       return state;
   }
