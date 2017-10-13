@@ -107,7 +107,6 @@ export function fetchOrganization(organizationId) {
   return async (dispatch: Function) => {
     const httpResponse = await httpRequest.get(
       `/api/organizations/${organizationId}`, {
-        params
       }
     );
     const organization = httpResponse.data;
