@@ -3,6 +3,7 @@ import {PropTypes} from 'prop-types';
 import {MdSearch} from 'react-icons/lib/md';
 import {MdClear} from 'react-icons/lib/md';
 import Chip from '../filters/Chip';
+import onClickOutside from 'react-onclickoutside';
 import {isEmpty, isString} from 'lodash';
 
 class FilterByText extends React.Component {
@@ -42,15 +43,16 @@ class FilterByText extends React.Component {
   }
 
   handleClickOutside() {
-    this.setState({labelTop: false});
+    this.setState({labelTop: false, showDropdown: false, value: ''});
   }
 
   handleDropdownOnClick(search_result) {
     if (search_result.searchable_type === 'Category') {
       this.props.handleOnChangeFilterOptions(search_result.content);
-    }
-    else if (search_result.searchable_type === 'Organization') {
+      this.setState({showDropdown: false, labelTop: false, value: ''});
+    } else if (search_result.searchable_type === 'Organization') {
       this.props.handleOnChangeFilterOptions(search_result.searchable_id, true)
+      this.setState({showDropdown: false, labelTop: false, value: ''});
     }
   }
 
@@ -84,6 +86,9 @@ class FilterByText extends React.Component {
             <a onClick={(e) => this.handleDropdownOnClick(search_result, e)}>
               {search_result.content}
             </a>
+            {search_result.searchable_type === 'Organization' ?
+              <img src="../static-data/images/LocationWhite.png" />
+            : null}
           </li>
         ))}
       </ul>
@@ -192,4 +197,4 @@ FilterByText.propTypes = {
   search_results: PropTypes.arrayOf(PropTypes.object),
 };
 
-export default FilterByText;
+export default onClickOutside(FilterByText);

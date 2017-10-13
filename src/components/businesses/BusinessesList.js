@@ -24,7 +24,11 @@ class BusinessesList extends React.Component {
           );
         })}
         <button
-          className="btn-link btn-link-primary"
+          className={
+            this.props.organizations.length <= 0
+            ? 'btn-link btn-link-primary hide'
+            : 'btn-link btn-link-primary show'
+          }
           onClick={handleClickOnClearAllFilters}
         >
           {'Clear Search Result'}

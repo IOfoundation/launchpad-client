@@ -37,6 +37,9 @@
   li {
     padding: 8px;
     text-align: left;
+    img {
+      float: right;
+    }
   }
   a {
     color: $white-color;
@@ -53,5 +56,5 @@
   position: absolute;
   transition: all 0.4s ease-in;
   left: 30px;
-  top: 95%;
+  top: 107%;
 }

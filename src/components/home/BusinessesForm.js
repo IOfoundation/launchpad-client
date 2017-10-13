@@ -38,6 +38,9 @@ class BusinessesForm extends React.Component {
             >
               {search_result.content}
             </a>
+            {search_result.searchable_type === 'Organization' ?
+              <img src="../static-data/images/LocationWhite.png" />
+            : null}
           </li>
         ))}
       </ul>

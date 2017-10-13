@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
-
+import {MdSearch} from 'react-icons/lib/md';
 import MapView from '../map-view/Main';
 
 class ContentMap extends Component {
@@ -36,6 +36,7 @@ class ContentMap extends Component {
   }
   render() {
     const {locations} = this.props;
+    const {businessesMetadata} = this.props;
     return (
       <div
         className={
@@ -44,7 +45,26 @@ class ContentMap extends Component {
         }
       >
         {this.props.topBar}
-        <div className={'container-center--medium grid m-left-24 p-left-16'}>
+        <div className={
+            businessesMetadata.totalOrganizations === '0'
+              ? 'no-result-message-show'
+              : 'no-result-message-hide'
+          }>
+          <MdSearch size="200" color="#95EAC3" />
+          <p className="message">
+            {'Sorry but nothing matched your search terms.'}
+          </p>
+          <p className="message">
+            {'Please try Again with different Keywords'}
+          </p>
+        </div>
+        <div className={
+            businessesMetadata.totalOrganizations === '0' ?
+              'result-container-hide'
+            :
+              'container-center--medium grid m-left-24 p-left-16'
+            }
+        >
           <div
             className={
               this.props.expanded
@@ -82,12 +102,14 @@ class ContentMap extends Component {
 }
 
 ContentMap.propTypes = {
+  businessesMetadata: PropTypes.array,
   children: PropTypes.node,
   expanded: PropTypes.bool,
   expandMap: PropTypes.func.isRequired,
   locations: PropTypes.array,
   reduceMap: PropTypes.func.isRequired,
   topBar: PropTypes.node,
+  totalOrganizations: PropTypes.array,
 };
 
 export default ContentMap;

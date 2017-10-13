@@ -39,10 +39,58 @@ class Business extends Component {
               />
             </h3>
             <p className="preview-details">{business.description}</p>
-            <p className="details" />
+            <div className="grid col-lg-12 full-information p-0">
+              <div className="grid col-lg-8 p-0">
+                <div className="col-lg-12 social-icons">
+                  <img src="../static-data/images/FB.svg" />
+                  <img src="../static-data/images/TW.svg" />
+                  <img src="../static-data/images/Youtube.svg" />
+                  <img src="../static-data/images/LinkedIN.svg" />
+                </div>
+                <div className="col-lg-6 p-0">
+                  <p className="business-title">{'Main Location:'}</p>
+                  <h4>{mainLocation.address.address_1}</h4>
+                  <h4>{mainLocation.address.city},
+                    {mainLocation.address.state_province}</h4>
+                </div>
+                <div className="col-lg-6 p-0">
+                  <p className="business-title">{'Contact:'}</p>
+                  <h4>{business.phones[0].number}</h4>
+                  <h4>{business.email}</h4>
+                </div>
+              </div>
+              <hr/>
+              {business.services.map(service => {
+                return (
+                  <div key={service.id} className="col-lg-12 grid p-0">
+                    <div className="col-lg-6 p-0">
+                      <p className="business-title">{'Services:'}</p>
+                      <h4>{service.name}</h4>
+                      <p>{service.description}</p>
+                    </div>
+                    <div className="col-lg-6">
+                      {!service.email || service.phones.length <= 0 ? '' : <p className="business-title">{'contact:'}</p>}
+                      {service.email ? <h4>{service.email}</h4> : null}
+                      {service.phones.length <= 0 ?  '' : <h4>{service.phones[0].number}</h4>}
+                    </div>
+                  </div>
+                );
+              })}
+              <hr/>
+              <div className="col-lg-12">
+                <div className="col-lg-6">
+                  <p className="business-title">{'Other Locations:'}</p>
+                </div>
+                <div className="col-lg-6">
+                  <p className="business-title">{'Contact:'}</p>
+                </div>
+              </div>
+            </div>
             <p className="location">
-              <span>{business.locations.length} {business.locations.length == 1 ? 'location | ' : 'locations | '}</span>
-              <span>{mainLocation.address.city} {mainLocation.address.state_province}</span>
+              <span>{business.locations.length}
+                {business.locations.length == 1 ? 'location | ' : 'locations | '}</span>
+              <span>{mainLocation.address.city}
+                {mainLocation.address.state_province}</span>
             </p>
           </div>
         </div>

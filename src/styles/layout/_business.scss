@@ -2,6 +2,7 @@
   background-color: rgba(0, 0, 0, 0.05);
   padding: 24px;
   margin-bottom: 12px;
+  overflow: hidden;
   &-collapse,
   &-expand {
     position: relative;
@@ -12,19 +13,54 @@
    .details {
      display: none;
    }
-   .location {
+  .location {
      font-weight: bold;
      margin-top: 12px;
      bottom: 0px;
      position: absolute;
-   }
+    }
   }
   &-collapse {
     height: 87px;
     transition: all 0.4s ease-out;
+    .full-information {
+      height: 0px;
+      overflow: hidden;
+      transition: all 0.4s ease-out;
+    }
   }
    &-expand{
     height: 613px;
     transition: all 0.4s ease-in;
+    .location {
+      display: none;
+    }
+    .full-information {
+      margin-top: 22px;
+      height: auto;
+      transition: all 0.4s ease-out;
+      p {
+        opacity: 0.5;
+      }
+    }
+  }
+
+  .business-title {
+    margin-bottom: 8px;
+  }
+  hr {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    border: 1px solid rgba(96,125,139,0.25);
+  }
+  h4 {
+    margin-bottom: 4px;
+    font-weight: bold;
+  }
+  .social-icons {
+    margin-bottom: 32px;
+    img {
+      margin-right: 8px;
+    }
   }
 }
