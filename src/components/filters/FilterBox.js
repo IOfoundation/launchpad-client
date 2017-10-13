@@ -10,12 +10,14 @@ class FilterBox extends React.Component {
         <div className="grid">
           <FilterByText
             filterName={'Search Box'}
-            handleTextSearchBusinesses={this.props.handleTextSearchBusinesses}
+            handleTextSearchResults={this.props.handleTextSearchResults}
             handleOnRemoveFilterOption={this.props.handleOnRemoveFilterOption}
             handleClickOnClearAllFilters={
               this.props.handleClickOnClearAllFilters
             }
+            handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
             getFilterChips={this.props.getFilterChips}
+            getBusiness={this.props.getBusiness}
             search_results={this.props.search_results}
           />
         </div>
@@ -48,11 +50,12 @@ class FilterBox extends React.Component {
 
 FilterBox.propTypes = {
   filterOptions: PropTypes.object.isRequired,
+  getBusiness: PropTypes.func.isRequired,
   getFilterChips: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
   handleOnRemoveFilterOption: PropTypes.func.isRequired,
-  handleTextSearchBusinesses: PropTypes.func.isRequired,
+  handleTextSearchResults: PropTypes.func.isRequired,
   search_results: PropTypes.arrayOf(PropTypes.object),
 };
 

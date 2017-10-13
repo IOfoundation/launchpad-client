@@ -85,16 +85,6 @@ const pushBrowserHistory = filters => {
   });
 };
 
-export function fetchOrganization(organizationId) {
-  return async (dispatch: Function) => {
-    const httpResponse = await httpRequest.get(
-      `/api/organizations/${organizationId}`
-    );
-    const organization = httpResponse.data;
-    dispatch(organizationDataObject(organization));
-  };
-}
-
 export function filterBusinessesByName(filterValue, currentParams) {
   return async (dispatch: Function) => {
     const filters = filtersObject(null, filterValue, currentParams);
@@ -113,6 +103,20 @@ export function filterBusinessesByName(filterValue, currentParams) {
   };
 }
 
+export function fetchOrganization(organizationId) {
+  return async (dispatch: Function) => {
+    const httpResponse = await httpRequest.get(
+      `/api/organizations/${organizationId}`, {
+        params
+      }
+    );
+    const organization = httpResponse.data;
+    dispatch(organizationDataObject(organization));
+    //dispatch(businessesMetaDataObject(metadata));
+    //pushBrowserHistory(organizationId);
+  };
+}
+
 export function filterOrganizations(filterValue, currentParams, removeFilter) {
   return async (dispatch: Function) => {
     const filters = filtersObject(filterValue, currentParams, removeFilter);
@@ -123,11 +127,9 @@ export function filterOrganizations(filterValue, currentParams, removeFilter) {
     if (!params.hasOwnProperty('page')) {
       Object.assign(params, {page: 1});
     }
-
     const httpResponse = await httpRequest.get('/api/organizations/search', {
       params,
     });
-
     const organizations = httpResponse.data;
     const metadata = {
       pagination: {
@@ -166,14 +168,6 @@ export function changePage(page, currentParams) {
     dispatch(businessesMetaDataObject(metadata));
 
     pushBrowserHistory(params);
-  };
-}
-
-export function showBusiness(business) {
-  return async () => {
-    browserHistory.push({
-      pathname: `/businesses/${business.id}`,
-    });
   };
 }
 

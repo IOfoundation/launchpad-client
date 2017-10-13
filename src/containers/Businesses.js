@@ -20,14 +20,22 @@ export class Businesses extends Component {
     }
   }
 
-  handleTextSearchBusinesses(filter) {
+  handleTextSearchResults(filter) {
     this.props.actions.fetchSearchResults(filter);
   }
 
-  handleOnChangeFilterOptions(filterValue) {
-    const organizationsFilters = this.props.location.query;
-    this.getFilterChips();
-    this.props.actions.filterOrganizations(filterValue, organizationsFilters);
+  getBusiness(id) {
+    this.props.actions.fetchOrganization(id);
+  }
+
+  handleOnChangeFilterOptions(filterValue, isId) {
+    let params = this.props.location.query;
+    if (isId) {
+      this.props.actions.fetchOrganization(filterValue);
+    } else {
+      this.getFilterChips();
+      this.props.actions.filterOrganizations(filterValue, params);
+    }
   }
 
   handleOnRemoveFilterOption(filterValue) {
@@ -53,7 +61,7 @@ export class Businesses extends Component {
   }
 
   handleClickOnBusiness(business) {
-    this.props.actions.showBusiness(business);
+    this.props.actions.getBusiness(business);
   }
 
   render() {
@@ -75,7 +83,7 @@ export class Businesses extends Component {
                   }
                 </h2>
                 <FilterBox
-                  handleTextSearchBusinesses={this.handleTextSearchBusinesses.bind(
+                  handleTextSearchResults={this.handleTextSearchResults.bind(
                     this
                   )}
                   filterOptions={this.props.filters}
@@ -90,6 +98,7 @@ export class Businesses extends Component {
                     this
                   )}
                   getFilterChips={this.getFilterChips.bind(this)}
+                  getBusiness={this.getBusiness.bind(this)}
                 />
               </div>
             </div>

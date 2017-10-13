@@ -19,7 +19,7 @@ class BusinessesForm extends React.Component {
 
   handleKeyPress(value) {
     this.setState({value: event.target.value, showDropdown: true});
-    this.props.handleTextSearchBusinesses(value);
+    this.props.handleTextSearchResults(value);
     if (isEmpty(value)) {
       this.setState({showDropdown: false});
     }
@@ -70,7 +70,7 @@ class BusinessesForm extends React.Component {
 }
 
 BusinessesForm.propTypes = {
-  handleTextSearchBusinesses: PropTypes.func.isRequired,
+  handleTextSearchResults: PropTypes.func.isRequired,
   search_results: PropTypes.arrayOf(PropTypes.object),
 };
 

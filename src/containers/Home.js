@@ -8,7 +8,7 @@ import HomeView from '../components/home/Main';
 import * as actions from '../actions/business';
 
 export class Home extends Component {
-  handleTextSearchBusinesses(filter) {
+  handleTextSearchResults(filter) {
     this.props.actions.fetchSearchResults(filter);
   }
 
@@ -18,7 +18,7 @@ export class Home extends Component {
         <section>
           <HomeView
             search_results={this.props.search_results}
-            handleTextSearchBusinesses={this.handleTextSearchBusinesses.bind(
+            handleTextSearchResults={this.handleTextSearchResults.bind(
               this
             )}
           />
