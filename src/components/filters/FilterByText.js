@@ -86,9 +86,6 @@ class FilterByText extends React.Component {
             <a onClick={(e) => this.handleDropdownOnClick(search_result, e)}>
               {search_result.content}
             </a>
-            {search_result.searchable_type === 'Organization' ?
-              <img src="../static-data/images/LocationWhite.png" />
-            : null}
           </li>
         ))}
       </ul>
