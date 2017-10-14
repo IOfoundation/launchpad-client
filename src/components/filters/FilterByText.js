@@ -36,7 +36,7 @@ class FilterByText extends React.Component {
 
   handleKeyPress(value) {
     this.setState({value: event.target.value, showDropdown: true});
-    this.props.handleTextSearchResults(value);
+    this.props.getTextSearchResults(value);
     if (isEmpty(value)) {
       this.setState({showDropdown: false});
     }
@@ -189,7 +189,7 @@ FilterByText.propTypes = {
   getFilterChips: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
   handleOnRemoveFilterOption: PropTypes.func.isRequired,
-  handleTextSearchResults: PropTypes.func.isRequired,
+  getTextSearchResults: PropTypes.func.isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
   search_results: PropTypes.arrayOf(PropTypes.object),
 };

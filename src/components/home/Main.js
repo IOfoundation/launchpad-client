@@ -4,7 +4,7 @@ import {Link} from 'react-router';
 import BusinessesForm from './BusinessesForm';
 import Logo from '../shared/Logo';
 
-const Main = ({search_results, handleTextSearchResults}) => {
+const Main = ({search_results, getTextSearchResults}) => {
   return (
     <div>
       <section className="hero center-xs">
@@ -23,7 +23,7 @@ const Main = ({search_results, handleTextSearchResults}) => {
           <div className="hero_inputContainer">
             <BusinessesForm
               search_results={search_results}
-              handleTextSearchResults={handleTextSearchResults}
+              getTextSearchResults={getTextSearchResults}
             />
           </div>
           <div className="margin-auto margin-y-20">

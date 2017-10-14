@@ -20,7 +20,7 @@ export class Businesses extends Component {
     }
   }
 
-  handleTextSearchResults(filter) {
+  getTextSearchResults(filter) {
     this.props.actions.fetchSearchResults(filter);
   }
 
@@ -31,7 +31,7 @@ export class Businesses extends Component {
   handleOnChangeFilterOptions(filterValue, isId) {
     let params = this.props.location.query;
     if (isId) {
-      this.props.actions.fetchOrganization(filterValue);
+      this.props.actions.fetchOrganization(filterValue, params);
     } else {
       this.getFilterChips();
       this.props.actions.filterOrganizations(filterValue, params);
@@ -50,6 +50,8 @@ export class Businesses extends Component {
   getFilterChips() {
     return this.props.location.query;
   }
+
+
 
   handleClickOnClearAllFilters() {
     this.props.actions.filterOrganizations('', '');
@@ -83,7 +85,7 @@ export class Businesses extends Component {
                   }
                 </h2>
                 <FilterBox
-                  handleTextSearchResults={this.handleTextSearchResults.bind(
+                  getTextSearchResults={this.getTextSearchResults.bind(
                     this
                   )}
                   filterOptions={this.props.filters}

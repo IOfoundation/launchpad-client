@@ -66,15 +66,39 @@ const searchResultsDataObject = search_results => {
   };
 };
 
-const filtersObject = (filterValue, filters, removeFilter) => {
+const filtersObject = (filterValue, filters, removeFilter, isId) => {
   const newFilters = cloneDeep(filters);
   if (removeFilter) {
-    _removeFilters(filterValue, newFilters);
+    _removeFilters(filterValue, newFilters, isId);
   } else {
     _addFilters(filterValue, newFilters);
   }
   return newFilters;
 };
+
+export function fetchOrganization(organizationId, params) {
+  return async (dispatch: Function) => {
+    if (params) {
+      const filters = filtersObject(organizationId, params, true, true)
+      console.log(filters);
+      const httpResponse = await httpRequest.get(
+        `api/organizations/${organizationId}`, {
+          ...filters
+        }
+      );
+      const organization = httpResponse.data;
+      dispatch(organizationDataObject(organization));
+      pushBrowserHistory(filters);
+    }
+    else {
+      const httpResponse = await httpRequest.get(
+        `/api/organizations/${organizationId}`
+      );
+      const organization = httpResponse.data;
+      dispatch(organizationDataObject(organization));
+    }
+  };
+}
 
 const pushBrowserHistory = filters => {
   let filterString = queryString.stringify(filters, {encode: false});
@@ -100,19 +124,6 @@ export function filterBusinessesByName(filterValue, currentParams) {
     dispatch(locationsDataObject(locations));
     dispatch(businessesMetaDataObject(metadata));
     pushBrowserHistory(filters);
-  };
-}
-
-export function fetchOrganization(organizationId) {
-  return async (dispatch: Function) => {
-    const httpResponse = await httpRequest.get(
-      `/api/organizations/${organizationId}`, {
-      }
-    );
-    const organization = httpResponse.data;
-    dispatch(organizationDataObject(organization));
-    //dispatch(businessesMetaDataObject(metadata));
-    //pushBrowserHistory(organizationId);
   };
 }
 
@@ -226,9 +237,12 @@ export function fetchSearchResults(filter) {
   };
 }
 
-function _removeFilters(filterValue, newFilters) {
-  if (isString(newFilters.category)) {
+function _removeFilters(filterValue, newFilters, isId) {
+  if (isString(newFilters.category) || isId) {
     newFilters.category = [];
+    if (isId) {
+      newFilters.id = filterValue;
+    }
   } else {
     const filterIndex = newFilters.category.indexOf(filterValue);
     newFilters.category.splice(filterIndex, 1);
