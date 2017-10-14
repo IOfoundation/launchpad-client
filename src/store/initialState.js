@@ -1,6 +1,10 @@
 const initialState = {
   businesses: {
-    organization: {},
+    organization: {
+      id: null,
+      name: 'name',
+      description: 'description',
+      location: {},},
     locations: [],
     organizations: [],
     items: [],

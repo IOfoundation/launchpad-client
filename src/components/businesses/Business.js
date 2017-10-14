@@ -202,7 +202,7 @@ class Business extends Component {
 Business.propTypes = {
   business: PropTypes.object.isRequired,
   handleClickOnBusiness: PropTypes.func.isRequired,
-  expanded: PropTypes.boolean,
+  expanded: PropTypes.bool,
 };
 
 export default Business;

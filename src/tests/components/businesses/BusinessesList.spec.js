@@ -4,8 +4,17 @@ import {shallow} from 'enzyme';
 import BusinessesList from '../../../components/businesses/BusinessesList';
 
 const handleClickOnBusiness = jest.fn();
+const handleClickOnClearAllFilters = jest.fn();
 
-function mockOrganizations() {
+function mockSingleOrganization() {
+  return {id: 1, name: 'Business1'};
+}
+
+function singleEmptyOrganization() {
+  return {};
+}
+
+function mockMultipleOrganizations() {
   return [
     {
       id: 1,
@@ -20,11 +29,15 @@ function mockOrganizations() {
 
 describe('<BusinessesList />', () => {
   it('Renders a Business component for every Business in the array', () => {
-    const organizations = mockOrganizations();
+    const organizations = mockMultipleOrganizations();
+    const organization = singleEmptyOrganization();
     const wrapper = shallow(
       <BusinessesList
         organizations={organizations}
+        organization={organization}
         handleClickOnBusiness={handleClickOnBusiness}
+        handleClickOnClearAllFilters={handleClickOnClearAllFilters}
+        expanded={false}
       />
     );
     expect(wrapper.find('Business').length).toEqual(2);

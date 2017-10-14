@@ -102,7 +102,7 @@ class ContentMap extends Component {
 }
 
 ContentMap.propTypes = {
-  businessesMetadata: PropTypes.array,
+  businessesMetadata: PropTypes.object,
   children: PropTypes.node,
   expanded: PropTypes.bool,
   expandMap: PropTypes.func.isRequired,
