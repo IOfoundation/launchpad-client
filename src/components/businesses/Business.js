@@ -6,7 +6,7 @@ class Business extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      expanded: false,
+      expanded: this.props.expanded,
     };
   }
 
@@ -202,6 +202,7 @@ class Business extends Component {
 Business.propTypes = {
   business: PropTypes.object.isRequired,
   handleClickOnBusiness: PropTypes.func.isRequired,
+  expanded: PropTypes.boolean,
 };
 
 export default Business;

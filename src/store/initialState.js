@@ -1,11 +1,6 @@
 const initialState = {
   businesses: {
-    organization: {
-      id: 'id',
-      name: 'name',
-      description: 'description',
-      location: {},
-    },
+    organization: {},
     locations: [],
     organizations: [],
     search_results: [],

@@ -40,6 +40,7 @@ class Main extends Component {
     const {
       businessesMetadata,
       organizations,
+      organization,
       locations,
       handleClickOnBusiness,
       handleClickOnClearAllFilters,
@@ -56,6 +57,7 @@ class Main extends Component {
       >
         <BusinessesList
           organizations={organizations}
+          organization={organization}
           handleClickOnBusiness={handleClickOnBusiness}
           handleClickOnClearAllFilters={handleClickOnClearAllFilters}
           expanded={this.state.cardExpanded}
@@ -75,7 +77,8 @@ Main.propTypes = {
   handleClickOnBusiness: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
-  organizations: PropTypes.array.isRequired,
+  organizations: PropTypes.array,
+  organization: PropTypes.object,
 };
 
 export default Main;

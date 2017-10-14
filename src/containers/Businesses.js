@@ -51,8 +51,6 @@ export class Businesses extends Component {
     return this.props.location.query;
   }
 
-
-
   handleClickOnClearAllFilters() {
     this.props.actions.filterOrganizations('', '');
   }
@@ -67,6 +65,7 @@ export class Businesses extends Component {
   }
 
   render() {
+    console.log(this.props.organization)
     return (
       <MainLayout>
         <section>
@@ -109,6 +108,7 @@ export class Businesses extends Component {
           <BusinessesView
             filterOptions={this.props.filters}
             organizations={this.props.organizations}
+            organization={this.props.organization}
             locations={this.props.locations}
             businessesMetadata={this.props.metadata}
             handleChangePage={this.handleChangePage.bind(this)}
@@ -130,7 +130,8 @@ Businesses.propTypes = {
   actions: PropTypes.object,
   filters: PropTypes.object.isRequired,
   metadata: PropTypes.object.isRequired,
-  organizations: PropTypes.arrayOf(PropTypes.object).isRequired,
+  organizations: PropTypes.arrayOf(PropTypes.object),
+  organization: PropTypes.object,
   params: PropTypes.object,
   search_results: PropTypes.arrayOf(PropTypes.object)
 };
@@ -139,6 +140,7 @@ const mapStateToProps = _state => {
   const {businesses, routing} = _state;
   return {
     organizations: businesses.organizations,
+    organization: businesses.organization,
     locations: businesses.locations,
     filters: businesses.filters,
     metadata: businesses.metadata,
