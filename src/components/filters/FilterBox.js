@@ -18,7 +18,7 @@ class FilterBox extends React.Component {
             handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
             getFilterChips={this.props.getFilterChips}
             getBusiness={this.props.getBusiness}
-            search_results={this.props.search_results}
+            items={this.props.items}
           />
         </div>
         <div className="grid container--middle bottom-xs between-xs p-left-0">
@@ -56,7 +56,7 @@ FilterBox.propTypes = {
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
   handleOnRemoveFilterOption: PropTypes.func.isRequired,
   getTextSearchResults: PropTypes.func.isRequired,
-  search_results: PropTypes.arrayOf(PropTypes.object),
+  items: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default FilterBox;

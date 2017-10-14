@@ -59,10 +59,10 @@ const filtersDataObject = filters => {
   };
 };
 
-const searchResultsDataObject = search_results => {
+const searchResultsDataObject = items => {
   return {
     type: types.FETCH_SEARCH_RESULTS,
-    search_results,
+    items,
   };
 };
 
@@ -80,7 +80,6 @@ export function fetchOrganization(organizationId, params) {
   return async (dispatch: Function) => {
     if (params) {
       const filters = filtersObject(organizationId, params, true, true)
-      console.log(filters);
       const httpResponse = await httpRequest.get(
         `api/organizations/${organizationId}`, {
           ...filters
@@ -232,8 +231,8 @@ export function fetchSearchResults(filter) {
     const httpResponse = await httpRequest.get('api/categories/search', {
       params: {'name': filter}
     });
-    const search_results = httpResponse.data;
-    dispatch(searchResultsDataObject(search_results));
+    const items = httpResponse.data;
+    dispatch(searchResultsDataObject(items));
   };
 }
 

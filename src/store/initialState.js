@@ -3,7 +3,7 @@ const initialState = {
     organization: {},
     locations: [],
     organizations: [],
-    search_results: [],
+    items: [],
     metadata: {
       pagination: {
         last: {

@@ -17,7 +17,7 @@ export class Home extends Component {
       <MainLayout>
         <section>
           <HomeView
-            search_results={this.props.search_results}
+            items={this.props.items}
             getTextSearchResults={this.getTextSearchResults.bind(
               this
             )}
@@ -30,13 +30,13 @@ export class Home extends Component {
 
 Home.propTypes = {
   actions: PropTypes.object,
-  search_results: PropTypes.arrayOf(PropTypes.object).isRequired,
+  items: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 const mapStateToProps = _state => {
   const {businesses} = _state;
   return {
-    search_results: businesses.search_results,
+    items: businesses.items,
   };
 };
 

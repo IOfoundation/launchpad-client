@@ -46,12 +46,12 @@ class FilterByText extends React.Component {
     this.setState({labelTop: false, showDropdown: false, value: ''});
   }
 
-  handleDropdownOnClick(search_result) {
-    if (search_result.searchable_type === 'Category') {
-      this.props.handleOnChangeFilterOptions(search_result.content);
+  handleDropdownOnClick(item) {
+    if (item.searchable_type === 'Category') {
+      this.props.handleOnChangeFilterOptions(item.content);
       this.setState({showDropdown: false, labelTop: false, value: ''});
-    } else if (search_result.searchable_type === 'Organization') {
-      this.props.handleOnChangeFilterOptions(search_result.searchable_id, true)
+    } else if (item.searchable_type === 'Organization') {
+      this.props.handleOnChangeFilterOptions(item.searchable_id, true)
       this.setState({showDropdown: false, labelTop: false, value: ''});
     }
   }
@@ -81,10 +81,10 @@ class FilterByText extends React.Component {
   renderDropdown() {
     return (
       <ul className="option-dropdown-list">
-        {this.props.search_results.map(search_result => (
-          <li key={search_result.id}>
-            <a onClick={(e) => this.handleDropdownOnClick(search_result, e)}>
-              {search_result.content}
+        {this.props.items.map(item => (
+          <li key={item.id}>
+            <a onClick={(e) => this.handleDropdownOnClick(item, e)}>
+              {item.content}
             </a>
           </li>
         ))}
@@ -191,7 +191,7 @@ FilterByText.propTypes = {
   handleOnRemoveFilterOption: PropTypes.func.isRequired,
   getTextSearchResults: PropTypes.func.isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
-  search_results: PropTypes.arrayOf(PropTypes.object),
+  items: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default onClickOutside(FilterByText);

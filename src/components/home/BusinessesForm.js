@@ -28,15 +28,15 @@ class BusinessesForm extends React.Component {
   renderDropdown() {
     return (
       <ul className="hero-dropdown-list">
-        {this.props.search_results.map(search_result => (
-          <li key={search_result.id}>
+        {this.props.items.map(item => (
+          <li key={item.id}>
             <a
-              href={search_result.searchable_type === 'Category'
-                ? `/businesses?category=${search_result.content}`
-                : `/businesses?id=${search_result.searchable_id}`
+              href={item.searchable_type === 'Category'
+                ? `/businesses?category=${item.content}`
+                : `/businesses?id=${item.searchable_id}`
               }
             >
-              {search_result.content}
+              {item.content}
             </a>
           </li>
         ))}
@@ -71,7 +71,7 @@ class BusinessesForm extends React.Component {
 
 BusinessesForm.propTypes = {
   getTextSearchResults: PropTypes.func.isRequired,
-  search_results: PropTypes.arrayOf(PropTypes.object),
+  items: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default onClickOutside(BusinessesForm);

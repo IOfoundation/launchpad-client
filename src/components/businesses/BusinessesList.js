@@ -19,7 +19,6 @@ class BusinessesList extends React.Component {
       );
     } else {
       {this.props.organizations.map(organization => {
-        console.log(organization)
         return (
           <Business
             business={organization}

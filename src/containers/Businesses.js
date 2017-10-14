@@ -65,7 +65,6 @@ export class Businesses extends Component {
   }
 
   render() {
-    console.log(this.props.organization)
     return (
       <MainLayout>
         <section>
@@ -88,7 +87,7 @@ export class Businesses extends Component {
                     this
                   )}
                   filterOptions={this.props.filters}
-                  search_results={this.props.search_results}
+                  items={this.props.items}
                   handleClickOnClearAllFilters={this.handleClickOnClearAllFilters.bind(
                     this
                   )}
@@ -133,7 +132,7 @@ Businesses.propTypes = {
   organizations: PropTypes.arrayOf(PropTypes.object),
   organization: PropTypes.object,
   params: PropTypes.object,
-  search_results: PropTypes.arrayOf(PropTypes.object)
+  items: PropTypes.arrayOf(PropTypes.object)
 };
 
 const mapStateToProps = _state => {
@@ -145,7 +144,7 @@ const mapStateToProps = _state => {
     filters: businesses.filters,
     metadata: businesses.metadata,
     queries: routing.locationBeforeTransitions.query,
-    search_results: businesses.search_results,
+    items: businesses.items,
   };
 };
 
