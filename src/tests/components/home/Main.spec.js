@@ -4,17 +4,15 @@ import {shallow} from 'enzyme';
 import HomePage from '../../../components/home/Main';
 import BusinessesForm from '../../../components/home/BusinessesForm';
 
-const services = [];
-const handleClickOnServiceTag = jest.fn();
-const handleSubmitSearchBusinessesForm = jest.fn();
+const items = [];
+const getTextSearchResults = jest.fn();
 
 describe('<HomePage />', () => {
   it('Renders a BusinessesForm"', () => {
     const wrapper = shallow(
       <HomePage
-        services={services}
-        handleClickOnServiceTag={handleClickOnServiceTag}
-        handleSubmitSearchBusinessesForm={handleSubmitSearchBusinessesForm}
+        items={items}
+        getTextSearchResults={getTextSearchResults}
       />
     );
     expect(wrapper.find(BusinessesForm).length).toEqual(1);
