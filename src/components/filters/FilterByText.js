@@ -13,7 +13,7 @@ class FilterByText extends React.Component {
       labelTop: false,
       showFilterLabel: false,
       showDropdown: false,
-      value: '',
+      searchText: '',
     };
   }
   deleteFilter(e) {
@@ -34,8 +34,9 @@ class FilterByText extends React.Component {
     this.setState({labelTop: false});
   }
 
-  handleKeyPress(value) {
-    this.setState({value: event.target.value, showDropdown: true});
+  handleKeyPress(event) {
+    const value = event.target.value;
+    this.setState({searchText: value, showDropdown: true});
     this.props.getTextSearchResults(value);
     if (isEmpty(value)) {
       this.setState({showDropdown: false});
@@ -141,9 +142,9 @@ class FilterByText extends React.Component {
           >
             <input
               type="text"
-              value={this.state.value}
+              value={this.state.searchText}
               onClick={() => this._inputClicked()}
-              onKeyUp={e => this.handleKeyPress(e.target.value)}
+              onChange={event => this.handleKeyPress(event)}
               placeholder={
                 this.state.labelTop ? (
                   'Search by Resource Name or Ipsum'

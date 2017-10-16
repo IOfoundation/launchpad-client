@@ -8,7 +8,7 @@ class BusinessesForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
+      searchText: '',
       showDropdown: false,
     };
   }
@@ -17,8 +17,9 @@ class BusinessesForm extends React.Component {
     this.setState({showDropdown: false});
   }
 
-  handleKeyPress(value) {
-    this.setState({value: event.target.value, showDropdown: true});
+  handleKeyPress(event) {
+    const value = event.target.value;
+    this.setState({searchText: value, showDropdown: true});
     this.props.getTextSearchResults(value);
     if (isEmpty(value)) {
       this.setState({showDropdown: false});
@@ -49,8 +50,8 @@ class BusinessesForm extends React.Component {
       <form>
         <input
           type="text"
-          value={this.state.value}
-          onKeyUp={e => this.handleKeyPress(e.target.value)}
+          value={this.state.searchText}
+          onChange={event => this.handleKeyPress(event)}
           placeholder="Search for businesses and services"
           className="hero_input businessesName"
         />
