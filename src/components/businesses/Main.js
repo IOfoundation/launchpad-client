@@ -11,8 +11,11 @@ class Main extends Component {
     super(props);
     this.reduceMap = this.reduceMap.bind(this);
     this.expandMap = this.expandMap.bind(this);
+    this.onBoundsChange = this.onBoundsChange.bind(this);
+    this.redoSearchInMap = this.redoSearchInMap.bind(this);
     this.state = {
       expanded: false,
+      bounds: {},
     };
   }
 
@@ -22,6 +25,14 @@ class Main extends Component {
 
   expandMap() {
     this.setState({expanded: true});
+  }
+
+  onBoundsChange(mapDetails) {
+    this.setState({bounds: mapDetails.bounds});
+  }
+
+  redoSearchInMap() {
+    this.props.handleOnChangeFilterOptions(this.state.bounds, 'coordinates');
   }
 
   _renderResultsInfo() {
@@ -52,7 +63,9 @@ class Main extends Component {
         businessesMetadata={businessesMetadata}
         expanded={this.state.expanded}
         expandMap={this.expandMap}
+        onBoundsChange={this.onBoundsChange}
         reduceMap={this.reduceMap}
+        redoSearchInMap={this.redoSearchInMap}
         topBar={this._renderResultsInfo()}
       >
         <BusinessesList
@@ -77,7 +90,7 @@ Main.propTypes = {
   handleClickOnBusiness: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
-  organizations: PropTypes.array,
+  organizations: PropTypes.arrayOf(PropTypes.object),
   organization: PropTypes.object,
 };
 

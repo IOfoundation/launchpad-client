@@ -16,7 +16,7 @@ export class Businesses extends Component {
     if ('id' in params) {
       this.props.actions.fetchOrganization(params.id);
     } else {
-      this.props.actions.filterOrganizations(null, params);
+      this.props.actions.filterOrganizations(null, params, 'category');
     }
   }
 
@@ -28,13 +28,13 @@ export class Businesses extends Component {
     this.props.actions.fetchOrganization(id);
   }
 
-  handleOnChangeFilterOptions(filterValue, isId) {
+  handleOnChangeFilterOptions(filterValue, filterType) {
     let params = this.props.location.query;
-    if (isId) {
+    if (filterType === 'organization') {
       this.props.actions.fetchOrganization(filterValue, params);
     } else {
       this.getFilterChips();
-      this.props.actions.filterOrganizations(filterValue, params);
+      this.props.actions.filterOrganizations(filterValue, params, filterType);
     }
   }
 
@@ -43,6 +43,7 @@ export class Businesses extends Component {
     this.props.actions.filterOrganizations(
       filterValue,
       organizationsFilters,
+      'category',
       true
     );
   }
@@ -53,6 +54,7 @@ export class Businesses extends Component {
 
   handleClickOnClearAllFilters() {
     this.props.actions.filterOrganizations('', '');
+    this.props.actions.clearOrganization();
   }
 
   handleChangePage(page) {
@@ -127,24 +129,24 @@ export class Businesses extends Component {
 
 Businesses.propTypes = {
   actions: PropTypes.object,
+  items: PropTypes.arrayOf(PropTypes.object),
   filters: PropTypes.object.isRequired,
   metadata: PropTypes.object.isRequired,
   organizations: PropTypes.arrayOf(PropTypes.object),
   organization: PropTypes.object,
   params: PropTypes.object,
-  items: PropTypes.arrayOf(PropTypes.object)
 };
 
 const mapStateToProps = _state => {
   const {businesses, routing} = _state;
   return {
+    items: businesses.items,
+    filters: businesses.filters,
+    locations: businesses.locations,
+    metadata: businesses.metadata,
     organizations: businesses.organizations,
     organization: businesses.organization,
-    locations: businesses.locations,
-    filters: businesses.filters,
-    metadata: businesses.metadata,
     queries: routing.locationBeforeTransitions.query,
-    items: businesses.items,
   };
 };
 

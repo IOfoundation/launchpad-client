@@ -49,10 +49,10 @@ class FilterByText extends React.Component {
 
   handleDropdownOnClick(item) {
     if (item.searchable_type === 'Category') {
-      this.props.handleOnChangeFilterOptions(item.content);
+      this.props.handleOnChangeFilterOptions(item.content, 'category');
       this.setState({showDropdown: false, labelTop: false, value: ''});
     } else if (item.searchable_type === 'Organization') {
-      this.props.handleOnChangeFilterOptions(item.searchable_id, true)
+      this.props.handleOnChangeFilterOptions(item.searchable_id, 'organization')
       this.setState({showDropdown: false, labelTop: false, value: ''});
     }
   }

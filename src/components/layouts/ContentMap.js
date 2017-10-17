@@ -13,6 +13,12 @@ class ContentMap extends Component {
         >
           {'Reduce Map'}
         </button>
+        <button
+          className="btn-link btn-link-primary underline text-xs-margin"
+          onClick={this.props.redoSearchInMap}
+        >
+          {'Redo Search in Map Area'}
+        </button>
       </div>
     );
   }
@@ -27,7 +33,7 @@ class ContentMap extends Component {
         </button>
         <button
           className="btn-link btn-link-primary underline text-xs-margin"
-          onClick={this.props.expandMap}
+          onClick={this.props.redoSearchInMap}
         >
           {'Redo Search in Map Area'}
         </button>
@@ -35,8 +41,7 @@ class ContentMap extends Component {
     );
   }
   render() {
-    const {locations} = this.props;
-    const {businessesMetadata} = this.props;
+    const {locations, businessesMetadata, onBoundsChange} = this.props;
     return (
       <div
         className={
@@ -89,7 +94,10 @@ class ContentMap extends Component {
                   : 'map-container-expand'
               }
             >
-              <MapView locations={locations} />
+              <MapView
+                locations={locations}
+                onBoundsChange={onBoundsChange}
+              />
             </div>
             {this.props.expanded
               ? this._renderReduceButton()
@@ -107,6 +115,8 @@ ContentMap.propTypes = {
   expanded: PropTypes.bool,
   expandMap: PropTypes.func.isRequired,
   locations: PropTypes.array,
+  onBoundsChange: PropTypes.func,
+  redoSearchInMap: PropTypes.func.isRequired,
   reduceMap: PropTypes.func.isRequired,
   topBar: PropTypes.node,
   totalOrganizations: PropTypes.array,

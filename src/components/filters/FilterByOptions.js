@@ -22,7 +22,7 @@ class FilterByOptions extends React.Component {
     }
   }
   _onClick(selectedfilterOption) {
-    this.props.handleOnChangeFilterOptions(selectedfilterOption.name);
+    this.props.handleOnChangeFilterOptions(selectedfilterOption.name, 'category');
   }
   handleClickOutside() {
     this.setState({

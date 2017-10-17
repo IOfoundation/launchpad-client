@@ -1,6 +1,6 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
-import GoogleMapReact from 'google-map-react';
+import GoogleMap from 'google-map-react';
 import MapMarker from './MapMarker';
 
 class Main extends React.Component {
@@ -18,6 +18,10 @@ class Main extends React.Component {
   getCoordinates(business) {
     return business.coordinates;
   }
+  handleBoundsChange(event) {
+    this.props.onBoundsChange(event);
+  }
+
   _renderModal(business) {
     return (
       <div className="map_modal">
@@ -59,9 +63,10 @@ class Main extends React.Component {
     if (firstBusiness) {
       const [centerLng, centerLat] = this.getCoordinates(firstBusiness);
       return (
-        <GoogleMapReact
+        <GoogleMap
           center={{lat: centerLat, lng: centerLng}}
           zoom={15}
+          onChange={event => this.handleBoundsChange(event)}
           bootstrapURLKeys={{
             key: process.env.GOOGLE_MAP_API_KEY,
           }}
@@ -70,17 +75,18 @@ class Main extends React.Component {
             const [lng, lat] = this.getCoordinates(location);
             return <MapMarker key={location.id} lat={lat} lng={lng} />;
           })}
-        </GoogleMapReact>
+        </GoogleMap>
       );
     }
     return (
-      <GoogleMapReact
+      <GoogleMap
         center={sacCoordinates}
         zoom={10}
+        onChange={event => this.handleBoundsChange(event)}
         bootstrapURLKeys={{
           key: process.env.GOOGLE_MAP_API_KEY,
         }}
-      ></GoogleMapReact>
+      ></GoogleMap>
 
     )
   }
@@ -88,6 +94,7 @@ class Main extends React.Component {
 
 Main.propTypes = {
   locations: PropTypes.array,
+  onBoundsChange: PropTypes.func.isRequired,
 };
 
 export default Main;

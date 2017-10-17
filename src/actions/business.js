@@ -5,7 +5,7 @@ import {browserHistory} from 'react-router';
 import queryString from 'query-string';
 import {isEmpty, isString, cloneDeep} from 'lodash';
 
-const MaxItemsDisplayedPerPage = 10;
+const MaxItemsDisplayedPerPage = 6;
 
 const paginationMetadata = links => {
   const _paginationMetadata = {};
@@ -66,20 +66,27 @@ const searchResultsDataObject = items => {
   };
 };
 
-const filtersObject = (filterValue, filters, removeFilter, isId) => {
+const filtersObject = (filterValue, filters, filterType, removeFilter) => {
+  console.log(filterType)
   const newFilters = cloneDeep(filters);
-  if (removeFilter) {
-    _removeFilters(filterValue, newFilters, isId);
-  } else {
-    _addFilters(filterValue, newFilters);
-  }
+    if (removeFilter) {
+      _removeFilters(filterValue, newFilters, filterType);
+    } else {
+      if (filterType === 'coordinates') {
+        _addCoordinatesFilter(filterValue, newFilters);
+      } else {
+        _addFilters(filterValue, newFilters);
+      }
+    }
   return newFilters;
 };
 
-export function fetchOrganization(organizationId, params) {
+
+
+export function fetchOrganization(organizationId, params, filterType) {
   return async (dispatch: Function) => {
     if (params) {
-      const filters = filtersObject(organizationId, params, true, true)
+      const filters = filtersObject(organizationId, params, 'organization', true)
       const httpResponse = await httpRequest.get(
         `api/organizations/${organizationId}`, {
           ...filters
@@ -97,6 +104,18 @@ export function fetchOrganization(organizationId, params) {
       dispatch(organizationDataObject(organization));
     }
   };
+}
+
+export function clearOrganization() {
+  return async (dispatch: Function) => {
+    const organization = {
+      id: null,
+      name: 'name',
+      description: 'description',
+      location: {}
+    };
+    dispatch(organizationDataObject(organization));
+  }
 }
 
 const pushBrowserHistory = filters => {
@@ -126,9 +145,9 @@ export function filterBusinessesByName(filterValue, currentParams) {
   };
 }
 
-export function filterOrganizations(filterValue, currentParams, removeFilter) {
+export function filterOrganizations(filterValue, currentParams, filterType, removeFilter) {
   return async (dispatch: Function) => {
-    const filters = filtersObject(filterValue, currentParams, removeFilter);
+    const filters = filtersObject(filterValue, currentParams, filterType, removeFilter);
     const params = {
       ...filters,
       per_page: MaxItemsDisplayedPerPage,
@@ -136,7 +155,7 @@ export function filterOrganizations(filterValue, currentParams, removeFilter) {
     if (!params.hasOwnProperty('page')) {
       Object.assign(params, {page: 1});
     }
-    const httpResponse = await httpRequest.get('/api/organizations/search', {
+    const httpResponse = await httpRequest.get('/api/organizations', {
       params,
     });
     const organizations = httpResponse.data;
@@ -161,7 +180,7 @@ export function changePage(page, currentParams) {
       per_page: MaxItemsDisplayedPerPage,
     };
 
-    const httpResponse = await httpRequest.get('/api/organizations/search', {
+    const httpResponse = await httpRequest.get('/api/organizations', {
       params,
     });
 
@@ -228,7 +247,7 @@ export function fetchFilterOptions() {
 
 export function fetchSearchResults(filter) {
   return async (dispatch: Function) => {
-    const httpResponse = await httpRequest.get('api/categories/search', {
+    const httpResponse = await httpRequest.get('api/search', {
       params: {'name': filter}
     });
     const items = httpResponse.data;
@@ -236,16 +255,24 @@ export function fetchSearchResults(filter) {
   };
 }
 
-function _removeFilters(filterValue, newFilters, isId) {
-  if (isString(newFilters.category) || isId) {
+function _removeFilters(filterValue, newFilters, filterType) {
+  if (isString(newFilters.category) || filterType === 'organization') {
     newFilters.category = [];
-    if (isId) {
+    if (filterType === 'organization') {
       newFilters.id = filterValue;
     }
   } else {
     const filterIndex = newFilters.category.indexOf(filterValue);
     newFilters.category.splice(filterIndex, 1);
   }
+  return newFilters;
+}
+
+function _addCoordinatesFilter(filterValue, newFilters) {
+  newFilters.sw_lat = filterValue.sw.lat;
+  newFilters.sw_lng = filterValue.sw.lng;
+  newFilters.ne_lat = filterValue.ne.lat;
+  newFilters.ne_lng = filterValue.ne.lng;
   return newFilters;
 }
 
