@@ -67,7 +67,6 @@ const searchResultsDataObject = items => {
 };
 
 const filtersObject = (filterValue, filters, filterType, removeFilter) => {
-  console.log(filterType)
   const newFilters = cloneDeep(filters);
     if (removeFilter) {
       _removeFilters(filterValue, newFilters, filterType);
@@ -248,7 +247,7 @@ export function fetchFilterOptions() {
 export function fetchSearchResults(filter) {
   return async (dispatch: Function) => {
     const httpResponse = await httpRequest.get('api/search', {
-      params: {'name': filter}
+      params: {'text': filter}
     });
     const items = httpResponse.data;
     dispatch(searchResultsDataObject(items));
