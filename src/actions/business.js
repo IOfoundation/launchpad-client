@@ -77,6 +77,12 @@ const filtersObject = (filterValue, filters, filterType, removeFilter) => {
     _addFilters(filterValue, newFilters);
 };
 
+
+  return filterType === 'coordinates' ?
+    _addCoordinatesFilter(filterValue, newFilters) :
+    _addFilters(filterValue, newFilters);
+};
+
 export function fetchOrganization(organizationId, params, filterType) {
   return async (dispatch: Function) => {
     if (params) {

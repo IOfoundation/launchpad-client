@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {PropTypes} from 'prop-types';
 import {Link} from 'react-router';
+import {isEmpty, isString, cloneDeep} from 'lodash';
+
 
 import MainLayout from '../components/layouts/Main';
 import FilterBox from '../components/filters/FilterBox';
@@ -28,13 +30,25 @@ export class Businesses extends Component {
     this.props.actions.fetchOrganization(id);
   }
 
-  handleOnChangeFilterOptions(filterValue, filterType) {
+  handleOnChangeFilterOptions(filterValue, filterType, removeFilter) {
     let params = this.props.location.query;
-    if (filterType === 'organization') {
-      this.props.actions.fetchOrganization(filterValue, params);
-    } else {
-      this.getFilterChips();
+
+    if (isEmpty(params.category)) {
       this.props.actions.filterOrganizations(filterValue, params, filterType);
+    } else {
+      if (removeFilter || params.category.includes(filterValue)) {
+        this.props.actions.filterOrganizations(filterValue, params,filterType, true)
+
+      } else {
+
+        if (filterType === 'organization') {
+          this.props.actions.fetchOrganization(filterValue, params);
+
+        } else {
+          this.getFilterChips();
+          this.props.actions.filterOrganizations(filterValue, params, filterType);
+        }
+      }
     }
   }
 
