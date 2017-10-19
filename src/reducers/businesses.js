@@ -17,7 +17,7 @@ export default function(state: STATE = initialState, action: ACTION): STATE {
     case types.FETCH_ORGANIZATIONS: {
       const {organizations} = action;
       if (organizations.id) { organizations = [organizations]; }
-      const locations = organizations.id ? (organizations.locations) : (organizations.map(org => org.locations).reduce((a, b) => a.concat(b)));
+      const locations = isEmpty(organizations) ? (null) : (organizations.map(org => org.locations).reduce((a, b) => a.concat(b)));
       return {
         ...state,
         organizations,

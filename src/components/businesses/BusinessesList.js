@@ -8,38 +8,25 @@ import Business from './Business';
 class BusinessesList extends Component {
 
   _renderOrgs(organizations) {
-    if (this.props.organizations.id) {
-      const organization = organizations;
-      return (
-        <Business
-          business={organization}
-          key={organization.id}
-          handleClickOnBusiness={this.props.handleClickOnBusiness}
-          expanded={true}
-        />
-      );
-    } else {
-      return this.props.organizations.map(organization => (
-        <Business
-          business={organization}
-          key={organization.id}
-          handleClickOnBusiness={this.props.handleClickOnBusiness}
-          expanded={false}
-        />
-      ));
-    }
+    return this.props.organizations.map(organization => (
+      <Business
+        business={organization}
+        key={organization.id}
+        handleClickOnBusiness={this.props.handleClickOnBusiness}
+        expanded={organizations.length === 1 ? (true) : (false)}
+      />
+    ));
   }
   render() {
     const {
       handleClickOnBusiness,
       handleClickOnClearAllFilters,
       organizations,
-      organization,
     } = this.props;
 
     return (
       <div>
-        {this._renderOrgs(this.props.organizations, this.props.organization)}
+        {this._renderOrgs(this.props.organizations)}
         <button
           className={
             this.props.organizations.length <= 0
@@ -57,11 +44,9 @@ class BusinessesList extends Component {
 }
 
 BusinessesList.propTypes = {
-  expanded: PropTypes.bool,
   handleClickOnBusiness: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func,
   organizations: PropTypes.arrayOf(PropTypes.object),
-  organization: PropTypes.object,
 };
 
 export default BusinessesList;

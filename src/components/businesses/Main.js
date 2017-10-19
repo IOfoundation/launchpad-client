@@ -70,10 +70,8 @@ class Main extends Component {
       >
         <BusinessesList
           organizations={organizations}
-          organization={organization}
           handleClickOnBusiness={handleClickOnBusiness}
           handleClickOnClearAllFilters={handleClickOnClearAllFilters}
-          expanded={this.state.cardExpanded}
         />
         <Pagination
           businessesMetadata={businessesMetadata}
@@ -91,7 +89,6 @@ Main.propTypes = {
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
   organizations: PropTypes.arrayOf(PropTypes.object),
-  organization: PropTypes.object,
 };
 
 export default Main;

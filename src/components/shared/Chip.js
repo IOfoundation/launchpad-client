@@ -1,7 +1,7 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 
-const Chip = ({text, handleClick}) => (
+const Chip = ({canDelete, text, handleClick}) => (
   <a
     className={`
       search-filter-label
@@ -10,12 +10,13 @@ const Chip = ({text, handleClick}) => (
     data-value={text}
   >
     {text}
-    <span className="search-filter-icon">{'x'}</span>
+    {canDelete ? (<span className="search-filter-icon">{'x'}</span>): (null) }
   </a>
 );
 
 Chip.propTypes = {
-  handleClick: PropTypes.func.isRequired,
+  canDelete: PropTypes.bool.isRequired,
+  handleClick: PropTypes.func,
   text: PropTypes.string.isRequired,
 };
 

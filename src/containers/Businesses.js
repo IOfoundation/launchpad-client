@@ -30,7 +30,6 @@ export class Businesses extends Component {
 
   handleOnChangeFilterOptions(filterValue, filterType, removeFilter) {
     let params = this.props.location.query;
-
     if (isEmpty(params.category)) {
       this.props.actions.filterOrganizations(filterValue, params, filterType);
     } else {

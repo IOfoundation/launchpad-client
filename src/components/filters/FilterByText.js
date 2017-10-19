@@ -2,7 +2,7 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 import {MdSearch} from 'react-icons/lib/md';
 import {MdClear} from 'react-icons/lib/md';
-import Chip from '../filters/Chip';
+import Chip from '../shared/Chip';
 import onClickOutside from 'react-onclickoutside';
 import {isEmpty, isString} from 'lodash';
 
@@ -65,6 +65,7 @@ class FilterByText extends React.Component {
           key={filters.category}
           text={filters.category}
           handleClick={this.deleteFilter.bind(this)}
+          canDelete={true}
         />
       );
     }
@@ -73,6 +74,7 @@ class FilterByText extends React.Component {
         key={filter}
         text={filter}
         handleClick={this.deleteFilter.bind(this)}
+        canDelete={true}
       />
     ));
   }
