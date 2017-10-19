@@ -12,14 +12,38 @@ function mockMultipleOrganizations() {
       name: 'Businesses1',
     },
     {
-      id: 1,
+      id: 2,
       name: 'Businesses2',
     },
   ];
 }
 
 describe('<BusinessesList />', () => {
-  it('Renders a Business component for every Business in the array', () => {
+  it('Renders empty state', () => {
+    const organizations = emptyOrganizations();
+    const wrapper = shallow(
+      <BusinessesList
+        organizations={organizations}
+        handleClickOnBusiness={handleClickOnBusiness}
+        handleClickOnClearAllFilters={handleClickOnClearAllFilters}
+      />
+    );
+    expect(wrapper.find('.no-result-message-show'));
+  });
+
+  it('Renders expanded Business component when only one Org in the array', () => {
+    const organizations = mockSingleOrganization();
+    const wrapper = shallow(
+      <BusinessesList
+        organizations={organizations}
+        handleClickOnBusiness={handleClickOnBusiness}
+        handleClickOnClearAllFilters={handleClickOnClearAllFilters}
+      />
+    );
+    expect(wrapper.find('Business').prop('expanded')).toEqual(true);
+  });
+
+  it('Renders a Business component for every Org in the array', () => {
     const organizations = mockMultipleOrganizations();
     const isMobile = false;
     const wrapper = shallow(
