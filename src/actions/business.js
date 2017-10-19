@@ -132,12 +132,14 @@ export function filterBusinessesByName(filterValue, currentParams) {
     pushBrowserHistory(filters);
   };
 }
+
 // TODO: Refactor this method
 
 export function filterOrganizations(filterValue, currentParams, filterType, removeFilter) {
   return async (dispatch: Function) => {
+    console.log("filterOrgs: ",filterValue, currentParams, filterType, removeFilter)
+    const filters = filtersObject(filterValue, currentParams, filterType, removeFilter);
     if (filterType === 'organization') {
-      const filters = filtersObject(filterValue, currentParams, 'organization', true)
       const httpResponse = await httpRequest.get(
         `api/organizations/${filterValue}`, {
           ...filters
@@ -145,6 +147,31 @@ export function filterOrganizations(filterValue, currentParams, filterType, remo
       );
       const organizations = httpResponse.data;
       dispatch(organizationsDataObject(organizations));
+      pushBrowserHistory(filters);
+
+    } else if (filterType === 'all') {
+      const params = {
+        ...filters,
+        per_page: MaxItemsDisplayedPerPage,
+      };
+      if (!params.hasOwnProperty('page')) {
+        Object.assign(params, {page: 1});
+      }
+      const httpResponse = await httpRequest.get(
+        `api/organizations`, {
+          params
+        }
+      )
+      const organizations = httpResponse.data;
+      const metadata = {
+        pagination: {
+          ...paginationMetadata(JSON.parse(httpResponse.headers.link)),
+          currentPage: params.page,
+        },
+        totalOrganizations: httpResponse.headers['x-total-count'],
+      };
+      dispatch(organizationsDataObject(organizations));
+      dispatch(businessesMetaDataObject(metadata));
       pushBrowserHistory(filters);
 
     } else {
@@ -258,6 +285,9 @@ export function fetchSearchResults(filter) {
 }
 
 function _removeFilters(filterValue, newFilters, filterType) {
+  if (filterType === 'all') {
+    return [];
+  }
   if (isString(newFilters.category) || filterType === 'organization') {
     newFilters.category = [];
     if (filterType === 'organization') {

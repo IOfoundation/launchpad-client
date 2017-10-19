@@ -16,7 +16,7 @@ export class Businesses extends Component {
     const params = this.props.location.query;
     this.props.actions.fetchFilterOptions();
     'id' in params ?
-      this.props.actions.filterOrganizations(params.id, params, 'organization') :
+      this.props.actions.filterOrganizations(params.id, params, 'organization', true) :
       this.props.actions.filterOrganizations(null, params, 'category');
   }
 
@@ -49,8 +49,7 @@ export class Businesses extends Component {
   }
 
   handleClickOnClearAllFilters() {
-    this.props.actions.filterOrganizations('', '');
-    this.props.actions.clearOrganization();
+    this.props.actions.filterOrganizations(null, null, 'all', true);
   }
 
   handleChangePage(page) {

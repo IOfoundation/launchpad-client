@@ -12,8 +12,6 @@ export class Home extends Component {
     this.props.actions.fetchSearchResults(filter);
   }
 
-  
-
   render() {
     return (
       <MainLayout>
