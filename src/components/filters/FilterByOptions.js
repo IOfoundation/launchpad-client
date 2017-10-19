@@ -38,7 +38,7 @@ class FilterByOptions extends React.Component {
           <button
             className="dropdown-options"
             key={child.id}
-            onClick={() => this.props.handleOnChangeFilterOptions(child.name)}
+            onClick={() => this.props.handleOnChangeFilterOptions(child.name, 'category')}
           >
             <span>{child.name}</span>
           </button>

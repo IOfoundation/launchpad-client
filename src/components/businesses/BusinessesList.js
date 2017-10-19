@@ -7,8 +7,9 @@ import Business from './Business';
 //const BusinessesList = ({businesses, handleClickOnBusiness, expanded}) => {
 class BusinessesList extends Component {
 
-  _renderOrgs(organizations, organization) {
-    if (this.props.organization.id != null) {
+  _renderOrgs(organizations) {
+    if (this.props.organizations.id) {
+      const organization = organizations;
       return (
         <Business
           business={organization}

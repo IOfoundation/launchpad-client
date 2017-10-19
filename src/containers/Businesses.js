@@ -15,11 +15,9 @@ export class Businesses extends Component {
   componentWillMount(_nextProps) {
     const params = this.props.location.query;
     this.props.actions.fetchFilterOptions();
-    if ('id' in params) {
-      this.props.actions.fetchOrganization(params.id);
-    } else {
+    'id' in params ?
+      this.props.actions.filterOrganizations(params.id, params, 'organization') :
       this.props.actions.filterOrganizations(null, params, 'category');
-    }
   }
 
   getTextSearchResults(filter) {
@@ -40,26 +38,10 @@ export class Businesses extends Component {
         this.props.actions.filterOrganizations(filterValue, params,filterType, true)
 
       } else {
-
-        if (filterType === 'organization') {
-          this.props.actions.fetchOrganization(filterValue, params);
-
-        } else {
-          this.getFilterChips();
-          this.props.actions.filterOrganizations(filterValue, params, filterType);
-        }
+        this.getFilterChips();
+        this.props.actions.filterOrganizations(filterValue, params, filterType);
       }
     }
-  }
-
-  handleOnRemoveFilterOption(filterValue) {
-    const organizationsFilters = this.props.location.query;
-    this.props.actions.filterOrganizations(
-      filterValue,
-      organizationsFilters,
-      'category',
-      true
-    );
   }
 
   getFilterChips() {
@@ -108,9 +90,6 @@ export class Businesses extends Component {
                     this
                   )}
                   handleOnChangeFilterOptions={this.handleOnChangeFilterOptions.bind(
-                    this
-                  )}
-                  handleOnRemoveFilterOption={this.handleOnRemoveFilterOption.bind(
                     this
                   )}
                   getFilterChips={this.getFilterChips.bind(this)}

@@ -187,7 +187,6 @@ FilterByText.propTypes = {
   getBusiness: PropTypes.func.isRequired,
   getFilterChips: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
-  handleOnRemoveFilterOption: PropTypes.func.isRequired,
   getTextSearchResults: PropTypes.func.isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
   items: PropTypes.arrayOf(PropTypes.object),

@@ -16,23 +16,12 @@ export default function(state: STATE = initialState, action: ACTION): STATE {
   switch (action.type) {
     case types.FETCH_ORGANIZATIONS: {
       const {organizations} = action;
-      const locations = isEmpty(organizations) ? (
-        null
-      ) : (
-        organizations.map(org => org.locations).reduce((a, b) => a.concat(b))
-      );
+      if (organizations.id) { organizations = [organizations]; }
+      const locations = organizations.id ? (organizations.locations) : (organizations.map(org => org.locations).reduce((a, b) => a.concat(b)));
       return {
         ...state,
         organizations,
         locations,
-      };
-    }
-
-    case types.FETCH_ORGANIZATION: {
-      const {organization} = action;
-      return {
-        ...state,
-        organization,
       };
     }
 

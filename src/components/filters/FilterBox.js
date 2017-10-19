@@ -11,7 +11,6 @@ class FilterBox extends React.Component {
           <FilterByText
             filterName={'Search Box'}
             getTextSearchResults={this.props.getTextSearchResults}
-            handleOnRemoveFilterOption={this.props.handleOnRemoveFilterOption}
             handleClickOnClearAllFilters={
               this.props.handleClickOnClearAllFilters
             }
@@ -54,7 +53,6 @@ FilterBox.propTypes = {
   getFilterChips: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
-  handleOnRemoveFilterOption: PropTypes.func.isRequired,
   getTextSearchResults: PropTypes.func.isRequired,
   items: PropTypes.arrayOf(PropTypes.object),
 };

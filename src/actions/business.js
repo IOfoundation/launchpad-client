@@ -31,13 +31,6 @@ const paginationMetadata = links => {
   return _paginationMetadata;
 };
 
-const organizationDataObject = organization => {
-  return {
-    type: types.FETCH_ORGANIZATION,
-    organization,
-  };
-};
-
 const organizationsDataObject = organizations => {
   return {
     type: types.FETCH_ORGANIZATIONS,
@@ -71,11 +64,6 @@ const filtersObject = (filterValue, filters, filterType, removeFilter) => {
   if (removeFilter) {
     return _removeFilters(filterValue, newFilters, filterType);
   }
-
-  return filterType === 'coordinates' ?
-    _addCoordinatesFilter(filterValue, newFilters) :
-    _addFilters(filterValue, newFilters);
-};
 
 
   return filterType === 'coordinates' ?
@@ -144,31 +132,45 @@ export function filterBusinessesByName(filterValue, currentParams) {
     pushBrowserHistory(filters);
   };
 }
+// TODO: Refactor this method
 
 export function filterOrganizations(filterValue, currentParams, filterType, removeFilter) {
   return async (dispatch: Function) => {
-    const filters = filtersObject(filterValue, currentParams, filterType, removeFilter);
-    const params = {
-      ...filters,
-      per_page: MaxItemsDisplayedPerPage,
-    };
-    if (!params.hasOwnProperty('page')) {
-      Object.assign(params, {page: 1});
+    if (filterType === 'organization') {
+      const filters = filtersObject(filterValue, currentParams, 'organization', true)
+      const httpResponse = await httpRequest.get(
+        `api/organizations/${filterValue}`, {
+          ...filters
+        }
+      );
+      const organizations = httpResponse.data;
+      dispatch(organizationsDataObject(organizations));
+      pushBrowserHistory(filters);
+
+    } else {
+      const filters = filtersObject(filterValue, currentParams, filterType, removeFilter);
+      const params = {
+        ...filters,
+        per_page: MaxItemsDisplayedPerPage,
+      };
+      if (!params.hasOwnProperty('page')) {
+        Object.assign(params, {page: 1});
+      }
+      const httpResponse = await httpRequest.get('/api/organizations', {
+        params,
+      });
+      const organizations = httpResponse.data;
+      const metadata = {
+        pagination: {
+          ...paginationMetadata(JSON.parse(httpResponse.headers.link)),
+          currentPage: params.page,
+        },
+        totalOrganizations: httpResponse.headers['x-total-count'],
+      };
+      dispatch(organizationsDataObject(organizations));
+      dispatch(businessesMetaDataObject(metadata));
+      pushBrowserHistory(filters);
     }
-    const httpResponse = await httpRequest.get('/api/organizations', {
-      params,
-    });
-    const organizations = httpResponse.data;
-    const metadata = {
-      pagination: {
-        ...paginationMetadata(JSON.parse(httpResponse.headers.link)),
-        currentPage: params.page,
-      },
-      totalOrganizations: httpResponse.headers['x-total-count'],
-    };
-    dispatch(organizationsDataObject(organizations));
-    dispatch(businessesMetaDataObject(metadata));
-    pushBrowserHistory(filters);
   };
 }
 

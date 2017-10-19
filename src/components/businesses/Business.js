@@ -88,8 +88,8 @@ class Business extends Component {
             </div>
             <p className="location">
               <span>{business.locations.length}
-                {business.locations.length == 1 ? 'location | ' : 'locations | '}</span>
-              <span>{mainLocation.address.city}
+                {business.locations.length == 1 ? ' location | ' : ' locations | '}</span>
+              <span>{mainLocation.address.city},
                 {mainLocation.address.state_province}</span>
             </p>
           </div>
