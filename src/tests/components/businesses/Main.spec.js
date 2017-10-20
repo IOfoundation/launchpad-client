@@ -96,4 +96,48 @@ describe('<BusinessesView />', () => {
     );
     expect(wrapper.find('ContentMap').exists('ResultsInfo')).to.equal(true);
   });
+
+  // WIP
+  it('Clicking on Expand Map updates the state to expanded: true', () => {
+    const wrapper = shallow(
+      <BusinessesPage
+        filterOptions={basicFilters}
+        organizations={basicOrganizations}
+        locations={basicLocations}
+        businessesMetadata={basicBusinessesMetadata}
+        handleChangePage={handleChangePage}
+        handleClickOnBusiness={handleClickOnBusiness}
+        handleClickOnClearAllFilters={handleClickOnClearAllFilters}
+        handleOnChangeFilterOptions={handleOnChangeFilterOptions}
+      />
+    );
+    wrapper.find('ContentMap').find('.expandMap-btn').simulate('click');
+    //expect(wrapper.state('expanded')).toEqual(true);
+  });
+
+  it('Clicking on Reduce Map updates the state to expanded: false', () => {
+    const wrapper = shallow(
+      <BusinessesPage
+        filterOptions={basicFilters}
+        organizations={basicOrganizations}
+        locations={basicLocations}
+        businessesMetadata={basicBusinessesMetadata}
+        handleChangePage={handleChangePage}
+        handleClickOnBusiness={handleClickOnBusiness}
+        handleClickOnClearAllFilters={handleClickOnClearAllFilters}
+        handleOnChangeFilterOptions={handleOnChangeFilterOptions}
+      />
+    );
+    wrapper.find('ContentMap').find('.expandMap-btn').simulate('click');
+    //expect(wrapper.state('expanded')).toEqual(false)
+  });
+
+  it('Moving the google map updates the bounds', () => {
+
+  });
+
+  it('Clicking on Redo Seach updates the returned orgs', () => {
+
+  });
+
 });
