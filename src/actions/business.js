@@ -68,19 +68,14 @@ const searchResultsDataObject = items => {
 
 const filtersObject = (filterValue, filters, filterType, removeFilter) => {
   const newFilters = cloneDeep(filters);
-    if (removeFilter) {
-      _removeFilters(filterValue, newFilters, filterType);
-    } else {
-      if (filterType === 'coordinates') {
-        _addCoordinatesFilter(filterValue, newFilters);
-      } else {
-        _addFilters(filterValue, newFilters);
-      }
-    }
-  return newFilters;
+  if (removeFilter) {
+    return _removeFilters(filterValue, newFilters, filterType);
+  }
+
+  return filterType === 'coordinates' ?
+    _addCoordinatesFilter(filterValue, newFilters) :
+    _addFilters(filterValue, newFilters);
 };
-
-
 
 export function fetchOrganization(organizationId, params, filterType) {
   return async (dispatch: Function) => {
