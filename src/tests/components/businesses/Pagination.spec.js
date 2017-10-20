@@ -8,7 +8,7 @@ import ArrowRight from '../../../components/shared/ArrowRight';
 const handleChangePage = jest.fn();
 
 describe('<Pagination />', () => {
-  it('No returns prevPage button when the currentPage is 1', () => {
+  it('No prevPage button when the currentPage is 1', () => {
     const wrapper = shallow(
       <Pagination
         appliedFilters={{currentPage: 1}}
@@ -34,7 +34,7 @@ describe('<Pagination />', () => {
     ).to.equal(false);
   });
 
-  it('Returns prevPage button when the currentPage is greater than 1', () => {
+  it('Should return prevPage button when the currentPage is greater than 1', () => {
     const wrapper = shallow(
       <Pagination
         appliedFilters={{currentPage: 2}}
@@ -61,7 +61,7 @@ describe('<Pagination />', () => {
     ).to.equal(false);
   });
 
-  it('No returns nextPage button when current page is the last page', () => {
+  it('No nextPage button when current page is the last page', () => {
     const wrapper = shallow(
       <Pagination
         appliedFilters={{currentPage: 2}}
@@ -86,4 +86,19 @@ describe('<Pagination />', () => {
       )
     ).to.equal(false);
   });
+
+  it('No pagination when only one page of results', () => {
+    const wrapper = shallow(
+      <Pagination
+        businessesMetadata={{pagination: {
+          first: {page: 1, per_page: 3},
+          last: {page: 1, per_page: 3},
+          currentPage: 1
+        }}}
+        handleChangePage={handleChangePage}
+      />
+    );
+    expect(wrapper.exists('.pagination-container-hide')).toBe(true);
+  })
+  // TODO: TESTS THAT CLICKING ON THE PAGINATION BUTTONS ACTUALLY CHANGES THE PAGE
 });
