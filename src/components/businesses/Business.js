@@ -16,7 +16,6 @@ class Business extends Component {
   }
   render() {
     const {handleClickOnBusiness, business} = this.props;
-    const filters = business.services[0].categories;
     const mainLocation = business.locations[0];
     return (
       <div className="business-card">
@@ -40,7 +39,7 @@ class Business extends Component {
           </h3>
           <p className="preview-details">{business.description}</p>
           <div className="grid col-lg-12 full-information p-0">
-            <div className="grid col-lg-8 p-0">
+            <div className="grid col-lg-8 p-0 m-bot-25">
               <div className="col-lg-12 social-icons">
                 <img src="../static-data/images/FB.svg" />
                 <img src="../static-data/images/TW.svg" />
@@ -50,8 +49,11 @@ class Business extends Component {
               <div className="col-lg-6 p-0 main-location">
                 <p className="business-title">{'Main Location:'}</p>
                 <h4>{mainLocation.address.address_1}</h4>
-                <h4>{mainLocation.address.city},
-                  {mainLocation.address.state_province}</h4>
+                <h4>
+                  {mainLocation.address.city}
+                  {','}
+                  {mainLocation.address.state_province}
+                </h4>
               </div>
               <div className="col-lg-6 p-0 main-contact">
                 <p className="business-title">{'Contact:'}</p>
@@ -59,14 +61,32 @@ class Business extends Component {
                 <h4>{business.email}</h4>
               </div>
             </div>
-            <hr/>
+            <hr />
+            <p className="business-title">{'Services:'}</p>
             {business.services.map(service => {
               return (
-                <div key={service.id} className="col-lg-12 grid p-0 business-service">
+                <div
+                  key={service.id}
+                  className="col-lg-12 grid p-0 business-service m-bot-28"
+                >
                   <div className="col-lg-6 p-0">
-                    <p className="business-title">{'Services:'}</p>
                     <h4>{service.name}</h4>
                     <p>{service.description}</p>
+                  </div>
+                  <div className="col-lg-6">
+                    {!service.email || service.phones.length <= 0 ? (
+                      ''
+                    ) : (
+                      <p className="business-title">{'contact:'}</p>
+                    )}
+                    {service.email ? <h4>{service.email}</h4> : null}
+                    {service.phones.length <= 0 ? (
+                      ''
+                    ) : (
+                      <h4>{service.phones[0].number}</h4>
+                    )}
+                  </div>
+                  <div className="col-lg-12 p-0 m-top-16">
                     {service.categories.map(category => {
                       return (
                         <Chip
@@ -74,32 +94,31 @@ class Business extends Component {
                           text={category.name}
                           canDelete={false}
                         />
-                      )
+                      );
                     })}
-                  </div>
-                  <div className="col-lg-6">
-                    {!service.email || service.phones.length <= 0 ? '' : <p className="business-title">{'contact:'}</p>}
-                    {service.email ? <h4>{service.email}</h4> : null}
-                    {service.phones.length <= 0 ?  '' : <h4>{service.phones[0].number}</h4>}
                   </div>
                 </div>
               );
             })}
-            <hr/>
-            <div className="col-lg-12">
-              <div className="col-lg-6">
+            <hr />
+            <div className="col-lg-12 grid p-0">
+              <div className="col-lg-6 p-0">
                 <p className="business-title">{'Other Locations:'}</p>
               </div>
-              <div className="col-lg-6">
+              <div className="col-lg-6 p-0">
                 <p className="business-title">{'Contact:'}</p>
               </div>
             </div>
           </div>
           <p className="location">
-            <span>{business.locations.length}
+            <span>
+              {business.locations.length}
               {business.locations.length == 1 ? ' location | ' : ' locations | '}</span>
-            <span>{mainLocation.address.city},
-              {mainLocation.address.state_province}</span>
+            <span>
+              {mainLocation.address.city}
+              {','}
+              {mainLocation.address.state_province}
+            </span>
           </p>
         </div>
       </div>
@@ -109,8 +128,8 @@ class Business extends Component {
 
 Business.propTypes = {
   business: PropTypes.object.isRequired,
-  handleClickOnBusiness: PropTypes.func.isRequired,
   expanded: PropTypes.bool,
+  handleClickOnBusiness: PropTypes.func.isRequired,
 };
 
 export default Business;

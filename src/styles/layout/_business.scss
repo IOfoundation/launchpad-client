@@ -30,7 +30,6 @@
     }
   }
    &-expand{
-    height: 613px;
     transition: all 0.4s ease-in;
     .location {
       display: none;
@@ -49,7 +48,7 @@
     margin-bottom: 8px;
   }
   hr {
-    margin-top: 25px;
+    margin-top: 0px;
     margin-bottom: 25px;
     border: 1px solid rgba(96,125,139,0.25);
   }
@@ -62,5 +61,16 @@
     img {
       margin-right: 8px;
     }
+  }
+  .search-filter-label {
+    background-color: $white-color;
+    color: $primary-color;
+    border-radius: 21px;
+    padding: 2px 4px 2px 4px;
+    font-size: 10px !important;
+    font-weight: bold !important;
+    margin-right: 4px;
+    white-space: nowrap;
+    display: inline-block;
   }
 }
