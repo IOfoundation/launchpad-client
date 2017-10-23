@@ -53,7 +53,6 @@ class Main extends Component {
       organizations,
       organization,
       locations,
-      handleClickOnBusiness,
       handleClickOnClearAllFilters,
       handleChangePage,
     } = this.props;
@@ -70,7 +69,6 @@ class Main extends Component {
       >
         <BusinessesList
           organizations={organizations}
-          handleClickOnBusiness={handleClickOnBusiness}
           handleClickOnClearAllFilters={handleClickOnClearAllFilters}
         />
         <Pagination
@@ -85,7 +83,6 @@ Main.propTypes = {
   businessesMetadata: PropTypes.object.isRequired,
   filterOptions: PropTypes.object.isRequired,
   handleChangePage: PropTypes.func.isRequired,
-  handleClickOnBusiness: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
   organizations: PropTypes.arrayOf(PropTypes.object),

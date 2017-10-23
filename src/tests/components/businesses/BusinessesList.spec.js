@@ -3,7 +3,6 @@ import {shallow} from 'enzyme';
 
 import BusinessesList from '../../../components/businesses/BusinessesList';
 
-const handleClickOnBusiness = jest.fn();
 const handleClickOnClearAllFilters = jest.fn();
 
 function mockSingleOrganization() {
@@ -35,7 +34,6 @@ describe('<BusinessesList />', () => {
       <BusinessesList
         organizations={organizations}
         organization={organization}
-        handleClickOnBusiness={handleClickOnBusiness}
         handleClickOnClearAllFilters={handleClickOnClearAllFilters}
         expanded={false}
       />

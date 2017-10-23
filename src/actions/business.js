@@ -61,50 +61,13 @@ const searchResultsDataObject = items => {
 
 const filtersObject = (filterValue, filters, filterType, removeFilter) => {
   const newFilters = cloneDeep(filters);
-  if (removeFilter) {
+  if (removeFilter || filterType === 'organization') {
     return _removeFilters(filterValue, newFilters, filterType);
   }
-
-
   return filterType === 'coordinates' ?
     _addCoordinatesFilter(filterValue, newFilters) :
     _addFilters(filterValue, newFilters);
 };
-
-export function fetchOrganization(organizationId, params, filterType) {
-  return async (dispatch: Function) => {
-    if (params) {
-      const filters = filtersObject(organizationId, params, 'organization', true)
-      const httpResponse = await httpRequest.get(
-        `api/organizations/${organizationId}`, {
-          ...filters
-        }
-      );
-      const organization = httpResponse.data;
-      dispatch(organizationDataObject(organization));
-      pushBrowserHistory(filters);
-    }
-    else {
-      const httpResponse = await httpRequest.get(
-        `/api/organizations/${organizationId}`
-      );
-      const organization = httpResponse.data;
-      dispatch(organizationDataObject(organization));
-    }
-  };
-}
-
-export function clearOrganization() {
-  return async (dispatch: Function) => {
-    const organization = {
-      id: null,
-      name: 'name',
-      description: 'description',
-      location: {}
-    };
-    dispatch(organizationDataObject(organization));
-  }
-}
 
 const pushBrowserHistory = filters => {
   let filterString = queryString.stringify(filters, {encode: false});
@@ -115,89 +78,13 @@ const pushBrowserHistory = filters => {
   });
 };
 
-export function filterBusinessesByName(filterValue, currentParams) {
-  return async (dispatch: Function) => {
-    const filters = filtersObject(null, filterValue, currentParams);
-    const httpResponse = await httpRequest.get('/api/search', {
-      params: filters,
-    });
-    const locations = httpResponse.data;
-    const metadata = {
-      pagination: {
-        currentPage: currentParams.page,
-      },
-    };
-    dispatch(locationsDataObject(locations));
-    dispatch(businessesMetaDataObject(metadata));
-    pushBrowserHistory(filters);
-  };
-}
-
-// TODO: Refactor this method
-
 export function filterOrganizations(filterValue, currentParams, filterType, removeFilter) {
   return async (dispatch: Function) => {
-    console.log("filterOrgs: ",filterValue, currentParams, filterType, removeFilter)
     const filters = filtersObject(filterValue, currentParams, filterType, removeFilter);
-    if (filterType === 'organization') {
-      const httpResponse = await httpRequest.get(
-        `api/organizations/${filterValue}`, {
-          ...filters
-        }
-      );
-      const organizations = httpResponse.data;
-      dispatch(organizationsDataObject(organizations));
-      pushBrowserHistory(filters);
-
-    } else if (filterType === 'all') {
-      const params = {
-        ...filters,
-        per_page: MaxItemsDisplayedPerPage,
-      };
-      if (!params.hasOwnProperty('page')) {
-        Object.assign(params, {page: 1});
-      }
-      const httpResponse = await httpRequest.get(
-        `api/organizations`, {
-          params
-        }
-      )
-      const organizations = httpResponse.data;
-      const metadata = {
-        pagination: {
-          ...paginationMetadata(JSON.parse(httpResponse.headers.link)),
-          currentPage: params.page,
-        },
-        totalOrganizations: httpResponse.headers['x-total-count'],
-      };
-      dispatch(organizationsDataObject(organizations));
-      dispatch(businessesMetaDataObject(metadata));
-      pushBrowserHistory(filters);
-
-    } else {
-      const filters = filtersObject(filterValue, currentParams, filterType, removeFilter);
-      const params = {
-        ...filters,
-        per_page: MaxItemsDisplayedPerPage,
-      };
-      if (!params.hasOwnProperty('page')) {
-        Object.assign(params, {page: 1});
-      }
-      const httpResponse = await httpRequest.get('/api/organizations', {
-        params,
-      });
-      const organizations = httpResponse.data;
-      const metadata = {
-        pagination: {
-          ...paginationMetadata(JSON.parse(httpResponse.headers.link)),
-          currentPage: params.page,
-        },
-        totalOrganizations: httpResponse.headers['x-total-count'],
-      };
-      dispatch(organizationsDataObject(organizations));
-      dispatch(businessesMetaDataObject(metadata));
-      pushBrowserHistory(filters);
-    }
+    const {organizations, metadata} = await _buildOrganizationsAndMetadata(filterValue, filterType, filters);
+    dispatch(organizationsDataObject(organizations));
+    dispatch(businessesMetaDataObject(metadata));
+    pushBrowserHistory(filters);
   };
 }
 
@@ -301,6 +188,7 @@ function _removeFilters(filterValue, newFilters, filterType) {
 }
 
 function _addCoordinatesFilter(filterValue, newFilters) {
+  newFilters.id = [];
   newFilters.sw_lat = filterValue.sw.lat;
   newFilters.sw_lng = filterValue.sw.lng;
   newFilters.ne_lat = filterValue.ne.lat;
@@ -309,6 +197,7 @@ function _addCoordinatesFilter(filterValue, newFilters) {
 }
 
 function _addFilters(filterValue, newFilters) {
+  newFilters.id = [];
   if (!filterValue) {
     return newFilters;
   }
@@ -320,4 +209,83 @@ function _addFilters(filterValue, newFilters) {
     newFilters.category.push(filterValue);
   }
   return newFilters;
+}
+
+async function _buildOrganizationsAndMetadata(filterValue, filterType, filters) {
+  let organizationsAndMetadata;
+  if (filterType === 'organization') {
+    const organizations = await _getOrganization(filterValue, filters);
+    organizationsAndMetadata = _getOrganizationAndMetadata(organizations);
+  } else {
+    const params = {
+      ...filters,
+      per_page: MaxItemsDisplayedPerPage,
+    };
+    if (!params.hasOwnProperty('page')) {
+      Object.assign(params, {page: 1});
+    }
+    const organizations = await _getOrganizations(params);
+    organizationsAndMetadata = _getOrganizationsAndMetadata(organizations, params);
+  }
+  return new Promise(function(resolve, reject) {
+    organizationsAndMetadata ? (
+      resolve(organizationsAndMetadata)
+    ) : (
+      reject('Failed to get response')
+    );
+  });
+}
+async function _getOrganization(filterValue, filters) {
+  return new Promise(function(resolve, reject) {
+    httpRequest.get(`api/organizations/${filterValue}`, {filters}).then(function (response) {
+      response ? (
+        resolve(response)
+      ) : (
+        reject('Failed to get response')
+      );
+    });
+  });
+}
+function _getOrganizations(params) {
+  return new Promise(function(resolve, reject) {
+    httpRequest.get(`api/organizations`, {params}).then(function (response) {
+      response ? (
+        resolve(response)
+      ) : (
+        reject('Failed to get response')
+      );
+    });
+  });
+}
+function _getOrganizationAndMetadata(organizations) {
+  return ({
+    organizations: organizations.data,
+    metadata: {
+      pagination: {
+        first: {
+          page: 1,
+          per_page: MaxItemsDisplayedPerPage,
+        },
+        last: {
+          page: 1,
+          per_page: MaxItemsDisplayedPerPage,
+        },
+        currentPage: 1,
+      },
+      totalOrganizations: 1,
+    },
+  });
+}
+
+function _getOrganizationsAndMetadata(organizations, params) {
+  return ({
+    organizations: organizations.data,
+    metadata: {
+      pagination: {
+        ...paginationMetadata(JSON.parse(organizations.headers.link)),
+        currentPage: params.page,
+      },
+    totalOrganizations: organizations.headers['x-total-count'],
+    },
+  })
 }

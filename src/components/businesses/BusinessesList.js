@@ -4,7 +4,6 @@ import {MdClear} from 'react-icons/lib/md';
 
 import Business from './Business';
 
-//const BusinessesList = ({businesses, handleClickOnBusiness, expanded}) => {
 class BusinessesList extends Component {
 
   _renderOrgs(organizations) {
@@ -12,14 +11,12 @@ class BusinessesList extends Component {
       <Business
         business={organization}
         key={organization.id}
-        handleClickOnBusiness={this.props.handleClickOnBusiness}
         expanded={organizations.length === 1 ? (true) : (false)}
       />
     ));
   }
   render() {
     const {
-      handleClickOnBusiness,
       handleClickOnClearAllFilters,
       organizations,
     } = this.props;
@@ -44,7 +41,6 @@ class BusinessesList extends Component {
 }
 
 BusinessesList.propTypes = {
-  handleClickOnBusiness: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func,
   organizations: PropTypes.arrayOf(PropTypes.object),
 };

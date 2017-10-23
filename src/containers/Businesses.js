@@ -12,6 +12,7 @@ import BusinessesView from 'components/businesses/Main';
 import * as actions from '../actions/business';
 
 export class Businesses extends Component {
+
   componentWillMount(_nextProps) {
     const params = this.props.location.query;
     this.props.actions.fetchFilterOptions();
@@ -24,23 +25,22 @@ export class Businesses extends Component {
     this.props.actions.fetchSearchResults(filter);
   }
 
-  getBusiness(id) {
-    this.props.actions.fetchOrganization(id);
-  }
-
   handleOnChangeFilterOptions(filterValue, filterType, removeFilter) {
     let params = this.props.location.query;
-    if (isEmpty(params.category)) {
-      this.props.actions.filterOrganizations(filterValue, params, filterType);
-    } else {
-      if (removeFilter || params.category.includes(filterValue)) {
-        this.props.actions.filterOrganizations(filterValue, params,filterType, true)
+    isEmpty(params.category) ? (
+      this.props.actions.filterOrganizations(filterValue, params, filterType)
+    ) : (
+      this.handleFilterOrganizationsWithParams(filterValue, params, filterType, removeFilter)
+    );
+    this.getFilterChips();
+  }
 
-      } else {
-        this.getFilterChips();
-        this.props.actions.filterOrganizations(filterValue, params, filterType);
-      }
-    }
+  handleFilterOrganizationsWithParams(filterValue, params, filterType, removeFilter) {
+    removeFilter || params.category.includes(filterValue) ? (
+      this.props.actions.filterOrganizations(filterValue, params,filterType, true)
+    ) : (
+      this.props.actions.filterOrganizations(filterValue, params, filterType)
+    );
   }
 
   getFilterChips() {
@@ -56,8 +56,12 @@ export class Businesses extends Component {
     this.props.actions.changePage(page, businessesFilters);
   }
 
-  handleClickOnBusiness(business) {
-    this.props.actions.getBusiness(business);
+  _renderLoader() {
+  return (
+      <div className="loadDiv">
+        <div className="loading"> </div>
+      </div>
+    );
   }
 
   render() {
@@ -91,12 +95,10 @@ export class Businesses extends Component {
                     this
                   )}
                   getFilterChips={this.getFilterChips.bind(this)}
-                  getBusiness={this.getBusiness.bind(this)}
                 />
               </div>
             </div>
           </div>
-
           <BusinessesView
             filterOptions={this.props.filters}
             organizations={this.props.organizations}
@@ -104,7 +106,6 @@ export class Businesses extends Component {
             locations={this.props.locations}
             businessesMetadata={this.props.metadata}
             handleChangePage={this.handleChangePage.bind(this)}
-            handleClickOnBusiness={this.handleClickOnBusiness.bind(this)}
             handleClickOnClearAllFilters={this.handleClickOnClearAllFilters.bind(
               this
             )}

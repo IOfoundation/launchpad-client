@@ -48,16 +48,12 @@ class FilterByText extends React.Component {
   }
 
   handleDropdownOnClick(item) {
-    if (item.searchable_type === 'Category') {
-      this.props.handleOnChangeFilterOptions(item.content, 'category');
-      this.setState({showDropdown: false, labelTop: false, value: ''});
-    } else {
-      this.props.handleOnChangeFilterOptions(
-        item.searchable_id,
-        'organization'
-      );
-      this.setState({showDropdown: false, labelTop: false, value: ''});
-    }
+    item.searchable_type === 'Category' ? (
+      this.props.handleOnChangeFilterOptions(item.content, 'category')
+    ) : (
+      this.props.handleOnChangeFilterOptions(item.searchable_id, 'organization')
+    );
+    this.setState({showDropdown: false, labelTop: false, value: ''});
   }
 
   renderFilter() {
@@ -192,7 +188,6 @@ class FilterByText extends React.Component {
 }
 
 FilterByText.propTypes = {
-  getBusiness: PropTypes.func.isRequired,
   getFilterChips: PropTypes.func.isRequired,
   getTextSearchResults: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,

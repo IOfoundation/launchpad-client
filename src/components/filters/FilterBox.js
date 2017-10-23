@@ -16,7 +16,6 @@ class FilterBox extends React.Component {
             }
             handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
             getFilterChips={this.props.getFilterChips}
-            getBusiness={this.props.getBusiness}
             items={this.props.items}
           />
         </div>
@@ -49,7 +48,6 @@ class FilterBox extends React.Component {
 
 FilterBox.propTypes = {
   filterOptions: PropTypes.object.isRequired,
-  getBusiness: PropTypes.func.isRequired,
   getFilterChips: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,

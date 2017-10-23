@@ -15,7 +15,8 @@ class Business extends Component {
     this.setState({expanded: !this.state.expanded});
   }
   render() {
-    const {handleClickOnBusiness, business} = this.props;
+    const {business} = this.props;
+    const filters = business.services[0].categories;
     const mainLocation = business.locations[0];
     return (
       <div className="business-card">
@@ -129,7 +130,6 @@ class Business extends Component {
 Business.propTypes = {
   business: PropTypes.object.isRequired,
   expanded: PropTypes.bool,
-  handleClickOnBusiness: PropTypes.func.isRequired,
 };
 
 export default Business;

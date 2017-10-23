@@ -3,8 +3,6 @@ import {shallow} from 'enzyme';
 
 import Business from '../../../components/businesses/Business';
 
-const handleClickOnBusiness = jest.fn();
-
 function mockBusiness() {
   return {
     id: 1,
@@ -60,7 +58,6 @@ describe('<Business />', () => {
     const wrapper = shallow(
       <Business
         business={businessItem}
-        handleClickOnBusiness={handleClickOnBusiness}
       />
     );
     expect(wrapper.contains('Businesses1')).toBe(true);

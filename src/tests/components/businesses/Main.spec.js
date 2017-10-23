@@ -14,7 +14,6 @@ const filters = {
 };
 
 const handleChangePage = jest.fn();
-const handleClickOnBusiness = jest.fn();
 const handleClickOnClearAllFilters = jest.fn();
 const handleOnChangeFilterOptions = jest.fn();
 
@@ -27,7 +26,6 @@ describe('<BusinessesPage />', () => {
         organizations={organizations}
         businessesMetadata={businessesMetadata}
         handleChangePage={handleChangePage}
-        handleClickOnBusiness={handleClickOnBusiness}
         handleClickOnClearAllFilters={handleClickOnClearAllFilters}
         handleOnChangeFilterOptions={handleOnChangeFilterOptions}
       />
@@ -43,7 +41,6 @@ describe('<BusinessesPage />', () => {
         organizations={organizations}
         businessesMetadata={businessesMetadata}
         handleChangePage={handleChangePage}
-        handleClickOnBusiness={handleClickOnBusiness}
         handleClickOnClearAllFilters={handleClickOnClearAllFilters}
         handleOnChangeFilterOptions={handleOnChangeFilterOptions}
       />
