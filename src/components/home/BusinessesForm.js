@@ -3,6 +3,7 @@ import {PropTypes} from 'prop-types';
 import {MdSearch} from 'react-icons/lib/md';
 import onClickOutside from 'react-onclickoutside';
 import {isEmpty} from 'lodash';
+import {Link} from 'react-router';
 
 class BusinessesForm extends React.Component {
   constructor(props) {
@@ -10,38 +11,103 @@ class BusinessesForm extends React.Component {
     this.state = {
       searchText: '',
       showDropdown: false,
+      showPreviewDropdown: false,
     };
   }
 
   handleClickOutside() {
-    this.setState({showDropdown: false});
+    this.setState({
+      searchText: '',
+      showDropdown: false,
+      showPreviewDropdown: false,
+    });
+    const {value} = this.state;
+    this.props.getTextSearchResults(value);
   }
 
   handleKeyPress(event) {
     const value = event.target.value;
-    this.setState({searchText: value, showDropdown: true});
+    this.setState({
+      searchText: value,
+      showDropdown: true,
+      showPreviewDropdown: false,
+    });
     this.props.getTextSearchResults(value);
     if (isEmpty(value)) {
       this.setState({showDropdown: false});
     }
   }
-
-  renderDropdown() {
+  inputOnClick() {
+    this.setState({showPreviewDropdown: true});
+  }
+  defaultDropdownOptions() {
     return (
       <ul className="hero-dropdown-list">
-        {this.props.items.map(item => (
-          <li key={item.id}>
-            <a
-              href={item.searchable_type === 'Category'
-                ? `/businesses?category=${item.content}`
-                : `/businesses?id=${item.searchable_id}`
-              }
-            >
-              {item.content}
-            </a>
-          </li>
-        ))}
+        <li>
+          <Link to="/businesses?category=Planning/Management">
+            {'Business Planning/Management'}
+          </Link>
+        </li>
+        <li>
+          <Link to="/businesses?category=Capital">{'Capital'}</Link>
+        </li>
+        <li>
+          <Link to="/businesses?category=Legal%20Services">
+            {'Legal Services'}
+          </Link>
+        </li>
+        <li>
+          <Link to="/businesses?category=Marketing/Sales">
+            {'Marketing/Sales'}
+          </Link>
+        </li>
+        <li>
+          <Link to="/businesses?category=Physical%20Space">
+            {'Physical Space'}
+          </Link>
+        </li>
       </ul>
+    );
+  }
+  renderDropdown() {
+    return (
+      <div>
+        <ul className={
+            this.state.showPreviewDropdown ? (
+              'hero-dropdown-list-hide'
+            ) : (
+              'hero-dropdown-list'
+            )
+          }
+        >
+          {this.props.items.map(item => (
+            <li key={item.id}>
+              <a
+                href={
+                  item.searchable_type === 'Category' ? (
+                    `/businesses?category=${item.content}`
+                  ) : (
+                    `/businesses?id=${item.searchable_id}`
+                  )
+                }
+              >
+                {item.content}
+              </a>
+              {item.searchable_type === 'Organization' ? (
+                <img src="../static-data/images/organization.png" />
+              ) : null}
+            </li>
+          ))}
+          {this.props.items.length === 0 && this.state.showDropdown ? (
+            <a className="not-match-message">
+              {'This does not match any item on our platform'}
+            </a>
+          ) : (
+            ''
+          )}
+        </ul>
+        {this.state.showPreviewDropdown ? this.defaultDropdownOptions() : null}
+      </div>
     );
   }
 
@@ -52,15 +118,18 @@ class BusinessesForm extends React.Component {
           type="text"
           value={this.state.searchText}
           onChange={event => this.handleKeyPress(event)}
+          onClick={() => this.inputOnClick()}
           placeholder="Search for businesses and services"
           className="hero_input businessesName"
         />
         <MdSearch className="text-search-icon" size={40} color={'#2AD587'} />
         <div
           className={
-            this.state.showDropdown
-              ? 'hero_input-dropdown hero_input-show'
-              : 'hero_input-dropdown hero_input-hide'
+            this.state.showDropdown || this.state.showPreviewDropdown ? (
+              'hero_input-dropdown hero_input-show'
+            ) : (
+              'hero_input-dropdown hero_input-hide'
+            )
           }
         >
           {this.renderDropdown()}

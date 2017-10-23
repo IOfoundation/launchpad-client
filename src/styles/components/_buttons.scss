@@ -24,6 +24,7 @@
       float: left;
     }
     span {
+      font-weight: bold;
       display: inline-block;
       width: 100%;
       text-align: left;
@@ -43,6 +44,7 @@
     }
     &-primary {
       color: $primary-color;
+      font-weight: bold;
     }
   }
 }

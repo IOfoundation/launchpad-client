@@ -18,7 +18,8 @@
       outline: none;
     }
     .small-width-search {
-      width: 100%;
+      width: 60%;
+      float: right;
       transition: all 0.2s ease-in;
     }
     .full-width-search {
@@ -30,8 +31,6 @@
       color: $secondary-color;
       width: 100%;
       transition: all 0.2s ease-in;
-      position: absolute;
-      top: -6px;
       background-color: #000;
       &::placeholder {
         color: $white-color;
@@ -58,7 +57,7 @@
       &-icon {
         position: absolute;
         right: 5px;
-        top: -9px;
+        top: -5px;
       }
     }
     .dropdown-btn {
@@ -208,29 +207,42 @@
   display: initial;
   position: absolute;
   transition: all 0.4s ease-in;
-  left: 0px;
+  right: 0px;
   top: 100%;
   z-index: 8;
   background-color: #4A4A4A;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 12px;
+  padding-right: 12px;
   img {
     float: right;
+    width: 16px;
   }
 }
 .option-dropdown-list {
-    list-style: none;
-    width: 416px;
+  list-style: none;
+  width: 416px;
+  padding: 8px;
+  color:#fff;
+  li {
     padding: 8px;
-    color:#fff;
-    li {
-      margin-bottom: 16px;
-      a {
-        color: #fff;
-      }
+    text-align: left;
+    a {
+      color: #fff;
+      display: inline-block;
+      width: 90%;
     }
+    &:hover {
+      background-color: #3E3E3E;
+    }
+  }
+  .not-match-message {
+    font-weight: bold;
+    font-size: 16px;
+    opacity: 0.5;
+    color: #fff;
+  }
 }
-.full-width-text-filter {
-   position: absolute;
-   width: 100%;
- }
+.small-filter-container {
+  width: 40%;
+  transition: all 0.4 ease-in;
+}

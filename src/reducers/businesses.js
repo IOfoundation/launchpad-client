@@ -1,7 +1,6 @@
 import {BusinessTypes as types} from '../action-types';
 import {isEmpty} from 'lodash';
 
-
 type STATE = {};
 type ACTION = {};
 

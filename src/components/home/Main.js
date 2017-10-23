@@ -11,14 +11,16 @@ const Main = ({items, getTextSearchResults}) => {
         <div className="container-center">
           <Logo />
           <h2>
-            {
-              'Where startups and small businesses connect in California’s Central Valley'
-            }
+            {'Where startups and small businesses connect in'}
+            <br />
+            {'California’s Capital Region'}
           </h2>
           <p>
             {
-              'Over 650 resources to help your business grow est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. '
+              'Over 650 resources to help your business grow est non commodo luctus,'
             }
+            <br />
+            {'nisi erat porttitor ligula, eget lacinia odio sem nec elit.'}
           </p>
           <div className="hero_inputContainer">
             <BusinessesForm
@@ -65,8 +67,9 @@ const Main = ({items, getTextSearchResults}) => {
 };
 
 Main.propTypes = {
-  ResultsBusinesses: PropTypes.func,
+  getTextSearchResults: PropTypes.func,
   items: PropTypes.arrayOf(PropTypes.object),
+  ResultsBusinesses: PropTypes.func,
 };
 
 export default Main;

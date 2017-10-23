@@ -28,6 +28,9 @@
     background-color: $primary-color;
   }
 }
+.hero-dropdown-list-hide {
+  display: none;
+}
 .hero-dropdown-list{
   list-style: none;
   background-color: $primary-color;
@@ -39,23 +42,41 @@
     text-align: left;
     img {
       float: right;
+      width: 16px;
+    }
+    &:hover {
+      background-color: #3E3E3E;
     }
   }
   a {
     color: $white-color;
+    display: inline-block;
+    width: 90%;
+  }
+  .not-match-message {
+    font-weight: bold;
+    font-size: 16px;
+    opacity: 0.5;
+    color: #fff;
+    text-align: left;
   }
 }
 
 .hero_input-hide {
   display: none;
   position: absolute;
-  transition: all 0.4s ease-in;
+  transition: all 0.2s ease-out;
 }
 .hero_input-show {
   display: initial;
   position: absolute;
-  transition: all 0.4s ease-in;
+  transition: all 0.2s ease-in;
   left: 30px;
   top: 107%;
   z-index: 1;
+  max-height: 300px;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }

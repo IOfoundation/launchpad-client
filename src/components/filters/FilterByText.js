@@ -31,7 +31,7 @@ class FilterByText extends React.Component {
   }
 
   _closeSearch() {
-    this.setState({labelTop: false});
+    this.setState({labelTop: false, showDropdown: false, searchText: ''});
   }
 
   handleKeyPress(event) {
@@ -48,11 +48,16 @@ class FilterByText extends React.Component {
   }
 
   handleDropdownOnClick(item) {
-  item.searchable_type === 'Category' ?
-    this.props.handleOnChangeFilterOptions(item.content, 'category') :
-    this.props.handleOnChangeFilterOptions(item.searchable_id, 'organization')
-
-  this.setState({showDropdown: false, labelTop: false, value: ''});
+    if (item.searchable_type === 'Category') {
+      this.props.handleOnChangeFilterOptions(item.content, 'category');
+      this.setState({showDropdown: false, labelTop: false, value: ''});
+    } else {
+      this.props.handleOnChangeFilterOptions(
+        item.searchable_id,
+        'organization'
+      );
+      this.setState({showDropdown: false, labelTop: false, value: ''});
+    }
   }
 
   renderFilter() {
@@ -84,11 +89,21 @@ class FilterByText extends React.Component {
       <ul className="option-dropdown-list">
         {this.props.items.map(item => (
           <li key={item.id}>
-            <a onClick={(e) => this.handleDropdownOnClick(item, e)}>
+            <a onClick={e => this.handleDropdownOnClick(item, e)}>
               {item.content}
             </a>
+            {item.searchable_type === 'Organization' ? (
+              <img src="../static-data/images/organization.png" />
+            ) : null}
           </li>
         ))}
+        {this.props.items.length === 0 ? (
+          <a className="not-match-message">
+            {'This does not match any item on our platform'}
+          </a>
+        ) : (
+          ''
+        )}
       </ul>
     );
   }
@@ -96,22 +111,14 @@ class FilterByText extends React.Component {
   render() {
     const filters = this.props.getFilterChips();
     return (
-      <div
-        className={
-          this.state.labelTop ? (
-            'col-md-12 col-xs-12 text-xs-margin filterTextContainer noPadding m-bot-16'
-          ) : (
-            'col-md-12 col-xs-12 text-xs-margin filterTextContainer noPadding'
-          )
-        }
-      >
+      <div className="col-md-12 col-xs-12 text-xs-margin filterTextContainer noPadding">
         <div className="grid search-text-form p-bot-16">
           <div
             className={
-              isEmpty(filters) || this.state.labelTop ? (
+              isEmpty(filters) ? (
                 'filter-label-container-hide'
               ) : (
-                'filter-label-container-show col-lg-9 noPadding'
+                'filter-label-container-show col-lg-7 noPadding'
               )
             }
           >
@@ -121,22 +128,16 @@ class FilterByText extends React.Component {
             </a>
           </div>
           <h3
-            className={
-              isEmpty(filters) ? (
-                'show-filter col-lg-9 p-left-0'
-              ) : (
-                'col-lg-9 hide-filter'
-              )
-            }
+            className={isEmpty(filters) ? 'col-lg-7 noPadding' : 'hide-filter'}
           >
             {'Filter results with the selections below'}
           </h3>
           <div
             className={
-              this.state.labelTop ? (
-                'full-width-text-filter'
+              isEmpty(filters) && this.state.labelTop ? (
+                'col-lg-5 full-width-text-filter noPadding'
               ) : (
-                'col-lg-3 noPadding'
+                'small-filter-container noPadding'
               )
             }
           >
@@ -160,6 +161,7 @@ class FilterByText extends React.Component {
                 )
               }
             />
+
             {this.state.labelTop && (
               <MdClear
                 className="text-search-icon"
@@ -171,7 +173,11 @@ class FilterByText extends React.Component {
           </div>
           <div
             className={
-              this.state.showDropdown ? 'option-dropdown-show' : 'hero_input-hide'
+              this.state.showDropdown ? (
+                'option-dropdown-show'
+              ) : (
+                'hero_input-hide'
+              )
             }
           >
             {this.renderDropdown()}
@@ -188,8 +194,8 @@ class FilterByText extends React.Component {
 FilterByText.propTypes = {
   getBusiness: PropTypes.func.isRequired,
   getFilterChips: PropTypes.func.isRequired,
-  handleClickOnClearAllFilters: PropTypes.func.isRequired,
   getTextSearchResults: PropTypes.func.isRequired,
+  handleClickOnClearAllFilters: PropTypes.func.isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
   items: PropTypes.arrayOf(PropTypes.object),
 };
