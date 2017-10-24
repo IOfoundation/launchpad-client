@@ -17,7 +17,7 @@ class Business extends Component {
   render() {
     const {business} = this.props;
     const filters = business.services[0].categories;
-    const mainLocation = business.locations[0];
+    const locations = business.locations;
     return (
       <div className="business-card">
         <div
@@ -49,11 +49,11 @@ class Business extends Component {
               </div>
               <div className="col-lg-6 p-0 main-location">
                 <p className="business-title">{'Main Location:'}</p>
-                <h4>{mainLocation.address.address_1}</h4>
+                <h4>{locations[0].address.address_1}</h4>
                 <h4>
-                  {mainLocation.address.city}
+                  {locations[0].address.city}
                   {','}
-                  {mainLocation.address.state_province}
+                  {locations[0].address.state_province}
                 </h4>
               </div>
               <div className="col-lg-6 p-0 main-contact">
@@ -105,6 +105,12 @@ class Business extends Component {
             <div className="col-lg-12 grid p-0">
               <div className="col-lg-6 p-0">
                 <p className="business-title">{'Other Locations:'}</p>
+                {locations.map(location => {
+                  return (
+                    <h4>{location.address.address_1} {location.address.city} {`,`}
+                      {location.address.state_province}</h4>
+                  )}
+                )}
               </div>
               <div className="col-lg-6 p-0">
                 <p className="business-title">{'Contact:'}</p>
@@ -113,12 +119,12 @@ class Business extends Component {
           </div>
           <p className="location">
             <span>
-              {business.locations.length}
-              {business.locations.length == 1 ? ' location | ' : ' locations | '}</span>
+              {locations.length}
+              {locations.length == 1 ? ' location | ' : ' locations | '}</span>
             <span>
-              {mainLocation.address.city}
+              {locations[0].address.city}
               {','}
-              {mainLocation.address.state_province}
+              {locations[0].address.state_province}
             </span>
           </p>
         </div>
