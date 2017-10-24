@@ -81,7 +81,7 @@ const pushBrowserHistory = filters => {
 export function filterOrganizations(filterValue, currentParams, filterType, removeFilter) {
   return async (dispatch: Function) => {
     const filters = filtersObject(filterValue, currentParams, filterType, removeFilter);
-    const {organizations, metadata} = await _buildOrganizationsAndMetadata(filterValue, filterType, filters);
+    const {organizations, metadata} = await _buildOrganizationsAndMetadata(filters);
     dispatch(organizationsDataObject(organizations));
     dispatch(businessesMetaDataObject(metadata));
     pushBrowserHistory(filters);
@@ -197,7 +197,7 @@ function _addCoordinatesFilter(filterValue, newFilters) {
 }
 
 function _addFilters(filterValue, newFilters) {
-  newFilters.id = [];
+  newFilters.id = null;
   if (!filterValue) {
     return newFilters;
   }
@@ -211,22 +211,25 @@ function _addFilters(filterValue, newFilters) {
   return newFilters;
 }
 
-async function _buildOrganizationsAndMetadata(filterValue, filterType, filters) {
-  let organizationsAndMetadata;
-  if (filterType === 'organization') {
-    const organizations = await _getOrganization(filterValue, filters);
-    organizationsAndMetadata = _getOrganizationAndMetadata(organizations);
-  } else {
-    const params = {
-      ...filters,
-      per_page: MaxItemsDisplayedPerPage,
-    };
-    if (!params.hasOwnProperty('page')) {
-      Object.assign(params, {page: 1});
-    }
-    const organizations = await _getOrganizations(params);
-    organizationsAndMetadata = _getOrganizationsAndMetadata(organizations, params);
+async function _buildOrganizationsAndMetadata(filters) {
+  const params = {
+    ...filters,
+    per_page: MaxItemsDisplayedPerPage,
+  };
+  if (!params.hasOwnProperty('page')) {
+    Object.assign(params, {page: 1});
   }
+  const organizations = await _getOrganizations(params);
+  const organizationsAndMetadata = {
+    organizations: organizations.data,
+    metadata: {
+      pagination: {
+        ...paginationMetadata(JSON.parse(organizations.headers.link)),
+        currentPage: params.page,
+      },
+    totalOrganizations: organizations.headers['x-total-count'],
+    },
+  };
   return new Promise(function(resolve, reject) {
     organizationsAndMetadata ? (
       resolve(organizationsAndMetadata)
@@ -235,17 +238,7 @@ async function _buildOrganizationsAndMetadata(filterValue, filterType, filters) 
     );
   });
 }
-async function _getOrganization(filterValue, filters) {
-  return new Promise(function(resolve, reject) {
-    httpRequest.get(`api/organizations/${filterValue}`, {filters}).then(function (response) {
-      response ? (
-        resolve(response)
-      ) : (
-        reject('Failed to get response')
-      );
-    });
-  });
-}
+
 function _getOrganizations(params) {
   return new Promise(function(resolve, reject) {
     httpRequest.get(`api/organizations`, {params}).then(function (response) {
@@ -256,36 +249,4 @@ function _getOrganizations(params) {
       );
     });
   });
-}
-function _getOrganizationAndMetadata(organizations) {
-  return ({
-    organizations: organizations.data,
-    metadata: {
-      pagination: {
-        first: {
-          page: 1,
-          per_page: MaxItemsDisplayedPerPage,
-        },
-        last: {
-          page: 1,
-          per_page: MaxItemsDisplayedPerPage,
-        },
-        currentPage: 1,
-      },
-      totalOrganizations: 1,
-    },
-  });
-}
-
-function _getOrganizationsAndMetadata(organizations, params) {
-  return ({
-    organizations: organizations.data,
-    metadata: {
-      pagination: {
-        ...paginationMetadata(JSON.parse(organizations.headers.link)),
-        currentPage: params.page,
-      },
-    totalOrganizations: organizations.headers['x-total-count'],
-    },
-  })
 }

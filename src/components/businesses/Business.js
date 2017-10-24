@@ -107,7 +107,7 @@ class Business extends Component {
                 <p className="business-title">{'Other Locations:'}</p>
                 {locations.map(location => {
                   return (
-                    <h4>{location.address.address_1} {location.address.city} {`,`}
+                    <h4 key={location.id}>{location.address.address_1} {location.address.city} {`,`}
                       {location.address.state_province}</h4>
                   )}
                 )}
