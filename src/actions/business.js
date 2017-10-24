@@ -188,7 +188,7 @@ function _removeFilters(filterValue, newFilters, filterType) {
 }
 
 function _addCoordinatesFilter(filterValue, newFilters) {
-  newFilters.id = [];
+  newFilters.id = null;
   newFilters.sw_lat = filterValue.sw.lat;
   newFilters.sw_lng = filterValue.sw.lng;
   newFilters.ne_lat = filterValue.ne.lat;
@@ -230,6 +230,7 @@ async function _buildOrganizationsAndMetadata(filters) {
     totalOrganizations: organizations.headers['x-total-count'],
     },
   };
+
   return new Promise(function(resolve, reject) {
     organizationsAndMetadata ? (
       resolve(organizationsAndMetadata)
@@ -237,6 +238,7 @@ async function _buildOrganizationsAndMetadata(filters) {
       reject('Failed to get response')
     );
   });
+
 }
 
 function _getOrganizations(params) {
@@ -248,5 +250,7 @@ function _getOrganizations(params) {
         reject('Failed to get response')
       );
     });
+
   });
+  
 }
