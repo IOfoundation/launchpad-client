@@ -12,6 +12,7 @@ class Main extends Component {
     this.state = {
       expanded: false,
       bounds: {},
+      toggleOn: false,
     };
   }
 
@@ -29,6 +30,7 @@ class Main extends Component {
 
   redoSearchInMap() {
     this.props.handleOnChangeFilterOptions(this.state.bounds, 'coordinates');
+    this.setState({toggleOn: true});
   }
 
   _renderResultsInfo() {

@@ -8,18 +8,31 @@ class ContentMap extends Component {
   _renderReduceButton() {
     return (
       <div className="row between-xs middle-xs reducedMapBottom">
-        <button
-          className="btn-link btn-link-primary text-bold"
-          onClick={this.props.reduceMap}
-        >
-          {'Reduce Map'}
-        </button>
-        <button
-          className="btn-link btn-link-primary underline text-xs-margin"
-          onClick={this.props.redoSearchInMap}
-        >
-          {'Redo Search in Map Area'}
-        </button>
+        <div className="col-lg-12 p-0">
+          <button
+            className="btn-link btn-link-primary text-bold"
+            onClick={this.props.reduceMap}
+          >
+            {'Reduce Map'}
+          </button>
+        </div>
+        <div className="col-lg-12 p-0">
+          <div className="float-right">
+            <button
+              onClick={this.props.redoSearchInMap}
+              className={this.props.toggleOn ?
+                ('toggle-btn toggle-on') : ('toggle-btn toggle-off')}
+            >
+              <span />
+            </button>
+            <button
+              className="btn-link btn-link-primary underline text-xs-margin"
+              onClick={this.props.redoSearchInMap}
+            >
+              {'Search in Map Area'}
+            </button>
+          </div>
+        </div>
       </div>
     );
   }
@@ -32,13 +45,23 @@ class ContentMap extends Component {
         >
           {'Expand Map'}
         </button>
-        <button
-          className="btn-link btn-link-primary underline text-xs-margin p-0"
-          onClick={this.props.redoSearchInMap}
-        >
-          {'Redo Search in Map Area'}
-        </button>
-      </div>
+        <div className="col-lg-12 p-0">
+          <div className="float-right">
+            <button
+              onClick={this.props.redoSearchInMap}
+              className={this.props.toggleOn ?
+                ('toggle-btn toggle-on') : ('toggle-btn toggle-off')}
+            >
+              <span />
+            </button>
+            <button
+              className="btn-link btn-link-primary underline text-xs-margin"
+              onClick={this.props.redoSearchInMap}
+            >
+              {'Search in Map Area'}
+            </button>
+          </div>
+        </div>      </div>
     );
   }
   render() {
@@ -134,6 +157,7 @@ ContentMap.propTypes = {
   onBoundsChange: PropTypes.func,
   redoSearchInMap: PropTypes.func.isRequired,
   reduceMap: PropTypes.func.isRequired,
+  toggleOn: PropTypes.bool,
   topBar: PropTypes.node,
   totalOrganizations: PropTypes.array,
 };
