@@ -211,46 +211,27 @@ function _addFilters(filterValue, newFilters) {
   return newFilters;
 }
 
-async function _buildOrganizationsAndMetadata(filters) {
-  const params = {
-    ...filters,
-    per_page: MaxItemsDisplayedPerPage,
-  };
-  if (!params.hasOwnProperty('page')) {
-    Object.assign(params, {page: 1});
-  }
-  const organizations = await _getOrganizations(params);
-  const organizationsAndMetadata = {
-    organizations: organizations.data,
-    metadata: {
-      pagination: {
-        ...paginationMetadata(JSON.parse(organizations.headers.link)),
-        currentPage: params.page,
-      },
-    totalOrganizations: organizations.headers['x-total-count'],
-    },
-  };
-
-  return new Promise(function(resolve, reject) {
-    organizationsAndMetadata ? (
-      resolve(organizationsAndMetadata)
-    ) : (
-      reject('Failed to get response')
-    );
+function _buildOrganizationsAndMetadata(filters) {
+  return new Promise(async function(resolve) {
+    const params = {
+      ...filters,
+      per_page: MaxItemsDisplayedPerPage,
+    };
+    if (!params.hasOwnProperty('page')) {
+      Object.assign(params, {page: 1});
+    }
+    const httpResponse = await httpRequest.get(`api/organizations`, {params});
+    const organizations = httpResponse.data
+    if (httpResponse) {
+      const metadata = {
+        pagination: {
+          ...paginationMetadata(JSON.parse(httpResponse.headers.link)),
+          currentPage: params.page,
+        },
+        totalOrganizations: httpResponse.headers['x-total-count'],
+      };
+      resolve({organizations, metadata})
+    }
   });
 
-}
-
-function _getOrganizations(params) {
-  return new Promise(function(resolve, reject) {
-    httpRequest.get(`api/organizations`, {params}).then(function (response) {
-      response ? (
-        resolve(response)
-      ) : (
-        reject('Failed to get response')
-      );
-    });
-
-  });
-  
 }
