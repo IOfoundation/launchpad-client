@@ -86,8 +86,10 @@ export class Businesses extends Component {
                   getTextSearchResults={(e) => this.getTextSearchResults(e)}
                   filterOptions={this.props.filters}
                   items={this.props.items}
-                  handleClickOnClearAllFilters={(e) => this.handleClickOnClearAllFilters(e)}
-                  handleOnChangeFilterOptions={(e) => this.handleOnChangeFilterOptions(e)}
+                  handleClickOnClearAllFilters={(e) =>
+                    this.handleClickOnClearAllFilters(e)}
+                  handleOnChangeFilterOptions={(filterValue, filterType, removeFilter) =>
+                    this.handleOnChangeFilterOptions(filterValue, filterType, removeFilter)}
                   getFilterChips={(e) => this.getFilterChips()}
                 />
               </div>
@@ -100,8 +102,10 @@ export class Businesses extends Component {
             locations={this.props.locations}
             businessesMetadata={this.props.metadata}
             handleChangePage={(e) => this.handleChangePage(e)}
-            handleClickOnClearAllFilters={(e) => this.handleClickOnClearAllFilters(e)}
-            handleOnChangeFilterOptions={(e) => this.handleOnChangeFilterOptions(e)}
+            handleClickOnClearAllFilters={(e) =>
+              this.handleClickOnClearAllFilters(e)}
+            handleOnChangeFilterOptions={(filterValue, filterType, removeFilter) =>
+              this.handleOnChangeFilterOptions(filterValue, filterType, removeFilter)}
           />
         </section>
       </MainLayout>

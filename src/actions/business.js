@@ -188,7 +188,7 @@ function _removeFilters(filterValue, newFilters, filterType) {
 }
 
 function _addCoordinatesFilter(filterValue, newFilters) {
-  newFilters.id = null;
+  newFilters.id = [];
   newFilters.sw_lat = filterValue.sw.lat;
   newFilters.sw_lng = filterValue.sw.lng;
   newFilters.ne_lat = filterValue.ne.lat;
@@ -197,7 +197,7 @@ function _addCoordinatesFilter(filterValue, newFilters) {
 }
 
 function _addFilters(filterValue, newFilters) {
-  newFilters.id = null;
+  newFilters.id = [];
   if (!filterValue) {
     return newFilters;
   }

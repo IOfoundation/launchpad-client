@@ -9,10 +9,6 @@ import ContentMap from '../layouts/ContentMap';
 class Main extends Component {
   constructor(props) {
     super(props);
-    this.reduceMap = this.reduceMap.bind(this);
-    this.expandMap = this.expandMap.bind(this);
-    this.onBoundsChange = this.onBoundsChange.bind(this);
-    this.redoSearchInMap = this.redoSearchInMap.bind(this);
     this.state = {
       expanded: false,
       bounds: {},
@@ -61,10 +57,10 @@ class Main extends Component {
         locations={locations}
         businessesMetadata={businessesMetadata}
         expanded={this.state.expanded}
-        expandMap={this.expandMap}
-        onBoundsChange={this.onBoundsChange}
-        reduceMap={this.reduceMap}
-        redoSearchInMap={this.redoSearchInMap}
+        expandMap={() => this.expandMap()}
+        onBoundsChange={(mapDetails) => this.onBoundsChange(mapDetails)}
+        reduceMap={() => this.reduceMap()}
+        redoSearchInMap={() => this.redoSearchInMap()}
         topBar={this._renderResultsInfo()}
       >
         <BusinessesList
