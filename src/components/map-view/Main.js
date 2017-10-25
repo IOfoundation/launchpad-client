@@ -6,7 +6,6 @@ import MapMarker from './MapMarker';
 class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.openModal = this.openModal.bind(this);
     this.state = {
       showModal: false,
     };
@@ -66,7 +65,8 @@ class Main extends React.Component {
         <GoogleMap
           center={{lat: centerLat, lng: centerLng}}
           zoom={15}
-          onChange={event => this.handleBoundsChange(event)}
+          onChange={e => this.handleBoundsChange(e)}
+          onChildClick={e => this.openModal(e)}
           bootstrapURLKeys={{
             key: process.env.GOOGLE_MAP_API_KEY,
           }}

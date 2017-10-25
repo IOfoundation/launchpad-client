@@ -26,7 +26,7 @@ export class Businesses extends Component {
   }
 
   handleOnChangeFilterOptions(filterValue, filterType, removeFilter) {
-    let params = this.props.location.query;
+    const params = this.props.location.query;
     isEmpty(params.category) ? (
       this.props.actions.filterOrganizations(filterValue, params, filterType)
     ) : (
@@ -83,18 +83,12 @@ export class Businesses extends Component {
                   }
                 </h2>
                 <FilterBox
-                  getTextSearchResults={this.getTextSearchResults.bind(
-                    this
-                  )}
+                  getTextSearchResults={(e) => this.getTextSearchResults(e)}
                   filterOptions={this.props.filters}
                   items={this.props.items}
-                  handleClickOnClearAllFilters={this.handleClickOnClearAllFilters.bind(
-                    this
-                  )}
-                  handleOnChangeFilterOptions={this.handleOnChangeFilterOptions.bind(
-                    this
-                  )}
-                  getFilterChips={this.getFilterChips.bind(this)}
+                  handleClickOnClearAllFilters={(e) => this.handleClickOnClearAllFilters(e)}
+                  handleOnChangeFilterOptions={(e) => this.handleOnChangeFilterOptions(e)}
+                  getFilterChips={(e) => this.getFilterChips()}
                 />
               </div>
             </div>
@@ -105,13 +99,9 @@ export class Businesses extends Component {
             organization={this.props.organization}
             locations={this.props.locations}
             businessesMetadata={this.props.metadata}
-            handleChangePage={this.handleChangePage.bind(this)}
-            handleClickOnClearAllFilters={this.handleClickOnClearAllFilters.bind(
-              this
-            )}
-            handleOnChangeFilterOptions={this.handleOnChangeFilterOptions.bind(
-              this
-            )}
+            handleChangePage={(e) => this.handleChangePage(e)}
+            handleClickOnClearAllFilters={(e) => this.handleClickOnClearAllFilters(e)}
+            handleOnChangeFilterOptions={(e) => this.handleOnChangeFilterOptions(e)}
           />
         </section>
       </MainLayout>

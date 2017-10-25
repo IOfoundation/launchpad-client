@@ -58,3 +58,35 @@
 .show {
   display: initial;
 }
+
+.toggle-btn {
+  width: 25px;
+  height: 14px;
+  border-radius: 13px;
+  padding: 1px 2px;
+  border: 0px;
+  outline: none;
+  vertical-align: middle;
+  span {
+    height: 12px;
+    width: 12px;
+    display: block;
+    border-radius: 10px;
+    background-color: #FFF;
+  }
+}
+.toggle-on {
+  background-color: #2AD587;
+  transition: all 0.4s ease-in;
+  span {
+    float: right;
+    transition: all 0.4s ease-in;
+  }
+}
+.toggle-off {
+  background-color: #546E7A;
+  span {
+    float: left;
+    transition: all 0.4s ease-out;
+  }
+}

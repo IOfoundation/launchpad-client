@@ -15,11 +15,13 @@ const markerStyle = {
   color: '#4A4A4A',
 };
 
+
+
 export default class MapMarker extends Component {
   render() {
     return (
       <div style={markerStyle}>
-        <MdPlace className="map_marker" size={40} />
+        <MdPlace className="map_marker" size={40}/>
       </div>
     );
   }

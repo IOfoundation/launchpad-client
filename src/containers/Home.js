@@ -18,7 +18,7 @@ export class Home extends Component {
         <section>
           <HomeView
             items={this.props.items}
-            getTextSearchResults={this.getTextSearchResults.bind(this)}
+            getTextSearchResults={(e) => this.getTextSearchResults(e)}
           />
         </section>
       </MainLayout>

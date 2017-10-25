@@ -65,7 +65,7 @@ class FilterByText extends React.Component {
         <Chip
           key={filters.category}
           text={filters.category}
-          handleClick={this.deleteFilter.bind(this)}
+          handleClick={(e) => this.deleteFilter(e)}
           canDelete={true}
         />
       );
@@ -74,7 +74,7 @@ class FilterByText extends React.Component {
       <Chip
         key={filter}
         text={filter}
-        handleClick={this.deleteFilter.bind(this)}
+        handleClick={e => this.deleteFilter(e)}
         canDelete={true}
       />
     ));
@@ -141,7 +141,7 @@ class FilterByText extends React.Component {
               type="text"
               value={this.state.searchText}
               onClick={() => this._inputClicked()}
-              onChange={event => this.handleKeyPress(event)}
+              onChange={(e) => this.handleKeyPress(e)}
               placeholder={
                 this.state.labelTop ? (
                   'Search by Resource Name or Ipsum'

@@ -48,7 +48,7 @@
     margin-bottom: 8px;
   }
   hr {
-    margin-top: 0px;
+    margin-top: 0;
     margin-bottom: 25px;
     border: 1px solid rgba(96,125,139,0.25);
   }
@@ -66,7 +66,7 @@
     background-color: $white-color;
     color: $primary-color;
     border-radius: 21px;
-    padding: 2px 4px 2px 4px;
+    padding: 2px 4px;
     font-size: 10px !important;
     font-weight: bold !important;
     margin-right: 4px;
