@@ -1,6 +1,5 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
-import {MdSearch} from 'react-icons/lib/md';
 import {MdClear} from 'react-icons/lib/md';
 import Chip from '../shared/Chip';
 import onClickOutside from 'react-onclickoutside';
@@ -93,12 +92,10 @@ class FilterByText extends React.Component {
             ) : null}
           </li>
         ))}
-        {this.props.items.length === 0 ? (
-          <a className="not-match-message">
-            {'This does not match any item on our platform'}
-          </a>
-        ) : (
-          ''
+        {!this.props.items.length && (
+          <li className="not-match-message">
+            <a>{'This does not match any item on our platform'}</a>
+          </li>
         )}
       </ul>
     );
@@ -114,7 +111,7 @@ class FilterByText extends React.Component {
               isEmpty(filters) ? (
                 'filter-label-container-hide'
               ) : (
-                'filter-label-container-show col-lg-7 noPadding'
+                'filter-label-container-show col-lg-7 col-md-6 noPadding'
               )
             }
           >
@@ -141,7 +138,7 @@ class FilterByText extends React.Component {
               type="text"
               value={this.state.searchText}
               onClick={() => this._inputClicked()}
-              onChange={(e) => this.handleKeyPress(e)}
+              onChange={e => this.handleKeyPress(e)}
               placeholder={
                 this.state.labelTop ? (
                   'Search by Resource Name or Ipsum'
@@ -161,7 +158,7 @@ class FilterByText extends React.Component {
             {this.state.labelTop && (
               <MdClear
                 className="text-search-icon"
-                size="32"
+                size="40"
                 color="#2AD587"
                 onClick={() => this._closeSearch()}
               />
@@ -179,7 +176,10 @@ class FilterByText extends React.Component {
             {this.renderDropdown()}
           </div>
           {!this.state.labelTop && (
-            <MdSearch className="text-search-icon" size="32" color="#2AD587" />
+            <img
+              className="text-search-icon"
+              src="../static-data/images/search.png"
+            />
           )}
         </div>
       </div>

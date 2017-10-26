@@ -2,9 +2,26 @@
   background: url("/static-data/images/hero.png");
   background-size: cover;
   background-position: 50% 25%;
-  padding: 90px 0;
+  padding: 85px 0;
   color: white;
   height: 75vh;
+  .logo {
+    width: 60px;
+  }
+  .logo-container {
+    width: 100%;
+    margin-bottom: 26px;
+  }
+  &-link {
+    @media (max-width: 48em) {
+      width: 100%;
+      margin: 0px;
+      font-size: 14px;
+    }
+  }
+  @media (max-width: 48em) {
+    height: 100%;
+  }
 }
 .hero_inputContainer {
   margin-top: 48px;
@@ -33,12 +50,13 @@
     width: auto;
   }
   .hero h2 {
-    font-size: 24px;
-    line-height: 40px;
+    font-size: 20px;
+    line-height: 27px;
   }
   .hero_input {
-    width: 85%;
+    width: 80%;
     margin: 10px auto;
+    padding-left: 16px;
   }
   .hero_input_btn {
     width: 90%;

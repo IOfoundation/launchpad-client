@@ -1,0 +1,113 @@
+.dropdown-input-container {
+  text-align: right;
+  padding: 10px 16px 10px 16px;
+  border-bottom: 1px solid #666;
+  .filter-icon {
+    color: #2AD587;
+    float: left;
+    img {
+      margin-right: 8px;
+    }
+  }
+  .dropdown-input {
+    display: none;
+  }
+  .dropdown-label {
+    vertical-align: middle;
+    opacity: 0.75;
+  }
+  .close-icon {
+    display: none;
+    transition: height 0.5s ease-out;
+  }
+  .filters-dropdow {
+    font-size: 16px;
+  }
+  .dropdown-container-filters {
+    height: 0px;
+    transition: height 0.5s ease-out;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    background-color: #000;
+    overflow: hidden;
+    z-index: 2;
+    text-align: left;
+  }
+  input:checked {
+    &~ div.dropdown-container-filters {
+      height: 100vh;
+      transition: height 0.5s ease-in;
+    }
+    &~ svg.right-arrow,
+    &~ label.dropdown-label {
+      display: none;
+      transition: height 0.5s ease-in;
+    }
+    &~ label.close-icon {
+      display: initial;
+      transition: height 0.5s ease-in;
+    }
+  }
+}
+.filter-list {
+  list-style: none;
+  padding: 0 4px 0 4px;
+  font-size: 16px;
+  margin: 0px;
+  .select {
+    padding: 8px 12px 8px 12px;
+    display: flex;
+    align-items: center;
+    transition: all 0.5s ease-in;
+    justify-content: space-between;
+  }
+  input {
+    display: none;
+  }
+  svg {
+    float: right;
+  }
+  .first-level-icon {
+    transition: all 0.2s ease-in;
+  }
+  .filters-second-level {
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in;
+    ul {
+      padding: 0 11px 0 32px;
+    }
+    li {
+      list-style: none;
+      margin-top: 16px;
+      .hover {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+  }
+  .filters-third-level {
+    max-height: 0px;
+    transition: max-height 0.5s ease-in;
+    overflow: hidden;
+  }
+  input:checked {
+    &~ .select {
+      background-color: #062015;
+      .first-level-icon {
+        transform: rotate(90deg);
+      }
+    }
+    &~ .filters-second-level {
+      max-height: 1000px;
+      .second-level-icon {
+        transform: rotate(90deg);
+      }
+    }
+    &~ .filters-third-level {
+      max-height: 1000px;
+    }
+  }
+}

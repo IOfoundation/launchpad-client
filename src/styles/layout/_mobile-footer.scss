@@ -1,0 +1,67 @@
+.mobile-footer {
+  width: 100%;
+  height: auto;
+  background-color: #000;
+  color: #FFF;
+  text-align: center;
+  padding: 0px;
+
+  &-list {
+    width: 100%;
+    list-style: none;
+    padding: 0px;
+  }
+  &-list.icons {
+    svg {
+      margin: 0 5px 0 5px;
+    }
+  }
+  &-icon {
+    vertical-align: text-top !important;
+  }
+  input{display:none}
+  input:checked ~ ul.subDropDown{
+    max-height: 300px;
+    transition: max-height 0.5s ease-in;
+  }
+  input:checked ~ svg {
+    transform: rotate(90deg);
+    transition: all 0.2s ease-in;
+  }
+  input:checked ~ li {
+    background-color: #161616;
+  }
+  ul.subDropDown{
+    max-height:0;
+    padding:0;
+    overflow:hidden;
+    list-style-type:none;
+    background: #161616;
+    box-shadow:0 0 1px rgba(0,0,0,.3);
+    transition:max-height 0.5s ease-out;
+    min-width:100%;
+    a {
+      display: block;
+      color: #fff;
+      font-size: 14px;
+      line-height: 20px;
+      padding: 20px 0 20px 0;
+    }
+  }
+  svg {
+    margin-left: 3px;
+    transition: all 0.2s ease-out;
+  }
+  .social-icons {
+    margin-bottom: 8px;
+    svg {
+      margin-left: 10px;
+    }
+  }
+  @media (min-width: 751px) {
+    display: none !important;
+  }
+  @media (max-width: 750px) {
+    display: initial;
+  }
+}

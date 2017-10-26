@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {CategoriesConstants} from '../../constants';
 import Chip from '../shared/Chip';
 import {PropTypes} from 'prop-types';
 
@@ -16,7 +15,6 @@ class Business extends Component {
   }
   render() {
     const {business} = this.props;
-    const filters = business.services[0].categories;
     const locations = business.locations;
     return (
       <div className="business-card">
@@ -35,7 +33,12 @@ class Business extends Component {
               className="business-card-icon"
               onClick={e => this.toggleCard(e)}
               style={{float: 'right'}}
-              src="static-data/images/expand-icon.png"
+              src={this.state.expanded ? (
+                  'static-data/images/collapse-icon.png'
+                ) : (
+                  'static-data/images/expand-icon.png'
+                )
+              }
             />
           </h3>
           <p className="preview-details">{business.description}</p>
@@ -47,7 +50,7 @@ class Business extends Component {
                 <img src="../static-data/images/Youtube.svg" />
                 <img src="../static-data/images/LinkedIN.svg" />
               </div>
-              <div className="col-lg-6 p-0 main-location">
+              <div className="col-lg-4 p-0 m-right-52 main-location">
                 <p className="business-title">{'Main Location:'}</p>
                 <h4>{locations[0].address.address_1}</h4>
                 <h4>
@@ -56,7 +59,7 @@ class Business extends Component {
                   {locations[0].address.state_province}
                 </h4>
               </div>
-              <div className="col-lg-6 p-0 main-contact">
+              <div className="col-lg-4 p-0 main-contact">
                 <p className="business-title">{'Contact:'}</p>
                 <h4>{business.phones[0].number}</h4>
                 <h4>{business.email}</h4>
@@ -103,16 +106,24 @@ class Business extends Component {
             })}
             <hr />
             <div className="col-lg-12 grid p-0">
-              <div className="col-lg-6 p-0">
+              <div className="col-lg-4 p-0 m-right-54">
                 <p className="business-title">{'Other Locations:'}</p>
                 {locations.map(location => {
                   return (
-                    <h4 key={location.id}>{location.address.address_1} {location.address.city} {`,`}
-                      {location.address.state_province}</h4>
-                  )}
-                )}
+                    <div key={location.id} className="m-top-24">
+                      <h4>{location.address.address_1}</h4>
+                      {location.address.address_2 && <h4>{location.address.address_2}</h4>}
+                      <h4>
+                        {location.address.city}
+                        {', '}
+                        {location.address.state_province}{' '}
+                        {location.address.postal_code}
+                      </h4>
+                    </div>
+                  );
+                })}
               </div>
-              <div className="col-lg-6 p-0">
+              <div className="col-lg-4 p-0">
                 <p className="business-title">{'Contact:'}</p>
               </div>
             </div>
@@ -120,10 +131,11 @@ class Business extends Component {
           <p className="location">
             <span>
               {locations.length}
-              {locations.length == 1 ? ' location | ' : ' locations | '}</span>
+              {locations.length == 1 ? ' location' : ' locations'}</span>
+            <span className="m-x-7">{'|'}</span>
             <span>
               {locations[0].address.city}
-              {','}
+              {', '}
               {locations[0].address.state_province}
             </span>
           </p>

@@ -29,6 +29,7 @@ export class Home extends Component {
 Home.propTypes = {
   actions: PropTypes.object,
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
+  location: PropTypes.object,
 };
 
 const mapStateToProps = _state => {

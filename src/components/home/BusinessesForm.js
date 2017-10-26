@@ -98,12 +98,10 @@ class BusinessesForm extends React.Component {
               ) : null}
             </li>
           ))}
-          {this.props.items.length === 0 && this.state.showDropdown ? (
-            <a className="not-match-message">
-              {'This does not match any item on our platform'}
-            </a>
-          ) : (
-            ''
+          {this.props.items.length === 0 && (
+            <li className="not-match-message">
+              <a>{'This does not match any item on our platform'}</a>
+            </li>
           )}
         </ul>
         {this.state.showPreviewDropdown ? this.defaultDropdownOptions() : null}
@@ -119,7 +117,13 @@ class BusinessesForm extends React.Component {
           value={this.state.searchText}
           onChange={event => this.handleKeyPress(event)}
           onClick={() => this.inputOnClick()}
-          placeholder="Search for businesses and services"
+          placeholder={
+            this.state.showDropdown || this.state.showPreviewDropdown ? (
+              ''
+            ) : (
+              'Search for businesses or services'
+            )
+          }
           className="hero_input businessesName"
         />
         <MdSearch className="text-search-icon" size={40} color={'#2AD587'} />

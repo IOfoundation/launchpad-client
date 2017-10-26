@@ -1,14 +1,21 @@
 import React from 'react';
 import {Link} from 'react-router';
+import FaBars from 'react-icons/lib/fa/bars';
+import Logo from './Logo';
 
-const Header = () => {
+const Header = pathname => {
   return (
-    <header className="headerContainer">
+    <header className="headerContainer" htmlFor="header-dropdown">
       <div className="contentContainer header row between-xs middle-xs">
         <div className="header_links">
-          <span className="header_title">{'Welcome to [project-name]'}</span>
+          <Link to="/"><Logo /></Link>
+          <span className="header_title">{'Welcome to IO Ipsum'}</span>
           <span className="header_leftLink">{'Back to Lorem'}</span>
         </div>
+        <input id="header-dropdown" type="checkbox" name="dropdown" />
+        <label htmlFor="header-dropdown" className="collapse-menu-icon">
+          <FaBars size={24} />
+        </label>
         <nav className="header_links">
           <Link className="header_link" to="/contact-us">
             {'Contact Us'}

@@ -20,24 +20,25 @@ class ResultInfo extends Component {
   render() {
     const {businessesMetadata: {totalOrganizations}} = this.props;
     return (
-      <div className="container-center--medium grid">
-        <p className="m-bot-16 col-xs-12 col-md-12 col-lg-12">
+      <div className="grid business-type-btn">
+        <p className="m-bot-16 col-xs-12 col-md-12 col-lg-12 p-0">
           {'Select a business type that represents you.'}
         </p>
-        <div className="col-xs-12 col-md-4 col-lg-4 m-bot-16 p-right-0">
+        <div className="col-xs-4 col-md-4 col-lg-4 m-bot-16 p-0">
           <button
             className="btn btn-search btn-outline"
             key={this.props.filterOptions[0].id}
             onClick={e => this._onClick(this.props.filterOptions[0])}
           >
             <div className="btn-search-text">
-              <span>{'Startup or High'}</span>
-              <span>{'Growth Business'}</span>
+              <span className="desktop-devices">{'Startup or High'}</span>
+              <span className="desktop-devices">{'Growth Business'}</span>
+              <span className="mobile-devices">{'Startup or High Growth Business'}</span>
             </div>
             <MdKeyboardArrowRight className="btn-search-icon" size="32" />
           </button>
         </div>
-        <div className="col-xs-12 col-md-4 col-lg-4 m-bot-16 p-right-0">
+        <div className="col-xs-4 col-md-4 col-lg-4 m-bot-16 p-right-0">
           <button
             className="btn btn-search btn-outline"
             key={this.props.filterOptions[1].id}
@@ -50,7 +51,7 @@ class ResultInfo extends Component {
             <MdKeyboardArrowRight className="btn-search-icon" size="32" />
           </button>
         </div>
-        <div className="col-xs-12 col-md-4 col-lg-4 m-bot-16 p-right-0">
+        <div className="col-xs-4 col-md-4 col-lg-4 m-bot-16 p-right-0">
           <button
             className="btn btn-search btn-outline"
             key={this.props.filterOptions[2].id}
@@ -67,8 +68,8 @@ class ResultInfo extends Component {
           ''
         :
           <div className="col-lg-12 p-0">
-            <h3 className="m-left-16 m-top-24 col-xs-12 col-md-12 col-lg-12 noPadding">{`${totalOrganizations} Services Available`}</h3>
-            <hr className="m-left-16 m-bot-24" />
+            <h3 className="m-top-24 col-xs-12 col-md-12 col-lg-12 noPadding">{`${totalOrganizations} Services Available`}</h3>
+            <hr className="m-bot-24" />
           </div>
         }
       </div>

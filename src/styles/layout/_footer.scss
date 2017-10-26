@@ -26,15 +26,18 @@
     opacity: .75;
     margin-bottom: 16px;
     font-size: 12px;
-    font-family: $font-family-thin;
   }
   &_icon {
     display: inline-block !important;
-    margin-right: 5px;
+    margin-right: 8px;
+    opacity: 1 !important;
     svg {
       width: 16px;
       height: 16px;
     }
+  }
+  @media (max-width: 750px) {
+    display: none;
   }
 }
 

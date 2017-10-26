@@ -1,6 +1,5 @@
 .search-nav {
-  padding: 20px 0;
-  margin-top: 32px;
+  margin-top: 28px;
   padding-bottom: 0px;
   h2 {
     font-weight: normal;
@@ -16,6 +15,7 @@
     input:focus {
       border: 0px;
       outline: none;
+      color: #00D3A7;
     }
     .small-width-search {
       width: 60%;
@@ -43,6 +43,9 @@
         right: 5px;
         top: -9px;
       }
+      @media (max-width: 48em) {
+        padding: 10px 0 10px 0;
+      }
     }
     .text-search {
       border: none;
@@ -50,14 +53,21 @@
       text-align: left;
       color: $secondary-color;
       &::placeholder {
-        color: $secondary-color;
+        color: #00D3A7;
         font-size: 20px;
         font-weight: lighter;
+        @media (max-width: 48em) {
+          font-size: 16px;
+        }
       }
       &-icon {
         position: absolute;
         right: 5px;
-        top: -5px;
+        top: -8px;
+        @media (max-width: 48em) {
+          top: 60%;
+          left: 42%;
+        }
       }
     }
     .dropdown-btn {
@@ -154,7 +164,7 @@
       background-color: $white-color;
       color: $primary-color;
       border-radius: 21px;
-      padding: 4px 11px 4px 9px;
+      padding: 0 12px 0 9px;
       font-size: 14px !important;
       font-weight: bold !important;
       margin-right: 8px;
@@ -223,6 +233,7 @@
   width: 416px;
   padding: 8px;
   color:#fff;
+  margin: 0px;
   li {
     padding: 8px;
     text-align: left;
@@ -240,6 +251,9 @@
     font-size: 16px;
     opacity: 0.5;
     color: #fff;
+    &:hover {
+      background-color: #4a4a4a;
+    }
   }
 }
 .small-filter-container {

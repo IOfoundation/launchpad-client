@@ -15,6 +15,7 @@
 @import "components/links";
 @import "components/buttons";
 @import "components/pagination";
+@import "components/home/hero";
 @import "components/businesses/resultInfo";
 
 //layout
@@ -22,5 +23,7 @@
 @import "layout/container";
 @import "layout/grid";
 @import "layout/footer";
+@import "layout/mobile-footer";
 @import "layout/search-nav";
 @import "layout/business";
+@import "layout/search-nav-mobile";

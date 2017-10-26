@@ -6,6 +6,7 @@
 }
 
 .businessList--reduced {
+  transition: .3s ease all;
   position: relative;
 }
 

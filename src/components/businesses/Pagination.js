@@ -46,8 +46,8 @@ class Pagination extends React.Component {
             />
           }
           pageCount={last.page}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={5}
+          marginPagesDisplayed={3}
+          pageRangeDisplayed={2}
           onPageChange={this.handlePageClick.bind(this)}
           containerClassName={'pagination-index'}
           subContainerClassName={'pagination-numbers'}

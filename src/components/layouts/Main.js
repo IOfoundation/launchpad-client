@@ -2,6 +2,7 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 import Header from '../shared/Header';
 import Footer from '../shared/Footer';
+import MobileFooter from '../shared/mobileFooter';
 
 const MainLayout = ({children}) => {
   return (
@@ -9,6 +10,7 @@ const MainLayout = ({children}) => {
       <Header />
       {children}
       <Footer />
+      <MobileFooter />
     </div>
   );
 };

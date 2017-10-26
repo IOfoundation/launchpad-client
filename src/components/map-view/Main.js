@@ -86,8 +86,8 @@ class Main extends React.Component {
         bootstrapURLKeys={{
           key: process.env.GOOGLE_MAP_API_KEY,
         }}
-      ></GoogleMap>
-
+      >
+      </GoogleMap>
     )
   }
 }

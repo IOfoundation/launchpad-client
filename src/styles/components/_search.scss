@@ -7,17 +7,30 @@
     font-size: 20px;
     padding: 0px;
     font-weight: 400;
+    @media (max-width: 48em) {
+      font-size: 16px;
+      padding: -5px;
+    }
+  }
+  .hide-placeholder {
+    input::placeholder {
+      opacity: 0;
+    }
   }
   .text-search-icon {
     position: absolute;
-    right: 30px;
+    right: 25%;
     top: 19px;
+    @media (max-width: 48em) {
+      right: 10%;
+      top: 25%;
+    }
   }
 }
 .hero_input {
   background-color: $primary-color;
   height: 76px;
-  width: 91%;
+  width: 50%;
   border: none;
   padding: 0 28px;
   color: $secondary-color;
@@ -37,6 +50,7 @@
   width: 416px;
   padding: 8px;
   z-index: 900;
+  margin: 0px;
   li {
     padding: 8px;
     text-align: left;
@@ -59,6 +73,9 @@
     opacity: 0.5;
     color: #fff;
     text-align: left;
+    &:hover {
+      background-color: #000;
+    }
   }
 }
 
@@ -71,7 +88,7 @@
   display: initial;
   position: absolute;
   transition: all 0.2s ease-in;
-  left: 30px;
+  left: 24%;
   top: 107%;
   z-index: 1;
   max-height: 300px;

@@ -1,8 +1,4 @@
-.header {
-  color: white;
-  font-size: 12px;
-  padding: 12px 5px;
-}
+
 .header_title {
   margin-right: 16px;
   white-space: nowrap;
@@ -17,23 +13,4 @@
   color: white;
   margin-left: 24px;
   line-height: 16px;
-}
-
-@media (max-width: 48em) {
-  .header {
-    padding: 12px 10px;
-    white-space: nowrap;
-    width: 100%;
-    text-align: center;
-  }
-  .header_title {
-    display: block;
-    margin-bottom: 10px;
-  }
-  .header_links {
-    margin: 5px auto;
-  }
-  .headerContainer {
-    height: auto;
-  }
 }

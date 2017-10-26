@@ -12,7 +12,7 @@ h1,h2,h3,h4,h5,p, a {
   margin: 0;
 }
 .contentContainer {
-  max-width: 1300px;
+  max-width: 68%;
   margin: 0 auto;
 }
 
@@ -48,10 +48,23 @@ h1,h2,h3,h4,h5,p, a {
 .hidden {
   display: none;
 }
-
+.mobile-devices {
+  display: none !important;
+}
+@media (max-width: 750px) {
+  .mobile-devices {
+    display: initial !important;
+  }
+  .desktop-devices {
+    display: none !important;
+  }
+}
 @media (max-width: 48em) {
   .text-xs-margin {
     margin: 10px auto;
+  }
+  .contentContainer {
+    max-width: 100%;
   }
 }
 
@@ -69,6 +82,5 @@ h1,h2,h3,h4,h5,p, a {
 @import './components/businesses/businesses.css';
 @import './components/businesses/businessBlock.css';
 
-@import './components/home/hero.css';
 @import './components/home/browseBy.css';
 @import './components/business/business.css';

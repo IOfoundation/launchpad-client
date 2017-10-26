@@ -43,18 +43,16 @@ class ContentMap extends Component {
   render() {
     const {locations, businessesMetadata, onBoundsChange} = this.props;
     return (
-      <div
-        className={
-          'businessesContainer ' +
-          (this.props.expanded ? '' : 'businessesContainerReduced')
-        }
-      >
+      <div className="businessesContainer">
         {this.props.topBar}
         <div className={
-            businessesMetadata.totalOrganizations === '0'
-              ? 'no-result-message-show'
-              : 'no-result-message-hide'
-          }>
+            businessesMetadata.totalOrganizations === '0' ? (
+              'no-result-message-show'
+            ) : (
+              'no-result-message-hide'
+            )
+          }
+        >
           <MdSearch size="200" color="#95EAC3" />
           <p className="message">
             {'Sorry but nothing matched your search terms.'}
@@ -64,17 +62,18 @@ class ContentMap extends Component {
           </p>
         </div>
         <div className={
-            businessesMetadata.totalOrganizations === '0' ?
+            businessesMetadata.totalOrganizations === '0' ? (
               'result-container-hide'
-            :
-              'container-center--medium grid m-left-24 p-left-16'
-            }
+            ) : (
+              'grid'
+            )
+          }
         >
           <div
             className={
-              this.props.expanded
-                ? 'col-md-8 col-xs-12 businessList p-left-0'
-                : 'col-md-9 col-xs-12 businessList--reduced p-left-0'
+              (this.props.expanded
+                ? 'col-md-7 col-xs-12 businessList p-left-0'
+                : 'col-md-9 col-xs-12 businessList--reduced p-left-0') + ' list'
             }
           >
             {this.props.children}
@@ -83,8 +82,8 @@ class ContentMap extends Component {
             className={
               'map ' +
               (this.props.expanded
-                ? 'col-md-4 col-xs-12 p-0 '
-                : 'col-md-3 col-xs-12')
+                ? 'col-md-5 col-xs-12 p-0'
+                : 'col-md-3 col-xs-12 p-0')
             }
           >
             <div

@@ -1,7 +1,11 @@
 import React from 'react';
 import {Link} from 'react-router';
 import Logo from './Logo';
-import {FaTwitter, FaFacebook, FaLinkedin} from 'react-icons/lib/fa';
+import {FaTwitter,
+  FaFacebook,
+  FaLinkedin,
+  FaGithubSquare,
+} from 'react-icons/lib/fa';
 
 const Footer = () => {
   return (
@@ -32,7 +36,7 @@ const Footer = () => {
           <Link to="">{'Fermentum Ultricies'}</Link>
           <Link to="">{'Nullam'}</Link>
         </div>
-        <div className="col-md-1 col-md-offset-2 col-xs-6 text-xs-margin">
+        <div className="social-icons col-md-2 col-md-offset-1 col-xs-6 text-xs-margin">
           <p className="main-footer_subtitle">{'SOCIAL'}</p>
           <Link className="main-footer_icon" to="">
             <FaTwitter size={12} color={'white'} />
@@ -42,6 +46,9 @@ const Footer = () => {
           </Link>
           <Link className="main-footer_icon" to="">
             <FaLinkedin size={12} color={'white'} />
+          </Link>
+          <Link className="main-footer_icon" to="">
+            <FaGithubSquare size={12} color={'white'} />
           </Link>
         </div>
       </div>
