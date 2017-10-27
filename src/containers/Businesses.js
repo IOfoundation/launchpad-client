@@ -27,12 +27,12 @@ export class Businesses extends Component {
 
   handleOnChangeFilterOptions(filterValue, filterType, removeFilter) {
     const params = this.props.location.query;
+    this.getFilterChips();
     isEmpty(params.category) ? (
       this.props.actions.filterOrganizations(filterValue, params, filterType)
     ) : (
       this.handleFilterOrganizationsWithParams(filterValue, params, filterType, removeFilter)
     );
-    this.getFilterChips();
   }
 
   handleFilterOrganizationsWithParams(filterValue, params, filterType, removeFilter) {
@@ -54,14 +54,6 @@ export class Businesses extends Component {
   handleChangePage(page) {
     const businessesFilters = this.props.location.query;
     this.props.actions.changePage(page, businessesFilters);
-  }
-
-  _renderLoader() {
-  return (
-      <div className="loadDiv">
-        <div className="loading"> </div>
-      </div>
-    );
   }
 
   render() {
@@ -135,7 +127,6 @@ Businesses.propTypes = {
   filters: PropTypes.object.isRequired,
   metadata: PropTypes.object.isRequired,
   organizations: PropTypes.arrayOf(PropTypes.object),
-  organization: PropTypes.object,
   params: PropTypes.object,
 };
 
@@ -147,7 +138,6 @@ const mapStateToProps = _state => {
     locations: businesses.locations,
     metadata: businesses.metadata,
     organizations: businesses.organizations,
-    organization: businesses.organization,
     queries: routing.locationBeforeTransitions.query,
   };
 };

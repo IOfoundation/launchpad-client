@@ -5,7 +5,6 @@ type STATE = {};
 type ACTION = {};
 
 const initialState: STATE = {
-  organization: null,
   organizations: [],
   filters: null,
   metadata: null,

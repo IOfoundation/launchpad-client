@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
+import {isEmpty} from 'lodash';
+
 
 import BusinessesList from './BusinessesList';
 import Pagination from './Pagination';
@@ -26,11 +28,16 @@ class Main extends Component {
 
   onBoundsChange(mapDetails) {
     this.setState({bounds: mapDetails.bounds});
+    if (this.state.toggleOn === true) {
+      this.props.handleOnChangeFilterOptions(this.state.bounds, 'coordinates');
+    }
   }
 
   redoSearchInMap() {
-    this.props.handleOnChangeFilterOptions(this.state.bounds, 'coordinates');
-    this.setState({toggleOn: true});
+    if(this.state.toggleOn === false) {
+      this.props.handleOnChangeFilterOptions(this.state.bounds, 'coordinates');
+    }
+    this.setState({toggleOn: !this.state.toggleOn});
   }
 
   _renderResultsInfo() {
@@ -44,6 +51,23 @@ class Main extends Component {
       );
     }
     return null;
+  }
+
+  _renderLoader() {
+  return (
+      <div className="loadDiv">
+        <img className="loader" src="static-data/images/loader.gif"/>
+      </div>
+    );
+  }
+
+  _renderBusinesses() {
+    return (
+      <BusinessesList
+        organizations={this.props.organizations}
+        handleClickOnClearAllFilters={this.props.handleClickOnClearAllFilters}
+      />
+    );
   }
   render() {
     const {
@@ -65,11 +89,14 @@ class Main extends Component {
         reduceMap={() => this.reduceMap()}
         redoSearchInMap={() => this.redoSearchInMap()}
         topBar={this._renderResultsInfo()}
+        toggleOn={this.state.toggleOn}
       >
-        <BusinessesList
-          organizations={organizations}
-          handleClickOnClearAllFilters={handleClickOnClearAllFilters}
-        />
+        {isEmpty(this.props.organizations) ? (
+          this._renderLoader()
+        ):(
+          this._renderBusinesses()
+        )}
+
         <Pagination
           businessesMetadata={businessesMetadata}
           handleChangePage={handleChangePage}

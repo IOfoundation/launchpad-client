@@ -64,7 +64,7 @@ class Main extends React.Component {
       return (
         <GoogleMap
           center={{lat: centerLat, lng: centerLng}}
-          zoom={15}
+          zoom={10}
           onChange={e => this.handleBoundsChange(e)}
           onChildClick={e => this.openModal(e)}
           bootstrapURLKeys={{

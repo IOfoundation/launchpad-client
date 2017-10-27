@@ -11,22 +11,8 @@
 }
 
 .loadDiv {
- @extend html;
  display: flex;
  justify-content: space-around;
  align-items: center;
- padding: 25% 25%;
-}
-
-.loading {
- border-radius: 50%;
- width: $base-line-height;
- height: $base-line-height;
- border: 0.25rem solid $off-white;
- border-top-color: $white;
- animation: spin $spin-duration infinite linear;
- &--double {
-   border-style: double;
-   border-width: 0.5rem;
- }
+ padding: 10% 10%;
 }
