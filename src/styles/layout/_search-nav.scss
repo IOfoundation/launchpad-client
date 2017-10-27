@@ -65,7 +65,7 @@
         right: 5px;
         top: -8px;
         @media (max-width: 48em) {
-          top: 60%;
+          top: 24%;
           left: 42%;
         }
       }
@@ -81,6 +81,11 @@
       font-size: 14px;
       font-weight: lighter;
       opacity: 0.75;
+    }
+    @media (max-width: 42em) {
+      h3 {
+        font-size: 16px;
+      }
     }
   }
 }
@@ -227,6 +232,10 @@
     float: right;
     width: 16px;
   }
+  @media (max-width: 42em){
+    width: 100%;
+    padding: 0 16px 0 16px;
+  }
 }
 .option-dropdown-list {
   list-style: none;
@@ -253,6 +262,12 @@
     color: #fff;
     &:hover {
       background-color: #4a4a4a;
+    }
+  }
+  @media (max-width: 42em){
+    width: 100%;
+    li {
+      padding: 8px 16px 8px 16px;
     }
   }
 }

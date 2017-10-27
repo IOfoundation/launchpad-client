@@ -1,0 +1,23 @@
+.tabs-container {
+  text-align: right;
+  box-shadow: inset 0 -2px 0 0 #000000;
+  margin: 0 8px 16px 8px;
+  padding: 0px;
+  span {
+    float: left;
+    font-size: 16px;
+  }
+  .tab {
+    list-style: none;
+    display: inline-block;
+    outline: none;
+    img {
+      margin: 0 8px 6px 8px;
+      width: 24px;
+    }
+  }
+}
+.map-container {
+  width: 100%;
+  height: 100vh;
+}

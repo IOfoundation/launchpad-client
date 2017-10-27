@@ -79,3 +79,22 @@
     display: inline-block;
   }
 }
+
+.business-type-btn {
+  @media (max-width: 42em) {
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 0 8px 0 8px;
+    .business-type-container {
+      overflow: scroll;
+      white-space: nowrap;
+      display: inline-block;
+      div {
+        margin-right: 8px;
+        display: inline-block;
+        max-width: 100%;
+      }
+    }
+  }
+
+}

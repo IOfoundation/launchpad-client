@@ -1,7 +1,7 @@
 .dropdown-input-container {
   text-align: right;
   padding: 10px 16px 10px 16px;
-  border-bottom: 1px solid #666;
+  margin-bottom: 23px;
   .filter-icon {
     color: #2AD587;
     float: left;
@@ -109,5 +109,14 @@
     &~ .filters-third-level {
       max-height: 1000px;
     }
+  }
+}
+.filter-chip {
+  .search-input-container {
+    border-top: 1px solid #666;
+    position: relative;
+  }
+  .search-filter-label {
+    margin-top: 8px;
   }
 }

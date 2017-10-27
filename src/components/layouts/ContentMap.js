@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
 import {MdSearch} from 'react-icons/lib/md';
 import MapView from '../map-view/Main';
+import ResultPage from '../businesses/mobile/ResultPage';
 
 class ContentMap extends Component {
   _renderReduceButton() {
@@ -61,11 +62,17 @@ class ContentMap extends Component {
             {'Please try Again with different Keywords'}
           </p>
         </div>
+        <ResultPage
+          BusinessesList={this.props.children}
+          locations={locations}
+          onBoundsChange={onBoundsChange}
+          TotalOrganizations={businessesMetadata.totalOrganizations}
+        />
         <div className={
             businessesMetadata.totalOrganizations === '0' ? (
-              'result-container-hide'
+              'result-container-hide desktop-devices'
             ) : (
-              'grid'
+              'grid desktop-devices'
             )
           }
         >
@@ -88,15 +95,14 @@ class ContentMap extends Component {
           >
             <div
               className={
-                this.props.expanded
-                  ? 'map-container-collapse'
-                  : 'map-container-expand'
+                this.props.expanded ? (
+                  'map-container-collapse'
+                ) : (
+                  'map-container-expand'
+                )
               }
             >
-              <MapView
-                locations={locations}
-                onBoundsChange={onBoundsChange}
-              />
+              <MapView locations={locations} onBoundsChange={onBoundsChange}/>
             </div>
             {this.props.expanded
               ? this._renderReduceButton()

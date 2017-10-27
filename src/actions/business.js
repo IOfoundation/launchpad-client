@@ -233,5 +233,4 @@ function _buildOrganizationsAndMetadata(filters) {
       resolve({organizations, metadata})
     }
   });
-
 }
