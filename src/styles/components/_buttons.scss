@@ -75,22 +75,22 @@
 
 .toggle-btn {
   width: 25px;
-  height: 14px;
+  height: 12px;
   border-radius: 13px;
   padding: 1px 2px;
   border: 0px;
   outline: none;
   vertical-align: middle;
   span {
-    height: 12px;
-    width: 12px;
+    height: 8px;
+    width: 8px;
     display: block;
     border-radius: 10px;
     background-color: #FFF;
   }
 }
 .toggle-on {
-  background-color: #2AD587;
+  background-color: #91e630;
   transition: all 0.4s ease-in;
   span {
     float: right;
@@ -98,7 +98,7 @@
   }
 }
 .toggle-off {
-  background-color: #546E7A;
+  background-color: #666666;
   span {
     float: left;
     transition: all 0.4s ease-out;
