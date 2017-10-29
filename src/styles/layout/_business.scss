@@ -1,3 +1,14 @@
+.business {
+  background-color: #f2f2f2;
+  transition: .3s ease all;
+}
+.business-img {
+  max-width: 0px;
+  overflow: hidden;
+}
+.business-logo{
+  width: 100%;
+}
 .business-card {
   background-color: rgba(0, 0, 0, 0.05);
   padding: 20px 24px 20px 24px;
@@ -63,6 +74,10 @@
   }
   .social-icons {
     margin-bottom: 32px;
+    transition: .3s ease all;
+    &-hide {
+      display: none;
+    }
     img {
       margin-right: 8px;
     }
@@ -92,7 +107,7 @@
       div {
         margin-right: 8px;
         display: inline-block;
-        max-width: 100%;
+        max-width: 200%;
       }
     }
   }

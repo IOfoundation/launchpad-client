@@ -24,7 +24,7 @@ class ResultInfo extends Component {
         <p className="m-bot-16 col-xs-12 col-md-12 col-lg-12 p-0">
           {'Select a business type that represents you.'}
         </p>
-        <div className="business-type-container grid">
+        <div className="business-type-container col-lg-12 p-0 grid">
           <div className="col-xs-4 col-md-4 col-lg-4 m-bot-16 p-0">
             <button
               className="btn btn-search btn-outline"

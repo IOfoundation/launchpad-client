@@ -55,6 +55,7 @@ class Main extends Component {
     return (
       <ContentMap
         locations={locations}
+        organizations={organizations}
         businessesMetadata={businessesMetadata}
         expanded={this.state.expanded}
         expandMap={() => this.expandMap()}

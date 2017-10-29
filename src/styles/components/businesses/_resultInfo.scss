@@ -35,6 +35,18 @@
       line-height: 36px;
       opacity: 0.5;
     }
+    @media (max-width: 48em) {
+      margin-top: 0px;
+      padding: 24px;
+      svg {
+        width: 100px;
+        height: 100px;
+      }
+      .message {
+        font-size: 16px;
+        line-height: 24px;
+      }
+    }
   }
   &-hide {
     display: none;

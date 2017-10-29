@@ -27,13 +27,13 @@ class ContentMap extends Component {
     return (
       <div className="row between-xs middle-xs reducedMapBottom">
         <button
-          className="btn-link btn-link-primary text-bold text-xs-margin"
+          className="btn-link btn-link-primary text-bold text-xs-margin p-0 m-bot-8"
           onClick={this.props.expandMap}
         >
           {'Expand Map'}
         </button>
         <button
-          className="btn-link btn-link-primary underline text-xs-margin"
+          className="btn-link btn-link-primary underline text-xs-margin p-0"
           onClick={this.props.redoSearchInMap}
         >
           {'Redo Search in Map Area'}
@@ -42,7 +42,7 @@ class ContentMap extends Component {
     );
   }
   render() {
-    const {locations, businessesMetadata, onBoundsChange} = this.props;
+    const {locations, businessesMetadata, onBoundsChange, organizations} = this.props;
     return (
       <div className="businessesContainer">
         {this.props.topBar}
@@ -55,19 +55,26 @@ class ContentMap extends Component {
           }
         >
           <MdSearch size="200" color="#95EAC3" />
-          <p className="message">
+          <p className="message desktop-devices">
             {'Sorry but nothing matched your search terms.'}
           </p>
-          <p className="message">
+          <p className="message desktop-devices">
             {'Please try Again with different Keywords'}
           </p>
+          <div className="mobile-devices">
+            <p className="message">
+              {'Sorry but nothing matched your search terms. Please try Again with different Keywords'}
+            </p>
+          </div>
         </div>
-        <ResultPage
-          BusinessesList={this.props.children}
-          locations={locations}
-          onBoundsChange={onBoundsChange}
-          TotalOrganizations={businessesMetadata.totalOrganizations}
-        />
+        <div className={organizations.length === 0 ? 'result-container-hide' : ''}>
+          <ResultPage
+            BusinessesList={this.props.children}
+            locations={locations}
+            onBoundsChange={onBoundsChange}
+            TotalOrganizations={businessesMetadata.totalOrganizations}
+          />
+        </div>
         <div className={
             businessesMetadata.totalOrganizations === '0' ? (
               'result-container-hide desktop-devices'
@@ -104,9 +111,11 @@ class ContentMap extends Component {
             >
               <MapView locations={locations} onBoundsChange={onBoundsChange}/>
             </div>
-            {this.props.expanded
-              ? this._renderReduceButton()
-              : this._renderExpandButton()}
+            {this.props.expanded ? (
+              this._renderReduceButton()
+            ) : (
+              this._renderExpandButton()
+              )}
           </div>
         </div>
       </div>

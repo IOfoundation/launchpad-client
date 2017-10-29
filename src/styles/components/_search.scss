@@ -1,5 +1,7 @@
 .hero_inputContainer {
   position: relative;
+  max-width: 940px;
+  margin: 48px auto;
   input::placeholder {
     color: $white-color;
     opacity: 0.75;
@@ -19,7 +21,7 @@
   }
   .text-search-icon {
     position: absolute;
-    right: 25%;
+    right: 0px;
     top: 19px;
     @media (max-width: 48em) {
       right: 10%;
@@ -30,7 +32,7 @@
 .hero_input {
   background-color: $primary-color;
   height: 76px;
-  width: 50%;
+  width: 100%;
   border: none;
   padding: 0 28px;
   color: $secondary-color;
@@ -88,7 +90,7 @@
   display: initial;
   position: absolute;
   transition: all 0.2s ease-in;
-  left: 24%;
+  left: 27px;
   top: 107%;
   z-index: 1;
   max-height: 300px;

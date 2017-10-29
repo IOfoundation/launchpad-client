@@ -6,7 +6,6 @@ import Business from './Business';
 
 class BusinessesList extends Component {
   _renderOrgs(organizations) {
-    console.log('organizations', this.props.organizations);
     return this.props.organizations.map(organization => (
       <Business
         business={organization}
@@ -17,7 +16,6 @@ class BusinessesList extends Component {
   }
   render() {
     const {handleClickOnClearAllFilters, organizations} = this.props;
-
     return (
       <div>
         {this._renderOrgs(organizations)}

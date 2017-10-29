@@ -36,7 +36,7 @@
   }
   input:checked {
     &~ div.dropdown-container-filters {
-      height: 100vh;
+      height: 5000px;
       transition: height 0.5s ease-in;
     }
     &~ svg.right-arrow,
@@ -47,6 +47,9 @@
     &~ label.close-icon {
       display: initial;
       transition: height 0.5s ease-in;
+    }
+    &~ div#modal {
+      display: initial;
     }
   }
 }
@@ -75,6 +78,12 @@
     max-height: 0px;
     overflow: hidden;
     transition: max-height 0.5s ease-in;
+    .second-level-icon {
+      transition: all 0.2s ease-in;
+    }
+    a {
+      color: #fff;
+    }
     ul {
       padding: 0 11px 0 32px;
     }
@@ -101,7 +110,9 @@
       }
     }
     &~ .filters-second-level {
-      max-height: 1000px;
+      max-height: 10000px;
+    }
+    &~ .hover {
       .second-level-icon {
         transform: rotate(90deg);
       }
@@ -119,4 +130,15 @@
   .search-filter-label {
     margin-top: 8px;
   }
+}
+
+#modal {
+  display: none;
+  position: fixed;
+  background-color: #000;
+  opacity: 0.8;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }

@@ -16,40 +16,46 @@ class Business extends Component {
   render() {
     const {business} = this.props;
     const locations = business.locations;
+    console.log("img", this.props);
     return (
       <div className="business-card">
         <div
           className={
             this.state.expanded ? (
-              'business-card-expand'
+              'business-card-expand grid'
             ) : (
-              'business-card-collapse'
+              'business-card-collapse grid'
             )
           }
         >
-          <h3 className="title">
-            {business.name}
-            <img
-              className="business-card-icon"
-              onClick={e => this.toggleCard(e)}
-              style={{float: 'right'}}
-              src={this.state.expanded ? (
-                  'static-data/images/collapse-icon.png'
-                ) : (
-                  'static-data/images/expand-icon.png'
-                )
-              }
-            />
-          </h3>
-          <p className="preview-details">{business.description}</p>
+          <div className={this.state.expanded ? ('business col-lg-2 p-0') : ('business business-img')}>
+            <img className="business-logo" src="../static-data/images/orgs-placeholder.png" />
+          </div>
+          <div className={this.state.expanded ? ('business col-lg-10 p-right-0') : ('business col-lg-12 p-0')}>
+            <h3 className="title">
+              {business.name}
+              <img
+                className="business-card-icon"
+                onClick={e => this.toggleCard(e)}
+                style={{float: 'right'}}
+                src={this.state.expanded ? (
+                    'static-data/images/collapse-icon.png'
+                  ) : (
+                    'static-data/images/expand-icon.png'
+                  )
+                }
+              />
+            </h3>
+            <p className="preview-details">{business.description}</p>
+            <div className={this.state.expanded ? ('col-lg-12 social-icons p-0 m-top-16') : ('social-icons-hide')}>
+              {business.facebook ? <a src={business.facebook}><img src="../static-data/images/FB.svg" /></a> : ''}
+              {business.twitter ? <a src={business.twitter}><img src="../static-data/images/TW.svg" /></a> : ''}
+              {business.youtube ? <a src={business.youtube}><img src="../static-data/images/Youtube.svg" /></a> : ''}
+              {business.linkedin ? <a src={business.linkedin}><img src="../static-data/images/LinkedIN.svg" /></a> : ''}
+            </div>
+          </div>
           <div className="grid col-lg-12 full-information p-0">
             <div className="grid col-lg-8 p-0 m-bot-25">
-              <div className="col-lg-12 social-icons">
-                <img src="../static-data/images/FB.svg" />
-                <img src="../static-data/images/TW.svg" />
-                <img src="../static-data/images/Youtube.svg" />
-                <img src="../static-data/images/LinkedIN.svg" />
-              </div>
               <div className="col-lg-4 p-0 m-right-52 main-location">
                 <p className="business-title">{'Main Location:'}</p>
                 <h4>{locations[0].address.address_1}</h4>

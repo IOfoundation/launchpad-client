@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import MapView from '../../map-view/Main';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 
@@ -9,13 +10,12 @@ class ResultPage extends Component {
       tabIndex: 0,
     };
   }
-
   render() {
     const {tabIndex} = this.state;
     return (
       <div className="mobile-devices">
         <Tabs
-          selectedIndex={this.state.tabIndex}
+          selectedIndex={tabIndex}
           onSelect={tabIndex => this.setState({tabIndex})}
         >
           <TabList className="tabs-container">
@@ -57,5 +57,12 @@ class ResultPage extends Component {
     );
   }
 }
+
+ResultPage.PropTypes = {
+  TotalOrganizations: PropTypes.array,
+  BusinessesList: PropTypes.array,
+  locations: PropTypes.array,
+  onBoundsChange: PropTypes.func,
+};
 
 export default ResultPage;

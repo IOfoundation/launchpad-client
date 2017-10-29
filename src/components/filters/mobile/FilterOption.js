@@ -10,11 +10,30 @@ class FilterOption extends Component {
       selectedfilterOption: null,
     };
   }
-  _onClick(selectedfilterOption) {
-    this.props.handleOnChangeFilterOptions(selectedfilterOption.name, 'category');
+  uncheckAll() {
+    const checks = document.querySelectorAll(
+      '.dropdown-input-container' + ' input[type="checkbox"]'
+    );
+    for (const i = 0; i < checks.length; i++) {
+      const check = checks[i];
+      if (!check.disabled) {
+        check.checked = false;
+      }
+    }
+  }
+  _onClick(event, selectedfilterOption) {
+    this.uncheckAll();
+    this.props.handleOnChangeFilterOptions(
+      selectedfilterOption.name,
+      'category'
+    );
   }
   _toggleSubOption(event, selectedfilterOption) {
-    this.props.handleOnChangeFilterOptions(selectedfilterOption.name, 'category');
+    this.props.handleOnChangeFilterOptions(
+      selectedfilterOption.name,
+      'category'
+    );
+    this.uncheckAll();
     if (selectedfilterOption.children.length > 0) {
       this.setState({selectedfilterOption, subDropdownOpen: true});
     }
@@ -23,10 +42,7 @@ class FilterOption extends Component {
     return (
       <ul>
         {filterOption.children.map(child => (
-          <li
-            key={child.id}
-            onClick={() => this.props.handleOnChangeFilterOptions(child.name, 'category')}
-          >
+          <li key={child.id} onClick={e => this._onClick(e, child)}>
             {child.name}
           </li>
         ))}
@@ -37,15 +53,14 @@ class FilterOption extends Component {
     return (
       <ul>
         {this.props.filterOptions.map(filterOption => (
-          <li
-            key={filterOption.id}
-            onClick={e => this._toggleSubOption(e, filterOption)}
-          >
-            <input type="checkbox" id={filterOption.id} />
+          <li key={filterOption.id}>
+            <input type="checkbox" id={filterOption.name} />
             <div className="hover">
-              <label htmlFor={filterOption.id}>{filterOption.name}</label>
+              <a onClick={e => this._toggleSubOption(e, filterOption)}>{filterOption.name}</a>
               {filterOption.children.length > 0 && (
+                <label htmlFor={filterOption.name}>
                 <MdKeyboardArrowRight className="second-level-icon" size="20" />
+                </label>
               )}
             </div>
             {filterOption.children.length > 0 && (
@@ -65,8 +80,8 @@ class FilterOption extends Component {
         <li>
           <input type="checkbox" id={filterName} />
           <div className="select">
-            <label htmlFor={filterName}>{filterName}</label>
-            <RightArrow className="first-level-icon" />
+            <label>{filterName}</label>
+            <label htmlFor={filterName}><RightArrow className="first-level-icon" /></label>
           </div>
           <div className="filters-second-level">{this._renderOptions()}</div>
         </li>
