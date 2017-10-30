@@ -13,6 +13,7 @@ class FilterByText extends React.Component {
       showFilterLabel: false,
       showDropdown: false,
       searchText: '',
+      searchPlaceHolder: 'Or search by name',
     };
   }
   deleteFilter(e) {
@@ -52,7 +53,7 @@ class FilterByText extends React.Component {
     ) : (
       this.props.handleOnChangeFilterOptions(item.searchable_id, 'organization')
     );
-    this.setState({showDropdown: false, labelTop: false, value: ''});
+    this.setState({showDropdown: false, labelTop: false, value: '', searchText: item.content, searchPlaceHolder: item.content});
   }
 
   renderFilter() {
@@ -116,12 +117,15 @@ class FilterByText extends React.Component {
             }
           >
             {this.renderFilter()}
-            <a className="search-filter-clear" onClick={() => this.clearAll()}>
-              {'Clear All'}
-            </a>
+            {filters.category ?
+              <a className="search-filter-clear" onClick={() => this.clearAll()}>
+                {'Clear All'}
+              </a>
+              : ''
+            }
           </div>
           <h3
-            className={isEmpty(filters) ? 'filter-result-text col-lg-8 col-md-7 col-xs-7 noPadding' : 'hide-filter'}
+            className={filters.category ? 'hide-filter' : 'filter-result-text col-lg-8 col-md-7 col-xs-7 noPadding'}
           >
             {'Filter results with the selections below'}
           </h3>
