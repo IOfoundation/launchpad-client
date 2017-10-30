@@ -17,46 +17,37 @@
       outline: none;
       color: #00D3A7;
     }
-    .small-width-search {
-      width: 70%;
-      float: right;
-      transition: all 0.2s ease-in;
-    }
-    .full-width-search {
-      border: none;
-      background: none;
-      text-align: left;
-      padding-top: 4px;
-      padding-bottom: 4px;
-      color: $secondary-color;
-      width: 100%;
-      transition: all 0.2s ease-in;
-      background-color: #000;
-      &::placeholder {
-        color: $white-color;
-        font-weight: lighter;
-        font-size: 20px;
-        opacity: 0.75;
-      }
-      &-icon {
-        position: absolute;
-        right: 5px;
-        top: -9px;
-      }
-      @media (max-width: 50em) {
-        padding: 10px 0;
+    .filter-result-text {
+      @media (max-width: 1140px) {
+        font-size: 16px;
       }
     }
-    .text-search {
+    .search-by-text {
+      display: inline-block;
+      width: 244px;
+      transition: all 0.2s ease-in;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      background-color: transparent;
       border: none;
-      background: none;
-      text-align: left;
-      color: $secondary-color;
+      color: #00D3A7;
+      &:focus {
+        &::placeholder {
+          color: $white-color;
+          font-weight: lighter;
+          font-size: 20px;
+          opacity: 0.75;
+          @media (max-width: 1140px) {
+            font-size: 16px;
+          }
+        }
+      }
       &::placeholder {
         color: #00D3A7;
         font-size: 20px;
         font-weight: lighter;
-        @media (max-width: 50em) {
+        @media (max-width: 1140px) {
           font-size: 16px;
         }
       }
@@ -64,10 +55,13 @@
         position: absolute;
         right: 5px;
         top: -8px;
-        @media (max-width: 50em) {
+        @media (max-width: 60em) {
           top: 24%;
           left: 160px;
         }
+      }
+      @media (max-width: 60em) {
+        padding: 10px 0;
       }
     }
     .dropdown-btn {
@@ -82,7 +76,7 @@
       font-weight: lighter;
       opacity: 0.75;
     }
-    @media (max-width: 50em) {
+    @media (max-width: 60em) {
       h3 {
         font-size: 16px;
       }
@@ -163,6 +157,13 @@
 .search {
   &-text-form {
     position: relative;
+    .small-filter-container {
+      transition: all 0.4 ease-in;
+      @media (min-width: 1415px) {
+        max-width: 20%;
+        flex-basis: 20%;
+      }
+    }
   }
   &-filter{
     &-label {
@@ -184,6 +185,7 @@
       color: $white-color;
       opacity: 0.75;
       padding-left: 8px;
+      padding: 0 8px 0 8px;
       white-space: nowrap;
       display: inline-block;
     }
@@ -232,7 +234,7 @@
     float: right;
     width: 16px;
   }
-  @media (max-width: 50em){
+  @media (max-width: 60em){
     width: 100%;
     padding: 0 16px;
   }
@@ -264,15 +266,11 @@
       background-color: #4a4a4a;
     }
   }
-  @media (max-width: 50em){
+  @media (max-width: 60em){
     width: 100%;
     height: 4000px;
     li {
       padding: 8px 16px;
     }
   }
-}
-.small-filter-container {
-  width: 40%;
-  transition: all 0.4 ease-in;
 }

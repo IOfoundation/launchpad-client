@@ -21,7 +21,7 @@
   .collapse-menu-icon {
     float: right;
   }
-  @media (max-width: 50em) {
+  @media (max-width: 60em) {
     height: auto;
     position: fixed;
     width: 100%;
@@ -47,7 +47,7 @@
       }
     }
     nav.header_links-contact {
-      max-width: 70%;
+      max-width: 100%;
       display: inline-block;
       height: 0px;
       overflow: hidden;

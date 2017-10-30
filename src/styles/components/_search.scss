@@ -9,7 +9,7 @@
     font-size: 20px;
     padding: 0px;
     font-weight: 400;
-    @media (max-width: 50em) {
+    @media (max-width: 60em) {
       font-size: 16px;
       padding: -5px;
     }
@@ -23,7 +23,7 @@
     position: absolute;
     right: 24px;
     top: 19px;
-    @media (max-width: 50em) {
+    @media (max-width: 60em) {
       right: 6%;
       top: 25%;
     }
@@ -79,7 +79,7 @@
       background-color: #000;
     }
   }
-  @media (max-width: 50em) {
+  @media (max-width: 60em) {
     width: 100%;
     li {
       width: 89%;
@@ -104,7 +104,7 @@
   &::-webkit-scrollbar {
     display: none;
   }
-  @media (max-width: 50em) {
+  @media (max-width: 60em) {
     width: 86%;
     left: 7%;
   }

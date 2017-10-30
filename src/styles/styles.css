@@ -16,12 +16,12 @@ h1,h2,h3,h4,h5,p, a {
   max-width: 1300px;
   margin: 0 auto;
 }
-@media (max-width: 50em) {
+@media (max-width: 60em) {
   .body-container {
     padding: 0px;
     flex-basis: 100%;
     max-width: 100%;
-    margin-top: 25px;
+    margin-top: 23px;
   }
 }
 /* Useful Classes */
@@ -59,7 +59,7 @@ h1,h2,h3,h4,h5,p, a {
 .mobile-devices {
   display: none !important;
 }
-@media (max-width: 50em) {
+@media (max-width: 60em) {
   .mobile-devices {
     display: initial !important;
   }
@@ -67,7 +67,7 @@ h1,h2,h3,h4,h5,p, a {
     display: none !important;
   }
 }
-@media (max-width: 50em) {
+@media (max-width: 60em) {
   .text-xs-margin {
     margin: 10px auto;
   }

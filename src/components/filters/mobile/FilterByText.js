@@ -90,11 +90,11 @@ class FilterByTextMobile extends Component {
     return (
       <div className="filter-chip">
         <div className="p-left-16 p-right-16">
-          <h3 className="col-lg-7 noPadding">
+          <h3 className="col-lg-12 col-md-12 col-xs-12 noPadding">
             {'Filter results with the selections below'}
           </h3>
           {this.renderFilter()}
-          <a className="search-filter-clear" onClick={() => this.clearAll()}>
+          <a className="search-filter-label clear" onClick={() => this.clearAll()}>
             {'Clear All'}
           </a>
         </div>
@@ -103,10 +103,10 @@ class FilterByTextMobile extends Component {
             type="text"
             value={this.state.searchText}
             onChange={e => this.handleKeyPress(e)}
-            className="text-search full-width-search"
+            className="search-by-text"
             placeholder="Or search by name"
           />
-          <MdSearch className="text-search-icon" size={24} color="#2AD587" />
+          <MdSearch className="search-by-text-icon" size={24} color="#2AD587" />
         </div>
         <div
           className={

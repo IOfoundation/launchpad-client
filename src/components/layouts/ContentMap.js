@@ -88,8 +88,8 @@ class ContentMap extends Component {
           <div
             className={
               (this.props.expanded
-                ? 'col-md-7 col-xs-12 businessList p-left-0'
-                : 'col-md-9 col-xs-12 businessList--reduced p-left-0') + ' list'
+                ? 'col-md-7 col-xs-7 businessList p-left-0'
+                : 'col-md-9 col-xs-9 businessList--reduced p-left-0') + ' list'
             }
           >
             {this.props.children}
@@ -98,8 +98,8 @@ class ContentMap extends Component {
             className={
               'map ' +
               (this.props.expanded
-                ? 'col-md-5 col-xs-12 p-0'
-                : 'col-md-3 col-xs-12 p-0')
+                ? 'col-lg-5 col-md-5 col-xs-5 p-0'
+                : 'col-lg-3 col-md-3 col-xs-3 p-0')
             }
           >
             <div

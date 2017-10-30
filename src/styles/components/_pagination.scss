@@ -11,13 +11,17 @@
   cursor: pointer;
 }
 .pagination-index {
+  margin-top: 24px;
   font-size: 14px;
   font-weight: bold;
   list-style: none;
   padding: 0px;
-  .previous,
+  .previous {
+    margin-left: 0;
+    color: $primary-color;
+  }
   .next {
-    margin-left: 0px;
+    margin-right: 0;
     color: $primary-color;
   }
   .previous.disabled,
@@ -38,7 +42,7 @@
       font-weight: bold;
     }
   }
-  @media (max-width: 50em) {
+  @media (max-width: 60em) {
     li {
       margin: 0 12px;
     }

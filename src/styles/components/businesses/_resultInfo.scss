@@ -36,7 +36,7 @@
       line-height: 36px;
       opacity: 0.5;
     }
-    @media (max-width: 50em) {
+    @media (max-width: 60em) {
       margin-top: 0px;
       padding: 24px;
       svg {
@@ -52,14 +52,14 @@
   &-hide {
     display: none;
   }
-  @media (max-width: 50em) {
+  @media (max-width: 60em) {
     margin-top: 50%;
     width: 100%;
     min-height: 35vh;
   }
 }
 
-@media (max-width: 50em) {
+@media (max-width: 60em) {
   .businessList_top {
     text-align: center;
   }

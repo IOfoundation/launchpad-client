@@ -5,7 +5,6 @@
   font-size: 12px;
   height: auto;
   min-height: 171px;
-  max-height: 320px;
   .logo {
     width: 50px;
   }
@@ -36,7 +35,7 @@
       height: 16px;
     }
   }
-  @media (max-width: 50em) {
+  @media (max-width: 60em) {
     display: none;
   }
 }

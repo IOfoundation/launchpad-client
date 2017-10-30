@@ -106,7 +106,7 @@
   padding: 11px 15px 11px 15px;
 }
 
-@media (max-width: 50em) {
+@media (max-width: 60em) {
   .reduceMapBtn {
     left: 10px;
     right: auto;

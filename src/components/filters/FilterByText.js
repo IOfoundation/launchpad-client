@@ -111,7 +111,7 @@ class FilterByText extends React.Component {
               isEmpty(filters) ? (
                 'filter-label-container-hide'
               ) : (
-                'filter-label-container-show col-lg-7 col-md-6 col-xs-5 noPadding'
+                'filter-label-container-show col-lg-8 col-md-7 col-xs-7 noPadding'
               )
             }
           >
@@ -121,19 +121,12 @@ class FilterByText extends React.Component {
             </a>
           </div>
           <h3
-            className={isEmpty(filters) ? 'col-lg-7 noPadding' : 'hide-filter'}
+            className={isEmpty(filters) ? 'filter-result-text col-lg-8 col-md-7 col-xs-7 noPadding' : 'hide-filter'}
           >
             {'Filter results with the selections below'}
           </h3>
           <div
-            className={
-              isEmpty(filters) && this.state.labelTop ? (
-                'col-lg-5 full-width-text-filter noPadding'
-              ) : (
-                'small-filter-container col-lg-5 col-md-5 col-xs-6 noPadding'
-              )
-            }
-          >
+            className="small-filter-container col-lg-4 col-md-5 col-xs-5 noPadding">
             <input
               type="text"
               value={this.state.searchText}
@@ -141,27 +134,20 @@ class FilterByText extends React.Component {
               onChange={e => this.handleKeyPress(e)}
               placeholder={
                 this.state.labelTop ? (
-                  'Search by Resource Name or Ipsum'
+                  'Search by Resource Name'
                 ) : (
                   'Or search by name'
                 )
               }
-              className={
-                this.state.labelTop ? (
-                  'full-width-search'
-                ) : (
-                  'text-search small-width-search'
-                )
-              }
-            />
+              className="search-by-text"/>
           {!this.state.labelTop ? (
               <img
-                className="text-search-icon"
+                className="search-by-text-icon"
                 src="../static-data/images/search.png"
               />
           ) : (
               <MdClear
-                className="text-search-icon"
+                className="search-by-text-icon"
                 size="40"
                 color="#2AD587"
                 onClick={() => this._closeSearch()}

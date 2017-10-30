@@ -16,22 +16,7 @@ class BusinessesList extends Component {
   }
   render() {
     const {handleClickOnClearAllFilters, organizations} = this.props;
-    return (
-      <div>
-        {this._renderOrgs(organizations)}
-        <button
-          className={
-            organizations.length <= 0
-            ? 'btn-link btn-link-primary hide'
-            : 'btn-link btn-link-primary btn-clear m-bot-24 show'
-          }
-          onClick={handleClickOnClearAllFilters}
-        >
-          {'Clear Search Result'}
-          <MdClear size={30} color={'#2AD587'} />
-        </button>
-      </div>
-    );
+    return <div>{this._renderOrgs(organizations)}</div>;
   }
 }
 

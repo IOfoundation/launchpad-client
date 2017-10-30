@@ -132,6 +132,14 @@
     max-width: 300px;
     text-overflow: ellipsis;
     overflow: hidden;
+    @media (max-width: 60em) {
+      margin-bottom: 0px;
+    }
+  }
+  .search-filter-label.clear{
+    background-color: transparent;
+    color: #fff;
+    opacity: 0.75;
   }
 }
 

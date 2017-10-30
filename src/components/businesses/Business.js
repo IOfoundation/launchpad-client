@@ -61,9 +61,9 @@ class Business extends Component {
               {business.linkedin ? <a src={business.linkedin}><img src="../static-data/images/LinkedIN.svg" /></a> : ''}
             </div>
           </div>
-          <div className="grid col-lg-12 full-information p-0">
-            <div className="grid col-lg-8 p-0 m-bot-25">
-              <div className="col-lg-4 p-0 m-right-52 main-location">
+          <div className="grid col-lg-12 col-md-12 col-xs-12 full-information p-0">
+            <div className="grid col-lg-8 col-md-8 col-xs-12 p-0 m-bot-25">
+              <div className="col-lg-4 col-md-4 col-xs-4 p-0 m-right-52 main-location">
                 <p className="business-title">{'Main Location:'}</p>
                 <h4>{locations[0].address.address_1}</h4>
                 <h4>
@@ -72,25 +72,25 @@ class Business extends Component {
                   {locations[0].address.state_province}
                 </h4>
               </div>
-              <div className="col-lg-4 p-0 main-contact">
+              <div className="col-lg-4 col-md-4 col-xs-4 p-0 main-contact">
                 <p className="business-title">{'Contact:'}</p>
                 <h4>{business.phones[0].number}</h4>
                 <h4>{business.email}</h4>
               </div>
             </div>
-            <hr />
-            <p className="business-title">{'Services:'}</p>
+            <hr className="" />
+            <p className="business-title col-lg-12 col-md-12 col-xs-12 p-0">{'Services:'}</p>
             {business.services.map(service => {
               return (
                 <div
                   key={service.id}
-                  className="col-lg-12 grid p-0 business-service m-bot-28"
+                  className="col-lg-12 col-md-12 col-xs-12 grid p-0 business-service m-bot-28"
                 >
-                  <div className="col-lg-6 p-0">
+                  <div className="col-lg-6 col-md-6 col-xs-6 p-0">
                     <h4>{service.name}</h4>
                     <p>{service.description}</p>
                   </div>
-                  <div className="col-lg-6">
+                  <div className="col-lg-6 col-md-6 col-xs-6">
                     {!service.email || service.phones.length <= 0 ? (
                       ''
                     ) : (
@@ -103,7 +103,7 @@ class Business extends Component {
                       <h4>{service.phones[0].number}</h4>
                     )}
                   </div>
-                  <div className="col-lg-12 p-0 m-top-16">
+                  <div className="col-lg-12 col-md-12 col-xs-12 p-0 m-top-16">
                     {service.categories.map(category => {
                       return (
                         <Chip
@@ -118,8 +118,8 @@ class Business extends Component {
               );
             })}
             <hr />
-            <div className="col-lg-12 grid p-0">
-              <div className="col-lg-4 p-0 m-right-54">
+            <div className="col-lg-12 col-md-12 col-xs-12 grid p-0">
+              <div className="col-lg-4 col-md-4 col-xs-6 p-0 m-right-54">
                 <p className="business-title">{'Other Locations:'}</p>
                 {locations.map(location => {
                   return (
@@ -136,7 +136,7 @@ class Business extends Component {
                   );
                 })}
               </div>
-              <div className="col-lg-4 p-0">
+              <div className="col-lg-4 col-md-4 col-xs-6 p-0">
                 <p className="business-title">{'Contact:'}</p>
               </div>
             </div>
