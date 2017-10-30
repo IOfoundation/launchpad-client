@@ -10,33 +10,34 @@
     width: 100%;
     list-style: none;
     padding: 0px;
-  }
-  &-list.icons {
-    svg {
-      margin: 0 5px 0 5px;
+    margin: 0px;
+    transition: max-height 0.5s ease-in;
+    li {
+      padding: 24px 0 24px 0;
+      overflow:hidden;
+      max-height: 10px;
+      transition: all 0.5s ease-in;
+      svg {
+        margin: 0 5px 0 5px;
+      }
     }
   }
   &-icon {
     vertical-align: text-top !important;
   }
   input{display:none}
-  input:checked ~ ul.subDropDown{
-    max-height: 300px;
-    transition: max-height 0.5s ease-in;
+  input:checked {
+    &~ li {
+      background-color: #161616;
+      min-height: 240px;
+      svg {
+        transform: rotate(90deg);
+      }
+    }
   }
-  input:checked ~ svg {
-    transform: rotate(90deg);
-    transition: all 0.2s ease-in;
-  }
-  input:checked ~ li {
-    background-color: #161616;
-  }
-  ul.subDropDown{
-    max-height:0;
+  ul.subDropDown {
     padding:0;
-    overflow:hidden;
     list-style-type:none;
-    background: #161616;
     box-shadow:0 0 1px rgba(0,0,0,.3);
     transition:max-height 0.5s ease-out;
     min-width:100%;
@@ -58,10 +59,10 @@
       margin-left: 10px;
     }
   }
-  @media (min-width: 751px) {
+  @media (min-width: 51em) {
     display: none !important;
   }
-  @media (max-width: 750px) {
+  @media (max-width: 50em) {
     display: initial;
   }
 }

@@ -9,7 +9,7 @@
     font-size: 20px;
     padding: 0px;
     font-weight: 400;
-    @media (max-width: 48em) {
+    @media (max-width: 50em) {
       font-size: 16px;
       padding: -5px;
     }
@@ -21,9 +21,9 @@
   }
   .text-search-icon {
     position: absolute;
-    right: 0px;
+    right: 24px;
     top: 19px;
-    @media (max-width: 48em) {
+    @media (max-width: 50em) {
       right: 10%;
       top: 25%;
     }
@@ -32,7 +32,7 @@
 .hero_input {
   background-color: $primary-color;
   height: 76px;
-  width: 100%;
+  width: 94%;
   border: none;
   padding: 0 28px;
   color: $secondary-color;
@@ -79,6 +79,12 @@
       background-color: #000;
     }
   }
+  @media (max-width: 50em) {
+    width: 100%;
+    li {
+      width: 89%;
+    }
+  }
 }
 
 .hero_input-hide {
@@ -97,5 +103,9 @@
   overflow-y: scroll;
   &::-webkit-scrollbar {
     display: none;
+  }
+  @media (max-width: 50em) {
+    width: 92%;
+    left: 7%;
   }
 }

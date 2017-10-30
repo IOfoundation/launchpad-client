@@ -52,7 +52,7 @@ h1,h2,h3,h4,h5,p, a {
 .mobile-devices {
   display: none !important;
 }
-@media (max-width: 750px) {
+@media (max-width: 50em) {
   .mobile-devices {
     display: initial !important;
   }
@@ -60,12 +60,13 @@ h1,h2,h3,h4,h5,p, a {
     display: none !important;
   }
 }
-@media (max-width: 48em) {
+@media (max-width: 50em) {
   .text-xs-margin {
     margin: 10px auto;
   }
   .contentContainer {
     max-width: 100%;
+    width: 100%;
   }
 }
 

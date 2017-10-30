@@ -54,7 +54,10 @@
       margin-left: 16px;
     }
   }
-  @media (max-width: 48em) {
+  @media (max-width: 1181px) {
+    padding: 20px 4px 20px 10px;
+  }
+  @media (max-width: 50em) {
     padding: 8px;
   }
 }

@@ -19,7 +19,7 @@ class FilterBox extends React.Component {
             items={this.props.items}
           />
         </div>
-        <div className="grid container--middle bottom-xs between-xs p-left-0">
+        <div className="grid col-lg-10 col-md-12 col-xs-12 bottom-xs between-xs p-left-0">
           <FilterByOptions
             filterName={'Business Services'}
             filterOptions={this.props.filterOptions.businessServices}

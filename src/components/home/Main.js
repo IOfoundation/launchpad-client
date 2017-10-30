@@ -8,7 +8,7 @@ const Main = ({items, getTextSearchResults}) => {
   return (
     <div>
       <section className="hero center-xs">
-        <div>
+        <div className="p-x-24">
           <div className="logo-container">
             <Logo />
           </div>

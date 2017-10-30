@@ -90,7 +90,7 @@ class FilterByOptions extends React.Component {
   }
   render() {
     return (
-      <div className="col-md-3 col-xs-10 noPadding filterSelectContainer text-xs-margin">
+      <div className="col-md-3 col-xs-3 noPadding filterSelectContainer text-xs-margin">
         <button
           className="dropdown-btn filterSelect"
           onClick={() => this._toggleDropdownOptions()}

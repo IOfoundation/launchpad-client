@@ -54,17 +54,19 @@ class ContentMap extends Component {
             )
           }
         >
-          <MdSearch size="200" color="#95EAC3" />
-          <p className="message desktop-devices">
-            {'Sorry but nothing matched your search terms.'}
-          </p>
-          <p className="message desktop-devices">
-            {'Please try Again with different Keywords'}
-          </p>
-          <div className="mobile-devices">
-            <p className="message">
-              {'Sorry but nothing matched your search terms. Please try Again with different Keywords'}
+          <div className="no-result-message">
+            <MdSearch size="200" color="#95EAC3" />
+            <p className="message desktop-devices">
+              {'Sorry but nothing matched your search terms.'}
             </p>
+            <p className="message desktop-devices">
+              {'Please try Again with different Keywords'}
+            </p>
+            <div className="mobile-devices">
+              <p className="message">
+                {'Sorry but nothing matched your search terms. Please try Again with different Keywords'}
+              </p>
+            </div>
           </div>
         </div>
         <div className={organizations.length === 0 ? 'result-container-hide' : ''}>

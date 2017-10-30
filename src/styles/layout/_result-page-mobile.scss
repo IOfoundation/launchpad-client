@@ -1,6 +1,9 @@
 .react-tabs-show {
   display: initial;
 }
+.react-tabs {
+  min-height: 50vh;
+}
 .tabs-container {
   text-align: right;
   box-shadow: inset 0 -2px 0 0 #000000;

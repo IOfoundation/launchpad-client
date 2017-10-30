@@ -111,7 +111,7 @@ class FilterByText extends React.Component {
               isEmpty(filters) ? (
                 'filter-label-container-hide'
               ) : (
-                'filter-label-container-show col-lg-7 col-md-6 noPadding'
+                'filter-label-container-show col-lg-7 col-md-6 col-xs-5 noPadding'
               )
             }
           >
@@ -130,7 +130,7 @@ class FilterByText extends React.Component {
               isEmpty(filters) && this.state.labelTop ? (
                 'col-lg-5 full-width-text-filter noPadding'
               ) : (
-                'small-filter-container noPadding'
+                'small-filter-container col-lg-5 col-md-5 col-xs-6 noPadding'
               )
             }
           >
@@ -154,15 +154,19 @@ class FilterByText extends React.Component {
                 )
               }
             />
-
-            {this.state.labelTop && (
+          {!this.state.labelTop ? (
+              <img
+                className="text-search-icon"
+                src="../static-data/images/search.png"
+              />
+          ) : (
               <MdClear
                 className="text-search-icon"
                 size="40"
                 color="#2AD587"
                 onClick={() => this._closeSearch()}
               />
-            )}
+          )}
           </div>
           <div
             className={
@@ -175,12 +179,6 @@ class FilterByText extends React.Component {
           >
             {this.renderDropdown()}
           </div>
-          {!this.state.labelTop && (
-            <img
-              className="text-search-icon"
-              src="../static-data/images/search.png"
-            />
-          )}
         </div>
       </div>
     );

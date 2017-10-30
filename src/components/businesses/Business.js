@@ -28,10 +28,18 @@ class Business extends Component {
             )
           }
         >
-          <div className={this.state.expanded ? ('business col-lg-2 p-0') : ('business business-img')}>
+          <div className={this.state.expanded ? ('business col-lg-2 col-md-2 col-xs-2 p-0') : ('business business-img')}>
             <img className="business-logo" src="../static-data/images/orgs-placeholder.png" />
           </div>
-          <div className={this.state.expanded ? ('business col-lg-10 p-right-0') : ('business col-lg-12 p-0')}>
+          <div
+            className={
+              this.state.expanded ? (
+                'business col-lg-10 col-md-10 col-xs-10 p-right-0'
+              ) : (
+                'business col-lg-12 col-md-12 col-xs-12 p-0'
+              )
+            }
+          >
             <h3 className="title">
               {business.name}
               <img

@@ -23,10 +23,10 @@ class MobileFooter extends React.Component {
     return (
       <footer className="mobile-footer row grid">
         <ul className="mobile-footer-list">
+          <input id="dropDown-1" type="checkbox" name="dropdown" />
           <li>
-            <input id="dropDown-1" type="checkbox" name="dropdown" />
             <label htmlFor="dropDown-1">{'FOOTER NAV 01'}</label>
-            <RightArrow />
+            <RightArrow htmlFor="dropDown-1" />
             <ul className="subDropDown">
               <Link to="">{'About'}</Link>
               <Link to="">{'Fermentum Ultricies'}</Link>
@@ -35,10 +35,10 @@ class MobileFooter extends React.Component {
           </li>
         </ul>
         <ul className="mobile-footer-list">
+          <input id="dropDown-2" type="checkbox" name="dropdown" />
           <li>
-            <input id="dropDown-2" type="checkbox" name="dropdown" />
             <label htmlFor="dropDown-2">{'SUPPORT'}</label>
-            <RightArrow />
+            <RightArrow htmlFor="dropDown-2" />
             <ul className="subDropDown">
               <Link to="">{'Help Center'}</Link>
               <Link to="">{'FAQ'}</Link>
@@ -49,10 +49,10 @@ class MobileFooter extends React.Component {
           </li>
         </ul>
         <ul className="mobile-footer-list">
+          <input id="dropDown-3" type="checkbox" name="dropdown" />
           <li>
-            <input id="dropDown-3" type="checkbox" name="dropdown" />
             <label htmlFor="dropDown-3">{'FOOTER NAV 3'}</label>
-            <RightArrow />
+            <RightArrow htmlFor="dropDown-3" />
             <ul className="subDropDown">
               <Link to="">{'About'}</Link>
               <Link to="">{'Fermentum Ultricies'}</Link>
