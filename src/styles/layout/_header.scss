@@ -18,6 +18,9 @@
     display: none;
     margin-right: 8px;
   }
+  .collapse-menu-icon {
+    float: right;
+  }
   @media (max-width: 50em) {
     height: auto;
     position: fixed;
@@ -29,11 +32,23 @@
     img {
       display: initial;
     }
-    input:checked ~ nav.header_links {
+    input:checked ~ nav.header_links-contact {
       height: 100vh;
       transition: height 0.5s ease-in;
     }
-    nav.header_links {
+    .header_links {
+      &-title {
+        max-width: 30%;
+        display: inline-block;
+      }
+      &-contact{
+        max-width: 70%;
+        display: inline-block;
+      }
+    }
+    nav.header_links-contact {
+      max-width: 70%;
+      display: inline-block;
       height: 0px;
       overflow: hidden;
       transition: height 0.5s ease-out;
@@ -41,7 +56,7 @@
       .header_link {
         display: block;
         text-align: left;
-        margin: 40px 0 40px 0;
+        margin: 40px 0;
       }
     }
     .header {

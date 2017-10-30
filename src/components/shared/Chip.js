@@ -9,7 +9,7 @@ const Chip = ({canDelete, text, handleClick}) => (
     onClick={e => handleClick(e)}
     data-value={text}
   >
-    {text}
+    <span className="text">{text}</span>
     {canDelete ? (<span className="search-filter-icon">{'x'}</span>): (null) }
   </a>
 );

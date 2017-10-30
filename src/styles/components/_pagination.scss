@@ -26,7 +26,7 @@
   }
   li {
     display: inline-block;
-    margin: 0 20px 0 20px;
+    margin: 0 20px;
     a {
       color: #bbbbbb;
       font-weight: bold;
@@ -40,7 +40,7 @@
   }
   @media (max-width: 50em) {
     li {
-      margin: 0 12px 0 12px;
+      margin: 0 12px;
     }
   }
 }

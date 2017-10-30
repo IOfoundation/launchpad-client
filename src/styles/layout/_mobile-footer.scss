@@ -10,10 +10,10 @@
     width: 100%;
     list-style: none;
     padding: 0px;
-    margin: 0px;
+    margin: 0;
     transition: max-height 0.5s ease-in;
     li {
-      padding: 24px 0 24px 0;
+      padding: 24px 0;
       overflow:hidden;
       max-height: 10px;
       transition: all 0.5s ease-in;
@@ -46,7 +46,7 @@
       color: #fff;
       font-size: 14px;
       line-height: 20px;
-      padding: 20px 0 20px 0;
+      padding: 20px 0;
     }
   }
   svg {

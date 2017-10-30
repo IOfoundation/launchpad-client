@@ -24,7 +24,7 @@
     right: 24px;
     top: 19px;
     @media (max-width: 50em) {
-      right: 10%;
+      right: 6%;
       top: 25%;
     }
   }
@@ -52,7 +52,7 @@
   width: 416px;
   padding: 8px;
   z-index: 900;
-  margin: 0px;
+  margin: 0;
   li {
     padding: 8px;
     text-align: left;
@@ -105,7 +105,7 @@
     display: none;
   }
   @media (max-width: 50em) {
-    width: 92%;
+    width: 86%;
     left: 7%;
   }
 }

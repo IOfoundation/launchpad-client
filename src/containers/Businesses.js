@@ -70,13 +70,15 @@ export class Businesses extends Component {
         <section>
           <div className="search-nav search-nav-invert">
             <div className="row contentContainer">
-              <Link className="desktop-devices" to="/">
-                <img
-                  className="logo"
-                  src="static-data/images/ioLogoBlack.png"
-                />
-              </Link>
-              <div className="col-lg-9 col-md-9 col-xs-12 container--full margin-0">
+              <div>
+                <Link className="desktop-devices" to="/">
+                  <img
+                    className="logo"
+                    src="static-data/images/ioLogoBlack.png"
+                  />
+                </Link>
+              </div>
+              <div className="col-lg-9 col-md-9 col-xs-9 body-container">
                 <h2 className="desktop-devices">
                   {
                     "Where startups and small businesses connect in California's Central Valley"

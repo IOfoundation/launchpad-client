@@ -11,7 +11,7 @@
 }
 .business-card {
   background-color: rgba(0, 0, 0, 0.05);
-  padding: 20px 24px 20px 24px;
+  padding: 20px 24px;
   margin-bottom: 12px;
   overflow: hidden;
   .business-service {
@@ -99,7 +99,7 @@
   @media (max-width: 50em) {
     overflow: hidden;
     white-space: nowrap;
-    margin: 0 8px 0 8px;
+    margin: 0 8px;
     .business-type-container {
       overflow: scroll;
       white-space: nowrap;

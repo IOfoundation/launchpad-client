@@ -1,6 +1,6 @@
 .dropdown-input-container {
   text-align: right;
-  padding: 10px 16px 10px 16px;
+  padding: 10px 16px;
   margin-bottom: 23px;
   .filter-icon {
     color: #2AD587;
@@ -55,11 +55,11 @@
 }
 .filter-list {
   list-style: none;
-  padding: 0 4px 0 4px;
+  padding: 0 4px;
   font-size: 16px;
-  margin: 0px;
+  margin: 0;
   .select {
-    padding: 8px 12px 8px 12px;
+    padding: 8px 12px;
     display: flex;
     align-items: center;
     transition: all 0.5s ease-in;
@@ -129,6 +129,9 @@
   }
   .search-filter-label {
     margin-top: 8px;
+    max-width: 300px;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 }
 

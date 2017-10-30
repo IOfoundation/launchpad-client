@@ -26,10 +26,6 @@
 }
 
 .no-result-message {
-  position: absolute;
-  top: 50%;
-  width: 92%;
-  min-height: 35vh;
   &-show {
     text-align: center;
     margin-bottom: 116px;
@@ -55,6 +51,12 @@
   }
   &-hide {
     display: none;
+  }
+  @media (max-width: 50em) {
+    position: absolute;
+    top: 70%;
+    width: 88%;
+    min-height: 35vh;
   }
 }
 

@@ -4,7 +4,7 @@
   background-position: 50% 25%;
   padding: 85px 0;
   color: white;
-  height: 75vh;
+  height: 90vh;
   .logo {
     width: 60px;
   }
@@ -15,7 +15,7 @@
   &-link {
     @media (max-width: 50em) {
       width: 100%;
-      margin: 0px;
+      margin: 0;
       font-size: 14px;
     }
   }
@@ -48,7 +48,7 @@
     line-height: 27px;
   }
   .hero_input {
-    width: 80%;
+    width: 85%;
     margin: 10px auto;
     padding-left: 16px;
   }

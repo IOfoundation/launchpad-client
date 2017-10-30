@@ -16,7 +16,6 @@ class Business extends Component {
   render() {
     const {business} = this.props;
     const locations = business.locations;
-    console.log("img", this.props);
     return (
       <div className="business-card">
         <div

@@ -16,7 +16,14 @@ h1,h2,h3,h4,h5,p, a {
   max-width: 1300px;
   margin: 0 auto;
 }
-
+@media (max-width: 50em) {
+  .body-container {
+    padding: 0px;
+    flex-basis: 100%;
+    max-width: 100%;
+    margin-top: 25px;
+  }
+}
 /* Useful Classes */
 .primary {
   color: #3F51B5;
