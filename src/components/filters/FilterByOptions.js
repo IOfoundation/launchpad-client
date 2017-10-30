@@ -73,7 +73,7 @@ class FilterByOptions extends React.Component {
               onClick={e => this._onClick(filterOption)}
               onMouseOver={e => this._toggleSubOption(e, filterOption)}
             >
-              <span className="">{filterOption.name}</span>
+              <span>{filterOption.name}</span>
               {filterOption.children.length > 0 && (
                 <MdKeyboardArrowRight
                   className="dropdown-options-icon"

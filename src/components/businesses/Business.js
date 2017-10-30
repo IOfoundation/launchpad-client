@@ -78,7 +78,7 @@ class Business extends Component {
                 <h4>{business.email}</h4>
               </div>
             </div>
-            <hr className="" />
+            <hr/>
             <p className="business-title col-lg-12 col-md-12 col-xs-12 p-0">{'Services:'}</p>
             {business.services.map(service => {
               return (
