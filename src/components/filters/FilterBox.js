@@ -36,7 +36,7 @@ class FilterBox extends React.Component {
             handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
           />
           <FilterByOptions
-            filterName={'Underserved Com...'}
+            filterName={'Underserved Comm...'}
             filterOptions={this.props.filterOptions.communities}
             handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
           />

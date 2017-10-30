@@ -64,33 +64,57 @@ class ContentMap extends Component {
         </div>      </div>
     );
   }
+  _renderNoSearchResults() {
+    const {businessesMetadata} = this.props;
+    return (
+      <div className={
+        businessesMetadata.totalOrganizations === '0'
+          ? 'no-result-message-show col-md-8 col-xs-12 p-left-0 businessList--reduced'
+          : 'no-result-message-hide'
+      }>
+        <div className="no-result-message">
+          <MdSearch size="200" color="#95EAC3" />
+          <p className="message desktop-devices">
+            {'Sorry but nothing matched your search terms.'}
+          </p>
+          <p className="message desktop-devices">
+            {'Please try Again with different Keywords'}
+          </p>
+          <div className="mobile-devices">
+            <p className="message">
+              {'Sorry but nothing matched your search terms. Please try Again with different Keywords'}
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  _renderBusinesses() {
+    const {locations, onBoundsChange} = this.props;
+    return (
+        <div
+          className={
+            this.props.expanded
+              ? 'col-md-8 col-xs-12 businessList p-left-0'
+              : 'col-md-9 col-xs-12 businessList--reduced p-left-0'
+          }
+        >
+          {this.props.children}
+        </div>
+
+    );
+  }
   render() {
     const {locations, businessesMetadata, onBoundsChange, organizations} = this.props;
     return (
       <div className="businessesContainer">
         {this.props.topBar}
         <div className={
-            businessesMetadata.totalOrganizations === '0' ? (
-              'no-result-message-show'
-            ) : (
-              'no-result-message-hide'
-            )
+            businessesMetadata.totalOrganizations === '0' ?
+              this._renderNoSearchResults() :
+              this._renderBusinesses()
           }
         >
-          <div className="no-result-message">
-            <img src="/static-data/images/search-icon.png" />
-            <p className="message desktop-devices">
-              {'Sorry but nothing matched your search terms.'}
-            </p>
-            <p className="message desktop-devices">
-              {'Please try Again with different Keywords'}
-            </p>
-            <div className="mobile-devices">
-              <p className="message">
-                {'Sorry but nothing matched your search terms. Please try Again with different Keywords'}
-              </p>
-            </div>
-          </div>
         </div>
         <div className={organizations.length === 0 ? 'result-container-hide' : ''}>
           <ResultPage
@@ -114,7 +138,7 @@ class ContentMap extends Component {
                 ? 'col-md-7 col-xs-7 businessList p-left-0'
                 : 'col-md-9 col-xs-9 businessList--reduced p-left-0') + ' list'
             }
-          >
+            >
             {this.props.children}
           </div>
           <div
@@ -127,22 +151,21 @@ class ContentMap extends Component {
           >
             <div
               className={
-                this.props.expanded ? (
-                  'map-container-collapse'
-                ) : (
-                  'map-container-expand'
-                )
-              }
-            >
-              <MapView locations={locations} onBoundsChange={onBoundsChange}/>
-            </div>
-            {this.props.expanded ? (
-              this._renderReduceButton()
-            ) : (
-              this._renderExpandButton()
-              )}
+              this.props.expanded
+                ? 'map-container-collapse'
+                : 'map-container-expand'
+            }
+          >
+            <MapView
+              locations={locations}
+              onBoundsChange={onBoundsChange}
+            />
           </div>
+          {this.props.expanded
+            ? this._renderReduceButton()
+            : this._renderExpandButton()}
         </div>
+      </div>
       </div>
     );
   }

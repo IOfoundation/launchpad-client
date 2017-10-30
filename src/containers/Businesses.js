@@ -12,7 +12,12 @@ import BusinessesView from 'components/businesses/Main';
 import * as actions from '../actions/business';
 
 export class Businesses extends Component {
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      showBusinessTypes: true,
+    };
+  }
   componentWillMount(_nextProps) {
     const params = this.props.location.query;
     this.props.actions.fetchFilterOptions();
@@ -25,9 +30,17 @@ export class Businesses extends Component {
     this.props.actions.fetchSearchResults(filter);
   }
 
+  checkBusinessType(filterValue) {
+    const businessTypes = ['Startup or High-Growth Business', 'Main Street or Small Business', 'Microenterprise or Home Based Business'];
+    if (businessTypes.includes(filterValue)) {
+      this.setState({showBusinessTypes: !this.state.showBusinessTypes});
+    }
+  }
+
   handleOnChangeFilterOptions(filterValue, filterType, removeFilter) {
     const params = this.props.location.query;
     this.getFilterChips();
+    this.checkBusinessType(filterValue)
     isEmpty(params.category) ? (
       this.props.actions.filterOrganizations(filterValue, params, filterType)
     ) : (
@@ -48,6 +61,7 @@ export class Businesses extends Component {
   }
 
   handleClickOnClearAllFilters() {
+    this.setState({showBusinessTypes: true});
     this.props.actions.filterOrganizations(null, null, 'all', true);
   }
 
@@ -101,9 +115,9 @@ export class Businesses extends Component {
                   />
                 </div>
                 <BusinessesView
+                  showBusinessTypes={this.state.showBusinessTypes}
                   filterOptions={this.props.filters}
                   organizations={this.props.organizations}
-                  organization={this.props.organization}
                   locations={this.props.locations}
                   businessesMetadata={this.props.metadata}
                   handleChangePage={(e) => this.handleChangePage(e)}

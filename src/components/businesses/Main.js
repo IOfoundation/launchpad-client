@@ -47,6 +47,7 @@ class Main extends Component {
           businessesMetadata={this.props.businessesMetadata}
           handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
           filterOptions={this.props.filterOptions.businessTypes}
+          showBusinessTypes={this.props.showBusinessTypes}
         />
       );
     }
@@ -112,6 +113,8 @@ Main.propTypes = {
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
   organizations: PropTypes.arrayOf(PropTypes.object),
+  showBusinessTypes: PropTypes.bool,
+
 };
 
 export default Main;
