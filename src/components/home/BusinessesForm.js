@@ -126,7 +126,7 @@ class BusinessesForm extends React.Component {
           }
           className="hero_input businessesName"
         />
-        <MdSearch className="text-search-icon" size={40} color={'#2AD587'} />
+        <img className="text-search-icon" src="/static-data/images/search.png" />
         <div
           className={
             this.state.showDropdown || this.state.showPreviewDropdown ? (
