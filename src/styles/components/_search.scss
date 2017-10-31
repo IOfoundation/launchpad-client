@@ -25,12 +25,16 @@
     top: 23px;
     @media (max-width: 60em) {
       right: 6%;
-      top: 25%;
+      top: 31px;
+    }
+    @media (max-width: 580px) and (min-width: 320px) {
+      display: none;
     }
   }
 }
 .hero_input {
   background-color: $primary-color;
+  border-radius: 0;
   height: 76px;
   width: 94%;
   border: none;

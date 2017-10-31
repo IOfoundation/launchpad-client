@@ -5,25 +5,35 @@
   color: #FFF;
   text-align: center;
   padding: 0px;
-
+  .social-icons-container {
+    padding: 24px;
+  }
   &-list {
     width: 100%;
     list-style: none;
     padding: 0px;
     margin: 0;
     transition: max-height 0.5s ease-in;
-    li {
+    .right-arrow {
+      margin: 0 0 5px 0;
+    }
+    .list-options {
       padding: 24px 0;
       overflow:hidden;
       max-height: 10px;
       transition: all 0.5s ease-in;
       svg {
-        margin: 0 5px 0 5px;
+        margin: 0 0 5px 5px;
       }
+    }
+    .social-icons-title {
+      font-size: 12px;
+      margin-bottom: 12px;
     }
   }
   &-icon {
     vertical-align: text-top !important;
+    padding-right: 12px;
   }
   input{display:none}
   input:checked {
@@ -52,12 +62,6 @@
   svg {
     margin-left: 3px;
     transition: all 0.2s ease-out;
-  }
-  .social-icons {
-    margin-bottom: 8px;
-    svg {
-      margin-left: 10px;
-    }
   }
   @media (min-width: 61em) {
     display: none !important;

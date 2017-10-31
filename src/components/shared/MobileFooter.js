@@ -24,9 +24,9 @@ class MobileFooter extends React.Component {
       <footer className="mobile-footer row grid">
         <ul className="mobile-footer-list">
           <input id="dropDown-1" type="checkbox" name="dropdown" />
-          <li>
+          <li className="list-options">
             <label htmlFor="dropDown-1">{'FOOTER NAV 01'}</label>
-            <RightArrow htmlFor="dropDown-1" />
+            <RightArrow htmlFor="dropDown-1" className="right-arrow" />
             <ul className="subDropDown">
               <Link to="">{'About'}</Link>
               <Link to="">{'Fermentum Ultricies'}</Link>
@@ -36,9 +36,9 @@ class MobileFooter extends React.Component {
         </ul>
         <ul className="mobile-footer-list">
           <input id="dropDown-2" type="checkbox" name="dropdown" />
-          <li>
+          <li className="list-options">
             <label htmlFor="dropDown-2">{'SUPPORT'}</label>
-            <RightArrow htmlFor="dropDown-2" />
+            <RightArrow htmlFor="dropDown-2" className="right-arrow" />
             <ul className="subDropDown">
               <Link to="">{'Help Center'}</Link>
               <Link to="">{'FAQ'}</Link>
@@ -50,9 +50,9 @@ class MobileFooter extends React.Component {
         </ul>
         <ul className="mobile-footer-list">
           <input id="dropDown-3" type="checkbox" name="dropdown" />
-          <li>
+          <li className="list-options">
             <label htmlFor="dropDown-3">{'FOOTER NAV 3'}</label>
-            <RightArrow htmlFor="dropDown-3" />
+            <RightArrow htmlFor="dropDown-3" className="right-arrow" />
             <ul className="subDropDown">
               <Link to="">{'About'}</Link>
               <Link to="">{'Fermentum Ultricies'}</Link>
@@ -60,8 +60,8 @@ class MobileFooter extends React.Component {
             </ul>
           </li>
         </ul>
-        <ul className="mobile-footer-list icons">
-          <li className="social-icons">{'SOCIAL'}</li>
+        <ul className="mobile-footer-list social-icons-container">
+          <li className="social-icons-title">{'SOCIAL'}</li>
           <li>
             <FaTwitter size={24} />
             <FaFacebook size={24} />

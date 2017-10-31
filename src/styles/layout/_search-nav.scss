@@ -65,18 +65,6 @@
         width: 140px;
       }
     }
-    .dropdown-btn {
-      background: none;
-      border: none;
-      border-bottom: 1px solid $white-color;
-      text-align: left;
-      padding: 4px 0;
-      width: 90%;
-      color: $white-color;
-      font-size: 14px;
-      font-weight: lighter;
-      opacity: 0.75;
-    }
     @media (max-width: 60em) {
       h3 {
         font-size: 16px;
@@ -103,6 +91,7 @@
       width: 50%;
       display: inline-block;
       float: left;
+      border-right: 1px solid rgba(0, 0, 0, 0.15);
     }
   }
   &-container {
@@ -112,11 +101,9 @@
     position: absolute;
     top: 40px;
     z-index: 10;
-    padding: 12px 4px 12px 4px;
+    padding: 12px 0;
     color: $primary-color;
-    &-collapse {
-      width: 271px;
-    }
+    width: 271px;
     &-expand {
       width: 544px;
     }
@@ -124,8 +111,9 @@
   &-options{
     border: none;
     background: none;
+    border-radius: 0;
     color: $primary-color;
-    padding: 8px 12px;
+    padding: 8px 16px;
     font-size: 16px !important;
     text-align: left;
     width: 100%;
@@ -147,11 +135,9 @@
     background: white;
     border:0px;
     z-index: 10;
-    padding: 12px 4px 12px 4px;
     color: $primary-color;
-    width: 48%;
+    width: 49%;
     display: inline-block;
-    border-left: 1px solid rgba(0, 0, 0, 0.15);
   }
 }
 
@@ -201,18 +187,31 @@
     display: none;
   }
 }
-.filterSelectContainer {
-  position: relative;
+.filter-btn{
+  background: none;
+  border: none;
+  border-radius: 0px;
+  border-bottom: 1px solid $white-color;
+  color: $white-color;
+  font-size: 14px;
+  font-weight: lighter;
+  text-align: left;
+  opacity: 0.75;
+  padding: 4px 0;
+  width: 90%;
+  &:active,
+  &:focus {
+    outline: none;
+  }
+  &-container {
+    position: relative;
+  }
+  &-icon {
+    position: absolute;
+    right: 20px;
+    top: 5px;
+  }
 }
-.filterSelect:active, .filterSelect:focus {
-  outline: none;
-}
-.filterSelect_icon {
-  position: absolute;
-  right: 20px;
-  top: 5px;
-}
-
 .hide-filter {
   display: none;
   transition: all 0.4s ease-out;
