@@ -55,7 +55,7 @@ class ContentMap extends Component {
           }
         >
           <div className="no-result-message">
-            <MdSearch size="200" color="#95EAC3" />
+            <img src="/static-data/images/search-icon.png" />
             <p className="message desktop-devices">
               {'Sorry but nothing matched your search terms.'}
             </p>
