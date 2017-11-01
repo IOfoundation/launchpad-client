@@ -61,7 +61,8 @@ class ContentMap extends Component {
               {'Search in Map Area'}
             </button>
           </div>
-        </div>      </div>
+        </div>
+      </div>
     );
   }
   _renderNoSearchResults() {
@@ -90,18 +91,34 @@ class ContentMap extends Component {
     );
   }
   _renderBusinesses() {
-    const {locations, onBoundsChange} = this.props;
+    const {locations, onBoundsChange, businessesMetadata} = this.props;
     return (
+    <div>
+      <ResultPage
+        BusinessesList={this.props.children}
+        locations={locations}
+        onBoundsChange={onBoundsChange}
+        TotalOrganizations={businessesMetadata.totalOrganizations}
+      />
+      <div className={
+          businessesMetadata.totalOrganizations === '0' ? (
+            'result-container-hide desktop-devices'
+          ) : (
+            'grid desktop-devices'
+          )
+        }
+      >
         <div
           className={
-            this.props.expanded
-              ? 'col-md-8 col-xs-12 businessList p-left-0'
-              : 'col-md-9 col-xs-12 businessList--reduced p-left-0'
+            (this.props.expanded
+              ? 'col-md-7 col-xs-7 businessList p-left-0'
+              : 'col-md-9 col-xs-9 businessList--reduced p-left-0') + ' list'
           }
-        >
+          >
           {this.props.children}
         </div>
-
+      </div>
+    </div>
     );
   }
   render() {
@@ -109,38 +126,10 @@ class ContentMap extends Component {
     return (
       <div className="businessesContainer">
         {this.props.topBar}
-        <div className={
-            businessesMetadata.totalOrganizations === '0' ?
+        {businessesMetadata.totalOrganizations === '0' ?
               this._renderNoSearchResults() :
               this._renderBusinesses()
-          }
-        >
-        </div>
-        <div className={organizations.length === 0 ? 'result-container-hide' : ''}>
-          <ResultPage
-            BusinessesList={this.props.children}
-            locations={locations}
-            onBoundsChange={onBoundsChange}
-            TotalOrganizations={businessesMetadata.totalOrganizations}
-          />
-        </div>
-        <div className={
-            businessesMetadata.totalOrganizations === '0' ? (
-              'result-container-hide desktop-devices'
-            ) : (
-              'grid desktop-devices'
-            )
-          }
-        >
-          <div
-            className={
-              (this.props.expanded
-                ? 'col-md-7 col-xs-7 businessList p-left-0'
-                : 'col-md-9 col-xs-9 businessList--reduced p-left-0') + ' list'
-            }
-            >
-            {this.props.children}
-          </div>
+        }
           <div
             className={
               'map ' +
@@ -154,8 +143,8 @@ class ContentMap extends Component {
               this.props.expanded
                 ? 'map-container-collapse'
                 : 'map-container-expand'
-            }
-          >
+              }
+              >
             <MapView
               locations={locations}
               onBoundsChange={onBoundsChange}
@@ -165,7 +154,6 @@ class ContentMap extends Component {
             ? this._renderReduceButton()
             : this._renderExpandButton()}
         </div>
-      </div>
       </div>
     );
   }

@@ -13,6 +13,7 @@ class ResultInfo extends Component {
       <div className="grid business-type-btn">
         {this.props.showBusinessTypes === false ?
           '' :
+          <div>
             <p className="m-bot-16 col-xs-12 col-md-12 col-lg-12 p-0">
               {'Select a business type that represents you.'}
             </p>
@@ -60,6 +61,7 @@ class ResultInfo extends Component {
                 </button>
               </div>
             </div>
+          </div>
           }
           {totalOrganizations === '0' ?
             '' :
@@ -68,11 +70,11 @@ class ResultInfo extends Component {
             <hr className="m-bot-24" />
           </div>
           }
-        </div>
-      }
+      </div>
     );
   }
 }
+
 
 ResultInfo.propTypes = {
   filterOptions: PropTypes.array.isRequired,
