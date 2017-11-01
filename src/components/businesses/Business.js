@@ -20,46 +20,52 @@ class Business extends Component {
       <div className="business-card">
         <div
           className={
-            this.state.expanded ? (
-              'business-card-expand grid'
-            ) : (
-              'business-card-collapse grid'
-            )
+            this.state.expanded
+              ? 'business-card-expand grid'
+              : 'business-card-collapse grid'
           }
         >
-          <div className={this.state.expanded ? ('business col-lg-2 col-md-2 col-xs-2 p-0') : ('business business-img')}>
-            <img className="business-logo" src="../static-data/images/orgs-placeholder.png" />
+          <div
+            className={
+              this.state.expanded
+                ? 'business col-lg-2 col-md-2 col-xs-2 p-0'
+                : 'business business-img'
+            }
+          >
+            <img
+              className="business-logo"
+              src="../static-data/images/orgs-placeholder.png"
+            />
           </div>
           <div
             className={
-              this.state.expanded ? (
-                'business col-lg-10 col-md-10 col-xs-10 p-right-0'
-              ) : (
-                'business col-lg-12 col-md-12 col-xs-12 p-0'
-              )
+              this.state.expanded
+                ? 'business col-lg-10 col-md-10 col-xs-10 p-right-0'
+                : 'business col-lg-12 col-md-12 col-xs-12 p-0'
             }
           >
-            <h3 className="title">
-              {business.name}
-              <img
-                className="business-card-icon"
-                onClick={e => this.toggleCard(e)}
-                style={{float: 'right'}}
-                src={this.state.expanded ? (
-                    'static-data/images/collapse-icon.png'
-                  ) : (
-                    'static-data/images/expand-icon.png'
-                  )
-                }
-              />
-            </h3>
-            <p className="preview-details">{business.description}</p>
-            <div className={this.state.expanded ? ('col-lg-12 social-icons p-0 m-top-16') : ('social-icons-hide')}>
-              {business.facebook ? <a src={business.facebook}><img src="../static-data/images/FB.svg" /></a> : ''}
-              {business.twitter ? <a src={business.twitter}><img src="../static-data/images/TW.svg" /></a> : ''}
-              {business.youtube ? <a src={business.youtube}><img src="../static-data/images/Youtube.svg" /></a> : ''}
-              {business.linkedin ? <a src={business.linkedin}><img src="../static-data/images/LinkedIN.svg" /></a> : ''}
+            <div className="preview-details-container">
+              <h3 className="title">
+                {business.name}
+              </h3>
+              <p className="preview-details">{business.description}</p>
+              <div className={this.state.expanded ? ('col-lg-12 social-icons p-0 m-top-16') : ('social-icons-hide')}>
+                {business.facebook ? <a src={business.facebook}><img src="../static-data/images/FB.svg" /></a> : ''}
+                {business.twitter ? <a src={business.twitter}><img src="../static-data/images/TW.svg" /></a> : ''}
+                {business.youtube ? <a src={business.youtube}><img src="../static-data/images/Youtube.svg" /></a> : ''}
+                {business.linkedin ? <a src={business.linkedin}><img src="../static-data/images/LinkedIN.svg" /></a> : ''}
+              </div>
             </div>
+            <img
+              className="business-card-icon"
+              onClick={e => this.toggleCard(e)}
+              style={{float: 'right'}}
+              src={
+                this.state.expanded
+                  ? 'static-data/images/collapse-icon.png'
+                  : 'static-data/images/expand-icon.png'
+              }
+            />
           </div>
           <div className="grid col-lg-12 col-md-12 col-xs-12 full-information p-0">
             <div className="grid col-lg-8 col-md-8 col-xs-12 p-0 m-bot-25">
@@ -78,8 +84,10 @@ class Business extends Component {
                 <h4>{business.email}</h4>
               </div>
             </div>
-            <hr/>
-            <p className="business-title col-lg-12 col-md-12 col-xs-12 p-0">{'Services:'}</p>
+            <hr />
+            <p className="business-title col-lg-12 col-md-12 col-xs-12 p-0">
+              {'Services:'}
+            </p>
             {business.services.map(service => {
               return (
                 <div

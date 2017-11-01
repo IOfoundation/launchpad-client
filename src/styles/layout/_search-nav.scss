@@ -231,7 +231,7 @@
   padding-left: 12px;
   padding-right: 12px;
   img {
-    float: right;
+    vertical-align: middle;
     width: 16px;
   }
   @media (max-width: 60em){
@@ -251,7 +251,8 @@
     a {
       color: #fff;
       display: inline-block;
-      width: 90%;
+      width: 94%;
+      vertical-align: middle;
     }
     &:hover {
       background-color: #3E3E3E;

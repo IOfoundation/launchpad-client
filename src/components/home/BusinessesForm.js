@@ -73,22 +73,18 @@ class BusinessesForm extends React.Component {
     return (
       <div>
         <ul className={
-            this.state.showPreviewDropdown ? (
-              'hero-dropdown-list-hide'
-            ) : (
-              'hero-dropdown-list'
-            )
+            this.state.showPreviewDropdown
+              ? 'hero-dropdown-list-hide'
+              : 'hero-dropdown-list'
           }
         >
           {this.props.items.map(item => (
             <li key={item.id}>
               <a
                 href={
-                  item.searchable_type === 'Category' ? (
-                    `/businesses?category=${item.content}`
-                  ) : (
-                    `/businesses?id=${item.searchable_id}`
-                  )
+                  item.searchable_type === 'Category'
+                    ? `/businesses?category=${item.content}`
+                    : `/businesses?id=${item.searchable_id}`
                 }
               >
                 {item.content}
@@ -112,31 +108,32 @@ class BusinessesForm extends React.Component {
   render() {
     return (
       <form>
-        <input
-          type="text"
-          value={this.state.searchText}
-          onChange={event => this.handleKeyPress(event)}
-          onClick={() => this.inputOnClick()}
-          placeholder={
-            this.state.showDropdown || this.state.showPreviewDropdown ? (
-              ''
-            ) : (
-              'Search for businesses or services'
-            )
-          }
-          className="hero_input businessesName"
-        />
-        <img className="text-search-icon" src="/static-data/images/search.png" />
-        <div
-          className={
-            this.state.showDropdown || this.state.showPreviewDropdown ? (
-              'hero_input-dropdown hero_input-show'
-            ) : (
-              'hero_input-dropdown hero_input-hide'
-            )
-          }
-        >
-          {this.renderDropdown()}
+        <div className="hero_input-container">
+          <input
+            type="text"
+            value={this.state.searchText}
+            onChange={event => this.handleKeyPress(event)}
+            onClick={() => this.inputOnClick()}
+            placeholder={
+              this.state.showDropdown || this.state.showPreviewDropdown
+                ? ''
+                : 'Search for businesses or services'
+            }
+            className="hero_input businessesName"
+          />
+          <img
+            className="text-search-icon"
+            src="/static-data/images/search.png"
+          />
+          <div
+            className={
+              this.state.showDropdown || this.state.showPreviewDropdown
+                ? 'hero_input-dropdown hero_input-show'
+                : 'hero_input-dropdown hero_input-hide'
+            }
+          >
+            {this.renderDropdown()}
+          </div>
         </div>
       </form>
     );
