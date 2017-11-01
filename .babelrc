@@ -7,14 +7,34 @@
   "env": {
     "development": {
       "presets": [
-        "env",
+        [
+          "env",
+          {
+            "targets" : {
+              "browsers": [
+                "last 2 versions",
+                "IE 8"
+              ]
+            }
+          }
+        ],
         "react-hmre"
-      ]
+      ],
     },
     "production": {
       "presets": [
         [
-          "env",
+          [
+            "env",
+            {
+              "targets" : {
+                "browsers": [
+                  "last 2 versions",
+                  "IE 8"
+                ]
+              }
+            }
+          ],
           {
             "es2015": {
               "modules": false
@@ -43,6 +63,6 @@
         "polyfill": true,
         "regenerator": true
       }
-    ]
+    ],
   ]
 }

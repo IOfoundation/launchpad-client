@@ -21,7 +21,7 @@ export default {
   },
   // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool
   devtool: 'source-map',
-  entry: path.resolve(__dirname, 'src/index'),
+  entry: ['babel-polyfill', path.resolve(__dirname, 'src/index')],
   // necessary per https://webpack.github.io/docs/testing.html#compile-and-test
   target: 'web',
   node: {
