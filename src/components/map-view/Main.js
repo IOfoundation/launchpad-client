@@ -67,6 +67,7 @@ class Main extends React.Component {
           zoom={10}
           onChange={e => this.handleBoundsChange(e)}
           onChildClick={e => this.openModal(e)}
+          resetBoundsOnResize={true}
           bootstrapURLKeys={{
             key: process.env.GOOGLE_MAP_API_KEY,
           }}
@@ -83,6 +84,7 @@ class Main extends React.Component {
         center={sacCoordinates}
         zoom={10}
         onChange={event => this.handleBoundsChange(event)}
+        resetBoundsOnResize={true}
         bootstrapURLKeys={{
           key: process.env.GOOGLE_MAP_API_KEY,
         }}

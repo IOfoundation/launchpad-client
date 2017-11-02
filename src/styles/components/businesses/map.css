@@ -118,6 +118,9 @@
 .float-right {
   float: right;
 }
+.map-expanded {
+  width: 200%;
+}
 
 @media (max-width: 960px) {
   .map {
