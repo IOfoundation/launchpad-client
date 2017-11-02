@@ -130,7 +130,3 @@ FilterByTextMobile.PropTypes = {
   handleDropdownOnClick: PropTypes.func.isRequired,
 };
 export default FilterByTextMobile;
-
-// width: 35%;
-    // margin-right: 24px;
-    // text-overflow: ellipsis;
