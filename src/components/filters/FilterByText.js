@@ -53,7 +53,13 @@ class FilterByText extends React.Component {
     ) : (
       this.props.handleOnChangeFilterOptions(item.searchable_id, 'organization')
     );
-    this.setState({showDropdown: false, labelTop: false, value: '', searchText: item.content, searchPlaceHolder: item.content});
+    this.setState({
+      showDropdown: false,
+      labelTop: false,
+      value: '',
+      searchText: item.content,
+      searchPlaceHolder: item.content
+    });
   }
 
   renderFilter() {

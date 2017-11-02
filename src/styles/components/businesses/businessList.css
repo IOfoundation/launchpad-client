@@ -10,7 +10,7 @@
   position: relative;
 }
 
-.loadDiv {
+.load-div {
  display: flex;
  justify-content: space-around;
  align-items: center;

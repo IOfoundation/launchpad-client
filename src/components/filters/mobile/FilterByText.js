@@ -28,7 +28,12 @@ class FilterByTextMobile extends Component {
     ) : (
       this.props.handleOnChangeFilterOptions(item.searchable_id, 'organization')
     );
-    this.setState({showDropdown: false, value: '', searchText: item.content, searchPlaceHolder: item.content});
+    this.setState({
+      showDropdown: false,
+      value: '',
+      searchText: item.content,
+      searchPlaceHolder: item.content
+    });
   }
 
   handleKeyPress(e) {
@@ -90,7 +95,7 @@ class FilterByTextMobile extends Component {
     return (
       <div className="filter-chip">
         <div className="p-left-16 p-right-16">
-          <h3 className="col-lg-12 col-md-12 col-xs-12 noPadding">
+          <h3 className="col-lg-12 col-md-12 col-xs-12 no-padding">
             {'Filter results with the selections below'}
           </h3>
           {this.renderFilter()}

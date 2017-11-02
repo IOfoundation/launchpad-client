@@ -14,9 +14,6 @@ import * as actions from '../actions/business';
 export class Businesses extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      showBusinessTypes: true,
-    };
   }
   componentWillMount(_nextProps) {
     const params = this.props.location.query;
@@ -30,21 +27,18 @@ export class Businesses extends Component {
     this.props.actions.fetchSearchResults(filter);
   }
 
-  checkBusinessType(filterValue) {
-    const businessTypes = ['Startup or High-Growth Business', 'Main Street or Small Business', 'Microenterprise or Home Based Business'];
-    if (businessTypes.includes(filterValue)) {
-      this.setState({showBusinessTypes: !this.state.showBusinessTypes});
-    }
-  }
-
   handleOnChangeFilterOptions(filterValue, filterType, removeFilter) {
     const params = this.props.location.query;
     this.getFilterChips();
-    this.checkBusinessType(filterValue)
     isEmpty(params.category) ? (
       this.props.actions.filterOrganizations(filterValue, params, filterType)
     ) : (
-      this.handleFilterOrganizationsWithParams(filterValue, params, filterType, removeFilter)
+      this.handleFilterOrganizationsWithParams(
+        filterValue,
+        params,
+        filterType,
+        removeFilter
+      )
     );
   }
 
@@ -71,6 +65,9 @@ export class Businesses extends Component {
   }
 
   render() {
+    const {filters, organizations, locations, items, metadata} = this.props;
+    const showBusinessTypes = !this.props.filters.businessTypes.map(
+      filter => filter.name).includes(this.props.location.query.category);
     return (
       <MainLayout>
         <section>
@@ -93,8 +90,8 @@ export class Businesses extends Component {
                 <div className="desktop-devices">
                   <FilterBox
                     getTextSearchResults={(e) => this.getTextSearchResults(e)}
-                    filterOptions={this.props.filters}
-                    items={this.props.items}
+                    filterOptions={filters}
+                    items={items}
                     handleClickOnClearAllFilters={(e) =>
                       this.handleClickOnClearAllFilters(e)}
                     handleOnChangeFilterOptions={(filterValue, filterType, removeFilter) =>
@@ -105,8 +102,8 @@ export class Businesses extends Component {
                 <div className="mobile-devices">
                   <FilterBoxMobile
                     getTextSearchResults={(e) => this.getTextSearchResults(e)}
-                    filterOptions={this.props.filters}
-                    items={this.props.items}
+                    filterOptions={filters}
+                    items={items}
                     handleClickOnClearAllFilters={(e) =>
                       this.handleClickOnClearAllFilters(e)}
                     handleOnChangeFilterOptions={(filterValue, filterType, removeFilter) =>
@@ -115,11 +112,11 @@ export class Businesses extends Component {
                   />
                 </div>
                 <BusinessesView
-                  showBusinessTypes={this.state.showBusinessTypes}
-                  filterOptions={this.props.filters}
-                  organizations={this.props.organizations}
-                  locations={this.props.locations}
-                  businessesMetadata={this.props.metadata}
+                  showBusinessTypes={showBusinessTypes}
+                  filterOptions={filters}
+                  organizations={organizations}
+                  locations={locations}
+                  businessesMetadata={metadata}
                   handleChangePage={(e) => this.handleChangePage(e)}
                   handleClickOnClearAllFilters={(e) =>
                     this.handleClickOnClearAllFilters(e)}

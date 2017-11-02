@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
 import {isEmpty} from 'lodash';
 
-
 import BusinessesList from './BusinessesList';
 import Pagination from './Pagination';
 import ResultInfo from './ResultInfo';
@@ -28,26 +27,33 @@ class Main extends Component {
 
   onBoundsChange(mapDetails) {
     this.setState({bounds: mapDetails.bounds});
-    if (this.state.toggleOn === true) {
+    if (this.state.toggleOn) {
       this.props.handleOnChangeFilterOptions(this.state.bounds, 'coordinates');
     }
   }
 
   redoSearchInMap() {
-    if(this.state.toggleOn === false) {
+    if(!this.state.toggleOn) {
       this.props.handleOnChangeFilterOptions(this.state.bounds, 'coordinates');
     }
     this.setState({toggleOn: !this.state.toggleOn});
   }
 
   _renderResultsInfo() {
-    if (this.props.filterOptions.businessTypes.length === 3) {
+    const {
+      businessesMetadata,
+      handleOnChangeFilterOptions,
+      businessTypes,
+      filterOptions,
+      showBusinessTypes
+    } = this.props;
+    if (filterOptions.businessTypes.length === 3) {
       return (
         <ResultInfo
-          businessesMetadata={this.props.businessesMetadata}
-          handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
-          filterOptions={this.props.filterOptions.businessTypes}
-          showBusinessTypes={this.props.showBusinessTypes}
+          businessesMetadata={businessesMetadata}
+          handleOnChangeFilterOptions={handleOnChangeFilterOptions}
+          filterOptions={filterOptions.businessTypes}
+          showBusinessTypes={showBusinessTypes}
         />
       );
     }
@@ -56,7 +62,7 @@ class Main extends Component {
 
   _renderLoader() {
   return (
-      <div className="loadDiv">
+      <div className="load-div">
         <img className="loader" src="static-data/images/loader.gif"/>
       </div>
     );
@@ -114,7 +120,6 @@ Main.propTypes = {
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
   organizations: PropTypes.arrayOf(PropTypes.object),
   showBusinessTypes: PropTypes.bool,
-
 };
 
 export default Main;

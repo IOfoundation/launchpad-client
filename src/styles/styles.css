@@ -50,7 +50,7 @@ h1,h2,h3,h4,h5,p, a {
 .opacity50 {
   opacity: .5;
 }
-.noPadding {
+.no-padding {
   padding: 0;
 }
 .hidden {
