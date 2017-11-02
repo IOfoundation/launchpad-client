@@ -33,9 +33,7 @@ describe('<BusinessesList />', () => {
     const wrapper = shallow(
       <BusinessesList
         organizations={organizations}
-        organization={organization}
         handleClickOnClearAllFilters={handleClickOnClearAllFilters}
-        expanded={false}
       />
     );
     expect(wrapper.find('Business').length).toEqual(2);

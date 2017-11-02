@@ -16,9 +16,9 @@ describe('<Header />', () => {
       expect(wrapper.find('nav').length).toEqual(1);
     });
 
-    it('Render 3 links in the nav bar', () => {
+    it('Render 4 links in the nav bar', () => {
       const wrapper = shallow(<Header />);
-      expect(wrapper.find(Link).length).toEqual(3);
+      expect(wrapper.find(Link).length).toEqual(4);
     });
 
     it('Must have a link to contact-us page', () => {

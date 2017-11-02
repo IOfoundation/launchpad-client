@@ -66,7 +66,7 @@ class ResultInfo extends Component {
           {totalOrganizations === '0' ?
             '' :
           <div className="col-lg-12 col-md-12 col-xs-12 p-0 desktop-devices">
-            <h3 className="m-top-24 col-xs-12 col-md-12 col-lg-12 noPadding">{`${totalOrganizations} Services Available`}</h3>
+            <h3 className="m-top-24 col-xs-12 col-md-12 col-lg-12 no-padding">{`${totalOrganizations} Services Available`}</h3>
             <hr className="m-bot-24" />
           </div>
           }

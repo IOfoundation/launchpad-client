@@ -111,14 +111,14 @@ class FilterByText extends React.Component {
   render() {
     const filters = this.props.getFilterChips();
     return (
-      <div className="col-md-12 col-xs-12 text-xs-margin filterTextContainer noPadding">
+      <div className="col-md-12 col-xs-12 text-xs-margin filterTextContainer no-padding">
         <div className="grid search-text-form p-bot-16">
           <div
             className={
               isEmpty(filters) ? (
                 'filter-label-container-hide'
               ) : (
-                'filter-label-container-show col-lg-8 col-md-7 col-xs-7 noPadding'
+                'filter-label-container-show col-lg-8 col-md-7 col-xs-7 no-padding'
               )
             }
           >
@@ -131,12 +131,12 @@ class FilterByText extends React.Component {
             }
           </div>
           <h3
-            className={filters.category ? 'hide-filter' : 'filter-result-text col-lg-8 col-md-7 col-xs-7 noPadding'}
+            className={filters.category ? 'hide-filter' : 'filter-result-text col-lg-8 col-md-7 col-xs-7 no-padding'}
           >
             {'Filter results with the selections below'}
           </h3>
           <div
-            className="small-filter-container col-lg-4 col-md-5 col-xs-5 noPadding">
+            className="small-filter-container col-lg-4 col-md-5 col-xs-5 no-padding">
             <input
               type="text"
               value={this.state.searchText}

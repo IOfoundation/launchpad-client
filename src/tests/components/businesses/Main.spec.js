@@ -4,7 +4,10 @@ import {shallow} from 'enzyme';
 import BusinessesPage from '../../../components/businesses/Main';
 
 const locations = [];
-const organizations = [];
+const organizations = [
+  { id: 1, name: 'organization 1' },
+  { id: 2, name: 'organization 2' }
+];
 const businessesMetadata = {};
 const filters = {
   businessServices: [],
