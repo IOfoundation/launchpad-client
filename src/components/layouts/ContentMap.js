@@ -72,9 +72,10 @@ class ContentMap extends Component {
         businessesMetadata.totalOrganizations === '0'
           ? 'no-result-message-show col-md-8 col-xs-12 p-left-0 businessList--reduced'
           : 'no-result-message-hide'
-      }>
+        }
+      >
         <div className="no-result-message">
-          <MdSearch size="200" color="#95EAC3" />
+          <img src="/static-data/images/search-icon.png" />
           <p className="message desktop-devices">
             {'Sorry but nothing matched your search terms.'}
           </p>

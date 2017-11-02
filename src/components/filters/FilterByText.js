@@ -71,16 +71,17 @@ class FilterByText extends React.Component {
         }
       >
       {this.renderFilter()}
-      {filters.category ?
-        <a className="search-filter-clear" onClick={() => this.clearAll()}>
-          {'Clear All'}
-        </a>
-        : ''
-      }
+        {filters.category ?
+          <a className="search-filter-clear" onClick={() => this.clearAll()}>
+            {'Clear All'}
+          </a>
+          : ''
+        }
       </div>
     );
   }
-  renderFilter(filters) {
+  renderFilter() {
+    const filters = this.props.getFilterChips();
     if (isEmpty(filters.category)) {
       return null;
     } else if (isString(filters.category)) {
