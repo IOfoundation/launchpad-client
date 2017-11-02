@@ -79,11 +79,11 @@ class ContentMap extends Component {
             {'Sorry but nothing matched your search terms.'}
           </p>
           <p className="message desktop-devices">
-            {'Please try Again with different Keywords'}
+            {'Please try again with different keywords'}
           </p>
           <div className="mobile-devices">
             <p className="message">
-              {'Sorry but nothing matched your search terms. Please try Again with different Keywords'}
+              {'Sorry but nothing matched your search terms. Please try again with different keywords'}
             </p>
           </div>
         </div>

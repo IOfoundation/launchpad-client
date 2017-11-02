@@ -28,7 +28,7 @@ class FilterByTextMobile extends Component {
     ) : (
       this.props.handleOnChangeFilterOptions(item.searchable_id, 'organization')
     );
-    this.setState({showDropdown: false, value: ''});
+    this.setState({showDropdown: false, value: '', searchText: item.content, searchPlaceHolder: item.content});
   }
 
   handleKeyPress(e) {
@@ -94,9 +94,12 @@ class FilterByTextMobile extends Component {
             {'Filter results with the selections below'}
           </h3>
           {this.renderFilter()}
-          <a className="search-filter-label clear" onClick={() => this.clearAll()}>
-            {'Clear All'}
-          </a>
+          {filters.category ?
+            <a className="search-filter-label clear" onClick={() => this.clearAll()}>
+              {'Clear All'}
+            </a>
+            : ''
+          }
         </div>
         <div className="search-input-container p-left-16 p-right-16 m-top-16">
           <input
@@ -127,3 +130,7 @@ FilterByTextMobile.PropTypes = {
   handleDropdownOnClick: PropTypes.func.isRequired,
 };
 export default FilterByTextMobile;
+
+// width: 35%;
+    // margin-right: 24px;
+    // text-overflow: ellipsis;
