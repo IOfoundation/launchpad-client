@@ -2,7 +2,7 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 import Header from '../shared/Header';
 import Footer from '../shared/Footer';
-import MobileFooter from '../shared/mobileFooter';
+import MobileFooter from '../shared/MobileFooter';
 
 const MainLayout = ({children}) => {
   return (

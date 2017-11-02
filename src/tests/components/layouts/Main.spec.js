@@ -4,6 +4,7 @@ import {shallow} from 'enzyme';
 import MainLayout from '../../../components/layouts/Main';
 import Header from '../../../components/shared/Header';
 import Footer from '../../../components/shared/Footer';
+import MobileFooter from '../../../components/shared/MobileFooter';
 
 describe('<MainLayout />', () => {
   it('Render the Header component', () => {
