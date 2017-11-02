@@ -10,13 +10,13 @@ class ContentMap extends Component {
       <div className="row between-xs middle-xs reducedMapBottom">
         <div className="col-lg-12 p-0">
           <button
-            className="btn-link btn-link-primary text-bold"
+            className="map-btn btn-link btn-link-primary text-bold"
             onClick={this.props.reduceMap}
           >
             {'Reduce Map'}
           </button>
         </div>
-        <div className="col-lg-12 p-0">
+        <div className="map-btn">
           <div className="float-right">
             <button
               onClick={this.props.redoSearchInMap}
@@ -40,12 +40,12 @@ class ContentMap extends Component {
     return (
       <div className="row between-xs middle-xs reducedMapBottom">
         <button
-          className="btn-link btn-link-primary text-bold text-xs-margin p-0 m-bot-8"
+          className="map-btn btn-link btn-link-primary text-bold text-xs-margin p-0 m-bot-8"
           onClick={this.props.expandMap}
         >
           {'Expand Map'}
         </button>
-        <div className="col-lg-12 p-0">
+        <div className="map-btn">
           <div className="float-right">
             <button
               onClick={this.props.redoSearchInMap}
@@ -112,7 +112,7 @@ class ContentMap extends Component {
           className={
             (this.props.expanded
               ? 'col-md-7 col-xs-7 businessList p-left-0'
-              : 'col-md-9 col-xs-9 businessList--reduced p-left-0') + ' list'
+              : 'col-md-12 col-xs-12 businessList--reduced p-left-0') + ' list'
           }
           >
           {this.props.children}
@@ -126,10 +126,6 @@ class ContentMap extends Component {
     return (
       <div className="businessesContainer">
         {this.props.topBar}
-        {businessesMetadata.totalOrganizations === '0' ?
-              this._renderNoSearchResults() :
-              this._renderBusinesses()
-        }
           <div
             className={
               'map ' +
@@ -154,6 +150,10 @@ class ContentMap extends Component {
             ? this._renderReduceButton()
             : this._renderExpandButton()}
         </div>
+        {businessesMetadata.totalOrganizations === '0' ?
+              this._renderNoSearchResults() :
+              this._renderBusinesses()
+        }
       </div>
     );
   }

@@ -107,6 +107,20 @@
   border-top: .5px solid rgba(0,0,0,0.12);
   padding: 11px 15px 11px 15px;
 }
+.map .map-btn {
+  margin-left: 0;
+  width: 100%;
+}
+
+.float-right {
+  float: right;
+}
+
+@media (max-width: 960px) {
+  .map {
+    display: none;
+  }
+}
 
 @media (max-width: 60em) {
   .reduceMapBtn {
