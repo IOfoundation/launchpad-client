@@ -1,6 +1,5 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
-import {MdSearch} from 'react-icons/lib/md';
 import onClickOutside from 'react-onclickoutside';
 import {isEmpty} from 'lodash';
 import {Link} from 'react-router';
