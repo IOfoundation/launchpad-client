@@ -21,7 +21,11 @@ class FilterByOptions extends Component {
         <label className="dropdown-label" htmlFor="filters-dropdown">
           {'No filters selected'}
         </label>
-        <RightArrow className="right-arrow" size={20} />
+        <RightArrow
+          className="right-arrow"
+          htmlFor="filters-dropdown"
+          size={20}
+        />
         <label htmlFor="filters-dropdown" className="close-icon">
           <MdClear size={24} color="#2AD587" />
         </label>

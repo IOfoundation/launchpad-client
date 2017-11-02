@@ -9,7 +9,7 @@ class FilterByText extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      labelTop: false,
+      inputOnFocus: false,
       showFilterLabel: false,
       showDropdown: false,
       searchText: '',
@@ -22,16 +22,16 @@ class FilterByText extends React.Component {
   }
 
   clearAll() {
-    this.setState({showFilterLabel: false, labelTop: false});
+    this.setState({showFilterLabel: false, inputOnFocus: false});
     this.props.handleClickOnClearAllFilters();
   }
 
   _inputClicked() {
-    this.setState({labelTop: true});
+    this.setState({inputOnFocus: true});
   }
 
   _closeSearch() {
-    this.setState({labelTop: false, showDropdown: false, searchText: ''});
+    this.setState({inputOnFocus: false, showDropdown: false, searchText: ''});
   }
 
   handleKeyPress(event) {
@@ -42,9 +42,8 @@ class FilterByText extends React.Component {
       this.setState({showDropdown: false});
     }
   }
-
   handleClickOutside() {
-    this.setState({labelTop: false, showDropdown: false, value: ''});
+    this.setState({inputOnFocus: false, showDropdown: false, value: ''});
   }
 
   handleDropdownOnClick(item) {
@@ -55,13 +54,32 @@ class FilterByText extends React.Component {
     );
     this.setState({
       showDropdown: false,
-      labelTop: false,
+      inputOnFocus: false,
       value: '',
       searchText: item.content,
       searchPlaceHolder: item.content
     });
   }
 
+  renderChipsContainer(filters) {
+    return (
+      <div
+        className={
+          isEmpty(filters)
+            ? 'filter-label-container-hide'
+            : 'filter-label-container-show'
+        }
+      >
+      {this.renderFilter()}
+        {filters.category ?
+          <a className="search-filter-clear" onClick={() => this.clearAll()}>
+            {'Clear All'}
+          </a>
+          : ''
+        }
+      </div>
+    );
+  }
   renderFilter() {
     const filters = this.props.getFilterChips();
     if (isEmpty(filters.category)) {
@@ -85,7 +103,25 @@ class FilterByText extends React.Component {
       />
     ));
   }
-
+  getFilterByTextIcon() {
+    return (
+      <div>
+        {this.state.inputOnFocus ? (
+          <MdClear
+            className="search-by-text-icon"
+            size="40"
+            color="#2AD587"
+            onClick={() => this._closeSearch()}
+          />
+        ) : (
+          <img
+            className="search-by-text-icon"
+            src="../static-data/images/search.png"
+          />
+        )}
+      </div>
+    );
+  }
   renderDropdown() {
     return (
       <ul className="option-dropdown-list">
@@ -113,64 +149,36 @@ class FilterByText extends React.Component {
     return (
       <div className="col-md-12 col-xs-12 text-xs-margin filterTextContainer no-padding">
         <div className="grid search-text-form p-bot-16">
-          <div
-            className={
-              isEmpty(filters) ? (
-                'filter-label-container-hide'
-              ) : (
-                'filter-label-container-show col-lg-8 col-md-7 col-xs-7 no-padding'
-              )
-            }
-          >
-            {this.renderFilter()}
-            {filters.category ?
-              <a className="search-filter-clear" onClick={() => this.clearAll()}>
-                {'Clear All'}
-              </a>
-              : ''
-            }
+          <div className="col-lg-8 col-md-7 col-xs-7 noPadding">
+            {this.renderChipsContainer(filters)}
+            <h3
+              className={
+                isEmpty(filters) ? 'filter-result-text' : 'hide-filter'
+              }
+            >
+              {'Filter results with the selections below'}
+            </h3>
           </div>
-          <h3
-            className={filters.category ? 'hide-filter' : 'filter-result-text col-lg-8 col-md-7 col-xs-7 no-padding'}
-          >
-            {'Filter results with the selections below'}
-          </h3>
-          <div
-            className="small-filter-container col-lg-4 col-md-5 col-xs-5 no-padding">
+          <div className="small-filter-container col-lg-4 col-md-5 col-xs-5 noPadding">
             <input
               type="text"
+              className="search-by-text"
               value={this.state.searchText}
               onClick={() => this._inputClicked()}
               onChange={e => this.handleKeyPress(e)}
               placeholder={
-                this.state.labelTop ? (
-                  'Search by Resource Name'
-                ) : (
-                  'Or search by name'
-                )
+                this.state.inputOnFocus
+                ? 'Search by Resource Name'
+                : 'Or search by name'
               }
-              className="search-by-text"/>
-          {!this.state.labelTop ? (
-              <img
-                className="search-by-text-icon"
-                src="../static-data/images/search.png"
-              />
-          ) : (
-              <MdClear
-                className="search-by-text-icon"
-                size="40"
-                color="#2AD587"
-                onClick={() => this._closeSearch()}
-              />
-          )}
+            />
+            {this.getFilterByTextIcon()}
           </div>
           <div
             className={
-              this.state.showDropdown ? (
-                'option-dropdown-show'
-              ) : (
-                'hero_input-hide'
-              )
+              this.state.showDropdown
+                ? 'option-dropdown-show'
+                : 'hero_input-hide'
             }
           >
             {this.renderDropdown()}

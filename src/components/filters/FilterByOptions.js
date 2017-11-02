@@ -31,6 +31,21 @@ class FilterByOptions extends React.Component {
       selectedfilterOption: null,
     });
   }
+  filterBtnOption(filterOption) {
+    return (
+      <button
+        className="dropdown-options"
+        key={filterOption.id}
+        onClick={e => this._onClick(filterOption)}
+        onMouseOver={e => this._toggleSubOption(e, filterOption)}
+      >
+        <span>{filterOption.name}</span>
+        {filterOption.children.length > 0 && (
+          <MdKeyboardArrowRight className="dropdown-options-icon" size="20" />
+        )}
+      </button>
+    );
+  }
   _renderSubOptions(filterOption) {
     return (
       <div className="dropdown-sub-container">
@@ -50,37 +65,20 @@ class FilterByOptions extends React.Component {
     return (
       <div
         className={
-          this.state.subDropdownOpen ? (
-            'dropdown-container dropdown-container-expand'
-          ) : (
-            'dropdown-container dropdown-container-collapse'
-          )
+          this.state.subDropdownOpen
+            ? 'dropdown-container dropdown-container-expand' : 'dropdown-container'
         }
       >
         <div
           className={
-            this.state.subDropdownOpen ? (
-              'dropdown-btn-half'
-            ) : (
-              'dropdown-btn-full'
-            )
+            this.state.subDropdownOpen
+              ? 'dropdown-btn-half' : 'dropdown-btn-full'
           }
         >
           {this.props.filterOptions.map(filterOption => (
-            <button
-              className="dropdown-options"
-              key={filterOption.id}
-              onClick={e => this._onClick(filterOption)}
-              onMouseOver={e => this._toggleSubOption(e, filterOption)}
-            >
-              <span>{filterOption.name}</span>
-              {filterOption.children.length > 0 && (
-                <MdKeyboardArrowRight
-                  className="dropdown-options-icon"
-                  size="20"
-                />
-              )}
-            </button>
+            <div key={filterOption.id}>
+              {this.filterBtnOption(filterOption)}
+            </div>
           ))}
         </div>
         {this.state.selectedfilterOption &&
@@ -90,14 +88,14 @@ class FilterByOptions extends React.Component {
   }
   render() {
     return (
-      <div className="col-md-3 col-xs-3 no-padding filterSelectContainer text-xs-margin">
+      <div className="col-md-3 col-xs-3 no-padding filter-btn-container text-xs-margin">
         <button
-          className="dropdown-btn filterSelect"
+          className="filter-btn"
           onClick={() => this._toggleDropdownOptions()}
         >
           {this.props.filterName}
         </button>
-        <FaSortDesc className="filterSelect_icon" size={14} color={'#fff'} />
+        <FaSortDesc className="filter-btn-icon" size={14} color={'#fff'} />
         {this.state.dropdownOpen && this._renderOptions()}
       </div>
     );

@@ -67,7 +67,25 @@ class FilterByTextMobile extends Component {
       />
     ));
   }
-
+  renderChipsContainer(filters) {
+    return (
+      <div
+        className={
+          isEmpty(filters)
+            ? 'filter-label-container-hide'
+            : 'filter-label-container-show'
+        }
+      >
+        {this.renderFilter()}
+        {filters.category ?
+          <a className="search-filter-label clear" onClick={() => this.clearAll()}>
+            {'Clear All'}
+          </a>
+          : ''
+        }
+      </div>
+    );
+  }
   renderDropdown() {
     return (
       <ul className="option-dropdown-list">
@@ -98,13 +116,7 @@ class FilterByTextMobile extends Component {
           <h3 className="col-lg-12 col-md-12 col-xs-12 no-padding">
             {'Filter results with the selections below'}
           </h3>
-          {this.renderFilter()}
-          {filters.category ?
-            <a className="search-filter-label clear" onClick={() => this.clearAll()}>
-              {'Clear All'}
-            </a>
-            : ''
-          }
+          {this.renderChipsContainer(filters)}
         </div>
         <div className="search-input-container p-left-16 p-right-16 m-top-16">
           <input
