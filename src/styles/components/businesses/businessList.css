@@ -16,3 +16,6 @@
  align-items: center;
  padding: 10% 10%;
 }
+.loader {
+  width: 100px;
+}
