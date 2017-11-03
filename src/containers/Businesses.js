@@ -14,6 +14,9 @@ import * as actions from '../actions/business';
 export class Businesses extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showBusinessTypes: true,
+    };
   }
   componentWillMount(_nextProps) {
     const params = this.props.location.query;
@@ -27,9 +30,17 @@ export class Businesses extends Component {
     this.props.actions.fetchSearchResults(filter);
   }
 
+  checkBusinessType(filterValue) {
+    const businessTypes = this.props.filters.businessTypes.map(filter => filter.name);
+    if (businessTypes.includes(filterValue)) {
+      this.setState({showBusinessTypes: !this.state.showBusinessTypes});
+    }
+  }
+
   handleOnChangeFilterOptions(filterValue, filterType, removeFilter) {
     const params = this.props.location.query;
     this.getFilterChips();
+    this.checkBusinessType(filterValue)
     isEmpty(params.category) ? (
       this.props.actions.filterOrganizations(filterValue, params, filterType)
     ) : (
@@ -66,8 +77,6 @@ export class Businesses extends Component {
 
   render() {
     const {filters, organizations, locations, items, metadata} = this.props;
-    const showBusinessTypes = !this.props.filters.businessTypes.map(
-      filter => filter.name).includes(this.props.location.query.category);
     return (
       <MainLayout>
         <section>
@@ -112,7 +121,7 @@ export class Businesses extends Component {
                   />
                 </div>
                 <BusinessesView
-                  showBusinessTypes={showBusinessTypes}
+                  showBusinessTypes={this.state.showBusinessTypes}
                   filterOptions={filters}
                   organizations={organizations}
                   locations={locations}
