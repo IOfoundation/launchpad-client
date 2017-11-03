@@ -149,7 +149,7 @@ class FilterByText extends React.Component {
     return (
       <div className="col-md-12 col-xs-12 text-xs-margin filterTextContainer no-padding">
         <div className="grid search-text-form p-bot-16">
-          <div className="col-lg-8 col-md-7 col-xs-7 noPadding">
+          <div className="col-lg-8 col-md-7 col-xs-7 no-padding">
             {this.renderChipsContainer(filters)}
             <h3
               className={
@@ -159,7 +159,7 @@ class FilterByText extends React.Component {
               {'Filter results with the selections below'}
             </h3>
           </div>
-          <div className="small-filter-container col-lg-4 col-md-5 col-xs-5 noPadding">
+          <div className="small-filter-container col-lg-4 col-md-5 col-xs-5 no-padding">
             <input
               type="text"
               className="search-by-text"
