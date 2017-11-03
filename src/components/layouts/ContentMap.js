@@ -8,14 +8,12 @@ class ContentMap extends Component {
   _renderReduceButton() {
     return (
       <div className="row between-xs middle-xs reducedMapBottom">
-        <div className="col-lg-12 p-0">
           <button
-            className="map-btn btn-link btn-link-primary text-bold"
+            className="map-btn btn-link btn-link-primary text-bold text-bold text-xs-margin p-0 m-bot-8"
             onClick={this.props.reduceMap}
           >
             {'Reduce Map'}
           </button>
-        </div>
         <div className="map-btn">
           <div className="float-right">
             <button
