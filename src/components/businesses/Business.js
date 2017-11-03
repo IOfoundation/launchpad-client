@@ -53,7 +53,7 @@ class Business extends Component {
                 {business.facebook ? <a src={business.facebook}><img src="../static-data/images/FB.svg" /></a> : ''}
                 {business.twitter ? <a src={business.twitter}><img src="../static-data/images/TW.svg" /></a> : ''}
                 {business.youtube ? <a src={business.youtube}><img src="../static-data/images/Youtube.svg" /></a> : ''}
-                {business.linkedin ? <a src={business.linkedin}><img src="../static-data/images/LinkedIN.svg" /></a> : ''}
+                {business.linkedin ? <a src={business.linkedin}><img src="../static-data/images/linkedin.svg" /></a> : ''}
               </div>
             </div>
             <img

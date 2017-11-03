@@ -35,7 +35,7 @@ require('static-data/images/ic_map_grey.png');
 require('static-data/images/FB.svg');
 require('static-data/images/TW.svg');
 require('static-data/images/Youtube.svg');
-require('static-data/images/LinkedIN.svg');
+require('static-data/images/linkedin.svg');
 
 const store = configureStore(initialState);
 
