@@ -4,6 +4,7 @@ import httpRequest from '../utils/httpRequest';
 import {browserHistory} from 'react-router';
 import queryString from 'query-string';
 import {isEmpty, isString, cloneDeep} from 'lodash';
+import URL from 'url-parse';
 
 const MaxItemsDisplayedPerPage = 6;
 
@@ -13,8 +14,8 @@ const paginationMetadata = links => {
     const link = links[type];
     if (link) {
       _paginationMetadata[type] = {};
-      const urlParse = new URL(link);
-      urlParse.search
+      const urlParse = URL(link);
+      urlParse.query
         .slice(1)
         .split('&')
         .forEach(pairs => {
@@ -82,6 +83,7 @@ export function filterOrganizations(filterValue, currentParams, filterType, remo
   return async (dispatch: Function) => {
     const filters = filtersObject(filterValue, currentParams, filterType, removeFilter);
     const {organizations, metadata} = await _buildOrganizationsAndMetadata(filters);
+
     dispatch(organizationsDataObject(organizations));
     dispatch(businessesMetaDataObject(metadata));
     pushBrowserHistory(filters);
@@ -211,26 +213,25 @@ function _addFilters(filterValue, newFilters) {
   return newFilters;
 }
 
-function _buildOrganizationsAndMetadata(filters) {
-  return new Promise(async function(resolve) {
-    const params = {
-      ...filters,
-      per_page: MaxItemsDisplayedPerPage,
-    };
-    if (!params.hasOwnProperty('page')) {
-      Object.assign(params, {page: 1});
-    }
-    const httpResponse = await httpRequest.get(`api/organizations`, {params});
-    const organizations = httpResponse.data
-    if (httpResponse) {
-      const metadata = {
-        pagination: {
-          ...paginationMetadata(JSON.parse(httpResponse.headers.link)),
-          currentPage: params.page,
-        },
-        totalOrganizations: httpResponse.headers['x-total-count'],
-      };
-      resolve({organizations, metadata})
-    }
-  });
+async function _buildOrganizationsAndMetadata(filters) {
+  const params = {
+    ...filters,
+    per_page: MaxItemsDisplayedPerPage,
+  };
+  if (!params.hasOwnProperty('page')) {
+    Object.assign(params, {page: 1});
+  }
+  const httpResponse = await httpRequest.get(`api/organizations`, {params});
+  const organizations = httpResponse.data
+  const metadata = {
+    pagination: {
+      ...paginationMetadata(JSON.parse(httpResponse.headers.link)),
+      currentPage: params.page,
+    },
+    totalOrganizations: httpResponse.headers['x-total-count'],
+  };
+  return {
+    organizations,
+    metadata,
+  };
 }

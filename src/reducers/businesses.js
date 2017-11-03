@@ -7,13 +7,20 @@ type ACTION = {};
 const initialState: STATE = {
   organizations: [],
   filters: null,
-  metadata: null,
+  metadata: {
+    pagination: {
+      last: {
+        page: [],
+      },
+    },
+  },
 };
 
 export default function(state: STATE = initialState, action: ACTION): STATE {
   switch (action.type) {
     case types.FETCH_ORGANIZATIONS: {
       const {organizations} = action;
+      console.log("METADATA", action);
       if (organizations.id) { organizations = [organizations]; }
       const locations = isEmpty(organizations) ? (null) : (organizations.map(org => org.locations).reduce((a, b) => a.concat(b)));
       return {
