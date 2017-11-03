@@ -21,7 +21,7 @@ require('static-data/images/ioLogoBlack.png');
 require('static-data/images/hero.png');
 require('static-data/images/LocationWhite.png');
 require('static-data/images/filter.png');
-require('static-data/images/close.png');
+require('static-data/images/close.svg');
 require('static-data/images/collapse-icon.png');
 require('static-data/images/search-icon.png');
 require('static-data/images/orgs-placeholder.png');
@@ -32,6 +32,10 @@ require('static-data/images/ic_map_list-view-Green.png');
 require('static-data/images/ic_map_list-view-Grey.png');
 require('static-data/images/ic_map_green.png');
 require('static-data/images/ic_map_grey.png');
+require('static-data/images/FB.svg');
+require('static-data/images/TW.svg');
+require('static-data/images/Youtube.svg');
+require('static-data/images/LinkedIN.svg');
 
 const store = configureStore(initialState);
 

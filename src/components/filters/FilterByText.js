@@ -153,7 +153,7 @@ class FilterByText extends React.Component {
             {this.renderChipsContainer(filters)}
             <h3
               className={
-                isEmpty(filters) ? 'filter-result-text' : 'hide-filter'
+                filters.category ? 'hide-filter' : 'filter-result-text'
               }
             >
               {'Filter results with the selections below'}
