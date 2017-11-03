@@ -7,34 +7,14 @@
   "env": {
     "development": {
       "presets": [
-        [
-          "env",
-          {
-            "targets" : {
-              "browsers": [
-                "last 2 versions",
-                "IE 10"
-              ]
-            }
-          }
-        ],
+        "env",
         "react-hmre"
-      ],
+      ]
     },
     "production": {
       "presets": [
         [
-          [
-            "env",
-            {
-              "targets" : {
-                "browsers": [
-                  "last 2 versions",
-                  "IE 10"
-                ]
-              }
-            }
-          ],
+          "env",
           {
             "es2015": {
               "modules": false
