@@ -19,9 +19,9 @@
       border: 1px solid $primary-color;
     }
     &-text {
-      width: 89%;
+      width: 87%;
       display: inline-block;
-      float: left;
+      vertical-align: middle;
       line-height: 24px;
     }
     span {
@@ -31,6 +31,9 @@
       text-align: left;
       vertical-align: middle;
       line-height: normal;
+    }
+    svg {
+      vertical-align: middle;
     }
   }
 
