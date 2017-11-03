@@ -94,8 +94,8 @@ class FilterByOptions extends React.Component {
           onClick={() => this._toggleDropdownOptions()}
         >
           {this.props.filterName}
+          <FaSortDesc className="filter-btn-icon" size={14} color={'#fff'} />
         </button>
-        <FaSortDesc className="filter-btn-icon" size={14} color={'#fff'} />
         {this.state.dropdownOpen && this._renderOptions()}
       </div>
     );
