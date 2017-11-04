@@ -16,6 +16,9 @@ class Business extends Component {
   render() {
     const {business} = this.props;
     const locations = business.locations;
+    const main_location = business.locations[0];
+    const other_locations = business.locations[1] ?
+      business.locations.slice(1) : null;
     return (
       <div className="business-card">
         <div
@@ -68,14 +71,14 @@ class Business extends Component {
             />
           </div>
           <div className="grid col-lg-12 col-md-12 col-xs-12 full-information p-0">
-            <div className="grid col-lg-8 col-md-8 col-xs-12 p-0 m-bot-25">
+            <div className="grid col-lg-12 col-md-12 col-xs-12 p-0 m-bot-25">
               <div className="col-lg-4 col-md-4 col-xs-4 p-0 m-right-52 main-location">
                 <p className="business-title">{'Main Location:'}</p>
-                <h4>{locations[0].address.address_1}</h4>
+                <h4>{main_location.address.address_1}</h4>
                 <h4>
-                  {locations[0].address.city}
+                  {main_location.address.city}
                   {','}
-                  {locations[0].address.state_province}
+                  {main_location.address.state_province}
                 </h4>
               </div>
               <div className="col-lg-4 col-md-4 col-xs-4 p-0 main-contact">
@@ -126,28 +129,33 @@ class Business extends Component {
               );
             })}
             <hr />
-            <div className="col-lg-12 col-md-12 col-xs-12 grid p-0">
-              <div className="col-lg-4 col-md-4 col-xs-6 p-0 m-right-54">
-                <p className="business-title">{'Other Locations:'}</p>
-                {locations.map(location => {
-                  return (
-                    <div key={location.id} className="m-top-24">
-                      <h4>{location.address.address_1}</h4>
-                      {location.address.address_2 && <h4>{location.address.address_2}</h4>}
-                      <h4>
-                        {location.address.city}
-                        {', '}
-                        {location.address.state_province}{' '}
-                        {location.address.postal_code}
-                      </h4>
-                    </div>
-                  );
-                })}
+            {other_locations ?
+              <div className="col-lg-12 col-md-12 col-xs-12 grid p-0">
+                <div className="col-lg-4 col-md-4 col-xs-6 p-0 m-right-54">
+                  <p className="business-title">{'Other Locations:'}</p>
+                  {other_locations.map(location => {
+                    return (
+                      <div key={location.id} className="m-top-24">
+                        <h4>{location.address.address_1}</h4>
+                        {location.address.address_2 && <h4>{location.address.address_2}</h4>}
+                        <h4>
+                          {location.address.city}
+                          {', '}
+                          {location.address.state_province}{' '}
+                          {location.address.postal_code}
+                        </h4>
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="col-lg-4 col-md-4 col-xs-6 p-0">
+                  <p className="business-title">{'Contact:'}</p>
+                </div>
               </div>
-              <div className="col-lg-4 col-md-4 col-xs-6 p-0">
-                <p className="business-title">{'Contact:'}</p>
-              </div>
-            </div>
+              :
+              ''
+            }
+
           </div>
           <p className="location">
             <span>
@@ -155,9 +163,10 @@ class Business extends Component {
               {locations.length == 1 ? ' location' : ' locations'}</span>
             <span className="m-x-7">{'|'}</span>
             <span>
-              {locations[0].address.city}
+              {locations.length == 1 ? '' : 'Main location '}
+              {main_location.address.city}
               {', '}
-              {locations[0].address.state_province}
+              {main_location.address.state_province}
             </span>
           </p>
         </div>
