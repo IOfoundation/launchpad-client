@@ -13,7 +13,6 @@ class Main extends Component {
     this.state = {
       expanded: false,
       bounds: {},
-      toggleOn: false,
     };
   }
 
@@ -27,33 +26,34 @@ class Main extends Component {
 
   onBoundsChange(mapDetails) {
     this.setState({bounds: mapDetails.bounds});
-    if (this.state.toggleOn) {
-      this.props.handleOnChangeFilterOptions(this.state.bounds, 'coordinates');
+    if (this.props.displayOptions.locationToggleSwitch) {
+      this.props.handleOnChangeFilterOptions(this.state.bounds, 'coordinates', false);
     }
   }
 
   redoSearchInMap() {
-    if(!this.state.toggleOn) {
-      this.props.handleOnChangeFilterOptions(this.state.bounds, 'coordinates');
-    }
-    this.setState({toggleOn: !this.state.toggleOn});
+    this.props.displayOptions.locationToggleSwitch
+      ? this.props.handleOnChangeFilterOptions('', 'coordinates', true)
+      : this.props.handleOnChangeFilterOptions(this.state.bounds, 'coordinates', false);
   }
 
   _renderResultsInfo() {
     const {
       businessesMetadata,
+      handleOnChangeBusinessType,
+      displayOptions,
       handleOnChangeFilterOptions,
       businessTypes,
       filterOptions,
-      showBusinessTypes
     } = this.props;
     if (filterOptions.businessTypes.length === 3) {
       return (
         <ResultInfo
           businessesMetadata={businessesMetadata}
+          checkBusinessType={handleOnChangeBusinessType}
           handleOnChangeFilterOptions={handleOnChangeFilterOptions}
           filterOptions={filterOptions.businessTypes}
-          showBusinessTypes={showBusinessTypes}
+          showBusinessTypes={displayOptions.showBusinessTypes}
         />
       );
     }
@@ -79,6 +79,7 @@ class Main extends Component {
   render() {
     const {
       businessesMetadata,
+      displayOptions,
       organizations,
       organization,
       locations,
@@ -96,7 +97,7 @@ class Main extends Component {
         reduceMap={() => this.reduceMap()}
         redoSearchInMap={() => this.redoSearchInMap()}
         topBar={this._renderResultsInfo()}
-        toggleOn={this.state.toggleOn}
+        toggleSwitch={displayOptions.locationToggleSwitch}
       >
         {isEmpty(this.props.organizations) ? (
           this._renderLoader()
@@ -114,12 +115,14 @@ class Main extends Component {
 }
 Main.propTypes = {
   businessesMetadata: PropTypes.object.isRequired,
+  checkBusinessType: PropTypes.func.isRequired,
+  checkLocationToggle: PropTypes.func.isRequired,
+  displayOptions: PropTypes.object.isRequired,
   filterOptions: PropTypes.object.isRequired,
   handleChangePage: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
   organizations: PropTypes.arrayOf(PropTypes.object),
-  showBusinessTypes: PropTypes.bool,
 };
 
 export default Main;

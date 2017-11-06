@@ -12,15 +12,11 @@ import BusinessesView from 'components/businesses/Main';
 import * as actions from '../actions/business';
 
 export class Businesses extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showBusinessTypes: true,
-    };
-  }
   componentWillMount(_nextProps) {
     const params = this.props.location.query;
     this.props.actions.fetchFilterOptions();
+    const locationToggleSwitch = 'ne_lat' in params ? true : false;
+    this.props.actions.changeFilterDisplayOptions(true, locationToggleSwitch);
     'id' in params ?
       this.props.actions.filterOrganizations(params.id, params, 'organization', true) :
       this.props.actions.filterOrganizations(null, params, 'category');
@@ -30,35 +26,34 @@ export class Businesses extends Component {
     this.props.actions.fetchSearchResults(filter);
   }
 
-  checkBusinessType(filterValue) {
+  handleOnChangeBusinessType(filterValue) {
+    const showBusinessTypes = this.props.displayOptions.showBusinessTypes;
     const businessTypes = this.props.filters.businessTypes.map(filter => filter.name);
-    if (businessTypes.includes(filterValue)) {
-      this.setState({showBusinessTypes: !this.state.showBusinessTypes});
+    if (filterValue) {
+      return businessTypes.includes(filterValue)? !showBusinessTypes: showBusinessTypes;
     }
+    return showBusinessTypes;
+  }
+
+  handleOnChangeLocationToggle(filterType, removeFilter) {
+    const locationToggleSwitch = this.props.displayOptions.locationToggleSwitch;
+    if (filterType === 'coordinates') {
+      return !removeFilter ? true : false;
+    }
+    return locationToggleSwitch;
   }
 
   handleOnChangeFilterOptions(filterValue, filterType, removeFilter) {
-    const params = this.props.location.query;
-    this.getFilterChips();
-    this.checkBusinessType(filterValue)
-    isEmpty(params.category) ? (
-      this.props.actions.filterOrganizations(filterValue, params, filterType)
-    ) : (
-      this.handleFilterOrganizationsWithParams(
-        filterValue,
-        params,
-        filterType,
-        removeFilter
-      )
+    const params = this.props.queries;
+    this.props.actions.changeFilterDisplayOptions(
+      this.handleOnChangeBusinessType(filterValue),
+      this.handleOnChangeLocationToggle(filterType, removeFilter)
     );
-  }
-
-  handleFilterOrganizationsWithParams(filterValue, params, filterType, removeFilter) {
-    removeFilter || params.category.includes(filterValue) ? (
-      this.props.actions.filterOrganizations(filterValue, params,filterType, true)
-    ) : (
-      this.props.actions.filterOrganizations(filterValue, params, filterType)
-    );
+    this.getFilterChips(filterValue);
+    if (!isEmpty(params.category)) {
+      removeFilter = removeFilter ? removeFilter : params.category.includes(filterValue) ? true : false;
+    }
+    this.props.actions.filterOrganizations(filterValue, params, filterType, removeFilter)
   }
 
   getFilterChips() {
@@ -66,8 +61,9 @@ export class Businesses extends Component {
   }
 
   handleClickOnClearAllFilters() {
-    this.setState({showBusinessTypes: true});
     this.props.actions.filterOrganizations(null, null, 'all', true);
+    this.props.actions.changeFilterDisplayOptions(true, false);
+
   }
 
   handleChangePage(page) {
@@ -76,7 +72,7 @@ export class Businesses extends Component {
   }
 
   render() {
-    const {filters, organizations, locations, items, metadata} = this.props;
+    const {displayOptions, filters, organizations, locations, items, metadata} = this.props;
     return (
       <MainLayout>
         <section>
@@ -121,11 +117,13 @@ export class Businesses extends Component {
                   />
                 </div>
                 <BusinessesView
-                  showBusinessTypes={this.state.showBusinessTypes}
+                  displayOptions={displayOptions}
                   filterOptions={filters}
                   organizations={organizations}
                   locations={locations}
                   businessesMetadata={metadata}
+                  checkBusinessType={(filterValue) => this.handleOnChangeBusinessType(filterValue)}
+                  checkLocationToggle={() => this.handleOnChangeLocationToggle()}
                   handleChangePage={(e) => this.handleChangePage(e)}
                   handleClickOnClearAllFilters={(e) =>
                     this.handleClickOnClearAllFilters(e)}
@@ -143,6 +141,7 @@ export class Businesses extends Component {
 
 Businesses.propTypes = {
   actions: PropTypes.object,
+  displayOptions: PropTypes.object.isRequired,
   items: PropTypes.arrayOf(PropTypes.object),
   filters: PropTypes.object.isRequired,
   metadata: PropTypes.object.isRequired,
@@ -153,6 +152,7 @@ Businesses.propTypes = {
 const mapStateToProps = _state => {
   const {businesses, routing} = _state;
   return {
+    displayOptions: businesses.displayOptions,
     items: businesses.items,
     filters: businesses.filters,
     locations: businesses.locations,

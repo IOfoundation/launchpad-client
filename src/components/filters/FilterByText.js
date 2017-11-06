@@ -50,7 +50,7 @@ class FilterByText extends React.Component {
     item.searchable_type === 'Category' ? (
       this.props.handleOnChangeFilterOptions(item.content, 'category')
     ) : (
-      this.props.handleOnChangeFilterOptions(item.searchable_id, 'organization')
+      this.props.handleOnChangeFilterOptions(item.searchable_id, 'organization', false)
     );
     this.setState({
       showDropdown: false,

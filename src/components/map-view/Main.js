@@ -59,6 +59,7 @@ class Main extends React.Component {
   render() {
     const firstBusiness = this.props.locations ? this.props.locations[0] : null;
     const sacCoordinates = {lat: 38.57, lng: -121.47};
+    const map_options = { fullscreenControl: false };
     if (firstBusiness) {
       const [centerLng, centerLat] = this.getCoordinates(firstBusiness);
       return (
@@ -68,6 +69,7 @@ class Main extends React.Component {
           onChange={e => this.handleBoundsChange(e)}
           onChildClick={e => this.openModal(e)}
           resetBoundsOnResize={true}
+          options={map_options}
           bootstrapURLKeys={{
             key: process.env.GOOGLE_MAP_API_KEY,
           }}
@@ -85,6 +87,7 @@ class Main extends React.Component {
         zoom={10}
         onChange={event => this.handleBoundsChange(event)}
         resetBoundsOnResize={true}
+        options={map_options}
         bootstrapURLKeys={{
           key: process.env.GOOGLE_MAP_API_KEY,
         }}

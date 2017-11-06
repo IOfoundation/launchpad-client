@@ -60,14 +60,11 @@ const searchResultsDataObject = items => {
   };
 };
 
-const filtersObject = (filterValue, filters, filterType, removeFilter) => {
-  const newFilters = cloneDeep(filters);
-  if (removeFilter || filterType === 'organization') {
-    return _removeFilters(filterValue, newFilters, filterType);
-  }
-  return filterType === 'coordinates' ?
-    _addCoordinatesFilter(filterValue, newFilters) :
-    _addFilters(filterValue, newFilters);
+const displayFilterOptions = displayOptions => {
+  return {
+    type: types.FETCH_DISPLAY_FILTER_OPTIONS,
+    displayOptions,
+  };
 };
 
 const pushBrowserHistory = filters => {
@@ -81,6 +78,7 @@ const pushBrowserHistory = filters => {
 
 export function filterOrganizations(filterValue, currentParams, filterType, removeFilter) {
   return async (dispatch: Function) => {
+
     const filters = filtersObject(filterValue, currentParams, filterType, removeFilter);
     const {organizations, metadata} = await _buildOrganizationsAndMetadata(filters);
 
@@ -89,6 +87,20 @@ export function filterOrganizations(filterValue, currentParams, filterType, remo
     pushBrowserHistory(filters);
   };
 }
+
+const filtersObject = (filterValue, filters, filterType, removeFilter) => {
+  const newFilters = cloneDeep(filters);
+  if (filterType === 'category') {
+    removeFilter ? _removeCategoryFilter(newFilters, filterValue) : _addCategoryFilter(newFilters, filterValue);
+  } else if (filterType === 'organization') {
+    removeFilter ? _removeOrganizationIdFilter() : _addOrganizationIdFilter(newFilters, filterValue);
+  } else if (filterType === 'coordinates') {
+    removeFilter ? _removeLocationFilter(newFilters) : _addLocationFilter(newFilters, filterValue);
+  } else {
+    _removeAllFilters();
+  }
+  return newFilters;
+};
 
 export function changePage(page, currentParams) {
   return async (dispatch: Function) => {
@@ -173,44 +185,14 @@ export function fetchSearchResults(filter) {
   };
 }
 
-function _removeFilters(filterValue, newFilters, filterType) {
-  if (filterType === 'all') {
-    return [];
+export function changeFilterDisplayOptions(showBusinessTypes, locationToggleSwitch) {
+  return async (dispatch: Function) => {
+    const displayOptions = {
+      showBusinessTypes: showBusinessTypes,
+      locationToggleSwitch: locationToggleSwitch,
+    };
+    dispatch(displayFilterOptions(displayOptions));
   }
-  if (isString(newFilters.category) || filterType === 'organization') {
-    newFilters.category = [];
-    if (filterType === 'organization') {
-      newFilters.id = filterValue;
-    }
-  } else {
-    const filterIndex = newFilters.category.indexOf(filterValue);
-    newFilters.category.splice(filterIndex, 1);
-  }
-  return newFilters;
-}
-
-function _addCoordinatesFilter(filterValue, newFilters) {
-  newFilters.id = [];
-  newFilters.sw_lat = filterValue.sw.lat;
-  newFilters.sw_lng = filterValue.sw.lng;
-  newFilters.ne_lat = filterValue.ne.lat;
-  newFilters.ne_lng = filterValue.ne.lng;
-  return newFilters;
-}
-
-function _addFilters(filterValue, newFilters) {
-  newFilters.id = [];
-  if (!filterValue) {
-    return newFilters;
-  }
-  if (isEmpty(newFilters.category)) {
-    newFilters.category = [filterValue];
-  } else if (isString(newFilters.category)) {
-    newFilters.category = [newFilters.category, filterValue];
-  } else {
-    newFilters.category.push(filterValue);
-  }
-  return newFilters;
 }
 
 async function _buildOrganizationsAndMetadata(filters) {
@@ -234,4 +216,58 @@ async function _buildOrganizationsAndMetadata(filters) {
     organizations,
     metadata,
   };
+}
+
+function _addCategoryFilter(newFilters, filterValue) {
+  if (filterValue === null) {
+    return newFilters;
+  } else if (isEmpty(newFilters.category)) {
+    newFilters.category = [filterValue];
+  } else if (isString(newFilters.category)) {
+    newFilters.category = [newFilters.category, filterValue];
+  } else {
+    newFilters.category.push(filterValue);
+  }
+  return newFilters;
+}
+
+function _removeCategoryFilter(newFilters, filterValue) {
+  if (isString(newFilters.category)) {
+    newFilters.category = [];
+    return newFilters;
+  }
+  const filterIndex = newFilters.category.indexOf(filterValue);
+  newFilters.category.splice(filterIndex, 1);
+  return newFilters;
+}
+
+function _addOrganizationIdFilter(newFilters, filterValue) {
+  newFilters = [];
+  newFilters.id = filterValue;
+  return newFilters;
+}
+
+function _removeOrganizationIdFilter() {
+  return [];
+}
+
+function _addLocationFilter(newFilters, filterValue) {
+  newFilters.id = [];
+  newFilters.sw_lat = filterValue.sw.lat;
+  newFilters.sw_lng = filterValue.sw.lng;
+  newFilters.ne_lat = filterValue.ne.lat;
+  newFilters.ne_lng = filterValue.ne.lng;
+  return newFilters;
+}
+
+function _removeLocationFilter(newFilters) {
+  newFilters.sw_lat = [];
+  newFilters.sw_lng = [];
+  newFilters.ne_lat = [];
+  newFilters.ne_lng = [];
+  return newFilters;
+}
+
+function _removeAllFilters() {
+  return [];
 }

@@ -26,10 +26,6 @@ $ rake db:drop
 $ rake db:setup rake db:seed
 $ bin/rake create_categories
 $ script/import 0.3
-$ rails c
-$ PgSearch::Multisearch.rebuild(Organization)
-$ PgSearch::Multisearch.rebuild(Category)
-$ exit
 $ bundle exec puma -C ./config/puma.rb
 ```
 
@@ -40,8 +36,4 @@ $ heroku run rake db:migrate
 $ heroku run rake db:seed
 $ heroku run rake create_categories
 $ heroku run script/import 0.3
-$ heroku rails c
-$ PgSearch::Multisearch.rebuild(Organization)
-$ PgSearch::Multisearch.rebuild(Category)
-$ Ctrl D
 ```

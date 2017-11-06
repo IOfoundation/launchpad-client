@@ -53,6 +53,14 @@ export default function(state: STATE = initialState, action: ACTION): STATE {
       };
     }
 
+    case types.FETCH_DISPLAY_FILTER_OPTIONS: {
+      const {displayOptions} = action;
+      return {
+        ...state,
+        displayOptions,
+      };
+    }
+
     default:
       return state;
   }

@@ -4,7 +4,8 @@ import ArrowRight from '../shared/ArrowRight';
 
 class ResultInfo extends Component {
   _onClick(filter) {
-    this.props.handleOnChangeFilterOptions(filter.name, 'category');
+    //this.props.handleOnChangeBusinessType(filter.name);
+    this.props.handleOnChangeFilterOptions(filter.name, 'category', false);
   }
 
   renderButtonBusinessTypeContainer() {
