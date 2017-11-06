@@ -8,7 +8,7 @@ class ContentMap extends Component {
     return (
       <div className="row between-xs middle-xs reducedMapBottom">
           <button
-            className="map-btn btn-link btn-link-primary text-bold text-bold text-xs-margin p-0 m-bot-8"
+            className="expand-btn map-btn btn-link btn-link-primary text-bold text-bold text-xs-margin p-0 m-bot-8"
             onClick={this.props.reduceMap}
           >
             {'Reduce Map'}
@@ -23,7 +23,7 @@ class ContentMap extends Component {
               <span />
             </button>
             <button
-              className="btn-link btn-link-primary underline text-xs-margin"
+              className="btn-link btn-link-primary underline text-xs-margin text-semi"
               onClick={this.props.redoSearchInMap}
             >
               {'Search in Map Area'}
@@ -37,7 +37,7 @@ class ContentMap extends Component {
     return (
       <div className="row between-xs middle-xs reducedMapBottom">
         <button
-          className="map-btn btn-link btn-link-primary text-bold text-xs-margin p-0 m-bot-8"
+          className="expand-btn map-btn btn-link btn-link-primary text-bold text-xs-margin p-0 m-bot-8 m-top-5"
           onClick={this.props.expandMap}
         >
           {'Expand Map'}
@@ -52,7 +52,7 @@ class ContentMap extends Component {
               <span />
             </button>
             <button
-              className="btn-link btn-link-primary underline text-xs-margin"
+              className="btn-link btn-link-primary underline text-xs-margin text-bold"
               onClick={this.props.redoSearchInMap}
             >
               {'Search in Map Area'}

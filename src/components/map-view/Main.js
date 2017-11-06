@@ -74,7 +74,7 @@ class Main extends React.Component {
         >
           {this.props.locations.map(location => {
             const [lng, lat] = this.getCoordinates(location);
-            return <MapMarker key={location.id} lat={lat} lng={lng} />;
+            return <MapMarker key={location.id} lat={lat} lng={lng}/>;
           })}
         </GoogleMap>
       );
