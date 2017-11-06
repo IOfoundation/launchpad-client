@@ -132,10 +132,10 @@
     position: relative;
   }
   .search-filter-label {
-    margin-top: 8px;
     max-width: 260px;
     text-overflow: ellipsis;
     overflow: hidden;
+    margin-bottom: 0;
     @media (max-width: 60em) {
       margin-bottom: 0px;
     }

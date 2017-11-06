@@ -4,12 +4,12 @@ import {PropTypes} from 'prop-types';
 const Chip = ({canDelete, text, handleClick}) => (
   <a
     className={`
-      search-filter-label
+      search-filter-label margin-0
     `}
     onClick={e => handleClick(e)}
     data-value={text}
   >
-    <span className="text">{text}</span>
+    <span className="text text-semi">{text}</span>
     {canDelete ? (<span className="search-filter-icon">{'x'}</span>): (null) }
   </a>
 );

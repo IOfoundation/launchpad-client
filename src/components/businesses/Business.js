@@ -77,7 +77,7 @@ class Business extends Component {
                 <h4>{main_location.address.address_1}</h4>
                 <h4>
                   {main_location.address.city}
-                  {','}
+                  {', '}
                   {main_location.address.state_province}
                 </h4>
               </div>
@@ -98,7 +98,7 @@ class Business extends Component {
                   className="col-lg-12 col-md-12 col-xs-12 grid p-0 business-service m-bot-28"
                 >
                   <div className="col-lg-6 col-md-6 col-xs-6 p-0">
-                    <h4>{service.name}</h4>
+                    <h4 className='text-bold'>{service.name}</h4>
                     <p>{service.description}</p>
                   </div>
                   <div className="col-lg-6 col-md-6 col-xs-6">
@@ -157,13 +157,13 @@ class Business extends Component {
             }
 
           </div>
-          <p className="location">
+          <p className="location text-bold">
             <span>
               {locations.length}
               {locations.length == 1 ? ' location' : ' locations'}</span>
             <span className="m-x-7">{'|'}</span>
             <span>
-              {locations.length == 1 ? '' : 'Main location '}
+              {locations.length == 1 ? '' : 'Main location in '}
               {main_location.address.city}
               {', '}
               {main_location.address.state_province}

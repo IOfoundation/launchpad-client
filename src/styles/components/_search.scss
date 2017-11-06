@@ -27,6 +27,7 @@
     position: absolute;
     right: 24px;
     top: 23px;
+    color: $fourth-color;
     @media (max-width: 60em) {
       right: 6%;
       top: 31px;
@@ -43,7 +44,7 @@
   width: 100%;
   border: none;
   padding: 0 28px;
-  color: $secondary-color;
+  color: $fourth-color;
   box-sizing: border-box;
   &:focus {
     outline: none;
@@ -86,10 +87,8 @@
     vertical-align: middle;
   }
   .not-match-message {
-    font-weight: bold;
     font-size: 16px;
     opacity: 0.5;
-    color: #fff;
     text-align: left;
     &:hover {
       background-color: #000;

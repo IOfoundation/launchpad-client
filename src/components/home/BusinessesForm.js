@@ -78,7 +78,11 @@ class BusinessesForm extends React.Component {
           }
         >
           {this.props.items.map(item => (
-            <li key={item.id}>
+            <li
+              key={item.id}
+              className={item.searchable_type === 'Organization' ?
+                'text-thin' : 'text-regular'
+            }>
               <a
                 href={
                   item.searchable_type === 'Category'
@@ -95,7 +99,7 @@ class BusinessesForm extends React.Component {
           ))}
           {this.props.items.length === 0 && (
             <li className="not-match-message">
-              <a>{'This does not match any item on our platform'}</a>
+              {'This does not match any item on our platform'}
             </li>
           )}
         </ul>
@@ -108,7 +112,7 @@ class BusinessesForm extends React.Component {
     return (
       <form>
         <input
-          type="text"
+          type='text'
           value={this.state.searchText}
           onChange={event => this.handleKeyPress(event)}
           onClick={() => this.inputOnClick()}
@@ -117,7 +121,7 @@ class BusinessesForm extends React.Component {
             ? ''
             : 'Search for businesses or services'
           }
-          className="hero_input businessesName"
+          className="hero_input businessesName text-thin"
         />
         <img
           className="text-search-icon"

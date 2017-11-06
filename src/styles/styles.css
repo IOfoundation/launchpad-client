@@ -1,6 +1,25 @@
 /* Set defaults */
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
+@font-face {
+  font-family: 'proxima-nova-regular';
+  src: url(../fonts/Mark Simonson - Proxima Nova Alt Regular-webfont.woff);
+}
+
+@font-face {
+  font-family: 'proxima-nova-bold';
+  src: url(../fonts/Mark Simonson - Proxima Nova Alt Bold-webfont.woff);
+}
+
+@font-face {
+  font-family: 'proxima-nova-thin';
+  src: url(../fonts/Mark Simonson - Proxima Nova Thin-webfont.woff);
+}
+@font-face {
+  font-family: 'proxima-nova-semi';
+  src: url(../fonts/Mark Simonson - Proxima Nova Semibold-webfont.woff2);
+}
+
 a {
   text-decoration: none;
   color: black;

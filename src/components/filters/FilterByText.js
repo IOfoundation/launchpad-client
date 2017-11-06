@@ -72,7 +72,7 @@ class FilterByText extends React.Component {
       >
       {this.renderFilter()}
         {filters.category ?
-          <a className="search-filter-clear" onClick={() => this.clearAll()}>
+          <a className="search-filter-clear text-thin" onClick={() => this.clearAll()}>
             {'Clear All'}
           </a>
           : ''
@@ -126,7 +126,11 @@ class FilterByText extends React.Component {
     return (
       <ul className="option-dropdown-list">
         {this.props.items.map(item => (
-          <li key={item.id}>
+          <li
+            key={item.id}
+            className={item.searchable_type === 'Organization' ?
+              'text-thin' : '' }
+            >
             <a onClick={e => this.handleDropdownOnClick(item, e)}>
               {item.content}
             </a>
@@ -152,8 +156,8 @@ class FilterByText extends React.Component {
           <div className="col-lg-8 col-md-7 col-xs-7 no-padding">
             {this.renderChipsContainer(filters)}
             <h3
-              className={
-                filters.category ? 'hide-filter' : 'filter-result-text'
+              className={filters.category ?
+                'hide-filter' : 'text-thin filter-result-text'
               }
             >
               {'Filter results with the selections below'}
@@ -162,7 +166,7 @@ class FilterByText extends React.Component {
           <div className="small-filter-container col-lg-4 col-md-5 col-xs-5 no-padding">
             <input
               type="text"
-              className="search-by-text"
+              className="search-by-text text-thin"
               value={this.state.searchText}
               onClick={() => this._inputClicked()}
               onChange={e => this.handleKeyPress(e)}

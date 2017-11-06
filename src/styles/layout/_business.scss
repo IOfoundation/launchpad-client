@@ -18,21 +18,23 @@
   margin-bottom: 12px;
   overflow: hidden;
   .business-service {
-    h4 {
-      font-weight: bold;
+    p {
+      font-size: 14px;
     }
   }
   .full-information {
     .business-title {
       opacity: 0.5;
+      font-size: 14px;
     }
   }
   &-collapse,
   &-expand {
     position: relative;
     .preview-details {
-    opacity: 0.5;
-    margin-top: 4px;
+      font-size: 14px;
+      opacity: 0.5;
+      margin-top: 4px;
    }
    .details {
      display: none;
@@ -90,16 +92,20 @@
     background-color: $white-color;
     color: $primary-color;
     border-radius: 21px;
-    padding: 2px 4px;
+    padding: 0 4px;
     font-size: 10px !important;
     font-weight: bold !important;
     margin-right: 4px;
     white-space: nowrap;
     display: inline-block;
+    margin-bottom: 0px !important;
   }
 }
 
 .business-type-btn {
+  .business-type-label {
+    font-size: 14px;
+  }
   .business-type {
     width: 100%;
   }

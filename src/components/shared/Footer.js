@@ -4,7 +4,7 @@ import Logo from './Logo';
 
 const Footer = () => {
   return (
-    <footer className="main-footer">
+    <footer className="main-footer text-thin">
       <div className="contentContainer row">
         <div className="col-md-2 col-xs-12 text-xs-margin">
           <a className="logo-link" href="/">
@@ -12,13 +12,13 @@ const Footer = () => {
           </a>
         </div>
         <div className="col-md-2 col-md-offset-1 col-xs-6 text-xs-margin">
-          <p className="main-footer_subtitle">{'FOOTER NAV 01'}</p>
+          <p className="main-footer_subtitle text-regular">{'FOOTER NAV 01'}</p>
           <Link to="">{'About'}</Link>
           <Link to="">{'Fermentum Ultricies'}</Link>
           <Link to="">{'Nullam'}</Link>
         </div>
         <div className="col-md-2 col-xs-6 text-xs-margin">
-          <p className="main-footer_subtitle">{'SUPPORT'}</p>
+          <p className="main-footer_subtitle text-regular">{'SUPPORT'}</p>
           <Link to="">{'Help Center'}</Link>
           <Link to="">{'FAQ'}</Link>
           <Link to="">{'Email Us'}</Link>
@@ -26,13 +26,13 @@ const Footer = () => {
           <Link to="">{'Privacy'}</Link>
         </div>
         <div className="col-md-2 col-xs-6 text-xs-margin">
-          <p className="main-footer_subtitle">{'FOOTER NAV 3'}</p>
+          <p className="main-footer_subtitle text-regular">{'FOOTER NAV 3'}</p>
           <Link to="">{'About'}</Link>
           <Link to="">{'Fermentum Ultricies'}</Link>
           <Link to="">{'Nullam'}</Link>
         </div>
         <div className="social-icons col-md-2 col-md-offset-1 col-xs-6 text-xs-margin">
-          <p className="main-footer_subtitle">{'SOCIAL'}</p>
+          <p className="main-footer_subtitle text-regular">{'SOCIAL'}</p>
           <Link className="main-footer_icon" to="">
             <img src="/static-data/images/twitter-white-icon.svg" />
           </Link>

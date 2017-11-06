@@ -18,6 +18,7 @@
       color: #00D3A7;
     }
     .filter-result-text {
+      height: 24px;
       @media (max-width: 1140px) {
         font-size: 16px;
       }
@@ -202,6 +203,7 @@
   &:active,
   &:focus {
     outline: none;
+    border-bottom: 1px solid $secondary-color;
   }
   &-container {
     position: relative;
@@ -275,4 +277,7 @@
       padding: 8px 16px;
     }
   }
+}
+.search-filter-clear {
+  font-size: 14px;
 }

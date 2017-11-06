@@ -13,17 +13,17 @@ const Main = ({items, getTextSearchResults}) => {
             <Logo />
           </div>
           <div className="col-lg-12">
-            <h2 className="desktop-devices">
+            <h2 className="desktop-devices text-semi">
               {'Where startups and small businesses connect in'}
               <br />
               {'California’s Capital Region'}
             </h2>
-            <h2 className="mobile-devices">
+            <h2 className="mobile-devices text-semi">
               {
                 'Where startups and small businesses connect in California’s Capital Region'
               }
             </h2>
-            <div className="desktop-devices">
+            <div className="desktop-devices text-thin">
               <p>
                 {
                   'Over 650 resources to help your business grow est non commodo luctus,'
@@ -32,7 +32,7 @@ const Main = ({items, getTextSearchResults}) => {
                 {'nisi erat porttitor ligula, eget lacinia odio sem nec elit.'}
               </p>
             </div>
-            <div className="mobile-devices m-top-16">
+            <div className="mobile-devices m-top-16 text-thin">
               <p>
                 {
                   'Over 650 resources to help your business grow est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.'
@@ -45,7 +45,7 @@ const Main = ({items, getTextSearchResults}) => {
                 getTextSearchResults={getTextSearchResults}
               />
             </div>
-            <div className="margin-auto margin-y-20">
+            <div className="margin-auto margin-y-20 text-thin">
               <Link
                 className="link hero-link p-bot-10 margin-x-16 m-bot-16"
                 to="/businesses?category=Planning/Management"

@@ -16,7 +16,7 @@ class ResultInfo extends Component {
             key={this.props.filterOptions[0].id}
             onClick={e => this._onClick(this.props.filterOptions[0])}
           >
-            <div className="btn-search-text">
+            <div className="btn-search-text text-bold">
               <span className="desktop-devices">{'Startup or High'}</span>
               <span className="desktop-devices">{'Growth Business'}</span>
               <span className="mobile-devices">{'Startup or High Growth Business'}</span>
@@ -34,7 +34,7 @@ class ResultInfo extends Component {
             key={this.props.filterOptions[1].id}
             onClick={e => this._onClick(this.props.filterOptions[1])}
           >
-            <div className="btn-search-text">
+            <div className="btn-search-text text-bold">
               <span className="desktop-devices">{'Main Street/'}</span>
               <span className="desktop-devices">{'Small Business'}</span>
               <span className="mobile-devices">{'Main Street/Small Business'}</span>
@@ -52,7 +52,7 @@ class ResultInfo extends Component {
             key={this.props.filterOptions[2].id}
             onClick={e => this._onClick(this.props.filterOptions[2])}
           >
-            <div className="btn-search-text">
+            <div className="btn-search-text text-bold">
               <span className="desktop-devices">{'Microenterprise or'}</span>
               <span className="desktop-devices">{'Home-Based Business'}</span>
               <span className="mobile-devices">{'Microenterprise or Home-Based Business'}</span>
@@ -73,7 +73,7 @@ class ResultInfo extends Component {
     return (
       <div className="grid business-type-btn">
         {this.props.showBusinessTypes && (
-          <p className="m-bot-16 col-xs-12 col-md-12 col-lg-12 p-0">
+          <p className="m-bot-16 col-xs-12 col-md-12 col-lg-12 p-0 business-type-label">
             {'Select a business type that represents you.'}
           </p>
         )}

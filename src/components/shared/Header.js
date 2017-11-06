@@ -6,11 +6,11 @@ import Logo from './Logo';
 const Header = pathname => {
   return (
     <header className="headerContainer" htmlFor="header-dropdown">
-      <div className="contentContainer header grid between-xs middle-xs">
+      <div className="contentContainer header grid between-xs middle-xs text-thin">
         <div className="header_links-title">
           <Link to="/"><Logo /></Link>
           <span className="header_title">{'Welcome to IO Ipsum'}</span>
-          <span className="header_leftLink">{'Back to Lorem'}</span>
+          <span className="header_leftLink text-regular">{'Back to Lorem'}</span>
         </div>
         <input id="header-dropdown" type="checkbox" name="dropdown" />
         <label htmlFor="header-dropdown" className="collapse-menu-icon">

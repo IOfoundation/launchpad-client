@@ -16,11 +16,15 @@
 h1, h2, h3 {
   font-weight: normal !important;
 }
-
-.text-bold {
-  font-weight: bold;
+.text-regular {
+  font-family: $font-family;
 }
-
+.text-bold {
+  font-family: $font-family-bold;
+}
+.text-semi {
+  font-family: $font-family-semi;
+}
 .text-thin {
   font-family: $font-family-thin;
 }
