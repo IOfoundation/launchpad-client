@@ -108,6 +108,7 @@ class FilterByTextMobile extends Component {
   }
 
   render() {
+    console.log("FILTERBYTEXT MOBILE", this.props)
     const filters = this.props.getFilterChips();
     return (
       <div className="filter-chip">

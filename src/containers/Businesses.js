@@ -1,17 +1,18 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {PropTypes} from 'prop-types';
-import {Link} from 'react-router';
-import {isEmpty, isString, cloneDeep} from 'lodash';
-
-import MainLayout from '../components/layouts/Main';
-import FilterBox from '../components/filters/FilterBox';
-import FilterBoxMobile from '../components/filters/FilterBoxMobile';
-import BusinessesView from 'components/businesses/Main';
+import {isEmpty, isString} from 'lodash';
+import BusinessPage from 'components/businesses/BusinessPage';
 import * as actions from '../actions/business';
 
-export class Businesses extends Component {
+export class Businesses extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showBusinessTypes: true,
+    };
+  }
   componentWillMount(_nextProps) {
     const params = this.props.location.query;
     this.props.actions.fetchFilterOptions();
@@ -78,7 +79,6 @@ export class Businesses extends Component {
   handleClickOnClearAllFilters() {
     this.props.actions.filterOrganizations(null, null, 'all', true);
     this.props.actions.changeFilterDisplayOptions(true, false);
-
   }
 
   handleChangePage(page) {
@@ -88,68 +88,25 @@ export class Businesses extends Component {
 
   render() {
     const {displayOptions, filters, organizations, locations, items, metadata} = this.props;
+    console.log("render container businesses");
     return (
-      <MainLayout>
-        <section>
-          <div className="search-nav search-nav-invert">
-            <div className="row contentContainer">
-              <div>
-                <Link className="desktop-devices" to="/">
-                  <img
-                    className="logo"
-                    src="static-data/images/ioLogoBlack.png"
-                  />
-                </Link>
-              </div>
-              <div className="col-lg-9 col-md-9 col-xs-9 body-container">
-                <h2 className="desktop-devices">
-                  {
-                    "Where startups and small businesses connect in California's Central Valley"
-                  }
-                </h2>
-                <div className="desktop-devices">
-                  <FilterBox
-                    getTextSearchResults={(e) => this.getTextSearchResults(e)}
-                    filterOptions={filters}
-                    items={items}
-                    handleClickOnClearAllFilters={(e) =>
-                      this.handleClickOnClearAllFilters(e)}
-                    handleOnChangeFilterOptions={(filterValue, filterType, removeFilter) =>
-                      this.handleOnChangeFilterOptions(filterValue, filterType, removeFilter)}
-                    getFilterChips={(e) => this.getFilterChips()}
-                  />
-                </div>
-                <div className="mobile-devices">
-                  <FilterBoxMobile
-                    getTextSearchResults={(e) => this.getTextSearchResults(e)}
-                    filterOptions={filters}
-                    items={items}
-                    handleClickOnClearAllFilters={(e) =>
-                      this.handleClickOnClearAllFilters(e)}
-                    handleOnChangeFilterOptions={(filterValue, filterType, removeFilter) =>
-                      this.handleOnChangeFilterOptions(filterValue, filterType, removeFilter)}
-                    getFilterChips={(e) => this.getFilterChips()}
-                  />
-                </div>
-                <BusinessesView
-                  displayOptions={displayOptions}
-                  filterOptions={filters}
-                  organizations={organizations}
-                  locations={locations}
-                  businessesMetadata={metadata}
-                  checkBusinessType={(filterValue) => this.handleOnChangeBusinessType(filterValue)}
-                  checkLocationToggle={() => this.handleOnChangeLocationToggle()}
-                  handleChangePage={(e) => this.handleChangePage(e)}
-                  handleClickOnClearAllFilters={(e) =>
-                    this.handleClickOnClearAllFilters(e)}
-                  handleOnChangeFilterOptions={(filterValue, filterType, removeFilter) =>
-                    this.handleOnChangeFilterOptions(filterValue, filterType, removeFilter)}
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-      </MainLayout>
+      <BusinessPage
+        displayOptions={displayOptions}
+        filterOptions={filters}
+        items={items}
+        organizations={organizations}
+        locations={locations}
+        businessesMetadata={metadata}
+        getTextSearchResults={(e) => this.getTextSearchResults(e)}
+        checkBusinessType={(filterValue) => this.handleOnChangeBusinessType(filterValue)}
+        checkLocationToggle={() => this.handleOnChangeLocationToggle()}
+        handleClickOnClearAllFilters={(e) =>
+          this.handleClickOnClearAllFilters(e)}
+        handleOnChangeFilterOptions={(filterValue, filterType, removeFilter) =>
+          this.handleOnChangeFilterOptions(filterValue, filterType, removeFilter)}
+        getFilterChips={(e) => this.getFilterChips()}
+        handleChangePage={(e) => this.handleChangePage(e)}
+      />
     );
   }
 }

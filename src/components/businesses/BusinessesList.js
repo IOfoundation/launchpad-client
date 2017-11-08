@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {PropTypes} from 'prop-types';
 
 import Business from './Business';
 
-class BusinessesList extends Component {
+class BusinessesList extends PureComponent {
   _renderOrgs(organizations) {
     return this.props.organizations.map(organization => (
       <Business
@@ -15,7 +15,8 @@ class BusinessesList extends Component {
   }
   render() {
     const {handleClickOnClearAllFilters, organizations} = this.props;
-    return <div>{this._renderOrgs(organizations)}</div>;
+    console.log('rendernBusinessesList', this.props);
+    return organizations && <div>{this._renderOrgs(organizations)}</div>;
   }
 }
 

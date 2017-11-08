@@ -43,10 +43,11 @@ class Main extends Component {
       handleOnChangeBusinessType,
       displayOptions,
       handleOnChangeFilterOptions,
-      businessTypes,
       filterOptions,
     } = this.props;
+    console.log("RESULTPAGE", this.props);
     if (filterOptions.businessTypes.length === 3) {
+      console.log("RESULinsideTPAGE");
       return (
         <ResultInfo
           businessesMetadata={businessesMetadata}

@@ -18,30 +18,22 @@ const initialState: STATE = {
 
 export default function(state: STATE = initialState, action: ACTION): STATE {
   switch (action.type) {
-    case types.FETCH_ORGANIZATIONS: {
-      const {organizations} = action;
+    case types.FETCH_DATA: {
+      const {organizations, metadata} = action;
       if (organizations.id) { organizations = [organizations]; }
       const locations = isEmpty(organizations) ? (null) : (organizations.map(org => org.locations).reduce((a, b) => a.concat(b)));
       return {
         ...state,
         organizations,
         locations,
+        metadata
       };
     }
-
     case types.FETCH_FILTERS_OPTIONS: {
       const {filters} = action;
       return {
         ...state,
         filters,
-      };
-    }
-
-    case types.FETCH_BUSINESSES_METADATA: {
-      const {metadata} = action;
-      return {
-        ...state,
-        metadata,
       };
     }
 
