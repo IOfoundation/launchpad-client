@@ -4,7 +4,7 @@ import {PropTypes} from 'prop-types';
 const Chip = ({canDelete, text, handleClick}) => (
   <a
     className={`
-      search-filter-label margin-0
+      search-filter-label
     `}
     onClick={e => handleClick(e)}
     data-value={text}

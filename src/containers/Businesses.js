@@ -57,7 +57,7 @@ export class Businesses extends Component {
   }
 
   getFilterChips() {
-    return this.props.location.query;
+    return this.props.queries;
   }
 
   handleClickOnClearAllFilters() {

@@ -219,6 +219,7 @@ async function _buildOrganizationsAndMetadata(filters) {
 }
 
 function _addCategoryFilter(newFilters, filterValue) {
+  if (newFilters.id) {newFilters.id = []} 
   if (filterValue === null) {
     return newFilters;
   } else if (isEmpty(newFilters.category)) {

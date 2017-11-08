@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Chip from '../shared/Chip';
 import {PropTypes} from 'prop-types';
+import {isEmpty} from 'lodash';
 
 class Business extends Component {
   constructor(props) {
@@ -13,6 +14,18 @@ class Business extends Component {
   toggleCard() {
     this.setState({expanded: !this.state.expanded});
   }
+
+  _renderContacts(subject) {
+    return (
+      <div className="col-lg-4 col-md-4 col-xs-4 p-0 main-contact">
+        <p className="business-title">{'Contact:'}</p>
+        <h4>{isEmpty(subject.name) ? '' : subject.name}</h4>
+        <h4>{isEmpty(subject.phones) ? '' : subject.phones[0].number}</h4>
+        <h4>{isEmpty(subject.email) ? '' : subject.email}</h4>
+      </div>
+    );
+  }
+
   render() {
     const {business} = this.props;
     const locations = business.locations;
@@ -53,10 +66,10 @@ class Business extends Component {
               </h3>
               <p className="preview-details">{business.description}</p>
               <div className={this.state.expanded ? ('col-lg-12 social-icons p-0 m-top-16') : ('social-icons-hide')}>
-                {business.facebook ? <a src={business.facebook}><img src="../static-data/images/FB.svg" /></a> : ''}
-                {business.twitter ? <a src={business.twitter}><img src="../static-data/images/TW.svg" /></a> : ''}
-                {business.youtube ? <a src={business.youtube}><img src="../static-data/images/Youtube.svg" /></a> : ''}
-                {business.linkedin ? <a src={business.linkedin}><img src="../static-data/images/linkedin.svg" /></a> : ''}
+                {business.facebook ? <a href={business.facebook}><img src="../static-data/images/FB.svg" /></a> : ''}
+                {business.twitter ? <a href={business.twitter}><img src="../static-data/images/TW.svg" /></a> : ''}
+                {business.youtube ? <a href={business.youtube}><img src="../static-data/images/Youtube.svg" /></a> : ''}
+                {business.linkedin ? <a href={business.linkedin}><img src="../static-data/images/linkedin.svg" /></a> : ''}
               </div>
             </div>
             <img
@@ -75,17 +88,16 @@ class Business extends Component {
               <div className="col-lg-4 col-md-4 col-xs-4 p-0 m-right-52 main-location">
                 <p className="business-title">{'Main Location:'}</p>
                 <h4>{main_location.address.address_1}</h4>
+                <h4>{main_location.address.address_2 ? main_location.address.address_2 : ''}</h4>
                 <h4>
                   {main_location.address.city}
                   {', '}
                   {main_location.address.state_province}
                 </h4>
               </div>
-              <div className="col-lg-4 col-md-4 col-xs-4 p-0 main-contact">
-                <p className="business-title">{'Contact:'}</p>
-                <h4>{business.phones[0].number}</h4>
-                <h4>{business.email}</h4>
-              </div>
+              {isEmpty(business.contacts) ?
+                ''
+                : this._renderContacts(business.contacts[0])}
             </div>
             <hr />
             <p className="business-title col-lg-12 col-md-12 col-xs-12 p-0">
@@ -97,45 +109,44 @@ class Business extends Component {
                   key={service.id}
                   className="col-lg-12 col-md-12 col-xs-12 grid p-0 business-service m-bot-28"
                 >
-                  <div className="col-lg-6 col-md-6 col-xs-6 p-0">
+                  <div className="col-lg-6 col-md-6 col-xs-6 p-left-0 p-right-4">
                     <h4 className='text-bold'>{service.name}</h4>
                     <p>{service.description}</p>
                   </div>
-                  <div className="col-lg-6 col-md-6 col-xs-6">
-                    {!service.email || service.phones.length <= 0 ? (
-                      ''
-                    ) : (
-                      <p className="business-title">{'contact:'}</p>
-                    )}
-                    {service.email ? <h4>{service.email}</h4> : null}
-                    {service.phones.length <= 0 ? (
-                      ''
-                    ) : (
-                      <h4>{service.phones[0].number}</h4>
-                    )}
-                  </div>
-                  <div className="col-lg-12 col-md-12 col-xs-12 p-0 m-top-16">
-                    {service.categories.map(category => {
-                      return (
-                        <Chip
-                          key={category.id}
-                          text={category.name}
-                          canDelete={false}
-                        />
-                      );
-                    })}
-                  </div>
+                  {isEmpty(service.contacts) ?
+                    ''
+                    : this._renderContacts(service.contacts[0])}
+                  {service.categories ?
+                    <div className="col-lg-12 col-md-12 col-xs-12 p-0 m-top-16">
+                      {service.categories.map(category => {
+                        return (
+                          <Chip
+                            key={category.id}
+                            text={category.name}
+                            canDelete={false}
+                          />
+                        );
+                      })}
+                    </div>
+                    : '' }
                 </div>
               );
             })}
             <hr />
             {other_locations ?
               <div className="col-lg-12 col-md-12 col-xs-12 grid p-0">
-                <div className="col-lg-4 col-md-4 col-xs-6 p-0 m-right-54">
-                  <p className="business-title">{'Other Locations:'}</p>
-                  {other_locations.map(location => {
-                    return (
-                      <div key={location.id} className="m-top-24">
+                <div className="col-lg-12 col-md-12 col-xs-12 grid p-0">
+                  <div className="col-lg-6 col-md-6 col-xs-6 p-0 m-right-54">
+                    <p className="business-title">{'Other Locations:'}</p>
+                  </div>
+                  <div className="col-lg-4 col-md-4 col-xs-6 p-0">
+                    <p className="business-title">{'Contact Number:'}</p>
+                  </div>
+                </div>
+                {other_locations.map(location => {
+                  return (
+                    <div key={location.id} className="col-lg-12 col-md-12 col-xs-12 grid p-0">
+                      <div className="col-lg-6 col-md-6 col-xs-6 p-0 m-top-24 m-right-54">
                         <h4>{location.address.address_1}</h4>
                         {location.address.address_2 && <h4>{location.address.address_2}</h4>}
                         <h4>
@@ -145,12 +156,13 @@ class Business extends Component {
                           {location.address.postal_code}
                         </h4>
                       </div>
-                    );
-                  })}
-                </div>
-                <div className="col-lg-4 col-md-4 col-xs-6 p-0">
-                  <p className="business-title">{'Contact:'}</p>
-                </div>
+                      <div className="col-lg-4 col-md-4 col-xs-6 p-0 m-top-24">
+                        {isEmpty(location.phones) ?
+                          '' : <h4>{location.phones[0].number}</h4>}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
               :
               ''
