@@ -16,10 +16,16 @@ export class Businesses extends Component {
     const params = this.props.location.query;
     this.props.actions.fetchFilterOptions();
     const locationToggleSwitch = 'ne_lat' in params ? true : false;
-    this.props.actions.changeFilterDisplayOptions(true, locationToggleSwitch);
+    const showBusinessTypes = this.checkBusinessType(params.category);
+    this.props.actions.changeFilterDisplayOptions(showBusinessTypes, locationToggleSwitch);
     'id' in params ?
       this.props.actions.filterOrganizations(params.id, params, 'organization', true) :
       this.props.actions.filterOrganizations(null, params, 'category');
+  }
+
+  checkBusinessType(filters) {
+    const businessTypes = ['Startup or High-Growth Business', 'Main Street or Small Business', 'Microenterprise or Home Based Business'];
+    isEmpty(filters) || (isString(filters) ? businessTypes.includes(filters) ? false : true : filters.map(filter => businessTypes.includes(filter)) ? false : true);
   }
 
   getTextSearchResults(filter) {
