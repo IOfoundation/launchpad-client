@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
 import Chip from '../shared/Chip';
+import FacebookIcon from '../shared/FacebookIcon';
+import TwitterIcon from '../shared/TwitterIcon';
+import LinkedinIcon from '../shared/LinkedinIcon';
+
 import {PropTypes} from 'prop-types';
 import {isEmpty} from 'lodash';
 
@@ -64,10 +68,9 @@ class Business extends Component {
               </h3>
               <p className="preview-details">{business.description}</p>
               <div className={this.state.expanded ? ('col-lg-12 social-icons p-0 m-top-16') : ('social-icons-hide')}>
-                {business.facebook ? <a href={business.facebook}><img src="../static-data/images/FB.svg" /></a> : ''}
-                {business.twitter ? <a href={business.twitter}><img src="../static-data/images/TW.svg" /></a> : ''}
-                {business.youtube ? <a href={business.youtube}><img src="../static-data/images/Youtube.svg" /></a> : ''}
-                {business.linkedin ? <a href={business.linkedin}><img src="../static-data/images/linkedin.svg" /></a> : ''}
+                {business.facebook ? <a href={business.facebook}><FacebookIcon className={'icon-svg'} size={18} /></a> : ''}
+                {business.twitter ? <a href={business.twitter}><TwitterIcon className={'icon-svg'} size={18} /></a> : ''}
+                {business.linkedin ? <a href={business.linkedin}><LinkedinIcon className={'icon-svg'} size={18} /></a> : ''}
               </div>
             </div>
             <img
