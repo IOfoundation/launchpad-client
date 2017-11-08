@@ -19,19 +19,17 @@ class Business extends Component {
     return (
       <div className="col-lg-4 col-md-4 col-xs-4 p-0 main-contact">
         <p className="business-title">{'Contact:'}</p>
-        <h4>{isEmpty(subject.name) ? '' : subject.name}</h4>
-        <h4>{isEmpty(subject.phones) ? '' : subject.phones[0].number}</h4>
-        <h4>{isEmpty(subject.email) ? '' : subject.email}</h4>
+        {isEmpty(subject.name) ? '' : <h4>{subject.name}</h4>}
+        {isEmpty(subject.phones) ? '' : <h4>{subject.phones[0].number}</h4>}
+        {isEmpty(subject.email) ? '' : <h4>{subject.email}</h4>}
       </div>
     );
   }
 
   render() {
     const {business} = this.props;
-    const locations = business.locations;
-    const main_location = business.locations[0];
-    const other_locations = business.locations[1] ?
-      business.locations.slice(1) : null;
+    const locations = business.locations
+    const [main_location, ...other_locations] = locations;
     return (
       <div className="business-card">
         <div
@@ -88,16 +86,12 @@ class Business extends Component {
               <div className="col-lg-4 col-md-4 col-xs-4 p-0 m-right-52 main-location">
                 <p className="business-title">{'Main Location:'}</p>
                 <h4>{main_location.address.address_1}</h4>
-                <h4>{main_location.address.address_2 ? main_location.address.address_2 : ''}</h4>
+                {main_location.address.address_2 ? <h4>{main_location.address.address_2}</h4> : ''}
                 <h4>
-                  {main_location.address.city}
-                  {', '}
-                  {main_location.address.state_province}
+                  {`${main_location.address.city}, ${main_location.address.state_province}`}
                 </h4>
               </div>
-              {isEmpty(business.contacts) ?
-                ''
-                : this._renderContacts(business.contacts[0])}
+              {!isEmpty(business.contacts) && this._renderContacts(business.contacts[0])}
             </div>
             <hr />
             <p className="business-title col-lg-12 col-md-12 col-xs-12 p-0">
@@ -113,9 +107,7 @@ class Business extends Component {
                     <h4 className='text-bold'>{service.name}</h4>
                     <p>{service.description}</p>
                   </div>
-                  {isEmpty(service.contacts) ?
-                    ''
-                    : this._renderContacts(service.contacts[0])}
+                  {!isEmpty(service.contacts) && this._renderContacts(service.contacts[0])}
                   {service.categories ?
                     <div className="col-lg-12 col-md-12 col-xs-12 p-0 m-top-16">
                       {service.categories.map(category => {
@@ -133,7 +125,8 @@ class Business extends Component {
               );
             })}
             <hr />
-            {other_locations ?
+            {isEmpty(other_locations) ?
+              '' :
               <div className="col-lg-12 col-md-12 col-xs-12 grid p-0">
                 <div className="col-lg-12 col-md-12 col-xs-12 grid p-0">
                   <div className="col-lg-6 col-md-6 col-xs-6 p-0 m-right-54">
@@ -150,10 +143,7 @@ class Business extends Component {
                         <h4>{location.address.address_1}</h4>
                         {location.address.address_2 && <h4>{location.address.address_2}</h4>}
                         <h4>
-                          {location.address.city}
-                          {', '}
-                          {location.address.state_province}{' '}
-                          {location.address.postal_code}
+                          {`${location.address.city}, ${location.address.state_province} ${location.address.postal_code}`}
                         </h4>
                       </div>
                       <div className="col-lg-4 col-md-4 col-xs-6 p-0 m-top-24">
@@ -164,8 +154,6 @@ class Business extends Component {
                   );
                 })}
               </div>
-              :
-              ''
             }
 
           </div>

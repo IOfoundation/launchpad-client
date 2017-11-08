@@ -19,7 +19,10 @@ const initialState = {
       businessTypes: [],
       industries: [],
     },
-    displayOptions: {showBusinessTypes: true, locationToggleSwitch: false}
+    displayOptions: {
+      showBusinessTypes: true,
+      locationToggleSwitch: false
+    },
   },
 };
 

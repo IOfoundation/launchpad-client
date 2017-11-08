@@ -78,7 +78,6 @@ const pushBrowserHistory = filters => {
 
 export function filterOrganizations(filterValue, currentParams, filterType, removeFilter) {
   return async (dispatch: Function) => {
-
     const filters = filtersObject(filterValue, currentParams, filterType, removeFilter);
     const {organizations, metadata} = await _buildOrganizationsAndMetadata(filters);
 
@@ -90,17 +89,22 @@ export function filterOrganizations(filterValue, currentParams, filterType, remo
 
 const filtersObject = (filterValue, filters, filterType, removeFilter) => {
   const newFilters = cloneDeep(filters);
-  if (filterType === 'category') {
-    removeFilter ? _removeCategoryFilter(newFilters, filterValue) : _addCategoryFilter(newFilters, filterValue);
-  } else if (filterType === 'organization') {
-    removeFilter ? _removeOrganizationIdFilter() : _addOrganizationIdFilter(newFilters, filterValue);
-  } else if (filterType === 'coordinates') {
-    removeFilter ? _removeLocationFilter(newFilters) : _addLocationFilter(newFilters, filterValue);
-  } else {
-    _removeAllFilters();
+  switch (filterType) {
+    case 'category':
+      removeFilter ? _removeCategoryFilter(newFilters, filterValue) : _addCategoryFilter(newFilters, filterValue);
+      break;
+    case 'organization':
+      removeFilter ? _removeOrganizationIdFilter() : _addOrganizationIdFilter(newFilters, filterValue);
+      break;
+    case 'coordinates':
+      removeFilter ? _removeLocationFilter(newFilters) : _addLocationFilter(newFilters, filterValue);
+      break;
+    default:
+      _removeAllFilters();
+    }
+    return newFilters;
   }
-  return newFilters;
-};
+
 
 export function changePage(page, currentParams) {
   return async (dispatch: Function) => {
@@ -219,10 +223,9 @@ async function _buildOrganizationsAndMetadata(filters) {
 }
 
 function _addCategoryFilter(newFilters, filterValue) {
-  if (newFilters.id) {newFilters.id = []} 
-  if (filterValue === null) {
-    return newFilters;
-  } else if (isEmpty(newFilters.category)) {
+  if (newFilters.id) {newFilters.id = [];}
+  if (filterValue === null) {return newFilters;}
+  if (isEmpty(newFilters.category)) {
     newFilters.category = [filterValue];
   } else if (isString(newFilters.category)) {
     newFilters.category = [newFilters.category, filterValue];

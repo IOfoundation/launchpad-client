@@ -16,8 +16,8 @@ export class Businesses extends Component {
     const params = this.props.location.query;
     this.props.actions.fetchFilterOptions();
     const locationToggleSwitch = 'ne_lat' in params ? true : false;
-    const showBusinessTypes = this.checkBusinessType(params.category);
-    this.props.actions.changeFilterDisplayOptions(showBusinessTypes, locationToggleSwitch);
+    //const showBusinessTypes = this.checkBusinessType(params.category);
+    this.props.actions.changeFilterDisplayOptions(this.checkBusinessType(params.category), locationToggleSwitch);
     'id' in params ?
       this.props.actions.filterOrganizations(params.id, params, 'organization', true) :
       this.props.actions.filterOrganizations(null, params, 'category');
@@ -25,7 +25,13 @@ export class Businesses extends Component {
 
   checkBusinessType(filters) {
     const businessTypes = ['Startup or High-Growth Business', 'Main Street or Small Business', 'Microenterprise or Home Based Business'];
-    isEmpty(filters) || (isString(filters) ? businessTypes.includes(filters) ? false : true : filters.map(filter => businessTypes.includes(filter)) ? false : true);
+    if(isEmpty(filters)){ return true; }
+
+    if(isString(filters)){
+      return !businessTypes.includes(filters);
+    }
+    const filteredTypes = filters.map(filter => businessTypes.includes(filter));
+    return isEmpty(filteredTypes);
   }
 
   getTextSearchResults(filter) {
@@ -56,8 +62,8 @@ export class Businesses extends Component {
       this.handleOnChangeLocationToggle(filterType, removeFilter)
     );
     this.getFilterChips(filterValue);
-    if (!isEmpty(params.category)) {
-      removeFilter = removeFilter ? removeFilter : params.category.includes(filterValue) ? true : false;
+    if (!isEmpty(params.category) && isEmpty(removeFilter)) {
+      removeFilter = params.category.includes(filterValue) ? true : false;
     }
     this.props.actions.filterOrganizations(filterValue, params, filterType, removeFilter)
   }
