@@ -32,9 +32,10 @@
     display: inline-block !important;
     margin-right: 8px;
     opacity: 1 !important;
-    svg {
-      width: 16px;
-      height: 16px;
+    img {
+      width: 20px;
+      height: 20px;
+      fill: #fff;
     }
   }
   @media (max-width: 60em) {

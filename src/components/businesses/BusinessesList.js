@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
-import {MdClear} from 'react-icons/lib/md';
 
 import Business from './Business';
 

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
-import RightArrow from 'react-icons/lib/fa/angle-right';
-import {MdKeyboardArrowRight} from 'react-icons/lib/md';
+import ArrowRight from '../../shared/arrow-right';
 
 class FilterOption extends Component {
   constructor(props) {
@@ -59,7 +58,7 @@ class FilterOption extends Component {
               <a onClick={e => this._toggleSubOption(e, filterOption)}>{filterOption.name}</a>
               {filterOption.children.length > 0 && (
                 <label htmlFor={filterOption.name}>
-                <MdKeyboardArrowRight className="second-level-icon" size="20" />
+                  <ArrowRight className="second-level-icon" size={20} style={{color: '#fff', verticalAlign: 'middle'}} />
                 </label>
               )}
             </div>
@@ -81,7 +80,9 @@ class FilterOption extends Component {
           <input type="checkbox" id={filterName} />
           <div className="select">
             <label>{filterName}</label>
-            <label htmlFor={filterName}><RightArrow className="first-level-icon" /></label>
+            <label htmlFor={filterName}>
+              <ArrowRight className="first-level-icon" size={20} style={{color: '#fff', verticalAlign: 'middle'}}/>
+            </label>
           </div>
           <div className="filters-second-level">{this._renderOptions()}</div>
         </li>

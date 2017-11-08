@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
-import {MdClear} from 'react-icons/lib/md';
-import RightArrow from 'react-icons/lib/fa/angle-right';
 import FilterOption from './FilterOption';
+import ArrowRight from '../../shared/arrow-right';
 
 class FilterByOptions extends Component {
   render() {
@@ -21,13 +20,13 @@ class FilterByOptions extends Component {
         <label className="dropdown-label" htmlFor="filters-dropdown">
           {'No filters selected'}
         </label>
-        <RightArrow
+        <ArrowRight
           className="right-arrow"
-          htmlFor="filters-dropdown"
           size={20}
-        />
+          style={{color: '#fff', verticalAlign: 'middle'}}
+          htmlFor="filters-dropdown" />
         <label htmlFor="filters-dropdown" className="close-icon">
-          <MdClear size={24} color="#2AD587" />
+          <img src="/static-data/images/close.png" />
         </label>
         <div className="dropdown-container-filters">
           <FilterOption

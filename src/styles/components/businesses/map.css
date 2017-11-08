@@ -71,7 +71,7 @@
 }
 .map_marker {
   color: #4A4A4A;
-
+  width: 20px;
 }
 .map_marker:hover {
   cursor: pointer;

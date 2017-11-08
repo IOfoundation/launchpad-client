@@ -1,11 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
 import Logo from './Logo';
-import {FaTwitter,
-  FaFacebook,
-  FaLinkedin,
-  FaGithubSquare,
-} from 'react-icons/lib/fa';
 
 const Footer = () => {
   return (
@@ -39,16 +34,16 @@ const Footer = () => {
         <div className="social-icons col-md-2 col-md-offset-1 col-xs-6 text-xs-margin">
           <p className="main-footer_subtitle">{'SOCIAL'}</p>
           <Link className="main-footer_icon" to="">
-            <FaTwitter size={12} color={'white'} />
+            <img src="/static-data/images/twitter-white-icon.svg" />
           </Link>
           <Link className="main-footer_icon" to="">
-            <FaFacebook size={12} color={'white'} />
+            <img src="/static-data/images/fb-white-icon.svg" />
           </Link>
           <Link className="main-footer_icon" to="">
-            <FaLinkedin size={12} color={'white'} />
+            <img src="/static-data/images/in-white-icon.svg" />
           </Link>
           <Link className="main-footer_icon" to="">
-            <FaGithubSquare size={12} color={'white'} />
+            <img src="/static-data/images/git-white-icon.svg" />
           </Link>
         </div>
       </div>

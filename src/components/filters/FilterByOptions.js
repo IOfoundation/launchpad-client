@@ -1,8 +1,7 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
-import {FaSortDesc} from 'react-icons/lib/fa';
 import onClickOutside from 'react-onclickoutside';
-import {MdKeyboardArrowRight} from 'react-icons/lib/md';
+import ArrowRight from '../shared/arrow-right';
 
 class FilterByOptions extends React.Component {
   constructor(props) {
@@ -41,7 +40,7 @@ class FilterByOptions extends React.Component {
       >
         <span>{filterOption.name}</span>
         {filterOption.children.length > 0 && (
-          <MdKeyboardArrowRight className="dropdown-options-icon" size="20" />
+          <ArrowRight className="dropdown-options-icon" size="20" />
         )}
       </button>
     );
@@ -94,7 +93,10 @@ class FilterByOptions extends React.Component {
           onClick={() => this._toggleDropdownOptions()}
         >
           {this.props.filterName}
-          <FaSortDesc className="filter-btn-icon" size={14} color={'#fff'} />
+          <img
+            className="filter-btn-icon"
+            src="/static-data/images/Dropdown-arrow.svg"
+          />
         </button>
         {this.state.dropdownOpen && this._renderOptions()}
       </div>

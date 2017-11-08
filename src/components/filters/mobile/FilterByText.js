@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
-import {MdSearch} from 'react-icons/lib/md';
 import Chip from '../../shared/Chip';
 import {isEmpty, isString} from 'lodash';
 
@@ -126,7 +125,10 @@ class FilterByTextMobile extends Component {
             className="search-by-text"
             placeholder="Or search by name"
           />
-          <MdSearch className="search-by-text-icon" size={24} color="#2AD587" />
+          <img
+            className="search-by-text-icon"
+            src="/static-data/images/search.png"
+          />
         </div>
         <div
           className={

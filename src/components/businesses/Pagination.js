@@ -1,7 +1,8 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
-import {MdChevronRight, MdChevronLeft} from 'react-icons/lib/md';
 import ReactPaginate from 'react-paginate';
+import ArrowLeft from '../shared/arrow-left';
+import ArrowRight from '../shared/arrow-right';
 
 class Pagination extends React.Component {
   constructor(props) {
@@ -30,19 +31,17 @@ class Pagination extends React.Component {
       >
         <ReactPaginate
           previousLabel={
-            <MdChevronLeft
+            <ArrowLeft
               className="pagination-arrow"
               size={17}
-              color={'#fff'}
-              style={{marginLeft: 4}}
+              style={{marginLeft: 4, color: '#fff', verticalAlign: 'middle'}}
             />
           }
           nextLabel={
-            <MdChevronRight
+            <ArrowRight
               className="pagination-arrow"
               size={17}
-              color={'#fff'}
-              style={{marginLeft: 4}}
+              style={{marginLeft: 4, color: '#fff', verticalAlign: 'middle'}}
             />
           }
           pageCount={last.page}

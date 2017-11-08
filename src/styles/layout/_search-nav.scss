@@ -58,6 +58,7 @@
         @media (max-width: 60em) {
           top: 24%;
           left: 160px;
+          width: 20px;
         }
       }
       @media (max-width: 60em) {
@@ -207,8 +208,9 @@
   }
   &-icon {
     position: absolute;
-    right: 20px;
-    top: 5px;
+    right: 16px;
+    top: 2px;
+    width: 24px;
   }
 }
 .hide-filter {
