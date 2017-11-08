@@ -88,21 +88,20 @@ export function filterOrganizations(filterValue, currentParams, filterType, remo
 }
 
 const filtersObject = (filterValue, filters, filterType, removeFilter) => {
-  const newFilters = cloneDeep(filters);
+  let newFilters = cloneDeep(filters);
   switch (filterType) {
     case 'category':
-      newFilters = removeFilter ? _removeCategoryFilter(newFilters, filterValue) : _addCategoryFilter(newFilters, filterValue);
+      return removeFilter ? _removeCategoryFilter(newFilters, filterValue) : _addCategoryFilter(newFilters, filterValue);
       break;
     case 'organization':
-      newFilters = removeFilter ? _removeOrganizationIdFilter() : _addOrganizationIdFilter(newFilters, filterValue);
+      return removeFilter ? _removeOrganizationIdFilter() : _addOrganizationIdFilter(newFilters, filterValue);
       break;
     case 'coordinates':
-      newFilters = removeFilter ? _removeLocationFilter(newFilters) : _addLocationFilter(newFilters, filterValue);
+      return removeFilter ? _removeLocationFilter(newFilters) : _addLocationFilter(newFilters, filterValue);
       break;
     default:
-      newFilters = _removeAllFilters();
+      return _removeAllFilters();
     }
-    return newFilters;
   }
 
 
@@ -246,6 +245,7 @@ function _removeCategoryFilter(newFilters, filterValue) {
 }
 
 function _addOrganizationIdFilter(newFilters, filterValue) {
+  changeFilterDisplayOptions(true, false);
   newFilters = [];
   newFilters.id = filterValue;
   return newFilters;

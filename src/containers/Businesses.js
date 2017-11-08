@@ -16,7 +16,6 @@ export class Businesses extends Component {
     const params = this.props.location.query;
     this.props.actions.fetchFilterOptions();
     const locationToggleSwitch = 'ne_lat' in params ? true : false;
-    //const showBusinessTypes = this.checkBusinessType(params.category);
     this.props.actions.changeFilterDisplayOptions(this.checkBusinessType(params.category), locationToggleSwitch);
     'id' in params ?
       this.props.actions.filterOrganizations(params.id, params, 'organization', true) :
@@ -49,10 +48,14 @@ export class Businesses extends Component {
 
   handleOnChangeLocationToggle(filterType, removeFilter) {
     const locationToggleSwitch = this.props.displayOptions.locationToggleSwitch;
-    if (filterType === 'coordinates') {
-      return !removeFilter ? true : false;
+    switch (filterType) {
+      case 'coordinates':
+        return !removeFilter ? true : false;
+      case 'organization':
+        return false;
+      default:
+        return locationToggleSwitch;
     }
-    return locationToggleSwitch;
   }
 
   handleOnChangeFilterOptions(filterValue, filterType, removeFilter) {
