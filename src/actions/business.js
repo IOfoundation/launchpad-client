@@ -91,16 +91,16 @@ const filtersObject = (filterValue, filters, filterType, removeFilter) => {
   const newFilters = cloneDeep(filters);
   switch (filterType) {
     case 'category':
-      removeFilter ? _removeCategoryFilter(newFilters, filterValue) : _addCategoryFilter(newFilters, filterValue);
+      newFilters = removeFilter ? _removeCategoryFilter(newFilters, filterValue) : _addCategoryFilter(newFilters, filterValue);
       break;
     case 'organization':
-      removeFilter ? _removeOrganizationIdFilter() : _addOrganizationIdFilter(newFilters, filterValue);
+      newFilters = removeFilter ? _removeOrganizationIdFilter() : _addOrganizationIdFilter(newFilters, filterValue);
       break;
     case 'coordinates':
-      removeFilter ? _removeLocationFilter(newFilters) : _addLocationFilter(newFilters, filterValue);
+      newFilters = removeFilter ? _removeLocationFilter(newFilters) : _addLocationFilter(newFilters, filterValue);
       break;
     default:
-      _removeAllFilters();
+      newFilters = _removeAllFilters();
     }
     return newFilters;
   }
