@@ -1,6 +1,6 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
-import {MdClear} from 'react-icons/lib/md';
+import ClearIcon from '../shared/ClearIcon';
 import Chip from '../shared/Chip';
 import onClickOutside from 'react-onclickoutside';
 import {isEmpty, isString} from 'lodash';
@@ -107,10 +107,10 @@ class FilterByText extends React.Component {
     return (
       <div>
         {this.state.inputOnFocus ? (
-          <MdClear
+          <ClearIcon
             className="search-by-text-icon"
             size="40"
-            color="#2AD587"
+            style={{color: '#2AD587', verticalAlign: 'middle'}}
             onClick={() => this._closeSearch()}
           />
         ) : (

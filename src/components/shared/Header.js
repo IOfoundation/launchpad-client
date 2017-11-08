@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
-import FaBars from 'react-icons/lib/fa/bars';
+import BarsIcon from '../shared/barsIcon';
 import Logo from './Logo';
 
 const Header = pathname => {
@@ -14,7 +14,7 @@ const Header = pathname => {
         </div>
         <input id="header-dropdown" type="checkbox" name="dropdown" />
         <label htmlFor="header-dropdown" className="collapse-menu-icon">
-          <FaBars size={24} />
+          <BarsIcon size={24} />
         </label>
         <nav className="header_links-contact">
           <Link className="header_link" to="/contact-us">

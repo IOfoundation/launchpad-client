@@ -1,8 +1,8 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-
 import Pagination from '../../../components/businesses/Pagination';
-import {MdChevronRight, MdChevronLeft} from 'react-icons/lib/md';
+import ArrowLeft from '../../../components/shared/ArrowLeft';
+import ArrowRight from '../../../components/shared/ArrowRight';
 
 const handleChangePage = jest.fn();
 
@@ -18,10 +18,9 @@ describe('<Pagination />', () => {
     );
     expect(
       wrapper.contains(
-        <MdChevronLeft
+        <ArrowLeft
           size={20}
-          color={'#0C0033'}
-          style={{marginRight: 8}}
+          style={{marginRight: 8, color:'#0C0033'}}
           onClick={() => this.props.handleChangePage(2 - 1)}
         />
       )
@@ -42,7 +41,7 @@ describe('<Pagination />', () => {
     );
     expect(
       wrapper.contains(
-        <MdChevronLeft
+        <ArrowLeft
           size={20}
           color={'#0C0033'}
           style={{marginRight: 8}}
@@ -66,10 +65,9 @@ describe('<Pagination />', () => {
     );
     expect(
       wrapper.contains(
-        <MdChevronRight
+        <ArrowRight
           size={20}
-          color={'#0C0033'}
-          style={{marginRight: 8}}
+          style={{marginRight: 8, color: '#0C0033'}}
           onClick={() => this.props.handleChangePage(2 - 1)}
         />
       )

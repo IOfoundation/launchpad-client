@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>fb</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M13.0734016,25.75 L13.0454545,16.8863636 L9.5,16.8863636 L9.5,13.3409091 L13.0454545,13.3409091 L13.0454545,11.125 C13.0454545,7.83535 15.0826018,6.25 18.0171923,6.25 C19.4228941,6.25 20.6310166,6.35465295 20.983098,6.40143523 L20.983098,9.83931182 L18.9478032,9.84023364 C17.351808,9.84023364 17.0427861,10.5986241 17.0427861,11.7115157 L17.0427861,13.3409091 L21.6875,13.3409091 L19.9147727,16.8863636 L17.0427861,16.8863636 L17.0427861,25.75 L13.0734016,25.75 Z" id="path-1"></path>
+    </defs>
+    <g id="icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="fb">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="Mask" fill="#fff" xlink:href="#path-1"></use>
+        </g>
+    </g>
+</svg>

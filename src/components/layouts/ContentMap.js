@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
-import {MdSearch} from 'react-icons/lib/md';
 import MapView from '../map-view/Main';
 import ResultPage from '../businesses/mobile/ResultPage';
 

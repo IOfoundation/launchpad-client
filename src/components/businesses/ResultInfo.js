@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
-import {MdKeyboardArrowRight} from 'react-icons/lib/md';
+import ArrowRight from '../shared/ArrowRight';
 
 class ResultInfo extends Component {
   _onClick(filter) {
@@ -21,7 +21,11 @@ class ResultInfo extends Component {
               <span className="desktop-devices">{'Growth Business'}</span>
               <span className="mobile-devices">{'Startup or High Growth Business'}</span>
             </div>
-            <MdKeyboardArrowRight className="btn-search-icon" size="32" />
+            <ArrowRight
+              className="btn-search-icon"
+              size={20}
+              style={{color: '#000', verticalAlign: 'middle'}}
+            />
           </button>
         </div>
         <div className="col-xs-4 col-md-4 col-lg-4 m-bot-16 p-right-0">
@@ -35,7 +39,11 @@ class ResultInfo extends Component {
               <span className="desktop-devices">{'Small Business'}</span>
               <span className="mobile-devices">{'Main Street/Small Business'}</span>
             </div>
-            <MdKeyboardArrowRight className="btn-search-icon" size="32" />
+            <ArrowRight
+              className="btn-search-icon"
+              size={20}
+              style={{color: '#000', verticalAlign: 'middle'}}
+            />
           </button>
         </div>
         <div className="col-xs-4 col-md-4 col-lg-4 m-bot-16 p-right-0">
@@ -49,7 +57,11 @@ class ResultInfo extends Component {
               <span className="desktop-devices">{'Home-Based Business'}</span>
               <span className="mobile-devices">{'Microenterprise or Home-Based Business'}</span>
             </div>
-            <MdKeyboardArrowRight className="btn-search-icon" size="32" />
+            <ArrowRight
+              className="btn-search-icon"
+              size={20}
+              style={{color: '#000', verticalAlign: 'middle'}}
+            />
           </button>
         </div>
       </div>

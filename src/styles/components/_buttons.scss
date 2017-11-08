@@ -19,7 +19,7 @@
       border: 1px solid $primary-color;
     }
     &-text {
-      width: 87%;
+      width: 95%;
       display: inline-block;
       vertical-align: middle;
       line-height: 24px;
@@ -32,8 +32,9 @@
       vertical-align: middle;
       line-height: normal;
     }
-    svg {
+    &-icon {
       vertical-align: middle;
+      width: 35px;
     }
   }
 
