@@ -1,6 +1,6 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
-import ClearIcon from '../shared/clear-icon';
+import ClearIcon from '../shared/ClearIcon';
 import Chip from '../shared/Chip';
 import onClickOutside from 'react-onclickoutside';
 import {isEmpty, isString} from 'lodash';

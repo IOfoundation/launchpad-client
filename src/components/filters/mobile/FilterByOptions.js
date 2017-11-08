@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
 import FilterOption from './FilterOption';
-import ArrowRight from '../../shared/arrow-right';
+import ArrowRight from '../../shared/ArrowRight';
 
 class FilterByOptions extends Component {
   render() {

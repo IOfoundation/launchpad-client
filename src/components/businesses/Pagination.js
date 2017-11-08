@@ -1,8 +1,8 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 import ReactPaginate from 'react-paginate';
-import ArrowLeft from '../shared/arrow-left';
-import ArrowRight from '../shared/arrow-right';
+import ArrowLeft from '../shared/ArrowLeft';
+import ArrowRight from '../shared/ArrowRight';
 
 class Pagination extends React.Component {
   constructor(props) {

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
-import ArrowRight from '../../shared/arrow-right';
+import ArrowRight from '../../shared/ArrowRight';
 
 class FilterOption extends Component {
   constructor(props) {

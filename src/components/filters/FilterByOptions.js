@@ -1,7 +1,7 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 import onClickOutside from 'react-onclickoutside';
-import ArrowRight from '../shared/arrow-right';
+import ArrowRight from '../shared/ArrowRight';
 
 class FilterByOptions extends React.Component {
   constructor(props) {

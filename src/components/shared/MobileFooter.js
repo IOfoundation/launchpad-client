@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
-import ArrowRight from '../shared/arrow-right';
+import ArrowRight from '../shared/ArrowRight';
 
 class MobileFooter extends React.Component {
   constructor(props) {

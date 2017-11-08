@@ -1,8 +1,8 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import Pagination from '../../../components/businesses/Pagination';
-import ArrowLeft from '../../../components/shared/arrow-left';
-import ArrowRight from '../../../components/shared/arrow-right';
+import ArrowLeft from '../../../components/shared/ArrowLeft';
+import ArrowRight from '../../../components/shared/ArrowRight';
 
 const handleChangePage = jest.fn();
 
