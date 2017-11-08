@@ -1,6 +1,6 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-
+import {expect} from 'chai';
 import Business from '../../../components/businesses/Business';
 
 const handleClickOnBusiness = jest.fn();
@@ -11,12 +11,23 @@ function mockOrganization() {
     name: 'organization1',
     description: 'orgDescription',
     email: 'jondoe@something.org',
-    contacts: [],
+    contacts: [
+      {
+        email: 'jondoe@something.org',
+        id: 1,
+        name: 'Jon Doe',
+        phones: [
+          {
+            number: '(530) 795-1520',
+          },
+        ],
+      },
+    ],
     phones: [
       {
         id: 1,
         number: '(123) 456 - 7890',
-      }
+      },
     ],
     locations: [
       {
@@ -27,8 +38,8 @@ function mockOrganization() {
           address_2: null,
           city: 'Sacramento',
           state_province: 'CA',
-          postal_code: '12345'
-        }
+          postal_code: '12345',
+        },
       },
       {
         id: 2,
@@ -38,8 +49,8 @@ function mockOrganization() {
           address_2: null,
           city: 'Sacramento',
           state_province: 'CA',
-          postal_code: '12345'
-        }
+          postal_code: '12345',
+        },
       },
     ],
     services: [
@@ -76,7 +87,7 @@ function mockOrganization() {
             name: 'category1',
           },
         ],
-      }
+      },
     ],
   };
 }
@@ -127,7 +138,9 @@ describe('<Business />', () => {
         handleClickOnBusiness={handleClickOnBusiness}
       />
     );
-    expect(wrapper.find('.main-contact').contains('jondoe@something.org')).toBe(true);
+    expect(wrapper.find('.main-contact').contains('jondoe@something.org')).toBe(
+      true
+    );
   });
 
   it('Renders a list of services offered', () => {

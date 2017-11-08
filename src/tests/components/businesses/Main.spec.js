@@ -2,6 +2,7 @@ import React from 'react';
 import {shallow} from 'enzyme';
 import {expect} from 'chai';
 import BusinessesView from '../../../components/businesses/Main';
+import BusinessesPage from '../../../components/businesses/BusinessesPage';
 
 const businesses = {
   locations: [],
@@ -101,43 +102,52 @@ describe('<BusinessesView />', () => {
   it('Clicking on Expand Map updates the state to expanded: true', () => {
     const wrapper = shallow(
       <BusinessesPage
-        filterOptions={basicFilters}
-        organizations={basicOrganizations}
-        locations={basicLocations}
-        businessesMetadata={basicBusinessesMetadata}
+        displayOptions={displayOptions}
+        filterOptions={filterOptions}
+        organizations={organizations}
+        locations={locations}
+        isMobile={isMobile}
+        showLoading={showLoading}
+        businessesMetadata={businessesMetadata}
+        checkBusinessType={checkBusinessType}
+        checkLocationToggle={checkBusinessType}
         handleChangePage={handleChangePage}
-        handleClickOnBusiness={handleClickOnBusiness}
         handleClickOnClearAllFilters={handleClickOnClearAllFilters}
         handleOnChangeFilterOptions={handleOnChangeFilterOptions}
       />
     );
-    wrapper.find('ContentMap').find('.expandMap-btn').simulate('click');
+    wrapper
+      .find('ContentMap')
+      .find('.expandMap-btn')
+      .simulate('click');
     //expect(wrapper.state('expanded')).toEqual(true);
   });
 
   it('Clicking on Reduce Map updates the state to expanded: false', () => {
     const wrapper = shallow(
       <BusinessesPage
-        filterOptions={basicFilters}
-        organizations={basicOrganizations}
-        locations={basicLocations}
-        businessesMetadata={basicBusinessesMetadata}
+        displayOptions={displayOptions}
+        filterOptions={filterOptions}
+        organizations={organizations}
+        locations={locations}
+        isMobile={isMobile}
+        showLoading={showLoading}
+        businessesMetadata={businessesMetadata}
+        checkBusinessType={checkBusinessType}
+        checkLocationToggle={checkBusinessType}
         handleChangePage={handleChangePage}
-        handleClickOnBusiness={handleClickOnBusiness}
         handleClickOnClearAllFilters={handleClickOnClearAllFilters}
         handleOnChangeFilterOptions={handleOnChangeFilterOptions}
       />
     );
-    wrapper.find('ContentMap').find('.expandMap-btn').simulate('click');
+    wrapper
+      .find('ContentMap')
+      .find('.expandMap-btn')
+      .simulate('click');
     //expect(wrapper.state('expanded')).toEqual(false)
   });
 
-  it('Moving the google map updates the bounds', () => {
+  it('Moving the google map updates the bounds', () => {});
 
-  });
-
-  it('Clicking on Redo Seach updates the returned orgs', () => {
-
-  });
-
+  it('Clicking on Redo Seach updates the returned orgs', () => {});
 });

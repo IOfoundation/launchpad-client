@@ -8,42 +8,36 @@ import FilterByOptions from '../../../components/filters/FilterByOptions.js';
 const handleOnChangeFilterOptions = jest.fn();
 
 function filters() {
-  return {
-    filters: [
+  return [
       {
-        businessServices: [
+        id: 2,
+        name: 'Financial Management',
+        children: [
           {
-            id: 2,
-            name: 'Financial Management',
-            children: [
-              {
-                id: 3,
-                name: 'Bookkeeping/Accounting Software Training',
-              },
-              {
-                id: 4,
-                name: 'Budget, Financial Statement & Cash Flow Training',
-              },
-            ],
+            id: 3,
+            name: 'Bookkeeping/Accounting Software Training',
           },
           {
-            id: 10,
-            name: 'Capital',
-            children: [
-              {
-                id: 11,
-                name: 'Accelerator Programs',
-              },
-              {
-                id: 12,
-                name: 'Equity Investors: Angels',
-              },
-            ],
+            id: 4,
+            name: 'Budget, Financial Statement & Cash Flow Training',
           },
         ],
       },
-    ],
-  };
+      {
+        id: 10,
+        name: 'Capital',
+        children: [
+          {
+            id: 11,
+            name: 'Accelerator Programs',
+          },
+          {
+            id: 12,
+            name: 'Equity Investors: Angels',
+          },
+        ],
+      },
+    ];
 }
 
 function items() {
@@ -54,11 +48,14 @@ describe('<FilterByOptions />', () => {
   it('_renderOptions should return a dropdown menu with 2 options', () => {
     const wrapper = shallow(
       <FilterByOptions
+        className={"filterByOptions"}
         filterName={'Business Services'}
-        filterOptions={filters.businessServices}
-        handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
+        filterOptions={filters()}
+        handleOnChangeFilterOptions={handleOnChangeFilterOptions}
       />
     );
-    expect(wrapper.find('.filterByText').length).toEqual(1);
+    const dropdownButton = wrapper.find('.filter-btn text-thin');
+    console.log(dropdownButton.simulate('click'))
+    expect(wrapper.find('.dropdown-options').length).toEqual(1);
   });
 });

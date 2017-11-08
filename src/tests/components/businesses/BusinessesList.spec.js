@@ -24,7 +24,8 @@ describe('<BusinessesList />', () => {
     const wrapper = shallow(
       <BusinessesList
         organizations={organizations}
-        handleClickOnBusiness={handleClickOnBusiness}
+        isMobile={false}
+        selectedOrg={-1}
         handleClickOnClearAllFilters={handleClickOnClearAllFilters}
       />
     );
@@ -36,7 +37,8 @@ describe('<BusinessesList />', () => {
     const wrapper = shallow(
       <BusinessesList
         organizations={organizations}
-        handleClickOnBusiness={handleClickOnBusiness}
+        isMobile={false}
+        selectedOrg={-1}
         handleClickOnClearAllFilters={handleClickOnClearAllFilters}
       />
     );
@@ -49,8 +51,9 @@ describe('<BusinessesList />', () => {
     const wrapper = shallow(
       <BusinessesList
         organizations={organizations}
+        isMobile={false}
+        selectedOrg={-1}
         handleClickOnClearAllFilters={handleClickOnClearAllFilters}
-        isMobile={isMobile}
       />
     );
     expect(wrapper.find('Business').length).toEqual(2);
