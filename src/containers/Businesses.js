@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import {PropTypes} from 'prop-types';
 import {isEmpty, isString} from 'lodash';
 import BusinessesPage from 'components/businesses/BusinessesPage';
+import MainLayout from '../components/layouts/Main';
 import * as actions from '../actions/business';
 
 export class Businesses extends PureComponent {
@@ -98,24 +99,26 @@ export class Businesses extends PureComponent {
   render() {
     const {displayOptions, filters, organizations, locations, items, metadata} = this.props;
     return (
-      <BusinessesPage
-        displayOptions={displayOptions}
-        filterOptions={filters}
-        items={items}
-        organizations={organizations}
-        locations={locations}
-        businessesMetadata={metadata}
-        windowWidth={this.state.width}
-        getTextSearchResults={(e) => this.getTextSearchResults(e)}
-        checkBusinessType={(filterValue) => this.handleOnChangeBusinessType(filterValue)}
-        checkLocationToggle={() => this.handleOnChangeLocationToggle()}
-        handleClickOnClearAllFilters={(e) =>
-          this.handleClickOnClearAllFilters(e)}
-        handleOnChangeFilterOptions={(filterValue, filterType, removeFilter) =>
-          this.handleOnChangeFilterOptions(filterValue, filterType, removeFilter)}
-        getFilterChips={(e) => this.getFilterChips()}
-        handleChangePage={(e) => this.handleChangePage(e)}
-      />
+      <MainLayout>
+        <BusinessesPage
+          displayOptions={displayOptions}
+          filterOptions={filters}
+          items={items}
+          organizations={organizations}
+          locations={locations}
+          businessesMetadata={metadata}
+          windowWidth={this.state.width}
+          getTextSearchResults={(e) => this.getTextSearchResults(e)}
+          checkBusinessType={(filterValue) => this.handleOnChangeBusinessType(filterValue)}
+          checkLocationToggle={() => this.handleOnChangeLocationToggle()}
+          handleClickOnClearAllFilters={(e) =>
+            this.handleClickOnClearAllFilters(e)}
+          handleOnChangeFilterOptions={(filterValue, filterType, removeFilter) =>
+            this.handleOnChangeFilterOptions(filterValue, filterType, removeFilter)}
+          getFilterChips={(e) => this.getFilterChips()}
+          handleChangePage={(e) => this.handleChangePage(e)}
+        />
+    </MainLayout>
     );
   }
 }
