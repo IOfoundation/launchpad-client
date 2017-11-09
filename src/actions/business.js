@@ -74,8 +74,6 @@ export function filterOrganizations(filterValue, currentParams, filterType, remo
     const filters = filtersObject(filterValue, currentParams, filterType, removeFilter);
     const {organizations, metadata} = await _buildOrganizationsAndMetadata(filters);
 
-    //dispatch(organizationsDataObject(organizations));
-    //dispatch(businessesMetaDataObject(metadata));
     dispatch(getData(organizations, metadata))
     pushBrowserHistory(filters);
   };
@@ -118,8 +116,6 @@ export function changePage(page, currentParams) {
       },
       totalOrganizations: httpResponse.headers['x-total-count'],
     };
-    //dispatch(organizationsDataObject(organizations));
-    //dispatch(businessesMetaDataObject(metadata));
     dispatch(getData(organizations, metadata));
     pushBrowserHistory(params);
   };
