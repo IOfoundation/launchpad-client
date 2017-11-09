@@ -43,7 +43,6 @@ class Main extends Component {
       handleOnChangeBusinessType,
       displayOptions,
       handleOnChangeFilterOptions,
-      businessTypes,
       filterOptions,
     } = this.props;
     if (filterOptions.businessTypes.length === 3) {
@@ -85,10 +84,12 @@ class Main extends Component {
       locations,
       handleClickOnClearAllFilters,
       handleChangePage,
+      isMobile
     } = this.props;
     return (
       <ContentMap
         locations={locations}
+        isMobile={isMobile}
         organizations={organizations}
         businessesMetadata={businessesMetadata}
         expanded={this.state.expanded}

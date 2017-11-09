@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import Chip from '../shared/Chip';
 import FacebookIcon from '../shared/FacebookIcon';
 import TwitterIcon from '../shared/TwitterIcon';
@@ -7,7 +7,7 @@ import LinkedinIcon from '../shared/LinkedinIcon';
 import {PropTypes} from 'prop-types';
 import {isEmpty} from 'lodash';
 
-class Business extends Component {
+class Business extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,7 +32,7 @@ class Business extends Component {
 
   render() {
     const {business} = this.props;
-    const locations = business.locations
+    const locations = business.locations;
     const [main_location, ...other_locations] = locations;
     return (
       <div className="business-card">

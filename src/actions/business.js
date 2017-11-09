@@ -32,16 +32,10 @@ const paginationMetadata = links => {
   return _paginationMetadata;
 };
 
-const organizationsDataObject = organizations => {
+const getData = (organizations, metadata) => {
   return {
-    type: types.FETCH_ORGANIZATIONS,
+    type: types.FETCH_DATA,
     organizations,
-  };
-};
-
-const businessesMetaDataObject = metadata => {
-  return {
-    type: types.FETCH_BUSINESSES_METADATA,
     metadata,
   };
 };
@@ -66,7 +60,6 @@ const displayFilterOptions = displayOptions => {
     displayOptions,
   };
 };
-
 const pushBrowserHistory = filters => {
   let filterString = queryString.stringify(filters, {encode: false});
   filterString = filterString.replace(/&per_page=\d+/, '');
@@ -81,8 +74,7 @@ export function filterOrganizations(filterValue, currentParams, filterType, remo
     const filters = filtersObject(filterValue, currentParams, filterType, removeFilter);
     const {organizations, metadata} = await _buildOrganizationsAndMetadata(filters);
 
-    dispatch(organizationsDataObject(organizations));
-    dispatch(businessesMetaDataObject(metadata));
+    dispatch(getData(organizations, metadata))
     pushBrowserHistory(filters);
   };
 }
@@ -104,7 +96,6 @@ const filtersObject = (filterValue, filters, filterType, removeFilter) => {
     }
   }
 
-
 export function changePage(page, currentParams) {
   return async (dispatch: Function) => {
     const params = {
@@ -125,9 +116,7 @@ export function changePage(page, currentParams) {
       },
       totalOrganizations: httpResponse.headers['x-total-count'],
     };
-    dispatch(organizationsDataObject(organizations));
-    dispatch(businessesMetaDataObject(metadata));
-
+    dispatch(getData(organizations, metadata));
     pushBrowserHistory(params);
   };
 }
@@ -197,7 +186,6 @@ export function changeFilterDisplayOptions(showBusinessTypes, locationToggleSwit
     dispatch(displayFilterOptions(displayOptions));
   }
 }
-
 async function _buildOrganizationsAndMetadata(filters) {
   const params = {
     ...filters,
