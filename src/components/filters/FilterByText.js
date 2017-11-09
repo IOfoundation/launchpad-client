@@ -31,7 +31,11 @@ class FilterByText extends React.Component {
   }
 
   _closeSearch() {
-    this.setState({inputOnFocus: false, showDropdown: false, searchText: ''});
+    this.setState({
+      inputOnFocus: false,
+      showDropdown: false,
+      searchText: '',
+    });
   }
 
   handleKeyPress(event) {
@@ -43,7 +47,11 @@ class FilterByText extends React.Component {
     }
   }
   handleClickOutside() {
-    this.setState({inputOnFocus: false, showDropdown: false, value: ''});
+    this.setState({
+      inputOnFocus: false,
+      showDropdown: false,
+      searchText: '',
+    });
   }
 
   handleDropdownOnClick(item) {
@@ -107,12 +115,13 @@ class FilterByText extends React.Component {
     return (
       <div>
         {this.state.inputOnFocus ? (
-          <ClearIcon
-            className="search-by-text-icon"
-            size="40"
-            style={{color: '#2AD587', verticalAlign: 'middle'}}
-            onClick={() => this._closeSearch()}
-          />
+          <a onClick={() => this._closeSearch()}>
+            <ClearIcon
+              className="search-by-text-icon"
+              size="40"
+              style={{color: '#2AD587', verticalAlign: 'middle'}}
+            />
+          </a>
         ) : (
           <img
             className="search-by-text-icon"
