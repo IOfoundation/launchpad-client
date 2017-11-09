@@ -10,7 +10,6 @@ export class Businesses extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      showBusinessTypes: true,
       width: window.innerWidth,
     };
   }
