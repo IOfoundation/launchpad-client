@@ -45,9 +45,7 @@ class Main extends Component {
       handleOnChangeFilterOptions,
       filterOptions,
     } = this.props;
-    console.log("RESULTPAGE", this.props);
     if (filterOptions.businessTypes.length === 3) {
-      console.log("RESULinsideTPAGE");
       return (
         <ResultInfo
           businessesMetadata={businessesMetadata}
@@ -86,10 +84,12 @@ class Main extends Component {
       locations,
       handleClickOnClearAllFilters,
       handleChangePage,
+      isMobile
     } = this.props;
     return (
       <ContentMap
         locations={locations}
+        isMobile={isMobile}
         organizations={organizations}
         businessesMetadata={businessesMetadata}
         expanded={this.state.expanded}

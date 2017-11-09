@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {PropTypes} from 'prop-types';
 import {isEmpty, isString} from 'lodash';
-import BusinessPage from 'components/businesses/BusinessPage';
+import BusinessesPage from 'components/businesses/BusinessesPage';
 import * as actions from '../actions/business';
 
 export class Businesses extends PureComponent {
@@ -11,16 +11,26 @@ export class Businesses extends PureComponent {
     super(props);
     this.state = {
       showBusinessTypes: true,
+      width: window.innerWidth,
     };
   }
   componentWillMount(_nextProps) {
     const params = this.props.location.query;
     this.props.actions.fetchFilterOptions();
     const locationToggleSwitch = 'ne_lat' in params ? true : false;
+    window.addEventListener('resize', () => this.handleWindowSizeChange());
     this.props.actions.changeFilterDisplayOptions(this.checkBusinessType(params.category), locationToggleSwitch);
     'id' in params ?
       this.props.actions.filterOrganizations(params.id, params, 'organization', true) :
       this.props.actions.filterOrganizations(null, params, 'category');
+  }
+
+  componentWillUnMount() {
+    window.addEventListener('resize', () => this.handleWindowSizeChange());
+  }
+
+  handleWindowSizeChange() {
+    this.setState({width: window.innerWidth});
   }
 
   checkBusinessType(filters) {
@@ -88,15 +98,15 @@ export class Businesses extends PureComponent {
 
   render() {
     const {displayOptions, filters, organizations, locations, items, metadata} = this.props;
-    console.log("render container businesses");
     return (
-      <BusinessPage
+      <BusinessesPage
         displayOptions={displayOptions}
         filterOptions={filters}
         items={items}
         organizations={organizations}
         locations={locations}
         businessesMetadata={metadata}
+        windowWidth={this.state.width}
         getTextSearchResults={(e) => this.getTextSearchResults(e)}
         checkBusinessType={(filterValue) => this.handleOnChangeBusinessType(filterValue)}
         checkLocationToggle={() => this.handleOnChangeLocationToggle()}

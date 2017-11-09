@@ -15,7 +15,6 @@ class BusinessesList extends PureComponent {
   }
   render() {
     const {handleClickOnClearAllFilters, organizations} = this.props;
-    console.log('rendernBusinessesList', this.props);
     return organizations && <div>{this._renderOrgs(organizations)}</div>;
   }
 }

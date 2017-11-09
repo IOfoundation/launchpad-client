@@ -88,35 +88,43 @@ class ContentMap extends Component {
       </div>
     );
   }
-  _renderBusinesses() {
-    const {locations, onBoundsChange, businessesMetadata} = this.props;
+  _renderResultPageMobile() {
     return (
-    <div>
       <ResultPage
         BusinessesList={this.props.children}
-        locations={locations}
-        onBoundsChange={onBoundsChange}
-        TotalOrganizations={businessesMetadata.totalOrganizations}
+        locations={this.props.locations}
+        onBoundsChange={this.props.onBoundsChange}
+        TotalOrganizations={this.props.businessesMetadata.totalOrganizations}
       />
-      <div className={
-          businessesMetadata.totalOrganizations === '0' ? (
-            'result-container-hide desktop-devices'
-          ) : (
-            'grid desktop-devices'
-          )
-        }
-      >
-        <div
-          className={
-            (this.props.expanded
-              ? 'col-md-12 col-xs-12 businessList p-left-0'
-              : 'col-md-12 col-xs-12 businessList--reduced p-left-0') + ' list'
-          }
+    );
+  }
+  _renderBusinesses() {
+    const {locations, onBoundsChange, businessesMetadata, isMobile} = this.props;
+    return (
+      <div>
+        {isMobile ? (
+          this._renderResultPageMobile()
+        ) : (
+          <div
+            className={
+              this.props.businessesMetadata.totalOrganizations === '0' ?
+                'result-container-hide desktop-devices'
+              :
+                'grid desktop-devices'
+            }
           >
-          {this.props.children}
-        </div>
+            <div
+              className={
+                (this.props.expanded
+                  ? 'col-md-12 col-xs-12 businessList p-left-0'
+                  : 'col-md-12 col-xs-12 businessList--reduced p-left-0') + ' list'
+              }
+            >
+              {this.props.children}
+            </div>
+          </div>
+        )}
       </div>
-    </div>
     );
   }
   render() {
@@ -124,34 +132,30 @@ class ContentMap extends Component {
     return (
       <div className="businessesContainer">
         {this.props.topBar}
+        <div
+          className={
+            'map ' +
+            (this.props.expanded
+              ? 'col-lg-5 col-md-5 col-xs-5 p-0 map-expanded'
+              : 'col-lg-3 col-md-3 col-xs-3 p-0')
+          }
+        >
           <div
             className={
-              'map ' +
-              (this.props.expanded
-                ? 'col-lg-5 col-md-5 col-xs-5 p-0 map-expanded'
-                : 'col-lg-3 col-md-3 col-xs-3 p-0')
-            }
-          >
-            <div
-              className={
               this.props.expanded
                 ? 'map-container-collapse'
                 : 'map-container-expand'
-              }
-              >
-            <MapView
-              locations={locations}
-              onBoundsChange={onBoundsChange}
-            />
+            }
+          >
+            <MapView locations={locations} onBoundsChange={onBoundsChange} />
           </div>
           {this.props.expanded
             ? this._renderReduceButton()
             : this._renderExpandButton()}
         </div>
-        {businessesMetadata.totalOrganizations === '0' ?
-              this._renderNoSearchResults() :
-              this._renderBusinesses()
-        }
+        {businessesMetadata.totalOrganizations === '0'
+          ? this._renderNoSearchResults()
+          : this._renderBusinesses()}
       </div>
     );
   }

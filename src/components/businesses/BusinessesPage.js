@@ -1,12 +1,40 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import MainLayout from '../layouts/Main';
 import FilterBox from '../filters/FilterBox';
 import FilterBoxMobile from '../filters/FilterBoxMobile';
 import BusinessesView from './Main';
 import {Link} from 'react-router';
 
-class BusinessPage extends Component {
+class BusinessesPage extends Component {
+  renderFilterBoxMobile() {
+    return (
+      <FilterBoxMobile
+        getTextSearchResults={this.props.getTextSearchResults}
+        filterOptions={this.props.filterOptions}
+        items={this.props.items}
+        handleClickOnClearAllFilters={this.props.handleClickOnClearAllFilters}
+        handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
+        getFilterChips={this.props.getFilterChips}
+      />
+    );
+  }
+  renderFilterBoxDesktop() {
+    return (
+      <FilterBox
+        getTextSearchResults={this.props.getTextSearchResults}
+        filterOptions={this.props.filterOptions}
+        items={this.props.items}
+        handleClickOnClearAllFilters={this.props.handleClickOnClearAllFilters}
+        handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
+        getFilterChips={this.props.getFilterChips}
+      />
+    );
+  }
+
   render() {
+    const {windowWidth} = this.props;
+    const isMobile = windowWidth <= 960;
     return (
       <MainLayout>
         <section>
@@ -26,31 +54,13 @@ class BusinessPage extends Component {
                     "Where startups and small businesses connect in California's Central Valley"
                   }
                 </h2>
-                <div className="desktop-devices">
-                  <FilterBox
-                    getTextSearchResults={this.props.getTextSearchResults}
-                    filterOptions={this.props.filterOptions}
-                    items={this.props.items}
-                    handleClickOnClearAllFilters={this.props.handleClickOnClearAllFilters}
-                    handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
-                    getFilterChips={this.props.getFilterChips}
-                  />
-                </div>
-                <div className="mobile-devices">
-                  <FilterBoxMobile
-                    getTextSearchResults={this.props.getTextSearchResults}
-                    filterOptions={this.props.filterOptions}
-                    items={this.props.items}
-                    handleClickOnClearAllFilters={this.props.handleClickOnClearAllFilters}
-                    handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
-                    getFilterChips={this.props.getFilterChips}
-                  />
-                </div>
+                {isMobile ? this.renderFilterBoxMobile() : this.renderFilterBoxDesktop()}
                 <BusinessesView
                   displayOptions={this.props.displayOptions}
                   filterOptions={this.props.filterOptions}
                   organizations={this.props.organizations}
                   locations={this.props.locations}
+                  isMobile={isMobile}
                   businessesMetadata={this.props.businessesMetadata}
                   checkBusinessType={this.props.checkBusinessType}
                   checkLocationToggle={this.props.checkBusinessType}
@@ -63,8 +73,22 @@ class BusinessPage extends Component {
           </div>
         </section>
       </MainLayout>
-    )
+    );
   }
 }
 
-export default BusinessPage;
+BusinessesPage.propTypes = {
+  BusinessPage: PropTypes.array,
+  checkBusinessType: PropTypes.func,
+  displayOptions: PropTypes.object.isRequired,
+  getFilterChips: PropTypes.func,
+  getTextSearchResults: PropTypes.func,
+  handleChangePage: PropTypes.func,
+  handleClickOnClearAllFilters: PropTypes.func,
+  handleOnChangeFilterOptions: PropTypes.func,
+  items: PropTypes.arrayOf(PropTypes.object),
+  locations: PropTypes.arrayOf(PropTypes.object),
+  organizations: PropTypes.arrayOf(PropTypes.object),
+};
+
+export default BusinessesPage;

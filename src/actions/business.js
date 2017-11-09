@@ -32,18 +32,11 @@ const paginationMetadata = links => {
   return _paginationMetadata;
 };
 
-const organizationsDataObject = organizations => {
-  return {
-    type: types.FETCH_ORGANIZATIONS,
-    organizations,
-  };
-};
-
 const getData = (organizations, metadata) => {
   return {
     type: types.FETCH_DATA,
     organizations,
-    metadata
+    metadata,
   };
 };
 

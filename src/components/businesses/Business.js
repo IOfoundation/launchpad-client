@@ -34,7 +34,6 @@ class Business extends PureComponent {
     const {business} = this.props;
     const locations = business.locations;
     const [main_location, ...other_locations] = locations;
-    console.log('render business', this.props);
     return (
       <div className="business-card">
         <div

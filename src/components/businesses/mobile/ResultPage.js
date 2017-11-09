@@ -13,7 +13,7 @@ class ResultPage extends Component {
   render() {
     const {tabIndex} = this.state;
     return (
-      <div className="mobile-devices">
+      <div>
         <Tabs
           selectedIndex={tabIndex}
           onSelect={tabIndex => this.setState({tabIndex})}
