@@ -69,23 +69,14 @@
   height: 40px;
   width: 40px;
 }
-.map_marker {
-  color: #4A4A4A;
-  width: 20px;
-}
-.map_marker:hover {
-  cursor: pointer;
-  color: #4A4A4A;
-  stroke: #4A4A4A;
-  stroke-width:2px;
-  stroke-linejoin: round;
-}
+
 .map_modal {
   position: absolute;
   text-align: center;
   width: 200px;
+  bottom: -60px;
+  left: -20px;
   margin-left: -90px;
-  bottom: 50px;
   box-shadow: 0 0 2px 0 rgba(0,0,0,0.12), 0 2px 2px 0 rgba(12,0,51,0.1);
   background: white;
 }
@@ -98,7 +89,7 @@
   margin-top: -5px;
 }
 .map_modal_title {
-  color: #3F51B5;
+  color: #000000;
   font-weight: bold;
   font-size: 14px;
   margin: 0;

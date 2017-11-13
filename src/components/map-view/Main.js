@@ -8,6 +8,7 @@ class Main extends React.Component {
     super(props);
     this.state = {
       showModal: false,
+      selected: -1,
     };
   }
 
@@ -20,44 +21,18 @@ class Main extends React.Component {
   handleBoundsChange(event) {
     this.props.onBoundsChange(event);
   }
-
-  _renderModal(business) {
-    return (
-      <div className="map_modal">
-        <div className="row between-xs top-xs map_modal_top">
-          <h1 className="map_modal_title">{business.name}</h1>
-          <img className="map_modal_logo" src={business.logo} />
-        </div>
-        <section className="row between-xs map_modal_social business_block--expanded_bottom">
-          <a className="visitWebsite bold smallFont primary" href="#">
-            {'VISIT WEBSITE'}
-          </a>
-          <div>
-            <a className="socialIcon" href="#">
-              <img
-                className="socialIcon_icon"
-                src="../static-data/images/twitter.svg"
-              />
-            </a>
-            <a className="socialIcon" href="#">
-              <img
-                className="socialIcon_icon"
-                src="../static-data/images/facebook.svg"
-              />
-            </a>
-            <a className="socialIcon" href="#">
-              <img
-                className="socialIcon_icon"
-                src="../static-data/images/linkedin.svg"
-              />
-            </a>
-          </div>
-        </section>
-      </div>
-    );
+  _handleOnClick(e) {
+    this.setState({selected: e});
+    console.log(this.state.selected)
   }
+
+  _handleHover(e) {
+
+  }
+
   render() {
-    const firstBusiness = this.props.locations ? this.props.locations[0] : null;
+    const {locations} = this.props;
+    const firstBusiness = locations ? locations[0] : null;
     const sacCoordinates = {lat: 38.57, lng: -121.47};
     const map_options = { fullscreenControl: false };
     const zoomLevel = 7
@@ -67,17 +42,29 @@ class Main extends React.Component {
         <GoogleMap
           center={sacCoordinates}
           zoom={zoomLevel}
+          hoverDistance={12}
           onChange={e => this.handleBoundsChange(e)}
-          onChildClick={e => this.openModal(e)}
           resetBoundsOnResize={true}
           options={map_options}
+          onChildMouseEnter={e => this._handleHover(e)}
+          onChildMouseLeave={e => this._handleHover(e)}
+          onChildClick={e => this._handleOnClick(e)}
           bootstrapURLKeys={{
             key: process.env.GOOGLE_MAP_API_KEY,
           }}
         >
-          {this.props.locations.map(location => {
+          {locations.map(location => {
             const [lng, lat] = this.getCoordinates(location);
-            return <MapMarker key={location.id} lat={lat} lng={lng}/>;
+            return (
+              <MapMarker
+                key={location.id}
+                lat={lat}
+                lng={lng}
+                organization={location.organization}
+                selected={String(this.state.selected) === String(location.id)
+                  ? true : false}
+              />
+            );
           })}
         </GoogleMap>
       );
