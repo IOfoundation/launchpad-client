@@ -20,9 +20,9 @@ export class Businesses extends PureComponent {
     const locationToggleSwitch = 'ne_lat' in params ? true : false;
     window.addEventListener('resize', () => this.handleWindowSizeChange());
     this.props.actions.changeFilterDisplayOptions(this.checkBusinessType(params.category), locationToggleSwitch);
-    'id' in params ?
-      this.props.actions.filterOrganizations(params.id, params, 'organization', true) :
-      this.props.actions.filterOrganizations(null, params, 'category');
+    //'id' in params ?
+      //this.props.actions.filterOrganizations(params.id, params, 'organization', true) :
+      //this.props.actions.filterOrganizations(null, params, 'category');
   }
 
   componentWillUnMount() {
