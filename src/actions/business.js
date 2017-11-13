@@ -211,6 +211,7 @@ async function _buildOrganizationsAndMetadata(filters) {
 
 function _addCategoryFilter(newFilters, filterValue) {
   if (newFilters.id) {newFilters.id = [];}
+  if (!isEmpty(newFilters.page)) {_removePaginationFilters(newFilters);}
   if (filterValue === null) {return newFilters;}
   if (isEmpty(newFilters.category)) {
     newFilters.category = [filterValue];
@@ -223,6 +224,7 @@ function _addCategoryFilter(newFilters, filterValue) {
 }
 
 function _removeCategoryFilter(newFilters, filterValue) {
+  if (!isEmpty(newFilters.page)) {_removePaginationFilters(newFilters);}
   if (isString(newFilters.category)) {
     newFilters.category = [];
     return newFilters;
@@ -244,6 +246,7 @@ function _removeOrganizationIdFilter() {
 }
 
 function _addLocationFilter(newFilters, filterValue) {
+  if (!isEmpty(newFilters.page)) {_removePaginationFilters(newFilters);}
   newFilters.id = [];
   newFilters.sw_lat = filterValue.sw.lat;
   newFilters.sw_lng = filterValue.sw.lng;
@@ -253,6 +256,7 @@ function _addLocationFilter(newFilters, filterValue) {
 }
 
 function _removeLocationFilter(newFilters) {
+  if (!isEmpty(newFilters.page)) {_removePaginationFilters(newFilters);}
   newFilters.sw_lat = [];
   newFilters.sw_lng = [];
   newFilters.ne_lat = [];
@@ -262,4 +266,9 @@ function _removeLocationFilter(newFilters) {
 
 function _removeAllFilters() {
   return [];
+}
+
+function _removePaginationFilters(newFilters) {
+  newFilters.page = 1;
+  return newFilters
 }

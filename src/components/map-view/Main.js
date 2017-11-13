@@ -60,12 +60,13 @@ class Main extends React.Component {
     const firstBusiness = this.props.locations ? this.props.locations[0] : null;
     const sacCoordinates = {lat: 38.57, lng: -121.47};
     const map_options = { fullscreenControl: false };
+    const zoomLevel = 7
     if (firstBusiness) {
       const [centerLng, centerLat] = this.getCoordinates(firstBusiness);
       return (
         <GoogleMap
-          center={{lat: centerLat, lng: centerLng}}
-          zoom={10}
+          center={sacCoordinates}
+          zoom={zoomLevel}
           onChange={e => this.handleBoundsChange(e)}
           onChildClick={e => this.openModal(e)}
           resetBoundsOnResize={true}

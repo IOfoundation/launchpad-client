@@ -14,7 +14,7 @@ class Pagination extends React.Component {
   }
 
   render() {
-    const {last} = this.props.businessesMetadata.pagination;
+    const {last, currentPage} = this.props.businessesMetadata.pagination;
     if (!last.page) {
       return null;
     }
@@ -51,6 +51,7 @@ class Pagination extends React.Component {
           containerClassName={'pagination-index text-semi'}
           subContainerClassName={'pagination-numbers '}
           activeClassName={'active'}
+          forcePage={currentPage - 1}
         />
       </div>
     );
