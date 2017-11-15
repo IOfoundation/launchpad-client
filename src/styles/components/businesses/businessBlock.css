@@ -46,7 +46,8 @@
   line-height: 20px;
 }
 .business_block--expanded_bottom {
-  margin-top: 16px;
+  margin-top: 8px;
+  height: 43px;
 }
 .business_block_contact {
   font-size: 14px;

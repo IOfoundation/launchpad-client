@@ -128,7 +128,7 @@ class ContentMap extends Component {
     );
   }
   render() {
-    const {locations, businessesMetadata, onBoundsChange, organizations} = this.props;
+    const {locations, businessesMetadata, onBoundsChange, organizations, highlightOrgCard} = this.props;
     return (
       <div className="businessesContainer">
         {this.props.topBar}
@@ -147,7 +147,11 @@ class ContentMap extends Component {
                 : 'map-container-expand'
             }
           >
-            <MapView locations={locations} onBoundsChange={onBoundsChange} />
+            <MapView
+              locations={locations}
+              onBoundsChange={onBoundsChange}
+              highlightOrgCard={highlightOrgCard}
+            />
           </div>
           {this.props.expanded
             ? this._renderReduceButton()
@@ -166,6 +170,7 @@ ContentMap.propTypes = {
   children: PropTypes.node,
   expanded: PropTypes.bool,
   expandMap: PropTypes.func.isRequired,
+  highlightOrgCard: PropTypes.func.isRequired,
   locations: PropTypes.array,
   onBoundsChange: PropTypes.func,
   redoSearchInMap: PropTypes.func.isRequired,

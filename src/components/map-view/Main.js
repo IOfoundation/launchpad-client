@@ -22,12 +22,15 @@ class Main extends React.Component {
     this.props.onBoundsChange(event);
   }
   _handleOnClick(e) {
-    this.setState({selected: e});
-    console.log(this.state.selected)
+    this.setState({ selected: e });
+  }
+
+  _handleCloseClick() {
+    this.setState({ selected: -1 });
   }
 
   _handleHover(e) {
-
+    this.props.highlightOrgCard(e);
   }
 
   render() {
@@ -61,8 +64,9 @@ class Main extends React.Component {
                 lat={lat}
                 lng={lng}
                 organization={location.organization}
-                selected={String(this.state.selected) === String(location.id)
+                selected={this.state.selected === String(location.id)
                   ? true : false}
+                handleCloseClick={() => this._handleCloseClick()}
               />
             );
           })}

@@ -96,6 +96,8 @@ export class Businesses extends PureComponent {
     this.props.actions.changePage(page, businessesFilters);
   }
 
+  
+
   render() {
     const {displayOptions, filters, organizations, locations, items, metadata} = this.props;
     return (

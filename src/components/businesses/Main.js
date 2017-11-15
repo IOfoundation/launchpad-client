@@ -13,6 +13,7 @@ class Main extends Component {
     this.state = {
       expanded: false,
       bounds: {},
+      selectedOrg: -1,
     };
   }
 
@@ -29,6 +30,10 @@ class Main extends Component {
     if (this.props.displayOptions.locationToggleSwitch) {
       this.props.handleOnChangeFilterOptions(this.state.bounds, 'coordinates', false);
     }
+  }
+
+  highlightOrgCard(organizationId) {
+    this.setState({selectedOrg: organizationId});
   }
 
   redoSearchInMap() {
@@ -72,6 +77,7 @@ class Main extends Component {
     return (
       <BusinessesList
         organizations={this.props.organizations}
+        selectedOrg={this.state.selectedOrg}
         handleClickOnClearAllFilters={this.props.handleClickOnClearAllFilters}
       />
     );
@@ -100,6 +106,7 @@ class Main extends Component {
         redoSearchInMap={() => this.redoSearchInMap()}
         topBar={this._renderResultsInfo()}
         toggleSwitch={displayOptions.locationToggleSwitch}
+        highlightOrgCard={(organizationId) => this.highlightOrgCard(organizationId)}
       >
         {isEmpty(this.props.organizations) ? (
           this._renderLoader()
