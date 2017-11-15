@@ -13,7 +13,10 @@
     list-style: none;
     padding: 0px;
     margin: 0;
-    transition: max-height 0.5s ease-in;
+    transition: 0.5s ease all;
+    svg {
+      width: 20px;
+    }
     .right-arrow {
       margin: 0 0 5px 0;
     }
@@ -21,7 +24,7 @@
       padding: 24px 0;
       overflow:hidden;
       max-height: 10px;
-      transition: all 0.5s ease-in;
+      transition: 0.5s ease all;
       svg {
         margin: 0 5px;
       }
@@ -39,7 +42,7 @@
   input:checked {
     &~ li {
       background-color: #161616;
-      min-height: 240px;
+      max-height: 240px;
       svg {
         transform: rotate(90deg);
       }

@@ -1,4 +1,3 @@
-
 .pagination-container {
   &-hide {
     display: none;
@@ -23,6 +22,9 @@
   .next {
     margin-right: 0;
     color: $primary-color;
+  }
+  .break {
+    color: #bbbbbb;
   }
   .previous.disabled,
   .next.disabled {

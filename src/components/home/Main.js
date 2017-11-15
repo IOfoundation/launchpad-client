@@ -13,12 +13,12 @@ const Main = ({items, getTextSearchResults}) => {
             <Logo />
           </div>
           <div className="col-lg-12">
-            <h2 className="desktop-devices text-semi">
+            <h2 className="desktop-devices text-bold">
               {'Where startups and small businesses connect in'}
               <br />
               {'California’s Capital Region'}
             </h2>
-            <h2 className="mobile-devices text-semi">
+            <h2 className="mobile-devices text-bold">
               {
                 'Where startups and small businesses connect in California’s Capital Region'
               }

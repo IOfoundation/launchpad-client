@@ -15,7 +15,7 @@
     input:focus {
       border: 0px;
       outline: none;
-      color: #00D3A7;
+      color: #fff;
     }
     .filter-result-text {
       height: 24px;
@@ -106,6 +106,8 @@
     padding: 12px 0;
     color: $primary-color;
     width: 271px;
+    max-height: 500px;
+    overflow-y: scroll;
     &-expand {
       width: 544px;
     }
@@ -211,7 +213,7 @@
   &-icon {
     position: absolute;
     right: 16px;
-    top: 2px;
+    top: -3px;
     width: 24px;
   }
 }
@@ -254,7 +256,7 @@
     a {
       color: #fff;
       display: inline-block;
-      width: 94%;
+      width: 93%;
       vertical-align: middle;
     }
     &:hover {

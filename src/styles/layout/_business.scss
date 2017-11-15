@@ -2,7 +2,6 @@
   max-width: 95%;
 }
 .business {
-  background-color: #f2f2f2;
   transition: .3s ease all;
 }
 .business-img {
@@ -11,6 +10,7 @@
 }
 .business-logo{
   width: 100%;
+  float: right;
 }
 .business-card {
   background-color: rgba(0, 0, 0, 0.05);
@@ -23,6 +23,7 @@
     }
   }
   .full-information {
+    transition: .3s ease all;
     .business-title {
       opacity: 0.5;
       font-size: 14px;
@@ -35,6 +36,7 @@
       font-size: 14px;
       opacity: 0.5;
       margin-top: 4px;
+      line-height: 20px;
    }
    .details {
      display: none;
@@ -49,7 +51,6 @@
     .full-information {
       max-height: 0px;
       overflow: hidden;
-      transition: all 0.4s ease-in;
     }
   }
   &-expand {
@@ -57,9 +58,7 @@
       display: none;
     }
     .full-information {
-      margin-top: 22px;
       max-height: 2000px;
-      transition: all 0.4s ease-in;
     }
   }
 

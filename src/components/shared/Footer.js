@@ -1,6 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router';
 import Logo from './Logo';
+import FacebookIcon from '../shared/FacebookIcon';
+import TwitterIcon from '../shared/TwitterIcon';
+import LinkedinIcon from '../shared/LinkedinIcon';
+import GitIcon from '../shared/GitIcon';
 
 const Footer = () => {
   return (
@@ -34,16 +38,16 @@ const Footer = () => {
         <div className="social-icons col-md-2 col-md-offset-1 col-xs-6 text-xs-margin">
           <p className="main-footer_subtitle text-regular">{'SOCIAL'}</p>
           <Link className="main-footer_icon" to="">
-            <img src="/static-data/images/twitter-white-icon.svg" />
+            <TwitterIcon />
           </Link>
           <Link className="main-footer_icon" to="">
-            <img src="/static-data/images/fb-white-icon.svg" />
+            <FacebookIcon />
           </Link>
           <Link className="main-footer_icon" to="">
-            <img src="/static-data/images/in-white-icon.svg" />
+            <LinkedinIcon />
           </Link>
           <Link className="main-footer_icon" to="">
-            <img src="/static-data/images/git-white-icon.svg" />
+            <GitIcon />
           </Link>
         </div>
       </div>

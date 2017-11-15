@@ -1,6 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router';
 import ArrowRight from '../shared/ArrowRight';
+import FacebookIcon from '../shared/FacebookIcon';
+import TwitterIcon from '../shared/TwitterIcon';
+import LinkedinIcon from '../shared/LinkedinIcon';
+import GitIcon from '../shared/GitIcon';
 
 class MobileFooter extends React.Component {
   constructor(props) {
@@ -72,10 +76,10 @@ class MobileFooter extends React.Component {
         <ul className="mobile-footer-list social-icons-container">
           <li className="social-icons-title">{'SOCIAL'}</li>
           <li>
-            <img src="/static-data/images/twitter-white-icon.svg" />
-            <img src="/static-data/images/fb-white-icon.svg" />
-            <img src="/static-data/images/in-white-icon.svg" />
-            <img src="/static-data/images/git-white-icon.svg" />
+            <TwitterIcon />
+            <FacebookIcon />
+            <LinkedinIcon />
+            <GitIcon />
           </li>
         </ul>
       </footer>
