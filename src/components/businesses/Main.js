@@ -63,6 +63,7 @@ class Main extends Component {
   return (
       <div className="load-div">
         <img className="loader" src="static-data/images/loader.gif"/>
+        <h3 className="loader-text text-thin">Loading</h3>
       </div>
     );
   }

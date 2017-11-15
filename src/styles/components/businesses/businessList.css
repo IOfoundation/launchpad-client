@@ -19,3 +19,11 @@
 .loader {
   width: 100px;
 }
+.loader-text {
+  position: absolute;
+  text-transform: uppercase;
+  color: #00D3A7;
+  font-size: 24px;
+  padding-top: 25%;
+  line-height: 36px;
+}

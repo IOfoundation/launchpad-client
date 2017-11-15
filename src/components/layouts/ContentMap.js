@@ -17,7 +17,7 @@ class ContentMap extends Component {
           <div className="float-right">
             <button
               onClick={this.props.redoSearchInMap}
-              className={this.props.toggleOn ?
+              className={this.props.toggleSwitch ?
                 ('toggle-btn toggle-on') : ('toggle-btn toggle-off')}
             >
               <span />
