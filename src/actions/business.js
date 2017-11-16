@@ -61,10 +61,10 @@ const displayFilterOptions = displayOptions => {
   };
 };
 
-const addChipToFilterComponent = filterChips => {
+const addChipToFilterComponent = appliedFilters => {
   return {
-    type: types.UPDATE_CHIP_FILTERS,
-    filterChips,
+    type: types.UPDATE_APPLIED_FILTERS,
+    appliedFilters,
   };
 };
 
@@ -197,10 +197,18 @@ export function changeFilterDisplayOptions(showBusinessTypes, locationToggleSwit
 
 export function updateChipFilers(currentFilters, filterValue) {
   return (dispatch: Function) => {
+<<<<<<< HEAD
+    let appliedFilters = [];
+    if (isEmpty(currentFilters)) { appliedFilters = filterValue; }
+    if (isString(currentFilters)) { appliedFilters = [currentFilters, filterValue]; }
+      currentFilters.push(filterValue);
+    dispatch(addChipToFilterComponent(appliedFilters));
+=======
     const filterChips = isEmpty(currentFilters) ?
       [filterValue] :
       currentFilters.push(filterValue);
     dispatch(addChipToFilterComponent(filterChips));
+>>>>>>> ad98377... CS-295 Add addChipToFilterComponent action
   }
 }
 

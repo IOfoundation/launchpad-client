@@ -23,6 +23,7 @@ const initialState = {
       showBusinessTypes: true,
       locationToggleSwitch: false
     },
+    appliedFilters: [],
   },
 };
 

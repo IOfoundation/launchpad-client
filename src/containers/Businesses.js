@@ -71,19 +71,19 @@ export class Businesses extends PureComponent {
 
   handleOnChangeFilterOptions(filterValue, filterType, removeFilter) {
     const params = this.props.queries;
+    this.props.actions.updateChipFilers(params, filterValue);
     this.props.actions.changeFilterDisplayOptions(
       this.handleOnChangeBusinessType(filterValue),
       this.handleOnChangeLocationToggle(filterType, removeFilter)
     );
-    this.getFilterChips(filterValue);
     if (typeof removeFilter === "undefined" && !isEmpty(params.category)) {
       removeFilter = params.category.includes(filterValue) ? true : false;
     }
     this.props.actions.filterOrganizations(filterValue, params, filterType, removeFilter)
   }
 
-  getFilterChips() {
-    return this.props.queries;
+  getFilterChips(params, filterValue) {
+    return this.props.appliedFilters;
   }
 
   handleClickOnClearAllFilters() {
@@ -136,6 +136,7 @@ Businesses.propTypes = {
 const mapStateToProps = _state => {
   const {businesses, routing} = _state;
   return {
+    appliedFilters: businesses.appliedFilters,
     displayOptions: businesses.displayOptions,
     items: businesses.items,
     filters: businesses.filters,

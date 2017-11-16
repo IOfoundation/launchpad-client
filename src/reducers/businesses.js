@@ -53,6 +53,14 @@ export default function(state: STATE = initialState, action: ACTION): STATE {
       };
     }
 
+    case types.UPDATE_APPLIED_FILTERS: {
+      const {appliedFilters} = action;
+      return {
+        ...state,
+        appliedFilters,
+      };
+    }
+
     default:
       return state;
   }
