@@ -3,7 +3,6 @@ import FacebookIcon from '../shared/FacebookIcon';
 import TwitterIcon from '../shared/TwitterIcon';
 import LinkedinIcon from '../shared/LinkedinIcon';
 import ClearIcon from '../shared/ClearIcon';
-import $ from 'jquery';
 
 const K_WIDTH = 24;
 const K_HEIGHT = 24;
