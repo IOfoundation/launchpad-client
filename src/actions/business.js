@@ -60,6 +60,14 @@ const displayFilterOptions = displayOptions => {
     displayOptions,
   };
 };
+
+const addChipToFilterComponent = filterChips => {
+  return {
+    type: types.UPDATE_CHIP_FILTERS,
+    filterChips,
+  };
+};
+
 const pushBrowserHistory = filters => {
   let filterString = queryString.stringify(filters, {encode: false});
   filterString = filterString.replace(/&per_page=\d+/, '');
@@ -186,6 +194,16 @@ export function changeFilterDisplayOptions(showBusinessTypes, locationToggleSwit
     dispatch(displayFilterOptions(displayOptions));
   }
 }
+
+export function updateChipFilers(currentFilters, filterValue) {
+  return (dispatch: Function) => {
+    const filterChips = isEmpty(currentFilters) ?
+      [filterValue] :
+      currentFilters.push(filterValue);
+    dispatch(addChipToFilterComponent(filterChips));
+  }
+}
+
 async function _buildOrganizationsAndMetadata(filters) {
   const params = {
     ...filters,
