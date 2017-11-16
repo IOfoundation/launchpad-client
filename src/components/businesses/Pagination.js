@@ -48,7 +48,7 @@ class Pagination extends React.Component {
           marginPagesDisplayed={1}
           pageRangeDisplayed={2}
           onPageChange={this.handlePageClick.bind(this)}
-          containerClassName={'pagination-index text-semi'}
+          containerClassName={'pagination-index text-bold'}
           subContainerClassName={'pagination-numbers '}
           activeClassName={'active'}
           forcePage={currentPage - 1}

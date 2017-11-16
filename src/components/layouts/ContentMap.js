@@ -23,7 +23,7 @@ class ContentMap extends Component {
               <span />
             </button>
             <button
-              className="btn-link btn-link-primary underline text-xs-margin text-semi"
+              className="btn-link btn-link-primary underline text-xs-margin text-bold"
               onClick={this.props.redoSearchInMap}
             >
               {'Search in Map Area'}

@@ -29,7 +29,29 @@ class Business extends PureComponent {
       </div>
     );
   }
-
+  _renderOtherLocations(otherLocations) {
+    return (
+      <div className="col-lg-12 col-md-12 col-xs-12 p-0 grid">
+        {otherLocations.map(location => {
+          return (
+            <div key={location.id} className="col-lg-12 col-md-12 col-xs-12 m-bot-24 p-0 grid">
+              <div className="col-lg-6 col-md-6 col-xs-6 p-0 m-right-54">
+                <h4>{location.address.address_1}</h4>
+                {location.address.address_2 && <h4>{location.address.address_2}</h4>}
+                <h4>
+                  {`${location.address.city}, ${location.address.state_province} ${location.address.postal_code}`}
+                </h4>
+              </div>
+              <div className="col-lg-4 col-md-4 col-xs-6 p-0 m-top-24">
+                {location.phones.length > 0 && <h4>{location.phones[0].number}</h4>}
+                {location.email && <h4>{location.email}</h4>}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    )
+  }
   render() {
     const {business} = this.props;
     const locations = business.locations;
@@ -46,7 +68,7 @@ class Business extends PureComponent {
           <div
             className={
               this.state.expanded
-                ? 'business col-lg-2 col-md-2 col-xs-2 p-0'
+                ? 'business col-lg-2 col-md-2 col-xs-2 p-0 m-bot-20'
                 : 'business business-img'
             }
           >
@@ -63,11 +85,11 @@ class Business extends PureComponent {
             }
           >
             <div className="preview-details-container">
-              <h3 className="title">
+              <h3 className="title m-bot-8">
                 {business.name}
               </h3>
               <p className="preview-details">{business.description}</p>
-              <div className={this.state.expanded ? ('col-lg-12 social-icons p-0 m-top-16') : ('social-icons-hide')}>
+              <div className={this.state.expanded ? ('col-lg-12 social-icons p-0 m-top-20') : ('social-icons-hide')}>
                 {business.facebook ? <a href={business.facebook}><FacebookIcon className={'icon-svg'} size={18} /></a> : ''}
                 {business.twitter ? <a href={business.twitter}><TwitterIcon className={'icon-svg'} size={18} /></a> : ''}
                 {business.linkedin ? <a href={business.linkedin}><LinkedinIcon className={'icon-svg'} size={18} /></a> : ''}
@@ -136,29 +158,12 @@ class Business extends PureComponent {
                     <p className="business-title">{'Other Locations:'}</p>
                   </div>
                   <div className="col-lg-4 col-md-4 col-xs-6 p-0">
-                    <p className="business-title">{'Contact Number:'}</p>
+                    <p className="business-title">{'Contact:'}</p>
                   </div>
+                  {this._renderOtherLocations(other_locations)}
                 </div>
-                {other_locations.map(location => {
-                  return (
-                    <div key={location.id} className="col-lg-12 col-md-12 col-xs-12 grid p-0">
-                      <div className="col-lg-6 col-md-6 col-xs-6 p-0 m-top-24 m-right-54">
-                        <h4>{location.address.address_1}</h4>
-                        {location.address.address_2 && <h4>{location.address.address_2}</h4>}
-                        <h4>
-                          {`${location.address.city}, ${location.address.state_province} ${location.address.postal_code}`}
-                        </h4>
-                      </div>
-                      <div className="col-lg-4 col-md-4 col-xs-6 p-0 m-top-24">
-                        {isEmpty(location.phones) ?
-                          '' : <h4>{location.phones[0].number}</h4>}
-                      </div>
-                    </div>
-                  );
-                })}
               </div>
             }
-
           </div>
           <p className="location text-bold">
             <span>

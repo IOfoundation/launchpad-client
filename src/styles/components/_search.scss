@@ -1,7 +1,7 @@
 .hero_inputContainer {
   position: relative;
   max-width: 940px;
-  margin: 48px auto;
+  margin: 48px auto 20px auto;
   input {
     &::placeholder,
     &::-moz-placeholder,
@@ -88,7 +88,7 @@
   }
   .not-match-message {
     font-size: 16px;
-    opacity: 0.5;
+    opacity: 0.75;
     text-align: left;
     &:hover {
       background-color: #000;
