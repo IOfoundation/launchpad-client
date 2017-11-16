@@ -76,7 +76,7 @@ export class Businesses extends PureComponent {
       this.handleOnChangeLocationToggle(filterType, removeFilter)
     );
     this.getFilterChips(filterValue);
-    if (!isEmpty(params.category) && isEmpty(removeFilter)) {
+    if (typeof removeFilter === "undefined" && !isEmpty(params.category)) {
       removeFilter = params.category.includes(filterValue) ? true : false;
     }
     this.props.actions.filterOrganizations(filterValue, params, filterType, removeFilter)
@@ -96,7 +96,7 @@ export class Businesses extends PureComponent {
     this.props.actions.changePage(page, businessesFilters);
   }
 
-  
+
 
   render() {
     const {displayOptions, filters, organizations, locations, items, metadata} = this.props;

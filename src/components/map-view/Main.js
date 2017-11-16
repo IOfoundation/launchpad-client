@@ -18,23 +18,20 @@ class Main extends React.Component {
   getCoordinates(business) {
     return business.coordinates;
   }
-  handleBoundsChange(event) {
-    this.props.onBoundsChange(event);
+  handleBoundsChange(e) {
+    this.props.onBoundsChange(e);
   }
   _handleOnClick(e) {
     this.setState({ selected: e });
   }
-
   _handleCloseClick() {
     this.setState({ selected: -1 });
   }
-
   _handleChildMouseEnter(e) {
     this.props.highlightOrgCard(
       this.props.locations.find(x => String(x.id) === e).organization.id
     );
   }
-
   _handleChildMouseLeave(e) {
     this.props.highlightOrgCard(-1);
   }
