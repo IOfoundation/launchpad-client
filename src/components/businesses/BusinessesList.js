@@ -7,7 +7,7 @@ class BusinessesList extends PureComponent {
   _renderOrgs(organizations) {
     return this.props.organizations.map(organization => (
       <Business
-        selectedColor={this.props.selectedOrg === organization.id ? '#E5E5E5' : '#F2F2F2'}
+        isSelected={this.props.selectedOrg === organization.id}
         business={organization}
         key={organization.id}
         expanded={organizations.length === 1}

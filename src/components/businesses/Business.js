@@ -53,11 +53,11 @@ class Business extends PureComponent {
     )
   }
   render() {
-    const {business, selectedColor} = this.props;
+    const {business, isSelected} = this.props;
     const locations = business.locations;
     const [main_location, ...other_locations] = locations;
     return (
-      <div className="business-card" style={{backgroundColor: selectedColor}}>
+      <div className="business-card" style={{backgroundColor: isSelected ? '#E5E5E5' : '#F2F2F2'}}>
         <div
           className={
             this.state.expanded
