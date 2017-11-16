@@ -150,6 +150,9 @@
 .close-map-org:hover {
   cursor: pointer;
 }
+.icon-svg {
+  margin-right: 8px;
+}
 
 @media (max-width: 960px) {
   .map {

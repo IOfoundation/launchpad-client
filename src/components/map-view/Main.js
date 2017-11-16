@@ -8,7 +8,7 @@ class Main extends React.Component {
     super(props);
     this.state = {
       showModal: false,
-      selected: -1,
+      selected: '-1',
     };
   }
 
@@ -29,8 +29,14 @@ class Main extends React.Component {
     this.setState({ selected: -1 });
   }
 
-  _handleHover(e) {
-    this.props.highlightOrgCard(e);
+  _handleChildMouseEnter(e) {
+    this.props.highlightOrgCard(
+      this.props.locations.find(x => String(x.id) === e).organization.id
+    );
+  }
+
+  _handleChildMouseLeave(e) {
+    this.props.highlightOrgCard(-1);
   }
 
   render() {
@@ -49,8 +55,8 @@ class Main extends React.Component {
           onChange={e => this.handleBoundsChange(e)}
           resetBoundsOnResize={true}
           options={map_options}
-          onChildMouseEnter={e => this._handleHover(e)}
-          onChildMouseLeave={e => this._handleHover(e)}
+          onChildMouseEnter={e => this._handleChildMouseEnter(e)}
+          onChildMouseLeave={e => this._handleChildMouseLeave(e)}
           onChildClick={e => this._handleOnClick(e)}
           bootstrapURLKeys={{
             key: process.env.GOOGLE_MAP_API_KEY,

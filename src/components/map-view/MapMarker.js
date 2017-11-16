@@ -54,14 +54,15 @@ export default class MapMarker extends Component {
           <h1 className="map_modal_title">{organization.name}</h1>
         </div>
         <section className="row between-xs map_modal_social business_block--expanded_bottom">
-          <a className="visitWebsite bold" href={organization.website}>
-            {'VISIT WEBSITE'}
-          </a>
           <div>
             {organization.facebook ? <a href={organization.facebook}><FacebookIcon className={'icon-svg'} size={18} /></a> : ''}
             {organization.twitter ? <a href={organization.twitter}><TwitterIcon className={'icon-svg'} size={18} /></a> : ''}
             {organization.linkedin ? <a href={organization.linkedin}><LinkedinIcon className={'icon-svg'} size={18} /></a> : ''}
           </div>
+          <a className="visitWebsite bold" href={organization.website}>
+            {'WEBSITE'}
+          </a>
+
         </section>
       </div>
     );
