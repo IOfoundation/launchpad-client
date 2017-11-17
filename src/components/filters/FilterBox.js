@@ -47,7 +47,7 @@ class FilterBox extends React.Component {
 }
 
 FilterBox.propTypes = {
-  appliedFilters: PropTypes.object,
+  appliedFilters: PropTypes.arrayOf(PropTypes.object),
   filterOptions: PropTypes.object.isRequired,
   getTextSearchResults: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,

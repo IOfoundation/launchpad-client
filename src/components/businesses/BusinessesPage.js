@@ -75,7 +75,7 @@ class BusinessesPage extends Component {
 }
 
 BusinessesPage.propTypes = {
-  appliedFilters: PropTypes.object,
+  appliedFilters: PropTypes.arrayOf(PropTypes.object),
   BusinessPage: PropTypes.array,
   checkBusinessType: PropTypes.func,
   displayOptions: PropTypes.object.isRequired,

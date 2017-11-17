@@ -15,8 +15,10 @@ class FilterByText extends React.Component {
     };
   }
 
-  shouldComponentUpdate(nextProps) {
-    return this.props.appliedFilters !== nextProps.appliedFilters;
+  shouldComponentUpdate(nextProps, nextState) {
+    let shouldUpdate = this.props.appliedFilters !== nextProps.appliedFilters ? true : false;
+    shouldUpdate = this.state.searchText !== nextState.searchText ? true : false;
+    return shouldUpdate;
   }
 
   deleteFilter(e) {
@@ -162,7 +164,6 @@ class FilterByText extends React.Component {
 
   render() {
     const filters = this.props.appliedFilters;
-    console.log("rerendered")
     return (
       <div className="col-md-12 col-xs-12 text-xs-margin filterTextContainer no-padding">
         <div className="grid search-text-form p-bot-16">
@@ -221,7 +222,7 @@ class FilterByText extends React.Component {
 }
 
 FilterByText.propTypes = {
-  appliedFilters: PropTypes.object,
+  appliedFilters: PropTypes.arrayOf(PropTypes.object),
   getTextSearchResults: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
