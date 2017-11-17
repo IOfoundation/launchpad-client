@@ -36,12 +36,14 @@
     a {
       color: #bbbbbb;
       font-weight: bold;
+      outline: 0;
     }
   }
   li.active {
     a {
       color: #000;
       font-weight: bold;
+      outline: 0;
     }
   }
   @media (max-width: 60em) {
