@@ -11,6 +11,14 @@ class FilterByTextMobile extends Component {
       showDropdown: false,
     };
   }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const shouldUpdate =
+      this.props.appliedFilters !== nextProps.appliedFilters ||
+      this.state.searchText !== nextState.searchText ? true : false;
+    return shouldUpdate;
+  }
+
   deleteFilter(e) {
     const filter = e.currentTarget.getAttribute('data-value');
     this.props.handleOnChangeFilterOptions(filter, 'category', true);

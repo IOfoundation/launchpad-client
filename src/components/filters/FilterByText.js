@@ -16,8 +16,9 @@ class FilterByText extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    let shouldUpdate = this.props.appliedFilters !== nextProps.appliedFilters ? true : false;
-    shouldUpdate = this.state.searchText !== nextState.searchText ? true : false;
+    const shouldUpdate =
+      this.props.appliedFilters !== nextProps.appliedFilters ||
+      this.state.searchText !== nextState.searchText ? true : false;
     return shouldUpdate;
   }
 
@@ -222,7 +223,7 @@ class FilterByText extends React.Component {
 }
 
 FilterByText.propTypes = {
-  appliedFilters: PropTypes.arrayOf(PropTypes.object),
+  appliedFilters: PropTypes.object,
   getTextSearchResults: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
