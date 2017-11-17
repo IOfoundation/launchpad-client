@@ -130,7 +130,6 @@ class ContentMap extends Component {
   }
   render() {
     const {locations, businessesMetadata, onBoundsChange, organizations, highlightOrgCard} = this.props;
-    console.log('organizations', organizations);
     return (
       <div className="businessesContainer">
         {this.props.topBar}
