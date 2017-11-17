@@ -51,17 +51,6 @@ class Business extends PureComponent {
       </div>
     )
   }
-  _renderContact(service) {
-    return (
-      <div className="col-lg-6 col-md-6 col-xs-6 p-left-0 p-right-4">
-        <p className="business-title col-lg-12 col-md-12 col-xs-12 p-0">
-          {'Contact:'}
-        </p>
-        <p>{service.contacts[0].email}</p>
-        <p>{service.contacts[0].phones[0].number}</p>
-      </div>
-    )
-  }
   render() {
     const {business, isSelected} = this.props;
     const locations = business.locations;
