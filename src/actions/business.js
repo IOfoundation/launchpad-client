@@ -94,7 +94,7 @@ const filtersObject = (filterValue, filters, filterType, removeFilter) => {
       return removeFilter ? _removeCategoryFilter(newFilters, filterValue) : _addCategoryFilter(newFilters, filterValue);
       break;
     case 'organization':
-      return removeFilter ? _removeOrganizationIdFilter() : _addOrganizationIdFilter(newFilters, filterValue);
+      return _addOrganizationIdFilter(newFilters, filterValue);
       break;
     case 'coordinates':
       return removeFilter ? _removeLocationFilter(newFilters) : _addLocationFilter(newFilters, filterValue);
@@ -195,20 +195,10 @@ export function changeFilterDisplayOptions(showBusinessTypes, locationToggleSwit
   }
 }
 
-export function updateChipFilers(currentFilters, filterValue) {
+export function updateChipFilers(filterValue, currentParams, filterType, removeFilter) {
   return (dispatch: Function) => {
-<<<<<<< HEAD
-    let appliedFilters = [];
-    if (isEmpty(currentFilters)) { appliedFilters = filterValue; }
-    if (isString(currentFilters)) { appliedFilters = [currentFilters, filterValue]; }
-      currentFilters.push(filterValue);
+    const appliedFilters = filtersObject(filterValue, currentParams, filterType, removeFilter);
     dispatch(addChipToFilterComponent(appliedFilters));
-=======
-    const filterChips = isEmpty(currentFilters) ?
-      [filterValue] :
-      currentFilters.push(filterValue);
-    dispatch(addChipToFilterComponent(filterChips));
->>>>>>> ad98377... CS-295 Add addChipToFilterComponent action
   }
 }
 
@@ -265,10 +255,6 @@ function _addOrganizationIdFilter(newFilters, filterValue) {
   newFilters = [];
   newFilters.id = filterValue;
   return newFilters;
-}
-
-function _removeOrganizationIdFilter() {
-  return [];
 }
 
 function _addLocationFilter(newFilters, filterValue) {

@@ -45,7 +45,7 @@ class FilterByTextMobile extends Component {
     }
   }
   renderFilter() {
-    const filters = this.props.getFilterChips();
+    const filters = this.props.appliedFilters();
     if (isEmpty(filters.category)) {
       return null;
     } else if (isString(filters.category)) {
@@ -111,7 +111,7 @@ class FilterByTextMobile extends Component {
   }
 
   render() {
-    const filters = this.props.getFilterChips();
+    const filters = this.props.appliedFilters();
     return (
       <div className="filter-chip">
         {filters.category && (
@@ -147,7 +147,7 @@ class FilterByTextMobile extends Component {
   }
 }
 FilterByTextMobile.PropTypes = {
-  getFilterChips: PropTypes.func.isRequired,
+  appliedFilters: PropTypes.object,
   getTextSearchResults: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,

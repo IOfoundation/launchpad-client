@@ -15,7 +15,7 @@ class FilterBoxMobile extends Component {
           getTextSearchResults={this.props.getTextSearchResults}
           handleClickOnClearAllFilters={this.props.handleClickOnClearAllFilters}
           handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
-          getFilterChips={this.props.getFilterChips}
+          appliedFilters={this.props.appliedFilters}
           getBusiness={this.props.getBusiness}
           items={this.props.items}
         />
@@ -24,8 +24,8 @@ class FilterBoxMobile extends Component {
   }
 }
 FilterBoxMobile.PropTypes = {
+  appliedFilters: PropTypes.object,
   getBusiness: PropTypes.func.isRequired,
-  getFilterChips: PropTypes.func.isRequired,
   getTextSearchResults: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,

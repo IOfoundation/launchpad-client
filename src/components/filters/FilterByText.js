@@ -14,6 +14,11 @@ class FilterByText extends React.Component {
       searchText: '',
     };
   }
+
+  shouldComponentUpdate(nextProps) {
+    return this.props.appliedFilters !== nextProps.appliedFilters;
+  }
+
   deleteFilter(e) {
     const filter = e.currentTarget.getAttribute('data-value');
     this.props.handleOnChangeFilterOptions(filter, 'category', true);
@@ -88,7 +93,7 @@ class FilterByText extends React.Component {
     );
   }
   renderFilter() {
-    const filters = this.props.getFilterChips();
+    const filters = this.props.appliedFilters;
     if (isEmpty(filters.category)) {
       return null;
     } else if (isString(filters.category)) {
@@ -156,7 +161,8 @@ class FilterByText extends React.Component {
   }
 
   render() {
-    const filters = this.props.getFilterChips();
+    const filters = this.props.appliedFilters;
+    console.log("rerendered")
     return (
       <div className="col-md-12 col-xs-12 text-xs-margin filterTextContainer no-padding">
         <div className="grid search-text-form p-bot-16">
@@ -215,7 +221,7 @@ class FilterByText extends React.Component {
 }
 
 FilterByText.propTypes = {
-  getFilterChips: PropTypes.func.isRequired,
+  appliedFilters: PropTypes.object,
   getTextSearchResults: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,

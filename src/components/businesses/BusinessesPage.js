@@ -14,7 +14,7 @@ class BusinessesPage extends Component {
         items={this.props.items}
         handleClickOnClearAllFilters={this.props.handleClickOnClearAllFilters}
         handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
-        getFilterChips={this.props.getFilterChips}
+        appliedFilters={this.props.appliedFilters}
       />
     );
   }
@@ -26,7 +26,7 @@ class BusinessesPage extends Component {
         items={this.props.items}
         handleClickOnClearAllFilters={this.props.handleClickOnClearAllFilters}
         handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
-        getFilterChips={this.props.getFilterChips}
+        appliedFilters={this.props.appliedFilters}
       />
     );
   }
@@ -75,10 +75,10 @@ class BusinessesPage extends Component {
 }
 
 BusinessesPage.propTypes = {
+  appliedFilters: PropTypes.object,
   BusinessPage: PropTypes.array,
   checkBusinessType: PropTypes.func,
   displayOptions: PropTypes.object.isRequired,
-  getFilterChips: PropTypes.func,
   getTextSearchResults: PropTypes.func,
   handleChangePage: PropTypes.func,
   handleClickOnClearAllFilters: PropTypes.func,

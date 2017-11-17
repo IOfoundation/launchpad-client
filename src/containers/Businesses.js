@@ -21,8 +21,8 @@ export class Businesses extends PureComponent {
     window.addEventListener('resize', () => this.handleWindowSizeChange());
     this.props.actions.changeFilterDisplayOptions(this.checkBusinessType(params.category), locationToggleSwitch);
     'id' in params ?
-      this.props.actions.filterOrganizations(params.id, params, 'organization', true) :
-      this.props.actions.filterOrganizations(null, params, 'category');
+      this.handleInitialOrgSearch(params) :
+      this.handleInitialCategorySearch(params);
   }
 
   componentWillUnMount() {
@@ -31,6 +31,15 @@ export class Businesses extends PureComponent {
 
   handleWindowSizeChange() {
     this.setState({width: window.innerWidth});
+  }
+
+  handleInitialOrgSearch(params) {
+    this.props.actions.filterOrganizations(params.id, params, 'organization', true);
+  }
+
+  handleInitialCategorySearch(params) {
+    this.props.actions.updateChipFilers(null, params, 'category');
+    this.props.actions.filterOrganizations(null, params, 'category');
   }
 
   checkBusinessType(filters) {
@@ -71,7 +80,6 @@ export class Businesses extends PureComponent {
 
   handleOnChangeFilterOptions(filterValue, filterType, removeFilter) {
     const params = this.props.queries;
-    this.props.actions.updateChipFilers(params, filterValue);
     this.props.actions.changeFilterDisplayOptions(
       this.handleOnChangeBusinessType(filterValue),
       this.handleOnChangeLocationToggle(filterType, removeFilter)
@@ -79,14 +87,12 @@ export class Businesses extends PureComponent {
     if (typeof removeFilter === "undefined" && !isEmpty(params.category)) {
       removeFilter = params.category.includes(filterValue) ? true : false;
     }
+    this.props.actions.updateChipFilers(filterValue, params, filterType, removeFilter);
     this.props.actions.filterOrganizations(filterValue, params, filterType, removeFilter)
   }
-
-  getFilterChips(params, filterValue) {
-    return this.props.appliedFilters;
-  }
-
+  
   handleClickOnClearAllFilters() {
+    this.props.actions.updateChipFilers(null, null, 'all', true);
     this.props.actions.filterOrganizations(null, null, 'all', true);
     this.props.actions.changeFilterDisplayOptions(true, false);
   }
@@ -97,10 +103,11 @@ export class Businesses extends PureComponent {
   }
 
   render() {
-    const {displayOptions, filters, organizations, locations, items, metadata} = this.props;
+    const {displayOptions, filters, organizations, locations, items, metadata, appliedFilters} = this.props;
     return (
       <MainLayout>
         <BusinessesPage
+          appliedFilters={appliedFilters}
           displayOptions={displayOptions}
           filterOptions={filters}
           items={items}
@@ -115,7 +122,6 @@ export class Businesses extends PureComponent {
             this.handleClickOnClearAllFilters(e)}
           handleOnChangeFilterOptions={(filterValue, filterType, removeFilter) =>
             this.handleOnChangeFilterOptions(filterValue, filterType, removeFilter)}
-          getFilterChips={(e) => this.getFilterChips()}
           handleChangePage={(e) => this.handleChangePage(e)}
         />
     </MainLayout>
