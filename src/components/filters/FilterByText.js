@@ -15,11 +15,8 @@ class FilterByText extends React.Component {
     };
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    const shouldUpdate =
-      this.props.appliedFilters !== nextProps.appliedFilters ||
-      this.state.searchText !== nextState.searchText ? true : false;
-    return shouldUpdate;
+  shouldComponentUpdate(nextProps) {
+    return this.props.appliedFilters !== nextProps.appliedFilters;
   }
 
   deleteFilter(e) {
