@@ -5,11 +5,8 @@ import ArrowLeft from '../shared/ArrowLeft';
 import ArrowRight from '../shared/ArrowRight';
 
 class Pagination extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   handlePageClick(data) {
-    let selected = data.selected + 1;
+    const selected = data.selected + 1;
     this.props.handleChangePage(selected);
   }
 
@@ -34,14 +31,14 @@ class Pagination extends React.Component {
             <ArrowLeft
               className="pagination-arrow"
               size={17}
-              style={{marginLeft: 4, color: '#fff', verticalAlign: 'middle'}}
+              style={{color: '#fff', verticalAlign: 'middle'}}
             />
           }
           nextLabel={
             <ArrowRight
               className="pagination-arrow"
               size={17}
-              style={{marginLeft: 4, color: '#fff', verticalAlign: 'middle'}}
+              style={{color: '#fff', verticalAlign: 'middle'}}
             />
           }
           pageCount={last.page}

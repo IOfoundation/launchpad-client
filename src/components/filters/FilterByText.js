@@ -10,10 +10,8 @@ class FilterByText extends React.Component {
     super(props);
     this.state = {
       inputOnFocus: false,
-      showFilterLabel: false,
       showDropdown: false,
       searchText: '',
-      searchPlaceHolder: 'Or search by name',
     };
   }
   deleteFilter(e) {
@@ -22,7 +20,7 @@ class FilterByText extends React.Component {
   }
 
   clearAll() {
-    this.setState({showFilterLabel: false, inputOnFocus: false});
+    this.setState({inputOnFocus: false, searchText: ''});
     this.props.handleClickOnClearAllFilters();
   }
 
@@ -50,22 +48,21 @@ class FilterByText extends React.Component {
     this.setState({
       inputOnFocus: false,
       showDropdown: false,
-      searchText: '',
     });
   }
 
   handleDropdownOnClick(item) {
-    item.searchable_type === 'Category' ? (
-      this.props.handleOnChangeFilterOptions(item.content, 'category')
-    ) : (
-      this.props.handleOnChangeFilterOptions(item.searchable_id, 'organization', false)
-    );
+    item.searchable_type === 'Category' ? this.props.handleOnChangeFilterOptions(item.content, 'category')
+      : this.props.handleOnChangeFilterOptions(
+          item.searchable_id,
+          'organization',
+          false
+        );
     this.setState({
       showDropdown: false,
       inputOnFocus: false,
-      value: '',
+      value: item.content,
       searchText: item.content,
-      searchPlaceHolder: item.content
     });
   }
 
@@ -78,13 +75,15 @@ class FilterByText extends React.Component {
             : 'filter-label-container-show'
         }
       >
-      {this.renderFilter()}
-        {filters.category ?
-          <a className="search-filter-clear text-thin" onClick={() => this.clearAll()}>
+        {this.renderFilter()}
+        {filters.category && (
+          <a
+            className="search-filter-clear text-thin"
+            onClick={() => this.clearAll()}
+          >
             {'Clear All'}
           </a>
-          : ''
-        }
+        )}
       </div>
     );
   }
@@ -97,7 +96,7 @@ class FilterByText extends React.Component {
         <Chip
           key={filters.category}
           text={filters.category}
-          handleClick={(e) => this.deleteFilter(e)}
+          handleClick={e => this.deleteFilter(e)}
           canDelete={true}
         />
       );
@@ -137,9 +136,8 @@ class FilterByText extends React.Component {
         {this.props.items.map(item => (
           <li
             key={item.id}
-            className={item.searchable_type === 'Organization' ?
-              'text-thin' : '' }
-            >
+            className={item.searchable_type === 'Organization' && 'text-thin'}
+          >
             <a onClick={e => this.handleDropdownOnClick(item, e)}>
               {item.content}
             </a>
@@ -162,27 +160,41 @@ class FilterByText extends React.Component {
     return (
       <div className="col-md-12 col-xs-12 text-xs-margin filterTextContainer no-padding">
         <div className="grid search-text-form p-bot-16">
-          <div className="col-lg-8 col-md-7 col-xs-7 no-padding">
+          <div
+            className={
+              this.state.inputOnFocus
+                ? 'col-lg-8 col-md-7 col-xs-7 no-padding'
+                : 'filter-by-text-transition col-lg-9 col-md-8 col-xs-8 no-padding'
+            }
+          >
             {this.renderChipsContainer(filters)}
             <h3
-              className={filters.category ?
-                'hide-filter' : 'text-thin filter-result-text'
+              className={
+                filters.category
+                  ? 'hide-filter'
+                  : 'text-thin filter-result-text'
               }
             >
               {'Filter results with the selections below'}
             </h3>
           </div>
-          <div className="small-filter-container col-lg-4 col-md-5 col-xs-5 no-padding">
+          <div
+            className={
+              this.state.inputOnFocus
+                ? 'filter-by-text-transition col-lg-4 col-md-5 col-xs-5 no-padding'
+                : 'filter-by-text-transition col-lg-3 col-md-4 col-xs-4 no-padding'
+            }
+          >
             <input
               type="text"
               className="search-by-text text-thin"
-              value={this.state.searchText}
+              value={filters.category ? '' : this.state.searchText}
               onClick={() => this._inputClicked()}
               onChange={e => this.handleKeyPress(e)}
               placeholder={
                 this.state.inputOnFocus
-                ? 'Search by Resource Name'
-                : 'Or search by name'
+                  ? 'Search by Resource Name'
+                  : 'Or search by name'
               }
             />
             {this.getFilterByTextIcon()}

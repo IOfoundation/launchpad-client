@@ -65,6 +65,7 @@
       @media (max-width: 60em) {
         padding: 10px 0;
         width: 140px;
+        color: #2AD587;
       }
     }
     @media (max-width: 60em) {
@@ -156,12 +157,8 @@
 .search {
   &-text-form {
     position: relative;
-    .small-filter-container {
-      transition: all 0.4 ease-in;
-      @media (min-width: 1415px) {
-        max-width: 32%;
-        flex-basis: 32%;
-      }
+    .filter-by-text-transition {
+      transition: all 0.4s ease-in;
     }
   }
   &-filter{

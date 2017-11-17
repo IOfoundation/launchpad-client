@@ -14,10 +14,11 @@ class FilterByTextMobile extends Component {
   deleteFilter(e) {
     const filter = e.currentTarget.getAttribute('data-value');
     this.props.handleOnChangeFilterOptions(filter, 'category', true);
+    this.setState({searchText: ''});
   }
 
   clearAll() {
-    this.setState({showFilterLabel: false, labelTop: false});
+    this.setState({showFilterLabel: false, labelTop: false, searchText: ''});
     this.props.handleClickOnClearAllFilters();
   }
 
@@ -76,12 +77,14 @@ class FilterByTextMobile extends Component {
         }
       >
         {this.renderFilter()}
-        {filters.category ?
-          <a className="search-filter-label clear" onClick={() => this.clearAll()}>
+        {filters.category && (
+          <a
+            className="search-filter-label clear"
+            onClick={() => this.clearAll()}
+          >
             {'Clear All'}
           </a>
-          : ''
-        }
+        )}
       </div>
     );
   }
@@ -111,18 +114,20 @@ class FilterByTextMobile extends Component {
     const filters = this.props.getFilterChips();
     return (
       <div className="filter-chip">
-        <div className="p-left-16 p-right-16">
-          <h3 className="col-lg-12 col-md-12 col-xs-12 no-padding">
-            {'Filter results with the selections below'}
-          </h3>
-          {this.renderChipsContainer(filters)}
-        </div>
-        <div className="search-input-container p-left-16 p-right-16 m-top-16">
+        {filters.category && (
+          <div className="p-left-16 p-right-16 m-bot-16 m-top-20">
+            <h3 className="col-lg-12 col-md-12 col-xs-12 no-padding">
+              {'Filter results with the selections below'}
+            </h3>
+            {this.renderChipsContainer(filters)}
+          </div>
+        )}
+        <div className="search-input-container p-left-16 p-right-16">
           <input
             type="text"
-            value={this.state.searchText}
+            value={filters.category ? '' : this.state.searchText}
             onChange={e => this.handleKeyPress(e)}
-            className="search-by-text"
+            className="search-by-text text-thin"
             placeholder="Or search by name"
           />
           <img

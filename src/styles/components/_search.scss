@@ -83,8 +83,9 @@
   a {
     color: $white-color;
     display: inline-block;
-    width: 93%;
+    width: 89%;
     vertical-align: middle;
+    padding-right: 10px;
   }
   .not-match-message {
     font-size: 16px;
@@ -122,5 +123,9 @@
   @media (max-width: 60em) {
     width: 100%;
     left: 0;
+    top:100%;
+  }
+  @media (max-width: 375px) {
+    max-height: 200px;
   }
 }

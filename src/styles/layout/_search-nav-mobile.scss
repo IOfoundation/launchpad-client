@@ -1,11 +1,6 @@
 .dropdown-input-container {
   text-align: right;
   padding: 10px 16px;
-  margin-bottom: 23px;
-  .right-arrow {
-    width: 35px;
-    vertical-align: middle;
-  }
   .filter-icon {
     color: #2AD587;
     float: left;
@@ -23,6 +18,9 @@
   .close-icon {
     display: none;
     transition: height 0.5s ease-out;
+    img {
+      width: 20px;
+    }
   }
   .filters-dropdow {
     font-size: 16px;

@@ -25,7 +25,7 @@ class Business extends PureComponent {
         <p className="business-title">{'Contact:'}</p>
         {isEmpty(subject.name) ? '' : <h4>{subject.name}</h4>}
         {isEmpty(subject.phones) ? '' : <h4>{subject.phones[0].number}</h4>}
-        {isEmpty(subject.email) ? '' : <h4>{subject.email}</h4>}
+        {isEmpty(subject.email) ? '' : <h4 className="break-word">{subject.email}</h4>}
       </div>
     );
   }
