@@ -147,10 +147,9 @@ class Business extends PureComponent {
                 </div>
               );
             })}
-            <hr />
-            {isEmpty(other_locations) ?
-              '' :
+            {!isEmpty(other_locations) &&
               <div className="col-lg-12 col-md-12 col-xs-12 grid p-0">
+                <hr />
                 <div className="col-lg-12 col-md-12 col-xs-12 grid p-0">
                   <div className="col-lg-6 col-md-6 col-xs-6 p-0 m-right-54">
                     <p className="business-title">{'Other Locations:'}</p>
