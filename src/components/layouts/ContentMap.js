@@ -65,10 +65,11 @@ class ContentMap extends Component {
   _renderNoSearchResults() {
     const {businessesMetadata} = this.props;
     return (
-      <div className={
-        businessesMetadata.totalOrganizations === '0'
-          ? 'no-result-message-show col-md-8 col-xs-12 p-left-0 businessList--reduced'
-          : 'no-result-message-hide'
+      <div
+        className={
+          businessesMetadata.totalOrganizations
+            ? 'no-result-message-show col-md-8 col-xs-12 businessList--reduced'
+            : 'no-result-message-hide'
         }
       >
         <div className="no-result-message">
@@ -134,7 +135,7 @@ class ContentMap extends Component {
         {this.props.topBar}
         <div
           className={
-            'map ' +
+            'map m-bot-20 ' +
             (this.props.expanded
               ? 'col-lg-5 col-md-5 col-xs-5 p-0 map-expanded'
               : 'col-lg-3 col-md-3 col-xs-3 p-0')

@@ -25,6 +25,12 @@
       font-size: 14px;
     }
   }
+  @media (max-width: 60em) {
+    min-height: 100vh;
+  }
+  @media (max-width: 320px) {
+    min-height: 120vh;
+  }
 }
 .hero_input_btn {
   background: #ffc000;
@@ -58,7 +64,7 @@
     padding-left: 16px;
     text-overflow: ellipsis;
     overflow: hidden;
-    margin: 10px 0;
+    margin: 10px 0 0;
   }
   .hero_input_btn {
     width: 90%;

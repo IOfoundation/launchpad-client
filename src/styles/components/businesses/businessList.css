@@ -11,19 +11,17 @@
 }
 
 .load-div {
- display: flex;
- justify-content: space-around;
  align-items: center;
  padding: 10% 10%;
+ text-align: center;
 }
 .loader {
   width: 100px;
 }
 .loader-text {
-  position: absolute;
   text-transform: uppercase;
   color: #00D3A7;
   font-size: 24px;
-  padding-top: 25%;
+  padding-top: 20px;
   line-height: 36px;
 }

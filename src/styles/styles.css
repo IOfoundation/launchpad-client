@@ -71,7 +71,9 @@ input[type=text]::-ms-clear {
 .opacity75 {
   opacity: .75;
 }
-
+.break-word {
+  word-wrap: break-word;
+}
 .opacity50 {
   opacity: .5;
 }
@@ -84,6 +86,16 @@ input[type=text]::-ms-clear {
 .mobile-devices {
   display: none !important;
 }
+.container-mid {
+  top: 50%;
+  position: absolute;
+  transform: translateY(-50%);
+  width: 100%;
+}
+.center-x {
+  width: 90%;
+  margin: auto;
+}
 @media (max-width: 60em) {
   .mobile-devices {
     display: initial !important;
@@ -91,14 +103,20 @@ input[type=text]::-ms-clear {
   .desktop-devices {
     display: none !important;
   }
-}
-@media (max-width: 60em) {
+  .container-mid {
+    top: calc(50% + 112px);
+  }
   .text-xs-margin {
     margin: 10px auto;
   }
   .contentContainer {
     max-width: 100%;
     width: 100%;
+  }
+}
+@media (max-width: 320px) {
+  .container-mid {
+    top: calc(50% + 200px);
   }
 }
 
