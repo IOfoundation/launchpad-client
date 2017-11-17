@@ -23,7 +23,6 @@ class Business extends PureComponent {
     return (
       <div className="col-lg-4 col-md-4 col-xs-4 p-0 main-contact">
         <p className="business-title">{'Contact:'}</p>
-        {isEmpty(subject.name) ? '' : <h4>{subject.name}</h4>}
         {isEmpty(subject.phones) ? '' : <h4>{subject.phones[0].number}</h4>}
         {isEmpty(subject.email) ? '' : <h4>{subject.email}</h4>}
       </div>
@@ -49,6 +48,17 @@ class Business extends PureComponent {
             </div>
           );
         })}
+      </div>
+    )
+  }
+  _renderContact(service) {
+    return (
+      <div className="col-lg-6 col-md-6 col-xs-6 p-left-0 p-right-4">
+        <p className="business-title col-lg-12 col-md-12 col-xs-12 p-0">
+          {'Contact:'}
+        </p>
+        <p>{service.contacts[0].email}</p>
+        <p>{service.contacts[0].phones[0].number}</p>
       </div>
     )
   }
@@ -128,12 +138,12 @@ class Business extends PureComponent {
                   key={service.id}
                   className="col-lg-12 col-md-12 col-xs-12 grid p-0 business-service m-bot-28"
                 >
-                  <div className="col-lg-6 col-md-6 col-xs-6 p-left-0 p-right-4">
+                  <div className={isEmpty(service.contacts) ? 'col-lg-12 col-md-12 col-xs-12 p-left-0' : 'col-lg-7 col-md-7 col-xs-7 p-left-0 p-right-4'}>
                     <h4 className='text-bold'>{service.name}</h4>
                     <p>{service.description}</p>
                   </div>
                   {!isEmpty(service.contacts) && this._renderContacts(service.contacts[0])}
-                  {service.categories ?
+                  {service.categories &&
                     <div className="col-lg-12 col-md-12 col-xs-12 p-0 m-top-16">
                       {service.categories.map(category => {
                         return (
@@ -144,8 +154,7 @@ class Business extends PureComponent {
                           />
                         );
                       })}
-                    </div>
-                    : '' }
+                    </div>}
                 </div>
               );
             })}
