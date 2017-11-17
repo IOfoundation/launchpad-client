@@ -277,7 +277,7 @@ function _removeLocationFilter(newFilters) {
 }
 
 function _removeAllFilters() {
-  return [];
+  return {};
 }
 
 function _removePaginationFilters(newFilters) {
