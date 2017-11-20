@@ -4,9 +4,6 @@ import {PropTypes} from 'prop-types';
 import Business from './Business';
 
 class BusinessesList extends PureComponent {
-  shouldComponentUpdate(nextProps) {
-    return this.props.organizations !== nextProps.organizations;
-  }
   _renderOrgs(organizations) {
     return this.props.organizations.map(organization => (
       <Business
