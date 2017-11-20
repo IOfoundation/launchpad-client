@@ -252,7 +252,7 @@ function _removeCategoryFilter(newFilters, filterValue) {
 
 function _addOrganizationIdFilter(newFilters, filterValue) {
   changeFilterDisplayOptions(true, false);
-  newFilters = [];
+  newFilters = {};
   newFilters.id = filterValue;
   return newFilters;
 }

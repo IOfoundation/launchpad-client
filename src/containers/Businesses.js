@@ -25,6 +25,17 @@ export class Businesses extends PureComponent {
       this.handleInitialCategorySearch(params);
   }
 
+  // componentWillReceiveProps(nextProps) {
+  //   if (this.props.routingKey !== nextProps.routingKey && !_.isEqual(this.props.location.query, nextProps.location.query)) {
+  //     debugger
+  //     if ('id' in this.props.location.query) {
+  //       this.handleInitialOrgSearch(this.props.location.query)
+  //     } else {
+  //       this.handleInitialCategorySearch(this.props.location.query);
+  //     }
+  //   }
+  // }
+
   componentWillUnMount() {
     window.addEventListener('resize', () => this.handleWindowSizeChange());
   }
@@ -90,7 +101,7 @@ export class Businesses extends PureComponent {
     this.props.actions.updateChipFilers(filterValue, params, filterType, removeFilter);
     this.props.actions.filterOrganizations(filterValue, params, filterType, removeFilter)
   }
-  
+
   handleClickOnClearAllFilters() {
     this.props.actions.updateChipFilers(null, null, 'all', true);
     this.props.actions.filterOrganizations(null, null, 'all', true);
@@ -150,6 +161,7 @@ const mapStateToProps = _state => {
     metadata: businesses.metadata,
     organizations: businesses.organizations,
     queries: routing.locationBeforeTransitions.query,
+    routingKey: routing.locationBeforeTransitions.key
   };
 };
 
