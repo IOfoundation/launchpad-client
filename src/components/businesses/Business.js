@@ -79,19 +79,35 @@ class Business extends PureComponent {
           <div
             className={
               this.state.expanded
-                ? 'business col-lg-10 col-md-10 col-xs-10 p-right-0'
+                ? 'business expanded col-lg-10 col-md-10 col-xs-10 p-right-0'
                 : 'business col-lg-12 col-md-12 col-xs-12 p-0'
             }
           >
             <div className="preview-details-container">
-              <h3 className="title m-bot-8">
-                {business.name}
-              </h3>
+              <h3 className="title m-bot-8">{business.name}</h3>
               <p className="preview-details">{business.description}</p>
-              <div className={this.state.expanded ? ('col-lg-12 social-icons p-0 m-top-20') : ('social-icons-hide')}>
-                {business.facebook ? <a href={business.facebook}><FacebookIcon className={'icon-svg'} size={18} /></a> : ''}
-                {business.twitter ? <a href={business.twitter}><TwitterIcon className={'icon-svg'} size={18} /></a> : ''}
-                {business.linkedin ? <a href={business.linkedin}><LinkedinIcon className={'icon-svg'} size={18} /></a> : ''}
+              <div
+                className={
+                  this.state.expanded
+                    ? 'col-lg-12 social-icons p-0 m-top-20'
+                    : 'social-icons-hide'
+                }
+              >
+                {business.facebook && (
+                  <a href={business.facebook} target="_blank">
+                    <FacebookIcon className={'icon-svg'} size={18} />
+                  </a>
+                )}
+                {business.twitter && (
+                  <a href={business.twitter} target="_blank">
+                    <TwitterIcon className={'icon-svg'} size={18} />
+                  </a>
+                )}
+                {business.linkedin && (
+                  <a href={business.linkedin} target="_blank">
+                    <LinkedinIcon className={'icon-svg'} size={18} />
+                  </a>
+                )}
               </div>
             </div>
             <img

@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
 import onClickOutside from 'react-onclickoutside';
 import ArrowRight from '../shared/ArrowRight';
 import DropdownArrow from '../shared/DropdownArrow';
 
-class FilterByOptions extends React.Component {
+class FilterByOptions extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -94,10 +94,7 @@ class FilterByOptions extends React.Component {
           onClick={() => this._toggleDropdownOptions()}
         >
           {this.props.filterName}
-          <DropdownArrow
-            className="filter-btn-icon"
-            size={32}
-          />
+          <DropdownArrow className="filter-btn-icon" size={32} />
         </button>
         {this.state.dropdownOpen && this._renderOptions()}
       </div>

@@ -34,7 +34,6 @@
     position: relative;
     .preview-details {
       font-size: 14px;
-      opacity: 0.5;
       margin-top: 4px;
       line-height: 20px;
    }
@@ -48,12 +47,18 @@
     }
   }
   &-collapse {
+    .preview-details {
+      opacity: 0.5;
+    }
     .full-information {
       max-height: 0px;
       overflow: hidden;
     }
   }
   &-expand {
+    .preview-details {
+      opacity: 1;
+    }
     .location {
       display: none;
     }
@@ -98,6 +103,7 @@
     white-space: nowrap;
     display: inline-block;
     margin-bottom: 2px !important;
+    cursor: default;
   }
 }
 
@@ -116,9 +122,6 @@
       overflow: scroll;
       white-space: nowrap;
       display: inline-block;
-      ::-webkit-scrollbar {
-        display: none;
-      }
       div {
         margin-right: 8px;
         display: inline-block;
