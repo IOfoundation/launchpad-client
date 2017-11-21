@@ -10,9 +10,14 @@ describe('<Pagination />', () => {
   it('No returns prevPage button when the currentPage is 1', () => {
     const wrapper = shallow(
       <Pagination
-        businessesMetadata={
-          {pagination: {first: {page: 1, per_page: 4}, last: {}, next: {}, currentPage: 1}}
-        }
+        businessesMetadata={{
+          pagination: {
+            first: {page: 1, per_page: 4},
+            last: {},
+            next: {},
+            currentPage: 1,
+          },
+        }}
         handleChangePage={handleChangePage}
       />
     );
@@ -20,7 +25,7 @@ describe('<Pagination />', () => {
       wrapper.contains(
         <ArrowLeft
           size={20}
-          style={{marginRight: 8, color:'#0C0033'}}
+          style={{marginRight: 8, color: '#0C0033'}}
           onClick={() => this.props.handleChangePage(2 - 1)}
         />
       )
@@ -30,12 +35,14 @@ describe('<Pagination />', () => {
   it('Returns prevPage button when the currentPage is greater than 1', () => {
     const wrapper = shallow(
       <Pagination
-        businessesMetadata={{pagination: {
+        businessesMetadata={{
+          pagination: {
             first: {page: 1, per_page: 3},
             last: {page: 2, per_page: 3},
             prev: {page: 1, per_page: 3},
-            currentPage: 2}
-          }}
+            currentPage: 2,
+          },
+        }}
         handleChangePage={handleChangePage}
       />
     );
@@ -54,12 +61,14 @@ describe('<Pagination />', () => {
   it('No returns nextPage button when current page is the last page', () => {
     const wrapper = shallow(
       <Pagination
-        businessesMetadata={{pagination: {
+        businessesMetadata={{
+          pagination: {
             first: {page: 1, per_page: 3},
             last: {page: 2, per_page: 3},
             prev: {page: 1, per_page: 3},
-            currentPage: 2}
-          }}
+            currentPage: 2,
+          },
+        }}
         handleChangePage={handleChangePage}
       />
     );

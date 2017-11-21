@@ -21,7 +21,7 @@ const initialState = {
     },
     displayOptions: {
       showBusinessTypes: true,
-      locationToggleSwitch: false
+      locationToggleSwitch: false,
     },
     appliedFilters: {},
   },

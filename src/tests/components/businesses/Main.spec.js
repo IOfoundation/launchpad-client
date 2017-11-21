@@ -5,19 +5,19 @@ import BusinessesView from '../../../components/businesses/Main';
 
 const locations = [];
 const organizations = [
-  { id: 1, name: 'organization 1' },
-  { id: 2, name: 'organization 2' }
+  {id: 1, name: 'organization 1'},
+  {id: 2, name: 'organization 2'},
 ];
 const businessesMetadata = {};
 const filters = {
   businessServices: [],
-  businessTypes: [0: {}, 1: {}, 2: {},],
+  businessTypes: [(0: {}), (1: {}), (2: {})],
   stages: [],
   communities: [],
 };
 const displayOptions = {
   showBusinessTypes: true,
-  locationToggleSwitch: false
+  locationToggleSwitch: false,
 };
 const isMobile = false;
 

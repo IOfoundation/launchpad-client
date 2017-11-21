@@ -16,13 +16,12 @@ class BusinessesList extends PureComponent {
     ));
   }
   render() {
-    const {handleClickOnClearAllFilters, organizations} = this.props;
+    const {organizations} = this.props;
     return organizations && <div>{this._renderOrgs(organizations)}</div>;
   }
 }
 
 BusinessesList.propTypes = {
-  handleClickOnClearAllFilters: PropTypes.func,
   organizations: PropTypes.arrayOf(PropTypes.object),
   selectedOrg: PropTypes.number,
 };

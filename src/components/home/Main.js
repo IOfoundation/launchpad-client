@@ -30,7 +30,9 @@ const Main = ({items, getTextSearchResults}) => {
                     'Over 650 resources to help your business grow est non commodo luctus,'
                   }
                   <br />
-                  {'nisi erat porttitor ligula, eget lacinia odio sem nec elit.'}
+                  {
+                    'nisi erat porttitor ligula, eget lacinia odio sem nec elit.'
+                  }
                 </p>
               </div>
               <div className="mobile-devices m-top-16 text-thin">

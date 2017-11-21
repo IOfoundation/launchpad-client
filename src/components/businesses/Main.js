@@ -104,9 +104,7 @@ class Main extends Component {
       businessesMetadata,
       displayOptions,
       organizations,
-      organization,
       locations,
-      handleClickOnClearAllFilters,
       handleChangePage,
       isMobile,
       showLoading,
@@ -141,7 +139,10 @@ Main.propTypes = {
   filterOptions: PropTypes.object.isRequired,
   handleChangePage: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
+  handleOnChangeBusinessType: PropTypes.func,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
+  isMobile: PropTypes.bool.isRequired,
+  locations: PropTypes.arrayOf(PropTypes.object),
   organizations: PropTypes.arrayOf(PropTypes.object),
 };
 

@@ -68,6 +68,7 @@ class FilterByText extends Component {
       value: item.content,
       searchText: item.content,
     });
+    return;
   }
 
   renderChipsContainer(filters) {
@@ -134,7 +135,9 @@ class FilterByText extends Component {
 
   render() {
     const filters = this.props.appliedFilters;
-    const organization = this.props.organization.length ? this.props.organization[0].name : '';
+    const organization = this.props.organization.length
+      ? this.props.organization[0].name
+      : '';
     return (
       <div className="col-md-12 col-xs-12 text-xs-margin filterTextContainer no-padding">
         <div className="grid search-text-form p-bot-16">
@@ -166,19 +169,27 @@ class FilterByText extends Component {
             <input
               type="text"
               className="search-by-text text-thin"
-              value={this.state.filterById === true && isEmpty(filters) ? organization : this.state.searchText}
+              value={
+                this.state.filterById === true && isEmpty(filters)
+                  ? organization
+                  : this.state.searchText
+              }
               onChange={e => this.handleKeyPress(e)}
               onClick={() => this.handleInputClicked()}
               placeholder="Search by Resource Name"
               style={
-                this.state.inputOnFocus || this.state.searchText || this.state.filterById && isEmpty(filters)
+                this.state.inputOnFocus ||
+                this.state.searchText ||
+                (this.state.filterById && isEmpty(filters))
                   ? {opacity: 1}
                   : {opacity: 0}
               }
             />
             <a
               style={
-                this.state.inputOnFocus || this.state.searchText || this.state.filterById && isEmpty(filters)
+                this.state.inputOnFocus ||
+                this.state.searchText ||
+                (this.state.filterById && isEmpty(filters))
                   ? {opacity: 0}
                   : {opacity: 1}
               }

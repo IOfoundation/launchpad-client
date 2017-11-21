@@ -17,10 +17,10 @@ class Main extends React.Component {
     this.props.onBoundsChange(e);
   }
   _handleOnClick(e) {
-    this.setState({ selected: e });
+    this.setState({selected: e});
   }
   _handleCloseClick() {
-    this.setState({ selected: -1 });
+    this.setState({selected: -1});
   }
   _handleChildMouseEnter(e) {
     this.props.highlightOrgCard(
@@ -35,7 +35,7 @@ class Main extends React.Component {
     const {locations} = this.props;
     const firstBusiness = locations ? locations[0] : null;
     const sacCoordinates = {lat: 38.57, lng: -121.47};
-    const map_options = { fullscreenControl: false };
+    const map_options = {fullscreenControl: false};
     const zoomLevel = 7;
     if (firstBusiness) {
       const [centerLng, centerLat] = this.getCoordinates(firstBusiness);
@@ -62,8 +62,7 @@ class Main extends React.Component {
                 lat={lat}
                 lng={lng}
                 organization={location.organization}
-                selected={this.state.selected === String(location.id)
-                  ? true : false}
+                selected={this.state.selected === String(location.id)}
                 handleCloseClick={() => this._handleCloseClick()}
               />
             );
@@ -82,7 +81,7 @@ class Main extends React.Component {
           key: process.env.GOOGLE_MAP_API_KEY,
         }}
       />
-    )
+    );
   }
 }
 

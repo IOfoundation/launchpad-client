@@ -32,7 +32,7 @@ export class Home extends Component {
         <section>
           <HomeView
             items={this.props.items}
-            getTextSearchResults={(e) => this.getTextSearchResults(e)}
+            getTextSearchResults={e => this.getTextSearchResults(e)}
           />
         </section>
       </MainLayout>

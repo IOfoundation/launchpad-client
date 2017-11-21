@@ -14,7 +14,7 @@ class ResultInfo extends Component {
           <button
             className="btn btn-search btn-outline"
             key={this.props.filterOptions[0].id}
-            onClick={e => this._onClick(this.props.filterOptions[0])}
+            onClick={() => this._onClick(this.props.filterOptions[0])}
           >
             <div className="btn-search-text text-bold">
               <span className="desktop-devices">{'Startup or High'}</span>
@@ -34,7 +34,7 @@ class ResultInfo extends Component {
           <button
             className="btn btn-search btn-outline"
             key={this.props.filterOptions[1].id}
-            onClick={e => this._onClick(this.props.filterOptions[1])}
+            onClick={() => this._onClick(this.props.filterOptions[1])}
           >
             <div className="btn-search-text text-bold">
               <span className="desktop-devices">{'Main Street/'}</span>
@@ -54,7 +54,7 @@ class ResultInfo extends Component {
           <button
             className="btn btn-search btn-outline"
             key={this.props.filterOptions[2].id}
-            onClick={e => this._onClick(this.props.filterOptions[2])}
+            onClick={() => this._onClick(this.props.filterOptions[2])}
           >
             <div className="btn-search-text text-bold">
               <span className="desktop-devices">{'Microenterprise or'}</span>
@@ -103,8 +103,8 @@ class ResultInfo extends Component {
 }
 
 ResultInfo.propTypes = {
-  filterOptions: PropTypes.array.isRequired,
   businessesMetadata: PropTypes.object.isRequired,
+  filterOptions: PropTypes.arrayOf(PropTypes.object).isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
   showBusinessTypes: PropTypes.bool,
 };

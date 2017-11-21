@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+import {PropTypes} from 'prop-types';
 import MapView from '../../map-view/Main';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 
@@ -29,22 +29,20 @@ class ResultPage extends Component {
                   : `${totalOrganizations} Organizations Available`}
             </span>
             <Tab className="tab">
-              <img src={
-                  selectedTab === 0 ? (
-                    '../../static-data/images/ic_map_list-view-Green.png'
-                  ) : (
-                    '../../static-data/images/ic_map_list-view-Grey.png'
-                  )
+              <img
+                src={
+                  this.state.tabIndex === 0
+                    ? '../../static-data/images/ic_map_list-view-Green.png'
+                    : '../../static-data/images/ic_map_list-view-Grey.png'
                 }
               />
             </Tab>
             <Tab className="tab">
-              <img src={
-                  selectedTab === 1 ? (
-                    '../../static-data/images/ic_map_green.png'
-                  ) : (
-                    '../../static-data/images/ic_map_grey.png'
-                  )
+              <img
+                src={
+                  this.state.tabIndex === 1
+                    ? '../../static-data/images/ic_map_green.png'
+                    : '../../static-data/images/ic_map_grey.png'
                 }
               />
             </Tab>

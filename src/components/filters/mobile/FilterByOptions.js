@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {PropTypes} from 'prop-types';
 import FilterOption from './FilterOption';
 import ArrowRight from '../../shared/ArrowRight';
 
-class FilterByOptions extends Component {
+class FilterByOptions extends PureComponent {
   render() {
     const {filterOptions} = this.props;
     return (
@@ -24,7 +24,8 @@ class FilterByOptions extends Component {
           className="right-arrow"
           size={20}
           style={{color: '#fff', verticalAlign: 'middle'}}
-          htmlFor="filters-dropdown" />
+          htmlFor="filters-dropdown"
+        />
         <label htmlFor="filters-dropdown" className="close-icon">
           <img src="/static-data/images/close.png" />
         </label>
@@ -32,11 +33,13 @@ class FilterByOptions extends Component {
           <FilterOption
             filterName={'Business Services'}
             filterOptions={filterOptions.businessServices}
-            handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions} />
+            handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
+          />
           <FilterOption
             filterName={'Industry'}
             filterOptions={filterOptions.industries}
-            handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions} />
+            handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
+          />
           <FilterOption
             filterName={'Business Stage'}
             filterOptions={filterOptions.stages}

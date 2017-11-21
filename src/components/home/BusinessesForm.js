@@ -71,7 +71,8 @@ class BusinessesForm extends React.Component {
   renderDropdown() {
     return (
       <div>
-        <ul className={
+        <ul
+          className={
             this.state.showPreviewDropdown
               ? 'hero-dropdown-list-hide'
               : 'hero-dropdown-list scroll-list'
@@ -80,9 +81,12 @@ class BusinessesForm extends React.Component {
           {this.props.items.map(item => (
             <li
               key={item.id}
-              className={item.searchable_type === 'Organization' ?
-                'text-thin' : 'text-regular'
-            }>
+              className={
+                item.searchable_type === 'Organization'
+                  ? 'text-thin'
+                  : 'text-regular'
+              }
+            >
               <a
                 href={
                   item.searchable_type === 'Category'
@@ -112,14 +116,14 @@ class BusinessesForm extends React.Component {
     return (
       <form>
         <input
-          type='text'
+          type="text"
           value={this.state.searchText}
           onChange={event => this.handleKeyPress(event)}
           onClick={() => this.inputOnClick()}
           placeholder={
             this.state.showDropdown || this.state.showPreviewDropdown
-            ? ''
-            : 'Search for businesses or services'
+              ? ''
+              : 'Search for businesses or services'
           }
           className="hero_input businessesName text-thin"
         />

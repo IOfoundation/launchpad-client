@@ -17,8 +17,11 @@ class ContentMap extends Component {
           <div className="float-right">
             <button
               onClick={this.props.redoSearchInMap}
-              className={this.props.toggleSwitch ?
-                ('toggle-btn toggle-on') : ('toggle-btn toggle-off')}
+              className={
+                this.props.toggleSwitch
+                  ? 'toggle-btn toggle-on'
+                  : 'toggle-btn toggle-off'
+              }
             >
               <span />
             </button>
@@ -46,8 +49,11 @@ class ContentMap extends Component {
           <div className="float-right">
             <button
               onClick={this.props.redoSearchInMap}
-              className={this.props.toggleSwitch ?
-                ('toggle-btn toggle-on') : ('toggle-btn toggle-off')}
+              className={
+                this.props.toggleSwitch
+                  ? 'toggle-btn toggle-on'
+                  : 'toggle-btn toggle-off'
+              }
             >
               <span />
             </button>
@@ -82,7 +88,9 @@ class ContentMap extends Component {
           </p>
           <div className="mobile-devices">
             <p className="message">
-              {'Sorry but nothing matched your search terms. Please try again with different keywords'}
+              {
+                'Sorry but nothing matched your search terms. Please try again with different keywords'
+              }
             </p>
           </div>
         </div>
@@ -102,7 +110,12 @@ class ContentMap extends Component {
     );
   }
   _renderBusinesses() {
-    const {locations, onBoundsChange, businessesMetadata, isMobile} = this.props;
+    const {
+      locations,
+      onBoundsChange,
+      businessesMetadata,
+      isMobile,
+    } = this.props;
     return (
       <div>
         {isMobile ? (
@@ -119,7 +132,8 @@ class ContentMap extends Component {
               className={
                 (this.props.expanded
                   ? 'col-md-12 col-xs-12 businessList p-left-0'
-                  : 'col-md-12 col-xs-12 businessList--reduced p-left-0') + ' list'
+                  : 'col-md-12 col-xs-12 businessList--reduced p-left-0') +
+                ' list'
               }
             >
               {this.props.children}
@@ -130,7 +144,13 @@ class ContentMap extends Component {
     );
   }
   render() {
-    const {locations, businessesMetadata, onBoundsChange, organizations, highlightOrgCard} = this.props;
+    const {
+      locations,
+      businessesMetadata,
+      onBoundsChange,
+      organizations,
+      highlightOrgCard,
+    } = this.props;
     return (
       <div className="businessesContainer">
         {this.props.topBar}

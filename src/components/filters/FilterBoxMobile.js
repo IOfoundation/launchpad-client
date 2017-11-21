@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {PropTypes} from 'prop-types';
 import FilterByText from './mobile/FilterByText';
 import FilterByOptions from './mobile/FilterByOptions';
 
-class FilterBoxMobile extends Component {
+class FilterBoxMobile extends PureComponent {
   render() {
     return (
       <div className="container-invert">
@@ -23,7 +23,7 @@ class FilterBoxMobile extends Component {
           organization={this.props.organization}
         />
       </div>
-    )
+    );
   }
 }
 FilterBoxMobile.PropTypes = {

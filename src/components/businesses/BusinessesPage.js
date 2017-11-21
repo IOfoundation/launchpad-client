@@ -55,7 +55,9 @@ class BusinessesPage extends Component {
                   "Where startups and small businesses connect in California's Capital Region"
                 }
               </h2>
-              {isMobile ? this.renderFilterBoxMobile() : this.renderFilterBoxDesktop()}
+              {isMobile
+                ? this.renderFilterBoxMobile()
+                : this.renderFilterBoxDesktop()}
               <BusinessesView
                 displayOptions={this.props.displayOptions}
                 filterOptions={this.props.filterOptions}
@@ -67,8 +69,12 @@ class BusinessesPage extends Component {
                 checkBusinessType={this.props.checkBusinessType}
                 checkLocationToggle={this.props.checkBusinessType}
                 handleChangePage={this.props.handleChangePage}
-                handleClickOnClearAllFilters={this.props.handleClickOnClearAllFilters}
-                handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
+                handleClickOnClearAllFilters={
+                  this.props.handleClickOnClearAllFilters
+                }
+                handleOnChangeFilterOptions={
+                  this.props.handleOnChangeFilterOptions
+                }
               />
             </div>
           </div>
@@ -80,7 +86,8 @@ class BusinessesPage extends Component {
 
 BusinessesPage.propTypes = {
   appliedFilters: PropTypes.object,
-  BusinessPage: PropTypes.array,
+  businessesMetadata: PropTypes.object,
+  BusinessPage: PropTypes.arrayOf(PropTypes.object),
   checkBusinessType: PropTypes.func,
   displayOptions: PropTypes.object.isRequired,
   filterById: PropTypes.bool,
@@ -91,6 +98,7 @@ BusinessesPage.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object),
   locations: PropTypes.arrayOf(PropTypes.object),
   organizations: PropTypes.arrayOf(PropTypes.object),
+  windowWidth: PropTypes.number,
 };
 
 export default BusinessesPage;

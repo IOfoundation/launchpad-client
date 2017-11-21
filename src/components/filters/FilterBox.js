@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import {PropTypes} from 'prop-types';
 import FilterByText from './FilterByText';
 import FilterByOptions from './FilterByOptions';
 
-class FilterBox extends React.Component {
+class FilterBox extends PureComponent {
   render() {
     return (
       <div className="container-invert">
