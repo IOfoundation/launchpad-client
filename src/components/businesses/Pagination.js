@@ -11,7 +11,7 @@ class Pagination extends React.Component {
   }
 
   render() {
-    const {last, currentPage} = this.props.businessesMetadata.pagination;
+    const {last, currentPage} = this.props.metadata.pagination;
     if (!last.page) {
       return null;
     }
@@ -55,7 +55,7 @@ class Pagination extends React.Component {
   }
 }
 Pagination.propTypes = {
-  businessesMetadata: PropTypes.object.isRequired,
+  metadata: PropTypes.object.isRequired,
   handleChangePage: PropTypes.func.isRequired,
 };
 

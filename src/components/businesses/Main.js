@@ -27,7 +27,7 @@ class Main extends Component {
 
   onBoundsChange(mapDetails) {
     this.setState({bounds: mapDetails.bounds});
-    if (this.props.displayOptions.locationToggleSwitch) {
+    if (this.props.businesses.displayOptions.locationToggleSwitch) {
       this.props.handleOnChangeFilterOptions(
         'coordinates',
         this.state.bounds,
@@ -41,7 +41,7 @@ class Main extends Component {
   }
 
   redoSearchInMap() {
-    this.props.displayOptions.locationToggleSwitch
+    return this.props.businesses.displayOptions.locationToggleSwitch
       ? this.props.handleOnChangeFilterOptions('coordinates', '', true)
       : this.props.handleOnChangeFilterOptions(
           'coordinates',
@@ -52,20 +52,20 @@ class Main extends Component {
 
   _renderResultsInfo() {
     const {
-      businessesMetadata,
+      handleChangePage,
       handleOnChangeBusinessType,
-      displayOptions,
       handleOnChangeFilterOptions,
-      filterOptions,
-      showLoading,
+      businesses,
     } = this.props;
-    if (filterOptions.businessTypes.length === 3) {
+    const {metadata, displayOptions, filters} = businesses;
+
+    if (filters.businessTypes.length === 3) {
       return (
         <ResultInfo
-          businessesMetadata={businessesMetadata}
+          businessesMetadata={metadata}
           checkBusinessType={handleOnChangeBusinessType}
           handleOnChangeFilterOptions={handleOnChangeFilterOptions}
-          filterOptions={filterOptions.businessTypes}
+          filterOptions={filters.businessTypes}
           showBusinessTypes={displayOptions.showBusinessTypes}
           showLoading={showLoading}
         />
@@ -100,29 +100,19 @@ class Main extends Component {
     );
   }
   render() {
-    const {
-      businessesMetadata,
-      displayOptions,
-      organizations,
-      locations,
-      handleChangePage,
-      isMobile,
-      showLoading,
-    } = this.props;
+    const {handleChangePage, isMobile, businesses} = this.props;
+    const {metadata, organizations, displayOptions} = businesses;
+
     return (
       <ContentMap
-        locations={locations}
-        isMobile={isMobile}
-        showLoading={this.props.showLoading}
-        organizations={organizations}
-        businessesMetadata={businessesMetadata}
+        businesses={businesses}
+        toggleSwitch={displayOptions.locationToggleSwitch}
         expanded={this.state.expanded}
         expandMap={() => this.expandMap()}
         onBoundsChange={mapDetails => this.onBoundsChange(mapDetails)}
         reduceMap={() => this.reduceMap()}
         redoSearchInMap={() => this.redoSearchInMap()}
         topBar={this._renderResultsInfo()}
-        toggleSwitch={displayOptions.locationToggleSwitch}
         highlightOrgCard={organizationId =>
           this.highlightOrgCard(organizationId)}
       >
@@ -132,18 +122,14 @@ class Main extends Component {
   }
 }
 Main.propTypes = {
-  businessesMetadata: PropTypes.object.isRequired,
+  businesses: PropTypes.object.isRequired,
   checkBusinessType: PropTypes.func.isRequired,
   checkLocationToggle: PropTypes.func.isRequired,
-  displayOptions: PropTypes.object.isRequired,
-  filterOptions: PropTypes.object.isRequired,
   handleChangePage: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
   handleOnChangeBusinessType: PropTypes.func,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
   isMobile: PropTypes.bool.isRequired,
-  locations: PropTypes.arrayOf(PropTypes.object),
-  organizations: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default Main;

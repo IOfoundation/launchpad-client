@@ -98,21 +98,21 @@ export class Businesses extends PureComponent {
     this.props.actions.fetchSearchResults(filter);
   };
 
-  handleOnChangeBusinessType = filterValue => {
-    const showBusinessTypes = this.props.displayOptions.showBusinessTypes;
-    const businessTypes = this.props.filters.businessTypes.map(
-      filter => filter.name
-    );
+  handleOnChangeBusinessType(filterValue) {
+    const {displayOptions, filters} = this.props.businesses;
+    const showBusinessTypes = displayOptions.showBusinessTypes;
+    const businessTypes = filters.businessTypes.map(filter => filter.name);
     if (filterValue) {
       return businessTypes.includes(filterValue)
         ? !showBusinessTypes
         : showBusinessTypes;
     }
     return showBusinessTypes;
-  };
+  }
 
-  handleOnChangeLocationToggle = (filterType, removeFilter) => {
-    const locationToggleSwitch = this.props.displayOptions.locationToggleSwitch;
+  handleOnChangeLocationToggle(filterType, removeFilter) {
+    const locationToggleSwitch = this.props.businesses.displayOptions
+      .locationToggleSwitch;
     switch (filterType) {
       case 'coordinates':
         return !removeFilter;
@@ -121,7 +121,7 @@ export class Businesses extends PureComponent {
       default:
         return locationToggleSwitch;
     }
-  };
+  }
 
   handleOnChangeFilterOptions = (filterType, filterValue, removeFilter) => {
     const {queries} = this.props;
@@ -155,29 +155,10 @@ export class Businesses extends PureComponent {
   };
 
   render() {
-    const {
-      displayOptions,
-      filters,
-      organizations,
-      locations,
-      items,
-      metadata,
-      appliedFilters,
-      queries,
-    } = this.props;
-    const filterById = 'id' in queries && true;
     return (
       <MainLayout windowWidth={this.state.width}>
         <BusinessesPage
-          appliedFilters={appliedFilters}
-          displayOptions={displayOptions}
-          filterOptions={filters}
-          items={items}
-          filterById={filterById}
-          organizations={organizations}
-          locations={locations}
-          businessesMetadata={metadata}
-          showLoading={this.state.showLoading}
+          businesses={this.props.businesses}
           windowWidth={this.state.width}
           getTextSearchResults={this.getTextSearchResults}
           checkBusinessType={this.handleOnChangeBusinessType}
@@ -193,24 +174,13 @@ export class Businesses extends PureComponent {
 
 Businesses.propTypes = {
   actions: PropTypes.object,
-  displayOptions: PropTypes.object.isRequired,
-  items: PropTypes.arrayOf(PropTypes.object),
-  filters: PropTypes.object.isRequired,
-  metadata: PropTypes.object.isRequired,
-  organizations: PropTypes.arrayOf(PropTypes.object),
-  params: PropTypes.object,
+  businesses: PropTypes.object,
 };
 
 const mapStateToProps = _state => {
   const {businesses, routing} = _state;
   return {
-    appliedFilters: businesses.appliedFilters,
-    displayOptions: businesses.displayOptions,
-    items: businesses.items,
-    filters: businesses.filters,
-    locations: businesses.locations,
-    metadata: businesses.metadata,
-    organizations: businesses.organizations,
+    businesses,
     queries: routing.locationBeforeTransitions.query,
     action: routing.locationBeforeTransitions.action,
   };

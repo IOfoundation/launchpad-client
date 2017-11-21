@@ -5,10 +5,11 @@ import FilterByOptions from './mobile/FilterByOptions';
 
 class FilterBoxMobile extends PureComponent {
   render() {
+    const {filterOptions, appliedFilters, items} = this.props.businesses;
     return (
       <div className="container-invert">
         <FilterByOptions
-          filterOptions={this.props.filterOptions}
+          filterOptions={filterOptions}
           handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
         />
         <FilterByText
@@ -16,23 +17,20 @@ class FilterBoxMobile extends PureComponent {
           getTextSearchResults={this.props.getTextSearchResults}
           handleClickOnClearAllFilters={this.props.handleClickOnClearAllFilters}
           handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
-          appliedFilters={this.props.appliedFilters}
+          appliedFilters={appliedFilters}
           getBusiness={this.props.getBusiness}
-          items={this.props.items}
-          filterById={this.props.filterById}
-          organization={this.props.organization}
+          items={items}
         />
       </div>
     );
   }
 }
 FilterBoxMobile.PropTypes = {
-  appliedFilters: PropTypes.object,
+  businesses: PropTypes.object.isRequired,
   getBusiness: PropTypes.func.isRequired,
   getTextSearchResults: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
-  items: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default FilterBoxMobile;

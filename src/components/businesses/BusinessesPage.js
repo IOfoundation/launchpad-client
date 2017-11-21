@@ -7,57 +7,33 @@ import {Link} from 'react-router';
 
 class BusinessesPage extends Component {
   shouldComponentUpdate(nextProps) {
-    const {
-      appliedFilters,
-      organizations,
-      displayOptions,
-      businessesMetadata,
-      filterOptions,
-      windowWidth,
-    } = this.props;
-    if (
-      appliedFilters !== nextProps.appliedFilters ||
-      organizations !== nextProps.organizations ||
-      displayOptions !== nextProps.displayOptions ||
-      businessesMetadata !== nextProps.businessesMetadata ||
-      filterOptions !== nextProps.filterOptions ||
-      windowWidth !== nextProps.windowWidth
-    ) {
-      return true;
-    }
+    return this.props.businesses !== nextProps.businesses;
   }
 
   renderFilterBoxMobile() {
     return (
       <FilterBoxMobile
+        businesses={this.props.businesses}
         getTextSearchResults={this.props.getTextSearchResults}
-        filterOptions={this.props.filterOptions}
-        items={this.props.items}
         handleClickOnClearAllFilters={this.props.handleClickOnClearAllFilters}
         handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
-        appliedFilters={this.props.appliedFilters}
-        filterById={this.props.filterById}
-        organization={this.props.organizations}
       />
     );
   }
   renderFilterBoxDesktop() {
     return (
       <FilterBox
+        businesses={this.props.businesses}
         getTextSearchResults={this.props.getTextSearchResults}
-        filterOptions={this.props.filterOptions}
-        items={this.props.items}
-        filterById={this.props.filterById}
         handleClickOnClearAllFilters={this.props.handleClickOnClearAllFilters}
         handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
-        appliedFilters={this.props.appliedFilters}
-        organization={this.props.organizations}
       />
     );
   }
 
   render() {
-    const isMobile = this.props.windowWidth <= 960;
+    const {windowWidth, businesses} = this.props;
+    const isMobile = windowWidth <= 960;
     return (
       <section>
         <div className="search-nav search-nav-invert">
@@ -80,13 +56,8 @@ class BusinessesPage extends Component {
                 ? this.renderFilterBoxMobile()
                 : this.renderFilterBoxDesktop()}
               <BusinessesView
-                displayOptions={this.props.displayOptions}
-                filterOptions={this.props.filterOptions}
-                organizations={this.props.organizations}
-                locations={this.props.locations}
                 isMobile={isMobile}
-                showLoading={this.props.showLoading}
-                businessesMetadata={this.props.businessesMetadata}
+                businesses={this.props.businesses}
                 checkBusinessType={this.props.checkBusinessType}
                 checkLocationToggle={this.props.checkBusinessType}
                 handleChangePage={this.props.handleChangePage}
@@ -106,19 +77,12 @@ class BusinessesPage extends Component {
 }
 
 BusinessesPage.propTypes = {
-  appliedFilters: PropTypes.object,
-  businessesMetadata: PropTypes.object,
-  BusinessPage: PropTypes.arrayOf(PropTypes.object),
+  businesses: PropTypes.object.isRequired,
   checkBusinessType: PropTypes.func,
-  displayOptions: PropTypes.object.isRequired,
-  filterById: PropTypes.bool,
   getTextSearchResults: PropTypes.func,
   handleChangePage: PropTypes.func,
   handleClickOnClearAllFilters: PropTypes.func,
   handleOnChangeFilterOptions: PropTypes.func,
-  items: PropTypes.arrayOf(PropTypes.object),
-  locations: PropTypes.arrayOf(PropTypes.object),
-  organizations: PropTypes.arrayOf(PropTypes.object),
   windowWidth: PropTypes.number,
 };
 

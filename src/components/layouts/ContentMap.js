@@ -5,29 +5,28 @@ import ResultPage from '../businesses/mobile/ResultPage';
 
 class ContentMap extends Component {
   _renderReduceButton() {
+    const {reduceMap, redoSearchInMap, toggleSwitch} = this.props;
     return (
       <div className="row between-xs middle-xs reducedMapBottom">
         <button
           className="expand-btn map-btn btn-link btn-link-primary text-bold text-bold text-xs-margin p-0 m-bot-8"
-          onClick={this.props.reduceMap}
+          onClick={reduceMap}
         >
           {'Reduce Map'}
         </button>
         <div className="map-btn">
           <div className="float-right">
             <button
-              onClick={this.props.redoSearchInMap}
+              onClick={redoSearchInMap}
               className={
-                this.props.toggleSwitch
-                  ? 'toggle-btn toggle-on'
-                  : 'toggle-btn toggle-off'
+                toggleSwitch ? 'toggle-btn toggle-on' : 'toggle-btn toggle-off'
               }
             >
               <span />
             </button>
             <button
               className="btn-link btn-link-primary underline text-xs-margin text-bold"
-              onClick={this.props.redoSearchInMap}
+              onClick={redoSearchInMap}
             >
               {'Search in Map Area'}
             </button>
@@ -37,29 +36,28 @@ class ContentMap extends Component {
     );
   }
   _renderExpandButton() {
+    const {expandMap, redoSearchInMap, toggleSwitch} = this.props;
     return (
       <div className="row between-xs middle-xs reducedMapBottom">
         <button
           className="expand-btn map-btn btn-link btn-link-primary text-bold text-xs-margin p-0 m-bot-8 m-top-5"
-          onClick={this.props.expandMap}
+          onClick={expandMap}
         >
           {'Expand Map'}
         </button>
         <div className="map-btn">
           <div className="float-right">
             <button
-              onClick={this.props.redoSearchInMap}
+              onClick={redoSearchInMap}
               className={
-                this.props.toggleSwitch
-                  ? 'toggle-btn toggle-on'
-                  : 'toggle-btn toggle-off'
+                toggleSwitch ? 'toggle-btn toggle-on' : 'toggle-btn toggle-off'
               }
             >
               <span />
             </button>
             <button
               className="btn-link btn-link-primary underline text-xs-margin text-bold"
-              onClick={this.props.redoSearchInMap}
+              onClick={redoSearchInMap}
             >
               {'Search in Map Area'}
             </button>
@@ -69,11 +67,11 @@ class ContentMap extends Component {
     );
   }
   _renderNoSearchResults() {
-    const {businessesMetadata} = this.props;
+    const {metadata} = this.props.businesses;
     return (
       <div
         className={
-          businessesMetadata.totalOrganizations
+          metadata.totalOrganizations
             ? 'no-result-message-show col-md-8 col-xs-12 businessList--reduced'
             : 'no-result-message-hide'
         }
@@ -98,24 +96,27 @@ class ContentMap extends Component {
     );
   }
   _renderResultPageMobile() {
+    const {locations, metadata} = this.props.businesses;
     return (
       <ResultPage
         showLoading={this.props.showLoading}
         BusinessesList={this.props.children}
-        locations={this.props.locations}
+        locations={locations}
         onBoundsChange={this.props.onBoundsChange}
-        businessesMetadata={this.props.businessesMetadata}
+        TotalOrganizations={metadata.totalOrganizations}
         highlightOrgCard={this.props.highlightOrgCard}
       />
     );
   }
   _renderBusinesses() {
     const {
-      locations,
       onBoundsChange,
-      businessesMetadata,
       isMobile,
+      businesses,
+      expanded,
+      children,
     } = this.props;
+    const {locations, metadata} = businesses;
     return (
       <div>
         {isMobile ? (
@@ -123,20 +124,20 @@ class ContentMap extends Component {
         ) : (
           <div
             className={
-              this.props.businessesMetadata.totalOrganizations === '0'
+              metadata.totalOrganizations === '0'
                 ? 'result-container-hide desktop-devices'
                 : 'grid desktop-devices'
             }
           >
             <div
               className={
-                (this.props.expanded
+                (expanded
                   ? 'col-md-12 col-xs-12 businessList p-left-0'
                   : 'col-md-12 col-xs-12 businessList--reduced p-left-0') +
                 ' list'
               }
             >
-              {this.props.children}
+              {children}
             </div>
           </div>
         )}
@@ -145,28 +146,27 @@ class ContentMap extends Component {
   }
   render() {
     const {
-      locations,
-      businessesMetadata,
       onBoundsChange,
-      organizations,
       highlightOrgCard,
+      businesses,
+      topBar,
+      expanded,
     } = this.props;
+    const {organizations, locations, metadata} = businesses;
     return (
       <div className="businessesContainer">
-        {this.props.topBar}
+        {topBar}
         <div
           className={
             'map m-bot-20 ' +
-            (this.props.expanded
+            (expanded
               ? 'col-lg-5 col-md-5 col-xs-5 p-0 map-expanded'
               : 'col-lg-3 col-md-3 col-xs-3 p-0')
           }
         >
           <div
             className={
-              this.props.expanded
-                ? 'map-container-collapse'
-                : 'map-container-expand'
+              expanded ? 'map-container-collapse' : 'map-container-expand'
             }
           >
             <MapView
@@ -175,11 +175,9 @@ class ContentMap extends Component {
               highlightOrgCard={highlightOrgCard}
             />
           </div>
-          {this.props.expanded
-            ? this._renderReduceButton()
-            : this._renderExpandButton()}
+          {expanded ? this._renderReduceButton() : this._renderExpandButton()}
         </div>
-        {businessesMetadata.totalOrganizations === '0'
+        {metadata.totalOrganizations === '0'
           ? this._renderNoSearchResults()
           : this._renderBusinesses()}
       </div>
@@ -188,16 +186,14 @@ class ContentMap extends Component {
 }
 
 ContentMap.propTypes = {
-  businessesMetadata: PropTypes.object,
+  businesses: PropTypes.object,
   children: PropTypes.node,
   expanded: PropTypes.bool,
   expandMap: PropTypes.func.isRequired,
   highlightOrgCard: PropTypes.func.isRequired,
-  locations: PropTypes.arrayOf(PropTypes.object),
   onBoundsChange: PropTypes.func,
   redoSearchInMap: PropTypes.func.isRequired,
   reduceMap: PropTypes.func.isRequired,
-  toggleSwitch: PropTypes.bool,
   topBar: PropTypes.node,
   totalOrganizations: PropTypes.array,
 };
