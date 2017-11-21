@@ -68,7 +68,6 @@ class FilterByText extends Component {
       value: item.content,
       searchText: item.content,
     });
-    return;
   }
 
   renderChipsContainer(filters) {

@@ -11,9 +11,9 @@ class FilterOption extends PureComponent {
   }
   uncheckAll() {
     const checks = document.querySelectorAll(
-      '.dropdown-input-container' + ' input[type="checkbox"]'
+      '.dropdown-input-container input[type="checkbox"]'
     );
-    for (const i = 0; i < checks.length; i++) {
+    for (let i = 0; i < checks.length; i++) {
       const check = checks[i];
       if (!check.disabled) {
         check.checked = false;
@@ -101,7 +101,7 @@ class FilterOption extends PureComponent {
 
 FilterOption.propTypes = {
   filterName: PropTypes.string.isRequired,
-  filterOptions: PropTypes.array.isRequired,
+  filterOptions: PropTypes.arrayOf(PropTypes.object).isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
 };
 export default FilterOption;

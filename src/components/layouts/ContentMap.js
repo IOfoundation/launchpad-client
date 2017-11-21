@@ -193,7 +193,7 @@ ContentMap.propTypes = {
   expanded: PropTypes.bool,
   expandMap: PropTypes.func.isRequired,
   highlightOrgCard: PropTypes.func.isRequired,
-  locations: PropTypes.array,
+  locations: PropTypes.arrayOf(PropTypes.object),
   onBoundsChange: PropTypes.func,
   redoSearchInMap: PropTypes.func.isRequired,
   reduceMap: PropTypes.func.isRequired,

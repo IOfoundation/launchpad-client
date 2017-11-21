@@ -6,6 +6,27 @@ import BusinessesView from './Main';
 import {Link} from 'react-router';
 
 class BusinessesPage extends Component {
+  shouldComponentUpdate(nextProps) {
+    const {
+      appliedFilters,
+      organizations,
+      displayOptions,
+      businessesMetadata,
+      filterOptions,
+      windowWidth,
+    } = this.props;
+    if (
+      appliedFilters !== nextProps.appliedFilters ||
+      organizations !== nextProps.organizations ||
+      displayOptions !== nextProps.displayOptions ||
+      businessesMetadata !== nextProps.businessesMetadata ||
+      filterOptions !== nextProps.filterOptions ||
+      windowWidth !== nextProps.windowWidth
+    ) {
+      return true;
+    }
+  }
+
   renderFilterBoxMobile() {
     return (
       <FilterBoxMobile
