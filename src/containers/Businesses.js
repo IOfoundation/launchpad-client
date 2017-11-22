@@ -25,17 +25,6 @@ export class Businesses extends PureComponent {
       this.handleInitialCategorySearch(params);
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //   if (this.props.routingKey !== nextProps.routingKey && !_.isEqual(this.props.location.query, nextProps.location.query)) {
-  //     debugger
-  //     if ('id' in this.props.location.query) {
-  //       this.handleInitialOrgSearch(this.props.location.query)
-  //     } else {
-  //       this.handleInitialCategorySearch(this.props.location.query);
-  //     }
-  //   }
-  // }
-
   componentWillUnMount() {
     window.addEventListener('resize', () => this.handleWindowSizeChange());
   }
@@ -64,15 +53,15 @@ export class Businesses extends PureComponent {
     return isEmpty(filteredTypes);
   }
 
-  getTextSearchResults(filter) {
+  getTextSearchResults = (filter) => {
     this.props.actions.fetchSearchResults(filter);
-  }
+  };
 
   handleOnChangeBusinessType(filterValue) {
     const showBusinessTypes = this.props.displayOptions.showBusinessTypes;
     const businessTypes = this.props.filters.businessTypes.map(filter => filter.name);
     if (filterValue) {
-      return businessTypes.includes(filterValue)? !showBusinessTypes: showBusinessTypes;
+      return businessTypes.includes(filterValue) ? !showBusinessTypes: showBusinessTypes;
     }
     return showBusinessTypes;
   }
@@ -89,18 +78,19 @@ export class Businesses extends PureComponent {
     }
   }
 
-  handleOnChangeFilterOptions(filterValue, filterType, removeFilter) {
-    const params = this.props.queries;
-    this.props.actions.changeFilterDisplayOptions(
+  handleOnChangeFilterOptions = (filterValue, filterType, removeFilter) => {
+    const {queries} = this.props;
+    const {changeFilterDisplayOptions, updateChipFilers, filterOrganizations} = this.props.actions;
+    changeFilterDisplayOptions(
       this.handleOnChangeBusinessType(filterValue),
       this.handleOnChangeLocationToggle(filterType, removeFilter)
     );
-    if (typeof removeFilter === "undefined" && !isEmpty(params.category)) {
-      removeFilter = params.category.includes(filterValue) ? true : false;
+    if (typeof removeFilter === "undefined" && !isEmpty(queries.category)) {
+      removeFilter = queries.category.includes(filterValue) ? true : false;
     }
-    this.props.actions.updateChipFilers(filterValue, params, filterType, removeFilter);
-    this.props.actions.filterOrganizations(filterValue, params, filterType, removeFilter)
-  }
+    updateChipFilers(filterValue, queries, filterType, removeFilter);
+    filterOrganizations(filterValue, queries, filterType, removeFilter);
+  };
 
   handleClickOnClearAllFilters() {
     this.props.actions.updateChipFilers(null, null, 'all', true);
@@ -126,13 +116,12 @@ export class Businesses extends PureComponent {
           locations={locations}
           businessesMetadata={metadata}
           windowWidth={this.state.width}
-          getTextSearchResults={(e) => this.getTextSearchResults(e)}
+          getTextSearchResults={this.getTextSearchResults}
           checkBusinessType={(filterValue) => this.handleOnChangeBusinessType(filterValue)}
           checkLocationToggle={() => this.handleOnChangeLocationToggle()}
           handleClickOnClearAllFilters={(e) =>
             this.handleClickOnClearAllFilters(e)}
-          handleOnChangeFilterOptions={(filterValue, filterType, removeFilter) =>
-            this.handleOnChangeFilterOptions(filterValue, filterType, removeFilter)}
+          handleOnChangeFilterOptions={this.handleOnChangeFilterOptions}
           handleChangePage={(e) => this.handleChangePage(e)}
         />
     </MainLayout>
@@ -161,7 +150,7 @@ const mapStateToProps = _state => {
     metadata: businesses.metadata,
     organizations: businesses.organizations,
     queries: routing.locationBeforeTransitions.query,
-    routingKey: routing.locationBeforeTransitions.key
+    action: routing.locationBeforeTransitions.action
   };
 };
 

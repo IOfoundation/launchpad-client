@@ -22,7 +22,7 @@ class FilterByOptions extends React.Component {
     }
   }
   _onClick(selectedfilterOption) {
-    this.props.handleOnChangeFilterOptions(selectedfilterOption.name, 'category');
+    return this.props.handleOnChangeFilterOptions(selectedfilterOption.name, 'category');
   }
   handleClickOutside() {
     this.setState({
@@ -36,7 +36,7 @@ class FilterByOptions extends React.Component {
       <button
         className="dropdown-options"
         key={filterOption.id}
-        onClick={e => this._onClick(filterOption)}
+        onClick={() => this._onClick(filterOption)}
         onMouseOver={e => this._toggleSubOption(e, filterOption)}
       >
         <span>{filterOption.name}</span>

@@ -8,18 +8,14 @@
     "development": {
       "presets": [
         "env",
-        "react-hmre"
+        "react-hmre",
+        "stage-0"
       ]
     },
     "production": {
       "presets": [
         [
           "env",
-          {
-            "es2015": {
-              "modules": false
-            }
-          }
         ]
       ],
       "plugins": [
@@ -34,9 +30,9 @@
     }
   },
   "plugins": [
+    "transform-class-properties",
     "syntax-flow",
     "transform-flow-strip-types",
-    "transform-class-properties",
     "transform-decorators-legacy",
     [
       "transform-runtime", {
