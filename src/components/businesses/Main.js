@@ -108,7 +108,7 @@ class Main extends Component {
         toggleSwitch={displayOptions.locationToggleSwitch}
         highlightOrgCard={(organizationId) => this.highlightOrgCard(organizationId)}
       >
-        {isEmpty(this.props.organizations) ? (
+        {this.props.showLoading ? (
           this._renderLoader()
         ):(
           this._renderBusinesses()

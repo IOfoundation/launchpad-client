@@ -12,6 +12,7 @@ export class Businesses extends PureComponent {
     super(props);
     this.state = {
       width: window.innerWidth,
+      showLoading: true,
     };
   }
   componentWillMount(_nextProps) {
@@ -24,7 +25,11 @@ export class Businesses extends PureComponent {
       this.handleInitialOrgSearch(params) :
       this.handleInitialCategorySearch(params);
   }
-
+  componentWillReceiveProps(newProps) {
+    if(newProps.organizations !== this.props.organizations) {
+      this.setState({showLoading: false});
+    }
+  }
   componentWillUnMount() {
     window.addEventListener('resize', () => this.handleWindowSizeChange());
   }
@@ -53,7 +58,7 @@ export class Businesses extends PureComponent {
     return isEmpty(filteredTypes);
   }
 
-  getTextSearchResults = (filter) => {
+  getTextSearchResults = filter => {
     this.props.actions.fetchSearchResults(filter);
   };
 
@@ -81,6 +86,7 @@ export class Businesses extends PureComponent {
   handleOnChangeFilterOptions = (filterValue, filterType, removeFilter) => {
     const {queries} = this.props;
     const {changeFilterDisplayOptions, updateChipFilers, filterOrganizations} = this.props.actions;
+    this.setState({showLoading: true});
     changeFilterDisplayOptions(
       this.handleOnChangeBusinessType(filterValue),
       this.handleOnChangeLocationToggle(filterType, removeFilter)
@@ -93,6 +99,7 @@ export class Businesses extends PureComponent {
   };
 
   handleClickOnClearAllFilters() {
+    this.setState({showLoading: true});
     this.props.actions.updateChipFilers(null, null, 'all', true);
     this.props.actions.filterOrganizations(null, null, 'all', true);
     this.props.actions.changeFilterDisplayOptions(true, false);
@@ -115,6 +122,7 @@ export class Businesses extends PureComponent {
           organizations={organizations}
           locations={locations}
           businessesMetadata={metadata}
+          showLoading={this.state.showLoading}
           windowWidth={this.state.width}
           getTextSearchResults={this.getTextSearchResults}
           checkBusinessType={(filterValue) => this.handleOnChangeBusinessType(filterValue)}

@@ -59,6 +59,7 @@ class BusinessesPage extends Component {
                 organizations={this.props.organizations}
                 locations={this.props.locations}
                 isMobile={isMobile}
+                showLoading={this.props.showLoading}
                 businessesMetadata={this.props.businessesMetadata}
                 checkBusinessType={this.props.checkBusinessType}
                 checkLocationToggle={this.props.checkBusinessType}
