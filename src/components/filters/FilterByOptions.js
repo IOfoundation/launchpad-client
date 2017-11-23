@@ -21,9 +21,13 @@ class FilterByOptions extends Component {
       this.setState({selectedfilterOption, subDropdownOpen: true});
     }
   }
-  _onClick(selectedfilterOption) {
-    return this.props.handleOnChangeFilterOptions(selectedfilterOption.name, 'category');
-  }
+
+  handleClick = (selectedfilterOption) => () => {
+    const { name } = selectedfilterOption;
+    console.log(name);
+    this.props.handleOnChangeFilterOptions(name, 'category');
+  };
+
   handleClickOutside() {
     this.setState({
       dropdownOpen: false,
@@ -36,7 +40,7 @@ class FilterByOptions extends Component {
       <button
         className="dropdown-options"
         key={filterOption.id}
-        onClick={() => this._onClick(filterOption)}
+        onClick={this.handleClick(filterOption)}
         onMouseOver={e => this._toggleSubOption(e, filterOption)}
       >
         <span>{filterOption.name}</span>

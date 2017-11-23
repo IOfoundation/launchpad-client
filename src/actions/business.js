@@ -3,7 +3,7 @@ import {CategoriesConstants} from '../constants';
 import httpRequest from '../utils/httpRequest';
 import {browserHistory} from 'react-router';
 import queryString from 'query-string';
-import {isEmpty, isString, cloneDeep} from 'lodash';
+import {isEmpty, isString, cloneDeep, debounce} from 'lodash';
 import URL from 'url-parse';
 
 const MaxItemsDisplayedPerPage = 6;
@@ -77,31 +77,47 @@ const pushBrowserHistory = filters => {
   });
 };
 
-export function filterOrganizations(filterValue, currentParams, filterType, removeFilter) {
+export function filterOrganizations(
+  filterValue,
+  currentParams,
+  filterType,
+  removeFilter
+) {
   return async (dispatch: Function) => {
-    const filters = filtersObject(filterValue, currentParams, filterType, removeFilter);
-    const {organizations, metadata} = await _buildOrganizationsAndMetadata(filters);
-
-    dispatch(getData(organizations, metadata));
-    pushBrowserHistory(filters);
+    const filters = filtersObject(
+      filterValue,
+      currentParams,
+      filterType,
+      removeFilter
+    );
+    debouncedBuildOrganizationsAndMetadata(filters, dispatch);
   };
 }
+
+const debouncedBuildOrganizationsAndMetadata = debounce((filters, dispatch) => {
+  _buildOrganizationsAndMetadata(filters, dispatch);
+}, 500);
+
 const filtersObject = (filterValue, filters, filterType, removeFilter) => {
-  let newFilters = cloneDeep(filters);
+  const newFilters = cloneDeep(filters);
   switch (filterType) {
     case 'category':
-      return removeFilter ? _removeCategoryFilter(newFilters, filterValue) : _addCategoryFilter(newFilters, filterValue);
+      return removeFilter
+        ? _removeCategoryFilter(newFilters, filterValue)
+        : _addCategoryFilter(newFilters, filterValue);
       break;
     case 'organization':
       return _addOrganizationIdFilter(newFilters, filterValue);
       break;
     case 'coordinates':
-      return removeFilter ? _removeLocationFilter(newFilters) : _addLocationFilter(newFilters, filterValue);
+      return removeFilter
+        ? _removeLocationFilter(newFilters)
+        : _addLocationFilter(newFilters, filterValue);
       break;
     default:
       return _removeAllFilters();
-    }
   }
+};
 
 export function changePage(page, currentParams) {
   return async (dispatch: Function) => {
@@ -177,31 +193,46 @@ export function fetchFilterOptions() {
 export function fetchSearchResults(filter) {
   return async (dispatch: Function) => {
     const httpResponse = await httpRequest.get('api/search', {
-      params: {'text': filter}
+      params: {text: filter},
     });
     const items = httpResponse.data;
     dispatch(searchResultsDataObject(items));
   };
 }
 
-export function changeFilterDisplayOptions(showBusinessTypes, locationToggleSwitch) {
+export function changeFilterDisplayOptions(
+  showBusinessTypes,
+  locationToggleSwitch
+) {
   return async (dispatch: Function) => {
     const displayOptions = {
-      showBusinessTypes: showBusinessTypes,
-      locationToggleSwitch: locationToggleSwitch,
+      showBusinessTypes,
+      locationToggleSwitch,
     };
     dispatch(displayFilterOptions(displayOptions));
-  }
+  };
 }
 
-export function updateChipFilers(filterValue, currentParams, filterType, removeFilter) {
+export function updateChipFilers(
+  filterValue,
+  currentParams,
+  filterType,
+  removeFilter
+) {
   return (dispatch: Function) => {
-    const appliedFilters = filtersObject(filterValue, currentParams, filterType, removeFilter);
+    const appliedFilters = filtersObject(
+      filterValue,
+      currentParams,
+      filterType,
+      removeFilter
+    );
     dispatch(addChipToFilterComponent(appliedFilters));
-  }
+    pushBrowserHistory(appliedFilters);
+  };
 }
 
-async function _buildOrganizationsAndMetadata(filters) {
+async function _buildOrganizationsAndMetadata(filters, dispatch) {
+  console.log(filters)
   const params = {
     ...filters,
     per_page: MaxItemsDisplayedPerPage,
@@ -209,8 +240,8 @@ async function _buildOrganizationsAndMetadata(filters) {
   if (!params.hasOwnProperty('page')) {
     Object.assign(params, {page: 1});
   }
-  const httpResponse = await httpRequest.get(`api/organizations`, {params});
-  const organizations = httpResponse.data
+  const httpResponse = await httpRequest.get('api/organizations', {params});
+  const organizations = httpResponse.data;
   const metadata = {
     pagination: {
       ...paginationMetadata(JSON.parse(httpResponse.headers.link)),
@@ -218,16 +249,19 @@ async function _buildOrganizationsAndMetadata(filters) {
     },
     totalOrganizations: httpResponse.headers['x-total-count'],
   };
-  return {
-    organizations,
-    metadata,
-  };
+  dispatch(getData(organizations, metadata));
 }
 
 function _addCategoryFilter(newFilters, filterValue) {
-  if (newFilters.id) {newFilters.id = [];}
-  if (!isEmpty(newFilters.page)) {_removePaginationFilters(newFilters);}
-  if (filterValue === null) {return newFilters;}
+  if (newFilters.id) {
+    newFilters.id = [];
+  }
+  if (!isEmpty(newFilters.page)) {
+    _removePaginationFilters(newFilters);
+  }
+  if (filterValue === null) {
+    return newFilters;
+  }
   if (isEmpty(newFilters.category)) {
     newFilters.category = [filterValue];
   } else if (isString(newFilters.category)) {
@@ -239,7 +273,9 @@ function _addCategoryFilter(newFilters, filterValue) {
 }
 
 function _removeCategoryFilter(newFilters, filterValue) {
-  if (!isEmpty(newFilters.page)) {_removePaginationFilters(newFilters);}
+  if (!isEmpty(newFilters.page)) {
+    _removePaginationFilters(newFilters);
+  }
   if (isString(newFilters.category)) {
     newFilters.category = [];
     return newFilters;
@@ -257,7 +293,9 @@ function _addOrganizationIdFilter(newFilters, filterValue) {
 }
 
 function _addLocationFilter(newFilters, filterValue) {
-  if (!isEmpty(newFilters.page)) {_removePaginationFilters(newFilters);}
+  if (!isEmpty(newFilters.page)) {
+    _removePaginationFilters(newFilters);
+  }
   newFilters.id = [];
   newFilters.sw_lat = filterValue.sw.lat;
   newFilters.sw_lng = filterValue.sw.lng;
@@ -267,7 +305,9 @@ function _addLocationFilter(newFilters, filterValue) {
 }
 
 function _removeLocationFilter(newFilters) {
-  if (!isEmpty(newFilters.page)) {_removePaginationFilters(newFilters);}
+  if (!isEmpty(newFilters.page)) {
+    _removePaginationFilters(newFilters);
+  }
   newFilters.sw_lat = [];
   newFilters.sw_lng = [];
   newFilters.ne_lat = [];
@@ -281,5 +321,5 @@ function _removeAllFilters() {
 
 function _removePaginationFilters(newFilters) {
   newFilters.page = 1;
-  return newFilters
+  return newFilters;
 }

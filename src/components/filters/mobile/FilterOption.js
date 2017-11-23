@@ -20,12 +20,10 @@ class FilterOption extends Component {
       }
     }
   }
-  _onClick(event, selectedfilterOption) {
+  handleClick = (selectedfilterOption) => () => {
+    const { name } = selectedfilterOption;
     this.uncheckAll();
-    this.props.handleOnChangeFilterOptions(
-      selectedfilterOption.name,
-      'category'
-    );
+    return this.props.handleOnChangeFilterOptions(name, 'category');
   }
   _toggleSubOption(event, selectedfilterOption) {
     this.props.handleOnChangeFilterOptions(
@@ -41,7 +39,7 @@ class FilterOption extends Component {
     return (
       <ul>
         {filterOption.children.map(child => (
-          <li key={child.id} onClick={e => this._onClick(e, child)}>
+          <li key={child.id} onClick={this.handleClick(child)}>
             {child.name}
           </li>
         ))}

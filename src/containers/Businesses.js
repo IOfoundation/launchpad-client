@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {PropTypes} from 'prop-types';
-import {isEmpty, isString} from 'lodash';
+import {isEmpty, isString, debounce} from 'lodash';
 import BusinessesPage from 'components/businesses/BusinessesPage';
 import MainLayout from '../components/layouts/Main';
 import * as actions from '../actions/business';
@@ -69,7 +69,7 @@ export class Businesses extends PureComponent {
     this.props.actions.fetchSearchResults(filter);
   };
 
-  handleOnChangeBusinessType(filterValue) {
+  handleOnChangeBusinessType = (filterValue) => {
     const showBusinessTypes = this.props.displayOptions.showBusinessTypes;
     const businessTypes = this.props.filters.businessTypes.map(filter => filter.name);
     if (filterValue) {
@@ -78,7 +78,7 @@ export class Businesses extends PureComponent {
     return showBusinessTypes;
   }
 
-  handleOnChangeLocationToggle(filterType, removeFilter) {
+  handleOnChangeLocationToggle = (filterType, removeFilter) => {
     const locationToggleSwitch = this.props.displayOptions.locationToggleSwitch;
     switch (filterType) {
       case 'coordinates':
@@ -102,17 +102,17 @@ export class Businesses extends PureComponent {
       removeFilter = queries.category.includes(filterValue) ? true : false;
     }
     updateChipFilers(filterValue, queries, filterType, removeFilter);
-    filterOrganizations(filterValue, queries, filterType, removeFilter);
+    filterOrganizations(filterValue, queries, filterType, removeFilter)
   };
 
-  handleClickOnClearAllFilters() {
+  handleClickOnClearAllFilters = () => {
     this.setState({showLoading: true});
     this.props.actions.updateChipFilers(null, null, 'all', true);
     this.props.actions.filterOrganizations(null, null, 'all', true);
     this.props.actions.changeFilterDisplayOptions(true, false);
   }
 
-  handleChangePage(page) {
+  handleChangePage = (page) => {
     const businessesFilters = this.props.location.query;
     this.props.actions.changePage(page, businessesFilters);
   }
@@ -134,12 +134,11 @@ export class Businesses extends PureComponent {
           showLoading={this.state.showLoading}
           windowWidth={this.state.width}
           getTextSearchResults={this.getTextSearchResults}
-          checkBusinessType={(filterValue) => this.handleOnChangeBusinessType(filterValue)}
-          checkLocationToggle={() => this.handleOnChangeLocationToggle()}
-          handleClickOnClearAllFilters={(e) =>
-            this.handleClickOnClearAllFilters(e)}
+          checkBusinessType={this.handleOnChangeBusinessType}
+          checkLocationToggle={this.handleOnChangeLocationToggle}
+          handleClickOnClearAllFilters={this.handleClickOnClearAllFilters}
           handleOnChangeFilterOptions={this.handleOnChangeFilterOptions}
-          handleChangePage={(e) => this.handleChangePage(e)}
+          handleChangePage={this.handleChangePage}
         />
       </MainLayout>
     );
