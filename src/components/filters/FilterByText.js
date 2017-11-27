@@ -1,11 +1,12 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
 import ClearIcon from '../shared/ClearIcon';
 import Chip from '../shared/Chip';
 import onClickOutside from 'react-onclickoutside';
 import {isEmpty, isString} from 'lodash';
+import TagsBox from './TagsBox';
 
-class FilterByText extends React.Component {
+class FilterByText extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,21 +16,17 @@ class FilterByText extends React.Component {
     };
   }
 
-  shouldComponentUpdate(nextProps) {
-    return this.props.appliedFilters !== nextProps.appliedFilters;
-  }
-
-  deleteFilter(e) {
+  deleteFilter = e => {
     const filter = e.currentTarget.getAttribute('data-value');
     this.props.handleOnChangeFilterOptions(filter, 'category', true);
-  }
+  };
 
-  clearAll() {
+  clearAll = () => {
     this.setState({inputOnFocus: false, searchText: ''});
     this.props.handleClickOnClearAllFilters();
   }
 
-  _inputClicked() {
+  handleInputClicked() {
     this.setState({inputOnFocus: true});
   }
 
@@ -39,6 +36,7 @@ class FilterByText extends React.Component {
       showDropdown: false,
       searchText: '',
     });
+    this.props.handleClickOnClearAllFilters();
   }
 
   handleKeyPress(event) {
@@ -80,40 +78,13 @@ class FilterByText extends React.Component {
             : 'filter-label-container-show'
         }
       >
-        {this.renderFilter()}
-        {filters.category && (
-          <a
-            className="search-filter-clear text-thin"
-            onClick={() => this.clearAll()}
-          >
-            {'Clear All'}
-          </a>
-        )}
+        <TagsBox
+          filters={filters}
+          deleteFilter={this.deleteFilter}
+          clearAll={this.clearAll}
+        />
       </div>
     );
-  }
-  renderFilter() {
-    const filters = this.props.appliedFilters;
-    if (isEmpty(filters.category)) {
-      return null;
-    } else if (isString(filters.category)) {
-      return (
-        <Chip
-          key={filters.category}
-          text={filters.category}
-          handleClick={e => this.deleteFilter(e)}
-          canDelete={true}
-        />
-      );
-    }
-    return filters.category.map(filter => (
-      <Chip
-        key={filter}
-        text={filter}
-        handleClick={e => this.deleteFilter(e)}
-        canDelete={true}
-      />
-    ));
   }
   getFilterByTextIcon() {
     return (
@@ -186,22 +157,34 @@ class FilterByText extends React.Component {
           <div
             className={
               this.state.inputOnFocus
-                ? 'filter-by-text-transition col-lg-4 col-md-5 col-xs-5 no-padding'
-                : 'filter-by-text-transition col-lg-3 col-md-4 col-xs-4 no-padding'
+                ? 'filter-by-text-transition col-lg-4 col-md-5 col-xs-5 no-padding position-relative'
+                : 'filter-by-text-transition col-lg-3 col-md-4 col-xs-4 no-padding position-relative'
             }
           >
             <input
               type="text"
               className="search-by-text text-thin"
-              value={filters.category ? '' : this.state.searchText}
-              onClick={() => this._inputClicked()}
+              value={this.state.searchText}
               onChange={e => this.handleKeyPress(e)}
-              placeholder={
-                this.state.inputOnFocus
-                  ? 'Search by Resource Name'
-                  : 'Or search by name'
+              onClick={() => this.handleInputClicked()}
+              placeholder="Search by Resource Name"
+              style={
+                this.state.inputOnFocus || this.state.searchText
+                  ? {opacity: 1}
+                  : {opacity: 0}
               }
             />
+            <a
+              style={
+                this.state.inputOnFocus || this.state.searchText
+                  ? {opacity: 0}
+                  : {opacity: 1}
+              }
+              className="fake-placeholder text-thin"
+            >
+              {'Or '}
+              <span className="underline-text">{'search'}</span> {'by name'}
+            </a>
             {this.getFilterByTextIcon()}
           </div>
           <div

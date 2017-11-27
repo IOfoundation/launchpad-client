@@ -96,6 +96,13 @@ input[type=text]::-ms-clear {
   width: 90%;
   margin: auto;
 }
+.underline-text {
+  text-decoration: none;
+    border-bottom: 1px solid #00D3A7;
+}
+.position-relative {
+  position: relative;
+}
 @media (max-width: 60em) {
   .mobile-devices {
     display: initial !important;

@@ -74,7 +74,7 @@ class BusinessesForm extends React.Component {
         <ul className={
             this.state.showPreviewDropdown
               ? 'hero-dropdown-list-hide'
-              : 'hero-dropdown-list'
+              : 'hero-dropdown-list scroll-list'
           }
         >
           {this.props.items.map(item => (

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
 import Chip from '../../shared/Chip';
 import {isEmpty, isString} from 'lodash';
+import TagsBox from '../TagsBox';
 
 class FilterByTextMobile extends Component {
   constructor(props) {
@@ -12,30 +13,23 @@ class FilterByTextMobile extends Component {
     };
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    const shouldUpdate =
-      this.props.appliedFilters !== nextProps.appliedFilters ||
-      this.state.searchText !== nextState.searchText ? true : false;
-    return shouldUpdate;
-  }
-
-  deleteFilter(e) {
+  deleteFilter = e => {
     const filter = e.currentTarget.getAttribute('data-value');
     this.props.handleOnChangeFilterOptions(filter, 'category', true);
-    this.setState({searchText: ''});
   }
 
-  clearAll() {
-    this.setState({showFilterLabel: false, labelTop: false, searchText: ''});
+  clearAll = () => {
+    this.setState({showFilterLabel: false, searchText: ''});
     this.props.handleClickOnClearAllFilters();
   }
 
   handleDropdownOnClick(item) {
-    item.searchable_type === 'Category' ? (
-      this.props.handleOnChangeFilterOptions(item.content, 'category')
-    ) : (
-      this.props.handleOnChangeFilterOptions(item.searchable_id, 'organization')
-    );
+    item.searchable_type === 'Category' ? this.props.handleOnChangeFilterOptions(item.content, 'category')
+      : this.props.handleOnChangeFilterOptions(
+          item.searchable_id,
+          'organization',
+          false
+        );
     this.setState({
       showDropdown: false,
       value: '',
@@ -52,29 +46,6 @@ class FilterByTextMobile extends Component {
       this.setState({showDropdown: false});
     }
   }
-  renderFilter() {
-    const filters = this.props.appliedFilters;
-    if (isEmpty(filters.category)) {
-      return null;
-    } else if (isString(filters.category)) {
-      return (
-        <Chip
-          key={filters.category}
-          text={filters.category}
-          handleClick={(e) => this.deleteFilter(e)}
-          canDelete={true}
-        />
-      );
-    }
-    return filters.category.map(filter => (
-      <Chip
-        key={filter}
-        text={filter}
-        handleClick={e => this.deleteFilter(e)}
-        canDelete={true}
-      />
-    ));
-  }
   renderChipsContainer(filters) {
     return (
       <div
@@ -84,15 +55,11 @@ class FilterByTextMobile extends Component {
             : 'filter-label-container-show'
         }
       >
-        {this.renderFilter()}
-        {filters.category && (
-          <a
-            className="search-filter-label clear"
-            onClick={() => this.clearAll()}
-          >
-            {'Clear All'}
-          </a>
-        )}
+        <TagsBox
+          filters={filters}
+          deleteFilter={this.deleteFilter}
+          clearAll={this.clearAll}
+        />
       </div>
     );
   }
@@ -123,7 +90,7 @@ class FilterByTextMobile extends Component {
     return (
       <div className="filter-chip">
         {filters.category && (
-          <div className="p-left-16 p-right-16 m-bot-16 m-top-20">
+          <div className="filter-by-text-transition p-left-16 p-right-16 m-bot-16 m-top-20">
             <h3 className="col-lg-12 col-md-12 col-xs-12 no-padding">
               {'Filter results with the selections below'}
             </h3>

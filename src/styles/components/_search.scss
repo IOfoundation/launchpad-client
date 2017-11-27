@@ -102,7 +102,13 @@
     }
   }
 }
-
+.scroll-list {
+  max-height: 240px;
+  overflow-y: auto;
+  @media (max-width: 375px) {
+    max-height: 200px;
+  }
+}
 .hero_input-hide {
   display: none;
   position: absolute;
@@ -115,17 +121,9 @@
   left: 27px;
   top: 107%;
   z-index: 1;
-  max-height: 300px;
-  overflow-y: scroll;
-  &::-webkit-scrollbar {
-    display: none;
-  }
   @media (max-width: 60em) {
     width: 100%;
     left: 0;
     top:100%;
-  }
-  @media (max-width: 375px) {
-    max-height: 200px;
   }
 }

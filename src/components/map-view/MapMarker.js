@@ -54,14 +54,29 @@ export default class MapMarker extends Component {
         </div>
         <section className="row between-xs map_modal_social business_block--expanded_bottom">
           <div>
-            {organization.facebook ? <a href={organization.facebook}><FacebookIcon className={'icon-svg'} size={18} /></a> : ''}
-            {organization.twitter ? <a href={organization.twitter}><TwitterIcon className={'icon-svg'} size={18} /></a> : ''}
-            {organization.linkedin ? <a href={organization.linkedin}><LinkedinIcon className={'icon-svg'} size={18} /></a> : ''}
+            {organization.facebook && (
+              <a href={organization.facebook} target="_blank">
+                <FacebookIcon className={'icon-svg'} size={18} />
+              </a>
+            )}
+            {organization.twitter && (
+              <a href={organization.twitter} target="_blank">
+                <TwitterIcon className={'icon-svg'} size={18} />
+              </a>
+            )}
+            {organization.linkedin && (
+              <a href={organization.linkedin} target="_blank">
+                <LinkedinIcon className={'icon-svg'} size={18} />
+              </a>
+            )}
           </div>
-          <a className="visitWebsite bold" href={organization.website}>
+          <a
+            className="visitWebsite bold"
+            href={organization.website}
+            target="_blank"
+          >
             {'WEBSITE'}
           </a>
-
         </section>
       </div>
     );

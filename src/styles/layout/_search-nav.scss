@@ -33,19 +33,11 @@
       background-color: transparent;
       border: none;
       color: #00D3A7;
-      &:focus {
-        &::placeholder {
-          color: $white-color;
-          font-weight: lighter;
-          font-size: 20px;
-          opacity: 0.75;
-          @media (max-width: 1140px) {
-            font-size: 16px;
-          }
-        }
-      }
+      line-height: 20px;
+      position: absolute;
+      z-index: 2;
       &::placeholder {
-        color: #00D3A7;
+        color: $white-color;
         font-size: 20px;
         font-weight: lighter;
         @media (max-width: 1140px) {
@@ -65,7 +57,10 @@
       @media (max-width: 60em) {
         padding: 10px 0;
         width: 140px;
-        color: #2AD587;
+        position: relative;
+        &::placeholder {
+          color: #2AD587
+        }
       }
     }
     @media (max-width: 60em) {
@@ -75,7 +70,13 @@
     }
   }
 }
-
+.fake-placeholder {
+  color: #00D3A7;
+  font-size: 20px;
+  font-weight: lighter;
+  position: absolute;
+  left: 0;
+}
 //Dropdown
 .dropdown {
   &-btn {
@@ -90,7 +91,7 @@
     &-full {
       width: 100%;
       max-height: 500px;
-      overflow-y: scroll;
+      overflow-y: auto;
     }
     &-half {
       width: 50%;
@@ -98,7 +99,7 @@
       float: left;
       border-right: 1px solid rgba(0, 0, 0, 0.15);
       max-height: 500px;
-      overflow-y: scroll;
+      overflow-y: auto;
     }
   }
   &-container {
@@ -113,10 +114,6 @@
     width: 271px;
     &-expand {
       width: 544px;
-    }
-    ::-webkit-scrollbar {
-      width: 0px;
-      background: transparent; /* make scrollbar transparent */
     }
   }
   &-options{
@@ -149,7 +146,7 @@
     color: $primary-color;
     width: 49%;
     max-height: 500px;
-    overflow-y: scroll;
+    overflow-y: auto;
     display: inline-block;
   }
 }
