@@ -7,13 +7,8 @@ class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showModal: false,
       selected: '-1',
     };
-  }
-
-  openModal() {
-    this.setState({showModal: !this.state.showModal});
   }
   getCoordinates(business) {
     return business.coordinates;
@@ -86,8 +81,7 @@ class Main extends React.Component {
         bootstrapURLKeys={{
           key: process.env.GOOGLE_MAP_API_KEY,
         }}
-      >
-      </GoogleMap>
+      />
     )
   }
 }

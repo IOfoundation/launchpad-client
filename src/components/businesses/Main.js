@@ -75,11 +75,17 @@ class Main extends Component {
 
   _renderBusinesses() {
     return (
-      <BusinessesList
-        organizations={this.props.organizations}
-        selectedOrg={this.state.selectedOrg}
-        handleClickOnClearAllFilters={this.props.handleClickOnClearAllFilters}
-      />
+      <div>
+        <BusinessesList
+          organizations={this.props.organizations}
+          selectedOrg={this.state.selectedOrg}
+          handleClickOnClearAllFilters={this.props.handleClickOnClearAllFilters}
+        />
+        <Pagination
+          businessesMetadata={this.props.businessesMetadata}
+          handleChangePage={this.props.handleChangePage}
+        />
+      </div>
     );
   }
   render() {
@@ -108,16 +114,11 @@ class Main extends Component {
         toggleSwitch={displayOptions.locationToggleSwitch}
         highlightOrgCard={(organizationId) => this.highlightOrgCard(organizationId)}
       >
-        {isEmpty(this.props.organizations) ? (
+        {this.props.showLoading ? (
           this._renderLoader()
         ):(
           this._renderBusinesses()
         )}
-
-        <Pagination
-          businessesMetadata={businessesMetadata}
-          handleChangePage={handleChangePage}
-        />
       </ContentMap>
     );
   }

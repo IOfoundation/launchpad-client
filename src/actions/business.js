@@ -82,11 +82,10 @@ export function filterOrganizations(filterValue, currentParams, filterType, remo
     const filters = filtersObject(filterValue, currentParams, filterType, removeFilter);
     const {organizations, metadata} = await _buildOrganizationsAndMetadata(filters);
 
-    dispatch(getData(organizations, metadata))
+    dispatch(getData(organizations, metadata));
     pushBrowserHistory(filters);
   };
 }
-
 const filtersObject = (filterValue, filters, filterType, removeFilter) => {
   let newFilters = cloneDeep(filters);
   switch (filterType) {

@@ -7,12 +7,12 @@ class ContentMap extends Component {
   _renderReduceButton() {
     return (
       <div className="row between-xs middle-xs reducedMapBottom">
-          <button
-            className="expand-btn map-btn btn-link btn-link-primary text-bold text-bold text-xs-margin p-0 m-bot-8"
-            onClick={this.props.reduceMap}
-          >
-            {'Reduce Map'}
-          </button>
+        <button
+          className="expand-btn map-btn btn-link btn-link-primary text-bold text-bold text-xs-margin p-0 m-bot-8"
+          onClick={this.props.reduceMap}
+        >
+          {'Reduce Map'}
+        </button>
         <div className="map-btn">
           <div className="float-right">
             <button
@@ -108,10 +108,9 @@ class ContentMap extends Component {
         ) : (
           <div
             className={
-              this.props.businessesMetadata.totalOrganizations === '0' ?
-                'result-container-hide desktop-devices'
-              :
-                'grid desktop-devices'
+              this.props.businessesMetadata.totalOrganizations === '0'
+                ? 'result-container-hide desktop-devices'
+                : 'grid desktop-devices'
             }
           >
             <div
