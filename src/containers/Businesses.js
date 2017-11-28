@@ -26,7 +26,7 @@ export class Businesses extends PureComponent {
       this.handleInitialCategorySearch(params);
   }
   componentWillReceiveProps(newProps) {
-    const params = newProps.location.query;
+    const params = newProps.queries;
     const locationToggleSwitch = 'ne_lat' in params ? true : false;
     if(newProps.location.search.localeCompare(this.props.location.search) !== 0) {
       this.setState({showLoading: true});
@@ -156,11 +156,10 @@ Businesses.propTypes = {
   params: PropTypes.object,
 };
 
-const mapStateToProps = (_state, props) => {
+const mapStateToProps = _state => {
   const {businesses, routing} = _state;
-  const {category} = props.location.query;
   return {
-    appliedFilters: {category},
+    appliedFilters: businesses.appliedFilters,
     displayOptions: businesses.displayOptions,
     items: businesses.items,
     filters: businesses.filters,
