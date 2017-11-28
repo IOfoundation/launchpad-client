@@ -31,7 +31,7 @@ class TagsBox extends PureComponent {
             className="search-filter-clear text-thin"
             onClick={this.props.clearAll}
           >
-            {'Clear All'}
+            <span>{'Clear All'}</span>
           </a>
         )}
       </div>

@@ -96,6 +96,7 @@ class ContentMap extends Component {
         locations={this.props.locations}
         onBoundsChange={this.props.onBoundsChange}
         TotalOrganizations={this.props.businessesMetadata.totalOrganizations}
+        highlightOrgCard={this.props.highlightOrgCard}
       />
     );
   }

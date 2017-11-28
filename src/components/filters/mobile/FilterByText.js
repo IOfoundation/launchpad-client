@@ -10,6 +10,7 @@ class FilterByTextMobile extends Component {
     this.state = {
       searchText: '',
       showDropdown: false,
+      filterById: props.filterById && true,
     };
   }
 
@@ -40,7 +41,7 @@ class FilterByTextMobile extends Component {
 
   handleKeyPress(e) {
     const value = e.target.value;
-    this.setState({searchText: value, showDropdown: true});
+    this.setState({searchText: value, showDropdown: true, filterById: false});
     this.props.getTextSearchResults(value);
     if (isEmpty(value)) {
       this.setState({showDropdown: false});
@@ -87,6 +88,7 @@ class FilterByTextMobile extends Component {
 
   render() {
     const filters = this.props.appliedFilters;
+    const organization = this.props.organization.length ? this.props.organization[0].name : '';
     return (
       <div className="filter-chip">
         {filters.category && (
@@ -100,7 +102,7 @@ class FilterByTextMobile extends Component {
         <div className="search-input-container p-left-16 p-right-16">
           <input
             type="text"
-            value={filters.category ? '' : this.state.searchText}
+            value={this.state.filterById === true && isEmpty(filters) ? organization : this.state.searchText}
             onChange={e => this.handleKeyPress(e)}
             className="search-by-text text-thin"
             placeholder="Or search by name"

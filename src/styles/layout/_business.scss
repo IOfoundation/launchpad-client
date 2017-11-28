@@ -117,9 +117,9 @@
   @media (max-width: 60em) {
     overflow: hidden;
     white-space: nowrap;
-    margin: 0 8px;
+    margin: 10px 8px;
     .business-type-container {
-      overflow: scroll;
+      overflow-x: scroll;
       white-space: nowrap;
       display: inline-block;
       div {
