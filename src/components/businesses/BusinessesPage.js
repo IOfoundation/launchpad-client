@@ -49,7 +49,7 @@ class BusinessesPage extends Component {
             <div className="col-lg-9 col-md-9 col-xs-9 body-container">
               <h2 className="desktop-devices">
                 {
-                  "Where startups and small businesses connect in California's Central Valley"
+                  "Where startups and small businesses connect in California's Capital Region"
                 }
               </h2>
               {isMobile ? this.renderFilterBoxMobile() : this.renderFilterBoxDesktop()}
