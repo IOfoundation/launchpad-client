@@ -36,7 +36,7 @@ class Main extends React.Component {
     const firstBusiness = locations ? locations[0] : null;
     const sacCoordinates = {lat: 38.57, lng: -121.47};
     const map_options = { fullscreenControl: false };
-    const zoomLevel = 7
+    const zoomLevel = 7;
     if (firstBusiness) {
       const [centerLng, centerLat] = this.getCoordinates(firstBusiness);
       return (

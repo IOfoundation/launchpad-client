@@ -3,6 +3,7 @@ import FacebookIcon from '../shared/FacebookIcon';
 import TwitterIcon from '../shared/TwitterIcon';
 import LinkedinIcon from '../shared/LinkedinIcon';
 import ClearIcon from '../shared/ClearIcon';
+import ArrowRight from '../shared/ArrowRight';
 
 const K_WIDTH = 24;
 const K_HEIGHT = 24;
@@ -30,7 +31,6 @@ const markerFill = '#4A4A4A';
 const selectedMarkerFill = '#2AD587';
 
 export default class MapMarker extends Component {
-
   _closeOrgInfo() {
     this.props.handleCloseClick();
   }
@@ -39,19 +39,19 @@ export default class MapMarker extends Component {
     const orgInfoModal = (
       <div id="orgModal" className="map_modal">
         <div className="row between-xs top-xs map_modal_top">
-          <a onClick={() => this._closeOrgInfo()}>
+          <a className="close-map-org" onClick={() => this._closeOrgInfo()}>
             <ClearIcon
-              className="close-map-org"
-              size="10"
+              size={15}
               style={{color: '#000000', verticalAlign: 'middle'}}
             />
-        </a>
+          </a>
           <img
             className="map_modal_logo"
             src="../static-data/images/orgs-placeholder.png"
           />
           <h1 className="map_modal_title">{organization.name}</h1>
         </div>
+        <hr />
         <section className="row between-xs map_modal_social business_block--expanded_bottom">
           <div>
             {organization.facebook && (
@@ -71,11 +71,14 @@ export default class MapMarker extends Component {
             )}
           </div>
           <a
-            className="visitWebsite bold"
+            className="website-link bold"
             href={organization.website}
             target="_blank"
           >
             {'WEBSITE'}
+            <ArrowRight
+              size={20}
+              style={{verticalAlign: 'middle'}} />
           </a>
         </section>
       </div>
