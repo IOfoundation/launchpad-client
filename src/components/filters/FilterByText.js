@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
 import ClearIcon from '../shared/ClearIcon';
-import Chip from '../shared/Chip';
 import onClickOutside from 'react-onclickoutside';
-import {isEmpty, isString} from 'lodash';
+import {isEmpty} from 'lodash';
 import TagsBox from './TagsBox';
 
 class FilterByText extends Component {
@@ -13,9 +12,9 @@ class FilterByText extends Component {
       inputOnFocus: false,
       showDropdown: false,
       searchText: '',
+      filterById: props.filterById && true,
     };
   }
-
   deleteFilter = e => {
     const filter = e.currentTarget.getAttribute('data-value');
     this.props.handleOnChangeFilterOptions(filter, 'category', true);
@@ -24,7 +23,7 @@ class FilterByText extends Component {
   clearAll = () => {
     this.setState({inputOnFocus: false, searchText: ''});
     this.props.handleClickOnClearAllFilters();
-  }
+  };
 
   handleInputClicked() {
     this.setState({inputOnFocus: true});
@@ -32,16 +31,17 @@ class FilterByText extends Component {
 
   _closeSearch() {
     this.setState({
-      inputOnFocus: false,
       showDropdown: false,
       searchText: '',
+      filterById: false,
+      inputOnFocus: false,
     });
     this.props.handleClickOnClearAllFilters();
   }
 
   handleKeyPress(event) {
     const value = event.target.value;
-    this.setState({searchText: value, showDropdown: true});
+    this.setState({searchText: value, showDropdown: true, filterById: false});
     this.props.getTextSearchResults(value);
     if (isEmpty(value)) {
       this.setState({showDropdown: false});
@@ -133,6 +133,7 @@ class FilterByText extends Component {
 
   render() {
     const filters = this.props.appliedFilters;
+    const organization = this.props.organization.length ? this.props.organization[0].name : '';
     return (
       <div className="col-md-12 col-xs-12 text-xs-margin filterTextContainer no-padding">
         <div className="grid search-text-form p-bot-16">
@@ -164,19 +165,19 @@ class FilterByText extends Component {
             <input
               type="text"
               className="search-by-text text-thin"
-              value={this.state.searchText}
+              value={this.state.filterById === true && isEmpty(filters) ? organization : this.state.searchText}
               onChange={e => this.handleKeyPress(e)}
               onClick={() => this.handleInputClicked()}
               placeholder="Search by Resource Name"
               style={
-                this.state.inputOnFocus || this.state.searchText
+                this.state.inputOnFocus || this.state.searchText || this.state.filterById && isEmpty(filters)
                   ? {opacity: 1}
                   : {opacity: 0}
               }
             />
             <a
               style={
-                this.state.inputOnFocus || this.state.searchText
+                this.state.inputOnFocus || this.state.searchText || this.state.filterById && isEmpty(filters)
                   ? {opacity: 0}
                   : {opacity: 1}
               }
@@ -204,6 +205,7 @@ class FilterByText extends Component {
 
 FilterByText.propTypes = {
   appliedFilters: PropTypes.object,
+  filterById: PropTypes.bool,
   getTextSearchResults: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,

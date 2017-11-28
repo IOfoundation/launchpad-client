@@ -24,9 +24,11 @@ class BusinessesPage extends Component {
         getTextSearchResults={this.props.getTextSearchResults}
         filterOptions={this.props.filterOptions}
         items={this.props.items}
+        filterById={this.props.filterById}
         handleClickOnClearAllFilters={this.props.handleClickOnClearAllFilters}
         handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
         appliedFilters={this.props.appliedFilters}
+        organization={this.props.organizations}
       />
     );
   }
@@ -80,6 +82,7 @@ BusinessesPage.propTypes = {
   BusinessPage: PropTypes.array,
   checkBusinessType: PropTypes.func,
   displayOptions: PropTypes.object.isRequired,
+  filterById: PropTypes.bool,
   getTextSearchResults: PropTypes.func,
   handleChangePage: PropTypes.func,
   handleClickOnClearAllFilters: PropTypes.func,

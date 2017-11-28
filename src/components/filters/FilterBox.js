@@ -17,6 +17,8 @@ class FilterBox extends React.Component {
             handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
             appliedFilters={this.props.appliedFilters}
             items={this.props.items}
+            filterById={this.props.filterById}
+            organization={this.props.organization}
           />
         </div>
         <div className="grid col-lg-10 col-md-12 col-xs-12 bottom-xs between-xs p-left-0">
