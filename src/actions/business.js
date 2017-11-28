@@ -94,31 +94,6 @@ export function filterOrganizations(
   };
 }
 
-const debouncedBuildOrganizationsAndMetadata = debounce((filters, dispatch) => {
-  _buildOrganizationsAndMetadata(filters, dispatch);
-}, 500);
-
-const filtersObject = (filterValue, filters, filterType, removeFilter) => {
-  const newFilters = cloneDeep(filters);
-  switch (filterType) {
-    case 'category':
-      return removeFilter
-        ? _removeCategoryFilter(newFilters, filterValue)
-        : _addCategoryFilter(newFilters, filterValue);
-      break;
-    case 'organization':
-      return _addOrganizationIdFilter(newFilters, filterValue);
-      break;
-    case 'coordinates':
-      return removeFilter
-        ? _removeLocationFilter(newFilters)
-        : _addLocationFilter(newFilters, filterValue);
-      break;
-    default:
-      return _removeAllFilters();
-  }
-};
-
 export function changePage(page, currentParams) {
   return async (dispatch: Function) => {
     const params = {
@@ -232,7 +207,6 @@ export function updateChipFilers(
 }
 
 async function _buildOrganizationsAndMetadata(filters, dispatch) {
-  console.log(filters)
   const params = {
     ...filters,
     per_page: MaxItemsDisplayedPerPage,
@@ -323,3 +297,31 @@ function _removePaginationFilters(newFilters) {
   newFilters.page = 1;
   return newFilters;
 }
+
+const _debouncedBuildOrganizationsAndMetadata = debounce(
+  (filters, dispatch) => {
+    _buildOrganizationsAndMetadata(filters, dispatch);
+  },
+  500
+);
+
+const filtersObject = (filterValue, filters, filterType, removeFilter) => {
+  const newFilters = cloneDeep(filters);
+  switch (filterType) {
+    case 'category':
+      return removeFilter
+        ? _removeCategoryFilter(newFilters, filterValue)
+        : _addCategoryFilter(newFilters, filterValue);
+      break;
+    case 'organization':
+      return _addOrganizationIdFilter(newFilters, filterValue);
+      break;
+    case 'coordinates':
+      return removeFilter
+        ? _removeLocationFilter(newFilters)
+        : _addLocationFilter(newFilters, filterValue);
+      break;
+    default:
+      return _removeAllFilters();
+  }
+};
