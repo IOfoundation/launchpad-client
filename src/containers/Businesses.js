@@ -111,7 +111,8 @@ export class Businesses extends PureComponent {
   }
 
   render() {
-    const {displayOptions, filters, organizations, locations, items, metadata, appliedFilters} = this.props;
+    const {displayOptions, filters, organizations, locations, items, metadata, appliedFilters, queries} = this.props;
+    const filterById = 'id' in queries && true;
     return (
       <MainLayout>
         <BusinessesPage
@@ -119,6 +120,7 @@ export class Businesses extends PureComponent {
           displayOptions={displayOptions}
           filterOptions={filters}
           items={items}
+          filterById={filterById}
           organizations={organizations}
           locations={locations}
           businessesMetadata={metadata}
@@ -132,7 +134,7 @@ export class Businesses extends PureComponent {
           handleOnChangeFilterOptions={this.handleOnChangeFilterOptions}
           handleChangePage={(e) => this.handleChangePage(e)}
         />
-    </MainLayout>
+      </MainLayout>
     );
   }
 }
