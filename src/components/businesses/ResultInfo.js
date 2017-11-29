@@ -4,7 +4,7 @@ import ArrowRight from '../shared/ArrowRight';
 
 class ResultInfo extends Component {
   _onClick(filter) {
-    this.props.handleOnChangeFilterOptions(filter.name, 'category', false);
+    this.props.handleOnChangeFilterOptions('category', filter.name, false);
   }
 
   renderButtonBusinessTypeContainer() {
@@ -19,7 +19,9 @@ class ResultInfo extends Component {
             <div className="btn-search-text text-bold">
               <span className="desktop-devices">{'Startup or High'}</span>
               <span className="desktop-devices">{'Growth Business'}</span>
-              <span className="mobile-devices">{'Startup or High Growth Business'}</span>
+              <span className="mobile-devices">
+                {'Startup or High Growth Business'}
+              </span>
             </div>
             <ArrowRight
               className="btn-search-icon"
@@ -37,7 +39,9 @@ class ResultInfo extends Component {
             <div className="btn-search-text text-bold">
               <span className="desktop-devices">{'Main Street/'}</span>
               <span className="desktop-devices">{'Small Business'}</span>
-              <span className="mobile-devices">{'Main Street/Small Business'}</span>
+              <span className="mobile-devices">
+                {'Main Street/Small Business'}
+              </span>
             </div>
             <ArrowRight
               className="btn-search-icon"
@@ -55,7 +59,9 @@ class ResultInfo extends Component {
             <div className="btn-search-text text-bold">
               <span className="desktop-devices">{'Microenterprise or'}</span>
               <span className="desktop-devices">{'Home-Based Business'}</span>
-              <span className="mobile-devices">{'Microenterprise or Home-Based Business'}</span>
+              <span className="mobile-devices">
+                {'Microenterprise or Home-Based Business'}
+              </span>
             </div>
             <ArrowRight
               className="btn-search-icon"
@@ -77,10 +83,15 @@ class ResultInfo extends Component {
             {'Select a business type that represents you.'}
           </p>
         )}
-        {this.props.showBusinessTypes && this.renderButtonBusinessTypeContainer()}
+        {this.props.showBusinessTypes &&
+          this.renderButtonBusinessTypeContainer()}
         {totalOrganizations && (
           <div className="col-lg-12 col-md-12 col-xs-12 p-0 desktop-devices">
-            <h3 className="m-top-24 col-xs-12 col-md-12 col-lg-12 no-padding">{totalOrganizations ? `${totalOrganizations} Organizations Available` : `Loading Organizations`}</h3>
+            <h3 className="m-top-24 col-xs-12 col-md-12 col-lg-12 no-padding">
+              {totalOrganizations
+                ? `${totalOrganizations} Organizations Available`
+                : 'Loading Organizations'}
+            </h3>
             <hr className="m-bot-24 m-top-16" />
           </div>
         )}

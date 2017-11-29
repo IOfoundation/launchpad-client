@@ -20,15 +20,15 @@ class FilterOption extends Component {
       }
     }
   }
-  handleClick = (selectedfilterOption) => () => {
-    const { name } = selectedfilterOption;
+  handleClick = selectedfilterOption => () => {
+    const {name} = selectedfilterOption;
     this.uncheckAll();
-    return this.props.handleOnChangeFilterOptions(name, 'category');
-  }
+    return this.props.handleOnChangeFilterOptions('category', name);
+  };
   _toggleSubOption(event, selectedfilterOption) {
     this.props.handleOnChangeFilterOptions(
-      selectedfilterOption.name,
-      'category'
+      'category',
+      selectedfilterOption.name
     );
     this.uncheckAll();
     if (selectedfilterOption.children.length > 0) {
@@ -53,10 +53,16 @@ class FilterOption extends Component {
           <li key={filterOption.id}>
             <input type="checkbox" id={filterOption.name} />
             <div className="hover">
-              <a onClick={e => this._toggleSubOption(e, filterOption)}>{filterOption.name}</a>
+              <a onClick={e => this._toggleSubOption(e, filterOption)}>
+                {filterOption.name}
+              </a>
               {filterOption.children.length > 0 && (
                 <label htmlFor={filterOption.name}>
-                  <ArrowRight className="second-level-icon" size={20} style={{color: '#fff', verticalAlign: 'middle'}} />
+                  <ArrowRight
+                    className="second-level-icon"
+                    size={20}
+                    style={{color: '#fff', verticalAlign: 'middle'}}
+                  />
                 </label>
               )}
             </div>
@@ -79,7 +85,11 @@ class FilterOption extends Component {
           <div className="select">
             <label>{filterName}</label>
             <label htmlFor={filterName}>
-              <ArrowRight className="first-level-icon" size={20} style={{color: '#fff', verticalAlign: 'middle'}}/>
+              <ArrowRight
+                className="first-level-icon"
+                size={20}
+                style={{color: '#fff', verticalAlign: 'middle'}}
+              />
             </label>
           </div>
           <div className="filters-second-level">{this._renderOptions()}</div>

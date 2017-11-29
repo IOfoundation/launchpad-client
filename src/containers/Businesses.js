@@ -55,16 +55,16 @@ export class Businesses extends PureComponent {
 
   handleInitialOrgSearch(params) {
     this.props.actions.filterOrganizations(
-      params.id,
-      params,
       'organization',
+      params,
+      params.id,
       true
     );
   }
 
   handleInitialCategorySearch(params) {
-    this.props.actions.updateChipFilers(null, params, 'category');
-    this.props.actions.filterOrganizations(null, params, 'category');
+    this.props.actions.updateChipFilers('category', params);
+    this.props.actions.filterOrganizations('category', params);
   }
 
   checkBusinessType(filters) {
@@ -76,7 +76,6 @@ export class Businesses extends PureComponent {
     if (isEmpty(filters)) {
       return true;
     }
-
     if (isString(filters)) {
       return !businessTypes.includes(filters);
     }
@@ -113,7 +112,7 @@ export class Businesses extends PureComponent {
     }
   };
 
-  handleOnChangeFilterOptions = (filterValue, filterType, removeFilter) => {
+  handleOnChangeFilterOptions = (filterType, filterValue, removeFilter) => {
     const {queries} = this.props;
     const {
       changeFilterDisplayOptions,
@@ -128,14 +127,14 @@ export class Businesses extends PureComponent {
     if (typeof removeFilter === 'undefined' && !isEmpty(queries.category)) {
       removeFilter = Boolean(queries.category.includes(filterValue));
     }
-    updateChipFilers(filterValue, queries, filterType, removeFilter);
-    filterOrganizations(filterValue, queries, filterType, removeFilter);
+    updateChipFilers(filterType, queries, filterValue, removeFilter);
+    filterOrganizations(filterType, queries, filterValue, removeFilter);
   };
 
   handleClickOnClearAllFilters = () => {
     this.setState({showLoading: true});
-    this.props.actions.updateChipFilers(null, null, 'all', true);
-    this.props.actions.filterOrganizations(null, null, 'all', true);
+    this.props.actions.updateChipFilers();
+    this.props.actions.filterOrganizations();
     this.props.actions.changeFilterDisplayOptions(true, false);
   };
 

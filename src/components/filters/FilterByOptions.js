@@ -22,10 +22,10 @@ class FilterByOptions extends Component {
     }
   }
 
-  handleClick = (selectedfilterOption) => () => {
-    const { name } = selectedfilterOption;
+  handleClick = selectedfilterOption => () => {
+    const {name} = selectedfilterOption;
     console.log(name);
-    this.props.handleOnChangeFilterOptions(name, 'category');
+    this.props.handleOnChangeFilterOptions('category', name);
   };
 
   handleClickOutside() {
@@ -57,7 +57,8 @@ class FilterByOptions extends Component {
           <button
             className="dropdown-options"
             key={child.id}
-            onClick={() => this.props.handleOnChangeFilterOptions(child.name, 'category')}
+            onClick={() =>
+              this.props.handleOnChangeFilterOptions('category', child.name)}
           >
             <span>{child.name}</span>
           </button>
@@ -70,13 +71,15 @@ class FilterByOptions extends Component {
       <div
         className={
           this.state.subDropdownOpen
-            ? 'dropdown-container dropdown-container-expand' : 'dropdown-container'
+            ? 'dropdown-container dropdown-container-expand'
+            : 'dropdown-container'
         }
       >
         <div
           className={
             this.state.subDropdownOpen
-              ? 'dropdown-btn-half' : 'dropdown-btn-full'
+              ? 'dropdown-btn-half'
+              : 'dropdown-btn-full'
           }
         >
           {this.props.filterOptions.map(filterOption => (

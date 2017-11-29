@@ -16,26 +16,27 @@ class FilterByTextMobile extends Component {
 
   deleteFilter = e => {
     const filter = e.currentTarget.getAttribute('data-value');
-    this.props.handleOnChangeFilterOptions(filter, 'category', true);
-  }
+    this.props.handleOnChangeFilterOptions('category', filter, true);
+  };
 
   clearAll = () => {
     this.setState({showFilterLabel: false, searchText: ''});
     this.props.handleClickOnClearAllFilters();
-  }
+  };
 
   handleDropdownOnClick(item) {
-    item.searchable_type === 'Category' ? this.props.handleOnChangeFilterOptions(item.content, 'category')
+    item.searchable_type === 'Category'
+      ? this.props.handleOnChangeFilterOptions('category', item.content)
       : this.props.handleOnChangeFilterOptions(
-          item.searchable_id,
           'organization',
+          item.searchable_id,
           false
         );
     this.setState({
       showDropdown: false,
       value: '',
       searchText: item.content,
-      searchPlaceHolder: item.content
+      searchPlaceHolder: item.content,
     });
   }
 

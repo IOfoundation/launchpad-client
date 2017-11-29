@@ -28,7 +28,11 @@ class Main extends Component {
   onBoundsChange(mapDetails) {
     this.setState({bounds: mapDetails.bounds});
     if (this.props.displayOptions.locationToggleSwitch) {
-      this.props.handleOnChangeFilterOptions(this.state.bounds, 'coordinates', false);
+      this.props.handleOnChangeFilterOptions(
+        'coordinates',
+        this.state.bounds,
+        false
+      );
     }
   }
 
@@ -38,8 +42,12 @@ class Main extends Component {
 
   redoSearchInMap() {
     this.props.displayOptions.locationToggleSwitch
-      ? this.props.handleOnChangeFilterOptions('', 'coordinates', true)
-      : this.props.handleOnChangeFilterOptions(this.state.bounds, 'coordinates', false);
+      ? this.props.handleOnChangeFilterOptions('coordinates', '', true)
+      : this.props.handleOnChangeFilterOptions(
+          'coordinates',
+          this.state.bounds,
+          false
+        );
   }
 
   _renderResultsInfo() {
@@ -97,7 +105,7 @@ class Main extends Component {
       locations,
       handleClickOnClearAllFilters,
       handleChangePage,
-      isMobile
+      isMobile,
     } = this.props;
     return (
       <ContentMap
@@ -107,18 +115,17 @@ class Main extends Component {
         businessesMetadata={businessesMetadata}
         expanded={this.state.expanded}
         expandMap={() => this.expandMap()}
-        onBoundsChange={(mapDetails) => this.onBoundsChange(mapDetails)}
+        onBoundsChange={mapDetails => this.onBoundsChange(mapDetails)}
         reduceMap={() => this.reduceMap()}
         redoSearchInMap={() => this.redoSearchInMap()}
         topBar={this._renderResultsInfo()}
         toggleSwitch={displayOptions.locationToggleSwitch}
-        highlightOrgCard={(organizationId) => this.highlightOrgCard(organizationId)}
+        highlightOrgCard={organizationId =>
+          this.highlightOrgCard(organizationId)}
       >
-        {this.props.showLoading ? (
-          this._renderLoader()
-        ):(
-          this._renderBusinesses()
-        )}
+        {this.props.showLoading
+          ? this._renderLoader()
+          : this._renderBusinesses()}
       </ContentMap>
     );
   }
