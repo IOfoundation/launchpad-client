@@ -49,6 +49,7 @@ class ResultPage extends Component {
               <MapView
                 locations={this.props.locations}
                 onBoundsChange={this.props.onBoundsChange}
+                highlightOrgCard={this.props.highlightOrgCard}
               />
             </div>
           </TabPanel>

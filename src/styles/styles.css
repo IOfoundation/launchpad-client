@@ -128,9 +128,12 @@ input[type=text]::-ms-clear {
 }
 
 /* Shared */
-.visitWebsite {
+.website-link {
   text-transform: uppercase;
-  margin-right: 16px;
+  margin-right: 12px;
+}
+.website-link span {
+  vertical-align: middle;
 }
 /* Import Components */
 @import './components/shared/header.css';

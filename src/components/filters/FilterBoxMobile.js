@@ -9,7 +9,8 @@ class FilterBoxMobile extends Component {
       <div className="container-invert">
         <FilterByOptions
           filterOptions={this.props.filterOptions}
-          handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions} />
+          handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
+        />
         <FilterByText
           filterName={'Search Box'}
           getTextSearchResults={this.props.getTextSearchResults}
@@ -18,6 +19,8 @@ class FilterBoxMobile extends Component {
           appliedFilters={this.props.appliedFilters}
           getBusiness={this.props.getBusiness}
           items={this.props.items}
+          filterById={this.props.filterById}
+          organization={this.props.organization}
         />
       </div>
     )

@@ -15,6 +15,8 @@ class BusinessesPage extends Component {
         handleClickOnClearAllFilters={this.props.handleClickOnClearAllFilters}
         handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
         appliedFilters={this.props.appliedFilters}
+        filterById={this.props.filterById}
+        organization={this.props.organizations}
       />
     );
   }
