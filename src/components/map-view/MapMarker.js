@@ -75,7 +75,7 @@ export default class MapMarker extends Component {
             href={organization.website}
             target="_blank"
           >
-            {'WEBSITE'}
+            <span>{'WEBSITE'}</span>
             <ArrowRight
               size={20}
               style={{verticalAlign: 'middle'}} />
