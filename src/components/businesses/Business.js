@@ -94,18 +94,23 @@ class Business extends PureComponent {
                 }
               >
                 {business.facebook && (
-                  <a href={business.facebook} target="_blank">
+                  <a href={business.facebook} target="_blank" className="social-icon">
                     <FacebookIcon className={'icon-svg'} size={18} />
                   </a>
                 )}
                 {business.twitter && (
-                  <a href={business.twitter} target="_blank">
+                  <a href={business.twitter} target="_blank" className="social-icon">
                     <TwitterIcon className={'icon-svg'} size={18} />
                   </a>
                 )}
                 {business.linkedin && (
-                  <a href={business.linkedin} target="_blank">
+                  <a href={business.linkedin} target="_blank" className="social-icon">
                     <LinkedinIcon className={'icon-svg'} size={18} />
+                  </a>
+                )}
+                {business.website && (
+                  <a className="website-icon" href={business.website} target="_blank">
+                    <span>{'Go to Website'}</span>
                   </a>
                 )}
               </div>
