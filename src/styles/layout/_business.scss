@@ -1,5 +1,17 @@
 .preview-details-container {
   max-width: 95%;
+  .website-icon {
+    color: #fff;
+    background-color: #2bd587;
+    font-size: 12px;
+    padding: 2px 8px;
+    vertical-align: top;
+    display: inline-block;
+  }
+  .social-icon {
+    display: inline-block;
+    height: 18px;
+  }
 }
 .business {
   transition: .3s ease all;
