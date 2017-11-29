@@ -8,6 +8,97 @@ import URL from 'url-parse';
 
 const MaxItemsDisplayedPerPage = 6;
 
+const fetchOrganizationsRequestObject = () => {
+  return {
+    type: types.FETCH_ORGANIZATIONS_REQUEST,
+  };
+};
+
+const fetchOrganizationsSuccessObject = (organizations, metadata) => {
+  return {
+    type: types.FETCH_ORGANIZATIONS_SUCCESS,
+    organizations,
+    metadata,
+  };
+};
+
+const fetchOrganizationsErrorObject = error => {
+  return {
+    type: types.FETCH_ORGANIZATIONS_ERROR,
+    error,
+  };
+};
+
+const fetchFilterOptionsRequestObject = () => {
+  return {
+    type: types.FETCH_FILTER_OPTIONS_REQUEST,
+  };
+};
+
+const fetchFilterOptionsSuccessObject = filters => {
+  return {
+    type: types.FETCH_FILTER_OPTIONS_SUCCESS,
+    filters,
+  };
+};
+
+const fetchFilterOptionsErrorObject = error => {
+  return {
+    type: types.FETCH_FILTER_OPTIONS_ERROR,
+    error,
+  };
+};
+
+const fetchSearchResultsRequestObject = () => {
+  return {
+    type: types.FETCH_SEARCH_RESULTS_REQUEST,
+  };
+};
+
+const fetchSearchResultsSuccessObject = items => {
+  return {
+    type: types.FETCH_SEARCH_RESULTS_SUCCESS,
+    items,
+  };
+};
+
+const fetchSearchResultsErrorObject = error => {
+  return {
+    type: types.FETCH_SEARCH_RESULTS_ERROR,
+    error,
+  };
+};
+
+const updateDisplayFilterOptionsObject = displayOptions => {
+  return {
+    type: types.UPDATE_DISPLAY_FILTER_OPTIONS,
+    displayOptions,
+  };
+};
+
+const updateAppliedFiltersObject = appliedFilters => {
+  return {
+    type: types.UPDATE_APPLIED_FILTERS,
+    appliedFilters,
+  };
+};
+
+const pushBrowserHistory = filters => {
+  let filterString = queryString.stringify(filters, {encode: false});
+  filterString = filterString.replace(/&per_page=\d+/, '');
+  return browserHistory.push({
+    pathname: '/businesses',
+    search: `?${filterString}`,
+  });
+};
+
+const _debouncedBuildOrganizationsAndMetadata = debounce(
+  (filters, dispatch) => {
+    _buildOrganizationsAndMetadata(filters, dispatch);
+  },
+  500
+);
+
 const paginationMetadata = links => {
   const _paginationMetadata = {};
   Object.keys(links).forEach(type => {
@@ -32,146 +123,110 @@ const paginationMetadata = links => {
   return _paginationMetadata;
 };
 
-const getData = (organizations, metadata) => {
-  return {
-    type: types.FETCH_DATA,
-    organizations,
-    metadata,
-  };
-};
-
-const filtersDataObject = filters => {
-  return {
-    type: types.FETCH_FILTERS_OPTIONS,
-    filters,
-  };
-};
-
-const searchResultsDataObject = items => {
-  return {
-    type: types.FETCH_SEARCH_RESULTS,
-    items,
-  };
-};
-
-const displayFilterOptions = displayOptions => {
-  return {
-    type: types.FETCH_DISPLAY_FILTER_OPTIONS,
-    displayOptions,
-  };
-};
-
-const addChipToFilterComponent = appliedFilters => {
-  return {
-    type: types.UPDATE_APPLIED_FILTERS,
-    appliedFilters,
-  };
-};
-
-const pushBrowserHistory = filters => {
-  let filterString = queryString.stringify(filters, {encode: false});
-  filterString = filterString.replace(/&per_page=\d+/, '');
-  return browserHistory.push({
-    pathname: '/businesses',
-    search: `?${filterString}`,
-  });
-};
-
 export function filterOrganizations(
-  filterValue,
-  currentParams,
   filterType,
+  currentFilters,
+  filterValue,
   removeFilter
 ) {
   return async (dispatch: Function) => {
     const filters = filtersObject(
-      filterValue,
-      currentParams,
       filterType,
+      currentFilters,
+      filterValue,
       removeFilter
     );
-    debouncedBuildOrganizationsAndMetadata(filters, dispatch);
+    _debouncedBuildOrganizationsAndMetadata(filters, dispatch);
   };
 }
 
 export function changePage(page, currentParams) {
   return async (dispatch: Function) => {
-    const params = {
-      ...currentParams,
-      page,
-      per_page: MaxItemsDisplayedPerPage,
-    };
+    try {
+      dispatch(fetchOrganizationsRequestObject());
+      const params = {
+        ...currentParams,
+        page,
+        per_page: MaxItemsDisplayedPerPage,
+      };
 
-    const httpResponse = await httpRequest.get('/api/organizations', {
-      params,
-    });
+      const httpResponse = await httpRequest.get('/api/organizations', {
+        params,
+      });
 
-    const organizations = httpResponse.data;
-    const metadata = {
-      pagination: {
-        ...paginationMetadata(JSON.parse(httpResponse.headers.link)),
-        currentPage: params.page,
-      },
-      totalOrganizations: httpResponse.headers['x-total-count'],
-    };
-    dispatch(getData(organizations, metadata));
-    pushBrowserHistory(params);
+      const organizations = httpResponse.data;
+      const metadata = {
+        pagination: {
+          ...paginationMetadata(JSON.parse(httpResponse.headers.link)),
+          currentPage: params.page,
+        },
+        totalOrganizations: httpResponse.headers['x-total-count'],
+      };
+      dispatch(fetchOrganizationsSuccessObject(organizations, metadata));
+      pushBrowserHistory(params);
+    } catch (error) {
+      dispatch(fetchOrganizationsErrorObject(error));
+    }
   };
 }
 
 export function fetchFilterOptions() {
   return async (dispatch: Function) => {
-    const httpResponse = await httpRequest.get('/api/categories');
-    const categories = httpResponse.data;
-
-    const businessServiceCategory = categories.find(
-      category => category.name === CategoriesConstants.BUSINESS_SERVICES
-    );
-    const businessServices = businessServiceCategory
-      ? businessServiceCategory.children
-      : [];
-
-    const businessTypeCategory = categories.find(
-      category => category.name === CategoriesConstants.BUSINESS_TYPE
-    );
-    const businessTypes = businessTypeCategory
-      ? businessTypeCategory.children
-      : [];
-
-    const stageCategory = categories.find(
-      category => category.name === CategoriesConstants.STAGE
-    );
-    const stages = stageCategory ? stageCategory.children : [];
-
-    const communityCategory = categories.find(
-      category => category.name === CategoriesConstants.COMMUNITY
-    );
-    const communities = communityCategory ? communityCategory.children : [];
-
-    const industryCategory = categories.find(
-      category => category.name === CategoriesConstants.INDUSTRY
-    );
-    const industries = industryCategory ? industryCategory.children : [];
-
-    dispatch(
-      filtersDataObject({
-        businessServices,
-        businessTypes,
-        stages,
-        communities,
-        industries,
-      })
-    );
+    try {
+      dispatch(fetchFilterOptionsRequestObject());
+      const httpResponse = await httpRequest.get('/api/categories');
+      const categories = httpResponse.data;
+      const businessServiceCategory = categories.find(
+        category => category.name === CategoriesConstants.BUSINESS_SERVICES
+      );
+      const businessServices = businessServiceCategory
+        ? businessServiceCategory.children
+        : [];
+      const businessTypeCategory = categories.find(
+        category => category.name === CategoriesConstants.BUSINESS_TYPE
+      );
+      const businessTypes = businessTypeCategory
+        ? businessTypeCategory.children
+        : [];
+      const stageCategory = categories.find(
+        category => category.name === CategoriesConstants.STAGE
+      );
+      const stages = stageCategory ? stageCategory.children : [];
+      const communityCategory = categories.find(
+        category => category.name === CategoriesConstants.COMMUNITY
+      );
+      const communities = communityCategory ? communityCategory.children : [];
+      const industryCategory = categories.find(
+        category => category.name === CategoriesConstants.INDUSTRY
+      );
+      const industries = industryCategory ? industryCategory.children : [];
+      dispatch(
+        fetchFilterOptionsSuccessObject({
+          businessServices,
+          businessTypes,
+          stages,
+          communities,
+          industries,
+        })
+      );
+    } catch (error) {
+      dispatch(fetchFilterOptionsErrorObject(error));
+    }
   };
 }
 
 export function fetchSearchResults(filter) {
   return async (dispatch: Function) => {
-    const httpResponse = await httpRequest.get('api/search', {
-      params: {text: filter},
-    });
-    const items = httpResponse.data;
-    dispatch(searchResultsDataObject(items));
+    try {
+      dispatch(fetchSearchResultsRequestObject());
+      const httpResponse = await httpRequest.get('api/search', {
+        params: {text: filter},
+      });
+      const items = httpResponse.data;
+      dispatch(fetchSearchResultsSuccessObject(items));
+    } catch (error) {
+      dispatch(fetchSearchResultsErrorObject(error));
+    }
   };
 }
 
@@ -184,46 +239,51 @@ export function changeFilterDisplayOptions(
       showBusinessTypes,
       locationToggleSwitch,
     };
-    dispatch(displayFilterOptions(displayOptions));
+    dispatch(updateDisplayFilterOptionsObject(displayOptions));
   };
 }
 
 export function updateChipFilers(
-  filterValue,
-  currentParams,
   filterType,
+  currentFilters,
+  filterValue,
   removeFilter
 ) {
   return (dispatch: Function) => {
     const appliedFilters = filtersObject(
-      filterValue,
-      currentParams,
       filterType,
+      currentFilters,
+      filterValue,
       removeFilter
     );
-    dispatch(addChipToFilterComponent(appliedFilters));
+    dispatch(updateAppliedFiltersObject(appliedFilters));
     pushBrowserHistory(appliedFilters);
   };
 }
 
 async function _buildOrganizationsAndMetadata(filters, dispatch) {
-  const params = {
-    ...filters,
-    per_page: MaxItemsDisplayedPerPage,
-  };
-  if (!params.hasOwnProperty('page')) {
-    Object.assign(params, {page: 1});
+  try {
+    dispatch(fetchOrganizationsRequestObject());
+    const params = {
+      ...filters,
+      per_page: MaxItemsDisplayedPerPage,
+    };
+    if (!params.hasOwnProperty('page')) {
+      Object.assign(params, {page: 1});
+    }
+    const httpResponse = await httpRequest.get('api/organizations', {params});
+    const organizations = httpResponse.data;
+    const metadata = {
+      pagination: {
+        ...paginationMetadata(JSON.parse(httpResponse.headers.link)),
+        currentPage: params.page,
+      },
+      totalOrganizations: httpResponse.headers['x-total-count'],
+    };
+    dispatch(fetchOrganizationsSuccessObject(organizations, metadata));
+  } catch (error) {
+    dispatch(fetchOrganizationsErrorObject(error));
   }
-  const httpResponse = await httpRequest.get('api/organizations', {params});
-  const organizations = httpResponse.data;
-  const metadata = {
-    pagination: {
-      ...paginationMetadata(JSON.parse(httpResponse.headers.link)),
-      currentPage: params.page,
-    },
-    totalOrganizations: httpResponse.headers['x-total-count'],
-  };
-  dispatch(getData(organizations, metadata));
 }
 
 function _addCategoryFilter(newFilters, filterValue) {
@@ -233,7 +293,7 @@ function _addCategoryFilter(newFilters, filterValue) {
   if (!isEmpty(newFilters.page)) {
     _removePaginationFilters(newFilters);
   }
-  if (filterValue === null) {
+  if (typeof filterValue === 'undefined') {
     return newFilters;
   }
   if (isEmpty(newFilters.category)) {
@@ -298,29 +358,19 @@ function _removePaginationFilters(newFilters) {
   return newFilters;
 }
 
-const _debouncedBuildOrganizationsAndMetadata = debounce(
-  (filters, dispatch) => {
-    _buildOrganizationsAndMetadata(filters, dispatch);
-  },
-  500
-);
-
-const filtersObject = (filterValue, filters, filterType, removeFilter) => {
+const filtersObject = (filterType, filters, filterValue, removeFilter) => {
   const newFilters = cloneDeep(filters);
   switch (filterType) {
     case 'category':
       return removeFilter
         ? _removeCategoryFilter(newFilters, filterValue)
         : _addCategoryFilter(newFilters, filterValue);
-      break;
     case 'organization':
       return _addOrganizationIdFilter(newFilters, filterValue);
-      break;
     case 'coordinates':
       return removeFilter
         ? _removeLocationFilter(newFilters)
         : _addLocationFilter(newFilters, filterValue);
-      break;
     default:
       return _removeAllFilters();
   }

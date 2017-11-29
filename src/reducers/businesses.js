@@ -18,18 +18,43 @@ const initialState: STATE = {
 
 export default function(state: STATE = initialState, action: ACTION): STATE {
   switch (action.type) {
-    case types.FETCH_DATA: {
+    case types.FETCH_ORGANIZATIONS_REQUEST: {
+      return {
+        ...state,
+      };
+    }
+
+    case types.FETCH_ORGANIZATIONS_SUCCESS: {
       const {organizations, metadata} = action;
-      if (organizations.id) { organizations = [organizations]; }
-      const locations = isEmpty(organizations) ? (null) : (organizations.map(org => org.locations).reduce((a, b) => a.concat(b)));
+      if (organizations.id) {
+        organizations = [organizations];
+      }
+      const locations = isEmpty(organizations)
+        ? null
+        : organizations.map(org => org.locations).reduce((a, b) => a.concat(b));
       return {
         ...state,
         organizations,
         locations,
-        metadata
+        metadata,
       };
     }
-    case types.FETCH_FILTERS_OPTIONS: {
+
+    case types.FETCH_ORGANIZATIONS_ERROR: {
+      const {error} = action;
+      return {
+        ...state,
+        error,
+      };
+    }
+
+    case types.FETCH_FILTER_OPTIONS_REQUEST: {
+      return {
+        ...state,
+      };
+    }
+
+    case types.FETCH_FILTER_OPTIONS_SUCCESS: {
       const {filters} = action;
       return {
         ...state,
@@ -37,7 +62,21 @@ export default function(state: STATE = initialState, action: ACTION): STATE {
       };
     }
 
-    case types.FETCH_SEARCH_RESULTS: {
+    case types.FETCH_FILTER_OPTIONS_ERROR: {
+      const {error} = action;
+      return {
+        ...state,
+        error,
+      };
+    }
+
+    case types.FETCH_SEARCH_RESULTS_REQUEST: {
+      return {
+        ...state,
+      };
+    }
+
+    case types.FETCH_SEARCH_RESULTS_SUCCESS: {
       const {items} = action;
       return {
         ...state,
@@ -45,7 +84,15 @@ export default function(state: STATE = initialState, action: ACTION): STATE {
       };
     }
 
-    case types.FETCH_DISPLAY_FILTER_OPTIONS: {
+    case types.FETCH_SEARCH_RESULTS_ERROR: {
+      const {error} = action;
+      return {
+        ...state,
+        error,
+      };
+    }
+
+    case types.UPDATE_DISPLAY_FILTER_OPTIONS: {
       const {displayOptions} = action;
       return {
         ...state,
