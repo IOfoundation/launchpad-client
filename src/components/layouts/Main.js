@@ -4,13 +4,14 @@ import Header from '../shared/Header';
 import Footer from '../shared/Footer';
 import MobileFooter from '../shared/MobileFooter';
 
-const MainLayout = ({children}) => {
+const MainLayout = ({children}, props) => {
+  const isMobile = props.windowWidth <= 960;
   return (
     <div>
       <Header />
       {children}
-      <Footer />
-      <MobileFooter />
+      {!isMobile && <Footer />}
+      {isMobile && <MobileFooter />}
     </div>
   );
 };

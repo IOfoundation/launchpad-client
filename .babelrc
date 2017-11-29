@@ -13,7 +13,15 @@
       ]
     },
     "test": {
-      "presets": ["env"]
+      "presets": [
+        "env"
+      ],
+      "plugins": [
+        "transform-class-properties",
+        "syntax-flow",
+        "transform-flow-strip-types",
+        "transform-decorators-legacy",
+      ]
     }
   },
   "plugins": [

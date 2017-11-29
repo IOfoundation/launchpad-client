@@ -30,10 +30,12 @@ describe('<BusinessesList />', () => {
   it('Renders a Business component for every Business in the array', () => {
     const organizations = mockMultipleOrganizations();
     const organization = singleEmptyOrganization();
+    const isMobile = false;
     const wrapper = shallow(
       <BusinessesList
         organizations={organizations}
         handleClickOnClearAllFilters={handleClickOnClearAllFilters}
+        isMobile={isMobile}
       />
     );
     expect(wrapper.find('Business').length).toEqual(2);
