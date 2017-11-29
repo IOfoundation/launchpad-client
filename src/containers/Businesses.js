@@ -26,6 +26,14 @@ export class Businesses extends PureComponent {
       this.handleInitialCategorySearch(params);
   }
   componentWillReceiveProps(newProps) {
+    const params = newProps.queries;
+    const locationToggleSwitch = 'ne_lat' in params ? true : false;
+    if(newProps.location.search.localeCompare(this.props.location.search) !== 0) {
+      this.setState({showLoading: true});
+      'id' in params ?
+        this.handleInitialOrgSearch(params) :
+        this.handleInitialCategorySearch(params);
+    }
     if(newProps.organizations !== this.props.organizations) {
       this.setState({showLoading: false});
     }
@@ -33,7 +41,6 @@ export class Businesses extends PureComponent {
   componentWillUnMount() {
     window.addEventListener('resize', () => this.handleWindowSizeChange());
   }
-
   handleWindowSizeChange() {
     this.setState({width: window.innerWidth});
   }
@@ -160,7 +167,7 @@ const mapStateToProps = _state => {
     metadata: businesses.metadata,
     organizations: businesses.organizations,
     queries: routing.locationBeforeTransitions.query,
-    action: routing.locationBeforeTransitions.action
+    action: routing.locationBeforeTransitions.action,
   };
 };
 
