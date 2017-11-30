@@ -170,33 +170,6 @@ export function changePage(page, currentParams) {
   };
 }
 
-export function handleBackButton(currentParams) {
-  return async (dispatch: Function) => {
-    try {
-      dispatch(fetchOrganizationsRequestObject());
-      const params = {
-        ...currentParams,
-        per_page: MaxItemsDisplayedPerPage,
-      };
-      const httpResponse = await httpRequest.get('/api/organizations', {
-        params,
-      });
-      const organizations = httpResponse.data;
-      const metadata = {
-        pagination: {
-          ...paginationMetadata(JSON.parse(httpResponse.headers.link)),
-          currentPage: params.page,
-        },
-        totalOrganizations: httpResponse.headers['x-total-count'],
-      };
-      dispatch(fetchOrganizationsSuccessObject(organizations, metadata));
-      pushBrowserHistory(params);
-    } catch (error) {
-      dispatch(fetchOrganizationsErrorObject(error));
-    }
-  };
-}
-
 export function fetchFilterOptions() {
   return async (dispatch: Function) => {
     try {
