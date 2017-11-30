@@ -4,8 +4,8 @@ import Header from '../shared/Header';
 import Footer from '../shared/Footer';
 import MobileFooter from '../shared/MobileFooter';
 
-const MainLayout = ({children}, props) => {
-  const isMobile = props.windowWidth <= 960;
+const MainLayout = ({children, windowWidth}) => {
+  const isMobile = windowWidth <= 960;
   return (
     <div>
       <Header />
@@ -18,6 +18,7 @@ const MainLayout = ({children}, props) => {
 
 MainLayout.propTypes = {
   children: PropTypes.element,
+  windowWidth: PropTypes.number,
 };
 
 export default MainLayout;
