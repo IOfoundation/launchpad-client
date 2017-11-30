@@ -47,7 +47,7 @@ export class Businesses extends PureComponent {
   onBackButtonEvent = () => {
     const params = this.props.queries;
     this.setState({showLoading: true});
-    this.props.actions.handleBackButton(params);
+    this.props.actions.filterOrganizations('back-button', params);
     this.props.actions.updateChipFilters('back-button', params);
   };
 
