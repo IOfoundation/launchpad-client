@@ -49,6 +49,13 @@ export class Businesses extends PureComponent {
     this.setState({showLoading: true});
     this.props.actions.filterOrganizations('back-button', params);
     this.props.actions.updateChipFilters('back-button', params);
+    console.log(params);
+    const locationToggleSwitch = 'ne_lat' in params;
+    this.props.actions.changeFilterDisplayOptions(
+      this.checkBusinessType(params.category),
+      locationToggleSwitch
+    );
+    console.log(this.checkBusinessType(params.category), locationToggleSwitch);
   };
 
   handleWindowSizeChange = () => {
@@ -70,6 +77,7 @@ export class Businesses extends PureComponent {
   };
 
   checkBusinessType = filters => {
+    console.log(filters, 'Here');
     const businessTypes = [
       'Startup or High-Growth Business',
       'Main Street or Small Business',
@@ -79,10 +87,16 @@ export class Businesses extends PureComponent {
       return true;
     }
     if (isString(filters)) {
+      console.log('isString', !businessTypes.includes(filters));
       return !businessTypes.includes(filters);
     }
-    const filteredTypes = filters.map(filter => businessTypes.includes(filter));
-    return isEmpty(filteredTypes);
+    const filteredTypes = filters.map(filter => {
+      if (businessTypes.includes(filter) === true) {
+        console.log(businessTypes.includes(filter));
+        return true;
+      }
+    });
+    return !filteredTypes.includes(true);
   };
 
   getTextSearchResults = filter => {
