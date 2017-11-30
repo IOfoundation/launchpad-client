@@ -190,6 +190,7 @@ export function handleBackButton(currentParams) {
         totalOrganizations: httpResponse.headers['x-total-count'],
       };
       dispatch(fetchOrganizationsSuccessObject(organizations, metadata));
+      pushBrowserHistory(params);
     } catch (error) {
       dispatch(fetchOrganizationsErrorObject(error));
     }
@@ -269,7 +270,7 @@ export function changeFilterDisplayOptions(
   };
 }
 
-export function updateChipFilers(
+export function updateChipFilters(
   filterType,
   currentFilters,
   filterValue,
@@ -325,9 +326,10 @@ const filtersObject = (filterType, filters, filterValue, removeFilter) => {
       return removeFilter
         ? _removeLocationFilter(newFilters)
         : _addLocationFilter(newFilters, filterValue);
-    default:
+    case 'all':
       return _removeAllFilters();
   }
+  return newFilters;
 };
 
 function _addCategoryFilter(newFilters, filterValue) {

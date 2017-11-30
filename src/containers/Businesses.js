@@ -48,6 +48,7 @@ export class Businesses extends PureComponent {
     const params = this.props.queries;
     this.setState({showLoading: true});
     this.props.actions.handleBackButton(params);
+    this.props.actions.updateChipFilters('back-button', params);
   };
 
   handleWindowSizeChange = () => {
@@ -64,7 +65,7 @@ export class Businesses extends PureComponent {
   };
 
   handleInitialCategorySearch = params => {
-    this.props.actions.updateChipFilers('category', params);
+    this.props.actions.updateChipFilters('category', params);
     this.props.actions.filterOrganizations('category', params);
   };
 
@@ -117,7 +118,7 @@ export class Businesses extends PureComponent {
     const {queries} = this.props;
     const {
       changeFilterDisplayOptions,
-      updateChipFilers,
+      updateChipFilters,
       filterOrganizations,
     } = this.props.actions;
     this.setState({showLoading: true});
@@ -128,14 +129,14 @@ export class Businesses extends PureComponent {
     if (typeof removeFilter === 'undefined' && !isEmpty(queries.category)) {
       removeFilter = Boolean(queries.category.includes(filterValue));
     }
-    updateChipFilers(filterType, queries, filterValue, removeFilter);
+    updateChipFilters(filterType, queries, filterValue, removeFilter);
     filterOrganizations(filterType, queries, filterValue, removeFilter);
   };
 
   handleClickOnClearAllFilters = () => {
     this.setState({showLoading: true});
-    this.props.actions.updateChipFilers();
-    this.props.actions.filterOrganizations();
+    this.props.actions.updateChipFilters('all');
+    this.props.actions.filterOrganizations('all');
     this.props.actions.changeFilterDisplayOptions(true, false);
   };
 
