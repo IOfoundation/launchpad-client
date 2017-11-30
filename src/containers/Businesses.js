@@ -35,38 +35,40 @@ export class Businesses extends PureComponent {
       this.setState({showLoading: false});
     }
   }
+
   componentDidMount() {
     window.onpopstate = this.onBackButtonEvent;
   }
+
   componentWillUnMount() {
     window.addEventListener('resize', () => this.handleWindowSizeChange());
   }
+
   onBackButtonEvent = () => {
     const params = this.props.queries;
     this.setState({showLoading: true});
-    'id' in params
-      ? this.handleInitialOrgSearch(params)
-      : this.handleInitialCategorySearch(params);
-  }
-  handleWindowSizeChange() {
-    this.setState({width: window.innerWidth});
-  }
+    this.props.actions.handleBackButton(params);
+  };
 
-  handleInitialOrgSearch(params) {
+  handleWindowSizeChange = () => {
+    this.setState({width: window.innerWidth});
+  };
+
+  handleInitialOrgSearch = params => {
     this.props.actions.filterOrganizations(
       'organization',
       params,
       params.id,
       true
     );
-  }
+  };
 
-  handleInitialCategorySearch(params) {
+  handleInitialCategorySearch = params => {
     this.props.actions.updateChipFilers('category', params);
     this.props.actions.filterOrganizations('category', params);
-  }
+  };
 
-  checkBusinessType(filters) {
+  checkBusinessType = filters => {
     const businessTypes = [
       'Startup or High-Growth Business',
       'Main Street or Small Business',
@@ -80,7 +82,7 @@ export class Businesses extends PureComponent {
     }
     const filteredTypes = filters.map(filter => businessTypes.includes(filter));
     return isEmpty(filteredTypes);
-  }
+  };
 
   getTextSearchResults = filter => {
     this.props.actions.fetchSearchResults(filter);

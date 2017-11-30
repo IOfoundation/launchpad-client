@@ -170,6 +170,32 @@ export function changePage(page, currentParams) {
   };
 }
 
+export function handleBackButton(currentParams) {
+  return async (dispatch: Function) => {
+    try {
+      dispatch(fetchOrganizationsRequestObject());
+      const params = {
+        ...currentParams,
+        per_page: MaxItemsDisplayedPerPage,
+      };
+      const httpResponse = await httpRequest.get('/api/organizations', {
+        params,
+      });
+      const organizations = httpResponse.data;
+      const metadata = {
+        pagination: {
+          ...paginationMetadata(JSON.parse(httpResponse.headers.link)),
+          currentPage: params.page,
+        },
+        totalOrganizations: httpResponse.headers['x-total-count'],
+      };
+      dispatch(fetchOrganizationsSuccessObject(organizations, metadata));
+    } catch (error) {
+      dispatch(fetchOrganizationsErrorObject(error));
+    }
+  };
+}
+
 export function fetchFilterOptions() {
   return async (dispatch: Function) => {
     try {
@@ -286,6 +312,24 @@ async function _buildOrganizationsAndMetadata(filters, dispatch) {
   }
 }
 
+const filtersObject = (filterType, filters, filterValue, removeFilter) => {
+  const newFilters = cloneDeep(filters);
+  switch (filterType) {
+    case 'category':
+      return removeFilter
+        ? _removeCategoryFilter(newFilters, filterValue)
+        : _addCategoryFilter(newFilters, filterValue);
+    case 'organization':
+      return _addOrganizationIdFilter(newFilters, filterValue);
+    case 'coordinates':
+      return removeFilter
+        ? _removeLocationFilter(newFilters)
+        : _addLocationFilter(newFilters, filterValue);
+    default:
+      return _removeAllFilters();
+  }
+};
+
 function _addCategoryFilter(newFilters, filterValue) {
   if (newFilters.id) {
     newFilters.id = [];
@@ -357,21 +401,3 @@ function _removePaginationFilters(newFilters) {
   newFilters.page = 1;
   return newFilters;
 }
-
-const filtersObject = (filterType, filters, filterValue, removeFilter) => {
-  const newFilters = cloneDeep(filters);
-  switch (filterType) {
-    case 'category':
-      return removeFilter
-        ? _removeCategoryFilter(newFilters, filterValue)
-        : _addCategoryFilter(newFilters, filterValue);
-    case 'organization':
-      return _addOrganizationIdFilter(newFilters, filterValue);
-    case 'coordinates':
-      return removeFilter
-        ? _removeLocationFilter(newFilters)
-        : _addLocationFilter(newFilters, filterValue);
-    default:
-      return _removeAllFilters();
-  }
-};
