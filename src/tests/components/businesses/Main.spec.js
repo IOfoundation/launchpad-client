@@ -19,6 +19,7 @@ const displayOptions = {
   showBusinessTypes: true,
   locationToggleSwitch: false
 };
+const isMobile = false;
 
 const checkBusinessType = jest.fn();
 const checkLocationToggle = jest.fn();
@@ -35,6 +36,7 @@ describe('<BusinessesView />', () => {
         filterOptions={filters}
         organizations={organizations}
         locations={locations}
+        isMobile={isMobile}
         businessesMetadata={businessesMetadata}
         checkBusinessType={checkBusinessType}
         checkLocationToggle={checkLocationToggle}
@@ -53,6 +55,7 @@ describe('<BusinessesView />', () => {
         filterOptions={filters}
         organizations={organizations}
         locations={locations}
+        isMobile={isMobile}
         businessesMetadata={businessesMetadata}
         checkBusinessType={checkBusinessType}
         checkLocationToggle={checkLocationToggle}
@@ -71,6 +74,7 @@ describe('<BusinessesView />', () => {
         filterOptions={filters}
         organizations={organizations}
         locations={locations}
+        isMobile={isMobile}
         businessesMetadata={businessesMetadata}
         checkBusinessType={checkBusinessType}
         checkLocationToggle={checkLocationToggle}
@@ -89,6 +93,7 @@ describe('<BusinessesView />', () => {
         filterOptions={filters}
         organizations={organizations}
         locations={locations}
+        isMobile={isMobile}
         businessesMetadata={businessesMetadata}
         checkBusinessType={checkBusinessType}
         checkLocationToggle={checkLocationToggle}

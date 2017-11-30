@@ -86,6 +86,7 @@ class Main extends Component {
       <div>
         <BusinessesList
           organizations={this.props.organizations}
+          isMobile={this.props.isMobile}
           selectedOrg={this.state.selectedOrg}
           handleClickOnClearAllFilters={this.props.handleClickOnClearAllFilters}
         />

@@ -167,7 +167,7 @@ export class Businesses extends PureComponent {
     } = this.props;
     const filterById = 'id' in queries && true;
     return (
-      <MainLayout>
+      <MainLayout windowWidth={this.state.width}>
         <BusinessesPage
           appliedFilters={appliedFilters}
           displayOptions={displayOptions}

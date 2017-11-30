@@ -9,6 +9,7 @@ class BusinessesList extends PureComponent {
       <Business
         isSelected={this.props.selectedOrg === organization.id}
         business={organization}
+        isMobile={this.props.isMobile}
         key={organization.id}
         expanded={organizations.length === 1}
       />

@@ -36,8 +36,7 @@ class BusinessesPage extends Component {
   }
 
   render() {
-    const {windowWidth} = this.props;
-    const isMobile = windowWidth <= 960;
+    const isMobile = this.props.windowWidth <= 960;
     return (
       <section>
         <div className="search-nav search-nav-invert">
