@@ -49,13 +49,11 @@ export class Businesses extends PureComponent {
     this.setState({showLoading: true});
     this.props.actions.filterOrganizations('back-button', params);
     this.props.actions.updateChipFilters('back-button', params);
-    console.log(params);
     const locationToggleSwitch = 'ne_lat' in params;
     this.props.actions.changeFilterDisplayOptions(
       this.checkBusinessType(params.category),
       locationToggleSwitch
     );
-    console.log(this.checkBusinessType(params.category), locationToggleSwitch);
   };
 
   handleWindowSizeChange = () => {
