@@ -8,13 +8,27 @@ import HomeView from '../components/home/Main';
 import * as actions from '../actions/business';
 
 export class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      width: window.innerWidth,
+    };
+  }
+  componentWillMount(_nextProps) {
+    window.addEventListener('resize', () => this.handleWindowSizeChange());
+  }
   getTextSearchResults(filter) {
     this.props.actions.fetchSearchResults(filter);
   }
-
+  componentWillUnMount() {
+    window.addEventListener('resize', () => this.handleWindowSizeChange());
+  }
+  handleWindowSizeChange = () => {
+    this.setState({width: window.innerWidth});
+  };
   render() {
     return (
-      <MainLayout>
+      <MainLayout windowWidth={this.state.width}>
         <section>
           <HomeView
             items={this.props.items}
