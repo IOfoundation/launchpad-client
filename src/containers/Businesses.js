@@ -31,23 +31,22 @@ export class Businesses extends PureComponent {
   }
 
   componentWillReceiveProps(newProps) {
-    const params = newProps.queries;
-    const locationToggleSwitch = 'ne_lat' in params;
-    if (
-      newProps.location.search.localeCompare(this.props.location.search) !== 0
-    ) {
-      this.setState({showLoading: true});
-      'id' in params
-        ? this.handleInitialOrgSearch(params)
-        : this.handleInitialCategorySearch(params);
-    }
     if (newProps.organizations !== this.props.organizations) {
       this.setState({showLoading: false});
     }
   }
-
+  componentDidMount() {
+    window.onpopstate = this.onBackButtonEvent;
+  }
   componentWillUnMount() {
     window.addEventListener('resize', () => this.handleWindowSizeChange());
+  }
+  onBackButtonEvent = () => {
+    const params = this.props.queries;
+    this.setState({showLoading: true});
+    'id' in params
+      ? this.handleInitialOrgSearch(params)
+      : this.handleInitialCategorySearch(params);
   }
   handleWindowSizeChange() {
     this.setState({width: window.innerWidth});
