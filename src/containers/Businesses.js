@@ -77,7 +77,6 @@ export class Businesses extends PureComponent {
   };
 
   checkBusinessType = filters => {
-    console.log(filters, 'Here');
     const businessTypes = [
       'Startup or High-Growth Business',
       'Main Street or Small Business',
@@ -87,12 +86,10 @@ export class Businesses extends PureComponent {
       return true;
     }
     if (isString(filters)) {
-      console.log('isString', !businessTypes.includes(filters));
       return !businessTypes.includes(filters);
     }
     const filteredTypes = filters.map(filter => {
       if (businessTypes.includes(filter) === true) {
-        console.log(businessTypes.includes(filter));
         return true;
       }
     });
