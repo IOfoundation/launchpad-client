@@ -9,7 +9,6 @@ class FilterBoxMobile extends PureComponent {
       handleOnChangeFilterOptions,
       getTextSearchResults,
       handleClickOnClearAllFilters,
-      getBusiness,
       businesses,
     } = this.props;
     const {filters, appliedFilters, items, organizations} = businesses;
@@ -34,7 +33,6 @@ class FilterBoxMobile extends PureComponent {
 }
 FilterBoxMobile.PropTypes = {
   businesses: PropTypes.object.isRequired,
-  getBusiness: PropTypes.func.isRequired,
   getTextSearchResults: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,

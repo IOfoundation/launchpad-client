@@ -100,7 +100,6 @@ BusinessesPage.propTypes = {
   handleOnChangeBusinessType: PropTypes.func,
   handleOnChangeFilterOptions: PropTypes.func,
   handleOnChangeLocationToggle: PropTypes.func,
-  handleOnChangeFilterOptions: PropTypes.func,
   windowWidth: PropTypes.number,
 };
 

@@ -19,10 +19,10 @@ class TagsBox extends PureComponent {
         {!isEmpty(filters.category) && !isString(filters.category)
           ? filters.category.map(filter => (
               <Chip
-                key={filter}
-                text={filter}
-                handleClick={this.props.deleteFilter}
-                canDelete={true}
+              key={filter}
+              text={filter}
+              handleClick={this.props.deleteFilter}
+              canDelete={true}
               />
             ))
           : ''}

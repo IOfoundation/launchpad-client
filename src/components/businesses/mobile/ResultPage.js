@@ -10,6 +10,11 @@ class ResultPage extends Component {
       selectedTab: 0,
     };
   }
+
+  handleOnSelect(tabIndex) {
+    return this.setState({tabIndex});
+  }
+
   render() {
     const {selectedTab} = this.state;
     const {showLoading} = this.props;
@@ -31,7 +36,7 @@ class ResultPage extends Component {
             <Tab className="tab">
               <img
                 src={
-                  this.state.tabIndex === 0
+                  tabIndex === 0
                     ? '../../static-data/images/ic_map_list-view-Green.png'
                     : '../../static-data/images/ic_map_list-view-Grey.png'
                 }
@@ -40,20 +45,20 @@ class ResultPage extends Component {
             <Tab className="tab">
               <img
                 src={
-                  this.state.tabIndex === 1
+                  tabIndex === 1
                     ? '../../static-data/images/ic_map_green.png'
                     : '../../static-data/images/ic_map_grey.png'
                 }
               />
             </Tab>
           </TabList>
-          <TabPanel className="m-x-8">{this.props.BusinessesList}</TabPanel>
+          <TabPanel className="m-x-8">{BusinessesList}</TabPanel>
           <TabPanel>
             <div className="map-container">
               <MapView
-                locations={this.props.locations}
-                onBoundsChange={this.props.onBoundsChange}
-                highlightOrgCard={this.props.highlightOrgCard}
+                locations={locations}
+                onBoundsChange={onBoundsChange}
+                highlightOrgCard={highlightOrgCard}
               />
             </div>
           </TabPanel>

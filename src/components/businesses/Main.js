@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
-import {isEmpty} from 'lodash';
-
 import BusinessesList from './BusinessesList';
 import Pagination from './Pagination';
 import ResultInfo from './ResultInfo';
@@ -86,8 +84,8 @@ class Main extends Component {
     );
   }
   render() {
-    const {handleChangePage, isMobile, businesses} = this.props;
-    const {metadata, organizations, displayOptions} = businesses;
+    const {isMobile, businesses} = this.props;
+    const {displayOptions} = businesses;
 
     return (
       <ContentMap
@@ -110,12 +108,13 @@ class Main extends Component {
 }
 Main.propTypes = {
   businesses: PropTypes.object.isRequired,
-  handleOnChangeBusinessType: PropTypes.func.isRequired,
-  handleOnChangeLocationToggle: PropTypes.func.isRequired,
   handleChangePage: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
+  handleOnChangeBusinessType: PropTypes.func.isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
+  handleOnChangeLocationToggle: PropTypes.func.isRequired,
   isMobile: PropTypes.bool.isRequired,
+  showLoading: PropTypes.bool.isRequired,
 };
 
 export default Main;

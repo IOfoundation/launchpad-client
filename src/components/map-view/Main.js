@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
 import GoogleMap from 'google-map-react';
 import MapMarker from './MapMarker';
 
-class Main extends React.Component {
+class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,7 +27,7 @@ class Main extends React.Component {
       this.props.locations.find(x => String(x.id) === e).organization.id
     );
   }
-  _handleChildMouseLeave(e) {
+  _handleChildMouseLeave() {
     this.props.highlightOrgCard(-1);
   }
 
@@ -38,7 +38,6 @@ class Main extends React.Component {
     const map_options = {fullscreenControl: false};
     const zoomLevel = 7;
     if (firstBusiness) {
-      const [centerLng, centerLat] = this.getCoordinates(firstBusiness);
       return (
         <GoogleMap
           center={sacCoordinates}
@@ -48,7 +47,7 @@ class Main extends React.Component {
           resetBoundsOnResize={true}
           options={map_options}
           onChildMouseEnter={e => this._handleChildMouseEnter(e)}
-          onChildMouseLeave={e => this._handleChildMouseLeave(e)}
+          onChildMouseLeave={() => this._handleChildMouseLeave()}
           onChildClick={e => this._handleOnClick(e)}
           bootstrapURLKeys={{
             key: process.env.GOOGLE_MAP_API_KEY,
@@ -86,7 +85,8 @@ class Main extends React.Component {
 }
 
 Main.propTypes = {
-  locations: PropTypes.array,
+  highlightOrgCard: PropTypes.func.isRequired,
+  locations: PropTypes.arrayof(PropTypes.object),
   onBoundsChange: PropTypes.func.isRequired,
 };
 

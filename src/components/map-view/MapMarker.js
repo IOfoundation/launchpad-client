@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {PropTypes} from 'prop-types';
 import FacebookIcon from '../shared/FacebookIcon';
 import TwitterIcon from '../shared/TwitterIcon';
 import LinkedinIcon from '../shared/LinkedinIcon';
@@ -30,7 +31,7 @@ const selectedMarkerStyle = {
 const markerFill = '#4A4A4A';
 const selectedMarkerFill = '#2AD587';
 
-export default class MapMarker extends Component {
+class MapMarker extends Component {
   _closeOrgInfo() {
     this.props.handleCloseClick();
   }
@@ -102,3 +103,10 @@ export default class MapMarker extends Component {
     );
   }
 }
+
+MapMarker.PropTypes = {
+  handleCloseClick: PropTypes.func.isRequired,
+  $hover: PropTypes.bool.isRequired,
+  organizations: PropTypes.arrayOf(PropTypes.object),
+  selected: PropTypes.bool.isRequired,
+};

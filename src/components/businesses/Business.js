@@ -292,8 +292,9 @@ class Business extends PureComponent {
 
 Business.propTypes = {
   business: PropTypes.object.isRequired,
-  expanded: PropTypes.bool,
-  isSelected: PropTypes.bool,
+  expanded: PropTypes.bool.isRequired,
+  isMobile: PropTypes.bool.isRequired,
+  isSelected: PropTypes.bool.isRequired,
 };
 
 export default Business;

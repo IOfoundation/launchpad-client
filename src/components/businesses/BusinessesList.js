@@ -23,9 +23,9 @@ class BusinessesList extends PureComponent {
 }
 
 BusinessesList.propTypes = {
+  isMobile: PropTypes.bool.isRequired,
   organizations: PropTypes.arrayOf(PropTypes.object),
-  isMobile: PropTypes.bool,
-  selectedOrg: PropTypes.number,
+  selectedOrg: PropTypes.number.isRequired,
 };
 
 export default BusinessesList;

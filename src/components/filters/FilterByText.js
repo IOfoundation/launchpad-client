@@ -62,7 +62,7 @@ class FilterByText extends Component {
           item.searchable_id,
           false
         );
-    this.setState({
+    return this.setState({
       showDropdown: false,
       inputOnFocus: false,
       value: item.content,
@@ -219,6 +219,7 @@ FilterByText.propTypes = {
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
   items: PropTypes.arrayOf(PropTypes.object),
+  organizations: PropTypes.object,
 };
 
 export default onClickOutside(FilterByText);

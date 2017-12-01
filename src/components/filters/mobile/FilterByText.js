@@ -1,7 +1,6 @@
 import React, {PureComponent} from 'react';
 import {PropTypes} from 'prop-types';
-import Chip from '../../shared/Chip';
-import {isEmpty, isString} from 'lodash';
+import {isEmpty} from 'lodash';
 import TagsBox from '../TagsBox';
 
 class FilterByTextMobile extends PureComponent {
@@ -25,19 +24,19 @@ class FilterByTextMobile extends PureComponent {
   };
 
   handleDropdownOnClick(item) {
-    item.searchable_type === 'Category'
-      ? this.props.handleOnChangeFilterOptions('category', item.content)
-      : this.props.handleOnChangeFilterOptions(
-          'organization',
-          item.searchable_id,
-          false
-        );
     this.setState({
       showDropdown: false,
       value: '',
       searchText: item.content,
       searchPlaceHolder: item.content,
     });
+    return item.searchable_type === 'Category'
+      ? this.props.handleOnChangeFilterOptions('category', item.content)
+      : this.props.handleOnChangeFilterOptions(
+          'organization',
+          item.searchable_id,
+          false
+        );
   }
 
   handleKeyPress(e) {
@@ -130,6 +129,7 @@ class FilterByTextMobile extends PureComponent {
 }
 FilterByTextMobile.PropTypes = {
   appliedFilters: PropTypes.object,
+  filterById: PropTypes.bool,
   getTextSearchResults: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,

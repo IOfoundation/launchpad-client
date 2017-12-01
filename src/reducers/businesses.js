@@ -27,7 +27,7 @@ export default function(state: STATE = initialState, action: ACTION): STATE {
     case types.FETCH_ORGANIZATIONS_SUCCESS: {
       const {organizations, metadata} = action;
       if (organizations.id) {
-        organizations = [organizations];
+        const organizations = [organizations];
       }
       const locations = isEmpty(organizations)
         ? null

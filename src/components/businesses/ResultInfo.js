@@ -103,9 +103,9 @@ class ResultInfo extends Component {
 }
 
 ResultInfo.propTypes = {
-  metadata: PropTypes.object.isRequired,
   filterOptions: PropTypes.arrayOf(PropTypes.object).isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
+  metadata: PropTypes.object.isRequired,
   showBusinessTypes: PropTypes.bool,
 };
 

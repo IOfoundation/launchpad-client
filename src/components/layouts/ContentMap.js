@@ -4,6 +4,22 @@ import MapView from '../map-view/Main';
 import ResultPage from '../businesses/mobile/ResultPage';
 
 class ContentMap extends Component {
+  shouldComponentUpdate(nextProps) {
+    return this.validateComponent(nextProps);
+  }
+
+  validateComponent(nextProps) {
+    const {businesses, expanded, toggleSwitch} = this.props;
+    if (businesses !== nextProps.businesses) {
+      return true;
+    } else if (expanded !== nextProps.expanded) {
+      return true;
+    } else if (toggleSwitch !== nextProps.toggleSwitch) {
+      return true;
+    }
+    return false;
+  }
+
   _renderReduceButton() {
     const {reduceMap, redoSearchInMap, toggleSwitch} = this.props;
     return (
@@ -109,14 +125,8 @@ class ContentMap extends Component {
     );
   }
   _renderBusinesses() {
-    const {
-      onBoundsChange,
-      isMobile,
-      businesses,
-      expanded,
-      children,
-    } = this.props;
-    const {locations, metadata} = businesses;
+    const {isMobile, businesses, expanded, children} = this.props;
+    const {metadata} = businesses;
     return (
       <div>
         {isMobile ? (
@@ -152,7 +162,7 @@ class ContentMap extends Component {
       topBar,
       expanded,
     } = this.props;
-    const {organizations, locations, metadata} = businesses;
+    const {locations, metadata} = businesses;
     return (
       <div className="businessesContainer">
         {topBar}
@@ -191,7 +201,8 @@ ContentMap.propTypes = {
   expanded: PropTypes.bool,
   expandMap: PropTypes.func.isRequired,
   highlightOrgCard: PropTypes.func.isRequired,
-  onBoundsChange: PropTypes.func,
+  isMobile: PropTypes.bool.isRequired,
+  onBoundsChange: PropTypes.func.isRequired,
   redoSearchInMap: PropTypes.func.isRequired,
   reduceMap: PropTypes.func.isRequired,
   topBar: PropTypes.node,

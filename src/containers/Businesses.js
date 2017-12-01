@@ -30,15 +30,15 @@ export class Businesses extends PureComponent {
       : this.handleInitialCategorySearch(params);
   }
 
+  componentDidMount() {
+    window.onpopstate = this.onBackButtonEvent;
+  }
+
   componentWillReceiveProps(newProps) {
     const {organizations} = this.props.businesses;
     if (newProps.businesses.organizations !== organizations) {
       this.setState({showLoading: false});
     }
-  }
-
-  componentDidMount() {
-    window.onpopstate = this.onBackButtonEvent;
   }
 
   componentWillUnMount() {
@@ -96,6 +96,7 @@ export class Businesses extends PureComponent {
       if (businessTypes.includes(filter) === true) {
         return true;
       }
+      return false;
     });
     return !filteredTypes.includes(true);
   };
@@ -186,6 +187,7 @@ export class Businesses extends PureComponent {
 Businesses.propTypes = {
   actions: PropTypes.object,
   businesses: PropTypes.object,
+  params: PropTypes.object,
 };
 
 const mapStateToProps = _state => {
