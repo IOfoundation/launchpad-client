@@ -54,7 +54,7 @@ class FilterByTextMobile extends PureComponent {
         className={
           isEmpty(filters)
             ? 'filter-label-container-hide'
-            : 'filter-label-container-show'
+            : 'filter-label-container-show text-bold'
         }
       >
         <TagsBox

@@ -21,7 +21,7 @@ class Business extends PureComponent {
 
   _renderContacts = subject => {
     return (
-      <div className="col-lg-4 col-md-4 col-xs-12 p-0 main-contact">
+      <div className="col-lg-5 col-md-5 col-xs-12 p-0 main-contact">
         <p className="business-title">{'Contact:'}</p>
         {isEmpty(subject.phones) ? '' : <h4>{subject.phones[0].number}</h4>}
         {isEmpty(subject.email) ? (
@@ -218,7 +218,7 @@ class Business extends PureComponent {
             </div>
             <hr />
             <p className="business-title col-lg-12 col-md-12 col-xs-12 p-0">
-              {'Services:'}
+              {'Services'}
             </p>
             {business.services.map(service => {
               return (
@@ -261,16 +261,13 @@ class Business extends PureComponent {
             {!isEmpty(other_locations) &&
               !isMobile && (
                 <div className="col-lg-12 col-md-12 col-xs-12 grid p-0">
-                  <hr />
-                  <div className="col-lg-12 col-md-12 col-xs-12 grid p-0">
-                    <div className="col-lg-6 col-md-6 col-xs-6 p-0 m-right-54">
-                      <p className="business-title">{'Other Locations:'}</p>
-                    </div>
-                    <div className="col-lg-4 col-md-4 col-xs-6 p-0">
-                      <p className="business-title">{'Contact:'}</p>
-                    </div>
-                    {this._renderOtherLocations(other_locations)}
+                  <div className="col-lg-6 col-md-6 col-xs-6 p-0 m-right-54">
+                    <p className="business-title">{'Other Locations'}</p>
                   </div>
+                  <div className="col-lg-4 col-md-4 col-xs-6 p-0">
+                    <p className="business-title">{'Contact:'}</p>
+                  </div>
+                  {this._renderOtherLocations(other_locations)}
                 </div>
               )}
           </div>

@@ -62,6 +62,7 @@ class ResultPage extends Component {
           <TabPanel>
             <div className="map-container">
               <MapView
+                isMobile={this.props.isMobile}
                 locations={locations}
                 onBoundsChange={onBoundsChange}
                 highlightOrgCard={highlightOrgCard}
@@ -77,6 +78,7 @@ class ResultPage extends Component {
 ResultPage.PropTypes = {
   BusinessesList: PropTypes.arrayOf(PropTypes.object),
   highlightOrgCard: PropTypes.func.isRequired,
+  isMobile: PropTypes.bool.isRequired,
   locations: PropTypes.array,
   onBoundsChange: PropTypes.func,
   showLoading: PropTypes.bool,

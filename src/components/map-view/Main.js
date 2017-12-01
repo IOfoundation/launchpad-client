@@ -8,47 +8,52 @@ class Main extends Component {
     super(props);
     this.state = {
       selected: '-1',
+      coordinates: {lat: 38.57, lng: -121.47},
     };
   }
   getCoordinates(business) {
     return business.coordinates;
   }
-  handleBoundsChange(e) {
+  handleBoundsChange = e => {
     this.props.onBoundsChange(e);
   }
-  _handleOnClick(e) {
-    this.setState({selected: e});
-  }
-  _handleCloseClick() {
+  _handleOnClick = (e, childProps) => {
+    this.setState({
+      selected: e,
+      coordinates: {
+        lat: childProps.lat,
+        lng: childProps.lng},
+    });
+  };
+  _handleCloseClick = () => {
     this.setState({selected: -1});
-  }
-  _handleChildMouseEnter(e) {
+  };
+  _handleChildMouseEnter = e => {
     this.props.highlightOrgCard(
       this.props.locations.find(x => String(x.id) === e).organization.id
     );
-  }
-  _handleChildMouseLeave() {
+  };
+  _handleChildMouseLeave = () => {
     this.props.highlightOrgCard(-1);
-  }
+  };
 
   render() {
     const {locations} = this.props;
     const firstBusiness = locations ? locations[0] : null;
-    const sacCoordinates = {lat: 38.57, lng: -121.47};
-    const map_options = {fullscreenControl: false};
+    const mapOptions = {fullscreenControl: false};
     const zoomLevel = 7;
     if (firstBusiness) {
       return (
         <GoogleMap
-          center={sacCoordinates}
+          center={this.state.coordinates}
           zoom={zoomLevel}
           hoverDistance={12}
-          onChange={e => this.handleBoundsChange(e)}
+          onChange={this.handleBoundsChange}
           resetBoundsOnResize={true}
-          options={map_options}
-          onChildMouseEnter={e => this._handleChildMouseEnter(e)}
-          onChildMouseLeave={() => this._handleChildMouseLeave()}
-          onChildClick={e => this._handleOnClick(e)}
+          options={mapOptions}
+          onChildMouseEnter={this._handleChildMouseEnter}
+          onChildMouseLeave={this._handleChildMouseLeave}
+          onChildClick={this._handleOnClick}
           bootstrapURLKeys={{
             key: process.env.GOOGLE_MAP_API_KEY,
           }}
@@ -62,7 +67,7 @@ class Main extends Component {
                 lng={lng}
                 organization={location.organization}
                 selected={this.state.selected === String(location.id)}
-                handleCloseClick={() => this._handleCloseClick()}
+                handleCloseClick={this._handleCloseClick}
               />
             );
           })}
@@ -71,11 +76,11 @@ class Main extends Component {
     }
     return (
       <GoogleMap
-        center={sacCoordinates}
+        center={this.state.coordinates}
         zoom={10}
         onChange={event => this.handleBoundsChange(event)}
         resetBoundsOnResize={true}
-        options={map_options}
+        options={mapOptions}
         bootstrapURLKeys={{
           key: process.env.GOOGLE_MAP_API_KEY,
         }}
@@ -86,6 +91,7 @@ class Main extends Component {
 
 Main.propTypes = {
   highlightOrgCard: PropTypes.func.isRequired,
+  isMobile: PropTypes.bool.isRequired,
   locations: PropTypes.arrayOf(PropTypes.object),
   onBoundsChange: PropTypes.func.isRequired,
 };
