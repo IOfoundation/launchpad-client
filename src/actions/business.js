@@ -99,6 +99,14 @@ const _debouncedBuildOrganizationsAndMetadata = debounce(
   500
 );
 
+const _debouncedfetchSearchResults = debounce(
+  (filter, dispatch) => {
+    _buildSearchResultsObject(filter, dispatch);
+  },
+  50,
+  {leading: true}
+);
+
 const paginationMetadata = links => {
   const _paginationMetadata = {};
   Object.keys(links).forEach(type => {
@@ -217,16 +225,7 @@ export function fetchFilterOptions() {
 
 export function fetchSearchResults(filter) {
   return async (dispatch: Function) => {
-    try {
-      dispatch(fetchSearchResultsRequestObject());
-      const httpResponse = await httpRequest.get('api/search', {
-        params: {text: filter},
-      });
-      const items = httpResponse.data;
-      dispatch(fetchSearchResultsSuccessObject(items));
-    } catch (error) {
-      dispatch(fetchSearchResultsErrorObject(error));
-    }
+    _debouncedfetchSearchResults(filter, dispatch);
   };
 }
 
@@ -283,6 +282,19 @@ async function _buildOrganizationsAndMetadata(filters, dispatch) {
     dispatch(fetchOrganizationsSuccessObject(organizations, metadata));
   } catch (error) {
     dispatch(fetchOrganizationsErrorObject(error));
+  }
+}
+
+async function _buildSearchResultsObject(filter, dispatch) {
+  try {
+    dispatch(fetchSearchResultsRequestObject());
+    const httpResponse = await httpRequest.get('api/search', {
+      params: {text: filter},
+    });
+    const items = httpResponse.data;
+    dispatch(fetchSearchResultsSuccessObject(items));
+  } catch (error) {
+    dispatch(fetchSearchResultsErrorObject(error));
   }
 }
 
