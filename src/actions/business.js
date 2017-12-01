@@ -84,7 +84,7 @@ const updateAppliedFiltersObject = appliedFilters => {
 };
 
 const pushBrowserHistory = filters => {
-  let filterString = queryString.stringify(filters, {encode: false});
+  let filterString = queryString.stringify(filters, {encode: true});
   filterString = filterString.replace(/&per_page=\d+/, '');
   return browserHistory.push({
     pathname: '/businesses',
