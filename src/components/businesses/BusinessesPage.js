@@ -11,28 +11,48 @@ class BusinessesPage extends Component {
   }
 
   renderFilterBoxMobile() {
+    const {
+      businesses,
+      getTextSearchResults,
+      handleClickOnClearAllFilters,
+      handleOnChangeFilterOptions,
+    } = this.props;
     return (
       <FilterBoxMobile
-        businesses={this.props.businesses}
-        getTextSearchResults={this.props.getTextSearchResults}
-        handleClickOnClearAllFilters={this.props.handleClickOnClearAllFilters}
-        handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
+        businesses={businesses}
+        getTextSearchResults={getTextSearchResults}
+        handleClickOnClearAllFilters={handleClickOnClearAllFilters}
+        handleOnChangeFilterOptions={handleOnChangeFilterOptions}
       />
     );
   }
   renderFilterBoxDesktop() {
+    const {
+      businesses,
+      getTextSearchResults,
+      handleClickOnClearAllFilters,
+      handleOnChangeFilterOptions,
+    } = this.props;
     return (
       <FilterBox
-        businesses={this.props.businesses}
-        getTextSearchResults={this.props.getTextSearchResults}
-        handleClickOnClearAllFilters={this.props.handleClickOnClearAllFilters}
-        handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
+        businesses={businesses}
+        getTextSearchResults={getTextSearchResults}
+        handleClickOnClearAllFilters={handleClickOnClearAllFilters}
+        handleOnChangeFilterOptions={handleOnChangeFilterOptions}
       />
     );
   }
 
   render() {
-    const {windowWidth, businesses} = this.props;
+    const {
+      windowWidth,
+      businesses,
+      handleOnChangeBusinessType,
+      handleOnChangeLocationToggle,
+      handleChangePage,
+      handleClickOnClearAllFilters,
+      handleOnChangeFilterOptions,
+    } = this.props;
     const isMobile = windowWidth <= 960;
     return (
       <section>
@@ -57,16 +77,12 @@ class BusinessesPage extends Component {
                 : this.renderFilterBoxDesktop()}
               <BusinessesView
                 isMobile={isMobile}
-                businesses={this.props.businesses}
-                checkBusinessType={this.props.checkBusinessType}
-                checkLocationToggle={this.props.checkBusinessType}
-                handleChangePage={this.props.handleChangePage}
-                handleClickOnClearAllFilters={
-                  this.props.handleClickOnClearAllFilters
-                }
-                handleOnChangeFilterOptions={
-                  this.props.handleOnChangeFilterOptions
-                }
+                businesses={businesses}
+                handleOnChangeBusinessType={handleOnChangeBusinessType}
+                handleOnChangeLocationToggle={handleOnChangeLocationToggle}
+                handleChangePage={handleChangePage}
+                handleClickOnClearAllFilters={handleClickOnClearAllFilters}
+                handleOnChangeFilterOptions={handleOnChangeFilterOptions}
               />
             </div>
           </div>
@@ -78,10 +94,12 @@ class BusinessesPage extends Component {
 
 BusinessesPage.propTypes = {
   businesses: PropTypes.object.isRequired,
-  checkBusinessType: PropTypes.func,
   getTextSearchResults: PropTypes.func,
   handleChangePage: PropTypes.func,
   handleClickOnClearAllFilters: PropTypes.func,
+  handleOnChangeBusinessType: PropTypes.func,
+  handleOnChangeFilterOptions: PropTypes.func,
+  handleOnChangeLocationToggle: PropTypes.func,
   handleOnChangeFilterOptions: PropTypes.func,
   windowWidth: PropTypes.number,
 };

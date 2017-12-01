@@ -5,18 +5,23 @@ import FilterByOptions from './FilterByOptions';
 
 class FilterBox extends PureComponent {
   render() {
-    const {appliedFilters, filters, items} = this.props.businesses;
+    const {
+      getTextSearchResults,
+      handleClickOnClearAllFilters,
+      handleOnChangeFilterOptions,
+      businesses,
+    } = this.props;
+    const {appliedFilters, filters, items, organizations} = businesses;
     return (
       <div className="container-invert">
         <div className="grid">
           <FilterByText
             filterName={'Search Box'}
-            getTextSearchResults={this.props.getTextSearchResults}
-            handleClickOnClearAllFilters={
-              this.props.handleClickOnClearAllFilters
-            }
-            handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
+            getTextSearchResults={getTextSearchResults}
+            handleClickOnClearAllFilters={handleClickOnClearAllFilters}
+            handleOnChangeFilterOptions={handleOnChangeFilterOptions}
             appliedFilters={appliedFilters}
+            organizations={organizations}
             items={items}
           />
         </div>
@@ -24,22 +29,22 @@ class FilterBox extends PureComponent {
           <FilterByOptions
             filterName={'Business Services'}
             filterOptions={filters.businessServices}
-            handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
+            handleOnChangeFilterOptions={handleOnChangeFilterOptions}
           />
           <FilterByOptions
             filterName={'Industry'}
             filterOptions={filters.industries}
-            handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
+            handleOnChangeFilterOptions={handleOnChangeFilterOptions}
           />
           <FilterByOptions
             filterName={'Business Stage'}
             filterOptions={filters.stages}
-            handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
+            handleOnChangeFilterOptions={handleOnChangeFilterOptions}
           />
           <FilterByOptions
             filterName={'Underserved Com...'}
             filterOptions={filters.communities}
-            handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
+            handleOnChangeFilterOptions={handleOnChangeFilterOptions}
           />
         </div>
       </div>

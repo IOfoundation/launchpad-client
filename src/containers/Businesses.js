@@ -17,7 +17,7 @@ export class Businesses extends PureComponent {
   }
 
   componentWillMount(_nextProps) {
-    const params = this.props.location.query;
+    const {params} = this.props;
     this.props.actions.fetchFilterOptions();
     const locationToggleSwitch = 'ne_lat' in params;
     window.addEventListener('resize', () => this.handleWindowSizeChange());
@@ -31,7 +31,8 @@ export class Businesses extends PureComponent {
   }
 
   componentWillReceiveProps(newProps) {
-    if (newProps.organizations !== this.props.organizations) {
+    const {organizations} = this.props.businesses;
+    if (newProps.businesses.organizations !== organizations) {
       this.setState({showLoading: false});
     }
   }
@@ -45,12 +46,17 @@ export class Businesses extends PureComponent {
   }
 
   onBackButtonEvent = () => {
-    const params = this.props.queries;
-    this.setState({showLoading: true});
-    this.props.actions.filterOrganizations('back-button', params);
-    this.props.actions.updateChipFilters('back-button', params);
+    const {params} = this.props;
     const locationToggleSwitch = 'ne_lat' in params;
-    this.props.actions.changeFilterDisplayOptions(
+    const {
+      filterOrganizations,
+      updateChipFilters,
+      changeFilterDisplayOptions,
+    } = this.props.actions;
+    this.setState({showLoading: true});
+    filterOrganizations('back-button', params);
+    updateChipFilters('back-button', params);
+    changeFilterDisplayOptions(
       this.checkBusinessType(params.category),
       locationToggleSwitch
     );
@@ -124,7 +130,7 @@ export class Businesses extends PureComponent {
   }
 
   handleOnChangeFilterOptions = (filterType, filterValue, removeFilter) => {
-    const {queries} = this.props;
+    const {params} = this.props;
     const {
       changeFilterDisplayOptions,
       updateChipFilters,
@@ -135,23 +141,28 @@ export class Businesses extends PureComponent {
       this.handleOnChangeBusinessType(filterValue),
       this.handleOnChangeLocationToggle(filterType, removeFilter)
     );
-    if (typeof removeFilter === 'undefined' && !isEmpty(queries.category)) {
-      removeFilter = Boolean(queries.category.includes(filterValue));
+    if (typeof removeFilter === 'undefined' && !isEmpty(params.category)) {
+      removeFilter = Boolean(params.category.includes(filterValue));
     }
-    updateChipFilters(filterType, queries, filterValue, removeFilter);
-    filterOrganizations(filterType, queries, filterValue, removeFilter);
+    updateChipFilters(filterType, params, filterValue, removeFilter);
+    filterOrganizations(filterType, params, filterValue, removeFilter);
   };
 
   handleClickOnClearAllFilters = () => {
+    const {
+      updateChipFilters,
+      filterOrganizations,
+      changeFilterDisplayOptions,
+    } = this.props.actions;
     this.setState({showLoading: true});
-    this.props.actions.updateChipFilters('all');
-    this.props.actions.filterOrganizations('all');
-    this.props.actions.changeFilterDisplayOptions(true, false);
+    updateChipFilters('all');
+    filterOrganizations('all');
+    changeFilterDisplayOptions(true, false);
   };
 
   handleChangePage = page => {
-    const businessesFilters = this.props.location.query;
-    this.props.actions.changePage(page, businessesFilters);
+    const {params} = this.props;
+    this.props.actions.changePage(page, params);
   };
 
   render() {
@@ -161,8 +172,8 @@ export class Businesses extends PureComponent {
           businesses={this.props.businesses}
           windowWidth={this.state.width}
           getTextSearchResults={this.getTextSearchResults}
-          checkBusinessType={this.handleOnChangeBusinessType}
-          checkLocationToggle={this.handleOnChangeLocationToggle}
+          handleOnChangeBusinessType={this.handleOnChangeBusinessType}
+          handleOnChangeLocationToggle={this.handleOnChangeLocationToggle}
           handleClickOnClearAllFilters={this.handleClickOnClearAllFilters}
           handleOnChangeFilterOptions={this.handleOnChangeFilterOptions}
           handleChangePage={this.handleChangePage}
@@ -181,8 +192,7 @@ const mapStateToProps = _state => {
   const {businesses, routing} = _state;
   return {
     businesses,
-    queries: routing.locationBeforeTransitions.query,
-    action: routing.locationBeforeTransitions.action,
+    params: routing.locationBeforeTransitions.query,
   };
 };
 

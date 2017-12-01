@@ -133,10 +133,8 @@ class FilterByText extends Component {
   }
 
   render() {
-    const filters = this.props.appliedFilters;
-    const organization = this.props.organization.length
-      ? this.props.organization[0].name
-      : '';
+    const {appliedFilters, organizations} = this.props;
+    const organization = organizations.length ? organizations[0].name : '';
     return (
       <div className="col-md-12 col-xs-12 text-xs-margin filterTextContainer no-padding">
         <div className="grid search-text-form p-bot-16">
@@ -147,10 +145,10 @@ class FilterByText extends Component {
                 : 'filter-by-text-transition col-lg-9 col-md-8 col-xs-8 no-padding'
             }
           >
-            {this.renderChipsContainer(filters)}
+            {this.renderChipsContainer(appliedFilters)}
             <h3
               className={
-                filters.category
+                appliedFilters.category
                   ? 'hide-filter'
                   : 'text-thin filter-result-text'
               }
@@ -169,7 +167,7 @@ class FilterByText extends Component {
               type="text"
               className="search-by-text text-thin"
               value={
-                this.state.filterById === true && isEmpty(filters)
+                this.state.filterById === true && isEmpty(appliedFilters)
                   ? organization
                   : this.state.searchText
               }
@@ -179,7 +177,7 @@ class FilterByText extends Component {
               style={
                 this.state.inputOnFocus ||
                 this.state.searchText ||
-                (this.state.filterById && isEmpty(filters))
+                (this.state.filterById && isEmpty(appliedFilters))
                   ? {opacity: 1}
                   : {opacity: 0}
               }
@@ -188,7 +186,7 @@ class FilterByText extends Component {
               style={
                 this.state.inputOnFocus ||
                 this.state.searchText ||
-                (this.state.filterById && isEmpty(filters))
+                (this.state.filterById && isEmpty(appliedFilters))
                   ? {opacity: 0}
                   : {opacity: 1}
               }

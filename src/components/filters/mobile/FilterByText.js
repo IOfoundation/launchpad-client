@@ -88,25 +88,23 @@ class FilterByTextMobile extends PureComponent {
   }
 
   render() {
-    const filters = this.props.appliedFilters;
-    const organization = this.props.organization.length
-      ? this.props.organization[0].name
-      : '';
+    const {appliedFilters, organizations} = this.props;
+    const organization = organizations.length ? organizations[0].name : '';
     return (
       <div className="filter-chip">
-        {filters.category && (
+        {appliedFilters.category && (
           <div className="filter-by-text-transition p-left-16 p-right-16 m-bot-16 m-top-20">
             <h3 className="col-lg-12 col-md-12 col-xs-12 no-padding">
               {'Filter results with the selections below'}
             </h3>
-            {this.renderChipsContainer(filters)}
+            {this.renderChipsContainer(appliedFilters)}
           </div>
         )}
         <div className="search-input-container p-left-16 p-right-16">
           <input
             type="text"
             value={
-              this.state.filterById === true && isEmpty(filters)
+              this.state.filterById === true && isEmpty(appliedFilters)
                 ? organization
                 : this.state.searchText
             }
@@ -136,5 +134,6 @@ FilterByTextMobile.PropTypes = {
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
   handleDropdownOnClick: PropTypes.func.isRequired,
+  organizations: PropTypes.arrayOf(PropTypes.object),
 };
 export default FilterByTextMobile;

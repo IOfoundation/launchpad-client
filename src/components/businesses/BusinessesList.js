@@ -5,11 +5,12 @@ import Business from './Business';
 
 class BusinessesList extends PureComponent {
   _renderOrgs(organizations) {
-    return this.props.organizations.map(organization => (
+    const {isMobile, selectedOrg} = this.props;
+    return organizations.map(organization => (
       <Business
-        isSelected={this.props.selectedOrg === organization.id}
+        isSelected={selectedOrg === organization.id}
         business={organization}
-        isMobile={this.props.isMobile}
+        isMobile={isMobile}
         key={organization.id}
         expanded={organizations.length === 1}
       />
@@ -23,6 +24,7 @@ class BusinessesList extends PureComponent {
 
 BusinessesList.propTypes = {
   organizations: PropTypes.arrayOf(PropTypes.object),
+  isMobile: PropTypes.bool,
   selectedOrg: PropTypes.number,
 };
 

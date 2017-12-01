@@ -195,7 +195,7 @@ ContentMap.propTypes = {
   redoSearchInMap: PropTypes.func.isRequired,
   reduceMap: PropTypes.func.isRequired,
   topBar: PropTypes.node,
-  totalOrganizations: PropTypes.array,
+  toggleSwitch: PropTypes.bool,
 };
 
 export default ContentMap;
