@@ -16,16 +16,16 @@ class TagsBox extends PureComponent {
             canDelete={true}
           />
         )}
-        {!isEmpty(filters.category) && !isString(filters.category) ?
-          filters.category.map(filter => (
-            <Chip
-              key={filter}
-              text={filter}
-              handleClick={this.props.deleteFilter}
-              canDelete={true}
-            />
-          ))
-        : ''}
+        {!isEmpty(filters.category) && !isString(filters.category)
+          ? filters.category.map(filter => (
+              <Chip
+                key={filter}
+                text={filter}
+                handleClick={this.props.deleteFilter}
+                canDelete={true}
+              />
+            ))
+          : ''}
         {filters.category && (
           <a
             className="search-filter-clear text-thin"
