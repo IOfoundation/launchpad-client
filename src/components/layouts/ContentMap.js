@@ -135,8 +135,8 @@ class ContentMap extends Component {
           <div
             className={
               metadata.totalOrganizations
-                ? 'result-container-hide desktop-devices'
-                : 'grid desktop-devices'
+                ? 'grid desktop-devices'
+                : 'result-container-hide desktop-devices'
             }
           >
             <div
@@ -188,8 +188,8 @@ class ContentMap extends Component {
           {expanded ? this._renderReduceButton() : this._renderExpandButton()}
         </div>
         {metadata.totalOrganizations
-          ? this._renderNoSearchResults()
-          : this._renderBusinesses()}
+          ? this._renderBusinesses()
+          : this._renderNoSearchResults()}
       </div>
     );
   }
