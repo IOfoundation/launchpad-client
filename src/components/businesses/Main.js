@@ -43,7 +43,7 @@ class Main extends Component {
   };
 
   _renderResultsInfo = () => {
-    const {handleOnChangeFilterOptions, businesses} = this.props;
+    const {handleOnChangeFilterOptions, businesses, showLoading} = this.props;
     const {metadata, displayOptions, filters} = businesses;
 
     if (filters.businessTypes.length === 3) {
@@ -86,7 +86,6 @@ class Main extends Component {
   render() {
     const {isMobile, businesses, showLoading} = this.props;
     const {displayOptions} = businesses;
-
     return (
       <ContentMap
         businesses={businesses}

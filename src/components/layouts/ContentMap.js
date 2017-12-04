@@ -115,14 +115,21 @@ class ContentMap extends Component {
     );
   }
   _renderResultPageMobile() {
-    const {locations, metadata} = this.props.businesses;
+    const {
+      showLoading,
+      children,
+      onBoundsChange,
+      businesses,
+      highlightOrgCard,
+    } = this.props;
+    const {locations, metadata} = businesses;
     return (
       <ResultPage
         showLoading={this.props.showLoading}
         BusinessesList={this.props.children}
         locations={locations}
         onBoundsChange={this.props.onBoundsChange}
-        TotalOrganizations={metadata.totalOrganizations}
+        totalOrganizations={metadata.totalOrganizations}
         highlightOrgCard={this.props.highlightOrgCard}
       />
     );
@@ -209,6 +216,7 @@ ContentMap.propTypes = {
   redoSearchInMap: PropTypes.func.isRequired,
   reduceMap: PropTypes.func.isRequired,
   selectedOrg: PropTypes.number,
+  showLoading: PropTypes.bool,
   topBar: PropTypes.node,
   toggleSwitch: PropTypes.bool,
 };

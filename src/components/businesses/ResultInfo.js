@@ -75,7 +75,8 @@ class ResultInfo extends Component {
   }
 
   render() {
-    const {totalOrganizations} = this.props.metadata;
+    const {showBusinessTypes, metadata, showLoading} = this.props;
+    const {totalOrganizations} = metadata;
     return (
       <div className="grid business-type-btn">
         {this.props.showBusinessTypes && (
@@ -107,6 +108,7 @@ ResultInfo.propTypes = {
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
   metadata: PropTypes.object.isRequired,
   showBusinessTypes: PropTypes.bool,
+  showLoading: PropTypes.bool.isRequired,
 };
 
 export default ResultInfo;
