@@ -7,7 +7,10 @@ import {Link} from 'react-router';
 
 class BusinessesPage extends Component {
   shouldComponentUpdate(nextProps) {
-    return this.props.businesses !== nextProps.businesses;
+    return (
+      this.props.businesses !== nextProps.businesses ||
+      this.props.windowWidth !== nextProps.windowWidth
+    );
   }
 
   renderFilterBoxMobile() {
