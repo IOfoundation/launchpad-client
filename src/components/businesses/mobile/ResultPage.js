@@ -4,27 +4,33 @@ import MapView from '../../map-view/Main';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 
 class ResultPage extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      tabIndex: 0,
+      selectedTab: 0,
     };
   }
   render() {
-    const {tabIndex} = this.state;
+    const {selectedTab} = this.state;
+    const {showLoading} = this.props;
+    const {businessesMetadata: {totalOrganizations}} = this.props;
     return (
       <div>
         <Tabs
-          selectedIndex={tabIndex}
-          onSelect={tabIndex => this.setState({tabIndex})}
+          selectedIndex={selectedTab}
+          onSelect={selectedTab => this.setState({selectedTab})}
         >
           <TabList className="tabs-container">
             <span>
-              {this.props.TotalOrganizations} {'Resources Available'}
+              {showLoading
+                ? 'Loading Organizations'
+                : totalOrganizations == 1
+                  ? `${totalOrganizations} Organization Available`
+                  : `${totalOrganizations} Organizations Available`}
             </span>
             <Tab className="tab">
               <img src={
-                  this.state.tabIndex === 0 ? (
+                  selectedTab === 0 ? (
                     '../../static-data/images/ic_map_list-view-Green.png'
                   ) : (
                     '../../static-data/images/ic_map_list-view-Grey.png'
@@ -34,7 +40,7 @@ class ResultPage extends Component {
             </Tab>
             <Tab className="tab">
               <img src={
-                  this.state.tabIndex === 1 ? (
+                  selectedTab === 1 ? (
                     '../../static-data/images/ic_map_green.png'
                   ) : (
                     '../../static-data/images/ic_map_grey.png'
@@ -60,6 +66,7 @@ class ResultPage extends Component {
 }
 
 ResultPage.PropTypes = {
+  showLoading: PropTypes.bool,
   TotalOrganizations: PropTypes.array,
   BusinessesList: PropTypes.array,
   locations: PropTypes.array,
