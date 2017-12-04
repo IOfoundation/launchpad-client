@@ -219,7 +219,7 @@ FilterByText.propTypes = {
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
   items: PropTypes.arrayOf(PropTypes.object),
-  organizations: PropTypes.object,
+  organizations: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default onClickOutside(FilterByText);

@@ -86,7 +86,7 @@ class Main extends Component {
 
 Main.propTypes = {
   highlightOrgCard: PropTypes.func.isRequired,
-  locations: PropTypes.arrayof(PropTypes.object),
+  locations: PropTypes.arrayOf(PropTypes.object),
   onBoundsChange: PropTypes.func.isRequired,
 };
 

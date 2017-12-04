@@ -110,3 +110,5 @@ MapMarker.PropTypes = {
   organizations: PropTypes.arrayOf(PropTypes.object),
   selected: PropTypes.bool.isRequired,
 };
+
+export default MapMarker;

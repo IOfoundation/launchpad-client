@@ -114,7 +114,7 @@ Main.propTypes = {
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
   handleOnChangeLocationToggle: PropTypes.func.isRequired,
   isMobile: PropTypes.bool.isRequired,
-  showLoading: PropTypes.bool.isRequired,
+  showLoading: PropTypes.bool,
 };
 
 export default Main;
