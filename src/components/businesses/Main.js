@@ -15,34 +15,34 @@ class Main extends Component {
     };
   }
 
-  reduceMap() {
+  reduceMap = () => {
     this.setState({expanded: false});
-  }
+  };
 
-  expandMap() {
+  expandMap = () => {
     this.setState({expanded: true});
-  }
+  };
 
-  onBoundsChange(mapDetails) {
+  onBoundsChange = mapDetails => {
     const {handleOnChangeFilterOptions, businesses} = this.props;
     this.setState({bounds: mapDetails.bounds});
     if (businesses.displayOptions.locationToggleSwitch) {
       handleOnChangeFilterOptions('coordinates', this.state.bounds, false);
     }
-  }
+  };
 
-  highlightOrgCard(organizationId) {
+  highlightOrgCard = organizationId => {
     this.setState({selectedOrg: organizationId});
-  }
+  };
 
-  redoSearchInMap() {
+  redoSearchInMap = () => {
     const {businesses, handleOnChangeFilterOptions} = this.props;
     return businesses.displayOptions.locationToggleSwitch
       ? handleOnChangeFilterOptions('coordinates', '', true)
       : handleOnChangeFilterOptions('coordinates', this.state.bounds, false);
-  }
+  };
 
-  _renderResultsInfo() {
+  _renderResultsInfo = () => {
     const {handleOnChangeFilterOptions, businesses} = this.props;
     const {metadata, displayOptions, filters} = businesses;
 
@@ -58,18 +58,18 @@ class Main extends Component {
       );
     }
     return null;
-  }
+  };
 
-  _renderLoader() {
+  _renderLoader = () => {
     return (
       <div className="load-div">
         <img className="loader" src="static-data/images/loader.gif" />
         <h3 className="loader-text text-regular">{'Loading'}</h3>
       </div>
     );
-  }
+  };
 
-  _renderBusinesses() {
+  _renderBusinesses = () => {
     const {handleChangePage, businesses, isMobile} = this.props;
     const {organizations, metadata} = businesses;
     return (
@@ -82,9 +82,9 @@ class Main extends Component {
         <Pagination metadata={metadata} handleChangePage={handleChangePage} />
       </div>
     );
-  }
+  };
   render() {
-    const {isMobile, businesses} = this.props;
+    const {isMobile, businesses, showLoading} = this.props;
     const {displayOptions} = businesses;
 
     return (
@@ -92,14 +92,14 @@ class Main extends Component {
         businesses={businesses}
         isMobile={isMobile}
         toggleSwitch={displayOptions.locationToggleSwitch}
+        selectedOrg={this.state.selectedOrg}
         expanded={this.state.expanded}
-        expandMap={() => this.expandMap()}
-        onBoundsChange={mapDetails => this.onBoundsChange(mapDetails)}
-        reduceMap={() => this.reduceMap()}
-        redoSearchInMap={() => this.redoSearchInMap()}
+        expandMap={this.expandMap}
+        onBoundsChange={this.onBoundsChange}
+        reduceMap={this.reduceMap}
+        redoSearchInMap={this.redoSearchInMap}
         topBar={this._renderResultsInfo()}
-        highlightOrgCard={organizationId =>
-          this.highlightOrgCard(organizationId)}
+        highlightOrgCard={this.highlightOrgCard}
       >
         {showLoading ? this._renderLoader() : this._renderBusinesses()}
       </ContentMap>

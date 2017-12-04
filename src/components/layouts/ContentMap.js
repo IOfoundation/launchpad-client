@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
+import {isEmpty} from 'lodash';
 import MapView from '../map-view/Main';
 import ResultPage from '../businesses/mobile/ResultPage';
 
@@ -9,12 +10,14 @@ class ContentMap extends Component {
   }
 
   validateComponent(nextProps) {
-    const {businesses, expanded, toggleSwitch} = this.props;
+    const {businesses, expanded, toggleSwitch, selectedOrg} = this.props;
     if (businesses !== nextProps.businesses) {
       return true;
     } else if (expanded !== nextProps.expanded) {
       return true;
     } else if (toggleSwitch !== nextProps.toggleSwitch) {
+      return true;
+    } else if (selectedOrg != nextProps.selectedOrg) {
       return true;
     }
     return false;
@@ -162,7 +165,7 @@ class ContentMap extends Component {
       topBar,
       expanded,
     } = this.props;
-    const {locations, metadata} = businesses;
+    const {locations, organizations} = businesses;
     return (
       <div className="businessesContainer">
         {topBar}
@@ -187,9 +190,9 @@ class ContentMap extends Component {
           </div>
           {expanded ? this._renderReduceButton() : this._renderExpandButton()}
         </div>
-        {metadata.totalOrganizations
-          ? this._renderBusinesses()
-          : this._renderNoSearchResults()}
+        {isEmpty(organizations)
+          ? this._renderNoSearchResults()
+          : this._renderBusinesses()}
       </div>
     );
   }
@@ -205,6 +208,7 @@ ContentMap.propTypes = {
   onBoundsChange: PropTypes.func.isRequired,
   redoSearchInMap: PropTypes.func.isRequired,
   reduceMap: PropTypes.func.isRequired,
+  selectedOrg: PropTypes.number,
   topBar: PropTypes.node,
   toggleSwitch: PropTypes.bool,
 };
