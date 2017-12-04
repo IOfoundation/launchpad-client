@@ -115,6 +115,7 @@ class Main extends Component {
       <ContentMap
         locations={locations}
         isMobile={isMobile}
+        showLoading={this.props.showLoading}
         organizations={organizations}
         businessesMetadata={businessesMetadata}
         expanded={this.state.expanded}

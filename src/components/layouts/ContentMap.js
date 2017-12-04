@@ -92,10 +92,11 @@ class ContentMap extends Component {
   _renderResultPageMobile() {
     return (
       <ResultPage
+        showLoading={this.props.showLoading}
         BusinessesList={this.props.children}
         locations={this.props.locations}
         onBoundsChange={this.props.onBoundsChange}
-        TotalOrganizations={this.props.businessesMetadata.totalOrganizations}
+        businessesMetadata={this.props.businessesMetadata}
         highlightOrgCard={this.props.highlightOrgCard}
       />
     );
