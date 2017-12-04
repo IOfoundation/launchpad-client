@@ -57,6 +57,7 @@ class Main extends Component {
       displayOptions,
       handleOnChangeFilterOptions,
       filterOptions,
+      showLoading,
     } = this.props;
     if (filterOptions.businessTypes.length === 3) {
       return (
@@ -66,6 +67,7 @@ class Main extends Component {
           handleOnChangeFilterOptions={handleOnChangeFilterOptions}
           filterOptions={filterOptions.businessTypes}
           showBusinessTypes={displayOptions.showBusinessTypes}
+          showLoading={showLoading}
         />
       );
     }
@@ -107,6 +109,7 @@ class Main extends Component {
       handleClickOnClearAllFilters,
       handleChangePage,
       isMobile,
+      showLoading,
     } = this.props;
     return (
       <ContentMap
@@ -124,9 +127,7 @@ class Main extends Component {
         highlightOrgCard={organizationId =>
           this.highlightOrgCard(organizationId)}
       >
-        {this.props.showLoading
-          ? this._renderLoader()
-          : this._renderBusinesses()}
+        {showLoading ? this._renderLoader() : this._renderBusinesses()}
       </ContentMap>
     );
   }
