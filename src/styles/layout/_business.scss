@@ -1,5 +1,7 @@
-.preview-details-container {
-  max-width: 95%;
+.business-details-container {
+  .business-information {
+    max-width: 95%;
+  }
   .website-icon {
     color: #fff;
     background-color: #2bd587;
@@ -15,6 +17,7 @@
 }
 .business {
   transition: .3s ease all;
+  cursor: pointer;
   @media (max-width: 60em) {
     padding-left: 0px !important;
   }
@@ -22,6 +25,7 @@
 .business-img {
   max-width: 0px;
   overflow: hidden;
+  cursor: pointer;
   .business-logo {
     width: 0px;
     transition: .3s ease all;
@@ -54,7 +58,7 @@
   &-collapse,
   &-expand {
     position: relative;
-    .preview-details {
+    .business-description {
       font-size: 14px;
       margin-top: 4px;
       line-height: 20px;
@@ -69,7 +73,7 @@
     }
   }
   &-collapse {
-    .preview-details {
+    .business-description {
       opacity: 0.5;
     }
     .full-information {
@@ -78,7 +82,7 @@
     }
   }
   &-expand {
-    .preview-details {
+    .business-description {
       opacity: 1;
     }
     .location {

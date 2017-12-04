@@ -25,22 +25,10 @@ const Main = ({items, getTextSearchResults}) => {
                 }
               </h2>
               <div className="desktop-devices text-thin">
-                <p>
-                  {
-                    'Over 650 resources to help your business grow est non commodo luctus,'
-                  }
-                  <br />
-                  {
-                    'nisi erat porttitor ligula, eget lacinia odio sem nec elit.'
-                  }
-                </p>
+                <p>{'Find local resources to help your business grow'}</p>
               </div>
               <div className="mobile-devices m-top-16 text-thin">
-                <p>
-                  {
-                    'Over 650 resources to help your business grow est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.'
-                  }
-                </p>
+                <p>{'Find local resources to help your business grow'}</p>
               </div>
               <div className="hero_inputContainer">
                 <BusinessesForm

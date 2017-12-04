@@ -123,6 +123,7 @@ class Business extends PureComponent {
                 ? 'business col-lg-2 col-md-2 col-xs-2 p-0 m-bot-20'
                 : 'business business-img'
             }
+            onClick={this.toggleCard}
           >
             <img
               className="business-logo"
@@ -136,9 +137,11 @@ class Business extends PureComponent {
                 : 'business col-lg-12 col-md-12 col-xs-12 p-0'
             }
           >
-            <div className="preview-details-container">
-              <h3 className="title m-bot-8">{business.name}</h3>
-              <p className="preview-details">{business.description}</p>
+            <div className="business-details-container">
+              <div className="business-information" onClick={this.toggleCard}>
+                <h3 className="title m-bot-8">{business.name}</h3>
+                <p className="business-description">{business.description}</p>
+              </div>
               <div
                 className={
                   this.state.expanded
