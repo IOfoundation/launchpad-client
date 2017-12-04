@@ -13,6 +13,7 @@ class BusinessesPage extends Component {
   renderFilterBoxMobile() {
     const {
       businesses,
+      filterById,
       getTextSearchResults,
       handleClickOnClearAllFilters,
       handleOnChangeFilterOptions,
@@ -20,6 +21,7 @@ class BusinessesPage extends Component {
     return (
       <FilterBoxMobile
         businesses={businesses}
+        filterById={filterById}
         getTextSearchResults={getTextSearchResults}
         handleClickOnClearAllFilters={handleClickOnClearAllFilters}
         handleOnChangeFilterOptions={handleOnChangeFilterOptions}
@@ -29,6 +31,7 @@ class BusinessesPage extends Component {
   renderFilterBoxDesktop() {
     const {
       businesses,
+      filterById,
       getTextSearchResults,
       handleClickOnClearAllFilters,
       handleOnChangeFilterOptions,
@@ -36,6 +39,7 @@ class BusinessesPage extends Component {
     return (
       <FilterBox
         businesses={businesses}
+        filterById={filterById}
         getTextSearchResults={getTextSearchResults}
         handleClickOnClearAllFilters={handleClickOnClearAllFilters}
         handleOnChangeFilterOptions={handleOnChangeFilterOptions}
@@ -47,6 +51,7 @@ class BusinessesPage extends Component {
     const {
       windowWidth,
       businesses,
+      showLoading,
       handleOnChangeBusinessType,
       handleOnChangeLocationToggle,
       handleChangePage,
@@ -78,6 +83,7 @@ class BusinessesPage extends Component {
               <BusinessesView
                 isMobile={isMobile}
                 businesses={businesses}
+                showLoading={showLoading}
                 handleOnChangeBusinessType={handleOnChangeBusinessType}
                 handleOnChangeLocationToggle={handleOnChangeLocationToggle}
                 handleChangePage={handleChangePage}
@@ -94,12 +100,14 @@ class BusinessesPage extends Component {
 
 BusinessesPage.propTypes = {
   businesses: PropTypes.object.isRequired,
+  filterById: PropTypes.bool,
   getTextSearchResults: PropTypes.func,
   handleChangePage: PropTypes.func,
   handleClickOnClearAllFilters: PropTypes.func,
   handleOnChangeBusinessType: PropTypes.func,
   handleOnChangeFilterOptions: PropTypes.func,
   handleOnChangeLocationToggle: PropTypes.func,
+  showLoading: PropTypes.bool.isRequired,
   windowWidth: PropTypes.number,
 };
 

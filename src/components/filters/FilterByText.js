@@ -134,7 +134,7 @@ class FilterByText extends Component {
 
   render() {
     const {appliedFilters, organizations} = this.props;
-    const organization = organizations.length ? organizations[0].name : '';
+    const [organization] = organizations;
     return (
       <div className="col-md-12 col-xs-12 text-xs-margin filterTextContainer no-padding">
         <div className="grid search-text-form p-bot-16">
@@ -167,8 +167,10 @@ class FilterByText extends Component {
               type="text"
               className="search-by-text text-thin"
               value={
-                this.state.filterById === true && isEmpty(appliedFilters)
-                  ? organization
+                this.state.filterById === true &&
+                isEmpty(appliedFilters) &&
+                !isEmpty(organizations)
+                  ? organization.name
                   : this.state.searchText
               }
               onChange={e => this.handleKeyPress(e)}

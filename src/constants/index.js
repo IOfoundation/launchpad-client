@@ -1,7 +1,9 @@
 import CategoriesConstants from './categories';
+import FilterTypesConstants from './filterTypes';
 
-export {CategoriesConstants};
+export {CategoriesConstants, FilterTypesConstants};
 
 export default {
   CategoriesConstants,
+  FilterTypesConstants,
 };

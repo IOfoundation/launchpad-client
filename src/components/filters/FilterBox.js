@@ -10,6 +10,7 @@ class FilterBox extends PureComponent {
       handleClickOnClearAllFilters,
       handleOnChangeFilterOptions,
       businesses,
+      filterById,
     } = this.props;
     const {appliedFilters, filters, items, organizations} = businesses;
     return (
@@ -20,6 +21,7 @@ class FilterBox extends PureComponent {
             getTextSearchResults={getTextSearchResults}
             handleClickOnClearAllFilters={handleClickOnClearAllFilters}
             handleOnChangeFilterOptions={handleOnChangeFilterOptions}
+            filterById={filterById}
             appliedFilters={appliedFilters}
             organizations={organizations}
             items={items}
@@ -54,6 +56,7 @@ class FilterBox extends PureComponent {
 
 FilterBox.propTypes = {
   businesses: PropTypes.object.isRequired,
+  filterById: PropTypes.bool,
   getTextSearchResults: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,

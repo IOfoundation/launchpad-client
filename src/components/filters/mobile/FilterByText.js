@@ -1,4 +1,5 @@
 import React, {PureComponent} from 'react';
+import {FilterTypesConstants as filterTypes} from '../../../constants';
 import {PropTypes} from 'prop-types';
 import {isEmpty} from 'lodash';
 import TagsBox from '../TagsBox';
@@ -30,7 +31,7 @@ class FilterByTextMobile extends PureComponent {
       searchText: item.content,
       searchPlaceHolder: item.content,
     });
-    return item.searchable_type === 'Category'
+    return item.searchable_type === filterTypes.CATEGORY
       ? this.props.handleOnChangeFilterOptions('category', item.content)
       : this.props.handleOnChangeFilterOptions(
           'organization',
@@ -72,7 +73,7 @@ class FilterByTextMobile extends PureComponent {
             <a onClick={e => this.handleDropdownOnClick(item, e)}>
               {item.content}
             </a>
-            {item.searchable_type === 'Organization' ? (
+            {item.searchable_type === filterTypes.ORGANIZATION ? (
               <img src="../static-data/images/organization.png" />
             ) : null}
           </li>
@@ -88,7 +89,7 @@ class FilterByTextMobile extends PureComponent {
 
   render() {
     const {appliedFilters, organizations} = this.props;
-    const organization = organizations.length ? organizations[0].name : '';
+    const [organization] = organizations;
     return (
       <div className="filter-chip">
         {appliedFilters.category && (
@@ -103,8 +104,10 @@ class FilterByTextMobile extends PureComponent {
           <input
             type="text"
             value={
-              this.state.filterById === true && isEmpty(appliedFilters)
-                ? organization
+              this.state.filterById === true &&
+              isEmpty(appliedFilters) &&
+              !isEmpty(organizations)
+                ? organization.name
                 : this.state.searchText
             }
             onChange={e => this.handleKeyPress(e)}

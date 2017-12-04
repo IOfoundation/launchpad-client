@@ -134,7 +134,7 @@ class ContentMap extends Component {
         ) : (
           <div
             className={
-              metadata.totalOrganizations === '0'
+              metadata.totalOrganizations
                 ? 'result-container-hide desktop-devices'
                 : 'grid desktop-devices'
             }
@@ -187,7 +187,7 @@ class ContentMap extends Component {
           </div>
           {expanded ? this._renderReduceButton() : this._renderExpandButton()}
         </div>
-        {metadata.totalOrganizations === '0'
+        {metadata.totalOrganizations
           ? this._renderNoSearchResults()
           : this._renderBusinesses()}
       </div>
