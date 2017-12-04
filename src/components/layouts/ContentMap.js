@@ -200,8 +200,10 @@ class ContentMap extends Component {
             }
           >
             <MapView
+              expanded={expanded}
               toggleSwitch={toggleSwitch}
               locations={locations}
+              organizations={organizations}
               onBoundsChange={onBoundsChange}
               highlightOrgCard={highlightOrgCard}
             />
