@@ -180,7 +180,7 @@ class ContentMap extends Component {
       businesses,
       topBar,
       expanded,
-      isMobile,
+      toggleSwitch,
     } = this.props;
     const {locations, organizations} = businesses;
     return (
@@ -200,7 +200,7 @@ class ContentMap extends Component {
             }
           >
             <MapView
-              isMobile={isMobile}
+              toggleSwitch={toggleSwitch}
               locations={locations}
               onBoundsChange={onBoundsChange}
               highlightOrgCard={highlightOrgCard}

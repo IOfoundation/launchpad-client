@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
+import {isEmpty} from 'lodash';
 import GoogleMap from 'google-map-react';
 import MapMarker from './MapMarker';
 
@@ -16,13 +17,14 @@ class Main extends Component {
   }
   handleBoundsChange = e => {
     this.props.onBoundsChange(e);
-  }
+  };
   _handleOnClick = (e, childProps) => {
     this.setState({
       selected: e,
       coordinates: {
         lat: childProps.lat,
-        lng: childProps.lng},
+        lng: childProps.lng,
+      },
     });
   };
   _handleCloseClick = () => {
@@ -38,11 +40,11 @@ class Main extends Component {
   };
 
   render() {
-    const {locations} = this.props;
-    const firstBusiness = locations ? locations[0] : null;
-    const mapOptions = {fullscreenControl: false};
+    const {locations, toggleSwitch} = this.props;
+    const sacCoordinates = {lat: 38.57, lng: -121.47};
+    const map_options = {fullscreenControl: false};
     const zoomLevel = 7;
-    if (firstBusiness) {
+    if (toggleSwitch) {
       return (
         <GoogleMap
           center={this.state.coordinates}
@@ -94,6 +96,7 @@ Main.propTypes = {
   isMobile: PropTypes.bool.isRequired,
   locations: PropTypes.arrayOf(PropTypes.object),
   onBoundsChange: PropTypes.func.isRequired,
+  toggleSwitch: PropTypes.bool.isRequired,
 };
 
 export default Main;
