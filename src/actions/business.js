@@ -103,7 +103,7 @@ const _debouncedfetchSearchResults = debounce(
   (filter, dispatch) => {
     _buildSearchResultsObject(filter, dispatch);
   },
-  50,
+  250,
   {leading: true}
 );
 
