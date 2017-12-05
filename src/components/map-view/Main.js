@@ -14,10 +14,6 @@ class Main extends Component {
     };
   }
 
-  shouldComponentUpdate(nextProps) {
-    return this.props.organizations !== nextProps.organizations;
-  }
-
   getBounds = locations => {
     const lat_array = this.props.locations.map(location => location.latitude);
     const lng_array = this.props.locations.map(location => location.longitude);
@@ -61,7 +57,13 @@ class Main extends Component {
   };
 
   render() {
-    const {locations, organizations, toggleSwitch, expanded} = this.props;
+    const {
+      locations,
+      organizations,
+      toggleSwitch,
+      expanded,
+      showLoading,
+    } = this.props;
     const sacCoordinates = {lat: 38.57, lng: -121.47};
     const mapOptions = {fullscreenControl: false};
     const zoomLevel = 7;
@@ -97,7 +99,7 @@ class Main extends Component {
         </GoogleMap>
       );
     }
-    if (isEmpty(locations)) {
+    if (isEmpty(locations) || showLoading) {
       return (
         <GoogleMap
           center={sacCoordinates}
@@ -162,11 +164,12 @@ class Main extends Component {
       ? {width: 400, height: 485}
       : {width: 200, height: 237};
     const {center, zoom} = fitBounds(bounds, size);
+    console.log(center, zoom);
     return (
       <GoogleMap
         center={center}
-        zoom={zoom}
-        hoverDistance={12}
+        zoom={7}
+        hoverDistance={zoom}
         onChange={this.handleBoundsChange}
         resetBoundsOnResize={true}
         options={mapOptions}
