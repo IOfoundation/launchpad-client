@@ -96,7 +96,7 @@ class Main extends Component {
       return (
         <GoogleMap
           center={sacCoordinates}
-          zoom={12}
+          zoom={10}
           onChange={event => this.handleBoundsChange(event)}
           resetBoundsOnResize={true}
           options={map_options}
