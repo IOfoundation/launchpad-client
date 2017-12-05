@@ -134,6 +134,7 @@ class ContentMap extends Component {
     return (
       <ResultPage
         showLoading={this.props.showLoading}
+        isMobile={this.props.isMobile}
         BusinessesList={this.props.children}
         locations={locations}
         onBoundsChange={this.props.onBoundsChange}
@@ -179,6 +180,7 @@ class ContentMap extends Component {
       businesses,
       topBar,
       expanded,
+      isMobile,
     } = this.props;
     const {locations, organizations} = businesses;
     return (
@@ -198,6 +200,7 @@ class ContentMap extends Component {
             }
           >
             <MapView
+              isMobile={isMobile}
               locations={locations}
               onBoundsChange={onBoundsChange}
               highlightOrgCard={highlightOrgCard}
@@ -220,6 +223,7 @@ ContentMap.propTypes = {
   expandMap: PropTypes.func.isRequired,
   highlightOrgCard: PropTypes.func.isRequired,
   isMobile: PropTypes.bool.isRequired,
+  locations: PropTypes.array,
   onBoundsChange: PropTypes.func.isRequired,
   redoSearchInMap: PropTypes.func.isRequired,
   reduceMap: PropTypes.func.isRequired,

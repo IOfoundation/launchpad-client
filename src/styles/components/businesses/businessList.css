@@ -1,12 +1,12 @@
 
 .businessList {
   z-index: 1;
-  transition: .3s ease all;
+  transition: .4s ease all;
   position: relative;
 }
 
 .businessList--reduced {
-  transition: .3s ease all;
+  transition: .4s ease all;
   position: relative;
 }
 

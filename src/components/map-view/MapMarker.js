@@ -38,7 +38,7 @@ class MapMarker extends Component {
   render() {
     const {$hover, selected, organization} = this.props;
     const orgInfoModal = (
-      <div id="orgModal" className="map_modal">
+      <div id="org-modal" className="map_modal">
         <div className="row between-xs top-xs map_modal_top">
           <a className="close-map-org" onClick={() => this._closeOrgInfo()}>
             <ClearIcon

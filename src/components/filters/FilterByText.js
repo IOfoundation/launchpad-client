@@ -76,7 +76,7 @@ class FilterByText extends Component {
         className={
           isEmpty(filters)
             ? 'filter-label-container-hide'
-            : 'filter-label-container-show'
+            : 'filter-label-container-show text-bold'
         }
       >
         <TagsBox

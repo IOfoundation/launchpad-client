@@ -1,6 +1,6 @@
 .map {
   position: relative;
-  transition: .3s ease all;
+  transition: .4s ease all;
   padding-right: 0px;
   float: right;
   width: 30%;
@@ -69,12 +69,17 @@
   height: 40px;
   width: 40px;
 }
-
+.business_block--expanded_bottom {
+  transition: visibility 0s, opacity 0.5s linear;
+  visibility: visible;
+  opacity: 1;
+}
 .map_modal {
+  transition: all 0.4s ease-in;
   text-align: center;
   width: 269px;
   bottom: 68px;
-  left: -156px;
+  left: -123px;
   margin-left: -90px;
   box-shadow: 0 0 2px 0 rgba(0,0,0,0.12), 0 2px 2px 0 rgba(12,0,51,0.1);
   background: white;
@@ -93,7 +98,7 @@
   display: block; /* reduce the damage in FF3.0 */
   position: absolute;
   bottom: -8px;
-  right: 15px;
+  right: 44%;
   width: 0;
   border-width: 8px 8px 0;
   border-style: solid;
@@ -109,11 +114,13 @@
   background-color: inherit;
 }
 .map_modal_logo {
+  transition: all 0.4s ease-in;
   width: 64px;
   height: 64px;
   display: inline-block;
 }
 .map_modal_title {
+  transition: all 0.4s ease-in;
   color: #000000;
   font-size: 16px;
   margin: 0;
