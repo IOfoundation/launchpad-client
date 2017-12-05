@@ -164,7 +164,6 @@ class Main extends Component {
       ? {width: 400, height: 485}
       : {width: 200, height: 237};
     const {center, zoom} = fitBounds(bounds, size);
-    console.log(center, zoom);
     return (
       <GoogleMap
         center={center}
