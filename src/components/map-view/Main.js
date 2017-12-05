@@ -10,7 +10,7 @@ class Main extends Component {
     super(props);
     this.state = {
       selected: '-1',
-      coordinates: {lat: 38.57, lng: -121.47},
+      centerCoordinates: {lat: 38.57, lng: -121.47},
     };
   }
 
@@ -32,12 +32,13 @@ class Main extends Component {
     return business.coordinates;
   };
   handleBoundsChange = e => {
+    this.setState({centerCoordinates: e.center});
     this.props.onBoundsChange(e);
   };
   _handleOnClick = (e, childProps) => {
     this.setState({
       selected: e,
-      coordinates: {
+      centerCoordinates: {
         lat: childProps.lat,
         lng: childProps.lng,
       },
@@ -58,20 +59,20 @@ class Main extends Component {
   render() {
     const {locations, organizations, toggleSwitch, expanded} = this.props;
     const sacCoordinates = {lat: 38.57, lng: -121.47};
-    const map_options = {fullscreenControl: false};
+    const mapOptions = {fullscreenControl: false};
     const zoomLevel = 7;
     if (toggleSwitch) {
       return (
         <GoogleMap
-          center={this.state.coordinates}
+          center={this.state.centerCoordinates}
           zoom={zoomLevel}
           hoverDistance={12}
           onChange={this.handleBoundsChange}
           resetBoundsOnResize={true}
-          options={map_options}
-          onChildMouseEnter={e => this._handleChildMouseEnter(e)}
-          onChildMouseLeave={() => this._handleChildMouseLeave()}
-          onChildClick={e => this._handleOnClick(e)}
+          options={mapOptions}
+          onChildMouseEnter={this._handleChildMouseEnter}
+          onChildMouseLeave={this._handleChildMouseLeave}
+          onChildClick={this._handleOnClick}
           bootstrapURLKeys={{key: process.env.GOOGLE_MAP_API_KEY}}
         >
           {!isEmpty(locations)
@@ -84,7 +85,7 @@ class Main extends Component {
                     lng={lng}
                     organization={location.organization}
                     selected={this.state.selected === String(location.id)}
-                    handleCloseClick={() => this._handleCloseClick()}
+                    handleCloseClick={this._handleCloseClick}
                   />
               );
               })
@@ -97,9 +98,9 @@ class Main extends Component {
         <GoogleMap
           center={sacCoordinates}
           zoom={10}
-          onChange={event => this.handleBoundsChange(event)}
+          onChange={this.handleBoundsChange}
           resetBoundsOnResize={true}
-          options={map_options}
+          options={mapOptions}
           bootstrapURLKeys={{
             key: process.env.GOOGLE_MAP_API_KEY,
           }}
@@ -126,12 +127,12 @@ class Main extends Component {
           center={lng ? {lat, lng} : sacCoordinates}
           zoom={13}
           hoverDistance={12}
-          onChange={e => this.handleBoundsChange(e)}
+          onChange={this.handleBoundsChange}
           resetBoundsOnResize={true}
-          options={map_options}
-          onChildMouseEnter={e => this._handleChildMouseEnter(e)}
-          onChildMouseLeave={() => this._handleChildMouseLeave()}
-          onChildClick={e => this._handleOnClick(e)}
+          options={mapOptions}
+          onChildMouseEnter={this._handleChildMouseEnter}
+          onChildMouseLeave={this._handleChildMouseLeave}
+          onChildClick={this._handleOnClick}
           bootstrapURLKeys={{key: process.env.GOOGLE_MAP_API_KEY}}
         >
           {!isEmpty(locations)
@@ -144,7 +145,7 @@ class Main extends Component {
                     lng={lng}
                     organization={location.organization}
                     selected={this.state.selected === String(location.id)}
-                    handleCloseClick={() => this._handleCloseClick()}
+                    handleCloseClick={this._handleCloseClick}
                   />
               );
               })
@@ -162,12 +163,12 @@ class Main extends Component {
         center={center}
         zoom={zoom}
         hoverDistance={12}
-        onChange={e => this.handleBoundsChange(e)}
+        onChange={this.handleBoundsChange}
         resetBoundsOnResize={true}
-        options={map_options}
-        onChildMouseEnter={e => this._handleChildMouseEnter(e)}
-        onChildMouseLeave={() => this._handleChildMouseLeave()}
-        onChildClick={e => this._handleOnClick(e)}
+        options={mapOptions}
+        onChildMouseEnter={this._handleChildMouseEnter}
+        onChildMouseLeave={this._handleChildMouseLeave}
+        onChildClick={this._handleOnClick}
         bootstrapURLKeys={{key: process.env.GOOGLE_MAP_API_KEY}}
       >
         {!isEmpty(locations)
@@ -180,7 +181,7 @@ class Main extends Component {
                   lng={lng}
                   organization={location.organization}
                   selected={this.state.selected === String(location.id)}
-                  handleCloseClick={() => this._handleCloseClick()}
+                  handleCloseClick={this._handleCloseClick}
                 />
             );
             })
