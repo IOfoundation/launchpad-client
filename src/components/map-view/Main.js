@@ -14,7 +14,7 @@ class Main extends Component {
     };
   }
 
-  getBounds(locations) {
+  getBounds = locations => {
     const lat_array = this.props.locations.map(location => location.latitude);
     const lng_array = this.props.locations.map(location => location.longitude);
     return {
@@ -27,10 +27,10 @@ class Main extends Component {
         lng: Math.max(...lng_array),
       },
     };
-  }
-  getCoordinates(business) {
+  };
+  getCoordinates = business => {
     return business.coordinates;
-  }
+  };
   handleBoundsChange = e => {
     this.props.onBoundsChange(e);
   };
