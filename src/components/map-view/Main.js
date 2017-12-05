@@ -14,6 +14,10 @@ class Main extends Component {
     };
   }
 
+  shouldComponentUpdate(nextProps) {
+    return this.props.organizations !== nextProps.organizations;
+  }
+
   getBounds = locations => {
     const lat_array = this.props.locations.map(location => location.latitude);
     const lng_array = this.props.locations.map(location => location.longitude);
@@ -198,6 +202,7 @@ Main.propTypes = {
   locations: PropTypes.arrayOf(PropTypes.object),
   onBoundsChange: PropTypes.func.isRequired,
   organizations: PropTypes.arrayOf(PropTypes.object),
+  showLoading: PropTypes.bool.isRequired,
   toggleSwitch: PropTypes.bool.isRequired,
 };
 

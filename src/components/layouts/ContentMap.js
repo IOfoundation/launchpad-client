@@ -181,6 +181,7 @@ class ContentMap extends Component {
       topBar,
       expanded,
       toggleSwitch,
+      showLoading,
     } = this.props;
     const {locations, organizations} = businesses;
     return (
@@ -202,6 +203,7 @@ class ContentMap extends Component {
             <MapView
               expanded={expanded}
               toggleSwitch={toggleSwitch}
+              showLoading={showLoading}
               locations={locations}
               organizations={organizations}
               onBoundsChange={onBoundsChange}

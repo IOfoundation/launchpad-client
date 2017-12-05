@@ -90,6 +90,7 @@ class Main extends Component {
       <ContentMap
         businesses={businesses}
         isMobile={isMobile}
+        showLoading={showLoading}
         toggleSwitch={displayOptions.locationToggleSwitch}
         selectedOrg={this.state.selectedOrg}
         expanded={this.state.expanded}
