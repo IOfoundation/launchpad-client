@@ -10,7 +10,13 @@ class ContentMap extends Component {
   }
 
   validateComponent(nextProps) {
-    const {businesses, expanded, toggleSwitch, selectedOrg} = this.props;
+    const {
+      businesses,
+      expanded,
+      toggleSwitch,
+      selectedOrg,
+      isMobile,
+    } = this.props;
     if (businesses !== nextProps.businesses) {
       return true;
     } else if (expanded !== nextProps.expanded) {
@@ -18,6 +24,8 @@ class ContentMap extends Component {
     } else if (toggleSwitch !== nextProps.toggleSwitch) {
       return true;
     } else if (selectedOrg != nextProps.selectedOrg) {
+      return true;
+    } else if (isMobile != nextProps.isMobile) {
       return true;
     }
     return false;
