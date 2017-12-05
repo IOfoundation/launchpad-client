@@ -41,8 +41,7 @@ class Main extends Component {
 
   _renderResultsInfo = () => {
     const {handleOnChangeFilterOptions, businesses, showLoading} = this.props;
-    const {metadata, displayOptions, filters} = businesses;
-
+    const {metadata, displayOptions, filters, locations} = businesses;
     if (filters.businessTypes.length === 3) {
       return (
         <ResultInfo
@@ -51,6 +50,8 @@ class Main extends Component {
           filterOptions={filters.businessTypes}
           showBusinessTypes={displayOptions.showBusinessTypes}
           showLoading={showLoading}
+          displayOptions={displayOptions}
+          totalLocations={locations ? locations.length : 0}
         />
       );
     }

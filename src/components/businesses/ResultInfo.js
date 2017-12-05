@@ -13,7 +13,7 @@ class ResultInfo extends Component {
       : `${totalOrganizations} Organizations Available`;
   };
 
-  renderButtonBusinessTypeContainer() {
+  renderButtonBusinessTypeContainer = () => {
     return (
       <div className="business-type-container col-lg-12 p-0 grid">
         <div className="col-xs-4 col-md-4 col-lg-4 m-bot-16 p-0">
@@ -78,28 +78,39 @@ class ResultInfo extends Component {
         </div>
       </div>
     );
-  }
-
+  };
+  renderLocationTotal = () => {
+    const {totalLocations, showLoading} = this.props;
+    const locationsText = totalLocations === 1 ? 'Location' : 'Locations';
+    return (
+      <h4 className="col-xs-4 col-md-4 col-lg-4 m-top-24 no-padding text-right">
+        {showLoading
+          ? 'Loading Locations'
+          : `Map Showing ${totalLocations} ${locationsText}`}
+      </h4>
+    );
+  };
   render() {
-    const {metadata, showLoading} = this.props;
+    const {showBusinessTypes, metadata, showLoading, displayOptions, totalLocations} = this.props;
     const {totalOrganizations} = metadata;
+    const {locationToggleSwitch} = displayOptions;
     return (
       <div className="grid business-type-btn">
-        {this.props.showBusinessTypes && (
+        {showBusinessTypes && (
           <p className="m-bot-16 col-xs-12 col-md-12 col-lg-12 p-0 business-type-label">
             {'Select a business type that represents you.'}
           </p>
         )}
-        {this.props.showBusinessTypes &&
-          this.renderButtonBusinessTypeContainer()}
+        {showBusinessTypes && this.renderButtonBusinessTypeContainer()}
         {totalOrganizations && (
-          <div className="col-lg-12 col-md-12 col-xs-12 p-0 desktop-devices">
-            <h3 className="m-top-24 col-xs-12 col-md-12 col-lg-12 no-padding">
+          <div className="col-lg-12 col-md-12 col-xs-12 p-0 desktop-devices grid">
+            <h3 className="m-top-24 col-xs-8 col-md-8 col-lg-8 no-padding">
               {showLoading
                 ? 'Loading Organizations'
                 : this.displayOrganizationLabel(totalOrganizations)}
             </h3>
-            <hr className="m-bot-24 m-top-16" />
+            {locationToggleSwitch && this.renderLocationTotal()}
+            <hr className="col-lg-12 col-md-12 col-xs-12 m-bot-24 m-top-16" />
           </div>
         )}
       </div>
@@ -113,6 +124,7 @@ ResultInfo.propTypes = {
   metadata: PropTypes.object.isRequired,
   showBusinessTypes: PropTypes.bool,
   showLoading: PropTypes.bool.isRequired,
+  totalLocations: PropTypes.number.isRequired,
 };
 
 export default ResultInfo;
