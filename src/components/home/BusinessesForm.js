@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
 import onClickOutside from 'react-onclickoutside';
 import {isEmpty} from 'lodash';
 import {Link} from 'react-router';
 
-class BusinessesForm extends React.Component {
+class BusinessesForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,15 +13,12 @@ class BusinessesForm extends React.Component {
       showPreviewDropdown: false,
     };
   }
-
   handleClickOutside() {
     this.setState({
       searchText: '',
       showDropdown: false,
       showPreviewDropdown: false,
     });
-    const {value} = this.state;
-    this.props.getTextSearchResults(value);
   }
 
   handleKeyPress(event) {
