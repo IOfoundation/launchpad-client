@@ -14,7 +14,7 @@ class Main extends Component {
     };
   }
 
-  getBounds = locations => {
+  getBounds = () => {
     const lat_array = this.props.locations.map(location => location.latitude);
     const lng_array = this.props.locations.map(location => location.longitude);
     return {
@@ -81,11 +81,11 @@ class Main extends Component {
           onChildClick={this._handleOnClick}
           bootstrapURLKeys={{key: process.env.GOOGLE_MAP_API_KEY}}
         >
-          {!isEmpty(locations)
+          {locations
             ? locations.map(location => {
                 const [lng, lat] = this.getCoordinates(location);
                 return (
-                <MapMarker
+                  <MapMarker
                     key={location.id}
                     lat={lat}
                     lng={lng}
@@ -93,7 +93,7 @@ class Main extends Component {
                     selected={this.state.selected === String(location.id)}
                     handleCloseClick={this._handleCloseClick}
                   />
-              );
+                );
               })
             : ''}
         </GoogleMap>
@@ -127,7 +127,7 @@ class Main extends Component {
         </GoogleMap>
       );
     } else if (organizations.length === 1) {
-      const [lng, lat] = this.getCoordinates(organizations[0].locations[0]);
+      let [lng, lat] = this.getCoordinates(organizations[0].locations[0]);
       return (
         <GoogleMap
           center={lng ? {lat, lng} : sacCoordinates}
@@ -141,11 +141,11 @@ class Main extends Component {
           onChildClick={this._handleOnClick}
           bootstrapURLKeys={{key: process.env.GOOGLE_MAP_API_KEY}}
         >
-          {!isEmpty(locations)
+          {locations
             ? locations.map(location => {
-                const [lng, lat] = this.getCoordinates(location);
+                [lng, lat] = this.getCoordinates(location);
                 return (
-                <MapMarker
+                  <MapMarker
                     key={location.id}
                     lat={lat}
                     lng={lng}
@@ -153,13 +153,13 @@ class Main extends Component {
                     selected={this.state.selected === String(location.id)}
                     handleCloseClick={this._handleCloseClick}
                   />
-              );
+                );
               })
             : ''}
         </GoogleMap>
       );
     }
-    const bounds = this.getBounds(locations);
+    const bounds = this.getBounds();
     const size = expanded
       ? {width: 400, height: 485}
       : {width: 200, height: 237};
@@ -177,11 +177,11 @@ class Main extends Component {
         onChildClick={this._handleOnClick}
         bootstrapURLKeys={{key: process.env.GOOGLE_MAP_API_KEY}}
       >
-        {!isEmpty(locations)
+        {locations
           ? locations.map(location => {
               const [lng, lat] = this.getCoordinates(location);
               return (
-              <MapMarker
+                <MapMarker
                   key={location.id}
                   lat={lat}
                   lng={lng}
@@ -189,7 +189,7 @@ class Main extends Component {
                   selected={this.state.selected === String(location.id)}
                   handleCloseClick={this._handleCloseClick}
                 />
-            );
+              );
             })
           : ''}
       </GoogleMap>
