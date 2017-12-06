@@ -1,8 +1,5 @@
 {
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended"
-  ],
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
   "parser": "babel-eslint",
   "parserOptions": {
     "ecmaFeatures": {
@@ -13,21 +10,22 @@
     "ecmaVersion": 8,
     "sourceType": "module"
   },
-  "plugins": [
-    "react",
-    "prettier"
-  ],
+  "plugins": ["react", "prettier"],
   "env": {
     "jest": true,
     "node": true,
     "browser": true
   },
-  "globals": {
-  },
+  "globals": {},
   "rules": {
     "prettier/prettier": [
       "error",
-      {"trailingComma": "es5", "singleQuote": true, "bracketSpacing": false}
+      {
+        "trailingComma": "es5",
+        "singleQuote": true,
+        "bracketSpacing": false,
+        "indent": ["error", 2, {"SwitchCase": 1}]
+      }
     ],
 
     "array-bracket-spacing": 2,
@@ -38,13 +36,16 @@
     "block-scoped-var": 2,
     "brace-style": [2, "1tbs", {"allowSingleLine": false}],
     "class-methods-use-this": 0,
-    "comma-dangle": [2, {
-      "objects": "always-multiline",
-      "arrays": "always-multiline",
-      "imports": "always-multiline",
-      "exports": "always-multiline",
-      "functions": "never"
-    }],
+    "comma-dangle": [
+      2,
+      {
+        "objects": "always-multiline",
+        "arrays": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "never"
+      }
+    ],
     "comma-spacing": 2,
     "comma-style": 2,
     "complexity": 1,
@@ -69,7 +70,15 @@
     "keyword-spacing": 2,
     "line-comment-position": 1,
     "linebreak-style": 2,
-    "lines-around-comment": [0, {"beforeBlockComment": true, "beforeLineComment": true, "allowBlockStart": true, "allowBlockEnd": true}],
+    "lines-around-comment": [
+      0,
+      {
+        "beforeBlockComment": true,
+        "beforeLineComment": true,
+        "allowBlockStart": true,
+        "allowBlockEnd": true
+      }
+    ],
     "max-lines": 0,
     "max-nested-callbacks": [2, {"max": 3}],
     "max-statements-per-line": 2,
@@ -161,8 +170,14 @@
     "no-unsafe-finally": 2,
     "no-unsafe-negation": 2,
     "no-unused-expressions": 2,
-    "no-unused-vars": [2, {"varsIgnorePattern": "^(React|_)$", "argsIgnorePattern": "^_"}],
-    "no-use-before-define": [2, {"classes": false, "functions": false, "variables": false}],
+    "no-unused-vars": [
+      2,
+      {"varsIgnorePattern": "^(React|_)$", "argsIgnorePattern": "^_"}
+    ],
+    "no-use-before-define": [
+      2,
+      {"classes": false, "functions": false, "variables": false}
+    ],
     "no-useless-computed-key": 2,
     "no-useless-concat": 2,
     "no-useless-constructor": 2,

@@ -3,14 +3,14 @@ import {PropTypes} from 'prop-types';
 import {isEmpty, isString} from 'lodash';
 import Chip from '../shared/Chip';
 
-const TagsBox = ({filters}) => {
+const TagsBox = ({filters, clearAll, deleteFilter}) => {
   return (
     <div>
       {isString(filters.category) && (
         <Chip
           key={filters.category}
           text={filters.category}
-          handleClick={this.props.deleteFilter}
+          handleClick={deleteFilter}
           canDelete={true}
         />
       )}
@@ -19,16 +19,13 @@ const TagsBox = ({filters}) => {
             <Chip
               key={filter}
               text={filter}
-              handleClick={this.props.deleteFilter}
+              handleClick={deleteFilter}
               canDelete={true}
             />
           ))
         : ''}
       {filters.category && (
-        <a
-          className="search-filter-clear text-thin"
-          onClick={this.props.clearAll}
-        >
+        <a className="search-filter-clear text-thin" onClick={clearAll}>
           <span>{'Clear All'}</span>
         </a>
       )}

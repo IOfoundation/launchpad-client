@@ -44,7 +44,7 @@ class FilterByOptions extends Component {
       >
         <span>{filterOption.name}</span>
         {filterOption.children.length > 0 && (
-          <ArrowRight className="dropdown-options-icon" size="20" />
+          <ArrowRight className="dropdown-options-icon" size={20} />
         )}
       </button>
     );

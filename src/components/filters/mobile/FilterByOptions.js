@@ -3,7 +3,7 @@ import {PropTypes} from 'prop-types';
 import FilterOption from './FilterOption';
 import ArrowRight from '../../shared/ArrowRight';
 
-const FilterByOptions = ({filterOptions}) => {
+const FilterByOptions = ({filterOptions, handleOnChangeFilterOptions}) => {
   return (
     <div className="dropdown-input-container">
       <span className="filter-icon">
