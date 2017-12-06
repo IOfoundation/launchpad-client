@@ -48,7 +48,11 @@ class MapMarker extends Component {
           </a>
           <img
             className="map_modal_logo"
-            src="../static-data/images/orgs-placeholder.png"
+            src={
+              organization.logo_url
+                ? organization.logo_url
+                : '../static-data/images/orgs-placeholder.png'
+            }
           />
           <h1 className="map_modal_title">{organization.name}</h1>
         </div>

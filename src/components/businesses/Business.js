@@ -126,7 +126,11 @@ class Business extends PureComponent {
           >
             <img
               className="business-logo"
-              src="../static-data/images/orgs-placeholder.png"
+              src={
+                business.logo_url
+                  ? business.logo_url
+                  : '../static-data/images/orgs-placeholder.png'
+              }
             />
           </div>
           <div
