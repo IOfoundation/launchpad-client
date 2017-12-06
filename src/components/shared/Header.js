@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import BarsIcon from '../shared/barsIcon';
 import Logo from './Logo';
 
-const Header = pathname => {
+const Header = () => {
   return (
     <header className="headerContainer" htmlFor="header-dropdown">
       <div className="contentContainer header grid between-xs middle-xs text-thin">

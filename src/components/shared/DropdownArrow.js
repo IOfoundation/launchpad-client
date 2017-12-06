@@ -1,4 +1,5 @@
 import React from 'react';
+import {PropTypes} from 'prop-types';
 
 const DropdownArrow = ({className, size, style}) => {
   return (
@@ -25,6 +26,12 @@ const DropdownArrow = ({className, size, style}) => {
       </g>
     </svg>
   );
+};
+
+DropdownArrow.propTypes = {
+  className: PropTypes.string,
+  size: PropTypes.number,
+  style: PropTypes.object,
 };
 
 export default DropdownArrow;

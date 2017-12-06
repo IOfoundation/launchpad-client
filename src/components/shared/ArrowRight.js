@@ -1,4 +1,5 @@
 import React from 'react';
+import {PropTypes} from 'prop-types';
 
 const ArrowRight = ({className, size, style}) => {
   return (
@@ -16,6 +17,12 @@ const ArrowRight = ({className, size, style}) => {
       </g>
     </svg>
   );
+};
+
+ArrowRight.propTypes = {
+  className: PropTypes.string,
+  size: PropTypes.number,
+  style: PropTypes.object,
 };
 
 export default ArrowRight;

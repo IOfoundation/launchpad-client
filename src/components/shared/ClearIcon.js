@@ -1,4 +1,5 @@
 import React from 'react';
+import {PropTypes} from 'prop-types';
 
 const ClearIcon = ({className, size, style}) => {
   return (
@@ -16,6 +17,12 @@ const ClearIcon = ({className, size, style}) => {
       </g>
     </svg>
   );
+};
+
+ClearIcon.propTypes = {
+  className: PropTypes.string,
+  size: PropTypes.number,
+  style: PropTypes.object,
 };
 
 export default ClearIcon;

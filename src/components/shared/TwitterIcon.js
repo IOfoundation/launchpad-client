@@ -1,4 +1,5 @@
 import React from 'react';
+import {PropTypes} from 'prop-types';
 
 const TwitterIcon = ({className, size, style}) => {
   return (
@@ -38,6 +39,12 @@ const TwitterIcon = ({className, size, style}) => {
       </g>
     </svg>
   );
+};
+
+TwitterIcon.propTypes = {
+  className: PropTypes.string,
+  size: PropTypes.number,
+  style: PropTypes.object,
 };
 
 export default TwitterIcon;

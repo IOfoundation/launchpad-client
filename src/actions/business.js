@@ -306,7 +306,7 @@ const filtersObject = (filterType, filters, filterValue, removeFilter) => {
         ? _removeCategoryFilter(newFilters, filterValue)
         : _addCategoryFilter(newFilters, filterValue);
     case 'organization':
-      return _addOrganizationIdFilter(newFilters, filterValue);
+      return _addOrganizationIdFilter(filterValue);
     case 'coordinates':
       return removeFilter
         ? _removeLocationFilter(newFilters)
@@ -350,9 +350,9 @@ function _removeCategoryFilter(newFilters, filterValue) {
   return newFilters;
 }
 
-function _addOrganizationIdFilter(newFilters, filterValue) {
+function _addOrganizationIdFilter(filterValue) {
   changeFilterDisplayOptions(true, false);
-  newFilters = {};
+  const newFilters = {};
   newFilters.id = filterValue;
   return newFilters;
 }

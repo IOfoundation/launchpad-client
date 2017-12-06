@@ -25,11 +25,11 @@ class FilterByText extends Component {
     this.props.handleClickOnClearAllFilters();
   };
 
-  handleInputClicked() {
+  handleInputClicked = () => {
     this.setState({inputOnFocus: true});
-  }
+  };
 
-  _closeSearch() {
+  _closeSearch = () => {
     this.setState({
       showDropdown: false,
       searchText: '',
@@ -37,24 +37,24 @@ class FilterByText extends Component {
       inputOnFocus: false,
     });
     this.props.handleClickOnClearAllFilters();
-  }
+  };
 
-  handleKeyPress(event) {
+  handleKeyPress = event => {
     const value = event.target.value;
     this.setState({searchText: value, showDropdown: true, filterById: false});
     this.props.getTextSearchResults(value);
     if (isEmpty(value)) {
       this.setState({showDropdown: false});
     }
-  }
-  handleClickOutside() {
+  };
+  handleClickOutside = () => {
     this.setState({
       inputOnFocus: false,
       showDropdown: false,
     });
-  }
+  };
 
-  handleDropdownOnClick(item) {
+  handleDropdownOnClick = item => {
     item.searchable_type === 'Category'
       ? this.props.handleOnChangeFilterOptions('category', item.content)
       : this.props.handleOnChangeFilterOptions(
@@ -62,13 +62,13 @@ class FilterByText extends Component {
           item.searchable_id,
           false
         );
-    return this.setState({
+    this.setState({
       showDropdown: false,
       inputOnFocus: false,
       value: item.content,
       searchText: item.content,
     });
-  }
+  };
 
   renderChipsContainer(filters) {
     return (

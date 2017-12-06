@@ -5,14 +5,6 @@ import BusinessesList from '../../../components/businesses/BusinessesList';
 
 const handleClickOnClearAllFilters = jest.fn();
 
-function mockSingleOrganization() {
-  return {id: 1, name: 'Business1'};
-}
-
-function singleEmptyOrganization() {
-  return {};
-}
-
 function mockMultipleOrganizations() {
   return [
     {
@@ -29,7 +21,6 @@ function mockMultipleOrganizations() {
 describe('<BusinessesList />', () => {
   it('Renders a Business component for every Business in the array', () => {
     const organizations = mockMultipleOrganizations();
-    const organization = singleEmptyOrganization();
     const isMobile = false;
     const wrapper = shallow(
       <BusinessesList

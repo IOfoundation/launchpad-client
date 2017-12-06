@@ -104,10 +104,10 @@ class MapMarker extends Component {
   }
 }
 
-MapMarker.PropTypes = {
+MapMarker.propTypes = {
+  $hover: PropTypes.bool,
   handleCloseClick: PropTypes.func.isRequired,
-  $hover: PropTypes.bool.isRequired,
-  organizations: PropTypes.arrayOf(PropTypes.object),
+  organization: PropTypes.object,
   selected: PropTypes.bool.isRequired,
 };
 

@@ -7,6 +7,12 @@ class ResultInfo extends Component {
     this.props.handleOnChangeFilterOptions('category', filter.name, false);
   }
 
+  displayOrganizationLabel = totalOrganizations => {
+    return totalOrganizations === 1
+      ? `${totalOrganizations} Organization Available`
+      : `${totalOrganizations} Organizations Available`;
+  };
+
   renderButtonBusinessTypeContainer() {
     return (
       <div className="business-type-container col-lg-12 p-0 grid">
@@ -75,7 +81,7 @@ class ResultInfo extends Component {
   }
 
   render() {
-    const {showBusinessTypes, metadata, showLoading} = this.props;
+    const {metadata, showLoading} = this.props;
     const {totalOrganizations} = metadata;
     return (
       <div className="grid business-type-btn">
@@ -91,9 +97,7 @@ class ResultInfo extends Component {
             <h3 className="m-top-24 col-xs-12 col-md-12 col-lg-12 no-padding">
               {showLoading
                 ? 'Loading Organizations'
-                : totalOrganizations > 1
-                  ? `${totalOrganizations} Organizations Available`
-                  : `${totalOrganizations} Organization Available`}
+                : this.displayOrganizationLabel(totalOrganizations)}
             </h3>
             <hr className="m-bot-24 m-top-16" />
           </div>

@@ -11,9 +11,15 @@ class ResultPage extends Component {
     };
   }
 
-  handleOnSelect(selectedTab) {
+  handleOnSelect = selectedTab => {
     return this.setState({selectedTab});
-  }
+  };
+
+  displayOrganizationLabel = totalOrganizations => {
+    return totalOrganizations === 1
+      ? `${totalOrganizations} Organization Available`
+      : `${totalOrganizations} Organizations Available`;
+  };
 
   render() {
     const {selectedTab} = this.state;
@@ -27,17 +33,12 @@ class ResultPage extends Component {
     } = this.props;
     return (
       <div>
-        <Tabs
-          selectedIndex={selectedTab}
-          onSelect={selectedTab => this.setState({selectedTab})}
-        >
+        <Tabs selectedIndex={selectedTab} onSelect={this.handleOnSelect}>
           <TabList className="tabs-container">
             <span>
               {showLoading
                 ? 'Loading Organizations'
-                : totalOrganizations == 1
-                  ? `${totalOrganizations} Organization Available`
-                  : `${totalOrganizations} Organizations Available`}
+                : displayOrganizationLabel(totalOrganizations)}
             </span>
             <Tab className="tab">
               <img
@@ -75,14 +76,14 @@ class ResultPage extends Component {
   }
 }
 
-ResultPage.PropTypes = {
+ResultPage.propTypes = {
   BusinessesList: PropTypes.arrayOf(PropTypes.object),
   highlightOrgCard: PropTypes.func.isRequired,
   isMobile: PropTypes.bool.isRequired,
-  locations: PropTypes.array,
+  locations: PropTypes.arrayOf(PropTypes.object),
   onBoundsChange: PropTypes.func,
   showLoading: PropTypes.bool,
-  TotalOrganizations: PropTypes.array,
+  totalOrganizations: PropTypes.number,
 };
 
 export default ResultPage;

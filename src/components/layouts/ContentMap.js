@@ -23,9 +23,9 @@ class ContentMap extends Component {
       return true;
     } else if (toggleSwitch !== nextProps.toggleSwitch) {
       return true;
-    } else if (selectedOrg != nextProps.selectedOrg) {
+    } else if (selectedOrg !== nextProps.selectedOrg) {
       return true;
-    } else if (isMobile != nextProps.isMobile) {
+    } else if (isMobile !== nextProps.isMobile) {
       return true;
     }
     return false;
@@ -127,19 +127,19 @@ class ContentMap extends Component {
       showLoading,
       children,
       onBoundsChange,
-      businesses,
+      businesses: {locations, metadata},
       highlightOrgCard,
+      isMobile,
     } = this.props;
-    const {locations, metadata} = businesses;
     return (
       <ResultPage
-        showLoading={this.props.showLoading}
-        isMobile={this.props.isMobile}
-        BusinessesList={this.props.children}
+        showLoading={showLoading}
+        isMobile={isMobile}
+        BusinessesList={children}
         locations={locations}
-        onBoundsChange={this.props.onBoundsChange}
+        onBoundsChange={onBoundsChange}
         totalOrganizations={metadata.totalOrganizations}
-        highlightOrgCard={this.props.highlightOrgCard}
+        highlightOrgCard={highlightOrgCard}
       />
     );
   }
@@ -181,6 +181,7 @@ class ContentMap extends Component {
       topBar,
       expanded,
       toggleSwitch,
+      isMobile,
       showLoading,
     } = this.props;
     const {locations, organizations} = businesses;
@@ -203,6 +204,7 @@ class ContentMap extends Component {
             <MapView
               expanded={expanded}
               toggleSwitch={toggleSwitch}
+              isMobile={isMobile}
               showLoading={showLoading}
               locations={locations}
               organizations={organizations}
@@ -227,14 +229,14 @@ ContentMap.propTypes = {
   expandMap: PropTypes.func.isRequired,
   highlightOrgCard: PropTypes.func.isRequired,
   isMobile: PropTypes.bool.isRequired,
-  locations: PropTypes.array,
+  locations: PropTypes.arrayOf(PropTypes.object),
   onBoundsChange: PropTypes.func.isRequired,
   redoSearchInMap: PropTypes.func.isRequired,
   reduceMap: PropTypes.func.isRequired,
   selectedOrg: PropTypes.number,
   showLoading: PropTypes.bool,
-  topBar: PropTypes.node,
   toggleSwitch: PropTypes.bool,
+  topBar: PropTypes.node,
 };
 
 export default ContentMap;

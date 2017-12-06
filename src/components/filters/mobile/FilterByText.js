@@ -130,13 +130,14 @@ class FilterByTextMobile extends PureComponent {
     );
   }
 }
-FilterByTextMobile.PropTypes = {
+FilterByTextMobile.propTypes = {
   appliedFilters: PropTypes.object,
   filterById: PropTypes.bool,
   getTextSearchResults: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
-  handleOnChangeFilterOptions: PropTypes.func.isRequired,
   handleDropdownOnClick: PropTypes.func.isRequired,
+  handleOnChangeFilterOptions: PropTypes.func.isRequired,
+  items: PropTypes.arrayOf(PropTypes.object),
   organizations: PropTypes.arrayOf(PropTypes.object),
 };
 export default FilterByTextMobile;

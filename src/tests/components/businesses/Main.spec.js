@@ -31,7 +31,6 @@ const handleOnChangeLocationToggle = jest.fn();
 const handleChangePage = jest.fn();
 const handleClickOnClearAllFilters = jest.fn();
 const handleOnChangeFilterOptions = jest.fn();
-const onClick = jest.fn();
 
 describe('<BusinessesView />', () => {
   it('Renders a ContentMap component', () => {
