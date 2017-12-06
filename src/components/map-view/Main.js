@@ -1,16 +1,19 @@
 import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
-import {isEmpty} from 'lodash';
+import {isNull, isEmpty} from 'lodash';
 import GoogleMap from 'google-map-react';
 import {fitBounds} from 'google-map-react/utils';
 import MapMarker from './MapMarker';
 
 class Main extends Component {
-  state = {
-    selected: '-1',
-    centerCoordinates: {lat: 38.57, lng: -121.47},
-  };
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: '-1',
+      centerCoordinates: {lat: 38.57, lng: -121.47},
+      mapInstance: null,
+    };
+  }
   getBounds = () => {
     const lat_array = this.props.locations.map(location => location.latitude);
     const lng_array = this.props.locations.map(location => location.longitude);
@@ -31,6 +34,9 @@ class Main extends Component {
   handleBoundsChange = e => {
     this.setState({centerCoordinates: e.center});
     this.props.onBoundsChange(e);
+    if (!isNull(this.state.mapInstance)) {
+      this.getVisibleMarkers();
+    }
   };
   _handleOnClick = (e, childProps) => {
     this.setState({
@@ -52,7 +58,22 @@ class Main extends Component {
   _handleChildMouseLeave = () => {
     this.props.highlightOrgCard(-1);
   };
-
+  getMapsInstance = ({map, maps}) => {
+    this.setState({mapInstance: {map, maps}});
+  };
+  getVisibleMarkers = () => {
+    const map = this.state.mapInstance.map;
+    const markers = this.props.locations;
+    const bounds = map.getBounds();
+    let count = 0;
+    for (let i = 0; i < markers.length; i++) {
+      const marker = markers[i];
+      if (bounds.contains({lat: marker.latitude, lng: marker.longitude})) {
+        count++;
+      }
+    }
+    this.props.getLocationsInView(count);
+  };
   render() {
     const {
       locations,
@@ -73,6 +94,7 @@ class Main extends Component {
           onChange={this.handleBoundsChange}
           resetBoundsOnResize={true}
           options={mapOptions}
+          onGoogleApiLoaded={this.getMapsInstance}
           onChildMouseEnter={this._handleChildMouseEnter}
           onChildMouseLeave={this._handleChildMouseLeave}
           onChildClick={this._handleOnClick}
@@ -82,7 +104,7 @@ class Main extends Component {
             ? locations.map(location => {
                 const [lng, lat] = this.getCoordinates(location);
                 return (
-                  <MapMarker
+                <MapMarker
                     key={location.id}
                     lat={lat}
                     lng={lng}
@@ -90,7 +112,7 @@ class Main extends Component {
                     selected={this.state.selected === String(location.id)}
                     handleCloseClick={this._handleCloseClick}
                   />
-                );
+              );
               })
             : ''}
         </GoogleMap>
@@ -100,10 +122,11 @@ class Main extends Component {
       return (
         <GoogleMap
           center={sacCoordinates}
-          zoom={10}
+          zoom={7}
           onChange={this.handleBoundsChange}
           resetBoundsOnResize={true}
           options={mapOptions}
+          onGoogleApiLoaded={this.getMapsInstance}
           bootstrapURLKeys={{
             key: process.env.GOOGLE_MAP_API_KEY,
           }}
@@ -119,6 +142,7 @@ class Main extends Component {
           onChange={this.handleBoundsChange}
           resetBoundsOnResize={true}
           options={mapOptions}
+          onGoogleApiLoaded={this.getMapsInstance}
           onChildMouseEnter={this._handleChildMouseEnter}
           onChildMouseLeave={this._handleChildMouseLeave}
           onChildClick={this._handleOnClick}
@@ -128,7 +152,7 @@ class Main extends Component {
             ? locations.map(location => {
                 [lng, lat] = this.getCoordinates(location);
                 return (
-                  <MapMarker
+                <MapMarker
                     key={location.id}
                     lat={lat}
                     lng={lng}
@@ -136,7 +160,7 @@ class Main extends Component {
                     selected={this.state.selected === String(location.id)}
                     handleCloseClick={this._handleCloseClick}
                   />
-                );
+              );
               })
             : ''}
         </GoogleMap>
@@ -155,6 +179,7 @@ class Main extends Component {
         onChange={this.handleBoundsChange}
         resetBoundsOnResize={true}
         options={mapOptions}
+        onGoogleApiLoaded={this.getMapsInstance}
         onChildMouseEnter={this._handleChildMouseEnter}
         onChildMouseLeave={this._handleChildMouseLeave}
         onChildClick={this._handleOnClick}
@@ -164,7 +189,7 @@ class Main extends Component {
           ? locations.map(location => {
               const [lng, lat] = this.getCoordinates(location);
               return (
-                <MapMarker
+              <MapMarker
                   key={location.id}
                   lat={lat}
                   lng={lng}
@@ -172,7 +197,7 @@ class Main extends Component {
                   selected={this.state.selected === String(location.id)}
                   handleCloseClick={this._handleCloseClick}
                 />
-              );
+            );
             })
           : ''}
       </GoogleMap>

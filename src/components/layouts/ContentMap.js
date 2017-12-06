@@ -16,6 +16,7 @@ class ContentMap extends Component {
       toggleSwitch,
       selectedOrg,
       isMobile,
+      locationsInView,
     } = this.props;
     if (businesses !== nextProps.businesses) {
       return true;
@@ -26,6 +27,8 @@ class ContentMap extends Component {
     } else if (selectedOrg !== nextProps.selectedOrg) {
       return true;
     } else if (isMobile !== nextProps.isMobile) {
+      return true;
+    } else if (locationsInView !== nextProps.locationsInView) {
       return true;
     }
     return false;
@@ -210,6 +213,7 @@ class ContentMap extends Component {
               organizations={organizations}
               onBoundsChange={onBoundsChange}
               highlightOrgCard={highlightOrgCard}
+              getLocationsInView={this.props.getLocationsInView}
             />
           </div>
           {expanded ? this._renderReduceButton() : this._renderExpandButton()}
