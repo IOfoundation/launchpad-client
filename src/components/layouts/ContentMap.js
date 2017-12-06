@@ -10,16 +10,8 @@ class ContentMap extends Component {
   }
 
   validateComponent(nextProps) {
-    const {
-      businesses,
-      expanded,
-      toggleSwitch,
-      selectedOrg,
-      isMobile,
-    } = this.props;
+    const {businesses, toggleSwitch, selectedOrg, isMobile} = this.props;
     if (businesses !== nextProps.businesses) {
-      return true;
-    } else if (expanded !== nextProps.expanded) {
       return true;
     } else if (toggleSwitch !== nextProps.toggleSwitch) {
       return true;
@@ -32,12 +24,12 @@ class ContentMap extends Component {
   }
 
   _renderReduceButton() {
-    const {reduceMap, redoSearchInMap, toggleSwitch} = this.props;
+    const {redoSearchInMap, toggleSwitch, mapActions} = this.props;
     return (
       <div className="row between-xs middle-xs reducedMapBottom">
         <button
           className="expand-btn map-btn btn-link btn-link-primary text-bold text-bold text-xs-margin p-0 m-bot-8"
-          onClick={reduceMap}
+          onClick={mapActions.reduceMap}
         >
           {'Reduce Map'}
         </button>
@@ -63,12 +55,12 @@ class ContentMap extends Component {
     );
   }
   _renderExpandButton() {
-    const {expandMap, redoSearchInMap, toggleSwitch} = this.props;
+    const {redoSearchInMap, toggleSwitch, mapActions} = this.props;
     return (
       <div className="row between-xs middle-xs reducedMapBottom">
         <button
           className="expand-btn map-btn btn-link btn-link-primary text-bold text-xs-margin p-0 m-bot-8 m-top-5"
-          onClick={expandMap}
+          onClick={mapActions.expandMap}
         >
           {'Expand Map'}
         </button>
@@ -126,10 +118,10 @@ class ContentMap extends Component {
     const {
       showLoading,
       children,
-      onBoundsChange,
       businesses: {locations, metadata, organizations},
       highlightOrgCard,
       isMobile,
+      mapActions,
     } = this.props;
     return (
       <ResultPage
@@ -138,15 +130,15 @@ class ContentMap extends Component {
         isMobile={isMobile}
         BusinessesList={children}
         locations={locations}
-        onBoundsChange={onBoundsChange}
+        onBoundsChange={mapActions.onBoundsChange}
         totalOrganizations={metadata.totalOrganizations}
         highlightOrgCard={highlightOrgCard}
       />
     );
   }
   _renderBusinesses() {
-    const {isMobile, businesses, expanded, children} = this.props;
-    const {metadata} = businesses;
+    const {isMobile, businesses, children} = this.props;
+    const {metadata, mapProps: {expanded}} = businesses;
     return (
       <div>
         {isMobile ? (
@@ -176,11 +168,10 @@ class ContentMap extends Component {
   }
   render() {
     const {
-      onBoundsChange,
+      mapActions,
       highlightOrgCard,
-      businesses: {locations, organizations},
+      businesses: {locations, organizations, mapProps},
       topBar,
-      expanded,
       toggleSwitch,
       isMobile,
       showLoading,
@@ -191,28 +182,32 @@ class ContentMap extends Component {
         <div
           className={
             'map m-bot-20 ' +
-            (expanded
+            (mapProps.expanded
               ? 'col-lg-5 col-md-5 col-xs-5 p-0 map-expanded'
               : 'col-lg-3 col-md-3 col-xs-3 p-0')
           }
         >
           <div
             className={
-              expanded ? 'map-container-collapse' : 'map-container-expand'
+              mapProps.expanded
+                ? 'map-container-collapse'
+                : 'map-container-expand'
             }
           >
             <MapView
-              expanded={expanded}
               toggleSwitch={toggleSwitch}
               isMobile={isMobile}
               showLoading={showLoading}
               locations={locations}
               organizations={organizations}
-              onBoundsChange={onBoundsChange}
               highlightOrgCard={highlightOrgCard}
+              mapActions={mapActions}
+              mapProps={mapProps}
             />
           </div>
-          {expanded ? this._renderReduceButton() : this._renderExpandButton()}
+          {mapProps.expanded
+            ? this._renderReduceButton()
+            : this._renderExpandButton()}
         </div>
         {isEmpty(organizations)
           ? this._renderNoSearchResults()
@@ -225,14 +220,11 @@ class ContentMap extends Component {
 ContentMap.propTypes = {
   businesses: PropTypes.object,
   children: PropTypes.node,
-  expanded: PropTypes.bool,
-  expandMap: PropTypes.func.isRequired,
   highlightOrgCard: PropTypes.func.isRequired,
   isMobile: PropTypes.bool.isRequired,
   locations: PropTypes.arrayOf(PropTypes.object),
-  onBoundsChange: PropTypes.func.isRequired,
+  mapActions: PropTypes.object,
   redoSearchInMap: PropTypes.func.isRequired,
-  reduceMap: PropTypes.func.isRequired,
   selectedOrg: PropTypes.number,
   showLoading: PropTypes.bool,
   toggleSwitch: PropTypes.bool,

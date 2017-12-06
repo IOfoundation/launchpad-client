@@ -25,9 +25,9 @@ export default function(state: STATE = initialState, action: ACTION): STATE {
     }
 
     case types.FETCH_ORGANIZATIONS_SUCCESS: {
-      const {organizations, metadata} = action;
+      let {organizations, metadata} = action;
       if (organizations.id) {
-        const organizations = [organizations];
+        organizations = [organizations];
       }
       const locations = isEmpty(organizations)
         ? null
@@ -105,6 +105,14 @@ export default function(state: STATE = initialState, action: ACTION): STATE {
       return {
         ...state,
         appliedFilters,
+      };
+    }
+
+    case types.UPDATE_MAP_PROPS: {
+      const {mapProps} = action;
+      return {
+        ...state,
+        mapProps,
       };
     }
 

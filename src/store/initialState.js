@@ -24,6 +24,14 @@ const initialState = {
       locationToggleSwitch: false,
     },
     appliedFilters: {},
+    mapProps: {
+      bounds: {},
+      mapMarginBounds: {},
+      centerCoordinates: {lat: 38.57, lng: -121.47},
+      zoom: 7,
+      mapInstance: null,
+      expanded: false,
+    },
   },
 };
 
