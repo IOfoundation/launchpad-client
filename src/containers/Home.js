@@ -8,12 +8,9 @@ import HomeView from '../components/home/Main';
 import * as actions from '../actions/business';
 
 export class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      width: window.innerWidth,
-    };
-  }
+  state = {
+    width: window.innerWidth,
+  };
   componentWillMount(_nextProps) {
     window.addEventListener('resize', () => this.handleWindowSizeChange());
   }

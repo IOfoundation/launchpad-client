@@ -5,14 +5,11 @@ import {isEmpty} from 'lodash';
 import TagsBox from '../TagsBox';
 
 class FilterByTextMobile extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      searchText: '',
-      showDropdown: false,
-      filterById: props.filterById && true,
-    };
-  }
+  state = {
+    searchText: '',
+    showDropdown: false,
+    filterById: this.props.filterById && true,
+  };
 
   deleteFilter = e => {
     const filter = e.currentTarget.getAttribute('data-value');
@@ -135,7 +132,6 @@ FilterByTextMobile.propTypes = {
   filterById: PropTypes.bool,
   getTextSearchResults: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
-  handleDropdownOnClick: PropTypes.func.isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
   items: PropTypes.arrayOf(PropTypes.object),
   organizations: PropTypes.arrayOf(PropTypes.object),

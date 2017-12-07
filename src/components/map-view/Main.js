@@ -6,13 +6,10 @@ import {fitBounds} from 'google-map-react/utils';
 import MapMarker from './MapMarker';
 
 class Main extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selected: '-1',
-      centerCoordinates: {lat: 38.57, lng: -121.47},
-    };
-  }
+  state = {
+    selected: '-1',
+    centerCoordinates: {lat: 38.57, lng: -121.47},
+  };
 
   getBounds = () => {
     const lat_array = this.props.locations.map(location => location.latitude);

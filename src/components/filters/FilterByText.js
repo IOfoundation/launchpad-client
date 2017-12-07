@@ -6,15 +6,12 @@ import {isEmpty} from 'lodash';
 import TagsBox from './TagsBox';
 
 class FilterByText extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      inputOnFocus: false,
-      showDropdown: false,
-      searchText: '',
-      filterById: props.filterById && true,
-    };
-  }
+  state = {
+    inputOnFocus: false,
+    showDropdown: false,
+    searchText: '',
+    filterById: this.props.filterById && true,
+  };
   deleteFilter = e => {
     const filter = e.currentTarget.getAttribute('data-value');
     this.props.handleOnChangeFilterOptions('category', filter, true);

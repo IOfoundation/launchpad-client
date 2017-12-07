@@ -8,12 +8,9 @@ import {PropTypes} from 'prop-types';
 import {isEmpty} from 'lodash';
 
 class Business extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      expanded: this.props.expanded,
-    };
-  }
+  state = {
+    expanded: this.props.expanded,
+  };
 
   toggleCard = () => {
     this.setState({expanded: !this.state.expanded});

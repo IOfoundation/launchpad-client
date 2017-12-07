@@ -8,13 +8,10 @@ import MainLayout from '../components/layouts/Main';
 import * as actions from '../actions/business';
 
 export class Businesses extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      width: window.innerWidth,
-      showLoading: true,
-    };
-  }
+  state = {
+    width: window.innerWidth,
+    showLoading: true,
+  };
 
   componentWillMount(_nextProps) {
     const {params} = this.props;

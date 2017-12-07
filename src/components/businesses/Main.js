@@ -6,14 +6,11 @@ import ResultInfo from './ResultInfo';
 import ContentMap from '../layouts/ContentMap';
 
 class Main extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      expanded: false,
-      bounds: {},
-      selectedOrg: -1,
-    };
-  }
+  state = {
+    expanded: false,
+    bounds: {},
+    selectedOrg: -1,
+  };
 
   reduceMap = () => {
     this.setState({expanded: false});

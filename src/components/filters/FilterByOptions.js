@@ -5,14 +5,11 @@ import ArrowRight from '../shared/ArrowRight';
 import DropdownArrow from '../shared/DropdownArrow';
 
 class FilterByOptions extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dropdownOpen: false,
-      subDropdownOpen: false,
-      selectedfilterOption: null,
-    };
-  }
+  state = {
+    dropdownOpen: false,
+    subDropdownOpen: false,
+    selectedfilterOption: null,
+  };
   _toggleDropdownOptions() {
     this.setState({dropdownOpen: !this.state.dropdownOpen});
   }
@@ -110,7 +107,7 @@ class FilterByOptions extends Component {
 
 FilterByOptions.propTypes = {
   filterName: PropTypes.string.isRequired,
-  filterOptions: PropTypes.arrayOf(PropTypes.object).isRequired,
+  filterOptions: PropTypes.object,
   handleOnChangeFilterOptions: PropTypes.func,
 };
 export default onClickOutside(FilterByOptions);

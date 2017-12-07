@@ -3,12 +3,10 @@ import {PropTypes} from 'prop-types';
 import ArrowRight from '../../shared/ArrowRight';
 
 class FilterOption extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedfilterOption: null,
-    };
-  }
+  state = {
+    selectedfilterOption: null,
+  };
+
   uncheckAll() {
     const checks = document.querySelectorAll(
       '.dropdown-input-container input[type="checkbox"]'

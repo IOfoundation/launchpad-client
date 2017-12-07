@@ -4,12 +4,9 @@ import MapView from '../../map-view/Main';
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 
 class ResultPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedTab: 0,
-    };
-  }
+  state = {
+    selectedTab: 0,
+  };
 
   handleOnSelect = selectedTab => {
     return this.setState({selectedTab});
