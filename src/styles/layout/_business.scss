@@ -18,7 +18,7 @@
 .business {
   transition: .4s ease all;
   cursor: pointer;
-  @media (max-width: 60em) {
+  @media (max-width: 1200px) {
     padding-left: 0px !important;
   }
 }

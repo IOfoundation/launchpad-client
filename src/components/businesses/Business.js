@@ -119,7 +119,7 @@ class Business extends PureComponent {
           <div
             className={
               this.state.expanded
-                ? 'business col-lg-2 col-md-2 col-xs-2 p-0 m-bot-20'
+                ? 'business col-lg-2 col-md-3 col-xs-12 p-0 m-bot-20'
                 : 'business business-img'
             }
             onClick={this.toggleCard}
@@ -136,7 +136,7 @@ class Business extends PureComponent {
           <div
             className={
               this.state.expanded
-                ? 'business expanded col-lg-10 col-md-10 col-xs-12 p-right-0'
+                ? 'business expanded col-lg-10 col-md-9 col-xs-12 p-right-0'
                 : 'business col-lg-12 col-md-12 col-xs-12 p-0'
             }
           >
