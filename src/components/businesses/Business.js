@@ -105,6 +105,8 @@ class Business extends PureComponent {
     const {business, isSelected, isMobile} = this.props;
     const locations = business.locations;
     const [main_location, ...other_locations] = locations;
+    const locationText = locations.length === 1 ? ' Location' : ' Locations';
+    const totalLocations = locations.length;
     return (
       <div
         className="business-card"
@@ -272,13 +274,10 @@ class Business extends PureComponent {
               )}
           </div>
           <p className="location text-bold">
-            <span>
-              {locations.length}
-              {locations.length === 1 ? ' location' : ' locations'}
-            </span>
+            <span>{`${totalLocations} ${locationText}`}</span>
             <span className="m-x-7">{'|'}</span>
             <span>
-              {locations.length === 1 ? '' : 'Main location in '}
+              {locations.length > 1 && 'Main location in '}
               {main_location.address.city}
               {', '}
               {main_location.address.state_province}
