@@ -96,7 +96,7 @@ class Main extends Component {
         </GoogleMap>
       );
     }
-    if (isEmpty(locations) || showLoading) {
+    if (isEmpty(organizations) || showLoading) {
       return (
         <GoogleMap
           center={sacCoordinates}
@@ -181,14 +181,14 @@ class Main extends Component {
 }
 
 Main.propTypes = {
-  expanded: PropTypes.bool.isRequired,
+  expanded: PropTypes.bool,
   highlightOrgCard: PropTypes.func.isRequired,
   isMobile: PropTypes.bool.isRequired,
   locations: PropTypes.arrayOf(PropTypes.object),
   onBoundsChange: PropTypes.func.isRequired,
   organizations: PropTypes.arrayOf(PropTypes.object),
-  showLoading: PropTypes.bool.isRequired,
-  toggleSwitch: PropTypes.bool.isRequired,
+  showLoading: PropTypes.bool,
+  toggleSwitch: PropTypes.bool,
 };
 
 export default Main;

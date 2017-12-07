@@ -18,7 +18,6 @@ class FilterByOptions extends Component {
       this.setState({selectedfilterOption, subDropdownOpen: true});
     }
   }
-
   handleClick = selectedfilterOption => () => {
     const {name} = selectedfilterOption;
     this.props.handleOnChangeFilterOptions('category', name);
@@ -107,7 +106,7 @@ class FilterByOptions extends Component {
 
 FilterByOptions.propTypes = {
   filterName: PropTypes.string.isRequired,
-  filterOptions: PropTypes.object,
+  filterOptions: PropTypes.arrayOf(PropTypes.object),
   handleOnChangeFilterOptions: PropTypes.func,
 };
 export default onClickOutside(FilterByOptions);

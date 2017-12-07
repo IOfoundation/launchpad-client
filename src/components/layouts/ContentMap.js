@@ -127,12 +127,13 @@ class ContentMap extends Component {
       showLoading,
       children,
       onBoundsChange,
-      businesses: {locations, metadata},
+      businesses: {locations, metadata, organizations},
       highlightOrgCard,
       isMobile,
     } = this.props;
     return (
       <ResultPage
+        organizations={organizations}
         showLoading={showLoading}
         isMobile={isMobile}
         BusinessesList={children}
@@ -177,14 +178,13 @@ class ContentMap extends Component {
     const {
       onBoundsChange,
       highlightOrgCard,
-      businesses,
+      businesses: {locations, organizations},
       topBar,
       expanded,
       toggleSwitch,
       isMobile,
       showLoading,
     } = this.props;
-    const {locations, organizations} = businesses;
     return (
       <div className="businessesContainer">
         {topBar}

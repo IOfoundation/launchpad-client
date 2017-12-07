@@ -25,6 +25,7 @@ class ResultPage extends Component {
       totalOrganizations,
       BusinessesList,
       locations,
+      organizations,
       onBoundsChange,
       highlightOrgCard,
     } = this.props;
@@ -35,7 +36,7 @@ class ResultPage extends Component {
             <span>
               {showLoading
                 ? 'Loading Organizations'
-                : displayOrganizationLabel(totalOrganizations)}
+                : this.displayOrganizationLabel(totalOrganizations)}
             </span>
             <Tab className="tab">
               <img
@@ -62,6 +63,7 @@ class ResultPage extends Component {
               <MapView
                 isMobile={this.props.isMobile}
                 locations={locations}
+                organizations={organizations}
                 onBoundsChange={onBoundsChange}
                 highlightOrgCard={highlightOrgCard}
               />
@@ -74,13 +76,14 @@ class ResultPage extends Component {
 }
 
 ResultPage.propTypes = {
-  BusinessesList: PropTypes.arrayOf(PropTypes.object),
+  BusinessesList: PropTypes.object,
   highlightOrgCard: PropTypes.func.isRequired,
   isMobile: PropTypes.bool.isRequired,
   locations: PropTypes.arrayOf(PropTypes.object),
   onBoundsChange: PropTypes.func,
+  organizations: PropTypes.arrayOf(PropTypes.object),
   showLoading: PropTypes.bool,
-  totalOrganizations: PropTypes.number,
+  totalOrganizations: PropTypes.string,
 };
 
 export default ResultPage;
