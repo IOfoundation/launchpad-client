@@ -145,7 +145,7 @@ class FilterByText extends Component {
             {this.renderChipsContainer(appliedFilters)}
             <h3
               className={
-                appliedFilters.category
+                !isEmpty(appliedFilters.category)
                   ? 'hide-filter'
                   : 'text-thin filter-result-text'
               }
