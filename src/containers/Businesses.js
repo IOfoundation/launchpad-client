@@ -11,6 +11,7 @@ export class Businesses extends PureComponent {
   state = {
     width: window.innerWidth,
     showLoading: true,
+    homePage: false,
   };
 
   componentWillMount(_nextProps) {
@@ -168,7 +169,7 @@ export class Businesses extends PureComponent {
     const {width, showLoading} = this.state;
     const filterById = 'id' in params && true;
     return (
-      <MainLayout windowWidth={width}>
+      <MainLayout windowWidth={width} homePage={this.state.homePage} >
         <BusinessesPage
           businesses={businesses}
           windowWidth={width}

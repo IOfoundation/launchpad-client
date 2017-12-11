@@ -1,20 +1,27 @@
 import React from 'react';
+import {PropTypes} from 'prop-types';
 import {Link} from 'react-router';
 import BarsIcon from '../shared/barsIcon';
 import Logo from './Logo';
 
-const Header = () => {
+const Header = ({homePage}) => {
   return (
     <header className="headerContainer" htmlFor="header-dropdown">
       <div className="contentContainer header grid between-xs middle-xs text-thin">
         <div className="header_links-title">
-          <Link to="/">
-            <Logo />
-          </Link>
+          {!homePage && (
+            <Link to="/">
+              <Logo />
+            </Link>
+          )}
           <span className="header_title">{'Welcome to IO Ipsum'}</span>
-          <span className="header_leftLink text-regular">
-            {'Back to Lorem'}
-          </span>
+          {!homePage && (
+            <Link to="/">
+              <span className="header_leftLink text-regular">
+                {'Back to Home'}
+              </span>
+            </Link>
+          )}
         </div>
         <input id="header-dropdown" type="checkbox" name="dropdown" />
         <label htmlFor="header-dropdown" className="collapse-menu-icon">
@@ -34,6 +41,10 @@ const Header = () => {
       </div>
     </header>
   );
+};
+
+Header.propTypes = {
+  homePage: PropTypes.bool.isRequired,
 };
 
 export default Header;

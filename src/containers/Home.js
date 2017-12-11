@@ -10,6 +10,7 @@ import * as actions from '../actions/business';
 export class Home extends Component {
   state = {
     width: window.innerWidth,
+    homePage: true,
   };
   componentWillMount(_nextProps) {
     window.addEventListener('resize', () => this.handleWindowSizeChange());
@@ -25,7 +26,7 @@ export class Home extends Component {
   };
   render() {
     return (
-      <MainLayout windowWidth={this.state.width}>
+      <MainLayout windowWidth={this.state.width} homePage={this.state.homePage}>
         <section>
           <HomeView
             items={this.props.items}
