@@ -173,7 +173,7 @@ class Main extends Component {
     const {center, zoom} = fitBounds(bounds, size);
     return (
       <GoogleMap
-        center={center}
+        center={this.state.selected > 0 ? this.state.centerCoordinates : center}
         zoom={7}
         hoverDistance={zoom}
         onChange={this.handleBoundsChange}
