@@ -52,13 +52,15 @@ class FilterByText extends Component {
   };
 
   handleDropdownOnClick = item => {
-    item.searchable_type === 'Category'
-      ? this.props.handleOnChangeFilterOptions('category', item.content)
-      : this.props.handleOnChangeFilterOptions(
-          'organization',
-          item.searchable_id,
-          false
-        );
+    if (item.searchable_type === 'Category') {
+      this.props.handleOnChangeFilterOptions('category', item.content);
+    } else {
+      this.props.handleOnChangeFilterOptions(
+        'organization',
+        item.searchable_id,
+        false
+      );
+    }
     this.setState({
       showDropdown: false,
       inputOnFocus: false,
@@ -91,7 +93,7 @@ class FilterByText extends Component {
           <a onClick={() => this._closeSearch()}>
             <ClearIcon
               className="search-by-text-icon"
-              size="40"
+              size={40}
               style={{color: '#2AD587', verticalAlign: 'middle'}}
             />
           </a>
