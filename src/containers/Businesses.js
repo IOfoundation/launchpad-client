@@ -136,8 +136,12 @@ export class Businesses extends PureComponent {
       filterOrganizations,
     } = this.props.actions;
     this.setState({showLoading: true});
+    let showBusinessTypes = this.handleOnChangeBusinessType(filterValue);
+    if (filterType === 'organization') {
+      showBusinessTypes = true;
+    }
     changeFilterDisplayOptions(
-      this.handleOnChangeBusinessType(filterValue),
+      showBusinessTypes,
       this.handleOnChangeLocationToggle(filterType, removeFilter)
     );
     if (typeof removeFilter === 'undefined' && !isEmpty(params.category)) {
