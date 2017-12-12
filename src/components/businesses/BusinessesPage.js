@@ -50,11 +50,21 @@ class BusinessesPage extends Component {
     );
   }
 
+  _renderLoader = () => {
+    return (
+      <div className="load-div">
+        <img className="loader" src="static-data/images/loader.gif" />
+        <h3 className="loader-text text-regular">{'Loading'}</h3>
+      </div>
+    );
+  };
+
   render() {
     const {
       windowWidth,
       businesses,
       showLoading,
+      businessPageLoaded,
       handleOnChangeBusinessType,
       handleOnChangeLocationToggle,
       handleChangePage,
@@ -83,16 +93,20 @@ class BusinessesPage extends Component {
               {isMobile
                 ? this.renderFilterBoxMobile()
                 : this.renderFilterBoxDesktop()}
-              <BusinessesView
-                isMobile={isMobile}
-                businesses={businesses}
-                showLoading={showLoading}
-                handleOnChangeBusinessType={handleOnChangeBusinessType}
-                handleOnChangeLocationToggle={handleOnChangeLocationToggle}
-                handleChangePage={handleChangePage}
-                handleClickOnClearAllFilters={handleClickOnClearAllFilters}
-                handleOnChangeFilterOptions={handleOnChangeFilterOptions}
-              />
+              {businessPageLoaded ? (
+                <BusinessesView
+                  isMobile={isMobile}
+                  businesses={businesses}
+                  showLoading={showLoading}
+                  handleOnChangeBusinessType={handleOnChangeBusinessType}
+                  handleOnChangeLocationToggle={handleOnChangeLocationToggle}
+                  handleChangePage={handleChangePage}
+                  handleClickOnClearAllFilters={handleClickOnClearAllFilters}
+                  handleOnChangeFilterOptions={handleOnChangeFilterOptions}
+                />
+              ) : (
+                this._renderLoader()
+              )}
             </div>
           </div>
         </div>

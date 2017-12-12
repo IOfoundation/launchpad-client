@@ -12,6 +12,7 @@ export class Businesses extends PureComponent {
     width: window.innerWidth,
     showLoading: true,
     homePage: false,
+    businessPageLoaded: false,
   };
 
   componentWillMount(_nextProps) {
@@ -35,7 +36,7 @@ export class Businesses extends PureComponent {
   componentWillReceiveProps(newProps) {
     const {organizations} = this.props.businesses;
     if (newProps.businesses.organizations !== organizations) {
-      this.setState({showLoading: false});
+      this.setState({showLoading: false, businessPageLoaded: true});
     }
   }
 
@@ -170,12 +171,13 @@ export class Businesses extends PureComponent {
 
   render() {
     const {businesses, params} = this.props;
-    const {width, showLoading} = this.state;
+    const {width, showLoading, businessPageLoaded, mainPageLoaded} = this.state;
     const filterById = 'id' in params && true;
     return (
-      <MainLayout windowWidth={width} homePage={this.state.homePage} >
+      <MainLayout windowWidth={width} homePage={this.state.homePage}>
         <BusinessesPage
           businesses={businesses}
+          businessPageLoaded={businessPageLoaded}
           windowWidth={width}
           showLoading={showLoading}
           filterById={filterById}
