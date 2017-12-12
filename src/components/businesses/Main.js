@@ -6,12 +6,15 @@ import ResultInfo from './ResultInfo';
 import ContentMap from '../layouts/ContentMap';
 
 class Main extends Component {
-  state = {
-    expanded: false,
-    bounds: {},
-    selectedOrg: -1,
-  };
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      expanded: false,
+      bounds: {},
+      selectedOrg: -1,
+      locationsInView: 0,
+    };
+  }
   reduceMap = () => {
     this.setState({expanded: false});
   };
@@ -19,7 +22,9 @@ class Main extends Component {
   expandMap = () => {
     this.setState({expanded: true});
   };
-
+  getLocationsInView = locations => {
+    this.setState({locationsInView: locations});
+  };
   onBoundsChange = mapDetails => {
     const {handleOnChangeFilterOptions, businesses} = this.props;
     this.setState({bounds: mapDetails.bounds});
@@ -41,16 +46,18 @@ class Main extends Component {
 
   _renderResultsInfo = () => {
     const {handleOnChangeFilterOptions, businesses, showLoading} = this.props;
-    const {metadata, displayOptions, filters} = businesses;
-
+    const {metadata, displayOptions, filters, locations} = businesses;
     if (filters.businessTypes.length === 3) {
       return (
         <ResultInfo
+          locationsInView={this.state.locationsInView}
           metadata={metadata}
           handleOnChangeFilterOptions={handleOnChangeFilterOptions}
           filterOptions={filters.businessTypes}
           showBusinessTypes={displayOptions.showBusinessTypes}
           showLoading={showLoading}
+          displayOptions={displayOptions}
+          totalLocations={locations ? locations.length : 0}
         />
       );
     }
@@ -85,9 +92,11 @@ class Main extends Component {
     const {displayOptions} = businesses;
     return (
       <ContentMap
+        locationsInView={this.state.locationsInView}
         businesses={businesses}
         isMobile={isMobile}
         showLoading={showLoading}
+        getLocationsInView={this.getLocationsInView}
         toggleSwitch={displayOptions.locationToggleSwitch}
         selectedOrg={this.state.selectedOrg}
         expanded={this.state.expanded}
