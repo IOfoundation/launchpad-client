@@ -53,6 +53,61 @@ class Main extends Component {
     this.props.highlightOrgCard(-1);
   };
 
+  createMapOptions = showLoading => {
+    console.log("OPTIONS no entro", showLoading);
+    if (showLoading) {
+      console.log("OPTIONS ENTRO", showLoading);
+      return {
+        fullscreenControl: false,
+        styles: [
+          {
+            stylers: [
+              {saturation: -100},
+              {gamma: 0.8},
+              {lightness: 4},
+              {visibility: 'on'},
+            ],
+          },
+        ],
+      };
+    }
+    return {fullscreenControl: false};
+  };
+
+  _createMapSettings = () => {
+    const {organizations, toggleSwitch, expanded, showLoading} = this.props;
+    if (showLoading || toggleSwitch) {
+      return {
+        center: this.state.centerCoordinates,
+        zoom: 7,
+        options: this.createMapOptions(showLoading),
+      };
+    } else if (isEmpty(organizations)) {
+      return {
+        center: {lat: 38.57, lng: -121.47},
+        zoom: 10,
+        options: this.createMapOptions(showLoading),
+      };
+    } else if (organizations.length === 1) {
+      const [lng, lat] = this.getCoordinates(organizations[0].locations[0]);
+      return {
+        center: lng ? {lat, lng} : {lat: 38.57, lng: -121.47},
+        zoom: 13,
+        options: this.createMapOptions(showLoading),
+      };
+    }
+    const bounds = this.getBounds();
+    const size = expanded
+      ? {width: 400, height: 485}
+      : {width: 200, height: 237};
+    const {center, zoom} = fitBounds(bounds, size);
+    return {
+      center,
+      zoom,
+      options: this.createMapOptions(showLoading),
+    };
+  };
+
   render() {
     const {
       locations,
@@ -61,100 +116,37 @@ class Main extends Component {
       expanded,
       showLoading,
     } = this.props;
-    const sacCoordinates = {lat: 38.57, lng: -121.47};
-    const mapOptions = {fullscreenControl: false};
-    const zoomLevel = 7;
-    if (toggleSwitch) {
+    const {center, zoom, options} = this._createMapSettings();
+    const loadingStyles = {
+      fullscreenControl: false,
+      styles: [
+        {
+          stylers: [
+            {saturation: -100},
+            {gamma: 0.8},
+            {lightness: 4},
+            {visibility: 'on'},
+          ],
+        },
+      ],
+    };
+    if (showLoading) {
       return (
         <GoogleMap
-          center={this.state.centerCoordinates}
-          zoom={zoomLevel}
-          hoverDistance={12}
-          onChange={this.handleBoundsChange}
+          center={center}
+          zoom={zoom}
           resetBoundsOnResize={true}
-          options={mapOptions}
-          onChildMouseEnter={this._handleChildMouseEnter}
-          onChildMouseLeave={this._handleChildMouseLeave}
-          onChildClick={this._handleOnClick}
+          options={loadingStyles}
           bootstrapURLKeys={{key: process.env.GOOGLE_MAP_API_KEY}}
-        >
-          {locations
-            ? locations.map(location => {
-                const [lng, lat] = this.getCoordinates(location);
-                return (
-                  <MapMarker
-                    key={location.id}
-                    lat={lat}
-                    lng={lng}
-                    organization={location.organization}
-                    selected={this.state.selected === String(location.id)}
-                    handleCloseClick={this._handleCloseClick}
-                  />
-                );
-              })
-            : ''}
-        </GoogleMap>
-      );
-    }
-    if (isEmpty(organizations) || showLoading) {
-      return (
-        <GoogleMap
-          center={sacCoordinates}
-          zoom={10}
-          onChange={this.handleBoundsChange}
-          resetBoundsOnResize={true}
-          options={mapOptions}
-          bootstrapURLKeys={{
-            key: process.env.GOOGLE_MAP_API_KEY,
-          }}
-        />
-      );
-    } else if (organizations.length === 1) {
-      let [lng, lat] = this.getCoordinates(organizations[0].locations[0]);
-      return (
-        <GoogleMap
-          center={lng ? {lat, lng} : sacCoordinates}
-          zoom={13}
-          hoverDistance={12}
-          onChange={this.handleBoundsChange}
-          resetBoundsOnResize={true}
-          options={mapOptions}
-          onChildMouseEnter={this._handleChildMouseEnter}
-          onChildMouseLeave={this._handleChildMouseLeave}
-          onChildClick={this._handleOnClick}
-          bootstrapURLKeys={{key: process.env.GOOGLE_MAP_API_KEY}}
-        >
-          {locations
-            ? locations.map(location => {
-                [lng, lat] = this.getCoordinates(location);
-                return (
-                  <MapMarker
-                    key={location.id}
-                    lat={lat}
-                    lng={lng}
-                    organization={location.organization}
-                    selected={this.state.selected === String(location.id)}
-                    handleCloseClick={this._handleCloseClick}
-                  />
-                );
-              })
-            : ''}
-        </GoogleMap>
-      );
-    }
-    const bounds = this.getBounds();
-    const size = expanded
-      ? {width: 400, height: 485}
-      : {width: 200, height: 237};
-    const {center, zoom} = fitBounds(bounds, size);
+          />
+      )
+  } else {
     return (
       <GoogleMap
         center={center}
-        zoom={7}
-        hoverDistance={zoom}
+        zoom={zoom}
         onChange={this.handleBoundsChange}
         resetBoundsOnResize={true}
-        options={mapOptions}
         onChildMouseEnter={this._handleChildMouseEnter}
         onChildMouseLeave={this._handleChildMouseLeave}
         onChildClick={this._handleOnClick}
@@ -164,7 +156,7 @@ class Main extends Component {
           ? locations.map(location => {
               const [lng, lat] = this.getCoordinates(location);
               return (
-                <MapMarker
+              <MapMarker
                   key={location.id}
                   lat={lat}
                   lng={lng}
@@ -172,11 +164,12 @@ class Main extends Component {
                   selected={this.state.selected === String(location.id)}
                   handleCloseClick={this._handleCloseClick}
                 />
-              );
+            );
             })
           : ''}
       </GoogleMap>
     );
+  }
   }
 }
 
