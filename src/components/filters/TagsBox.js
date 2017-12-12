@@ -24,7 +24,7 @@ const TagsBox = ({filters, clearAll, deleteFilter}) => {
             />
           ))
         : ''}
-      {filters.category && (
+      {!isEmpty(filters.category) && (
         <a className="search-filter-clear text-thin" onClick={clearAll}>
           <span>{'Clear All'}</span>
         </a>
