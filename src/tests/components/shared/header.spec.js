@@ -16,9 +16,9 @@ describe('<Header />', () => {
       expect(wrapper.find('nav').length).toEqual(1);
     });
 
-    it('Render 4 links in the nav bar', () => {
+    it('Render 5 links in the nav bar', () => {
       const wrapper = shallow(<Header />);
-      expect(wrapper.find(Link).length).toEqual(4);
+      expect(wrapper.find(Link).length).toEqual(5);
     });
 
     it('Must have a link to contact-us page', () => {
@@ -43,15 +43,15 @@ describe('<Header />', () => {
       ).toBe(true);
     });
 
-    it('Must have a link to terms-of-use page', () => {
+    it('Must have a link to back-to-Home page', () => {
       const wrapper = shallow(<Header />);
       expect(
         wrapper.contains(
-          <Link className="header_link" to="/terms-of-use">
-            {'Terms of Use'}
+          <Link className="header_leftLink" to="/">
+            {'Back To Home'}
           </Link>
         )
-      ).toBe(true);
+      ).toBe(false);
     });
   });
 });
