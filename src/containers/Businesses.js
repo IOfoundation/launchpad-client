@@ -166,12 +166,10 @@ export class Businesses extends PureComponent {
 
   reduceMap = () => {
     this.props.actions.changeMapSize(false, this.props.businesses.mapProps);
-    this.getLocationsInView(this.props.businesses.locations);
   };
 
   expandMap = () => {
     this.props.actions.changeMapSize(true, this.props.businesses.mapProps);
-    this.getLocationsInView(this.props.businesses.locations);
   };
 
   getLocationsInView = locations => {

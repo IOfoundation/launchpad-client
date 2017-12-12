@@ -78,9 +78,9 @@ class Main extends Component {
     const {organizations, toggleSwitch, showLoading, mapProps} = this.props;
     const sacCoordinates = {lat: 38.57, lng: -121.47};
     if (toggleSwitch) {
-      return {zoom: 7, center: mapProps.centerCoordinates};
+      return {zoom: 9, center: mapProps.centerCoordinates};
     } else if (isEmpty(organizations) || showLoading) {
-      return {zoom: 7, center: sacCoordinates};
+      return {zoom: 9, center: sacCoordinates};
     } else if (organizations.length === 1) {
       const [lng, lat] = this.getCoordinates(organizations[0].locations[0]);
       return {zoom: 13, center: lng ? {lat, lng} : sacCoordinates};
