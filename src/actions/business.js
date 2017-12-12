@@ -83,6 +83,13 @@ const updateAppliedFiltersObject = appliedFilters => {
   };
 };
 
+const updateMapPropsObject = mapProps => {
+  return {
+    type: types.UPDATE_MAP_PROPS,
+    mapProps,
+  };
+};
+
 const pushBrowserHistory = filters => {
   let filterString = queryString.stringify(filters, {encode: true});
   filterString = filterString.replace(/&per_page=\d+/, '');
@@ -257,6 +264,81 @@ export function updateChipFilters(
     );
     dispatch(updateAppliedFiltersObject(appliedFilters));
     pushBrowserHistory(appliedFilters);
+  };
+}
+
+export function changeMapSize(expanded, currentProps) {
+  return async (dispatch: Function) => {
+    const mapProps = {
+      bounds: currentProps.bounds,
+      locationsInView: currentProps.locationsInView,
+      mapMarginBounds: currentProps.mapMarginBounds,
+      centerCoordinates: currentProps.centerCoordinates,
+      mapInstance: currentProps.mapInstance,
+      expanded,
+    };
+    dispatch(updateMapPropsObject(mapProps));
+  };
+}
+
+export function updateLocationsInView(locationsInView, currentProps) {
+  return async (dispatch: Function) => {
+    const mapProps = {
+      bounds: currentProps.bounds,
+      locationsInView,
+      mapMarginBounds: currentProps.mapMarginBounds,
+      centerCoordinates: currentProps.centerCoordinates,
+      zoom: currentProps.zoom,
+      mapInstance: currentProps.mapInstance,
+      expanded: currentProps.expanded,
+    };
+    dispatch(updateMapPropsObject(mapProps));
+  };
+}
+
+export function updateCenterCoordinates(centerCoordinates, currentProps) {
+  return async (dispatch: Function) => {
+    const mapProps = {
+      bounds: currentProps.bounds,
+      locationsInView: currentProps.locationsInView,
+      mapMarginBounds: currentProps.mapMarginBounds,
+      centerCoordinates,
+      zoom: currentProps.zoom,
+      mapInstance: currentProps.mapInstance,
+      expanded: currentProps.expanded,
+    };
+    dispatch(updateMapPropsObject(mapProps));
+  };
+}
+
+export function updateMapInstance({map, maps}, currentProps) {
+  return async (dispatch: Function) => {
+    const mapInstance = {map, maps};
+    const mapProps = {
+      bounds: currentProps.bounds,
+      locationsInView: currentProps.locationsInView,
+      mapMarginBounds: currentProps.mapMarginBounds,
+      centerCoordinates: currentProps.centerCoordinates,
+      zoom: currentProps.zoom,
+      mapInstance,
+      expanded: currentProps.expanded,
+    };
+    dispatch(updateMapPropsObject(mapProps));
+  };
+}
+
+export function updateMapBounds(mapDetails, currentProps) {
+  return async (dispatch: Function) => {
+    const mapProps = {
+      bounds: mapDetails.bounds,
+      locationsInView: currentProps.locationsInView,
+      mapMarginBounds: mapDetails.marginBounds,
+      centerCoordinates: mapDetails.center,
+      zoom: mapDetails.zoom,
+      mapInstance: currentProps.mapInstance,
+      expanded: currentProps.expanded,
+    };
+    dispatch(updateMapPropsObject(mapProps));
   };
 }
 

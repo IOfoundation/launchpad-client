@@ -60,6 +60,7 @@ class BusinessesPage extends Component {
       handleChangePage,
       handleClickOnClearAllFilters,
       handleOnChangeFilterOptions,
+      mapActions,
     } = this.props;
     const isMobile = windowWidth <= 960;
     return (
@@ -87,6 +88,7 @@ class BusinessesPage extends Component {
                 isMobile={isMobile}
                 businesses={businesses}
                 showLoading={showLoading}
+                mapActions={mapActions}
                 handleOnChangeBusinessType={handleOnChangeBusinessType}
                 handleOnChangeLocationToggle={handleOnChangeLocationToggle}
                 handleChangePage={handleChangePage}
@@ -110,6 +112,7 @@ BusinessesPage.propTypes = {
   handleOnChangeBusinessType: PropTypes.func,
   handleOnChangeFilterOptions: PropTypes.func,
   handleOnChangeLocationToggle: PropTypes.func,
+  mapActions: PropTypes.object,
   showLoading: PropTypes.bool.isRequired,
   windowWidth: PropTypes.number,
 };

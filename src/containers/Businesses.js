@@ -162,11 +162,87 @@ export class Businesses extends PureComponent {
   handleChangePage = page => {
     const {params} = this.props;
     this.props.actions.changePage(page, params);
+    this.getLocationsInView(this.props.businesses.locations);
+  };
+
+  reduceMap = () => {
+    this.props.actions.changeMapSize(false, this.props.businesses.mapProps);
+  };
+
+  expandMap = () => {
+    this.props.actions.changeMapSize(true, this.props.businesses.mapProps);
+  };
+
+  getLocationsInView = locations => {
+    let count = 0;
+    if (locations !== null) {
+      locations.forEach(location => {
+        const [lat, lng] = [location.latitude, location.longitude];
+        if (this.isWithinBounds(lng, lat) === true) {
+          count++;
+        }
+      });
+      this.setLocationsInView(count);
+    }
+  };
+
+  setLocationsInView = count => {
+    this.props.actions.updateLocationsInView(
+      count,
+      this.props.businesses.mapProps
+    );
+  };
+
+  setCenterCoordinates = coordinates => {
+    this.props.actions.updateCenterCoordinates(
+      coordinates,
+      this.props.businesses.mapProps
+    );
+  };
+
+  setMapInstance = ({map, maps}) => {
+    this.props.actions.updateMapInstance(
+      {map, maps},
+      this.props.businesses.mapProps
+    );
+  };
+
+  isWithinBounds = (lng, lat) => {
+    const {mapProps: {mapMarginBounds}} = this.props.businesses;
+    if (!isEmpty(mapMarginBounds)) {
+      const nw = mapMarginBounds.nw;
+      const se = mapMarginBounds.se;
+      if (lat > se.lat && lat < nw.lat && lng > nw.lng && lng < se.lng) {
+        return true;
+      }
+    }
+  };
+
+  onBoundsChange = mapDetails => {
+    const {businesses} = this.props;
+    this.props.actions.updateMapBounds(
+      mapDetails,
+      this.props.businesses.mapProps
+    );
+    if (businesses.displayOptions.locationToggleSwitch) {
+      this.handleOnChangeFilterOptions('coordinates', mapDetails.bounds, false);
+    }
   };
 
   render() {
     const {businesses, params} = this.props;
     const {width, showLoading} = this.state;
+    const mapActions = {
+      reduceMap: this.reduceMap,
+      expandMap: this.expandMap,
+      getLocationsInView: this.getLocationsInView,
+      setLocationsInView: this.setLocationsInView,
+      setMapMarginBounds: this.setMapMarginBounds,
+      setCenterCoordinates: this.setCenterCoordinates,
+      setMapInstance: this.setMapInstance,
+      isWithinBounds: this.isWithinBounds,
+      onBoundsChange: this.onBoundsChange,
+    };
     const filterById = 'id' in params && true;
     return (
       <MainLayout windowWidth={width} homePage={this.state.homePage} >
@@ -181,6 +257,7 @@ export class Businesses extends PureComponent {
           handleClickOnClearAllFilters={this.handleClickOnClearAllFilters}
           handleOnChangeFilterOptions={this.handleOnChangeFilterOptions}
           handleChangePage={this.handleChangePage}
+          mapActions={mapActions}
         />
       </MainLayout>
     );
