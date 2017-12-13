@@ -8,7 +8,8 @@ import MapMarker from './MapMarker';
 class Main extends Component {
   state = {
     selected: '-1',
-    centerCoordinates: {lat: 38.57, lng: -121.47},
+    center: {lat: 38.57, lng: -121.47},
+    zoom: null,
   };
 
   getBounds = () => {
@@ -29,7 +30,7 @@ class Main extends Component {
     return business.coordinates;
   };
   handleBoundsChange = e => {
-    this.setState({centerCoordinates: e.center});
+    this.setState({center: e.center, zoom: e.zoom});
     this.props.onBoundsChange(e);
   };
   _handleOnClick = (e, childProps) => {
@@ -76,8 +77,8 @@ class Main extends Component {
     const {organizations, toggleSwitch, expanded, showLoading} = this.props;
     if (showLoading || toggleSwitch) {
       return {
-        center: this.state.centerCoordinates,
-        zoom: 7,
+        center: this.state.center,
+        zoom: this.state.zoom,
         options: this.createMapOptions(showLoading),
       };
     } else if (isEmpty(organizations)) {
