@@ -1,4 +1,5 @@
 import React from 'react';
+import {PropTypes} from 'prop-types';
 import {shallow} from 'enzyme';
 import {expect} from 'chai';
 import BusinessesView from '../../../components/businesses/Main';
@@ -102,15 +103,11 @@ describe('<BusinessesView />', () => {
   it('Clicking on Expand Map updates the state to expanded: true', () => {
     const wrapper = shallow(
       <BusinessesPage
-        displayOptions={displayOptions}
-        filterOptions={filterOptions}
-        organizations={organizations}
-        locations={locations}
         isMobile={isMobile}
+        businesses={businesses}
         showLoading={showLoading}
-        businessesMetadata={businessesMetadata}
-        checkBusinessType={checkBusinessType}
-        checkLocationToggle={checkBusinessType}
+        handleOnChangeBusinessType={handleOnChangeBusinessType}
+        handleOnChangeLocationToggle={handleOnChangeLocationToggle}
         handleChangePage={handleChangePage}
         handleClickOnClearAllFilters={handleClickOnClearAllFilters}
         handleOnChangeFilterOptions={handleOnChangeFilterOptions}
@@ -126,15 +123,11 @@ describe('<BusinessesView />', () => {
   it('Clicking on Reduce Map updates the state to expanded: false', () => {
     const wrapper = shallow(
       <BusinessesPage
-        displayOptions={displayOptions}
-        filterOptions={filterOptions}
-        organizations={organizations}
-        locations={locations}
         isMobile={isMobile}
+        businesses={businesses}
         showLoading={showLoading}
-        businessesMetadata={businessesMetadata}
-        checkBusinessType={checkBusinessType}
-        checkLocationToggle={checkBusinessType}
+        handleOnChangeBusinessType={handleOnChangeBusinessType}
+        handleOnChangeLocationToggle={handleOnChangeLocationToggle}
         handleChangePage={handleChangePage}
         handleClickOnClearAllFilters={handleClickOnClearAllFilters}
         handleOnChangeFilterOptions={handleOnChangeFilterOptions}
