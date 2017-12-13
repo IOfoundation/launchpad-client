@@ -57,7 +57,6 @@ class Pagination extends React.Component {
 Pagination.propTypes = {
   handleChangePage: PropTypes.func.isRequired,
   metadata: PropTypes.object.isRequired,
-  size: PropTypes.string,
 };
 
 export default Pagination;
