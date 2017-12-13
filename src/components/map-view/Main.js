@@ -54,9 +54,7 @@ class Main extends Component {
   };
 
   createMapOptions = showLoading => {
-    console.log("OPTIONS no entro", showLoading);
     if (showLoading) {
-      console.log("OPTIONS ENTRO", showLoading);
       return {
         fullscreenControl: false,
         styles: [
@@ -138,9 +136,9 @@ class Main extends Component {
           resetBoundsOnResize={true}
           options={loadingStyles}
           bootstrapURLKeys={{key: process.env.GOOGLE_MAP_API_KEY}}
-          />
-      )
-  } else {
+        />
+      );
+    }
     return (
       <GoogleMap
         center={center}
@@ -169,7 +167,6 @@ class Main extends Component {
           : ''}
       </GoogleMap>
     );
-  }
   }
 }
 

@@ -81,7 +81,7 @@ class Main extends Component {
     );
   };
   render() {
-    const {isMobile, businesses, showLoading} = this.props;
+    const {isMobile, businesses, showLoading, handleChangePage} = this.props;
     const {displayOptions} = businesses;
     return (
       <ContentMap
@@ -97,6 +97,7 @@ class Main extends Component {
         redoSearchInMap={this.redoSearchInMap}
         topBar={this._renderResultsInfo()}
         highlightOrgCard={this.highlightOrgCard}
+        handleChangePage={handleChangePage}
       >
         {showLoading ? this._renderLoader() : this._renderBusinesses()}
       </ContentMap>
