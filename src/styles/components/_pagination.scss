@@ -1,7 +1,33 @@
+.map-pagination {
+  .pagination {
+    text-align: right;
+  }
+  .pagination-index {
+    margin-top: 40px;
+    .pagination-arrow {
+      padding: 3px;
+    }
+    .previous {
+      margin: 0 6px 0 0;
+    }
+    .next {
+      margin: 0 0 0 6px;
+    }
+    li {
+      margin: 0 7px;
+      a {
+        font-weight: 300;
+      }
+    }
+  }
+}
 .pagination-container {
   &-hide {
     display: none;
   }
+}
+.pagination {
+  text-align: center;
 }
 .pagination-arrow {
   border-radius: 2px;

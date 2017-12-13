@@ -215,7 +215,9 @@ class ContentMap extends Component {
             />
           </div>
           {expanded ? this._renderReduceButton() : this._renderExpandButton()}
-          <Pagination handleChangePage={handleChangePage} metadata={metadata} />
+          <div className="map-pagination">
+            <Pagination handleChangePage={handleChangePage} metadata={metadata} />
+          </div>
         </div>
         {isEmpty(organizations)
           ? this._renderNoSearchResults()

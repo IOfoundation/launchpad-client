@@ -23,7 +23,7 @@ class Pagination extends React.Component {
         className={
           pages.length <= 1
             ? 'pagination-container-hide'
-            : 'text-center pagination between-xs middle-xs m-bot-100'
+            : 'pagination between-xs middle-xs m-bot-100'
         }
       >
         <ReactPaginate
