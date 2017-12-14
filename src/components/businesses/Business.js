@@ -52,14 +52,14 @@ class Business extends PureComponent {
                   </h4>
                 </div>
                 {(location.phones.length > 0 || location.email) && (
-                    <div className="col-xs-12 p-0 m-top-16">
-                      <p className="business-title">{'Contact:'}</p>
-                      {location.phones.length > 0 && (
-                        <h4>{location.phones[0].number}</h4>
-                      )}
-                      {location.email && <h4>{location.email}</h4>}
-                    </div>
-                  )}
+                  <div className="col-xs-12 p-0 m-top-16">
+                    <p className="business-title">{'Contact:'}</p>
+                    {location.phones.length > 0 && (
+                      <h4>{location.phones[0].number}</h4>
+                    )}
+                    {location.email && <h4>{location.email}</h4>}
+                  </div>
+                )}
               </div>
             );
           })}

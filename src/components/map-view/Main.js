@@ -155,7 +155,7 @@ class Main extends Component {
           ? locations.map(location => {
               const [lng, lat] = this.getCoordinates(location);
               return (
-              <MapMarker
+                <MapMarker
                   key={location.id}
                   lat={lat}
                   lng={lng}
@@ -163,7 +163,7 @@ class Main extends Component {
                   selected={this.state.selected === String(location.id)}
                   handleCloseClick={this._handleCloseClick}
                 />
-            );
+              );
             })
           : ''}
       </GoogleMap>

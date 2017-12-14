@@ -166,6 +166,7 @@ export class Businesses extends PureComponent {
 
   handleChangePage = page => {
     const {params} = this.props;
+    this.setState({showLoading: true});
     this.props.actions.changePage(page, params);
   };
 
