@@ -297,13 +297,13 @@ const filtersObject = (filterType, filters, filterValue, removeFilter) => {
         ? _removeCategoryFilter(newFilters, filterValue)
         : _addCategoryFilter(newFilters, filterValue);
     case 'organization':
-      return _addOrganizationIdFilter(filterValue, newFilters);
+      return _addOrganizationIdFilter(filterValue);
     case 'coordinates':
       return removeFilter
         ? _removeLocationFilter(newFilters)
         : _addLocationFilter(newFilters, filterValue);
     case 'all':
-      return _removeAllFilters(newFilters.page);
+      return _removeAllFilters();
   }
   return newFilters;
 };
@@ -341,11 +341,11 @@ function _removeCategoryFilter(newFilters, filterValue) {
   return newFilters;
 }
 
-function _addOrganizationIdFilter(filterValue, currentFilters) {
+function _addOrganizationIdFilter(filterValue) {
   changeFilterDisplayOptions(true, false);
   const newFilters = {
     id: filterValue,
-    page: currentFilters.page,
+    page: 1,
   };
   return newFilters;
 }
@@ -373,8 +373,8 @@ function _removeLocationFilter(newFilters) {
   return newFilters;
 }
 
-function _removeAllFilters(page) {
-  return {page};
+function _removeAllFilters() {
+  return {page: 1};
 }
 
 function _removePaginationFilters(newFilters) {
