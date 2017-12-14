@@ -67,26 +67,19 @@ class Main extends Component {
   };
 
   _renderBusinesses = () => {
-    const {handleChangePage, businesses, isMobile} = this.props;
-    const {organizations, metadata, appliedFilters} = businesses;
+    const {businesses, isMobile} = this.props;
+    const {organizations} = businesses;
     return (
-      <div>
-        <BusinessesList
-          organizations={organizations}
-          isMobile={isMobile}
-          selectedOrg={this.state.selectedOrg}
-        />
-        <Pagination
-          appliedFilters={appliedFilters}
-          metadata={metadata}
-          handleChangePage={handleChangePage}
-        />
-      </div>
+      <BusinessesList
+        organizations={organizations}
+        isMobile={isMobile}
+        selectedOrg={this.state.selectedOrg}
+      />
     );
   };
   render() {
     const {isMobile, businesses, showLoading, handleChangePage} = this.props;
-    const {displayOptions} = businesses;
+    const {displayOptions, metadata, appliedFilters} = businesses;
     return (
       <ContentMap
         businesses={businesses}
@@ -103,7 +96,14 @@ class Main extends Component {
         highlightOrgCard={this.highlightOrgCard}
         handleChangePage={handleChangePage}
       >
-        {showLoading ? this._renderLoader() : this._renderBusinesses()}
+        <div>
+          {showLoading ? this._renderLoader() : this._renderBusinesses()}
+          <Pagination
+            appliedFilters={appliedFilters}
+            metadata={metadata}
+            handleChangePage={handleChangePage}
+          />
+        </div>
       </ContentMap>
     );
   }
