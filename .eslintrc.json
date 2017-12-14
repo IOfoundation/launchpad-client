@@ -23,8 +23,7 @@
       {
         "trailingComma": "es5",
         "singleQuote": true,
-        "bracketSpacing": false,
-        "indent": ["error", 2, {"SwitchCase": 1}]
+        "bracketSpacing": false
       }
     ],
 

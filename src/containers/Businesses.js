@@ -68,7 +68,6 @@ export class Businesses extends PureComponent {
   };
 
   handleInitialOrgSearch = params => {
-    console.log(params);
     this.props.actions.updateChipFilters(
       'organization',
       params,
