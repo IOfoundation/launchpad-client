@@ -11,7 +11,8 @@ class Pagination extends React.Component {
   }
 
   render() {
-    const {last, currentPage} = this.props.metadata.pagination;
+    const {last} = this.props.metadata.pagination;
+    const {currentPage} = this.props.appliedFilters;
     if (!last.page) {
       return null;
     }
@@ -55,6 +56,7 @@ class Pagination extends React.Component {
   }
 }
 Pagination.propTypes = {
+  appliedFilters: PropTypes.object.isRequired,
   handleChangePage: PropTypes.func.isRequired,
   metadata: PropTypes.object.isRequired,
 };

@@ -167,12 +167,13 @@ export class Businesses extends PureComponent {
   handleChangePage = page => {
     const {params} = this.props;
     this.setState({showLoading: true});
+    this.props.actions.updateAppliedFiltersCurrentPage(page, params);
     this.props.actions.changePage(page, params);
   };
 
   render() {
     const {businesses, params} = this.props;
-    const {width, showLoading, businessPageLoaded, mainPageLoaded} = this.state;
+    const {width, showLoading, businessPageLoaded} = this.state;
     const filterById = 'id' in params && true;
     return (
       <MainLayout windowWidth={width} homePage={this.state.homePage}>

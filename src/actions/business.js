@@ -178,6 +178,16 @@ export function changePage(page, currentParams) {
   };
 }
 
+export function updateAppliedFiltersCurrentPage(page, currentParams) {
+  return async (dispatch: Function) => {
+    const appliedFilters = {
+      ...currentParams,
+      currentPage: page,
+    };
+    dispatch(updateAppliedFiltersObject(appliedFilters));
+  };
+}
+
 export function fetchFilterOptions() {
   return async (dispatch: Function) => {
     try {
@@ -249,12 +259,14 @@ export function updateChipFilters(
   removeFilter
 ) {
   return (dispatch: Function) => {
+    console.log(currentFilters);
     const appliedFilters = filtersObject(
       filterType,
       currentFilters,
       filterValue,
       removeFilter
     );
+    console.log(appliedFilters);
     dispatch(updateAppliedFiltersObject(appliedFilters));
     pushBrowserHistory(appliedFilters);
   };

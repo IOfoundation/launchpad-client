@@ -68,7 +68,7 @@ class Main extends Component {
 
   _renderBusinesses = () => {
     const {handleChangePage, businesses, isMobile} = this.props;
-    const {organizations, metadata} = businesses;
+    const {organizations, metadata, appliedFilters} = businesses;
     return (
       <div>
         <BusinessesList
@@ -76,7 +76,11 @@ class Main extends Component {
           isMobile={isMobile}
           selectedOrg={this.state.selectedOrg}
         />
-        <Pagination metadata={metadata} handleChangePage={handleChangePage} />
+        <Pagination
+          appliedFilters={appliedFilters}
+          metadata={metadata}
+          handleChangePage={handleChangePage}
+        />
       </div>
     );
   };

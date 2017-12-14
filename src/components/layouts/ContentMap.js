@@ -179,7 +179,7 @@ class ContentMap extends Component {
     const {
       onBoundsChange,
       highlightOrgCard,
-      businesses: {locations, organizations, metadata},
+      businesses: {locations, organizations, metadata, appliedFilters},
       topBar,
       expanded,
       toggleSwitch,
@@ -217,6 +217,7 @@ class ContentMap extends Component {
           {expanded ? this._renderReduceButton() : this._renderExpandButton()}
           <div className="map-pagination">
             <Pagination
+              appliedFilters={appliedFilters}
               handleChangePage={handleChangePage}
               metadata={metadata}
             />
