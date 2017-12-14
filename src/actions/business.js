@@ -259,14 +259,12 @@ export function updateChipFilters(
   removeFilter
 ) {
   return (dispatch: Function) => {
-    console.log(currentFilters);
     const appliedFilters = filtersObject(
       filterType,
       currentFilters,
       filterValue,
       removeFilter
     );
-    console.log(appliedFilters);
     dispatch(updateAppliedFiltersObject(appliedFilters));
     pushBrowserHistory(appliedFilters);
   };

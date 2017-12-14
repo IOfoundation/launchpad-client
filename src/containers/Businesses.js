@@ -24,9 +24,10 @@ export class Businesses extends PureComponent {
       this.checkBusinessType(params.category),
       locationToggleSwitch
     );
-    'id' in params
-      ? this.handleInitialOrgSearch(params)
-      : this.handleInitialCategorySearch(params);
+    if ('id' in params) {
+      this.handleInitialOrgSearch(params);
+    }
+    this.handleInitialCategorySearch(params);
   }
 
   componentDidMount() {

@@ -108,14 +108,8 @@ class Main extends Component {
   };
 
   render() {
-    const {
-      locations,
-      organizations,
-      toggleSwitch,
-      expanded,
-      showLoading,
-    } = this.props;
-    const {center, zoom, options} = this._createMapSettings();
+    const {locations, showLoading} = this.props;
+    const {center, zoom} = this._createMapSettings();
     const loadingStyles = {
       fullscreenControl: false,
       styles: [

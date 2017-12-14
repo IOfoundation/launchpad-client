@@ -117,6 +117,7 @@ class BusinessesPage extends Component {
 
 BusinessesPage.propTypes = {
   businesses: PropTypes.object.isRequired,
+  businessPageLoaded: PropTypes.bool.isRequired,
   filterById: PropTypes.bool,
   getTextSearchResults: PropTypes.func,
   handleChangePage: PropTypes.func,

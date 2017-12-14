@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "engines": {
-    "npm": ">=3",
+    "npm": "5.6.0a",
     "node": "8.2.1"
   },
   "scripts": {
