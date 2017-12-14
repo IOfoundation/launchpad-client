@@ -26,8 +26,9 @@ export class Businesses extends PureComponent {
     );
     if ('id' in params) {
       this.handleInitialOrgSearch(params);
+    } else {
+      this.handleInitialCategorySearch(params);
     }
-    this.handleInitialCategorySearch(params);
   }
 
   componentDidMount() {
@@ -67,6 +68,13 @@ export class Businesses extends PureComponent {
   };
 
   handleInitialOrgSearch = params => {
+    console.log(params);
+    this.props.actions.updateChipFilters(
+      'organization',
+      params,
+      params.id,
+      true
+    );
     this.props.actions.filterOrganizations(
       'organization',
       params,
@@ -154,14 +162,15 @@ export class Businesses extends PureComponent {
   };
 
   handleClickOnClearAllFilters = () => {
+    const {params} = this.props;
     const {
       updateChipFilters,
       filterOrganizations,
       changeFilterDisplayOptions,
     } = this.props.actions;
     this.setState({showLoading: true});
-    updateChipFilters('all');
-    filterOrganizations('all');
+    updateChipFilters('all', params);
+    filterOrganizations('all', params);
     changeFilterDisplayOptions(true, false);
   };
 

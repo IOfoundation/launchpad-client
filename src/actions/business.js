@@ -150,41 +150,22 @@ export function filterOrganizations(
 
 export function changePage(page, currentParams) {
   return async (dispatch: Function) => {
-    try {
-      dispatch(fetchOrganizationsRequestObject());
-      const params = {
-        ...currentParams,
-        page,
-        per_page: MaxItemsDisplayedPerPage,
-      };
-
-      const httpResponse = await httpRequest.get('/api/organizations', {
-        params,
-      });
-
-      const organizations = httpResponse.data;
-      const metadata = {
-        pagination: {
-          ...paginationMetadata(JSON.parse(httpResponse.headers.link)),
-          currentPage: params.page,
-        },
-        totalOrganizations: httpResponse.headers['x-total-count'],
-      };
-      dispatch(fetchOrganizationsSuccessObject(organizations, metadata));
-      pushBrowserHistory(params);
-    } catch (error) {
-      dispatch(fetchOrganizationsErrorObject(error));
-    }
+    const filters = {
+      ...currentParams,
+      page,
+    };
+    _debouncedBuildOrganizationsAndMetadata(filters, dispatch);
   };
 }
 
-export function updateAppliedFiltersCurrentPage(page, currentParams) {
+export function updateAppliedFiltersCurrentPage(page, filters) {
   return async (dispatch: Function) => {
     const appliedFilters = {
-      ...currentParams,
-      currentPage: page,
+      ...filters,
+      page,
     };
     dispatch(updateAppliedFiltersObject(appliedFilters));
+    pushBrowserHistory(appliedFilters);
   };
 }
 
@@ -277,9 +258,6 @@ async function _buildOrganizationsAndMetadata(filters, dispatch) {
       ...filters,
       per_page: MaxItemsDisplayedPerPage,
     };
-    if (!params.hasOwnProperty('page')) {
-      Object.assign(params, {page: 1});
-    }
     const httpResponse = await httpRequest.get('api/organizations', {params});
     const organizations = httpResponse.data;
     const metadata = {
@@ -310,19 +288,22 @@ async function _buildSearchResultsObject(filter, dispatch) {
 
 const filtersObject = (filterType, filters, filterValue, removeFilter) => {
   const newFilters = cloneDeep(filters);
+  if (!newFilters.hasOwnProperty('page')) {
+    newFilters.page = 1;
+  }
   switch (filterType) {
     case 'category':
       return removeFilter
         ? _removeCategoryFilter(newFilters, filterValue)
         : _addCategoryFilter(newFilters, filterValue);
     case 'organization':
-      return _addOrganizationIdFilter(filterValue);
+      return _addOrganizationIdFilter(filterValue, newFilters);
     case 'coordinates':
       return removeFilter
         ? _removeLocationFilter(newFilters)
         : _addLocationFilter(newFilters, filterValue);
     case 'all':
-      return _removeAllFilters();
+      return _removeAllFilters(newFilters.page);
   }
   return newFilters;
 };
@@ -360,10 +341,12 @@ function _removeCategoryFilter(newFilters, filterValue) {
   return newFilters;
 }
 
-function _addOrganizationIdFilter(filterValue) {
+function _addOrganizationIdFilter(filterValue, currentFilters) {
   changeFilterDisplayOptions(true, false);
-  const newFilters = {};
-  newFilters.id = filterValue;
+  const newFilters = {
+    id: filterValue,
+    page: currentFilters.page,
+  };
   return newFilters;
 }
 
@@ -390,8 +373,8 @@ function _removeLocationFilter(newFilters) {
   return newFilters;
 }
 
-function _removeAllFilters() {
-  return {};
+function _removeAllFilters(page) {
+  return {page};
 }
 
 function _removePaginationFilters(newFilters) {

@@ -70,7 +70,7 @@ class Main extends Component {
         ],
       };
     }
-    return {fullscreenControl: false};
+    return {fullscreenControl: false, styles: []};
   };
 
   _createMapSettings = () => {
@@ -109,7 +109,7 @@ class Main extends Component {
 
   render() {
     const {locations, showLoading} = this.props;
-    const {center, zoom} = this._createMapSettings();
+    const {center, zoom, options} = this._createMapSettings();
     const loadingStyles = {
       fullscreenControl: false,
       styles: [
@@ -139,6 +139,7 @@ class Main extends Component {
         center={center}
         zoom={zoom}
         onChange={this.handleBoundsChange}
+        options={options}
         resetBoundsOnResize={true}
         onChildMouseEnter={this._handleChildMouseEnter}
         onChildMouseLeave={this._handleChildMouseLeave}
@@ -149,7 +150,7 @@ class Main extends Component {
           ? locations.map(location => {
               const [lng, lat] = this.getCoordinates(location);
               return (
-                <MapMarker
+              <MapMarker
                   key={location.id}
                   lat={lat}
                   lng={lng}
@@ -157,7 +158,7 @@ class Main extends Component {
                   selected={this.state.selected === String(location.id)}
                   handleCloseClick={this._handleCloseClick}
                 />
-              );
+            );
             })
           : ''}
       </GoogleMap>

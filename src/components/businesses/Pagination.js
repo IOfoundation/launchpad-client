@@ -12,7 +12,7 @@ class Pagination extends React.Component {
 
   render() {
     const {last} = this.props.metadata.pagination;
-    const {currentPage} = this.props.appliedFilters;
+    const {page} = this.props.appliedFilters;
     if (!last.page) {
       return null;
     }
@@ -49,7 +49,7 @@ class Pagination extends React.Component {
           containerClassName={'pagination-index text-bold'}
           subContainerClassName={'pagination-numbers '}
           activeClassName={'active'}
-          forcePage={currentPage - 1}
+          forcePage={page - 1}
         />
       </div>
     );
