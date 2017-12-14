@@ -11,6 +11,7 @@ describe('<Pagination />', () => {
   it('No returns prevPage button when the currentPage is 1', () => {
     const wrapper = shallow(
       <Pagination
+        appliedFilters={{currentPage: 1}}
         metadata={{
           pagination: {
             first: {page: 1, per_page: 4},
@@ -36,6 +37,7 @@ describe('<Pagination />', () => {
   it('Returns prevPage button when the currentPage is greater than 1', () => {
     const wrapper = shallow(
       <Pagination
+        appliedFilters={{currentPage: 2}}
         metadata={{
           pagination: {
             first: {page: 1, per_page: 3},
@@ -62,6 +64,7 @@ describe('<Pagination />', () => {
   it('No returns nextPage button when current page is the last page', () => {
     const wrapper = shallow(
       <Pagination
+        appliedFilters={{currentPage: 2}}
         metadata={{
           pagination: {
             first: {page: 1, per_page: 3},

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "engines": {
-    "npm": "5.6.0a",
+    "npm": "5.6.0",
     "node": "8.2.1"
   },
   "scripts": {
@@ -22,14 +22,17 @@
     "test": "jest",
     "test:CI": "./node_modules/.bin/babel-node tools/testCi.js",
     "test:cover": "npm run test -- --coverage ",
-    "test:cover:CI": "npm run test:CI -- --coverage && cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js",
+    "test:cover:CI":
+      "npm run test:CI -- --coverage && cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js",
     "test:watch": "npm run test -- --watch",
     "heroku-postbuild": "npm run build",
     "start:prod": "node ./deploy/index.js",
     "open:cover": "npm run test:cover && opn ./coverage/lcov-report/index.html",
     "analyze-bundle": "babel-node ./tools/analyzeBundle.js",
-    "eslint": "node_modules/.bin/eslint --fix --ext \".js\" --ignore-pattern node_modules --quiet .",
-    "prettier": "node_modules/.bin/prettier --single-quote --bracket-spacing false --trailing-comma es5 --write '{src,__{tests,mocks}__}/**/*.js'"
+    "eslint":
+      "node_modules/.bin/eslint --fix --ext \".js\" --ignore-pattern node_modules --quiet .",
+    "prettier":
+      "node_modules/.bin/prettier --single-quote --bracket-spacing false --trailing-comma es5 --write '{src,__{tests,mocks}__}/**/*.js'"
   },
   "author": "",
   "license": "MIT",
@@ -127,9 +130,7 @@
     "url": ""
   },
   "jest": {
-    "setupFiles": [
-      "./src/tests/helpers/testHelpers.js"
-    ],
+    "setupFiles": ["./src/tests/helpers/testHelpers.js"],
     "moduleNameMapper": {
       "\\.(css|scss)$": "identity-obj-proxy",
       "^.+\\.(gif|ttf|eot|svg|woff|woff2|ico)$": "<rootDir>/tools/fileMock.js"
