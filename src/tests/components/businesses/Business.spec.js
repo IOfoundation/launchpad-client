@@ -15,17 +15,14 @@ describe('<Business />', () => {
         expanded={true}
       />
     );
-    console.log(wrapper.contains('.title'));
-    expect(wrapper.find('.title').text()).to.be.deep.equal('organization1');
-    expect(wrapper.find('.preview-details').text()).to.be.deep.equal(
-      'orgDescription'
+    expect(wrapper.find('h3.title').text()).to.be.deep.equal(
+      organizationFixture.name
     );
-    expect(wrapper.find('.main-location').contains('123 Road St')).to.be(true);
-    expect(wrapper.find('.main-contact').contains('jondoe@test.org')).to.be(
-      true
+    expect(wrapper.find('.business-description').text()).to.be.deep.equal(
+      organizationFixture.description
     );
-    //expect(wrapper.find('.business-service').length).to.equal(2);
-    wrapper.find('.business-card-icon').simulate('click');
-    expect(wrapper.state('expanded')).to.equal(true);
+    expect(wrapper.find('.main-location').exists()).to.be.deep.equal(true);
+    expect(wrapper.find('.main-contact').exists()).to.be.deep.equal(true);
+    expect(wrapper.find('.business-service')).to.have.lengthOf(2);
   });
 });
