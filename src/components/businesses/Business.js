@@ -291,7 +291,11 @@ class Business extends PureComponent {
 }
 
 Business.propTypes = {
-  business: PropTypes.object.isRequired,
+  business: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    description: PropTypes.string,
+  }).isRequired,
   expanded: PropTypes.bool.isRequired,
   isMobile: PropTypes.bool.isRequired,
   isSelected: PropTypes.bool.isRequired,

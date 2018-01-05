@@ -113,7 +113,7 @@ const paginationMetadata = links => {
     const link = links[type];
     if (link) {
       _paginationMetadata[type] = {};
-      const urlParse = URL(link);
+      const urlParse = new URL(link);
       urlParse.query
         .slice(1)
         .split('&')

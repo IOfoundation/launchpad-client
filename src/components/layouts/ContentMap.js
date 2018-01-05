@@ -232,7 +232,13 @@ class ContentMap extends Component {
 }
 
 ContentMap.propTypes = {
-  businesses: PropTypes.object,
+  businesses: PropTypes.shape({
+    locations: PropTypes.arrayOf(PropTypes.Object),
+    organizations: PropTypes.arrayOf(PropTypes.Object),
+    metadata: PropTypes.shape({
+      totalOrganization: PropTypes.string,
+    }),
+  }).isRequired,
   children: PropTypes.node,
   expanded: PropTypes.bool,
   expandMap: PropTypes.func.isRequired,

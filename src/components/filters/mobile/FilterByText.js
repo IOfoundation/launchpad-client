@@ -128,7 +128,10 @@ class FilterByTextMobile extends PureComponent {
   }
 }
 FilterByTextMobile.propTypes = {
-  appliedFilters: PropTypes.object,
+  appliedFilters: PropTypes.shape({
+    category: PropTypes.string,
+    page: PropTypes.number,
+  }),
   filterById: PropTypes.bool,
   getTextSearchResults: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,

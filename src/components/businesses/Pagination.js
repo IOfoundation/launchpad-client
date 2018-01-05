@@ -56,9 +56,20 @@ class Pagination extends React.Component {
   }
 }
 Pagination.propTypes = {
-  appliedFilters: PropTypes.object.isRequired,
+  appliedFilters: PropTypes.shape({
+    category: PropTypes.string,
+    page: PropTypes.number,
+  }).isRequired,
   handleChangePage: PropTypes.func.isRequired,
-  metadata: PropTypes.object.isRequired,
+  metadata: PropTypes.shape({
+    pagination: PropTypes.shape({
+      first: PropTypes.object,
+      last: PropTypes.object,
+      next: PropTypes.object,
+      currentPage: PropTypes.number,
+    }),
+    totalOrganization: PropTypes.string,
+  }).isRequired,
 };
 
 export default Pagination;

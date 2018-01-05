@@ -51,7 +51,9 @@ const FilterBox = ({
 };
 
 FilterBox.propTypes = {
-  businesses: PropTypes.object.isRequired,
+  businesses: PropTypes.shape({
+    organizations: PropTypes.arrayOf(PropTypes.Object),
+  }).isRequired,
   filterById: PropTypes.bool,
   getTextSearchResults: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,

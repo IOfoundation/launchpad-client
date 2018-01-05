@@ -4,6 +4,16 @@ import {isEmpty, isString} from 'lodash';
 import Chip from '../shared/Chip';
 
 const TagsBox = ({filters, clearAll, deleteFilter}) => {
+  const _renderChips = () => {
+    return filters.category.map(filter => (
+      <Chip
+        key={filter}
+        text={filter}
+        handleClick={deleteFilter}
+        canDelete={true}
+      />
+    ));
+  };
   return (
     <div>
       {isString(filters.category) && (
@@ -15,14 +25,7 @@ const TagsBox = ({filters, clearAll, deleteFilter}) => {
         />
       )}
       {!isEmpty(filters.category) && !isString(filters.category)
-        ? filters.category.map(filter => (
-            <Chip
-              key={filter}
-              text={filter}
-              handleClick={deleteFilter}
-              canDelete={true}
-            />
-          ))
+        ? _renderChips()
         : ''}
       {!isEmpty(filters.category) && (
         <a className="search-filter-clear text-thin" onClick={clearAll}>
@@ -36,7 +39,9 @@ const TagsBox = ({filters, clearAll, deleteFilter}) => {
 TagsBox.propTypes = {
   clearAll: PropTypes.func.isRequired,
   deleteFilter: PropTypes.func.isRequired,
-  filters: PropTypes.object.isRequired,
+  filters: PropTypes.shape({
+    businessServices: PropTypes.arrayOf(PropTypes.Object),
+  }),
 };
 
 export default TagsBox;

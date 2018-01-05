@@ -32,7 +32,8 @@ function configureStoreDev(initialState) {
   ];
 
   const composeEnhancers =
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // add support for Redux dev tools
+    // add support for Redux dev tools
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   const store = createStore(
     rootReducer,
     initialState,

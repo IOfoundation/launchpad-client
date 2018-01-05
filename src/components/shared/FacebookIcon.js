@@ -10,7 +10,7 @@ const FacebookIcon = ({className, size, style}) => {
       viewBox="0 0 18 18"
       style={style}
     >
-      <g id="Main" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+      <g id="Main">
         <g
           id="List-Less-Initial-Expanded"
           transform="translate(-323.000000, -576.000000)"
@@ -44,7 +44,7 @@ const FacebookIcon = ({className, size, style}) => {
 FacebookIcon.propTypes = {
   className: PropTypes.string,
   size: PropTypes.number,
-  style: PropTypes.object,
+  style: PropTypes.shape({}),
 };
 
 export default FacebookIcon;

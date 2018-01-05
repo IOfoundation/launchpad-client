@@ -154,7 +154,18 @@ export class Businesses extends PureComponent {
       this.handleOnChangeLocationToggle(filterType, removeFilter)
     );
     if (typeof removeFilter === 'undefined' && !isEmpty(params.category)) {
-      removeFilter = Boolean(params.category.includes(filterValue));
+      updateChipFilters(
+        filterType,
+        params,
+        filterValue,
+        Boolean(params.category.includes(filterValue))
+      );
+      filterOrganizations(
+        filterType,
+        params,
+        filterValue,
+        Boolean(params.category.includes(filterValue))
+      );
     }
     updateChipFilters(filterType, params, filterValue, removeFilter);
     filterOrganizations(filterType, params, filterValue, removeFilter);
@@ -205,9 +216,23 @@ export class Businesses extends PureComponent {
 }
 
 Businesses.propTypes = {
-  actions: PropTypes.object,
-  businesses: PropTypes.object,
-  params: PropTypes.object,
+  actions: PropTypes.shape({
+    updateChipFilters: PropTypes.func.isRequired,
+    filterOrganizations: PropTypes.func.isRequired,
+    changeFilterDisplayOptions: PropTypes.func.isRequired,
+    updateAppliedFiltersCurrentPage: PropTypes.func.isRequired,
+    changePage: PropTypes.func.isRequired,
+    fetchFilterOptions: PropTypes.func.isRequired,
+    fetchSearchResults: PropTypes.func.isRequired,
+  }),
+  businesses: PropTypes.shape({
+    organizations: PropTypes.arrayOf(PropTypes.object),
+    filters: PropTypes.shape({}),
+    displayOptions: PropTypes.shape({
+      locationToggleSwitch: PropTypes.bool.isRequired,
+    }),
+  }),
+  params: PropTypes.shape({}),
 };
 
 const mapStateToProps = _state => {

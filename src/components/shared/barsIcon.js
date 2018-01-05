@@ -22,7 +22,7 @@ const BarsIcon = ({className, size, style}) => {
 BarsIcon.propTypes = {
   className: PropTypes.string,
   size: PropTypes.number,
-  style: PropTypes.object,
+  style: PropTypes.shape({}),
 };
 
 export default BarsIcon;

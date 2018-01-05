@@ -110,7 +110,15 @@ class ResultInfo extends Component {
 ResultInfo.propTypes = {
   filterOptions: PropTypes.arrayOf(PropTypes.object).isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
-  metadata: PropTypes.object.isRequired,
+  metadata: PropTypes.shape({
+    pagination: PropTypes.shape({
+      first: PropTypes.object,
+      last: PropTypes.object,
+      next: PropTypes.object,
+      currentPage: PropTypes.number,
+    }),
+    totalOrganization: PropTypes.string,
+  }).isRequired,
   showBusinessTypes: PropTypes.bool,
   showLoading: PropTypes.bool.isRequired,
 };

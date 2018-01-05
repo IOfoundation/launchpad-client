@@ -22,7 +22,7 @@ const ArrowLeft = ({className, size, style}) => {
 ArrowLeft.propTypes = {
   className: PropTypes.string,
   size: PropTypes.number,
-  style: PropTypes.object,
+  style: PropTypes.shape({}),
 };
 
 export default ArrowLeft;

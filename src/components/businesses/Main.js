@@ -109,7 +109,10 @@ class Main extends Component {
   }
 }
 Main.propTypes = {
-  businesses: PropTypes.object.isRequired,
+  businesses: PropTypes.shape({
+    locations: PropTypes.arrayOf(PropTypes.Object),
+    organizations: PropTypes.arrayOf(PropTypes.Object),
+  }).isRequired,
   handleChangePage: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
   handleOnChangeBusinessType: PropTypes.func.isRequired,

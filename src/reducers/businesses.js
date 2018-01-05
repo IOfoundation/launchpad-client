@@ -6,6 +6,7 @@ type ACTION = {};
 
 const initialState: STATE = {
   organizations: [],
+  locations: [],
   filters: null,
   metadata: {
     pagination: {
@@ -27,7 +28,12 @@ export default function(state: STATE = initialState, action: ACTION): STATE {
     case types.FETCH_ORGANIZATIONS_SUCCESS: {
       const {organizations, metadata} = action;
       if (organizations.id) {
-        const organizations = [organizations];
+        return {
+          ...state,
+          organizations: [organizations],
+          locations: organizations.locations,
+          metadata,
+        };
       }
       const locations = isEmpty(organizations)
         ? null

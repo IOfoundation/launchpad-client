@@ -28,7 +28,9 @@ const FilterBoxMobile = ({
   );
 };
 FilterBoxMobile.propTypes = {
-  businesses: PropTypes.object.isRequired,
+  businesses: PropTypes.shape({
+    organizations: PropTypes.arrayOf(PropTypes.Object),
+  }).isRequired,
   getTextSearchResults: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,
   handleOnChangeFilterOptions: PropTypes.func.isRequired,

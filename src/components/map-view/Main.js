@@ -54,6 +54,22 @@ class Main extends Component {
     this.props.highlightOrgCard(-1);
   };
 
+  _renderMarkers = locations => {
+    return locations.map(location => {
+      const [lng, lat] = this.getCoordinates(location);
+      return (
+        <MapMarker
+          key={location.id}
+          lat={lat}
+          lng={lng}
+          organization={location.organization}
+          selected={this.state.selected === String(location.id)}
+          handleCloseClick={this._handleCloseClick}
+        />
+      );
+    });
+  };
+
   createMapOptions = showLoading => {
     if (showLoading) {
       return {
@@ -146,21 +162,7 @@ class Main extends Component {
         onChildClick={this._handleOnClick}
         bootstrapURLKeys={{key: process.env.GOOGLE_MAP_API_KEY}}
       >
-        {locations
-          ? locations.map(location => {
-              const [lng, lat] = this.getCoordinates(location);
-              return (
-              <MapMarker
-                  key={location.id}
-                  lat={lat}
-                  lng={lng}
-                  organization={location.organization}
-                  selected={this.state.selected === String(location.id)}
-                  handleCloseClick={this._handleCloseClick}
-                />
-            );
-            })
-          : ''}
+        {locations ? this._renderMarkers(locations) : ''}
       </GoogleMap>
     );
   }

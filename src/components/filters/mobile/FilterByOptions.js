@@ -49,7 +49,9 @@ const FilterByOptions = ({filterOptions, handleOnChangeFilterOptions}) => {
   );
 };
 FilterByOptions.propTypes = {
-  filterOptions: PropTypes.object,
+  filterOptions: PropTypes.shape({
+    businessServices: PropTypes.arrayOf(PropTypes.Object),
+  }),
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
 };
 

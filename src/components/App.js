@@ -8,6 +8,9 @@ import '../styles/main.scss';
 // version of hot reloading won't hot reload a stateless
 // component at the top-level.
 class App extends Component {
+  shouldComponentUpdate(nextProps) {
+    return this.props.children !== nextProps.children;
+  }
   render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>

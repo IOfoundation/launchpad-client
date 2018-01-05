@@ -76,7 +76,7 @@ class ResultPage extends Component {
 }
 
 ResultPage.propTypes = {
-  BusinessesList: PropTypes.object,
+  BusinessesList: PropTypes.node,
   highlightOrgCard: PropTypes.func.isRequired,
   isMobile: PropTypes.bool.isRequired,
   locations: PropTypes.arrayOf(PropTypes.object),

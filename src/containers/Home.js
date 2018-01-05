@@ -39,9 +39,11 @@ export class Home extends Component {
 }
 
 Home.propTypes = {
-  actions: PropTypes.object,
+  actions: PropTypes.shape({
+    fetchSearchResults: PropTypes.func.isRequired,
+  }),
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
-  location: PropTypes.object,
+  location: PropTypes.shape({}),
 };
 
 const mapStateToProps = _state => {
