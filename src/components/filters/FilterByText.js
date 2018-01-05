@@ -10,8 +10,14 @@ class FilterByText extends Component {
     inputOnFocus: false,
     showDropdown: false,
     searchText: '',
-    filterById: this.props.filterById && true,
   };
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.organizations.length !== this.props.organizations.length) {
+      nextProps.filterById && !isEmpty(nextProps.organizations)
+        ? this.setState({searchText: nextProps.organizations[0].name})
+        : this.setState({searchText: ''})
+    }
+  }
   deleteFilter = e => {
     const filter = e.currentTarget.getAttribute('data-value');
     this.props.handleOnChangeFilterOptions('category', filter, true);
@@ -30,15 +36,13 @@ class FilterByText extends Component {
     this.setState({
       showDropdown: false,
       searchText: '',
-      filterById: false,
       inputOnFocus: false,
     });
     this.props.handleClickOnClearAllFilters();
   };
-
   handleKeyPress = event => {
     const value = event.target.value;
-    this.setState({searchText: value, showDropdown: true, filterById: false});
+    this.setState({searchText: value, showDropdown: true});
     this.props.getTextSearchResults(value);
     if (isEmpty(value)) {
       this.setState({showDropdown: false});
@@ -132,8 +136,7 @@ class FilterByText extends Component {
   }
 
   render() {
-    const {appliedFilters, organizations} = this.props;
-    const [organization] = organizations;
+    const {appliedFilters, filterById} = this.props;
     return (
       <div className="col-md-12 col-xs-12 text-xs-margin filterTextContainer no-padding">
         <div className="grid search-text-form p-bot-16">
@@ -165,29 +168,19 @@ class FilterByText extends Component {
             <input
               type="text"
               className="search-by-text text-thin"
-              value={
-                this.state.filterById === true &&
-                isEmpty(appliedFilters) &&
-                !isEmpty(organizations)
-                  ? organization.name
-                  : this.state.searchText
-              }
+              value={this.state.searchText}
               onChange={e => this.handleKeyPress(e)}
               onClick={() => this.handleInputClicked()}
               placeholder="Search by Resource Name"
               style={
-                this.state.inputOnFocus ||
-                this.state.searchText ||
-                (this.state.filterById && isEmpty(appliedFilters))
+                this.state.inputOnFocus || this.state.searchText || filterById
                   ? {opacity: 1}
                   : {opacity: 0}
               }
             />
             <a
               style={
-                this.state.inputOnFocus ||
-                this.state.searchText ||
-                (this.state.filterById && isEmpty(appliedFilters))
+                this.state.inputOnFocus || this.state.searchText || filterById
                   ? {opacity: 0}
                   : {opacity: 1}
               }
