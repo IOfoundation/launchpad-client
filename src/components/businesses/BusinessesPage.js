@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import FilterBox from '../filters/FilterBox';
 import FilterBoxMobile from '../filters/FilterBoxMobile';
-import BusinessesView from './Main';
+import Main from './Main';
 import {Link} from 'react-router';
 
 class BusinessesPage extends Component {
@@ -94,7 +94,7 @@ class BusinessesPage extends Component {
                 ? this.renderFilterBoxMobile()
                 : this.renderFilterBoxDesktop()}
               {businessPageLoaded ? (
-                <BusinessesView
+                <Main
                   isMobile={isMobile}
                   businesses={businesses}
                   showLoading={showLoading}
@@ -117,7 +117,7 @@ class BusinessesPage extends Component {
 
 BusinessesPage.propTypes = {
   businesses: PropTypes.shape({
-    organizations: PropTypes.shape({}),
+    organizations: PropTypes.arrayOf(PropTypes.object),
   }).isRequired,
   businessPageLoaded: PropTypes.bool.isRequired,
   filterById: PropTypes.bool,

@@ -22,17 +22,14 @@
     "test": "jest",
     "test:CI": "./node_modules/.bin/babel-node tools/testCi.js",
     "test:cover": "npm run test -- --coverage ",
-    "test:cover:CI":
-      "npm run test:CI -- --coverage && cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js",
+    "test:cover:CI": "npm run test:CI -- --coverage && cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js",
     "test:watch": "npm run test -- --watch",
     "heroku-postbuild": "npm run build",
     "start:prod": "node ./deploy/index.js",
     "open:cover": "npm run test:cover && opn ./coverage/lcov-report/index.html",
     "analyze-bundle": "babel-node ./tools/analyzeBundle.js",
-    "eslint":
-      "node_modules/.bin/eslint --fix --ext \".js\" --ignore-pattern node_modules --quiet .",
-    "prettier":
-      "node_modules/.bin/prettier --single-quote --bracket-spacing false --trailing-comma es5 --write '{src,__{tests,mocks}__}/**/*.js'"
+    "eslint": "node_modules/.bin/eslint --fix --ext \".js\" --ignore-pattern node_modules --quiet .",
+    "prettier": "node_modules/.bin/prettier --single-quote --bracket-spacing false --trailing-comma es5 --write '{src,__{tests,mocks}__}/**/*.js'"
   },
   "author": "",
   "license": "MIT",
@@ -40,12 +37,14 @@
     "axios": "0.17.0",
     "chai": "4.1.2",
     "deep-freeze": "^0.0.1",
+    "enzyme-to-json": "2.0.0",
     "express": "4.16.2",
     "flexboxgrid": "6.3.1",
-    "google-map-react": "^0.24.0",
+    "google-map-react": "^0.27.0",
     "jsonapi-serializer": "3.5.5",
     "material-ui": "0.18.3",
     "object-assign": "4.1.0",
+    "prop-types": "15.5.10",
     "query-string": "^4.3.4",
     "react": "15.5.4",
     "react-dom": "15.5.4",
@@ -55,6 +54,8 @@
     "react-router": "3.0.5",
     "react-router-redux": "4.0.8",
     "react-tabs": "2.1.0",
+    "react-tap-event-plugin": "2.0.1",
+    "react-test-renderer": "16.2.0",
     "redux": "3.6.0",
     "redux-thunk": "^2.2.0",
     "url-parse": "1.2.0",
@@ -108,9 +109,8 @@
     "postcss-loader": "1.2.1",
     "prettier": "1.7.4",
     "prompt": "1.0.0",
-    "prop-types": "15.5.10",
+    "react-addons-test-utils": "^15.4.1",
     "react-hot-loader": "3.0.0-beta.6",
-    "react-test-renderer": "15.5.4",
     "redux-immutable-state-invariant": "1.2.4",
     "redux-mock-store": "^1.2.3",
     "replace": "0.3.0",
@@ -130,7 +130,9 @@
     "url": ""
   },
   "jest": {
-    "setupFiles": ["./src/tests/helpers/testHelpers.js"],
+    "setupFiles": [
+      "./src/tests/helpers/testHelpers.js"
+    ],
     "moduleNameMapper": {
       "\\.(css|scss)$": "identity-obj-proxy",
       "^.+\\.(gif|ttf|eot|svg|woff|woff2|ico)$": "<rootDir>/tools/fileMock.js"

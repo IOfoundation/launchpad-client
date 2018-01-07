@@ -1,0 +1,134 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ResultInfo /> renders snapshot of ResultInfo 1`] = `
+<div
+  className="grid business-type-btn"
+>
+  <p
+    className="m-bot-16 col-xs-12 col-md-12 col-lg-12 p-0 business-type-label"
+  >
+    Select a business type that represents you.
+  </p>
+  <div
+    className="business-type-container col-lg-12 p-0 grid"
+  >
+    <div
+      className="col-xs-4 col-md-4 col-lg-4 m-bot-16 p-0"
+    >
+      <button
+        className="btn btn-search btn-outline"
+        key="142"
+        onClick={[Function]}
+      >
+        <div
+          className="btn-search-text text-bold"
+        >
+          <span
+            className="desktop-devices"
+          >
+            Startup or High
+          </span>
+          <span
+            className="desktop-devices"
+          >
+            Growth Business
+          </span>
+          <span
+            className="mobile-devices"
+          >
+            Startup or High Growth Business
+          </span>
+        </div>
+        <ArrowRight
+          className="btn-search-icon"
+          size={20}
+          style={
+            Object {
+              "color": "#000",
+              "verticalAlign": "middle",
+            }
+          }
+        />
+      </button>
+    </div>
+    <div
+      className="col-xs-4 col-md-4 col-lg-4 m-bot-16 p-right-0"
+    >
+      <button
+        className="btn btn-search btn-outline"
+        key="143"
+        onClick={[Function]}
+      >
+        <div
+          className="btn-search-text text-bold"
+        >
+          <span
+            className="desktop-devices"
+          >
+            Main Street/
+          </span>
+          <span
+            className="desktop-devices"
+          >
+            Small Business
+          </span>
+          <span
+            className="mobile-devices"
+          >
+            Main Street/Small Business
+          </span>
+        </div>
+        <ArrowRight
+          className="btn-search-icon"
+          size={20}
+          style={
+            Object {
+              "color": "#000",
+              "verticalAlign": "middle",
+            }
+          }
+        />
+      </button>
+    </div>
+    <div
+      className="col-xs-4 col-md-4 col-lg-4 m-bot-16 p-right-0"
+    >
+      <button
+        className="btn btn-search btn-outline"
+        key="144"
+        onClick={[Function]}
+      >
+        <div
+          className="btn-search-text text-bold"
+        >
+          <span
+            className="desktop-devices"
+          >
+            Microenterprise or
+          </span>
+          <span
+            className="desktop-devices"
+          >
+            Home-Based Business
+          </span>
+          <span
+            className="mobile-devices"
+          >
+            Microenterprise or Home-Based Business
+          </span>
+        </div>
+        <ArrowRight
+          className="btn-search-icon"
+          size={20}
+          style={
+            Object {
+              "color": "#000",
+              "verticalAlign": "middle",
+            }
+          }
+        />
+      </button>
+    </div>
+  </div>
+</div>
+`;

@@ -1,43 +1,29 @@
 import React from 'react';
 import {shallow} from 'enzyme';
+import toJson from 'enzyme-to-json';
 
 import ResultInfo from '../../../components/businesses/ResultInfo';
-import {MdKeyboardArrowRight} from 'react-icons/lib/md';
+import filtersFixture from '../../fixtures/filters';
 
-function businessesMetadata(totalOrganizations) {
+const createProps = props => {
   return {
-    pagination: {},
-    totalOrganizations:  totalOrganizations
+    filterOptions: filtersFixture.businessTypes,
+    handleOnChangeFilterOptions: jest.fn(),
+    metadata: props.metadata,
+    showBusinessTypes: props.showBusinessTypes,
+    showLoading: false,
   };
 };
 
-function filterOptions() {
-  return {
-    businessTypes: [
-      {
-        id: 142,
-        name: 'Startup or High-Growth Business'
-      },
-      {
-        id: 143,
-        name: 'Main Street or Small Business',
-      },
-      {
-        id: 144,
-        name: 'Microenterprise or Home Based Business',
-      }
-    ]
-  }
-}
-
-const handleOnChangeFilterOptions = jest.fn();
-
 describe('<ResultInfo />', () => {
-  it('')
+  it('renders snapshot of ResultInfo', () => {
+    const props = createProps({
+      metadata: {
+        totalOrganization: '50',
+      },
+      showBusinessTypes: true,
+    });
+    const wrapper = shallow(<ResultInfo {...props} />);
+    expect(toJson(wrapper)).toMatchSnapshot();
+  });
 });
-
-<ResultInfo
-  businessesMetadata={this.props.businessesMetadata}
-  handleOnChangeFilterOptions={this.props.handleOnChangeFilterOptions}
-  filterOptions={this.props.filterOptions.businessTypes}
-/>

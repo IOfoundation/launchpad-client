@@ -99,32 +99,32 @@ function items() {
   return [];
 }
 
-describe('<FilterBox />', () => {
-  it('Should return 1 FilterByText Component', () => {
-    const wrapper = shallow(
-      <FilterBox
-        getTextSearchResults={getTextSearchResults}
-        filterOptions={filters()}
-        items={items()}
-        handleClickOnClearAllFilters={handleClickOnClearAllFilters}
-        handleOnChangeFilterOptions={handleOnChangeFilterOptions}
-        getFilterChips={getFilterChips}
-      />
-    );
-    expect(wrapper.find('.filterByText').length).toEqual(1);
-  });
-
-  it('Should return 4 FilterByOption Components', () => {
-    const wrapper = shallow(
-      <FilterBox
-        getTextSearchResults={getTextSearchResults}
-        filterOptions={filters()}
-        items={items()}
-        handleClickOnClearAllFilters={handleClickOnClearAllFilters}
-        handleOnChangeFilterOptions={handleOnChangeFilterOptions}
-        getFilterChips={getFilterChips}
-      />
-    );
-    expect(wrapper.find('.filterByOptions').length).toEqual(4);
-  });
-});
+// describe('<FilterBox />', () => {
+//   it('Should return 1 FilterByText Component', () => {
+//     const wrapper = shallow(
+//       <FilterBox
+//         getTextSearchResults={getTextSearchResults}
+//         filterOptions={filters()}
+//         items={items()}
+//         handleClickOnClearAllFilters={handleClickOnClearAllFilters}
+//         handleOnChangeFilterOptions={handleOnChangeFilterOptions}
+//         getFilterChips={getFilterChips}
+//       />
+//     );
+//     expect(wrapper.find('.filterByText').length).toEqual(1);
+//   });
+//
+//   it('Should return 4 FilterByOption Components', () => {
+//     const wrapper = shallow(
+//       <FilterBox
+//         getTextSearchResults={getTextSearchResults}
+//         filterOptions={filters()}
+//         items={items()}
+//         handleClickOnClearAllFilters={handleClickOnClearAllFilters}
+//         handleOnChangeFilterOptions={handleOnChangeFilterOptions}
+//         getFilterChips={getFilterChips}
+//       />
+//     );
+//     expect(wrapper.find('.filterByOptions').length).toEqual(4);
+//   });
+// });

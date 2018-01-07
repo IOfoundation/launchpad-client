@@ -57,7 +57,10 @@ class Pagination extends React.Component {
 }
 Pagination.propTypes = {
   appliedFilters: PropTypes.shape({
-    category: PropTypes.string,
+    category: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.arrayOf(PropTypes.string),
+    ]),
     page: PropTypes.number,
   }).isRequired,
   handleChangePage: PropTypes.func.isRequired,

@@ -233,8 +233,8 @@ class ContentMap extends Component {
 
 ContentMap.propTypes = {
   businesses: PropTypes.shape({
-    locations: PropTypes.arrayOf(PropTypes.Object),
-    organizations: PropTypes.arrayOf(PropTypes.Object),
+    locations: PropTypes.arrayOf(PropTypes.object),
+    organizations: PropTypes.arrayOf(PropTypes.object),
     metadata: PropTypes.shape({
       totalOrganization: PropTypes.string,
     }),

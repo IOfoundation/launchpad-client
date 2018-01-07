@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Business /> --- Snapshot capturing Snapshot of Business 1`] = `
+exports[`<Business /> renders snapshot of Business 1`] = `
 <div
   className="business-card"
   style={
@@ -74,7 +74,6 @@ exports[`<Business /> --- Snapshot capturing Snapshot of Business 1`] = `
           <h4>
             123 Road St
           </h4>
-          
           <h4>
             Sacramento, CA
           </h4>
@@ -105,6 +104,7 @@ exports[`<Business /> --- Snapshot capturing Snapshot of Business 1`] = `
       </p>
       <div
         className="col-lg-12 col-md-12 col-xs-12 grid p-0 business-service m-bot-28"
+        key="1"
       >
         <div
           className="service-description col-lg-12 col-md-12 col-xs-12 p-left-0"
@@ -121,49 +121,26 @@ exports[`<Business /> --- Snapshot capturing Snapshot of Business 1`] = `
         <div
           className="col-lg-12 col-md-12 col-xs-12 p-0 m-top-16"
         >
-          <a
-            className="
-      search-filter-label
-    "
-            data-value="category1"
-            onClick={[Function]}
-          >
-            <span
-              className="text"
-            >
-              category1
-            </span>
-          </a>
-          <a
-            className="
-      search-filter-label
-    "
-            data-value="category2"
-            onClick={[Function]}
-          >
-            <span
-              className="text"
-            >
-              category2
-            </span>
-          </a>
-          <a
-            className="
-      search-filter-label
-    "
-            data-value="category3"
-            onClick={[Function]}
-          >
-            <span
-              className="text"
-            >
-              category3
-            </span>
-          </a>
+          <Chip
+            canDelete={false}
+            key="54"
+            text="category1"
+          />
+          <Chip
+            canDelete={false}
+            key="55"
+            text="category2"
+          />
+          <Chip
+            canDelete={false}
+            key="56"
+            text="category3"
+          />
         </div>
       </div>
       <div
         className="col-lg-12 col-md-12 col-xs-12 grid p-0 business-service m-bot-28"
+        key="2"
       >
         <div
           className="service-description col-lg-12 col-md-12 col-xs-12 p-left-0"
@@ -180,19 +157,11 @@ exports[`<Business /> --- Snapshot capturing Snapshot of Business 1`] = `
         <div
           className="col-lg-12 col-md-12 col-xs-12 p-0 m-top-16"
         >
-          <a
-            className="
-      search-filter-label
-    "
-            data-value="category1"
-            onClick={[Function]}
-          >
-            <span
-              className="text"
-            >
-              category1
-            </span>
-          </a>
+          <Chip
+            canDelete={false}
+            key="54"
+            text="category1"
+          />
         </div>
       </div>
       <div
@@ -221,6 +190,7 @@ exports[`<Business /> --- Snapshot capturing Snapshot of Business 1`] = `
         >
           <div
             className="col-lg-12 col-md-12 col-xs-12 m-bot-24 p-0 grid"
+            key="2"
           >
             <div
               className="col-lg-6 col-md-6 col-xs-6 p-0 m-right-54"

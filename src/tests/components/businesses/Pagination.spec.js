@@ -5,24 +5,30 @@ import Pagination from '../../../components/businesses/Pagination';
 import ArrowLeft from '../../../components/shared/ArrowLeft';
 import ArrowRight from '../../../components/shared/ArrowRight';
 
-const handleChangePage = jest.fn();
+const createProps = props => {
+  return {
+    appliedFilters: {
+      page: props.page,
+    },
+    handleChangePage: jest.fn(),
+    metadata: {
+      pagination: props.pagination,
+    },
+  };
+};
 
 describe('<Pagination />', () => {
   it('No prevPage button when the currentPage is 1', () => {
-    const wrapper = shallow(
-      <Pagination
-        appliedFilters={{currentPage: 1}}
-        metadata={{
-          pagination: {
-            first: {page: 1, per_page: 4},
-            last: {},
-            next: {},
-            currentPage: 1,
-          },
-        }}
-        handleChangePage={handleChangePage}
-      />
-    );
+    const props = createProps({
+      page: 1,
+      pagination: {
+        first: {page: 1, per_page: 4},
+        last: {},
+        next: {},
+        currentPage: 1,
+      },
+    });
+    const wrapper = shallow(<Pagination {...props} />);
     expect(
       wrapper.contains(
         <ArrowLeft
@@ -35,20 +41,16 @@ describe('<Pagination />', () => {
   });
 
   it('Should return prevPage button when the currentPage is greater than 1', () => {
-    const wrapper = shallow(
-      <Pagination
-        appliedFilters={{currentPage: 2}}
-        metadata={{
-          pagination: {
-            first: {page: 1, per_page: 3},
-            last: {page: 2, per_page: 3},
-            prev: {page: 1, per_page: 3},
-            currentPage: 2,
-          },
-        }}
-        handleChangePage={handleChangePage}
-      />
-    );
+    const props = createProps({
+      page: 2,
+      pagination: {
+        first: {page: 1, per_page: 3},
+        last: {page: 2, per_page: 3},
+        prev: {page: 1, per_page: 3},
+        currentPage: 2,
+      },
+    });
+    const wrapper = shallow(<Pagination {...props} />);
     expect(
       wrapper.contains(
         <ArrowLeft
@@ -62,20 +64,16 @@ describe('<Pagination />', () => {
   });
 
   it('No nextPage button when current page is the last page', () => {
-    const wrapper = shallow(
-      <Pagination
-        appliedFilters={{currentPage: 2}}
-        metadata={{
-          pagination: {
-            first: {page: 1, per_page: 3},
-            last: {page: 2, per_page: 3},
-            prev: {page: 1, per_page: 3},
-            currentPage: 2,
-          },
-        }}
-        handleChangePage={handleChangePage}
-      />
-    );
+    const props = createProps({
+      page: 2,
+      pagination: {
+        first: {page: 1, per_page: 3},
+        last: {page: 2, per_page: 3},
+        prev: {page: 1, per_page: 3},
+        currentPage: 2,
+      },
+    });
+    const wrapper = shallow(<Pagination {...props} />);
     expect(
       wrapper.contains(
         <ArrowRight
@@ -88,17 +86,15 @@ describe('<Pagination />', () => {
   });
 
   it('No pagination when only one page of results', () => {
-    const wrapper = shallow(
-      <Pagination
-        businessesMetadata={{pagination: {
-          first: {page: 1, per_page: 3},
-          last: {page: 1, per_page: 3},
-          currentPage: 1
-        }}}
-        handleChangePage={handleChangePage}
-      />
-    );
-    expect(wrapper.exists('.pagination-container-hide')).toBe(true);
-  })
-  // TODO: TESTS THAT CLICKING ON THE PAGINATION BUTTONS ACTUALLY CHANGES THE PAGE
+    const props = createProps({
+      page: 2,
+      pagination: {
+        first: {page: 1, per_page: 3},
+        last: {page: 1, per_page: 3},
+        currentPage: 1,
+      },
+    });
+    const wrapper = shallow(<Pagination {...props} />);
+    expect(wrapper.exists('.pagination-container-hide')).to.equal(true);
+  });
 });
