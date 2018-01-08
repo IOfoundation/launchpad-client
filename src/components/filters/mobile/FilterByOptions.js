@@ -50,7 +50,7 @@ const FilterByOptions = ({filterOptions, handleOnChangeFilterOptions}) => {
 };
 FilterByOptions.propTypes = {
   filterOptions: PropTypes.shape({
-    businessServices: PropTypes.arrayOf(PropTypes.Object),
+    businessServices: PropTypes.arrayOf(PropTypes.object),
   }),
   handleOnChangeFilterOptions: PropTypes.func.isRequired,
 };

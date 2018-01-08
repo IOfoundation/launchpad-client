@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BusinessesForm /> Search box renders results 1`] = `
+<BusinessesForm
+  disableOnClickOutside={[Function]}
+  enableOnClickOutside={[Function]}
+  eventTypes={
+    Array [
+      "mousedown",
+      "touchstart",
+    ]
+  }
+  getTextSearchResults={[Function]}
+  items={Array []}
+  outsideClickIgnoreClass="ignore-react-onclickoutside"
+  preventDefault={false}
+  stopPropagation={false}
+/>
+`;

@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FilterByOptions /> renders snapshot of FilterByOptions 1`] = `
+<FilterByOptions
+  disableOnClickOutside={[Function]}
+  enableOnClickOutside={[Function]}
+  eventTypes={
+    Array [
+      "mousedown",
+      "touchstart",
+    ]
+  }
+  filterName="Business Services"
+  filterOptions={
+    Array [
+      Object {
+        "children": Array [
+          Object {
+            "id": 3,
+            "name": "Bookkeeping/Accounting Software Training",
+          },
+          Object {
+            "id": 4,
+            "name": "Budget, Financial Statement & Cash Flow Training",
+          },
+        ],
+        "id": 2,
+        "name": "Financial Management",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "id": 11,
+            "name": "Accelerator Programs",
+          },
+          Object {
+            "id": 12,
+            "name": "Equity Investors: Angels",
+          },
+        ],
+        "id": 10,
+        "name": "Capital",
+      },
+    ]
+  }
+  handleOnChangeFilterOptions={[Function]}
+  outsideClickIgnoreClass="ignore-react-onclickoutside"
+  preventDefault={false}
+  stopPropagation={false}
+/>
+`;

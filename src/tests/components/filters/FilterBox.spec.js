@@ -1,130 +1,33 @@
 import React from 'react';
 import {shallow} from 'enzyme';
+import toJson from 'enzyme-to-json';
 
 import FilterBox from '../../../components/filters/FilterBox.js';
+import organizationFixture from '../../fixtures/organization';
+import filtersFixture from '../../fixtures/filters';
 
-const getTextSearchResults = jest.fn();
-const handleClickOnClearAllFilters = jest.fn();
-const handleOnChangeFilterOptions = jest.fn();
-const getFilterChips = jest.fn();
-
-function filters() {
+const createProps = props => {
   return {
-    filters: [
-      {
-        businessServices: [
-          {
-            id: 2,
-            name: 'Financial Management',
-            children: [
-              {
-                id: 3,
-                name: 'Bookkeeping/Accounting Software Training',
-              },
-              {
-                id: 4,
-                name: 'Budget, Financial Statement & Cash Flow Training',
-              },
-            ],
-          },
-          {
-            id: 10,
-            name: 'Capital',
-            children: [
-              {
-                id: 11,
-                name: 'Accelerator Programs',
-              },
-              {
-                id: 12,
-                name: 'Equity Investors: Angels',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        businessTypes: [
-          {
-            id: 142,
-            name: 'Startup or High-Growth Business',
-          },
-          {
-            id: 143,
-            name: 'Main Street or Small Business',
-          },
-        ],
-      },
-      {
-        stages: [
-          {
-            id: 146,
-            name: 'Idea/Inception',
-          },
-          {
-            id: 147,
-            name: 'Proof of Concept/Prototype/Market Intro',
-          },
-        ],
-      },
-      {
-        communities: [
-          {
-            id: 151,
-            name: 'African American',
-          },
-          {
-            id: 156,
-            name: 'Native American',
-          },
-        ],
-      },
-      {
-        industries: [
-          {
-            id: 172,
-            name: 'Management',
-          },
-          {
-            id: 180,
-            name: 'Retail',
-          },
-        ],
-      },
-    ],
+    businesses: {
+      appliedFilters: props.appliedFilters,
+      filters: filtersFixture,
+      items: props.items,
+      organizations: [organizationFixture],
+    },
+    filterById: false,
+    getTextSearchResults: jest.fn(),
+    handleClickOnClearAllFilters: jest.fn(),
+    handleOnChangeFilterOptions: jest.fn(),
   };
-}
+};
 
-function items() {
-  return [];
-}
-
-// describe('<FilterBox />', () => {
-//   it('Should return 1 FilterByText Component', () => {
-//     const wrapper = shallow(
-//       <FilterBox
-//         getTextSearchResults={getTextSearchResults}
-//         filterOptions={filters()}
-//         items={items()}
-//         handleClickOnClearAllFilters={handleClickOnClearAllFilters}
-//         handleOnChangeFilterOptions={handleOnChangeFilterOptions}
-//         getFilterChips={getFilterChips}
-//       />
-//     );
-//     expect(wrapper.find('.filterByText').length).toEqual(1);
-//   });
-//
-//   it('Should return 4 FilterByOption Components', () => {
-//     const wrapper = shallow(
-//       <FilterBox
-//         getTextSearchResults={getTextSearchResults}
-//         filterOptions={filters()}
-//         items={items()}
-//         handleClickOnClearAllFilters={handleClickOnClearAllFilters}
-//         handleOnChangeFilterOptions={handleOnChangeFilterOptions}
-//         getFilterChips={getFilterChips}
-//       />
-//     );
-//     expect(wrapper.find('.filterByOptions').length).toEqual(4);
-//   });
-// });
+describe('<FilterBox />', () => {
+  it('renders snapshot of FilterBox', () => {
+    const props = createProps({
+      appliedFilters: {page: 1},
+      items: [],
+    });
+    const wrapper = shallow(<FilterBox {...props} />);
+    expect(toJson(wrapper)).toMatchSnapshot();
+  });
+});

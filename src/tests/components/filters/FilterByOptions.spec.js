@@ -1,60 +1,25 @@
-// TODO: test _renderOptions & _renderSubOptions, test _toggleDropdownOptions
-
 import React from 'react';
 import {shallow} from 'enzyme';
+import toJson from 'enzyme-to-json';
 
 import FilterByOptions from '../../../components/filters/FilterByOptions.js';
+import filtersFixture from '../../fixtures/filters';
 
-const handleOnChangeFilterOptions = jest.fn();
+const createProps = props => {
+  return {
+    filterName: props.filterName,
+    filterOptions: props.filterOptions,
+    handleOnChangeFilterOptions: jest.fn(),
+  };
+};
 
-function filters() {
-  return [
-    {
-      id: 2,
-      name: 'Financial Management',
-      children: [
-        {
-          id: 3,
-          name: 'Bookkeeping/Accounting Software Training',
-        },
-        {
-          id: 4,
-          name: 'Budget, Financial Statement & Cash Flow Training',
-        },
-      ],
-    },
-    {
-      id: 10,
-      name: 'Capital',
-      children: [
-        {
-          id: 11,
-          name: 'Accelerator Programs',
-        },
-        {
-          id: 12,
-          name: 'Equity Investors: Angels',
-        },
-      ],
-    },
-  ];
-}
-
-// function items() {
-//   return [];
-// }
-
-// describe('<FilterByOptions />', () => {
-//   it('_renderOptions should return a dropdown menu with 2 options', () => {
-//     const wrapper = shallow(
-//       <FilterByOptions
-//         className={'filterByOptions'}
-//         filterName={'Business Services'}
-//         filterOptions={filters()}
-//         handleOnChangeFilterOptions={handleOnChangeFilterOptions}
-//       />
-//     );
-//     const dropdownButton = wrapper.find('.filter-btn text-thin');
-//     expect(wrapper.find('.dropdown-options').length).toEqual(1);
-//   });
-// });
+describe('<FilterByOptions />', () => {
+  it('renders snapshot of FilterByOptions', () => {
+    const props = createProps({
+      filterName: 'Business Services',
+      filterOptions: filtersFixture.businessServices,
+    });
+    const wrapper = shallow(<FilterByOptions {...props} />);
+    expect(toJson(wrapper)).toMatchSnapshot();
+  });
+});
