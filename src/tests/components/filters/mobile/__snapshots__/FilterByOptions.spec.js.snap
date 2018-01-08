@@ -1,0 +1,134 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FilterByText /> renders snapshot for mobile FilterByOptions component 1`] = `
+<div
+  className="dropdown-input-container"
+>
+  <span
+    className="filter-icon"
+  >
+    <img
+      src="../static-data/images/filter.png"
+    />
+    Filters
+  </span>
+  <input
+    className="dropdown-input"
+    id="filters-dropdown"
+    type="checkbox"
+  />
+  <label
+    className="dropdown-label"
+    htmlFor="filters-dropdown"
+  >
+    No filters selected
+  </label>
+  <ArrowRight
+    className="right-arrow"
+    htmlFor="filters-dropdown"
+    size={20}
+    style={
+      Object {
+        "color": "#fff",
+        "verticalAlign": "middle",
+      }
+    }
+  />
+  <label
+    className="close-icon"
+    htmlFor="filters-dropdown"
+  >
+    <img
+      src="/static-data/images/close.png"
+    />
+  </label>
+  <div
+    className="dropdown-container-filters"
+  >
+    <FilterOption
+      filterName="Business Services"
+      filterOptions={
+        Array [
+          Object {
+            "children": Array [
+              Object {
+                "id": 3,
+                "name": "Bookkeeping/Accounting Software Training",
+              },
+              Object {
+                "id": 4,
+                "name": "Budget, Financial Statement & Cash Flow Training",
+              },
+            ],
+            "id": 2,
+            "name": "Financial Management",
+          },
+          Object {
+            "children": Array [
+              Object {
+                "id": 11,
+                "name": "Accelerator Programs",
+              },
+              Object {
+                "id": 12,
+                "name": "Equity Investors: Angels",
+              },
+            ],
+            "id": 10,
+            "name": "Capital",
+          },
+        ]
+      }
+      handleOnChangeFilterOptions={[Function]}
+    />
+    <FilterOption
+      filterName="Industry"
+      filterOptions={
+        Array [
+          Object {
+            "id": 172,
+            "name": "Management",
+          },
+          Object {
+            "id": 180,
+            "name": "Retail",
+          },
+        ]
+      }
+      handleOnChangeFilterOptions={[Function]}
+    />
+    <FilterOption
+      filterName="Business Stage"
+      filterOptions={
+        Array [
+          Object {
+            "id": 146,
+            "name": "Idea/Inception",
+          },
+          Object {
+            "id": 147,
+            "name": "Proof of Concept/Prototype/Market Intro",
+          },
+        ]
+      }
+      handleOnChangeFilterOptions={[Function]}
+    />
+    <FilterOption
+      filterName="Underserved Com..."
+      filterOptions={
+        Array [
+          Object {
+            "id": 151,
+            "name": "African American",
+          },
+          Object {
+            "id": 156,
+            "name": "Native American",
+          },
+        ]
+      }
+      handleOnChangeFilterOptions={[Function]}
+    />
+  </div>
+</div>
+`;

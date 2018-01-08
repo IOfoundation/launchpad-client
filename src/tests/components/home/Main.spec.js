@@ -10,10 +10,7 @@ const getTextSearchResults = jest.fn();
 describe('<HomePage />', () => {
   it('Renders a BusinessesForm"', () => {
     const wrapper = shallow(
-      <HomePage
-        items={items}
-        getTextSearchResults={getTextSearchResults}
-      />
+      <HomePage items={items} getTextSearchResults={getTextSearchResults} />
     );
     expect(wrapper.find(BusinessesForm).length).toEqual(1);
   });

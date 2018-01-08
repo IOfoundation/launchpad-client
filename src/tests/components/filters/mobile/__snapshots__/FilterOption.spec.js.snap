@@ -1,0 +1,139 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FilterByText /> renders snapshot for mobile FilterOption component 1`] = `
+<ul
+  className="filter-list"
+>
+  <li>
+    <input
+      id="Business Services"
+      type="checkbox"
+    />
+    <div
+      className="select"
+    >
+      <label>
+        Business Services
+      </label>
+      <label
+        htmlFor="Business Services"
+      >
+        <ArrowRight
+          className="first-level-icon"
+          size={20}
+          style={
+            Object {
+              "color": "#fff",
+              "verticalAlign": "middle",
+            }
+          }
+        />
+      </label>
+    </div>
+    <div
+      className="filters-second-level"
+    >
+      <ul>
+        <li
+          key="2"
+        >
+          <input
+            id="Financial Management"
+            type="checkbox"
+          />
+          <div
+            className="hover"
+          >
+            <a
+              onClick={[Function]}
+            >
+              Financial Management
+            </a>
+            <label
+              htmlFor="Financial Management"
+            >
+              <ArrowRight
+                className="second-level-icon"
+                size={20}
+                style={
+                  Object {
+                    "color": "#fff",
+                    "verticalAlign": "middle",
+                  }
+                }
+              />
+            </label>
+          </div>
+          <div
+            className="filters-third-level"
+          >
+            <ul>
+              <li
+                key="3"
+                onClick={[Function]}
+              >
+                Bookkeeping/Accounting Software Training
+              </li>
+              <li
+                key="4"
+                onClick={[Function]}
+              >
+                Budget, Financial Statement & Cash Flow Training
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li
+          key="10"
+        >
+          <input
+            id="Capital"
+            type="checkbox"
+          />
+          <div
+            className="hover"
+          >
+            <a
+              onClick={[Function]}
+            >
+              Capital
+            </a>
+            <label
+              htmlFor="Capital"
+            >
+              <ArrowRight
+                className="second-level-icon"
+                size={20}
+                style={
+                  Object {
+                    "color": "#fff",
+                    "verticalAlign": "middle",
+                  }
+                }
+              />
+            </label>
+          </div>
+          <div
+            className="filters-third-level"
+          >
+            <ul>
+              <li
+                key="11"
+                onClick={[Function]}
+              >
+                Accelerator Programs
+              </li>
+              <li
+                key="12"
+                onClick={[Function]}
+              >
+                Equity Investors: Angels
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </li>
+</ul>
+`;
