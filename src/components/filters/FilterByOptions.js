@@ -106,7 +106,7 @@ class FilterByOptions extends Component {
 
 FilterByOptions.propTypes = {
   filterName: PropTypes.string.isRequired,
-  filterOptions: PropTypes.arrayOf(PropTypes.object),
+  filterOptions: PropTypes.arrayOf(PropTypes.object).isRequired,
   handleOnChangeFilterOptions: PropTypes.func,
 };
 export default onClickOutside(FilterByOptions);

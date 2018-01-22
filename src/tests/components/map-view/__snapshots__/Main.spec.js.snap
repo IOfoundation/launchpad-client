@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Main /> renders snapshot of map-view/Main 1`] = `
+<GoogleMap
+  bootstrapURLKeys={
+    Object {
+      "key": undefined,
+    }
+  }
+  center={
+    Object {
+      "lat": 38.57,
+      "lng": -121.47,
+    }
+  }
+  debounced={true}
+  distanceToMouse={[Function]}
+  googleMapLoader={[Function]}
+  hoverDistance={30}
+  layerTypes={Array []}
+  onChange={[Function]}
+  onChildClick={[Function]}
+  onChildMouseEnter={[Function]}
+  onChildMouseLeave={[Function]}
+  options={
+    Object {
+      "fullscreenControl": false,
+      "styles": Array [],
+    }
+  }
+  resetBoundsOnResize={true}
+  style={
+    Object {
+      "height": "100%",
+      "margin": 0,
+      "padding": 0,
+      "position": "relative",
+      "width": "100%",
+    }
+  }
+  yesIWantToUseGoogleMapApiInternals={false}
+  zoom={10}
+/>
+`;

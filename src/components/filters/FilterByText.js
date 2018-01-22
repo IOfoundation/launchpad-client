@@ -13,9 +13,11 @@ class FilterByText extends Component {
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.organizations.length !== this.props.organizations.length) {
-      nextProps.filterById && !isEmpty(nextProps.organizations)
-        ? this.setState({searchText: nextProps.organizations[0].name})
-        : this.setState({searchText: ''})
+      if (nextProps.filterById && !isEmpty(nextProps.organizations)) {
+        this.setState({searchText: nextProps.organizations[0].name});
+      } else {
+        this.setState({searchText: ''});
+      }
     }
   }
   deleteFilter = e => {
@@ -208,7 +210,10 @@ class FilterByText extends Component {
 
 FilterByText.propTypes = {
   appliedFilters: PropTypes.shape({
-    category: PropTypes.string,
+    category: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.arrayOf(PropTypes.string),
+    ]),
     page: PropTypes.number,
   }),
   filterById: PropTypes.bool,

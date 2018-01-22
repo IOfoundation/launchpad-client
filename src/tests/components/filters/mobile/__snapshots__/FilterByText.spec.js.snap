@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FilterByText /> renders snapshot for mobile FilterByText component 1`] = `
+<div
+  className="filter-chip"
+>
+  <div
+    className="search-input-container p-left-16 p-right-16"
+  >
+    <input
+      className="search-by-text text-thin"
+      onChange={[Function]}
+      placeholder="Or search by name"
+      type="text"
+      value=""
+    />
+    <img
+      className="search-by-text-icon"
+      src="/static-data/images/search.png"
+    />
+  </div>
+  <div
+    className="hero_input-hide"
+  >
+    <ul
+      className="option-dropdown-list"
+    >
+      <li
+        className="not-match-message"
+      >
+        <a>
+          This does not match any item on our platform
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+`;

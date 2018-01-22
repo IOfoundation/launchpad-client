@@ -1,0 +1,285 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ContentMap /> renders snapshot of ContentMap 1`] = `
+<div
+  className="businessesContainer"
+>
+  <div
+    className="map m-bot-20 col-lg-3 col-md-3 col-xs-3 p-0"
+  >
+    <div
+      className="map-container-expand"
+    >
+      <Main
+        expanded={false}
+        highlightOrgCard={[Function]}
+        isMobile={false}
+        locations={Array []}
+        onBoundsChange={[Function]}
+        organizations={
+          Array [
+            Object {
+              "contacts": Array [
+                Object {
+                  "email": "jondoe@test.org",
+                  "id": 1,
+                  "name": "Jon Doe",
+                  "phones": Array [
+                    Object {
+                      "number": "(530) 795-1520",
+                    },
+                  ],
+                },
+              ],
+              "description": "orgDescription",
+              "email": "jondoe@something.org",
+              "id": 1,
+              "locations": Array [
+                Object {
+                  "address": Object {
+                    "address_1": "123 Road St",
+                    "address_2": null,
+                    "city": "Sacramento",
+                    "postal_code": "12345",
+                    "state_province": "CA",
+                  },
+                  "id": 1,
+                  "name": "location1",
+                  "phones": Array [
+                    Object {
+                      "id": 2,
+                      "number": "(123) 456 - 7890",
+                    },
+                  ],
+                },
+                Object {
+                  "address": Object {
+                    "address_1": "456 Street Rd",
+                    "address_2": null,
+                    "city": "Sacramento",
+                    "postal_code": "12345",
+                    "state_province": "CA",
+                  },
+                  "id": 2,
+                  "name": "location2",
+                  "phones": Array [
+                    Object {
+                      "id": 3,
+                      "number": "(123) 456 - 7890",
+                    },
+                  ],
+                },
+              ],
+              "name": "organization1",
+              "phones": Array [
+                Object {
+                  "id": 1,
+                  "number": "(123) 456 - 7890",
+                },
+              ],
+              "services": Array [
+                Object {
+                  "categories": Array [
+                    Object {
+                      "id": 54,
+                      "name": "category1",
+                    },
+                    Object {
+                      "id": 55,
+                      "name": "category2",
+                    },
+                    Object {
+                      "id": 56,
+                      "name": "category3",
+                    },
+                  ],
+                  "description": "lorem ipsum...",
+                  "email": null,
+                  "id": 1,
+                  "name": "service1",
+                  "phones": Array [],
+                },
+                Object {
+                  "categories": Array [
+                    Object {
+                      "id": 54,
+                      "name": "category1",
+                    },
+                  ],
+                  "description": "lorem ipsum...",
+                  "email": null,
+                  "id": 2,
+                  "name": "service2",
+                  "phones": Array [],
+                },
+              ],
+            },
+            Object {
+              "contacts": Array [
+                Object {
+                  "email": "jondoe@test.org",
+                  "id": 1,
+                  "name": "Jon Doe",
+                  "phones": Array [
+                    Object {
+                      "number": "(530) 795-1520",
+                    },
+                  ],
+                },
+              ],
+              "description": "orgDescription",
+              "email": "jondoe@something.org",
+              "id": 1,
+              "locations": Array [
+                Object {
+                  "address": Object {
+                    "address_1": "123 Road St",
+                    "address_2": null,
+                    "city": "Sacramento",
+                    "postal_code": "12345",
+                    "state_province": "CA",
+                  },
+                  "id": 1,
+                  "name": "location1",
+                  "phones": Array [
+                    Object {
+                      "id": 2,
+                      "number": "(123) 456 - 7890",
+                    },
+                  ],
+                },
+                Object {
+                  "address": Object {
+                    "address_1": "456 Street Rd",
+                    "address_2": null,
+                    "city": "Sacramento",
+                    "postal_code": "12345",
+                    "state_province": "CA",
+                  },
+                  "id": 2,
+                  "name": "location2",
+                  "phones": Array [
+                    Object {
+                      "id": 3,
+                      "number": "(123) 456 - 7890",
+                    },
+                  ],
+                },
+              ],
+              "name": "organization1",
+              "phones": Array [
+                Object {
+                  "id": 1,
+                  "number": "(123) 456 - 7890",
+                },
+              ],
+              "services": Array [
+                Object {
+                  "categories": Array [
+                    Object {
+                      "id": 54,
+                      "name": "category1",
+                    },
+                    Object {
+                      "id": 55,
+                      "name": "category2",
+                    },
+                    Object {
+                      "id": 56,
+                      "name": "category3",
+                    },
+                  ],
+                  "description": "lorem ipsum...",
+                  "email": null,
+                  "id": 1,
+                  "name": "service1",
+                  "phones": Array [],
+                },
+                Object {
+                  "categories": Array [
+                    Object {
+                      "id": 54,
+                      "name": "category1",
+                    },
+                  ],
+                  "description": "lorem ipsum...",
+                  "email": null,
+                  "id": 2,
+                  "name": "service2",
+                  "phones": Array [],
+                },
+              ],
+            },
+          ]
+        }
+        showLoading={false}
+        toggleSwitch={false}
+      />
+    </div>
+    <div
+      className="row between-xs middle-xs reducedMapBottom"
+    >
+      <button
+        className="expand-btn map-btn btn-link btn-link-primary text-bold text-xs-margin p-0 m-bot-8 m-top-5"
+        onClick={[Function]}
+      >
+        Expand Map
+      </button>
+      <div
+        className="map-btn"
+      >
+        <div
+          className="float-right"
+        >
+          <button
+            className="toggle-btn toggle-off"
+            onClick={[Function]}
+          >
+            <span />
+          </button>
+          <button
+            className="btn-link btn-link-primary underline text-xs-margin text-bold"
+            onClick={[Function]}
+          >
+            Search in Map Area
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      className="map-pagination"
+    >
+      <Pagination
+        appliedFilters={
+          Object {
+            "pagination": Object {
+              "currentPage": 1,
+              "first": Object {
+                "page": 1,
+                "per_page": 4,
+              },
+              "last": Object {},
+              "next": Object {},
+            },
+          }
+        }
+        handleChangePage={[Function]}
+        metadata={
+          Object {
+            "totalOrganization": "50",
+          }
+        }
+      />
+    </div>
+  </div>
+  <div>
+    <div
+      className="result-container-hide desktop-devices"
+    >
+      <div
+        className="col-md-12 col-xs-12 businessList--reduced p-left-0 list"
+      />
+    </div>
+  </div>
+</div>
+`;

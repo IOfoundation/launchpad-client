@@ -129,7 +129,10 @@ class FilterByTextMobile extends PureComponent {
 }
 FilterByTextMobile.propTypes = {
   appliedFilters: PropTypes.shape({
-    category: PropTypes.string,
+    category: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.arrayOf(PropTypes.string),
+    ]),
     page: PropTypes.number,
   }),
   filterById: PropTypes.bool,

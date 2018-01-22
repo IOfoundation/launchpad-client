@@ -193,10 +193,10 @@ export class Businesses extends PureComponent {
 
   render() {
     const {businesses, params} = this.props;
-    const {width, showLoading, businessPageLoaded} = this.state;
+    const {width, showLoading, businessPageLoaded, homePage} = this.state;
     const filterById = 'id' in params && true;
     return (
-      <MainLayout windowWidth={width} homePage={this.state.homePage}>
+      <MainLayout windowWidth={width} homePage={homePage}>
         <BusinessesPage
           businesses={businesses}
           businessPageLoaded={businessPageLoaded}

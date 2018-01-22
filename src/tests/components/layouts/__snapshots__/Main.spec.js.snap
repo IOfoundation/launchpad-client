@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Main /> renders snapshot of Main 1`] = `
+<div>
+  <Header
+    homePage={false}
+  />
+  <MobileFooter />
+</div>
+`;

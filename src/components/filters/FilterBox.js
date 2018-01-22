@@ -52,7 +52,7 @@ const FilterBox = ({
 
 FilterBox.propTypes = {
   businesses: PropTypes.shape({
-    organizations: PropTypes.arrayOf(PropTypes.Object),
+    organizations: PropTypes.arrayOf(PropTypes.object),
   }).isRequired,
   filterById: PropTypes.bool,
   getTextSearchResults: PropTypes.func.isRequired,

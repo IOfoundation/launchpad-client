@@ -39,9 +39,7 @@ const TagsBox = ({filters, clearAll, deleteFilter}) => {
 TagsBox.propTypes = {
   clearAll: PropTypes.func.isRequired,
   deleteFilter: PropTypes.func.isRequired,
-  filters: PropTypes.shape({
-    businessServices: PropTypes.arrayOf(PropTypes.Object),
-  }),
+  filters: PropTypes.shape({}),
 };
 
 export default TagsBox;

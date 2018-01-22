@@ -3,7 +3,6 @@ import Chip from '../shared/Chip';
 import FacebookIcon from '../shared/FacebookIcon';
 import TwitterIcon from '../shared/TwitterIcon';
 import LinkedinIcon from '../shared/LinkedinIcon';
-
 import {PropTypes} from 'prop-types';
 import {isEmpty} from 'lodash';
 

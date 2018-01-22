@@ -1,28 +1,20 @@
 import React from 'react';
 import {shallow} from 'enzyme';
+import toJson from 'enzyme-to-json';
 
-import MainLayout from '../../../components/layouts/Main';
-import Header from '../../../components/shared/Header';
-import Footer from '../../../components/shared/Footer';
-import BusinessesPage from '../../../components/businesses/BusinessesPage';
+import Main from '../../../components/layouts/Main';
 
-describe('<MainLayout />', () => {
-  it('Render the Header component', () => {
-    const wrapper = shallow(<MainLayout />);
-    expect(wrapper.find(Header).length).toEqual(1);
-  });
+const createProps = props => {
+  return {
+    homePage: props.homePage,
+    windowWidth: props.windowWidth,
+  };
+};
 
-  it('Render the Footer component', () => {
-    const wrapper = shallow(<MainLayout />);
-    expect(wrapper.find(Footer).length).toEqual(1);
-  });
-
-  it('Render the childrens added to the layout', () => {
-    const wrapper = shallow(
-      <MainLayout windowWidth={1000}>
-        <BusinessesPage />
-      </MainLayout>
-    );
-    expect(wrapper.length).toEqual(1);
+describe('<Main />', () => {
+  it('renders snapshot of Main', () => {
+    const props = createProps({homePage: false, windowWidth: 960});
+    const wrapper = shallow(<Main {...props} />);
+    expect(toJson(wrapper)).toMatchSnapshot();
   });
 });
