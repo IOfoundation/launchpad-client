@@ -21,6 +21,7 @@ class FilterByOptions extends Component {
   handleClick = selectedfilterOption => () => {
     const {name} = selectedfilterOption;
     this.props.handleOnChangeFilterOptions('category', name);
+    this.setState();
   };
 
   handleClickOutside() {

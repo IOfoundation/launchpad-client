@@ -20,13 +20,7 @@ class Pagination extends React.Component {
       .fill(1)
       .map((v, i) => v + i);
     return (
-      <div
-        className={
-          pages.length <= 1
-            ? 'pagination-container-hide'
-            : 'pagination between-xs middle-xs m-bot-100'
-        }
-      >
+      <div className={'pagination between-xs middle-xs m-bot-100'}>
         <ReactPaginate
           previousLabel={
             <ArrowLeft

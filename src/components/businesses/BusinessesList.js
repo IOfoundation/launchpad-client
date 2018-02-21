@@ -12,7 +12,7 @@ class BusinessesList extends PureComponent {
         business={organization}
         isMobile={isMobile}
         key={organization.id}
-        expanded={organizations.length === 1}
+        expanded={this.props.totalOrganizations <= 1}
       />
     ));
   }
