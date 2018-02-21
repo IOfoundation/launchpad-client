@@ -2,7 +2,7 @@
 
 This app ->
 1. **Clone the project**. `git clone [https://github.com/fullstacklabs/city-of-sac-client.git]`.
-2. **Run the setup script**. `npm run setup`
+2. **Run the setup script**. `npm install`
 
 Switch to API ->
 
