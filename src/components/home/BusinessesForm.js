@@ -126,7 +126,7 @@ class BusinessesForm extends Component {
         />
         <img
           className="text-search-icon"
-          src="/static-data/images/search.png"
+          src="/static-data/images/Dropdown-arrow.svg"
         />
         <div
           className={
