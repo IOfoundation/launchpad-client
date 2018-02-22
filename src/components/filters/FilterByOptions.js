@@ -20,6 +20,7 @@ class FilterByOptions extends Component {
   }
   handleClick = name => {
     this.props.handleOnChangeFilterOptions('category', name);
+    this.setState({subDropdownOpen: false});
     this._toggleDropdownOptions();
   };
 
@@ -94,7 +95,17 @@ class FilterByOptions extends Component {
           className="filter-btn text-thin"
           onClick={() => this._toggleDropdownOptions()}
         >
-          {this.props.filterName}
+          <span
+            style={{
+              textOverflow: 'ellipsis',
+              overflow: 'hidden',
+              whiteSpace: 'nowrap',
+              display: 'block',
+              paddingRight: '32px',
+            }}
+          >
+            {this.props.filterName}
+          </span>
           <DropdownArrow className="filter-btn-icon" size={32} />
         </button>
         {this.state.dropdownOpen && this._renderOptions()}

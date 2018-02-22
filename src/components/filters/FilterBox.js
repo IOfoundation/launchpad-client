@@ -3,13 +3,14 @@ import {PropTypes} from 'prop-types';
 import FilterByText from './FilterByText';
 import FilterByOptions from './FilterByOptions';
 
-const FilterBox = ({
-  getTextSearchResults,
-  handleClickOnClearAllFilters,
-  handleOnChangeFilterOptions,
-  businesses: {appliedFilters, filters, items, organizations},
-  filterById,
-}) => {
+const FilterBox = props => {
+  const {
+    getTextSearchResults,
+    handleClickOnClearAllFilters,
+    handleOnChangeFilterOptions,
+    filterById,
+    businesses: {appliedFilters, organizations, items, filters},
+  } = props;
   return (
     <div className="container-invert">
       <div className="grid">
@@ -41,7 +42,7 @@ const FilterBox = ({
           handleOnChangeFilterOptions={handleOnChangeFilterOptions}
         />
         <FilterByOptions
-          filterName={'Underserved Com...'}
+          filterName={'Underserved Communities'}
           filterOptions={filters.communities}
           handleOnChangeFilterOptions={handleOnChangeFilterOptions}
         />
