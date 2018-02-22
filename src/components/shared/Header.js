@@ -14,7 +14,7 @@ const Header = ({homePage}) => {
               <Logo />
             </Link>
           )}
-          <span className="header_title">{'Welcome to IO Ipsum'}</span>
+          <span className="header_title">{'Welcome to LAUNCHPAD'}</span>
           {!homePage && (
             <Link to="/">
               <span className="header_leftLink text-regular">

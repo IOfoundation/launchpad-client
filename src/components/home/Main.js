@@ -15,21 +15,15 @@ const Main = ({items, getTextSearchResults}) => {
             </div>
             <div className="col-lg-12">
               <h2 className="desktop-devices text-bold">
-                {'Where startups and small businesses connect in'}
+                {'Connecting startups and small businesses'}
                 <br />
-                {'California’s Capital Region'}
+                {'to the resources they need to grow'}
               </h2>
               <h2 className="mobile-devices text-bold">
                 {
-                  'Where startups and small businesses connect in California’s Capital Region'
+                  'Connecting startups and small businesses to the resources they need to grow'
                 }
               </h2>
-              <div className="desktop-devices text-thin">
-                <p>{'Find local resources to help your business grow'}</p>
-              </div>
-              <div className="mobile-devices m-top-16 text-thin">
-                <p>{'Find local resources to help your business grow'}</p>
-              </div>
               <div className="hero_inputContainer">
                 <BusinessesForm
                   items={items}
