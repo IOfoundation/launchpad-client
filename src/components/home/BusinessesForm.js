@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
 import onClickOutside from 'react-onclickoutside';
-import {isEmpty} from 'lodash';
+import {isEmpty, last} from 'lodash';
 import {Link} from 'react-router';
 
 class BusinessesForm extends Component {
@@ -11,8 +11,91 @@ class BusinessesForm extends Component {
       searchText: '',
       showDropdown: false,
       showPreviewDropdown: false,
+      actualSelectedItem: null,
+      currentIndex: null,
     };
+    this.defaultList;
+    this._formOnKeyDown=this._formOnKeyDown.bind(this);
+    this._onMouseOver = this._onMouseOver.bind(this);
+    this._fromNodeListToArray=this._fromNodeListToArray.bind(this);
+    this._move = this._move.bind(this);
   }
+
+  _formOnKeyDown(event) {
+    switch (event.key) {
+      case 'Enter':
+        event.preventDefault();
+        console.log('Enter');
+        break;
+      case 'ArrowUp':
+        console.log('Up');
+        this._move('up');
+        break;
+      case 'ArrowDown':
+        console.log('down');
+        this._move('down');
+        break;
+      default:
+        break;
+    }
+  }
+
+  _fromNodeListToArray(nodeList){
+    this.defaultList = nodeList && [...nodeList.childNodes];
+  }
+
+  _move(action){
+    this._fromNodeListToArray(this.defaultList);
+    let index = this.state.currentIndex;
+    let elem = this.state.actualSelectedItem;
+    let newIndex, newElem;
+    switch(action){
+      case 'up':
+        if(index!=null && elem!=null){
+          newIndex=index-1;
+          newElem=this.defaultList[index-1];
+          this.setState({actualSelectedItem: newElem,
+                         currentIndex:newIndex});
+        }else{
+          newIndex=this.defaultList.length-1;
+          newElem=last(this.defaultList);
+          this.setState({currentIndex: newIndex ,
+                         actualSelectedItem: newElem});
+        }
+        console.log(newElem, newIndex);
+        break;
+      case 'down':
+        if(index!=null && elem!=null){
+          newIndex=index+1;
+          newElem=this.defaultList[index+1];
+          this.setState({actualSelectedItem: newElem,
+                        currentIndex:newIndex});
+        }else{
+          newIndex=0;
+          newElem=this.defaultList[0]
+          this.setState({currentIndex: newIndex,
+            actualSelectedItem: newElem});
+        }
+        console.log(newElem, newIndex);
+        break;
+      default:
+        break;
+    }
+  }
+
+  _onMouseOver(e) {
+    let elemLi, index;
+    this._fromNodeListToArray(this.defaultList);
+    if(e.target.tagName.toLowerCase() ==='a'){
+      elemLi=e.target.parentElement;
+    }else{
+      elemLi=e.target;
+    }
+    index = this.defaultList.findIndex( elem => elem.value ===  elemLi.value);
+    console.log(elemLi, elemLi.value, index);
+    this.setState({actualSelectedItem: elemLi, currentIndex: index});
+  }
+
   handleClickOutside() {
     this.setState({
       searchText: '',
@@ -38,26 +121,26 @@ class BusinessesForm extends Component {
   }
   defaultDropdownOptions() {
     return (
-      <ul className="hero-dropdown-list">
-        <li>
+      <ul className="hero-dropdown-list" ref={(list)=> this.defaultList=list}>
+        <li value="1" onMouseOver={this._onMouseOver}>
           <Link to="/businesses?category=Planning/Management">
             {'Business Planning/Management'}
           </Link>
         </li>
-        <li>
+        <li value="2" onMouseOver={this._onMouseOver}>
           <Link to="/businesses?category=Capital">{'Capital'}</Link>
         </li>
-        <li>
+        <li value="3" onMouseOver={this._onMouseOver}>
           <Link to="/businesses?category=Legal%20Services">
             {'Legal Services'}
           </Link>
         </li>
-        <li>
+        <li value="4" onMouseOver={this._onMouseOver} >
           <Link to="/businesses?category=Marketing/Sales">
             {'Marketing/Sales'}
           </Link>
         </li>
-        <li>
+        <li value="5" onMouseOver={this._onMouseOver}>
           <Link to="/businesses?category=Physical%20Space">
             {'Physical Space'}
           </Link>
@@ -74,15 +157,18 @@ class BusinessesForm extends Component {
               ? 'hero-dropdown-list-hide'
               : 'hero-dropdown-list scroll-list'
           }
+          ref={(list)=> this.defaultList=list}
         >
           {this.props.items.map(item => (
             <li
               key={item.id}
+              value={item.id}
               className={
                 item.searchable_type === 'Organization'
                   ? 'text-thin'
                   : 'text-regular'
               }
+              onMouseOver={this._onMouseOver}
             >
               <a
                 href={
@@ -111,7 +197,7 @@ class BusinessesForm extends Component {
 
   render() {
     return (
-      <form>
+      <form onKeyDown={this._formOnKeyDown}>
         <input
           type="text"
           value={this.state.searchText}
