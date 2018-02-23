@@ -111,7 +111,11 @@ class BusinessesForm extends Component {
 
   render() {
     return (
-      <form>
+      <form
+        onSubmit={e => {
+          e.preventDefault();
+        }}
+      >
         <input
           type="text"
           value={this.state.searchText}
