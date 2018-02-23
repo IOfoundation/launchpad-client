@@ -68,10 +68,11 @@ class Main extends Component {
 
   _renderBusinesses = () => {
     const {businesses, isMobile} = this.props;
-    const {organizations} = businesses;
+    const {organizations, metadata} = businesses;
     return (
       <BusinessesList
         organizations={organizations}
+        totalOrganizations={metadata.totalOrganizations}
         isMobile={isMobile}
         selectedOrg={this.state.selectedOrg}
       />
@@ -112,6 +113,9 @@ Main.propTypes = {
   businesses: PropTypes.shape({
     locations: PropTypes.arrayOf(PropTypes.object),
     organizations: PropTypes.arrayOf(PropTypes.object),
+    metadata: PropTypes.shape({
+      totalOrganizations: PropTypes.string,
+    }),
   }).isRequired,
   handleChangePage: PropTypes.func.isRequired,
   handleClickOnClearAllFilters: PropTypes.func.isRequired,

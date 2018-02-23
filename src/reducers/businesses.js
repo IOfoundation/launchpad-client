@@ -8,6 +8,9 @@ const initialState: STATE = {
   organizations: [],
   locations: [],
   filters: null,
+  appliedFilters: {
+    category: null,
+  },
   metadata: {
     pagination: {
       last: {
