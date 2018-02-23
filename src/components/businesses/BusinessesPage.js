@@ -4,6 +4,7 @@ import FilterBox from '../filters/FilterBox';
 import FilterBoxMobile from '../filters/FilterBoxMobile';
 import Main from './Main';
 import {Link} from 'react-router';
+import {isArray} from 'lodash';
 
 class BusinessesPage extends Component {
   shouldComponentUpdate(nextProps) {
@@ -13,13 +14,21 @@ class BusinessesPage extends Component {
     );
   }
 
+  _handleOnChangeFilterOptions = (type, name) => {
+    const filters = this.props.businesses.appliedFilters.category;
+    if (isArray(filters) && filters.find(item => item === name)) {
+      this.props.handleOnChangeFilterOptions(type, name, true);
+    } else {
+      this.props.handleOnChangeFilterOptions(type, name);
+    }
+  };
+
   renderFilterBoxMobile() {
     const {
       businesses,
       filterById,
       getTextSearchResults,
       handleClickOnClearAllFilters,
-      handleOnChangeFilterOptions,
     } = this.props;
     return (
       <FilterBoxMobile
@@ -27,7 +36,7 @@ class BusinessesPage extends Component {
         filterById={filterById}
         getTextSearchResults={getTextSearchResults}
         handleClickOnClearAllFilters={handleClickOnClearAllFilters}
-        handleOnChangeFilterOptions={handleOnChangeFilterOptions}
+        handleOnChangeFilterOptions={this._handleOnChangeFilterOptions}
       />
     );
   }
@@ -37,7 +46,6 @@ class BusinessesPage extends Component {
       filterById,
       getTextSearchResults,
       handleClickOnClearAllFilters,
-      handleOnChangeFilterOptions,
     } = this.props;
     return (
       <FilterBox
@@ -45,7 +53,7 @@ class BusinessesPage extends Component {
         filterById={filterById}
         getTextSearchResults={getTextSearchResults}
         handleClickOnClearAllFilters={handleClickOnClearAllFilters}
-        handleOnChangeFilterOptions={handleOnChangeFilterOptions}
+        handleOnChangeFilterOptions={this._handleOnChangeFilterOptions}
       />
     );
   }
@@ -69,7 +77,6 @@ class BusinessesPage extends Component {
       handleOnChangeLocationToggle,
       handleChangePage,
       handleClickOnClearAllFilters,
-      handleOnChangeFilterOptions,
     } = this.props;
     const isMobile = windowWidth <= 960;
     return (
@@ -102,7 +109,9 @@ class BusinessesPage extends Component {
                   handleOnChangeLocationToggle={handleOnChangeLocationToggle}
                   handleChangePage={handleChangePage}
                   handleClickOnClearAllFilters={handleClickOnClearAllFilters}
-                  handleOnChangeFilterOptions={handleOnChangeFilterOptions}
+                  handleOnChangeFilterOptions={
+                    this._handleOnChangeFilterOptions
+                  }
                 />
               ) : (
                 this._renderLoader()
@@ -117,6 +126,9 @@ class BusinessesPage extends Component {
 
 BusinessesPage.propTypes = {
   businesses: PropTypes.shape({
+    appliedFilters: PropTypes.shape({
+      category: PropTypes.arrayOf(PropTypes.string),
+    }),
     organizations: PropTypes.arrayOf(PropTypes.object),
   }).isRequired,
   businessPageLoaded: PropTypes.bool.isRequired,

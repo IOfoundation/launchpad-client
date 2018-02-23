@@ -21,7 +21,6 @@ class BusinessesForm extends Component {
     this._onMouseOver = this._onMouseOver.bind(this);
     this._fromNodeListToArray = this._fromNodeListToArray.bind(this);
     this._move = this._move.bind(this);
-    this.noop = this.noop.bind(this);
     this._onMouseMove = this._onMouseMove.bind(this);
   }
 
@@ -32,11 +31,12 @@ class BusinessesForm extends Component {
   }
 
   _formOnKeyDown(event) {
+    const {actualSelectedItem} = this.state;
     switch (event.key) {
       case 'Enter':
         event.preventDefault();
-        if (this.state.actualSelectedItem) {
-          this.state.actualSelectedItem.firstChild.click();
+        if (actualSelectedItem) {
+          actualSelectedItem.firstChild.click();
         }
         break;
       case 'ArrowUp':
@@ -57,18 +57,14 @@ class BusinessesForm extends Component {
 
   _move(action) {
     this._fromNodeListToArray(this.defaultList);
-    const index = this.state.currentIndex;
-    const elem = this.state.actualSelectedItem;
+    const {currentIndex: index, actualSelectedItem: elem} = this.state;
     let newIndex = null;
     let newElem = null;
 
     switch (action) {
       case 'up':
         if (index != null && elem != null) {
-          newIndex = index - 1;
-          if (newIndex < 0) {
-            newIndex = this.defaultList.length - 1;
-          }
+          newIndex = newIndex < 0 ? this.defaultList.length - 1 : index - 1;
           newElem = this.defaultList[newIndex];
         } else {
           newIndex = this.defaultList.length - 1;
@@ -77,10 +73,7 @@ class BusinessesForm extends Component {
         break;
       case 'down':
         if (index != null && elem != null) {
-          newIndex = index + 1;
-          if (newIndex > this.defaultList.length - 1) {
-            newIndex = 0;
-          }
+          newIndex = newIndex > this.defaultList.length - 1 ? 0 : index + 1;
           newElem = this.defaultList[newIndex];
         } else {
           newIndex = 0;
@@ -103,13 +96,11 @@ class BusinessesForm extends Component {
   }
 
   _onMouseOver(e) {
-    let elemLi;
     this._fromNodeListToArray(this.defaultList);
-    if (e.target.tagName.toLowerCase() === 'a') {
-      elemLi = e.target.parentElement;
-    } else {
-      elemLi = e.target;
-    }
+    const elemLi =
+      e.target.tagName.toLowerCase() === 'a'
+        ? e.target.parentElement
+        : e.target;
     const index = this.defaultList.findIndex(
       elem => elem.value === elemLi.value
     );
@@ -150,8 +141,9 @@ class BusinessesForm extends Component {
       this.setState({showDropdown: false});
     }
   }
-  inputOnClick() {
-    this.setState({showPreviewDropdown: true});
+  inputOnClick(input = true) {
+    const boolean = input ? true : !this.state.showPreviewDropdown;
+    this.setState({showPreviewDropdown: boolean, showDropdown: boolean});
   }
   defaultDropdownOptions() {
     return (
@@ -279,7 +271,13 @@ class BusinessesForm extends Component {
 
   render() {
     return (
-      <form onKeyDown={this._formOnKeyDown} onMouseMove={this._onMouseMove}>
+      <form
+        onSubmit={e => {
+          e.preventDefault();
+        }}
+        onKeyDown={this._formOnKeyDown}
+        onMouseMove={this._onMouseMove}
+      >
         <input
           type="text"
           value={this.state.searchText}
@@ -293,6 +291,7 @@ class BusinessesForm extends Component {
           className="hero_input businessesName text-thin"
         />
         <img
+          onClick={() => this.inputOnClick(false)}
           className="text-search-icon"
           src="/static-data/images/Dropdown-arrow.svg"
         />
