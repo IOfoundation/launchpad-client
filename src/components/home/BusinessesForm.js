@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
 import onClickOutside from 'react-onclickoutside';
-import {isEmpty} from 'lodash';
+import {isEmpty, last} from 'lodash';
 import {Link} from 'react-router';
 
 class BusinessesForm extends Component {
@@ -11,13 +11,121 @@ class BusinessesForm extends Component {
       searchText: '',
       showDropdown: false,
       showPreviewDropdown: false,
+      actualSelectedItem: null,
+      currentIndex: null,
+      keyPress: false,
     };
+    this.defaultList = null;
+    this.resultsListHTML = null;
+    this._formOnKeyDown = this._formOnKeyDown.bind(this);
+    this._onMouseOver = this._onMouseOver.bind(this);
+    this._fromNodeListToArray = this._fromNodeListToArray.bind(this);
+    this._move = this._move.bind(this);
+    this._onMouseMove = this._onMouseMove.bind(this);
   }
+
+  noop() {}
+
+  _onMouseMove() {
+    this.setState({keyPress: false});
+  }
+
+  _formOnKeyDown(event) {
+    const {actualSelectedItem} = this.state;
+    switch (event.key) {
+      case 'Enter':
+        event.preventDefault();
+        if (actualSelectedItem) {
+          actualSelectedItem.firstChild.click();
+        }
+        break;
+      case 'ArrowUp':
+        this._move('up');
+        break;
+      case 'ArrowDown':
+        this._move('down');
+        break;
+      default:
+        break;
+    }
+  }
+
+  _fromNodeListToArray(nodeList) {
+    this.resultsListHTML = nodeList;
+    this.defaultList = nodeList && [...nodeList.childNodes];
+  }
+
+  _move(action) {
+    this._fromNodeListToArray(this.defaultList);
+    const {currentIndex: index, actualSelectedItem: elem} = this.state;
+    let newIndex = null;
+    let newElem = null;
+
+    switch (action) {
+      case 'up':
+        if (index != null && elem != null) {
+          newIndex = newIndex < 0 ? this.defaultList.length - 1 : index - 1;
+          newElem = this.defaultList[newIndex];
+        } else {
+          newIndex = this.defaultList.length - 1;
+          newElem = last(this.defaultList);
+        }
+        break;
+      case 'down':
+        if (index != null && elem != null) {
+          newIndex = newIndex > this.defaultList.length - 1 ? 0 : index + 1;
+          newElem = this.defaultList[newIndex];
+        } else {
+          newIndex = 0;
+          newElem = this.defaultList[newIndex];
+        }
+        break;
+      default:
+        break;
+    }
+
+    if (newElem) {
+      this.resultsListHTML.scrollTo(0, newElem.offsetTop);
+    }
+
+    this.setState({
+      actualSelectedItem: newElem,
+      currentIndex: newIndex,
+      keyPress: true,
+    });
+  }
+
+  _onMouseOver(e) {
+    this._fromNodeListToArray(this.defaultList);
+    const elemLi =
+      e.target.tagName.toLowerCase() === 'a'
+        ? e.target.parentElement
+        : e.target;
+    const index = this.defaultList.findIndex(
+      elem => elem.value === elemLi.value
+    );
+    this.setState({actualSelectedItem: elemLi, currentIndex: index});
+  }
+
+  _getLiClassName(item) {
+    let className = '';
+    className +=
+      this.state.actualSelectedItem &&
+      this.state.actualSelectedItem.value === item.id
+        ? 'highlight-element '
+        : '';
+    className +=
+      item.searchable_type === 'Organization' ? 'text-thin' : 'text-regular';
+    return className;
+  }
+
   handleClickOutside() {
     this.setState({
       searchText: '',
       showDropdown: false,
       showPreviewDropdown: false,
+      actualSelectedItem: null,
+      currentIndex: null,
     });
   }
 
@@ -33,31 +141,82 @@ class BusinessesForm extends Component {
       this.setState({showDropdown: false});
     }
   }
-  inputOnClick() {
-    this.setState({showPreviewDropdown: true});
+  inputOnClick(input = true) {
+    const boolean = input ? true : !this.state.showPreviewDropdown;
+    this.setState({showPreviewDropdown: boolean, showDropdown: boolean});
   }
   defaultDropdownOptions() {
     return (
-      <ul className="hero-dropdown-list">
-        <li>
+      <ul
+        className="hero-dropdown-list"
+        ref={list => {
+          this.defaultList = list;
+        }}
+      >
+        <li
+          value="1"
+          onMouseOver={this.state.keyPress ? this.noop : this._onMouseOver}
+          className={
+            this.state.actualSelectedItem &&
+            this.state.actualSelectedItem.value === 1
+              ? 'highlight-element'
+              : ''
+          }
+        >
           <Link to="/businesses?category=Planning/Management">
             {'Business Planning/Management'}
           </Link>
         </li>
-        <li>
+        <li
+          value="2"
+          onMouseOver={this.state.keyPress ? this.noop : this._onMouseOver}
+          className={
+            this.state.actualSelectedItem &&
+            this.state.actualSelectedItem.value === 2
+              ? 'highlight-element'
+              : ''
+          }
+        >
           <Link to="/businesses?category=Capital">{'Capital'}</Link>
         </li>
-        <li>
+        <li
+          value="3"
+          onMouseOver={this.state.keyPress ? this.noop : this._onMouseOver}
+          className={
+            this.state.actualSelectedItem &&
+            this.state.actualSelectedItem.value === 3
+              ? 'highlight-element'
+              : ''
+          }
+        >
           <Link to="/businesses?category=Legal%20Services">
             {'Legal Services'}
           </Link>
         </li>
-        <li>
+        <li
+          value="4"
+          onMouseOver={this.state.keyPress ? this.noop : this._onMouseOver}
+          className={
+            this.state.actualSelectedItem &&
+            this.state.actualSelectedItem.value === 4
+              ? 'highlight-element'
+              : ''
+          }
+        >
           <Link to="/businesses?category=Marketing/Sales">
             {'Marketing/Sales'}
           </Link>
         </li>
-        <li>
+        <li
+          value="5"
+          onMouseOver={this.state.keyPress ? this.noop : this._onMouseOver}
+          className={
+            this.state.actualSelectedItem &&
+            this.state.actualSelectedItem.value === 5
+              ? 'highlight-element'
+              : ''
+          }
+        >
           <Link to="/businesses?category=Physical%20Space">
             {'Physical Space'}
           </Link>
@@ -74,15 +233,16 @@ class BusinessesForm extends Component {
               ? 'hero-dropdown-list-hide'
               : 'hero-dropdown-list scroll-list'
           }
+          ref={list => {
+            this.defaultList = list;
+          }}
         >
           {this.props.items.map(item => (
             <li
               key={item.id}
-              className={
-                item.searchable_type === 'Organization'
-                  ? 'text-thin'
-                  : 'text-regular'
-              }
+              value={item.id}
+              className={this._getLiClassName(item)}
+              onMouseOver={this.state.keyPress ? this.noop : this._onMouseOver}
             >
               <a
                 href={
@@ -115,6 +275,8 @@ class BusinessesForm extends Component {
         onSubmit={e => {
           e.preventDefault();
         }}
+        onKeyDown={this._formOnKeyDown}
+        onMouseMove={this._onMouseMove}
       >
         <input
           type="text"
@@ -129,8 +291,9 @@ class BusinessesForm extends Component {
           className="hero_input businessesName text-thin"
         />
         <img
+          onClick={() => this.inputOnClick(false)}
           className="text-search-icon"
-          src="/static-data/images/search.png"
+          src="/static-data/images/Dropdown-arrow.svg"
         />
         <div
           className={
