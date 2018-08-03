@@ -16,15 +16,13 @@
     "node": true,
     "browser": true
   },
-  "globals": {},
+  "globals": {
+    "Uint8Array": true
+  },
   "rules": {
     "prettier/prettier": [
       "error",
-      {
-        "trailingComma": "es5",
-        "singleQuote": true,
-        "bracketSpacing": false
-      }
+      {"trailingComma": "es5", "singleQuote": true, "bracketSpacing": false}
     ],
 
     "array-bracket-spacing": 2,
@@ -34,6 +32,7 @@
     "arrow-spacing": 2,
     "block-scoped-var": 2,
     "brace-style": [2, "1tbs", {"allowSingleLine": false}],
+    "camelcase": 0,
     "class-methods-use-this": 0,
     "comma-dangle": [
       2,
@@ -79,7 +78,7 @@
       }
     ],
     "max-lines": 0,
-    "max-nested-callbacks": [2, {"max": 3}],
+    "max-nested-callbacks": [2, {"max": 4}],
     "max-statements-per-line": 2,
     "multiline-ternary": 0,
     "new-cap": 2,
@@ -180,7 +179,7 @@
     "no-useless-computed-key": 2,
     "no-useless-concat": 2,
     "no-useless-constructor": 2,
-    "no-useless-escape": 2,
+    "no-useless-escape": 0,
     "no-useless-rename": 2,
     "no-var": 2,
     "no-void": 2,
@@ -202,7 +201,7 @@
     "prefer-rest-params": 2,
     "prefer-spread": 2,
     "prefer-template": 0,
-    "quote-props": [2, "consistent-as-needed"],
+    "quote-props": [2, "as-needed"],
     "quotes": [2, "single", {"avoidEscape": true}],
     "radix": 2,
     "require-yield": 2,

@@ -1,39 +1,35 @@
-# TO START
 
-This app ->
-1. **Clone the project**. `git clone [https://github.com/fullstacklabs/city-of-sac-client.git]`.
-2. **Run the setup script**. `npm install`
+# launchpad-client
 
-Switch to API ->
+## About
+I/O Labs Launchpad is an online tool for small businesses and entrepreneurs to find local resources to help build their organizations and connect in California Capital Region. This project is based on the starter kit [React Slingshot](https://github.com/coryhouse/react-slingshot) and uses [ReactJS](https://reactjs.org/)
 
-1. Pull latest from fullstacklabs/Ohana-API
-2. Setup the API `bin/setup`
-3. Run `script/reset` to reset the DB and accept new data
-4. Run `bin/rake create_categories` to import the taxonomies
-5. Run `script/import` to import the parsed csvs into the DB
-6. start api with `bundle exec puma -C ./config/puma.rb`
-7. cd back to the client, start client `npm start`
-8. go to http://localhost:3000/businesses
+## Getting Started
 
 
-TO DEPLOY CLIENT APP ->
-1. Verify that all tests are passing
-2. Run `git push staging master`
-
-TO RESET DB LOCALLY ->
+1. Make sure you have [npm](https://www.npmjs.com/) installed.
+2. Clone the project.
 ```
-$ rake db:drop
-$ rake db:setup rake db:seed
-$ bin/rake create_categories
-$ script/import 0.3
-$ bundle exec puma -C ./config/puma.rb
+git clone [https://github.com/IOfoundation/launchpad-client.git]
+```
+3. Inside the projet's folder install the dependencies
+```
+cd path/to/launchpad-client
+npm install
+```
+4. Make sure that the API, ([ohana-api](https://github.com/IOfoundation/ohana-api)) is up and running.
+5. Start the app
+```
+npm start
 ```
 
-TO RESET STAGING DB ->
-```
-$ heroku pg:reset --confirm city-of-sac
-$ heroku run rake db:migrate
-$ heroku run rake db:seed
-$ heroku run rake create_categories
-$ heroku run script/import 0.3
-```
+## Testing
+Spec tests for this project are run with [Jest](https://facebook.github.io/jest/) and [Enzyme](http://airbnb.io/enzyme/)
+To run these tests, simply run `npm run test` and all your tests in the `tests/` directory will be run.
+
+## Deploying
+This project is currently being hosted on Heroku. In order to deploy the master branch to heroku, run `git push staging heroku` .
+
+## Authors
+[MIT](https://opensource.org/licenses/MIT) License
+Brought to you by your friends at [Fullstack Labs](https://fullstacklabs.co/)
