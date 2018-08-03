@@ -240,7 +240,7 @@ exports[`<FilterBox /> renders snapshot of FilterBox 1`] = `
         ]
       }
       excludeScrollbar={false}
-      filterName="Underserved Com..."
+      filterName="Underserved Communities"
       filterOptions={
         Array [
           Object {

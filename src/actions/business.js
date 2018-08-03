@@ -138,6 +138,7 @@ export function filterOrganizations(
   removeFilter
 ) {
   return async (dispatch: Function) => {
+    dispatch(fetchOrganizationsRequestObject());
     const filters = filtersObject(
       filterType,
       currentFilters,
@@ -150,6 +151,8 @@ export function filterOrganizations(
 
 export function changePage(page, currentParams) {
   return async (dispatch: Function) => {
+    dispatch(fetchOrganizationsRequestObject());
+
     const filters = {
       ...currentParams,
       page,
@@ -253,7 +256,6 @@ export function updateChipFilters(
 
 async function _buildOrganizationsAndMetadata(filters, dispatch) {
   try {
-    dispatch(fetchOrganizationsRequestObject());
     const params = {
       ...filters,
       per_page: MaxItemsDisplayedPerPage,

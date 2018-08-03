@@ -103,7 +103,7 @@ exports[`<BusinessesList /> renders snapshot of BusinessesList -- one org in arr
         ],
       }
     }
-    expanded={true}
+    expanded={false}
     isMobile={false}
     isSelected={false}
     key="1"
