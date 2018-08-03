@@ -12,20 +12,20 @@ I/O Labs Launchpad is an online tool for small businesses and entrepreneurs to f
 ```
 git clone [https://github.com/IOfoundation/launchpad-client.git]
 ```
-3. Inside the projet's folder install the dependencies
+3. Inside the project's folder install the dependencies
 ```
 cd path/to/launchpad-client
-npm install
+yarn
 ```
 4. Make sure that the API, ([ohana-api](https://github.com/IOfoundation/ohana-api)) is up and running.
 5. Start the app
 ```
-npm start
+yarn start
 ```
 
 ## Testing
 Spec tests for this project are run with [Jest](https://facebook.github.io/jest/) and [Enzyme](http://airbnb.io/enzyme/)
-To run these tests, simply run `npm run test` and all your tests in the `tests/` directory will be run.
+To run these tests, simply run `yarn run test` and all your tests in the `tests/` directory will be run.
 
 ## Deploying
 This project is currently being hosted on Heroku. In order to deploy the master branch to heroku, run `git push staging heroku` .
