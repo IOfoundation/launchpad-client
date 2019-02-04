@@ -11,6 +11,10 @@
 }
 .header_link {
   color: white;
-  margin-left: 24px;
+  margin-right: 24px;
   line-height: 16px;
+}
+
+.header_link:last-child {
+  margin-right: 0;
 }

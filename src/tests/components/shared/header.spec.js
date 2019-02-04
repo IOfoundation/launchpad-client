@@ -25,37 +25,48 @@ describe('<Header />', () => {
       expect(wrapper.find(Link).length).toEqual(5);
     });
 
-    it('Must have a link to contact-us page', () => {
+    it('Must have a link to businesses page', () => {
       const wrapper = shallow(<Header {...props} />);
       expect(
         wrapper.contains(
-          <Link className="header_link" to="/contact-us">
-            {'Contact Us'}
+          <Link className="header_link" to="/businesses">
+            {'Resources'}
           </Link>
         )
       ).toBe(true);
     });
 
-    it('Must have a link to terms-of-use page', () => {
+    it('Must have a link to events page', () => {
       const wrapper = shallow(<Header {...props} />);
       expect(
         wrapper.contains(
-          <Link className="header_link" to="/terms-of-use">
-            {'Terms of Use'}
+          <Link className="header_link" to="/events">
+            {'Events'}
           </Link>
         )
       ).toBe(true);
     });
 
-    it('Must have a link to back-to-Home page', () => {
+    it('Must have a link to blog page', () => {
       const wrapper = shallow(<Header {...props} />);
       expect(
         wrapper.contains(
-          <Link className="header_leftLink" to="/">
-            {'Back To Home'}
+          <Link className="header_link" to="/blog">
+            {'Blog'}
           </Link>
         )
-      ).toBe(false);
+      ).toBe(true);
+    });
+
+    it('Must have a link to admin-login page', () => {
+      const wrapper = shallow(<Header {...props} />);
+      expect(
+        wrapper.contains(
+          <Link className="header_link" to="/admin-login">
+            {'Admin Login'}
+          </Link>
+        )
+      ).toBe(true);
     });
   });
 });
