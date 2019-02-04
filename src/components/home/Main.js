@@ -2,7 +2,6 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 import {Link} from 'react-router';
 import BusinessesForm from './BusinessesForm';
-import Logo from '../shared/Logo';
 
 const Main = ({items, getTextSearchResults}) => {
   return (
@@ -10,18 +9,19 @@ const Main = ({items, getTextSearchResults}) => {
       <section className="hero center-xs">
         <div className="container-mid">
           <div className="center-x">
-            <div className="logo-container">
-              <Logo />
+            <div className="remark">
+              {'Resource Finder'}
             </div>
             <div className="col-lg-12">
-              <h2 className="desktop-devices text-bold">
-                {'Connecting startups and small businesses'}
+              <h2 className="main-title desktop-devices text-bold">
+                {'Where startups and small business connect in'}
                 <br />
-                {'to the resources they need to grow'}
+                {'California\'s Capital Region'}
               </h2>
+              <h3 className="sub-title desktop-devices">{'Over 650 resources to help your business grow est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.'}</h3>
               <h2 className="mobile-devices text-bold">
                 {
-                  'Connecting startups and small businesses to the resources they need to grow'
+                  'Where startups and small business connect in California\'s Capital Region'
                 }
               </h2>
               <div className="hero_inputContainer">

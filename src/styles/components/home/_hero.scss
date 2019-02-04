@@ -5,19 +5,38 @@
   padding: 85px 0;
   color: white;
   min-height: 80vh;
-  h2 {
+
+  .main-title {
     letter-spacing: 1px;
+    font-size: 36px;
+    line-height: 54px;
+    margin: 0 0 5px;
   }
+  
+  .sub-title {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  
   .hero_input {
     font-size: 20px;
   }
+  
   .logo {
     width: 60px;
   }
+  
   .logo-container {
     width: 100%;
     margin-bottom: 26px;
   }
+
+  .remark {
+    font-size: 20px;
+    line-height: 20px;
+    margin-bottom: 40px;
+  }
+  
   &-link {
     @media (max-width: 60em) {
       width: 100%;
@@ -25,13 +44,16 @@
       font-size: 14px;
     }
   }
+  
   @media (max-width: 60em) {
     min-height: 100vh;
   }
+  
   @media (max-width: 320px) {
     min-height: 120vh;
   }
 }
+
 .hero_input_btn {
   background: #ffc000;
   border: none;
@@ -42,23 +64,28 @@
   padding: 9px 24px;
   border-radius: 2px;
 }
+
 .hero_input_btn:hover {
   cursor: pointer;
 }
+
 .hero_link {
   margin-top: 20px;
   color: white;
   display: block;
   font-weight: bold;
 }
+
 @media (max-width: 60em) {
   .hero_content {
     width: auto;
   }
+
   .hero h2 {
     font-size: 20px;
     line-height: 27px;
   }
+
   .hero_input {
     margin: 10px auto;
     padding-left: 16px;
@@ -66,6 +93,7 @@
     overflow: hidden;
     margin: 10px 0 0;
   }
+
   .hero_input_btn {
     width: 90%;
     margin: 0 auto;
