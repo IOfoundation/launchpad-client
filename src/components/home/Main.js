@@ -9,19 +9,21 @@ const Main = ({items, getTextSearchResults}) => {
       <section className="hero center-xs">
         <div className="container-mid">
           <div className="center-x">
-            <div className="remark">
-              {'Resource Finder'}
-            </div>
+            <div className="remark">{'Resource Finder'}</div>
             <div className="col-lg-12">
               <h2 className="main-title desktop-devices text-bold">
                 {'Where startups and small business connect in'}
                 <br />
-                {'California\'s Capital Region'}
+                {"California's Capital Region"}
               </h2>
-              <h3 className="sub-title desktop-devices">{'Over 650 resources to help your business grow est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.'}</h3>
+              <h3 className="sub-title desktop-devices">
+                {
+                  'Over 650 resources to help your business grow est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.'
+                }
+              </h3>
               <h2 className="mobile-devices text-bold">
                 {
-                  'Where startups and small business connect in California\'s Capital Region'
+                  "Where startups and small business connect in California's Capital Region"
                 }
               </h2>
               <div className="hero_inputContainer">
