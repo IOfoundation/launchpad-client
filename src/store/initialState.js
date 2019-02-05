@@ -27,6 +27,9 @@ const initialState = {
       category: null,
     },
   },
+  snackbar: {
+    visibility: false,
+  },
 };
 
 export default initialState;
