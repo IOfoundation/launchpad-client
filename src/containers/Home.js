@@ -6,7 +6,6 @@ import {bindActionCreators} from 'redux';
 import MainLayout from '../components/layouts/Main';
 import HomeView from '../components/home/Main';
 import * as actions from '../actions/business';
-import * as snackbarActions from '../actions/snackbar';
 import SnackbarUI from '../components/shared/SnackBar';
 
 export class Home extends Component {
@@ -16,10 +15,6 @@ export class Home extends Component {
   };
   componentWillMount(_nextProps) {
     window.addEventListener('resize', () => this.handleWindowSizeChange());
-
-    setTimeout(() => {
-      this.props.snackbarActions.showSnackbar();
-    }, 2000);
   }
   getTextSearchResults(filter) {
     this.props.actions.fetchSearchResults(filter);
@@ -39,13 +34,6 @@ export class Home extends Component {
             getTextSearchResults={e => this.getTextSearchResults(e)}
           />
           <SnackbarUI
-            open={this.props.snackbarVisibility}
-            handleActionClick={() => {
-              this.props.snackbarActions.hideSnackbar();
-            }}
-            handleRequestClose={() => {
-              this.props.snackbarActions.hideSnackbar();
-            }}
             message="message"
             autoHideDuration={10000}
             action="action"
@@ -62,26 +50,19 @@ Home.propTypes = {
   }),
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   location: PropTypes.shape({}),
-  snackbarActions: PropTypes.shape({
-    showSnackbar: PropTypes.func.isRequired,
-    hideSnackbar: PropTypes.func.isRequired,
-  }),
-  snackbarVisibility: PropTypes.bool,
 };
 
 const mapStateToProps = _state => {
-  const {businesses, snackbar} = _state;
+  const {businesses} = _state;
 
   return {
     items: businesses.items,
-    snackbarVisibility: snackbar.visibility,
   };
 };
 
 const mapDispatchToProps = _dispatch => {
   return {
     actions: bindActionCreators(actions, _dispatch),
-    snackbarActions: bindActionCreators(snackbarActions, _dispatch),
   };
 };
 
