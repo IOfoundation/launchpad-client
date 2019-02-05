@@ -6,7 +6,7 @@ import BarsIcon from '../shared/barsIcon';
 const Header = () => {
   return (
     <header className="headerContainer" htmlFor="header-dropdown">
-      <div className="contentContainer header grid between-xs middle-xs text-thin">
+      <div className="contentContainer header grid between-xs middle-xs text-semi">
         <div className="header_links-title">
           <span className="header_title">
             <Link to="/" className="white-link">
