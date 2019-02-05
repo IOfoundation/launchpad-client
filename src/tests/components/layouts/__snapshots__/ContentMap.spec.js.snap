@@ -246,38 +246,13 @@ exports[`<ContentMap /> renders snapshot of ContentMap 1`] = `
         </div>
       </div>
     </div>
-    <div
-      className="map-pagination"
-    >
-      <Pagination
-        appliedFilters={
-          Object {
-            "pagination": Object {
-              "currentPage": 1,
-              "first": Object {
-                "page": 1,
-                "per_page": 4,
-              },
-              "last": Object {},
-              "next": Object {},
-            },
-          }
-        }
-        handleChangePage={[Function]}
-        metadata={
-          Object {
-            "totalOrganization": "50",
-          }
-        }
-      />
-    </div>
   </div>
   <div>
     <div
       className="result-container-hide desktop-devices"
     >
       <div
-        className="col-md-12 col-xs-12 businessList--reduced p-left-0 list"
+        className="col-md-12 col-xs-12 businessList--reduced p-left-0 p-right-2 list"
       />
     </div>
   </div>
