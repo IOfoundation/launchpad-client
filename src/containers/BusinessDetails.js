@@ -12,7 +12,7 @@ class BusinessDetails extends PureComponent {
 
     return (
       <MainLayout windowWidth={width} homePage={homePage}>
-        <p>BusinessDetails works</p>
+        <p>{'BusinessDetails works'}</p>
       </MainLayout>
     );
   }

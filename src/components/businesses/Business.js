@@ -293,6 +293,9 @@ Business.propTypes = {
   expanded: PropTypes.bool.isRequired,
   isMobile: PropTypes.bool.isRequired,
   isSelected: PropTypes.bool.isRequired,
+  router: PropTypes.shape({
+    push: PropTypes.func,
+  }),
 };
 
 export default withRouter(Business);
