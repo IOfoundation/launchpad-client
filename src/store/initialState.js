@@ -29,6 +29,9 @@ const initialState = {
   },
   snackbar: {
     visibility: false,
+    message: 'placeholder message',
+    autoHideDuration: 10000,
+    actionText: 'DISMISS',
   },
 };
 

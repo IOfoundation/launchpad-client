@@ -6,11 +6,6 @@ import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/snackbar';
 
 class SnackbarUI extends PureComponent {
-  componentDidMount() {
-    setTimeout(() => {
-      this.props.actions.showSnackbar();
-    }, 2000);
-  }
   render() {
     const {message, action, autoHideDuration} = this.props;
 
@@ -53,6 +48,9 @@ const mapStateToProps = _state => {
 
   return {
     visibility: snackbar.visibility,
+    message: snackbar.message,
+    autoHideDuration: snackbar.autoHideDuration,
+    action: snackbar.actionText,
   };
 };
 
