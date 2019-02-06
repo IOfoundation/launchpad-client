@@ -314,19 +314,14 @@ exports[`<BusinessesList /> renders snapshot of BusinessesList -- one org in arr
         isSelected={false}
       >
         <div
-          className="business-card"
-          style={
-            Object {
-              "backgroundColor": "#F2F2F2",
-            }
-          }
+          className="business-card busines-card--bg-gray"
+          onClick={[Function]}
         >
           <div
             className="business-card-collapse grid"
           >
             <div
               className="business business-img"
-              onClick={[Function]}
             >
               <img
                 className="business-logo"
@@ -341,10 +336,9 @@ exports[`<BusinessesList /> renders snapshot of BusinessesList -- one org in arr
               >
                 <div
                   className="business-information"
-                  onClick={[Function]}
                 >
                   <h3
-                    className="title m-bot-8"
+                    className="title text-semi"
                   >
                     organization1
                   </h3>
@@ -358,16 +352,6 @@ exports[`<BusinessesList /> renders snapshot of BusinessesList -- one org in arr
                   className="social-icons-hide"
                 />
               </div>
-              <img
-                className="business-card-icon"
-                onClick={[Function]}
-                src="static-data/images/expand-icon.png"
-                style={
-                  Object {
-                    "float": "right",
-                  }
-                }
-              />
             </div>
             <div
               className="grid col-lg-12 col-md-12 col-xs-12 full-information p-0"
