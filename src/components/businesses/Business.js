@@ -1,4 +1,5 @@
 import React, {PureComponent} from 'react';
+import {withRouter} from 'react-router';
 import Chip from '../shared/Chip';
 import FacebookIcon from '../shared/FacebookIcon';
 import TwitterIcon from '../shared/TwitterIcon';
@@ -12,7 +13,7 @@ class Business extends PureComponent {
   };
 
   toggleCard = () => {
-    this.setState({expanded: !this.state.expanded});
+    this.props.router.push('/businesses/' + this.props.business.id);
   };
 
   _renderContacts = subject => {
@@ -45,10 +46,8 @@ class Business extends PureComponent {
                   {location.address.address_2 && (
                     <h4>{location.address.address_2}</h4>
                   )}
-                  <h4>
-                    {`${location.address.city}, ${location.address
-                      .state_province} ${location.address.postal_code}`}
-                  </h4>
+                  <h4>{`${location.address.city}, ${location.address
+                    .state_province} ${location.address.postal_code}`}</h4>
                 </div>
                 {(location.phones.length > 0 || location.email) && (
                   <div className="col-xs-12 p-0 m-top-16">
@@ -80,10 +79,8 @@ class Business extends PureComponent {
                 {location.address.address_2 && (
                   <h4>{location.address.address_2}</h4>
                 )}
-                <h4>
-                  {`${location.address.city}, ${location.address
-                    .state_province} ${location.address.postal_code}`}
-                </h4>
+                <h4>{`${location.address.city}, ${location.address
+                  .state_province} ${location.address.postal_code}`}</h4>
               </div>
               <div className="col-lg-4 col-md-4 col-xs-6 p-0 m-top-24">
                 {location.phones.length > 0 && (
@@ -210,10 +207,8 @@ class Business extends PureComponent {
                 ) : (
                   ''
                 )}
-                <h4>
-                  {`${main_location.address.city}, ${main_location.address
-                    .state_province}`}
-                </h4>
+                <h4>{`${main_location.address.city}, ${main_location.address
+                  .state_province}`}</h4>
               </div>
               {!isEmpty(business.contacts) &&
                 this._renderContacts(business.contacts[0])}
@@ -300,4 +295,4 @@ Business.propTypes = {
   isSelected: PropTypes.bool.isRequired,
 };
 
-export default Business;
+export default withRouter(Business);
