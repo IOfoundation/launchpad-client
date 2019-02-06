@@ -1,0 +1,52 @@
+.business-details-section {
+  display: flex;
+  justify-content: center;
+  margin: 56px auto 40px !important;
+
+  &__information {
+    flex: 1;
+    max-width: 632px;
+
+    &__title {
+      font-size: 36px;
+      margin-bottom: 12px;
+    }
+
+    &__content {
+      border-bottom: 1px solid #e1e1e1;
+      font-size: 16px;
+      line-height: 24px;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+    }
+
+    &__data {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+
+  &__logo {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 350px;
+
+    &__container {
+      align-items: center;
+      display: flex;
+      height: 140px;
+      width: 140px;
+    }
+
+    &__img {
+      height: auto;
+      width: 100%;
+    }
+  }
+
+  &__title {
+    font-family: $font-family-bold;
+    font-size: 36px;
+  }
+}

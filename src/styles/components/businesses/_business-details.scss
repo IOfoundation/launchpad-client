@@ -1,0 +1,12 @@
+.business-deatils-wrapper {
+  .content-section {
+    display: flex;
+    margin-bottom: 32px;
+    max-width: 982px !important;
+  }
+}
+
+@import "./details/main-section";
+@import "./details/detail";
+@import "./details/services-offered";
+@import "./details/service";
