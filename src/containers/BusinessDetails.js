@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react';
 import MainLayout from '../components/layouts/Main';
+import BusinessDetailsContent from '../components/businesses/BusinessDetails';
 
 class BusinessDetails extends PureComponent {
   state = {
@@ -12,7 +13,7 @@ class BusinessDetails extends PureComponent {
 
     return (
       <MainLayout windowWidth={width} homePage={homePage}>
-        <p>{'BusinessDetails works'}</p>
+        <BusinessDetailsContent />
       </MainLayout>
     );
   }

@@ -2,7 +2,7 @@ import React from 'react';
 
 import MainSection from './details/MainSection';
 import ServicesOffered from './details/ServicesOffered';
-import Location from './details/Location';
+import Locations from './details/Locations';
 
 const BusinessDetails = () => {
   return (
@@ -10,7 +10,7 @@ const BusinessDetails = () => {
       <MainSection />
       <section className="content-section contentContainer">
         <ServicesOffered />
-        <Location />
+        <Locations />
       </section>
     </div>
   );

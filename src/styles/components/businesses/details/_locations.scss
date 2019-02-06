@@ -1,0 +1,18 @@
+.detail-locations {
+  &__title {
+    font-size: 20px;
+    line-height: 28px;
+    margin-bottom: 8px;
+    opacity: 0.87;
+  }
+
+  &__all-locations {
+    line-height: 20px;
+    font-size: 14px;
+    color: $ninth-color;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

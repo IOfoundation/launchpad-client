@@ -1,36 +1,34 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import {Snackbar} from 'material-ui';
 import {PropTypes} from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/snackbar';
 
-class SnackbarUI extends PureComponent {
-  render() {
-    const {message, action, autoHideDuration} = this.props;
+const SnackbarUI = props => {
+  const {message, action, autoHideDuration, visibility} = props;
 
-    const style = {
-      bottom: '10px',
-    };
+  const style = {
+    bottom: '10px',
+  };
 
-    return (
-      <Snackbar
-        open={this.props.visibility}
-        message={message}
-        action={action}
-        autoHideDuration={autoHideDuration}
-        onActionClick={() => {
-          this.props.actions.hideSnackbar();
-        }}
-        onRequestClose={() => {
-          this.props.actions.hideSnackbar();
-        }}
-        style={style}
-        className="snackbar-purple"
-      />
-    );
-  }
-}
+  return (
+    <Snackbar
+      open={visibility}
+      message={message}
+      action={action}
+      autoHideDuration={autoHideDuration}
+      onActionClick={() => {
+        props.actions.hideSnackbar();
+      }}
+      onRequestClose={() => {
+        props.actions.hideSnackbar();
+      }}
+      style={style}
+      className="snackbar-purple"
+    />
+  );
+};
 
 SnackbarUI.propTypes = {
   action: PropTypes.string,

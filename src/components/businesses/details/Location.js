@@ -1,15 +1,23 @@
 import React from 'react';
+import {Link} from 'react-router';
+import {PropTypes} from 'prop-types';
 
-const Location = () => {
+const Location = props => {
   return (
-    <div className="location">
-      <h2>{'Main Location'}</h2>
-      <h3>{'Sacramento Office'}</h3>
-      <p>{'1325 J Street, 18th Floor Sacramento, CA 95746'}</p>
-      <p>{'(916) 514-7044'}</p>
-      <p>{'email@domaninname.com'}</p>
+    <div className="detail-location">
+      <Link className="detail-location__title text-semi">{props.title}</Link>
+      <p className="detail-location__content">{props.address}</p>
+      <p className="detail-location__content">{props.phone}</p>
+      <p className="detail-location__content">{props.email}</p>
     </div>
   );
+};
+
+Location.propTypes = {
+  address: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  phone: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default Location;
