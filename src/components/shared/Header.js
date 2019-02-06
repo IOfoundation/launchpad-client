@@ -2,40 +2,34 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 import {Link} from 'react-router';
 import BarsIcon from '../shared/barsIcon';
-import Logo from './Logo';
 
-const Header = ({homePage}) => {
+const Header = () => {
   return (
     <header className="headerContainer" htmlFor="header-dropdown">
-      <div className="contentContainer header grid between-xs middle-xs text-thin">
+      <div className="contentContainer header grid between-xs middle-xs text-semi">
         <div className="header_links-title">
-          {!homePage && (
-            <Link to="/">
-              <Logo />
+          <span className="header_title">
+            <Link to="/" className="white-link">
+              {'Welcome to Resource Finder'}
             </Link>
-          )}
-          <span className="header_title">{'Welcome to LAUNCHPAD'}</span>
-          {!homePage && (
-            <Link to="/">
-              <span className="header_leftLink text-regular">
-                {'Back to Home'}
-              </span>
-            </Link>
-          )}
+          </span>
         </div>
         <input id="header-dropdown" type="checkbox" name="dropdown" />
         <label htmlFor="header-dropdown" className="collapse-menu-icon">
           <BarsIcon size={24} />
         </label>
         <nav className="header_links-contact">
-          <Link className="header_link" to="/contact-us">
-            {'Contact Us'}
+          <Link className="header_link" to="/businesses">
+            {'Resources'}
           </Link>
-          <Link className="header_link" to="/terms-of-use">
-            {'Terms of Use'}
+          <Link className="header_link" to="/events">
+            {'Events'}
           </Link>
-          <Link className="header_link" to="/privacy-policy">
-            {'Privacy Policy'}
+          <Link className="header_link" to="/blog">
+            {'Blog'}
+          </Link>
+          <Link className="header_link" to="/admin-login">
+            {'Admin Login'}
           </Link>
         </nav>
       </div>
