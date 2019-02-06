@@ -6,10 +6,10 @@ const MainSection = () => {
     <section className="business-details-section contentContainer">
       <div className="business-details-section__information">
         <h2 className="business-details-section__information__title text-semi">
-          Golden Sierra Job Training Agency
+          {'Golden Sierra Job Training Agency'}
         </h2>
         <p className="business-details-section__information__content">
-          Lhtmlorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+          {`Lhtmlorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
           mattis magna felis, in porta elit tincidunt eu. Ut a euismod nibh.
           Maecenas ultrices iaculis orci vitae eleifend. Aliquam eu nibh lacus.
           Curabitur rhoncus gravida sapien, a mollis mauris bibendum sit amet.
@@ -21,7 +21,7 @@ const MainSection = () => {
           interdum. Suspendisse ac nulla quis justo ultricies posuere ac non
           sapien. Aliquam malesuada dui sed neque tempor sollicitudin. Nam
           dictum sed dui vitae pellentesque. Cras molestie metus justo. Proin
-          quis elit at lacus consectetur pretium
+          quis elit at lacus consectetur pretium`}
         </p>
         <div className="business-details-section__information__data">
           <Detail title="Date of Incorporation" content="March 1, 2013" />

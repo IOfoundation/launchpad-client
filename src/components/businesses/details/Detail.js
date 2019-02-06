@@ -1,4 +1,5 @@
 import React from 'react';
+import {PropTypes} from 'prop-types';
 
 const Detail = props => {
   return (
@@ -7,6 +8,11 @@ const Detail = props => {
       <p className="business-detail__content text-thin">{props.content}</p>
     </div>
   );
+};
+
+Detail.propTypes = {
+  content: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default Detail;

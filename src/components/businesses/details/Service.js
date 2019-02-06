@@ -1,4 +1,5 @@
 import React from 'react';
+import {PropTypes} from 'prop-types';
 
 const Service = props => {
   let $email = null;
@@ -18,6 +19,15 @@ const Service = props => {
       <p className="service__content">{props.content}</p>
     </div>
   );
+};
+
+Service.propTypes = {
+  content: PropTypes.string.isRequired,
+  extra: PropTypes.shape({
+    label: PropTypes.string,
+    content: PropTypes.string,
+  }),
+  title: PropTypes.string.isRequired,
 };
 
 export default Service;

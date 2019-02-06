@@ -4,7 +4,9 @@ import Service from './Service';
 const ServicesOffered = () => {
   return (
     <div className="services-offered">
-      <h2 className="services-offered__title text-semi">Services Offered</h2>
+      <h2 className="services-offered__title text-semi">
+        {'Services Offered'}
+      </h2>
       <Service
         title="Office of Small Business and Entrepreneurship"
         content="The Office of Small Business and Entrepreneurship provides information
