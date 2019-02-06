@@ -22,17 +22,14 @@
     "test": "jest",
     "test:CI": "./node_modules/.bin/babel-node tools/testCi.js",
     "test:cover": "npm run test -- --coverage ",
-    "test:cover:CI":
-      "npm run test:CI -- --coverage && cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js",
+    "test:cover:CI": "npm run test:CI -- --coverage && cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js",
     "test:watch": "npm run test -- --watch",
     "heroku-postbuild": "npm run build",
     "start:prod": "node ./deploy/index.js",
     "open:cover": "npm run test:cover && opn ./coverage/lcov-report/index.html",
     "analyze-bundle": "babel-node ./tools/analyzeBundle.js",
-    "eslint":
-      "node_modules/.bin/eslint --fix --ext \".js\" --ignore-pattern node_modules --quiet .",
-    "prettier":
-      "node_modules/.bin/prettier --single-quote --bracket-spacing false --trailing-comma es5 --write '{src,__{tests,mocks}__}/**/*.js'"
+    "eslint": "node_modules/.bin/eslint --fix --ext \".js\" --ignore-pattern node_modules --quiet .",
+    "prettier": "node_modules/.bin/prettier --single-quote --bracket-spacing false --trailing-comma es5 --write '{src,__{tests,mocks}__}/**/*.js'"
   },
   "author": "FullStack Labs",
   "license": "MIT",
@@ -45,7 +42,7 @@
     "flexboxgrid": "6.3.1",
     "google-map-react": "^0.27.0",
     "jsonapi-serializer": "3.5.5",
-    "material-ui": "0.18.3",
+    "material-ui": "0.20.1",
     "object-assign": "4.1.0",
     "prop-types": "15.5.10",
     "query-string": "^4.3.4",
@@ -133,8 +130,13 @@
     "url": ""
   },
   "jest": {
-    "setupFiles": ["./src/tests/helpers/testHelpers.js"],
-    "moduleDirectories": ["node_modules", "src"],
+    "setupFiles": [
+      "./src/tests/helpers/testHelpers.js"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
     "moduleNameMapper": {
       "\\.(css|scss)$": "identity-obj-proxy",
       "^.+\\.(gif|ttf|eot|svg|woff|woff2|ico)$": "<rootDir>/tools/fileMock.js"

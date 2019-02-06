@@ -1,4 +1,3 @@
-
 //abstracts
 @import "abstracts/variables";
 @import "abstracts/helpers";
@@ -9,7 +8,6 @@
 @import "base/margin";
 @import "base/padding";
 
-
 //Components
 @import "components/search";
 @import "components/links";
@@ -17,6 +15,7 @@
 @import "components/pagination";
 @import "components/home/hero";
 @import "components/businesses/resultInfo";
+@import "components/shared/snackbar";
 
 //layout
 @import "layout/header";

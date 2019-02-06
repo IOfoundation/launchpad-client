@@ -27,6 +27,12 @@ const initialState = {
       category: null,
     },
   },
+  snackbar: {
+    visibility: false,
+    message: 'placeholder message',
+    autoHideDuration: 10000,
+    actionText: 'DISMISS',
+  },
 };
 
 export default initialState;
