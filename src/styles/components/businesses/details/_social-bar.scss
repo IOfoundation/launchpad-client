@@ -1,0 +1,32 @@
+.details-social-bar {
+  align-items: center;
+  background-color: $tenth-color;
+  display: flex;
+  height: 56px;
+  justify-content: center;
+  margin-bottom: 40px;
+
+  &__item {
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 16px;
+
+    &--button {
+      background-color: $ninth-color;
+      border: 0;
+      color: $white-color;
+      font-size: 12px;
+      padding: 5px 8px;
+    }
+
+    &--icon {
+      width: 24px;
+      height: auto;
+    }
+  }
+
+  &__text {
+    line-height: 20px;
+    opacity: 0.87;
+  }
+}
