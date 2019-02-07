@@ -28,5 +28,33 @@
   &__text {
     line-height: 20px;
     opacity: 0.87;
+
+    &--mr {
+      margin-right: 16px;
+    }
+  }
+
+  &__icon {
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 16px;
+
+    rect {
+      fill: black;
+    }
+
+    path {
+      fill: white;
+    }
+
+    &--twitter {
+      rect {
+        fill: $tenth-color;
+      }
+
+      path {
+        fill: black;
+      }
+    }
   }
 }

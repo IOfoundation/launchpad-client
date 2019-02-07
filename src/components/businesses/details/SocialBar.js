@@ -1,6 +1,9 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
-import {openUrl} from '../../../utils/utility';
+
+import LinkedinIcon from '../../shared/LinkedinIcon';
+import FacebookIcon from '../../shared/FacebookIcon';
+import TwitterIcon from '../../shared/TwitterIcon';
 
 const SocialBar = props => {
   const {
@@ -14,28 +17,26 @@ const SocialBar = props => {
 
   return (
     <div className="details-social-bar">
-      <img
-        className="details-social-bar__item details-social-bar__item--icon"
-        src="/static-data/icons/facebook-black.svg"
-        onClick={() => openUrl(facebook)}
-      />
-      <img
-        className="details-social-bar__item details-social-bar__item--icon"
-        src="/static-data/icons/twitter-black.svg"
-        onClick={() => openUrl(twitter)}
-      />
-      <img
-        className="details-social-bar__item details-social-bar__item--icon"
-        src="/static-data/icons/linkedin-black.svg"
-        onClick={() => openUrl(linkedin)}
-      />
-      <button
+      <a href={facebook} target="_blank" className="details-social-bar__icon">
+        <FacebookIcon size={24} />
+      </a>
+      <a
+        href={twitter}
+        target="_blank"
+        className="details-social-bar__icon details-social-bar__icon--twitter"
+      >
+        <TwitterIcon size={30} />
+      </a>
+      <a href={linkedin} target="_blank" className="details-social-bar__icon">
+        <LinkedinIcon size={24} />
+      </a>
+      <a
         className="details-social-bar__item details-social-bar__item--button"
-        onClick={() => openUrl(website)}
+        href={website}
       >
         {'Go to Website'}
-      </button>
-      <span className="details-social-bar__text details-social-bar__item">
+      </a>
+      <span className="details-social-bar__text details-social-bar__text--mr">
         {phone}
       </span>
       <span className="details-social-bar__text">{email}</span>
