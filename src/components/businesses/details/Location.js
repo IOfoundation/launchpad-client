@@ -8,7 +8,9 @@ const Location = props => {
       <Link className="detail-location__title text-semi">{props.title}</Link>
       <p className="detail-location__content">{props.address}</p>
       <p className="detail-location__content">{props.phone}</p>
-      <p className="detail-location__content">{props.email}</p>
+      <a className="detail-location__content" href={`mailto:${props.email}`}>
+        {props.email}
+      </a>
     </div>
   );
 };
