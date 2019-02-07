@@ -91,7 +91,7 @@ class Business extends PureComponent {
     );
   };
   render() {
-    const {business, isSelected, isMobile} = this.props;
+    const {business, isMobile} = this.props;
     const locations = business.locations;
     const [main_location, ...other_locations] = locations;
     const locationText = locations.length === 1 ? ' Location' : ' Locations';
@@ -252,7 +252,6 @@ Business.propTypes = {
     description: PropTypes.string,
   }).isRequired,
   isMobile: PropTypes.bool.isRequired,
-  isSelected: PropTypes.bool.isRequired,
   router: PropTypes.shape({
     push: PropTypes.func,
   }),

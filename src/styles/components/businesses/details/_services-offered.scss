@@ -1,0 +1,13 @@
+.services-offered {
+  border-bottom: 1px solid #e1e1e1;
+  flex: 1;
+  padding-bottom: 32px;
+  margin: 0 53px 32px 0;
+  position: relative;
+
+  &__title {
+    font-size: 20px;
+    line-height: 28px;
+    margin-bottom: 24px;
+  }
+}

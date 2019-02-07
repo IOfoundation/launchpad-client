@@ -5,6 +5,7 @@ type STATE = {};
 type ACTION = {};
 
 const initialState: STATE = {
+  organization: {},
   organizations: [],
   locations: [],
   filters: null,
@@ -114,6 +115,28 @@ export default function(state: STATE = initialState, action: ACTION): STATE {
       return {
         ...state,
         appliedFilters,
+      };
+    }
+
+    case types.FETCH_ORGANIZATION_BY_ID_REQUEST: {
+      return {
+        ...state,
+      };
+    }
+
+    case types.FETCH_ORGANIZATION_BY_ID_SUCCESS: {
+      const {organization} = action;
+      return {
+        ...state,
+        organization,
+      };
+    }
+
+    case types.FETCH_ORGANIZATION_BY_ID_ERROR: {
+      const {error} = action;
+      return {
+        ...state,
+        error,
       };
     }
 

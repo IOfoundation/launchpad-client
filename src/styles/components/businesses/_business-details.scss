@@ -1,0 +1,25 @@
+.business-deatils-wrapper {
+  .content-section {
+    display: flex;
+    margin-bottom: 32px;
+    max-width: 982px !important;
+    position: relative;
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 25.7%;
+      background: #e1e1e1;
+      width: 1px;
+      height: 100%;
+    }
+  }
+}
+
+@import "./details/main-section";
+@import "./details/detail";
+@import "./details/services-offered";
+@import "./details/service";
+@import "./details/locations";
+@import "./details/location";
