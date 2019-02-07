@@ -1,27 +1,18 @@
 import React from 'react';
 import Detail from './Detail';
+import {PropTypes} from 'prop-types';
 
-const MainSection = () => {
+const MainSection = props => {
+  const {organization} = props;
+
   return (
     <section className="business-details-section contentContainer">
       <div className="business-details-section__information">
         <h2 className="business-details-section__information__title text-semi">
-          {'Golden Sierra Job Training Agency'}
+          {organization.name || organization.alternate_name}
         </h2>
         <p className="business-details-section__information__content">
-          {`Lhtmlorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-          mattis magna felis, in porta elit tincidunt eu. Ut a euismod nibh.
-          Maecenas ultrices iaculis orci vitae eleifend. Aliquam eu nibh lacus.
-          Curabitur rhoncus gravida sapien, a mollis mauris bibendum sit amet.
-          Maecenas iaculis purus ante, faucibus egestas ligula consectetur vel.
-          Vestibulum dignissim facilisis mauris mollis lobortis. Donec volutpat
-          ligula in velit luctus, ut porttitor massa varius. Cras dictum
-          interdum orci, ut vulputate sapien convallis at. Vestibulum pulvinar
-          libero ac blandit accumsan. Proin ullamcorper ipsum non viverra
-          interdum. Suspendisse ac nulla quis justo ultricies posuere ac non
-          sapien. Aliquam malesuada dui sed neque tempor sollicitudin. Nam
-          dictum sed dui vitae pellentesque. Cras molestie metus justo. Proin
-          quis elit at lacus consectetur pretium`}
+          {organization.description}
         </p>
         <div className="business-details-section__information__data">
           <Detail title="Date of Incorporation" content="March 1, 2013" />
@@ -37,12 +28,22 @@ const MainSection = () => {
         <div className="business-details-section__logo__container">
           <img
             className="business-details-section__logo__img"
-            src="http://gdurl.com/ptEF"
+            src={organization.logo_url || '/static-data/images/cs-logo.png'}
+            style={organization.logo_url ? null : {backgroundColor: 'black'}}
           />
         </div>
       </div>
     </section>
   );
+};
+
+MainSection.propTypes = {
+  organization: PropTypes.shape({
+    alternate_name: PropTypes.string,
+    name: PropTypes.string,
+    description: PropTypes.string,
+    logo_url: PropTypes.string,
+  }),
 };
 
 export default MainSection;

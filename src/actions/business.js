@@ -29,6 +29,26 @@ const fetchOrganizationsErrorObject = error => {
   };
 };
 
+const fetchOrganizationByIdRequestObject = () => {
+  return {
+    type: types.FETCH_ORGANIZATION_BY_ID_REQUEST,
+  };
+};
+
+const fetchOrganizationByIdSuccessObject = organization => {
+  return {
+    type: types.FETCH_ORGANIZATION_BY_ID_SUCCESS,
+    organization,
+  };
+};
+
+const fetchOrganizationByIdErrorObject = error => {
+  return {
+    type: types.FETCH_ORGANIZATION_BY_ID_ERROR,
+    error,
+  };
+};
+
 const fetchFilterOptionsRequestObject = () => {
   return {
     type: types.FETCH_FILTER_OPTIONS_REQUEST,
@@ -130,6 +150,18 @@ const paginationMetadata = links => {
   });
   return _paginationMetadata;
 };
+
+export function fetchOrganizationById(id) {
+  return async (dispatch: Function) => {
+    dispatch(fetchOrganizationByIdRequestObject());
+    try {
+      const httpResponse = await httpRequest.get(`api/organizations?id=${id}`);
+      dispatch(fetchOrganizationByIdSuccessObject(httpResponse.data[0]));
+    } catch (error) {
+      dispatch(fetchOrganizationByIdErrorObject(error));
+    }
+  };
+}
 
 export function filterOrganizations(
   filterType,

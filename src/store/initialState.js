@@ -1,6 +1,7 @@
 const initialState = {
   businesses: {
     locations: [],
+    organization: {},
     organizations: [],
     items: [],
     metadata: {
