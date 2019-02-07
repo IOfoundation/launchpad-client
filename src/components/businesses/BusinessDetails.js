@@ -7,7 +7,12 @@ import {PropTypes} from 'prop-types';
 
 const BusinessDetails = props => {
   const {organization} = props;
-  let $details = null;
+  let $details = (
+    <div className="load-div">
+      <img className="loader" src="/static-data/images/loader.gif" />
+      <h3 className="loader-text text-regular">{'Loading'}</h3>
+    </div>
+  );
 
   if (Object.keys(organization).length) {
     $details = (
