@@ -17,22 +17,35 @@ const SocialBar = props => {
 
   return (
     <div className="details-social-bar">
-      <a href={facebook} target="_blank" className="details-social-bar__icon">
+      <a
+        href={facebook}
+        target="_blank"
+        className="details-social-bar__icon"
+        rel="noopener noreferrer"
+      >
         <FacebookIcon size={24} />
       </a>
       <a
         href={twitter}
         target="_blank"
         className="details-social-bar__icon details-social-bar__icon--twitter"
+        rel="noopener noreferrer"
       >
         <TwitterIcon size={30} />
       </a>
-      <a href={linkedin} target="_blank" className="details-social-bar__icon">
+      <a
+        href={linkedin}
+        target="_blank"
+        className="details-social-bar__icon"
+        rel="noopener noreferrer"
+      >
         <LinkedinIcon size={24} />
       </a>
       <a
         className="details-social-bar__item details-social-bar__item--button"
+        target="_blank"
         href={website}
+        rel="noopener noreferrer"
       >
         {'Go to Website'}
       </a>

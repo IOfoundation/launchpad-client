@@ -6,6 +6,10 @@
   justify-content: center;
   margin-bottom: 40px;
 
+  a {
+    outline: 0;
+  }
+
   &__item {
     cursor: pointer;
     font-size: 14px;
