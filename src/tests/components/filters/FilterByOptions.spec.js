@@ -13,13 +13,13 @@ const createProps = props => {
   };
 };
 
-describe('<FilterByOptions />', () => {
+xdescribe('<FilterByOptions />', () => {
   it('renders snapshot of FilterByOptions', () => {
-    /*const props = createProps({
+    const props = createProps({
       filterName: 'Business Services',
       filterOptions: filtersFixture.businessServices,
     });
     const wrapper = shallow(<FilterByOptions {...props} />);
-    expect(toJson(wrapper)).toMatchSnapshot();*/
+    expect(toJson(wrapper)).toMatchSnapshot();
   });
 });

@@ -1,10 +1,7 @@
 import {BusinessTypes as types} from '../action-types';
 import {isEmpty} from 'lodash';
 
-type STATE = {};
-type ACTION = {};
-
-const initialState: STATE = {
+const initialState = {
   organization: {},
   organizations: [],
   locations: [],
@@ -21,7 +18,7 @@ const initialState: STATE = {
   },
 };
 
-export default function(state: STATE = initialState, action: ACTION): STATE {
+export default function(state = initialState, action) {
   switch (action.type) {
     case types.FETCH_ORGANIZATIONS_REQUEST: {
       return {

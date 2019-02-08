@@ -152,7 +152,7 @@ const paginationMetadata = links => {
 };
 
 export function fetchOrganizationById(id) {
-  return async (dispatch: Function) => {
+  return async dispatch => {
     dispatch(fetchOrganizationByIdRequestObject());
     try {
       const httpResponse = await httpRequest.get(`api/organizations?id=${id}`);
@@ -169,7 +169,7 @@ export function filterOrganizations(
   filterValue,
   removeFilter
 ) {
-  return async (dispatch: Function) => {
+  return async dispatch => {
     dispatch(fetchOrganizationsRequestObject());
     const filters = filtersObject(
       filterType,
@@ -182,7 +182,7 @@ export function filterOrganizations(
 }
 
 export function changePage(page, currentParams) {
-  return async (dispatch: Function) => {
+  return async dispatch => {
     dispatch(fetchOrganizationsRequestObject());
 
     const filters = {
@@ -194,7 +194,7 @@ export function changePage(page, currentParams) {
 }
 
 export function updateAppliedFiltersCurrentPage(page, filters) {
-  return async (dispatch: Function) => {
+  return async dispatch => {
     const appliedFilters = {
       ...filters,
       page,
@@ -205,7 +205,7 @@ export function updateAppliedFiltersCurrentPage(page, filters) {
 }
 
 export function fetchFilterOptions() {
-  return async (dispatch: Function) => {
+  return async dispatch => {
     try {
       dispatch(fetchFilterOptionsRequestObject());
       const httpResponse = await httpRequest.get('/api/categories');
@@ -250,7 +250,7 @@ export function fetchFilterOptions() {
 }
 
 export function fetchSearchResults(filter) {
-  return async (dispatch: Function) => {
+  return async dispatch => {
     _debouncedfetchSearchResults(filter, dispatch);
   };
 }
@@ -259,7 +259,7 @@ export function changeFilterDisplayOptions(
   showBusinessTypes,
   locationToggleSwitch
 ) {
-  return async (dispatch: Function) => {
+  return async dispatch => {
     const displayOptions = {
       showBusinessTypes,
       locationToggleSwitch,
@@ -274,7 +274,7 @@ export function updateChipFilters(
   filterValue,
   removeFilter
 ) {
-  return (dispatch: Function) => {
+  return dispatch => {
     const appliedFilters = filtersObject(
       filterType,
       currentFilters,

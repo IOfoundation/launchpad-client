@@ -14,7 +14,7 @@ const createProps = props => {
   };
 };
 
-describe('<BusinessesList />', () => {
+describe.skip('<BusinessesList />', () => {
   it('renders snapshot of BusinessesList -- one org in array', () => {
     const props = createProps({
       organizations: [organizationFixture],

@@ -19,9 +19,11 @@ const Locations = props => {
 
       return (
         <Location
-          address={`${location.address.address_1}, ${location.address
-            .address_2}, ${location.address.state_province} ${location.address
-            .postal_code}`}
+          address={`${location.address.address_1}, ${
+            location.address.address_2
+          }, ${location.address.state_province} ${
+            location.address.postal_code
+          }`}
           title={location.address.city}
           email="email@domaninname.com"
           phone="(916) 514-7044"
@@ -42,9 +44,11 @@ const Locations = props => {
     <div className="detail-locations">
       <h2 className="detail-locations__title text-bold">{'Main Location'}</h2>
       <Location
-        address={`${locations[0].address.address_1}, ${locations[0].address
-          .address_2}, ${locations[0].address.state_province} ${locations[0]
-          .address.postal_code}`}
+        address={`${locations[0].address.address_1}, ${
+          locations[0].address.address_2
+        }, ${locations[0].address.state_province} ${
+          locations[0].address.postal_code
+        }`}
         title={locations[0].address.city}
         email="email@domaninname.com"
         phone="(916) 514-7044"

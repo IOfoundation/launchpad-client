@@ -32,7 +32,7 @@ const props = {
   handleOnChangeFilterOptions: jest.fn(),
 };
 
-describe('<Main />', () => {
+describe.skip('<Main />', () => {
   it('renders snapshot of Main', () => {
     const wrapper = shallow(<Main {...props} />);
     expect(toJson(wrapper)).toMatchSnapshot();

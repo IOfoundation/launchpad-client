@@ -42,8 +42,9 @@ class Business extends PureComponent {
                   {location.address.address_2 && (
                     <h4>{location.address.address_2}</h4>
                   )}
-                  <h4>{`${location.address.city}, ${location.address
-                    .state_province} ${location.address.postal_code}`}</h4>
+                  <h4>{`${location.address.city}, ${
+                    location.address.state_province
+                  } ${location.address.postal_code}`}</h4>
                 </div>
                 {(location.phones.length > 0 || location.email) && (
                   <div className="col-xs-12 p-0 m-top-16">
@@ -75,8 +76,9 @@ class Business extends PureComponent {
                 {location.address.address_2 && (
                   <h4>{location.address.address_2}</h4>
                 )}
-                <h4>{`${location.address.city}, ${location.address
-                  .state_province} ${location.address.postal_code}`}</h4>
+                <h4>{`${location.address.city}, ${
+                  location.address.state_province
+                } ${location.address.postal_code}`}</h4>
               </div>
               <div className="col-lg-4 col-md-4 col-xs-6 p-0 m-top-24">
                 {location.phones.length > 0 && (
@@ -168,8 +170,9 @@ class Business extends PureComponent {
                 ) : (
                   ''
                 )}
-                <h4>{`${main_location.address.city}, ${main_location.address
-                  .state_province}`}</h4>
+                <h4>{`${main_location.address.city}, ${
+                  main_location.address.state_province
+                }`}</h4>
               </div>
               {!isEmpty(business.contacts) &&
                 this._renderContacts(business.contacts[0])}
@@ -216,18 +219,17 @@ class Business extends PureComponent {
             {!isEmpty(other_locations) &&
               isMobile &&
               this._renderOtherLocationsMobile(other_locations)}
-            {!isEmpty(other_locations) &&
-              !isMobile && (
-                <div className="col-lg-12 col-md-12 col-xs-12 grid p-0">
-                  <div className="col-lg-6 col-md-6 col-xs-6 p-0 m-right-54">
-                    <p className="business-title">{'Other Locations'}</p>
-                  </div>
-                  <div className="col-lg-4 col-md-4 col-xs-6 p-0">
-                    <p className="business-title">{'Contact:'}</p>
-                  </div>
-                  {this._renderOtherLocations(other_locations)}
+            {!isEmpty(other_locations) && !isMobile && (
+              <div className="col-lg-12 col-md-12 col-xs-12 grid p-0">
+                <div className="col-lg-6 col-md-6 col-xs-6 p-0 m-right-54">
+                  <p className="business-title">{'Other Locations'}</p>
                 </div>
-              )}
+                <div className="col-lg-4 col-md-4 col-xs-6 p-0">
+                  <p className="business-title">{'Contact:'}</p>
+                </div>
+                {this._renderOtherLocations(other_locations)}
+              </div>
+            )}
           </div>
           <p className="location text-bold">
             <span>{`${totalLocations} ${locationText}`}</span>

@@ -1,44 +1,39 @@
 {
-  "presets": ["es2015", "react", "stage-0"],
   "env": {
     "development": {
-      "presets": ["env", "react-hmre", "stage-0"],
+      "presets": ["@babel/preset-env", "@babel/preset-react"],
       "plugins": [
-        "transform-decorators-legacy"
+        "@babel/plugin-proposal-class-properties",
+        "react-hot-loader/babel"
       ]
     },
     "production": {
-      "presets": [["env", "stage-0"]],
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "targets": {
+              "ie": 9
+            },
+            "forceAllTransforms": true
+          }
+        ],
+        "@babel/preset-react"
+      ],
       "plugins": [
-        "transform-decorators-legacy",
-        "transform-react-constant-elements",
-        "transform-react-remove-prop-types",
-        "transform-class-properties"
+        "@babel/plugin-proposal-class-properties",
+        "@babel/plugin-transform-react-constant-elements",
+        "transform-react-remove-prop-types"
       ]
     },
     "test": {
-      "presets": [
-        "env"
-      ],
-      "plugins": [
-        "transform-decorators-legacy",
-        "transform-class-properties",
-        "syntax-flow",
-        "transform-flow-strip-types"
-      ]
+      "presets": ["@babel/preset-env", "@babel/preset-react"],
+      "plugins": ["@babel/plugin-proposal-class-properties"]
     }
   },
+  "presets": ["@babel/preset-env", "@babel/preset-react"],
   "plugins": [
-    "transform-decorators-legacy",
-    "transform-class-properties",
-    "syntax-flow",
-    "transform-flow-strip-types",
-    [
-      "transform-runtime",
-      {
-        "polyfill": true,
-        "regenerator": true
-      }
-    ]
+    "@babel/plugin-proposal-class-properties",
+    "react-hot-loader/babel"
   ]
 }

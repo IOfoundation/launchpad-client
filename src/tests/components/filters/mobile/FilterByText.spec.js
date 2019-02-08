@@ -17,7 +17,7 @@ const props = {
   organizations: [organizationFixture],
 };
 
-describe('<FilterByText />', () => {
+xdescribe('<FilterByText />', () => {
   it('renders snapshot for mobile FilterByText component', () => {
     const wrapper = shallow(<FilterByText {...props} />);
     expect(toJson(wrapper)).toMatchSnapshot();

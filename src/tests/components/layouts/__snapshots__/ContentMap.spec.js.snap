@@ -12,10 +12,10 @@ exports[`<ContentMap /> renders snapshot of ContentMap 1`] = `
     >
       <Main
         expanded={false}
-        highlightOrgCard={[Function]}
+        highlightOrgCard={[MockFunction]}
         isMobile={false}
         locations={Array []}
-        onBoundsChange={[Function]}
+        onBoundsChange={[MockFunction]}
         organizations={
           Array [
             Object {
@@ -221,7 +221,7 @@ exports[`<ContentMap /> renders snapshot of ContentMap 1`] = `
     >
       <button
         className="expand-btn map-btn btn-link btn-link-primary text-bold text-xs-margin p-0 m-bot-8 m-top-5"
-        onClick={[Function]}
+        onClick={[MockFunction]}
       >
         Expand Map
       </button>
@@ -233,13 +233,13 @@ exports[`<ContentMap /> renders snapshot of ContentMap 1`] = `
         >
           <button
             className="toggle-btn toggle-off"
-            onClick={[Function]}
+            onClick={[MockFunction]}
           >
             <span />
           </button>
           <button
             className="btn-link btn-link-primary underline text-xs-margin text-bold"
-            onClick={[Function]}
+            onClick={[MockFunction]}
           >
             Search in Map Area
           </button>
