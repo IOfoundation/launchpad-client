@@ -13,9 +13,11 @@ export class Businesses extends PureComponent {
     showLoading: true,
     homePage: false,
     businessPageLoaded: false,
+    organizations: this.props.businesses.organizations,
+    listener: () => this.handleWindowSizeChange(),
   };
 
-  componentWillMount(_nextProps) {
+  /*componentWillMount(_nextProps) {
     const {params} = this.props;
     this.props.actions.fetchFilterOptions();
     const locationToggleSwitch = 'ne_lat' in params;
@@ -29,21 +31,48 @@ export class Businesses extends PureComponent {
     } else {
       this.handleInitialCategorySearch(params);
     }
-  }
-
+  }*/
   componentDidMount() {
     window.onpopstate = this.onBackButtonEvent;
-  }
 
-  componentWillReceiveProps(newProps) {
-    const {organizations} = this.props.businesses;
-    if (newProps.businesses.organizations !== organizations) {
-      this.setState({showLoading: false, businessPageLoaded: true});
+    const {params} = this.props;
+    this.props.actions.fetchFilterOptions();
+    const locationToggleSwitch = 'ne_lat' in params;
+    window.addEventListener('resize', this.handleWindowSizeChange);
+    this.props.actions.changeFilterDisplayOptions(
+      this.checkBusinessType(params.category),
+      locationToggleSwitch
+    );
+    if ('id' in params) {
+      this.handleInitialOrgSearch(params);
+    } else {
+      this.handleInitialCategorySearch(params);
     }
   }
 
-  componentWillUnMount() {
-    window.addEventListener('resize', () => this.handleWindowSizeChange());
+  /*componentWillReceiveProps(newProps) {
+    const {organizations} = this.props.businesses;
+    if (newProps.businesses.organizations !== organizations) {
+      console.log('hide loading');
+      this.setState({showLoading: false, businessPageLoaded: true});
+    }
+  }*/
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.businesses.organizations !== prevState.organizations) {
+      return {
+        organizations: nextProps.businesses.organizations,
+        showLoading: false,
+        businessPageLoaded: true,
+      };
+    }
+
+    return null;
+  }
+
+  componentWillUnmount() {
+    console.log('Removing');
+    window.removeEventListener('resize', this.handleWindowSizeChange);
   }
 
   onBackButtonEvent = () => {
@@ -64,6 +93,7 @@ export class Businesses extends PureComponent {
   };
 
   handleWindowSizeChange = () => {
+    console.log('with');
     this.setState({width: window.innerWidth});
   };
 

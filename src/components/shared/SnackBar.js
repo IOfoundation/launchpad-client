@@ -1,9 +1,18 @@
 import React from 'react';
-import {Snackbar} from 'material-ui';
+// import {Snackbar} from 'material-ui';
+import {withStyles} from '@material-ui/core/styles';
+import Snackbar from '@material-ui/core/Snackbar';
+import Button from '@material-ui/core/Button';
 import {PropTypes} from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/snackbar';
+
+const styles = theme => ({
+  close: {
+    padding: theme.spacing.unit / 2,
+  },
+});
 
 const SnackbarUI = props => {
   const {message, action, autoHideDuration, visibility} = props;
@@ -15,17 +24,26 @@ const SnackbarUI = props => {
   return (
     <Snackbar
       open={visibility}
-      message={message}
-      action={action}
+      message={<span id="snackbar__message">{message}</span>}
+      action={
+        <Button
+          onClick={() => {
+            props.actions.hideSnackbar();
+          }}
+          className="snackbar__action"
+          size="small"
+          aria-label="Close"
+          color="inherit"
+        >
+          {action}
+        </Button>
+      }
       autoHideDuration={autoHideDuration}
-      onActionClick={() => {
-        props.actions.hideSnackbar();
-      }}
-      onRequestClose={() => {
+      onClose={() => {
         props.actions.hideSnackbar();
       }}
       style={style}
-      className="snackbar-purple"
+      className="snackbar"
     />
   );
 };
@@ -58,4 +76,7 @@ const mapDispatchToProps = _dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SnackbarUI);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(SnackbarUI));

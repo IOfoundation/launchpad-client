@@ -15,25 +15,27 @@ export class Home extends Component {
     homePage: true,
   };
 
-  componentWillMount(_nextProps) {
+  /*componentWillMount(_nextProps) {
     window.addEventListener('resize', () => this.handleWindowSizeChange());
-  }
+  }*/
 
   componentDidMount() {
     this.props.snackbar.testingSnackbar({
       message: 'This is a test',
     });
+    window.addEventListener('resize', this.handleWindowSizeChange);
   }
 
   getTextSearchResults(filter) {
     this.props.actions.fetchSearchResults(filter);
   }
 
-  componentWillUnMount() {
-    window.addEventListener('resize', () => this.handleWindowSizeChange());
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleWindowSizeChange);
   }
 
   handleWindowSizeChange = () => {
+    console.log('chaning width');
     this.setState({width: window.innerWidth});
   };
 

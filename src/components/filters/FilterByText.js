@@ -10,16 +10,52 @@ class FilterByText extends Component {
     inputOnFocus: false,
     showDropdown: false,
     searchText: '',
+    organizations: this.props.organizations,
   };
-  componentWillReceiveProps(nextProps) {
+
+  /*componentWillReceiveProps(nextProps) {
+    // console.log('componentWillReceiveProps', nextProps);
     if (nextProps.organizations.length !== this.props.organizations.length) {
+      console.log('is different');
       if (nextProps.filterById && !isEmpty(nextProps.organizations)) {
+        console.log('update search Text');
         this.setState({searchText: nextProps.organizations[0].name});
       } else {
+        console.log('empty search Text');
         this.setState({searchText: ''});
       }
     }
+  }*/
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.organizations.length !== prevState.organizations.length) {
+      console.log('is different');
+      // return {organizations: nextProps.organizations};
+      if (nextProps.filterById && !isEmpty(nextProps.organizations)) {
+        console.log('update search Text');
+        return {
+          searchText: nextProps.organizations[0].name,
+          organizations: nextProps.organizations,
+        };
+      }
+      console.log('empty search Text');
+      return {searchText: '', organizations: nextProps.organizations};
+    }
+    return null;
   }
+
+  /*componentDidUpdate(prevProps) {
+    if (prevProps.organizations !== this.props.organizations) {
+      if (this.props.filterById && !isEmpty(this.props.organizations)) {
+        console.log('update search Text');
+        this.setState({searchText: this.props.organizations[0].name});
+      } else {
+        console.log('empty search Text');
+        this.setState({searchText: ''});
+      }
+    }
+  }*/
+
   deleteFilter = e => {
     const filter = e.currentTarget.getAttribute('data-value');
     this.props.handleOnChangeFilterOptions('category', filter, true);

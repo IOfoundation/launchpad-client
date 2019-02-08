@@ -14,7 +14,7 @@ class BusinessDetails extends PureComponent {
     homePage: false,
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.actions.fetchOrganizationById(this.props.params.id);
   }
 
@@ -53,6 +53,7 @@ const mapDispatchToProps = _dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withRouter(BusinessDetails)
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(BusinessDetails));
