@@ -29,16 +29,12 @@ class FilterByText extends Component {
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.organizations.length !== prevState.organizations.length) {
-      console.log('is different');
-      // return {organizations: nextProps.organizations};
       if (nextProps.filterById && !isEmpty(nextProps.organizations)) {
-        console.log('update search Text');
         return {
           searchText: nextProps.organizations[0].name,
           organizations: nextProps.organizations,
         };
       }
-      console.log('empty search Text');
       return {searchText: '', organizations: nextProps.organizations};
     }
     return null;

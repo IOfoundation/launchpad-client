@@ -32,6 +32,18 @@ export class Businesses extends PureComponent {
       this.handleInitialCategorySearch(params);
     }
   }*/
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.businesses.organizations !== prevState.organizations) {
+      return {
+        organizations: nextProps.businesses.organizations,
+        showLoading: false,
+        businessPageLoaded: true,
+      };
+    }
+
+    return null;
+  }
+
   componentDidMount() {
     window.onpopstate = this.onBackButtonEvent;
 
@@ -58,20 +70,7 @@ export class Businesses extends PureComponent {
     }
   }*/
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.businesses.organizations !== prevState.organizations) {
-      return {
-        organizations: nextProps.businesses.organizations,
-        showLoading: false,
-        businessPageLoaded: true,
-      };
-    }
-
-    return null;
-  }
-
   componentWillUnmount() {
-    console.log('Removing');
     window.removeEventListener('resize', this.handleWindowSizeChange);
   }
 
@@ -93,7 +92,6 @@ export class Businesses extends PureComponent {
   };
 
   handleWindowSizeChange = () => {
-    console.log('with');
     this.setState({width: window.innerWidth});
   };
 

@@ -60,17 +60,17 @@ class MapMarker extends Component {
         <section className="row between-xs map_modal_social business_block--expanded_bottom">
           <div>
             {organization.facebook && (
-              <a href={organization.facebook} target="_blank">
+              <a href={organization.facebook} target="_blank" rel="noopener">
                 <FacebookIcon className={'icon-svg'} size={18} />
               </a>
             )}
             {organization.twitter && (
-              <a href={organization.twitter} target="_blank">
+              <a href={organization.twitter} target="_blank" rel="noopener">
                 <TwitterIcon className={'icon-svg'} size={18} />
               </a>
             )}
             {organization.linkedin && (
-              <a href={organization.linkedin} target="_blank">
+              <a href={organization.linkedin} target="_blank" rel="noopener">
                 <LinkedinIcon className={'icon-svg'} size={18} />
               </a>
             )}
@@ -79,6 +79,7 @@ class MapMarker extends Component {
             className="website-link bold"
             href={organization.website}
             target="_blank"
+            rel="noopener"
           >
             {'WEBSITE'}
             <ArrowRight size={20} style={{verticalAlign: 'middle'}} />

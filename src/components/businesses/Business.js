@@ -126,6 +126,7 @@ class Business extends PureComponent {
                     href={business.facebook}
                     target="_blank"
                     className="social-icon"
+                    rel="noopener"
                   >
                     <FacebookIcon className={'icon-svg'} size={18} />
                   </a>
@@ -135,6 +136,7 @@ class Business extends PureComponent {
                     href={business.twitter}
                     target="_blank"
                     className="social-icon"
+                    rel="noopener"
                   >
                     <TwitterIcon className={'icon-svg'} size={18} />
                   </a>
@@ -144,6 +146,7 @@ class Business extends PureComponent {
                     href={business.linkedin}
                     target="_blank"
                     className="social-icon"
+                    rel="noopener"
                   >
                     <LinkedinIcon className={'icon-svg'} size={18} />
                   </a>
@@ -153,6 +156,7 @@ class Business extends PureComponent {
                     className="website-icon"
                     href={business.website}
                     target="_blank"
+                    rel="noopener"
                   >
                     <span>{'Go to Website'}</span>
                   </a>
