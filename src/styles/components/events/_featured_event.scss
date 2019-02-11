@@ -1,0 +1,18 @@
+.featured-event {
+  &__title {
+    font-size: 14px;
+    line-height: 20px;
+    color: $ninth-color;
+  }
+
+  &__description {
+    font-size: 12px;
+    line-height: 16px;
+    opacity: 0.5;
+  }
+
+  &__information {
+    line-height: 16px;
+    font-size: 12px;
+  }
+}

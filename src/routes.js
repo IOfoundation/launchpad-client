@@ -16,6 +16,7 @@ import HomeContainer from './containers/Home';
 import BusinessesContainer from './containers/Businesses';
 import BusinessDetails from './containers/BusinessDetails';
 import Blog from './containers/Blog';
+import Events from './containers/Events';
 
 export default (
   <Route path="/" component={App}>
@@ -27,6 +28,7 @@ export default (
     <Route path="terms-of-use" component={TermsOfUse} />
     <Route path="privacy-policy" component={PrivacyPolicy} />
     <Route path="/blog" component={Blog} />
+    <Route path="/events" component={Events} />
     <Route path="*" component={NotFound} />
   </Route>
 );
