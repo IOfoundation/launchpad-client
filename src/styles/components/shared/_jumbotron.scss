@@ -4,8 +4,7 @@
   margin-bottom: 40px;
 
   &__container {
-    max-width: 960px;
-    margin: 0 auto;
+    @include container;
   }
 
   &__title {

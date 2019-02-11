@@ -1,12 +1,4 @@
 .featured-post {
-  flex: 1;
-  margin-right: 24px;
-  max-width: 222px;
-
-  &:nth-child(4n + 4) {
-    margin-right: 0;
-  }
-
   &__img-container {
     align-items: center;
     display: flex;

@@ -7,7 +7,7 @@ const PostLists = props => {
 
   return (
     <div className="blog-posts">
-      <h2>{section}</h2>
+      <h2 className="blog-posts__title">{section}</h2>
       <PostListItem
         title="Sed Do Eiusmod Tempor Incididunt Ut Labore Et Dolore Magna Aliqua Eni Sunt Proident Blandit Aute In Dolor"
         description="Curabitur blandit tempus porttitor. Maecenas faucibus mollis interdum. Lorem ipsum dolor. Tempus curabitur blandit tempus porttitor. Maecenas faucibus mollis interdum. Lorem maecenas faucibus."
