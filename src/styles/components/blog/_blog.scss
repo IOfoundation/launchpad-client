@@ -1,2 +1,8 @@
+.blog-container {
+  &__content {
+    @include container;
+  }
+}
+
 @import "./featured-posts";
 @import "./featured-post";
