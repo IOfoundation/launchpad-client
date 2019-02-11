@@ -35,7 +35,7 @@ const testingSnackbarError = error => {
 };
 
 export const testingSnackbar = config => {
-  return async (dispatch: Function) => {
+  return async dispatch => {
     try {
       dispatch(testingSnackbarRequest(config));
       const httpResponse = await httpRequest.get('/api/categories');

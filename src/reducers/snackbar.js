@@ -1,16 +1,13 @@
 import {SnackbarTypes as types} from '../action-types';
 
-type STATE = {};
-type ACTION = {};
-
-const initialState: STATE = {
+const initialState = {
   visibility: false,
   message: 'placeholder message',
   autoHideDuration: 10000,
   actionText: 'DISMISS',
 };
 
-export default function(state: STATE = initialState, action: ACTION): STATE {
+export default function(state = initialState, action) {
   switch (action.type) {
     case types.SHOW_SNACKBAR: {
       return {

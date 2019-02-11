@@ -15,22 +15,19 @@ export class Home extends Component {
     homePage: true,
   };
 
-  componentWillMount(_nextProps) {
-    window.addEventListener('resize', () => this.handleWindowSizeChange());
-  }
-
   componentDidMount() {
     this.props.snackbar.testingSnackbar({
       message: 'This is a test',
     });
+    window.addEventListener('resize', this.handleWindowSizeChange);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleWindowSizeChange);
   }
 
   getTextSearchResults(filter) {
     this.props.actions.fetchSearchResults(filter);
-  }
-
-  componentWillUnMount() {
-    window.addEventListener('resize', () => this.handleWindowSizeChange());
   }
 
   handleWindowSizeChange = () => {
@@ -78,4 +75,7 @@ const mapDispatchToProps = _dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);

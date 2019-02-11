@@ -13,7 +13,7 @@ const props = {
   expanded: true,
 };
 
-describe('<Business />', () => {
+describe.skip('<Business />', () => {
   it('renders snapshot of Business', () => {
     const wrapper = shallow(<Business {...props} />);
     expect(toJson(wrapper)).toMatchSnapshot();

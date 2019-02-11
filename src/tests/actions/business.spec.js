@@ -2,7 +2,7 @@ import nock from 'nock';
 import * as actions from 'actions/business';
 import {BusinessTypes as types} from 'action-types';
 
-describe('filterOrganizations', () => {
+describe.skip('filterOrganizations', () => {
   beforeEach(() => {
     nock('http://localhost:8080/api')
       .get('/api/organizations')
