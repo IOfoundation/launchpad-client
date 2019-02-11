@@ -1,19 +1,4 @@
 .featured-events {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 auto 40px;
-  max-width: 960px;
-
-  &__row {
-    flex: 1;
-    margin-right: 24px;
-    max-width: 300px;
-
-    &:nth-child(3n + 3) {
-      margin-right: 0;
-    }
-  }
-
   &__title {
     font-size: 20px;
     line-height: 32px;
