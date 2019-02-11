@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Jumbotron from '../shared/Jumbotron';
+import FeaturedPosts from './FeaturedPosts';
 
 const Blog = () => {
   return (
@@ -10,6 +11,7 @@ const Blog = () => {
         description="Find content relevant to your industry and business stage."
         descriptionModifacor="full-white"
       />
+      <FeaturedPosts />
     </div>
   );
 };
