@@ -36,7 +36,7 @@ const FeaturedEvents = props => {
           />
         </Grid>
         <Grid item={true} xs={4}>
-          <h2 className="featured-events__title text-bold">{'Dicember'}</h2>
+          <h2 className="featured-events__title text-bold">{'December'}</h2>
           <FeaturedEvent
             title="Raising Investor Capital The Right Way"
             description="Donec id elit non mi porta gravida at eget metus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros"

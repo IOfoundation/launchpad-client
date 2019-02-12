@@ -1,8 +1,13 @@
 .featured-event {
   &__title {
+    color: $ninth-color;
     font-size: 14px;
     line-height: 20px;
-    color: $ninth-color;
+
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
   }
 
   &__description {
@@ -12,7 +17,8 @@
   }
 
   &__information {
-    line-height: 16px;
     font-size: 12px;
+    line-height: 16px;
+    margin-bottom: 16px;
   }
 }
