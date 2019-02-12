@@ -1,8 +1,6 @@
 .business-deatils-wrapper {
   .content-section {
-    display: flex;
     margin-bottom: 32px;
-    max-width: 982px !important;
     position: relative;
 
     &:after {
@@ -13,6 +11,12 @@
       background: #e1e1e1;
       width: 1px;
       height: 100%;
+    }
+
+    @media (max-width: 60em) {
+      &:after {
+        display: none;
+      }
     }
   }
 }

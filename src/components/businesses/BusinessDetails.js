@@ -5,9 +5,18 @@ import MainSection from './details/MainSection';
 import ServicesOffered from './details/ServicesOffered';
 import Locations from './details/Locations';
 import SocialBar from './details/SocialBar';
+import {withStyles} from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import {containerStyles} from '../../utils/containerStyles';
+
+const styles = theme => ({
+  content: {
+    ...containerStyles(theme),
+  },
+});
 
 const BusinessDetails = props => {
-  const {organization} = props;
+  const {organization, classes} = props;
   let $details = (
     <div className="load-div">
       <img className="loader" src="/static-data/images/loader.gif" />
@@ -28,9 +37,16 @@ const BusinessDetails = props => {
       <div className="business-deatils-wrapper">
         <MainSection organization={organization} />
         <SocialBar socialInformation={socialInformation} />
-        <section className="content-section contentContainer">
-          <ServicesOffered services={organization.services} />
-          <Locations locations={organization.locations} />
+
+        <section className={['content-section', classes.content].join(' ')}>
+          <Grid container={true}>
+            <Grid item={true} xs={12} md={9}>
+              <ServicesOffered services={organization.services} />
+            </Grid>
+            <Grid item={true} xs={12} md={3}>
+              <Locations locations={organization.locations} />
+            </Grid>
+          </Grid>
         </section>
       </div>
     );
@@ -40,10 +56,13 @@ const BusinessDetails = props => {
 };
 
 BusinessDetails.propTypes = {
+  classes: PropTypes.shape({
+    content: PropTypes.string,
+  }),
   organization: PropTypes.shape({
     services: PropTypes.arrayOf(PropTypes.object),
     locations: PropTypes.arrayOf(PropTypes.object),
   }),
 };
 
-export default BusinessDetails;
+export default withStyles(styles)(BusinessDetails);
