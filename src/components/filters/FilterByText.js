@@ -13,20 +13,6 @@ class FilterByText extends Component {
     organizations: this.props.organizations,
   };
 
-  /*componentWillReceiveProps(nextProps) {
-    // console.log('componentWillReceiveProps', nextProps);
-    if (nextProps.organizations.length !== this.props.organizations.length) {
-      console.log('is different');
-      if (nextProps.filterById && !isEmpty(nextProps.organizations)) {
-        console.log('update search Text');
-        this.setState({searchText: nextProps.organizations[0].name});
-      } else {
-        console.log('empty search Text');
-        this.setState({searchText: ''});
-      }
-    }
-  }*/
-
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.organizations.length !== prevState.organizations.length) {
       if (nextProps.filterById && !isEmpty(nextProps.organizations)) {
@@ -39,18 +25,6 @@ class FilterByText extends Component {
     }
     return null;
   }
-
-  /*componentDidUpdate(prevProps) {
-    if (prevProps.organizations !== this.props.organizations) {
-      if (this.props.filterById && !isEmpty(this.props.organizations)) {
-        console.log('update search Text');
-        this.setState({searchText: this.props.organizations[0].name});
-      } else {
-        console.log('empty search Text');
-        this.setState({searchText: ''});
-      }
-    }
-  }*/
 
   deleteFilter = e => {
     const filter = e.currentTarget.getAttribute('data-value');
