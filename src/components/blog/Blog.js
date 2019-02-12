@@ -14,6 +14,7 @@ const Blog = props => {
         title="Resource Finder Blog"
         description="Find content relevant to your industry and business stage."
         descriptionModifacor="full-white"
+        background="blog-header"
       />
       <FeaturedPosts />
       <MainContent breakpoint={breakpoint} />

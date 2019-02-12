@@ -35,6 +35,7 @@ require('static-data/images/ic_map_list-view-Green.png');
 require('static-data/images/ic_map_list-view-Grey.png');
 require('static-data/images/ic_map_green.png');
 require('static-data/images/ic_map_grey.png');
+require('static-data/backgrounds/blog-header.png');
 
 const store = configureStore(initialState);
 

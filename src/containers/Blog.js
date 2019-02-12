@@ -12,10 +12,6 @@ class Blog extends PureComponent {
     listener: () => sizeCheck(this.handleWindowSizeChange),
   };
 
-  handleWindowSizeChange = breakpoint => {
-    this.setState({breakpoint, width: viewport().width});
-  };
-
   componentDidMount() {
     window.addEventListener('resize', this.state.listener);
   }
@@ -23,6 +19,10 @@ class Blog extends PureComponent {
   componentWillUnmount() {
     window.removeEventListener('resize', this.state.listener);
   }
+
+  handleWindowSizeChange = breakpoint => {
+    this.setState({breakpoint, width: viewport().width});
+  };
 
   render() {
     const {width, homePage, breakpoint} = this.state;
