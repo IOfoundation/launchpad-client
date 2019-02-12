@@ -17,21 +17,6 @@ export class Businesses extends PureComponent {
     listener: () => this.handleWindowSizeChange(),
   };
 
-  /*componentWillMount(_nextProps) {
-    const {params} = this.props;
-    this.props.actions.fetchFilterOptions();
-    const locationToggleSwitch = 'ne_lat' in params;
-    window.addEventListener('resize', () => this.handleWindowSizeChange());
-    this.props.actions.changeFilterDisplayOptions(
-      this.checkBusinessType(params.category),
-      locationToggleSwitch
-    );
-    if ('id' in params) {
-      this.handleInitialOrgSearch(params);
-    } else {
-      this.handleInitialCategorySearch(params);
-    }
-  }*/
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.businesses.organizations !== prevState.organizations) {
       return {
@@ -61,14 +46,6 @@ export class Businesses extends PureComponent {
       this.handleInitialCategorySearch(params);
     }
   }
-
-  /*componentWillReceiveProps(newProps) {
-    const {organizations} = this.props.businesses;
-    if (newProps.businesses.organizations !== organizations) {
-      console.log('hide loading');
-      this.setState({showLoading: false, businessPageLoaded: true});
-    }
-  }*/
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleWindowSizeChange);
@@ -277,7 +254,4 @@ const mapDispatchToProps = _dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Businesses);
+export default connect(mapStateToProps, mapDispatchToProps)(Businesses);

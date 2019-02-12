@@ -24,4 +24,9 @@
       opacity: 1;
     }
   }
+
+  @media (max-width: 60em) {
+    margin-top: 52px;
+    padding: 32px 24px;
+  }
 }

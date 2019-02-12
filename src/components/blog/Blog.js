@@ -1,10 +1,13 @@
 import React from 'react';
+import {PropTypes} from 'prop-types';
 
 import Jumbotron from '../shared/Jumbotron';
 import FeaturedPosts from './FeaturedPosts';
 import MainContent from './MainContent';
 
-const Blog = () => {
+const Blog = props => {
+  const {breakpoint} = props;
+
   return (
     <div className="blog-container">
       <Jumbotron
@@ -13,9 +16,13 @@ const Blog = () => {
         descriptionModifacor="full-white"
       />
       <FeaturedPosts />
-      <MainContent />
+      <MainContent breakpoint={breakpoint} />
     </div>
   );
+};
+
+Blog.propTypes = {
+  breakpoint: PropTypes.string,
 };
 
 export default Blog;

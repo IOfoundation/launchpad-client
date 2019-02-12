@@ -13,15 +13,19 @@ const styles = theme => ({
 });
 
 const MainContent = props => {
-  const {classes} = props;
+  const {classes, breakpoint} = props;
 
   return (
     <div className={classes.content}>
-      <Grid container={true} spacing={24}>
-        <Grid item={true} xs={3}>
+      <Grid
+        container={true}
+        spacing={24}
+        direction={breakpoint === 'xs' ? 'column-reverse' : 'row'}
+      >
+        <Grid item={true} xs={12} sm={3}>
           <Categories />
         </Grid>
-        <Grid item={true} xs={9}>
+        <Grid item={true} xs={12} sm={9}>
           <PostLists section="Front Page" />
         </Grid>
       </Grid>
@@ -30,6 +34,7 @@ const MainContent = props => {
 };
 
 MainContent.propTypes = {
+  breakpoint: PropTypes.string,
   classes: PropTypes.shape({
     content: PropTypes.string,
   }),
