@@ -7,8 +7,9 @@
     margin-bottom: 8px;
 
     &:hover {
-      text-decoration: underline;
       color: $ninth-color;
+      cursor: pointer;
+      text-decoration: underline;
     }
   }
 
@@ -19,7 +20,7 @@
     margin-bottom: 4px;
     opacity: 0.87;
 
-    &:hover {
+    &--hover:hover {
       color: $ninth-color;
       text-decoration: underline;
     }
