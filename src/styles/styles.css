@@ -24,7 +24,13 @@ a {
   text-decoration: none;
   color: black;
 }
-h1,h2,h3,h4,h5,p, a {
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+a {
   margin: 0;
 }
 .row {
@@ -51,10 +57,10 @@ input[type=text]::-ms-clear {
 }
 /* Useful Classes */
 .primary {
-  color: #3F51B5;
+  color: #3f51b5;
 }
 .secondary {
-  color: #0C0033;
+  color: #0c0033;
 }
 .white {
   color: #ffffff;
@@ -98,7 +104,7 @@ input[type=text]::-ms-clear {
 }
 .underline-text {
   text-decoration: none;
-    border-bottom: 1px solid #00D3A7;
+  border-bottom: 1px solid #00d3a7;
 }
 .position-relative {
   position: relative;
