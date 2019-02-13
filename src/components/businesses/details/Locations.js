@@ -4,19 +4,22 @@ import {Link} from 'react-router';
 import Location from './Location';
 import {PropTypes} from 'prop-types';
 import Modal from '@material-ui/core/Modal';
-import LocationDetails from './LocastionDetails';
+import LocationDetails from './LocationDetails';
 
 const styles = theme => ({
   paper: {
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
+    height: '75vh',
     left: '50%',
     outline: 'none',
-    padding: theme.spacing.unit * 4,
+    overflow: 'scroll',
+    padding: '32px 24px',
     position: 'absolute',
-    top: '40%',
+    top: '50%',
     transform: 'translate(-50%, -50%)',
     width: theme.spacing.unit * 70,
+    borderRadius: '5px',
   },
 });
 
@@ -78,7 +81,10 @@ class Locations extends PureComponent {
       <div className="detail-locations">
         <Modal open={this.state.open} onClose={this.closeModalHandler}>
           <div className={classes.paper}>
-            <LocationDetails organization={organizationSelected} />
+            <LocationDetails
+              organization={organizationSelected}
+              closeModal={this.closeModalHandler}
+            />
           </div>
         </Modal>
         <h2 className="detail-locations__title text-bold">{'Main Location'}</h2>
