@@ -1,0 +1,9 @@
+.blog-posts {
+  &__title {
+    border-bottom: 2px solid black;
+    font-size: 20px;
+    line-height: 32px;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+  }
+}

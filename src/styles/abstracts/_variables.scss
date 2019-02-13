@@ -2,31 +2,35 @@
 *  Set $use-silent-classes true to generate silent classes of the normal css classes
 *  Set $use-silent-classes false if you don't want to generate silent classes of the normal css classes
 */
-$use-silent-classes:               true;
-$css-class:                         ".";
-$silent-class:                      "%";
+$use-silent-classes: true;
+$css-class: ".";
+$silent-class: "%";
 
 //colors
-$primary-color:                     #000000;
-$secondary-color:                   #2AD587;
-$third-color:                       #4A4A4A;
-$fourth-color:                      #00D3A7;
-$fifth-color:                       #DDF2F0;
-$sixth-color:                       #E5E5E5;
-$eighth-color:                      #070709;
-$ninth-color:                       #00BA81;
-$tenth-color:                       #EAECF0;
-$success-color:                     #0AC46F;
-$warning-color:                     #FFC000;
-$error-color:                       #FF0048;
-$white-color:                       #fff;
-$seconday-color-opacity:            rgba(42, 213, 135, 0.17);
+$primary-color: #000000;
+$secondary-color: #2ad587;
+$third-color: #4a4a4a;
+$fourth-color: #00d3a7;
+$fifth-color: #ddf2f0;
+$sixth-color: #e5e5e5;
+$eighth-color: #070709;
+$ninth-color: #00ba81;
+$tenth-color: #eaecf0;
+$eleventh-color: #eaecf0;
+$success-color: #0ac46f;
+$warning-color: #ffc000;
+$error-color: #ff0048;
+$white-color: #fff;
+$seconday-color-opacity: rgba(42, 213, 135, 0.17);
 
 //typography
-$font-family:                       'proxima-nova-regular', Georgia, sans-serif;
-$font-family-thin:                  'proxima-nova-thin', Georgia, sans-serif;
-$font-family-bold:                  'proxima-nova-bold', Georgia, sans-serif;
-$font-family-semi:                  'proxima-nova-semi', Georgia, sans-serif;
-$font-size-header:                  36px;
-$font-size-title:                   20px;
-$font-size-paragraphe:              16px;
+$font-family: 'proxima-nova-regular', Georgia, sans-serif;
+$font-family-thin: 'proxima-nova-thin', Georgia, sans-serif;
+$font-family-bold: 'proxima-nova-bold', Georgia, sans-serif;
+$font-family-semi: 'proxima-nova-semi', Georgia, sans-serif;
+$font-size-header: 36px;
+$font-size-title: 20px;
+$font-size-paragraphe: 16px;
+
+//with
+$containers-max-width: 960px;

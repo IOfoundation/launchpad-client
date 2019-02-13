@@ -12,3 +12,8 @@
     @content;
   }
 }
+
+@mixin container {
+  max-width: $containers-max-width;
+  margin: 0 auto;
+}

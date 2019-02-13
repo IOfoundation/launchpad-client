@@ -5,7 +5,7 @@
   &:focus {
     outline: none;
   }
-  &-outline{
+  &-outline {
     background-color: transparent;
     border: 1px solid $primary-color;
     align-items: center;
@@ -14,7 +14,7 @@
 
   &-search {
     width: 100%;
-    .btn-outline{
+    .btn-outline {
       background-color: transparent;
       border: 1px solid $primary-color;
     }
@@ -41,7 +41,7 @@
   &-link {
     border: 0px;
     background-color: transparent;
-    float:right;
+    float: right;
     font-size: 14px;
     text-align: right;
     font-weight: bold;
@@ -90,7 +90,7 @@
     width: 8px;
     display: block;
     border-radius: 10px;
-    background-color: #FFF;
+    background-color: #fff;
   }
 }
 .toggle-on {
@@ -106,5 +106,23 @@
   span {
     float: left;
     transition: all 0.4s ease-out;
+  }
+}
+
+.button-outline {
+  outline: none;
+  padding: 0;
+  border: 0;
+  font-size: 14px;
+  line-height: 20px;
+  border-radius: 0;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    color: $ninth-color;
+    text-decoration: underline;
   }
 }

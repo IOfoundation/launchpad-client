@@ -14,6 +14,9 @@ const muiTheme = createMuiTheme({
   typography: {
     useNextVariants: true,
   },
+  layout: {
+    maxWidth: 1300,
+  },
 });
 
 // This is a class-based component because the current

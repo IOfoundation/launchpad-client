@@ -5,18 +5,31 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {withRouter} from 'react-router';
 import * as actions from '../actions/business';
+import {sizeCheck} from '../utils/sizeCheck';
+import {viewport} from '../utils/viewPort';
 
 import {PropTypes} from 'prop-types';
 
 class BusinessDetails extends PureComponent {
   state = {
-    width: window.innerWidth,
+    width: viewport().width,
+    breakpoint: '',
     homePage: false,
+    istener: () => sizeCheck(this.handleWindowSizeChange),
   };
 
   componentDidMount() {
     this.props.actions.fetchOrganizationById(this.props.params.id);
+    window.addEventListener('resize', this.state.listener);
   }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.state.listener);
+  }
+
+  handleWindowSizeChange = breakpoint => {
+    this.setState({breakpoint, width: viewport().width});
+  };
 
   render() {
     const {width, homePage} = this.state;

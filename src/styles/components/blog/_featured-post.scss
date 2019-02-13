@@ -1,0 +1,26 @@
+.featured-post {
+  &__img-container {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+    overflow: hidden;
+
+    &__img {
+      height: 100%;
+      width: auto;
+    }
+  }
+
+  &__title {
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 8px;
+  }
+
+  &__description {
+    font-size: 12px;
+    line-height: 16px;
+    opacity: 0.5;
+  }
+}
