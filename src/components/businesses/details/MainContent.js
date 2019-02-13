@@ -2,7 +2,7 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 
 import ServicesOffered from './ServicesOffered';
-import FeaturedPosts from './FeaturedPosts';
+import DetailFeaturedPosts from './DetailFeaturedPosts';
 
 const MainContent = props => {
   const {services} = props;
@@ -10,7 +10,7 @@ const MainContent = props => {
   return (
     <div className="main-content">
       <ServicesOffered services={services} />
-      <FeaturedPosts />
+      <DetailFeaturedPosts />
     </div>
   );
 };

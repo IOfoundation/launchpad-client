@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import FeaturedPost from './FeaturedPost';
+import DetailFeaturedPost from './DetailFeaturedPost';
 import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import {PropTypes} from 'prop-types';
@@ -12,28 +12,28 @@ const styles = () => ({
   },
 });
 
-export const FeaturedPosts = props => {
+export const DetailFeaturedPosts = props => {
   const {classes} = props;
 
   return (
     <Fragment>
-      <h2 className="featured-posts__title">{'Post'}</h2>
+      <h2 className="detail-featured-posts__title">{'Post'}</h2>
       <div className={classes.featuredPosts}>
         <Grid container={true} spacing={16}>
           <Grid item={true} xs={12} md={4}>
-            <FeaturedPost
+            <DetailFeaturedPost
               description="Duis Aute Irure Dolor In Reprehenderit In Voluptate Velit Esse Cill"
               date="February 2, 2019"
             />
           </Grid>
           <Grid item={true} xs={12} md={4}>
-            <FeaturedPost
+            <DetailFeaturedPost
               description="Excepteur Sint Occaecat Cupidatat Non Proident Sunt"
               date="February 2, 2019"
             />
           </Grid>
           <Grid item={true} xs={12} md={4}>
-            <FeaturedPost
+            <DetailFeaturedPost
               description="Sed Do Eiusmod Tempor Incididunt Ut Labore Et Dolore Magna Aliqua Eni…"
               date="February 2, 2019"
             />
@@ -44,10 +44,10 @@ export const FeaturedPosts = props => {
   );
 };
 
-FeaturedPosts.propTypes = {
+DetailFeaturedPosts.propTypes = {
   classes: PropTypes.shape({
     featuredPosts: PropTypes.string,
   }),
 };
 
-export default withStyles(styles)(FeaturedPosts);
+export default withStyles(styles)(DetailFeaturedPosts);
