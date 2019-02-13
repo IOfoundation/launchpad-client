@@ -2,7 +2,6 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 
 import MainSection from './details/MainSection';
-import ServicesOffered from './details/ServicesOffered';
 import SocialBar from './details/SocialBar';
 import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -14,6 +13,7 @@ const styles = theme => ({
   },
 });
 import LeftBar from './details/LeftBar';
+import MainContent from './details/MainContent';
 
 const BusinessDetails = props => {
   const {organization, classes, events} = props;
@@ -41,7 +41,7 @@ const BusinessDetails = props => {
         <section className={['content-section', classes.content].join(' ')}>
           <Grid container={true}>
             <Grid item={true} xs={12} md={9}>
-              <ServicesOffered services={organization.services} />
+              <MainContent services={organization.services} />
             </Grid>
             <Grid item={true} xs={12} md={3}>
               <LeftBar organization={organization} events={events} />
