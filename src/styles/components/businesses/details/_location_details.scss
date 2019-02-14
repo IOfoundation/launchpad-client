@@ -1,5 +1,7 @@
 .location-details {
   font-size: 14px;
+  height: 100%;
+  overflow-y: auto;
 
   &__icon {
     cursor: pointer;
