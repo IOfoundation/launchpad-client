@@ -1,16 +1,16 @@
 import React, {Fragment} from 'react';
 import {PropTypes} from 'prop-types';
+import Section from './Section';
 
-const LocationDetailsSection = props => {
+const FromString = props => {
   const {title, content} = props;
-  const appendedTitle = `${title}: `;
   const contentSplit = content.join(', ');
   let $content = null;
 
   if (content) {
     $content = (
       <Fragment>
-        <LocationDetailsSection title={appendedTitle} content={contentSplit} />
+        <Section title={title} content={contentSplit} />
       </Fragment>
     );
   }
@@ -18,9 +18,9 @@ const LocationDetailsSection = props => {
   return $content;
 };
 
-LocationDetailsSection.propTypes = {
+FromString.propTypes = {
   content: PropTypes.string,
   title: PropTypes.string,
 };
 
-export default LocationDetailsSection;
+export default FromString;

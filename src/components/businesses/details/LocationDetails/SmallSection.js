@@ -1,7 +1,7 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 
-const LocationDetailsSmallSection = props => {
+const SmallSection = props => {
   const {title, content} = props;
   const appendedTitle = `${title}: `;
   let $content = null;
@@ -18,9 +18,9 @@ const LocationDetailsSmallSection = props => {
   return $content;
 };
 
-LocationDetailsSmallSection.propTypes = {
+SmallSection.propTypes = {
   content: PropTypes.string,
   title: PropTypes.string,
 };
 
-export default LocationDetailsSmallSection;
+export default SmallSection;
