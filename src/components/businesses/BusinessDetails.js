@@ -16,7 +16,7 @@ const styles = theme => ({
 import LeftBar from './details/LeftBar';
 
 const BusinessDetails = props => {
-  const {organization, classes} = props;
+  const {organization, classes, events} = props;
   let $details = (
     <div className="load-div">
       <img className="loader" src="/static-data/images/loader.gif" />
@@ -44,7 +44,7 @@ const BusinessDetails = props => {
               <ServicesOffered services={organization.services} />
             </Grid>
             <Grid item={true} xs={12} md={3}>
-              <LeftBar organization={organization} />
+              <LeftBar organization={organization} events={events} />
             </Grid>
           </Grid>
         </section>
@@ -59,6 +59,7 @@ BusinessDetails.propTypes = {
   classes: PropTypes.shape({
     content: PropTypes.string,
   }),
+  events: PropTypes.arrayOf(PropTypes.shape({})),
   organization: PropTypes.shape({
     services: PropTypes.arrayOf(PropTypes.object),
     locations: PropTypes.arrayOf(PropTypes.object),

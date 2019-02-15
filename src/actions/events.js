@@ -26,7 +26,21 @@ export const getAllEvents = () => {
     try {
       dispatch(getAllEventsRequestStart());
       const httpResponse = await httpRequest.get('/api/events');
-      dispatch(getAllEventsRequestSuccess({data: httpResponse.data}));
+      dispatch(getAllEventsRequestSuccess(httpResponse.data));
+    } catch (error) {
+      dispatch(getAllEventsRequestError(error));
+    }
+  };
+};
+
+export const getAllEventsById = id => {
+  return async dispatch => {
+    try {
+      dispatch(getAllEventsRequestStart());
+      const httpResponse = await httpRequest.get(
+        `/api/events?organization_id=${id}`
+      );
+      dispatch(getAllEventsRequestSuccess(httpResponse.data));
     } catch (error) {
       dispatch(getAllEventsRequestError(error));
     }

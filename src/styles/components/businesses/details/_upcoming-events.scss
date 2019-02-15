@@ -14,6 +14,7 @@
     flex-direction: column;
     flex: 1;
     justify-content: center;
+    min-height: 70px;
     padding: 0 18px;
 
     &__month {
@@ -26,8 +27,10 @@
   }
 
   &__text {
+    align-items: center;
     box-sizing: border-box;
     color: $eighth-color;
+    display: flex;
     font-size: 12px;
     opacity: 0.87;
     padding: 12px;

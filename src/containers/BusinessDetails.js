@@ -21,7 +21,7 @@ class BusinessDetails extends PureComponent {
 
   componentDidMount() {
     this.props.business.fetchOrganizationById(this.props.params.id);
-    this.props.events.getAllEvents();
+    this.props.events.getAllEventsById(this.props.params.id);
     window.addEventListener('resize', this.state.listener);
   }
 
@@ -35,10 +35,14 @@ class BusinessDetails extends PureComponent {
 
   render() {
     const {width, homePage} = this.state;
+    const {organization, eventsData} = this.props;
 
     return (
       <MainLayout windowWidth={width} homePage={homePage}>
-        <BusinessDetailsContent organization={this.props.organization} />
+        <BusinessDetailsContent
+          organization={organization}
+          events={eventsData}
+        />
       </MainLayout>
     );
   }
@@ -51,6 +55,7 @@ BusinessDetails.propTypes = {
   events: PropTypes.shape({
     getAllEvents: PropTypes.func.isRequired,
   }),
+  eventsData: PropTypes.arrayOf(PropTypes.shape({})),
   organization: PropTypes.shape({}),
   params: PropTypes.shape({
     id: PropTypes.string,
@@ -58,10 +63,11 @@ BusinessDetails.propTypes = {
 };
 
 const mapStateToProps = _state => {
-  const {businesses} = _state;
+  const {businesses, events} = _state;
 
   return {
     organization: businesses.organization,
+    eventsData: events.data,
   };
 };
 
@@ -72,7 +78,6 @@ const mapDispatchToProps = _dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(BusinessDetails));
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withRouter(BusinessDetails)
+);
