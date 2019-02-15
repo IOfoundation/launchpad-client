@@ -25,7 +25,11 @@ const LocationDetails = props => {
         content={organization.phone && organization.phone[0].number}
       />
       <SmallSection title="Email" content={organization.email} />
-      <SmallSection title="Website" content={organization.website} />
+      <SmallSection
+        title="Website"
+        content={organization.website}
+        extraSpace={true}
+      />
       <Section title="Description" content={organization.description} />
       <RegularSchedules schedules={organization.regular_schedules} />
       <FromString
@@ -37,7 +41,7 @@ const LocationDetails = props => {
         content={organization.transportation}
       />
       <FromString
-        title="Accesibility Options"
+        title="Accessibility Options"
         content={organization.accessibility}
       />
     </div>

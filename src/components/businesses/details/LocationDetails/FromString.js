@@ -19,7 +19,7 @@ const FromString = props => {
 };
 
 FromString.propTypes = {
-  content: PropTypes.array,
+  content: PropTypes.arrayOf(PropTypes.string),
   title: PropTypes.string,
 };
 
