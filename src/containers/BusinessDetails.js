@@ -4,8 +4,10 @@ import BusinessDetailsContent from '../components/businesses/BusinessDetails';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {withRouter} from 'react-router';
-import * as actions from '../actions/business';
-import {viewport, sizeCheck} from '../utils';
+import * as business from '../actions/business';
+import * as events from '../actions/events';
+import {sizeCheck} from '../utils/sizeCheck';
+import {viewport} from '../utils/viewPort';
 
 import {PropTypes} from 'prop-types';
 
@@ -18,7 +20,8 @@ class BusinessDetails extends PureComponent {
   };
 
   componentDidMount() {
-    this.props.actions.fetchOrganizationById(this.props.params.id);
+    this.props.business.fetchOrganizationById(this.props.params.id);
+    this.props.events.getAllEvents();
     window.addEventListener('resize', this.state.listener);
   }
 
@@ -42,8 +45,11 @@ class BusinessDetails extends PureComponent {
 }
 
 BusinessDetails.propTypes = {
-  actions: PropTypes.shape({
+  business: PropTypes.shape({
     fetchOrganizationById: PropTypes.func.isRequired,
+  }),
+  events: PropTypes.shape({
+    getAllEvents: PropTypes.func.isRequired,
   }),
   organization: PropTypes.shape({}),
   params: PropTypes.shape({
@@ -61,7 +67,8 @@ const mapStateToProps = _state => {
 
 const mapDispatchToProps = _dispatch => {
   return {
-    actions: bindActionCreators(actions, _dispatch),
+    business: bindActionCreators(business, _dispatch),
+    events: bindActionCreators(events, _dispatch),
   };
 };
 

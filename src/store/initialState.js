@@ -34,6 +34,9 @@ const initialState = {
     autoHideDuration: 10000,
     actionText: 'DISMISS',
   },
+  events: {
+    data: [],
+  },
 };
 
 export default initialState;
