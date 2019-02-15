@@ -13,7 +13,6 @@ const LocationDetails = props => {
   },
   ${organization.address.state_province} ${organization.address.postal_code}`;
 
-  console.log(organization);
   return (
     <div className="location-details">
       <i className="material-icons location-details__icon" onClick={closeModal}>
@@ -62,7 +61,7 @@ LocationDetails.propTypes = {
     phone: PropTypes.arrayOf({
       number: PropTypes.string,
     }),
-    regular_schedules: PropTypes.shape({}),
+    regular_schedules: PropTypes.array,
     website: PropTypes.string,
   }),
 };
