@@ -254,4 +254,7 @@ const mapDispatchToProps = _dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Businesses);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Businesses);

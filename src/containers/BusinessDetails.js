@@ -54,6 +54,7 @@ BusinessDetails.propTypes = {
   }),
   events: PropTypes.shape({
     getAllEvents: PropTypes.func.isRequired,
+    getAllEventsById: PropTypes.func.isRequired,
   }),
   eventsData: PropTypes.arrayOf(PropTypes.shape({})),
   organization: PropTypes.shape({}),
@@ -63,11 +64,11 @@ BusinessDetails.propTypes = {
 };
 
 const mapStateToProps = _state => {
-  const {businesses, events} = _state;
+  const {businesses, events: _events} = _state;
 
   return {
     organization: businesses.organization,
-    eventsData: events.data,
+    eventsData: _events.data,
   };
 };
 
@@ -78,6 +79,7 @@ const mapDispatchToProps = _dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withRouter(BusinessDetails)
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(BusinessDetails));

@@ -44,7 +44,9 @@ const BusinessDetails = props => {
               <ServicesOffered services={organization.services} />
             </Grid>
             <Grid item={true} xs={12} md={3}>
-              <LeftBar organization={organization} events={events} />
+              {events.length > 0 ? (
+                <LeftBar organization={organization} events={events} />
+              ) : null}
             </Grid>
           </Grid>
         </section>

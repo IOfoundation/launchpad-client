@@ -1,55 +1,115 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import {PropTypes} from 'prop-types';
 import {Link} from 'react-router';
+import {withStyles} from '@material-ui/core/styles';
+import Modal from '@material-ui/core/Modal';
 
 import Locations from './Locations';
 import UpcomingEvents from './UpcomingEvents';
 import {getDateFromString} from '../../../utils/getDateFromString';
+import Layout from './Modal/Content';
 
-const LeftBar = props => {
-  const {organization, events} = props;
-  let $events = <p>{'There is no upcoming Events'}</p>;
-  let $button = null;
+const styles = theme => ({
+  modal: {
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    height: '450px',
+    left: '50%',
+    outline: 'none',
+    overflow: 'auto',
+    padding: theme.spacing.unit * 4,
+    position: 'absolute',
+    top: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '580px',
+  },
+});
 
-  if (events.length > 0) {
-    $events = events.slice(0, 3).map((event, index) => {
-      const date = getDateFromString(event.posted_at);
+class LeftBar extends PureComponent {
+  state = {
+    selectedEvent: this.props.events[0],
+    openModal: false,
+  };
 
-      return (
-        <UpcomingEvents
-          key={event.id}
-          text={event.title}
-          day={date.day}
-          month={date.month}
-        />
-      );
+  handlerModalVisibility = (event = null) => {
+    this.setState(prevState => {
+      return {
+        openModal: !prevState.openModal,
+      };
     });
-  }
 
-  if (events.length > 3) {
-    $button = (
-      <Link to="/events" className="view-more">
-        {'View More'}
-      </Link>
+    if (event) {
+      this.setState({selectedEvent: event});
+    }
+  };
+
+  render() {
+    const {organization, events, classes} = this.props;
+    const {openModal, selectedEvent} = this.state;
+
+    let $events = <p>{'There is no upcoming Events'}</p>;
+    let $button = null;
+
+    if (events.length > 0) {
+      $events = events.slice(0, 3).map(event => {
+        const date = getDateFromString(event.posted_at);
+
+        return (
+          <UpcomingEvents
+            key={event.id}
+            text={event.title}
+            day={date.day}
+            month={date.month}
+            clicked={() => this.handlerModalVisibility(event)}
+          />
+        );
+      });
+    }
+
+    if (events.length > 3) {
+      $button = (
+        <Link to="/events" className="view-more">
+          {'View More'}
+        </Link>
+      );
+    }
+    const eventAddres = `${selectedEvent.street_1}, ${
+      selectedEvent.street_2
+    }, ${selectedEvent.state_abbr}, ${selectedEvent.zip}`;
+
+    return (
+      <div className="left-bar">
+        <Modal open={openModal} onClose={this.handlerModalVisibility}>
+          <div className={classes.modal}>
+            <Layout
+              title={selectedEvent.title}
+              postedBy={selectedEvent.organization}
+              date={selectedEvent.starting_at}
+              address={eventAddres}
+              link={selectedEvent.external_url}
+              description={selectedEvent.body}
+              closed={this.handlerModalVisibility}
+            />
+          </div>
+        </Modal>
+        <Locations locations={organization.locations} />
+        <h3 className="left-bar__title text-bold">{'Upcoming events'}</h3>
+        {$events}
+        {$button}
+      </div>
     );
   }
-
-  return (
-    <div className="left-bar">
-      <Locations locations={organization.locations} />
-      <h3 className="left-bar__title text-bold">{'Upcoming events'}</h3>
-      {$events}
-      {$button}
-    </div>
-  );
-};
+}
 
 LeftBar.propTypes = {
+  classes: PropTypes.shape({
+    modal: PropTypes.string,
+  }),
+  events: PropTypes.arrayOf(PropTypes.shape({})),
   organization: PropTypes.shape({
     services: PropTypes.arrayOf(PropTypes.object),
     locations: PropTypes.arrayOf(PropTypes.object),
   }),
-  events: PropTypes.arrayOf(PropTypes.shape({})),
 };
 
-export default LeftBar;
+export default withStyles(styles)(LeftBar);
