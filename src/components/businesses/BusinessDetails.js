@@ -16,7 +16,8 @@ import LeftBar from './details/LeftBar';
 import MainContent from './details/MainContent';
 
 const BusinessDetails = props => {
-  const {organization, classes, events} = props;
+  const {organization, classes, events, posts} = props;
+
   let $details = (
     <div className="load-div">
       <img className="loader" src="/static-data/images/loader.gif" />
@@ -41,7 +42,7 @@ const BusinessDetails = props => {
         <section className={['content-section', classes.content].join(' ')}>
           <Grid container={true}>
             <Grid item={true} xs={12} md={9}>
-              <MainContent services={organization.services} />
+              <MainContent services={organization.services} posts={posts} />
             </Grid>
             <Grid item={true} xs={12} md={3}>
               <LeftBar organization={organization} events={events} />
@@ -64,6 +65,7 @@ BusinessDetails.propTypes = {
     services: PropTypes.arrayOf(PropTypes.object),
     locations: PropTypes.arrayOf(PropTypes.object),
   }),
+  posts: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default withStyles(styles)(BusinessDetails);

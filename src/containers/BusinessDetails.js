@@ -7,6 +7,7 @@ import {withRouter} from 'react-router';
 import * as business from '../actions/business';
 import * as events from '../actions/events';
 import {sizeCheck, viewport} from '../utils';
+import * as blogs from '../actions/blogs';
 
 import {PropTypes} from 'prop-types';
 
@@ -21,6 +22,7 @@ class BusinessDetails extends PureComponent {
   componentDidMount() {
     this.props.business.fetchOrganizationById(this.props.params.id);
     this.props.events.getAllEventsById(this.props.params.id);
+    this.props.blogs.getFeaturedPostById(this.props.params.id);
     window.addEventListener('resize', this.state.listener);
   }
 
@@ -33,6 +35,7 @@ class BusinessDetails extends PureComponent {
   };
 
   render() {
+    const {posts} = this.props;
     const {width, homePage} = this.state;
     const {organization, eventsData} = this.props;
 
@@ -41,6 +44,7 @@ class BusinessDetails extends PureComponent {
         <BusinessDetailsContent
           organization={organization}
           events={eventsData}
+          posts={posts}
         />
       </MainLayout>
     );
@@ -48,6 +52,9 @@ class BusinessDetails extends PureComponent {
 }
 
 BusinessDetails.propTypes = {
+  blogs: PropTypes.shape({
+    getFeaturedPostById: PropTypes.func.isRequired,
+  }),
   business: PropTypes.shape({
     fetchOrganizationById: PropTypes.func.isRequired,
   }),
@@ -60,14 +67,16 @@ BusinessDetails.propTypes = {
   params: PropTypes.shape({
     id: PropTypes.string,
   }),
+  posts: PropTypes.arrayOf(PropTypes.object),
 };
 
 const mapStateToProps = _state => {
-  const {businesses, events: _events} = _state;
+  const {businesses, events: _events, blogs: _blogs} = _state;
 
   return {
     organization: businesses.organization,
     eventsData: _events.data,
+    posts: _blogs.organizationPosts,
   };
 };
 
@@ -75,6 +84,7 @@ const mapDispatchToProps = _dispatch => {
   return {
     business: bindActionCreators(business, _dispatch),
     events: bindActionCreators(events, _dispatch),
+    blogs: bindActionCreators(blogs, _dispatch),
   };
 };
 

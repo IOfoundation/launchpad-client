@@ -3,12 +3,14 @@ import {routerReducer} from 'react-router-redux';
 import businesses from './businesses';
 import snackbar from './snackbar';
 import events from './events';
+import blogs from './blogs';
 
 const rootReducer = combineReducers({
   routing: routerReducer,
   businesses,
   snackbar,
   events,
+  blogs,
 });
 
 export default rootReducer;
