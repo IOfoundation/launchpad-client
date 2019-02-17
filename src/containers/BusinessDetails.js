@@ -35,7 +35,6 @@ class BusinessDetails extends PureComponent {
   };
 
   render() {
-    const {posts} = this.props;
     const {width, homePage} = this.state;
     const {organization, eventsData} = this.props;
 
@@ -44,7 +43,6 @@ class BusinessDetails extends PureComponent {
         <BusinessDetailsContent
           organization={organization}
           events={eventsData}
-          posts={posts}
         />
       </MainLayout>
     );
@@ -67,16 +65,14 @@ BusinessDetails.propTypes = {
   params: PropTypes.shape({
     id: PropTypes.string,
   }),
-  posts: PropTypes.arrayOf(PropTypes.object),
 };
 
 const mapStateToProps = _state => {
-  const {businesses, events: _events, blogs: _blogs} = _state;
+  const {businesses, events: _events} = _state;
 
   return {
     organization: businesses.organization,
     eventsData: _events.data,
-    posts: _blogs.organizationPosts,
   };
 };
 

@@ -5,18 +5,17 @@ import ServicesOffered from './ServicesOffered';
 import DetailFeaturedPosts from './DetailFeaturedPosts';
 
 const MainContent = props => {
-  const {services, posts} = props;
+  const {services} = props;
 
   return (
     <div className="main-content">
       <ServicesOffered services={services} />
-      <DetailFeaturedPosts posts={posts} />
+      <DetailFeaturedPosts />
     </div>
   );
 };
 
 MainContent.propTypes = {
-  posts: PropTypes.arrayOf(PropTypes.object),
   services: PropTypes.arrayOf(PropTypes.object),
 };
 

@@ -1,4 +1,6 @@
 import React, {Fragment, PureComponent} from 'react';
+import {connect} from 'react-redux';
+
 import DetailFeaturedPost from './DetailFeaturedPost';
 import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -10,6 +12,7 @@ const styles = () => ({
     boxSizing: 'border-box',
     flexGrow: 1,
     maxWidth: '675px',
+    marginBottom: '20px',
   },
 });
 
@@ -30,11 +33,16 @@ class DetailFeaturedPosts extends PureComponent {
   render() {
     const {classes, posts} = this.props;
     const {postViews} = this.state;
+    const results = posts.results;
     let $viewMore = null;
-    let $post = <Loading elementConfig={{style: {marginRight: '53px'}}} />;
+    let $posts = <Loading elementConfig={{style: {marginRight: '53px'}}} />;
 
-    if (posts.length > 0) {
-      if (posts.length > 3) {
+    if (posts.noResults) {
+      $posts = null;
+    }
+
+    if (results.length > 0) {
+      if (results.length > 3 && postViews < 9) {
         $viewMore = (
           <a className="view-more" onClick={this.incrementPostViews}>
             {'View More'}
@@ -42,7 +50,7 @@ class DetailFeaturedPosts extends PureComponent {
         );
       }
 
-      const $featuredPosts = posts.slice(0, postViews).map(post => {
+      const $featuredPosts = results.slice(0, postViews).map(post => {
         return (
           <Grid key={post.id} item={true} xs={12} md={4}>
             <DetailFeaturedPost
@@ -53,7 +61,7 @@ class DetailFeaturedPosts extends PureComponent {
         );
       });
 
-      $post = (
+      $posts = (
         <Fragment>
           <h2 className="detail-featured-posts__title">{'Post'}</h2>
           <div className={classes.featuredPosts}>
@@ -66,7 +74,7 @@ class DetailFeaturedPosts extends PureComponent {
       );
     }
 
-    return $post;
+    return $posts;
   }
 }
 
@@ -74,7 +82,20 @@ DetailFeaturedPosts.propTypes = {
   classes: PropTypes.shape({
     featuredPosts: PropTypes.string,
   }),
-  posts: PropTypes.arrayOf(PropTypes.object),
+  posts: PropTypes.shape({
+    results: PropTypes.arrayOf(PropTypes.object),
+    noResults: PropTypes.bool,
+  }),
 };
 
-export default withStyles(styles)(DetailFeaturedPosts);
+const mapStateToProps = _state => {
+  const {blogs: _blogs} = _state;
+
+  return {
+    posts: {results: _blogs.organizationPosts, noResults: _blogs.noResults},
+  };
+};
+
+export default connect(mapStateToProps)(
+  withStyles(styles)(DetailFeaturedPosts)
+);

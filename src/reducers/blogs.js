@@ -2,6 +2,7 @@ import {BlogsTypes as types} from '../action-types';
 
 const initialState = {
   organizationPosts: [],
+  noResults: false,
 };
 
 export default function(state = initialState, action) {
@@ -9,6 +10,8 @@ export default function(state = initialState, action) {
     case types.GET_FEATURED_POSTS_START: {
       return {
         ...state,
+        noResults: false,
+        organizationPosts: [],
       };
     }
 
@@ -27,6 +30,16 @@ export default function(state = initialState, action) {
         error,
       };
     }
+
+    case types.NO_RESULTS: {
+      const {noResults} = action;
+
+      return {
+        ...state,
+        noResults,
+      };
+    }
+
     default:
       return state;
   }

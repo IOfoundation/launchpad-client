@@ -22,6 +22,13 @@ const getFeaturedPostsError = error => {
   };
 };
 
+export const noResults = value => {
+  return {
+    type: types.NO_RESULTS,
+    noResults: value,
+  };
+};
+
 export const getFeaturedPostById = id => {
   return async dispatch => {
     try {
@@ -29,6 +36,9 @@ export const getFeaturedPostById = id => {
       const httpResponse = await httpRequest.get(
         `/api/blog_posts?filter[organization_id]=${id}`
       );
+      if (httpResponse.data.length === 0) {
+        dispatch(noResults(true));
+      }
       dispatch(getFeaturedPostsSuccess(httpResponse.data));
     } catch (error) {
       dispatch(getFeaturedPostsError(error));
