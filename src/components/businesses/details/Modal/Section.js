@@ -2,12 +2,14 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 
 export const Section = props => {
-  const {content, children, modifier} = props;
+  const {content, children, modifiers} = props;
   let $content = null;
   const classes = ['modal-events__section'];
 
-  if (modifier) {
-    classes.push(`modal-events__section--${modifier}`);
+  if (modifiers && modifiers.length > 0) {
+    modifiers.forEach(modifier => {
+      classes.push(`modal-events__section--${modifier}`);
+    });
   }
 
   if (content) {
@@ -23,7 +25,7 @@ export const Section = props => {
 
 Section.propTypes = {
   content: PropTypes.string,
-  modifier: PropTypes.string,
+  modifiers: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default Section;

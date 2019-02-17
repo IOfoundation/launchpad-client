@@ -8,7 +8,7 @@ export const Link = props => {
 
   if (link) {
     $content = (
-      <Section modifier="extra-space">
+      <Section modifiers={['extra-space', 'ml']}>
         <i className="material-icons modal-events__icon">{'link'}</i>
         <a
           href={link}

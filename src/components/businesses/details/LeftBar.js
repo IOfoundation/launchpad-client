@@ -46,11 +46,11 @@ class LeftBar extends PureComponent {
   render() {
     const {organization, events, classes} = this.props;
     const {openModal, selectedEvent} = this.state;
-
-    let $events = <p>{'There is no upcoming Events'}</p>;
+    let $events = <p>{'There are no upcoming Events'}</p>;
     let $button = null;
+    let $modal = null;
 
-    if (events.length > 0) {
+    if (events && events.length > 0) {
       $events = events.slice(0, 3).map(event => {
         const date = getDateFromString(event.posted_at);
 
@@ -66,32 +66,35 @@ class LeftBar extends PureComponent {
       });
     }
 
-    if (events.length > 3) {
+    if (events && events.length > 3) {
       $button = (
         <Link to="/events" className="view-more">
           {'View More'}
         </Link>
       );
     }
-    const eventAddres = `${selectedEvent.street_1}, ${
-      selectedEvent.street_2
-    }, ${selectedEvent.state_abbr}, ${selectedEvent.zip}`;
 
-    return (
-      <div className="left-bar">
+    if (selectedEvent) {
+      $modal = (
         <Modal open={openModal} onClose={this.handlerModalVisibility}>
           <div className={classes.modal}>
             <Layout
               title={selectedEvent.title}
               postedBy={selectedEvent.organization}
               date={selectedEvent.starting_at}
-              address={eventAddres}
+              address={`${selectedEvent.street_1}, ${selectedEvent.street_2}, ${selectedEvent.state_abbr}, ${selectedEvent.zip}`}
               link={selectedEvent.external_url}
               description={selectedEvent.body}
               closed={this.handlerModalVisibility}
             />
           </div>
         </Modal>
+      );
+    }
+
+    return (
+      <div className="left-bar">
+        {$modal}
         <Locations locations={organization.locations} />
         <h3 className="left-bar__title text-bold">{'Upcoming events'}</h3>
         {$events}

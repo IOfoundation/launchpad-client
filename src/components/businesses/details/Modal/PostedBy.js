@@ -8,7 +8,7 @@ export const PostedBy = props => {
 
   if (url && name) {
     $content = (
-      <Section modifier="extra-space">
+      <Section modifiers={['extra-space']}>
         {'Posted By: '}
         <a
           href={url}

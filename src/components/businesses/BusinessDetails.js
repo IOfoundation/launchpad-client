@@ -32,7 +32,7 @@ const BusinessDetails = props => {
     linkedin: organization.linkedin,
   };
 
-  if (Object.keys(organization).length) {
+  if (Object.keys(organization).length > 0) {
     $details = (
       <div className="business-deatils-wrapper">
         <MainSection organization={organization} />
@@ -44,9 +44,7 @@ const BusinessDetails = props => {
               <ServicesOffered services={organization.services} />
             </Grid>
             <Grid item={true} xs={12} md={3}>
-              {events.length > 0 ? (
-                <LeftBar organization={organization} events={events} />
-              ) : null}
+              <LeftBar organization={organization} events={events} />
             </Grid>
           </Grid>
         </section>

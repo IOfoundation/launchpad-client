@@ -17,7 +17,7 @@ const Layout = props => {
       <h1 className="modal-events__title">{title}</h1>
       <PostedBy url={postedBy.website} name={postedBy.name} />
       <DateSection date={date} />
-      <Section content={address} modifier="extra-space" />
+      <Section content={address} modifiers={['extra-space']} />
       <Link link={link} />
       <Section content={description} />
     </Fragment>
