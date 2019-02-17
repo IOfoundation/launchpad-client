@@ -6,6 +6,7 @@ import TwitterIcon from '../shared/TwitterIcon';
 import LinkedinIcon from '../shared/LinkedinIcon';
 import {PropTypes} from 'prop-types';
 import {isEmpty} from 'lodash';
+import {truncate} from '../../utils';
 
 class Business extends PureComponent {
   navigateToDetails = () => {
@@ -98,6 +99,13 @@ class Business extends PureComponent {
     const [main_location, ...other_locations] = locations;
     const locationText = locations.length === 1 ? ' Location' : ' Locations';
     const totalLocations = locations.length;
+
+    let description = business.description;
+
+    if (description.split(' ').length > 50) {
+      description = truncate(description, 50, '...');
+    }
+
     return (
       <div
         className="business-card busines-card--bg-gray"
@@ -118,7 +126,7 @@ class Business extends PureComponent {
             <div className="business-details-container">
               <div className="business-information">
                 <h3 className="title text-semi">{business.name}</h3>
-                <p className="business-description">{business.description}</p>
+                <p className="business-description">{description}</p>
               </div>
               <div className="social-icons-hide">
                 {business.facebook && (
