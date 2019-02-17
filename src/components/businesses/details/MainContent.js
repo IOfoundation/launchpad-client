@@ -10,7 +10,7 @@ const MainContent = props => {
   return (
     <div className="main-content">
       <ServicesOffered services={services} />
-      {posts.length > 0 ? <DetailFeaturedPosts posts={posts} /> : null}
+      <DetailFeaturedPosts posts={posts} />
     </div>
   );
 };
