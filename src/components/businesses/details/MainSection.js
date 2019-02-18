@@ -4,7 +4,7 @@ import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import {containerStyles} from '../../../utils/containerStyles';
-import {truncate} from '../../../utils';
+import {truncate, maxCharacters} from '../../../utils';
 import Description from './Service/Description';
 
 const styles = theme => ({
@@ -18,8 +18,8 @@ const MainSection = props => {
   const {organization, classes} = props;
   let description = organization.description;
 
-  if (description.split(' ').length > 50) {
-    description = truncate(organization.description, 50, '...');
+  if (description.split(' ').length > maxCharacters) {
+    description = truncate(organization.description);
   }
 
   return (

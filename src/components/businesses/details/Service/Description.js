@@ -27,7 +27,7 @@ class Description extends PureComponent {
     if (description.split(' ').length > 50) {
       $viewMore = (
         <p className="business-details-section__information__content">
-          {viewMore ? description : truncate(description, 50, '...')}
+          {viewMore ? description : truncate(description)}
           <a
             className="service__view-more text-semi"
             onClick={this.viewMoreHandler}

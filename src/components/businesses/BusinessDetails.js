@@ -39,8 +39,8 @@ const BusinessDetails = props => {
         <MainSection organization={organization} />
         <SocialBar socialInformation={socialInformation} />
 
-        <section className={['content-section', classes.content].join(' ')}>
-          <Grid container={true}>
+        <section className={'content-section'}>
+          <Grid container={true} className={classes.content}>
             <Grid item={true} xs={12} md={9}>
               <MainContent services={organization.services} />
             </Grid>

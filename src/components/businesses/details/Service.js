@@ -90,7 +90,7 @@ class Service extends PureComponent {
       <div className="service">
         <h3 className="service__title text-bold">{name}</h3>
         <p className="service__content">
-          {viewMore ? description : truncate(description, 50, '...')}
+          {viewMore ? description : truncate(description)}
           {viewMore ? null : (
             <a
               className="service__view-more text-semi"

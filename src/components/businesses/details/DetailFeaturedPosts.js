@@ -63,7 +63,7 @@ class DetailFeaturedPosts extends PureComponent {
 
       $posts = (
         <Fragment>
-          <h2 className="detail-featured-posts__title">{'Post'}</h2>
+          <h2 className="detail-featured-posts__title">{'Posts'}</h2>
           <div className={classes.featuredPosts}>
             <Grid container={true} spacing={16}>
               {$featuredPosts}

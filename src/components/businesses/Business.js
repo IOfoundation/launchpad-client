@@ -6,7 +6,7 @@ import TwitterIcon from '../shared/TwitterIcon';
 import LinkedinIcon from '../shared/LinkedinIcon';
 import {PropTypes} from 'prop-types';
 import {isEmpty} from 'lodash';
-import {truncate} from '../../utils';
+import {truncate, maxCharacters} from '../../utils';
 
 class Business extends PureComponent {
   navigateToDetails = () => {
@@ -102,8 +102,8 @@ class Business extends PureComponent {
 
     let description = business.description;
 
-    if (description.split(' ').length > 50) {
-      description = truncate(description, 50, '...');
+    if (description.split('').length > maxCharacters) {
+      description = truncate(description);
     }
 
     return (

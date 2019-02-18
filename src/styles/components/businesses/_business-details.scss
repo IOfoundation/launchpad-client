@@ -1,6 +1,7 @@
 .business-deatils-wrapper {
   .content-section {
-    margin-bottom: 32px;
+    background-color: #f7f9fd;
+    padding: 40px 0 32px;
     position: relative;
 
     &:after {
@@ -9,8 +10,11 @@
       top: 0;
       right: 25%;
       background: #e1e1e1;
+      height: calc(100% - 80px);
+      position: absolute;
+      right: 30.5%;
+      top: 40px;
       width: 1px;
-      height: 100%;
     }
 
     @media (max-width: 60em) {
