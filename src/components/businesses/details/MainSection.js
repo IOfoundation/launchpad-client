@@ -18,7 +18,7 @@ const MainSection = props => {
   const {organization, classes} = props;
   let description = organization.description;
 
-  if (description.split(' ').length > maxCharacters) {
+  if (description.split('').length > maxCharacters) {
     description = truncate(organization.description);
   }
 

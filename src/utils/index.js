@@ -4,6 +4,6 @@ export {dayOfWeekAsInteger} from './dayOfWeekAsInteger';
 export {httpRequest} from './httpRequest';
 export {containerStyles} from './containerStyles';
 export {sizeCheck} from './sizeCheck';
-export {truncate} from './truncate';
+export {truncate, maxCharacters} from './truncate';
 export {openUrl} from './utility';
 export {viewport} from './viewport';

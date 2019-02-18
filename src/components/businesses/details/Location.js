@@ -2,10 +2,18 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 
 const Location = props => {
-  const {onDetailsClicked} = props;
+  const {onDetailsClicked, extraClasses} = props;
+
+  const detailLocationClass = ['detail-location'];
+
+  if (extraClasses) {
+    extraClasses.forEach(extraClass => {
+      detailLocationClass.push(extraClass);
+    });
+  }
 
   return (
-    <div className="detail-location">
+    <div className={detailLocationClass.join(' ')}>
       <h3
         className="detail-location__title text-semi"
         onClick={onDetailsClicked}
@@ -27,6 +35,7 @@ const Location = props => {
 Location.propTypes = {
   address: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
+  extraClasses: PropTypes.arrayOf(PropTypes.string),
   onDetailsClicked: PropTypes.func,
   phone: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
