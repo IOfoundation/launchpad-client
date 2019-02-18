@@ -42,6 +42,7 @@
     "deep-freeze": "^0.0.1",
     "express": "4.16.2",
     "flexboxgrid": "6.3.1",
+    "formik": "1.5.1",
     "google-map-react": "^0.27.0",
     "jsonapi-serializer": "3.5.5",
     "object-assign": "4.1.0",
@@ -60,7 +61,8 @@
     "redux": "4.0.1",
     "redux-thunk": "^2.3.0",
     "url-parse": "1.4.4",
-    "webpack-dotenv-plugin": "^2.1.0"
+    "webpack-dotenv-plugin": "^2.1.0",
+    "yup": "0.26.10"
   },
   "devDependencies": {
     "@babel/cli": "7.0.0",
@@ -155,7 +157,9 @@
     ],
     "verbose": true
   },
-  "pre-commit": [ "pre-commit" ],
+  "pre-commit": [
+    "pre-commit"
+  ],
   "lint-staged": {
     "*.js": [ "prettier --single-quote --bracket-spacing false --trailing-comma es5 --write '{src,__{tests,mocks}__}/**/*.js'", "git add" ]
   }

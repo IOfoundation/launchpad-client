@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Caption from './elements/Caption';
-import SingInForm from './elements/SignInForm';
+import FormsContainer from './elements/FormsContainer';
 import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import {containerStyles} from '../../utils/containerStyles';
@@ -24,7 +24,7 @@ const AdminLogin = props => {
               {"Have a resource you'd like listed?"} <a>{'Sign up here'}</a>{' '}
             </span>
           </Caption>
-          <SingInForm />
+          <FormsContainer />
         </Grid>
       </section>
     </div>

@@ -1,107 +1,84 @@
 import React, {PureComponent} from 'react';
+import {Formik, Form, Field, ErrorMessage} from 'formik';
+import TextField from '@material-ui/core/TextField';
+
 import Grid from '@material-ui/core/Grid';
-import FormElement from '../../shared/FormElement/FormElement';
 
 class SingInForm extends PureComponent {
   state = {
-    signInForm: [
-      {
-        key: 'email',
-        elementType: 'input',
-        elementConfig: {
-          type: 'email',
-          placeholder: 'Email Address',
-        },
-        value: '',
-        validation: {
-          required: true,
-        },
-        valid: false,
-        touched: false,
-      },
-      {
-        key: 'password',
-        elementType: 'password',
-        elementConfig: {
-          type: 'password',
-          placeholder: 'Password',
-        },
-        value: '',
-        validation: {
-          required: true,
-        },
-        valid: false,
-        touched: false,
-      },
-    ],
-    loading: false,
-    formIsValid: false,
+    initialValues: {email: '', password: ''},
   };
 
-  valueChangesHandler = (event, key) => {
-    const newValue = event.target.value;
-
-    this.setState(prevStatus => {
-      const orderForm = prevStatus.orderForm.map(formElement => {
-        if (formElement.key === key) {
-          formElement.value = newValue;
-          formElement.valid = checkValidity(newValue, formElement.validation);
-          console.log(formElement);
-        }
-        return formElement;
-      });
-
-      const formIsValid = prevStatus.orderForm.every(
-        formElement => formElement.valid || !formElement.validation
-      );
-
-      console.log(formIsValid);
-
-      return {...orderForm, formIsValid};
-    });
+  submitHandler = (values, {setSubmitting}) => {
+    setTimeout(() => {
+      console.log(JSON.stringify(values, null, 2));
+      setSubmitting(false);
+    }, 400);
   };
 
-  setFocus = key => {
-    this.setState(prevStatus => {
-      const orderForm = prevStatus.orderForm.map(formElement => {
-        if (formElement.key === key) {
-          formElement.touched = true;
-          console.log('touched');
-        }
-        return formElement;
-      });
+  changeHandler = (name, event) => {
+    const {handleChange, errors, handleBlur} = this.props;
 
-      return {...orderForm};
-    });
+    event.persist();
+    handleChange(event);
+
+    if (errors[name]) {
+      handleBlur(event);
+    }
   };
 
   render() {
-    const $formElements = this.state.signInForm.map((formElement, index) => {
-      return (
-        <FormElement
-          key={index}
-          elementType={formElement.elementType}
-          elementConfig={formElement.elementConfig}
-          valid={formElement.valid}
-          shouldValidate={formElement.validation}
-          value={formElement.value}
-          valueChanges={event =>
-            this.valueChangesHandler(event, formElement.key)
-          }
-          onFocused={() => this.setFocus(formElement.key)}
-          touched={formElement.touched}
-        />
-      );
-    });
+    const {
+      values: {email, password},
+      errors,
+      touched,
+      handleSubmit,
+      isValid,
+      handleBlur,
+      isSubmitting,
+    } = this.props;
 
     return (
-      <Grid item={true} xs={12} md={4}>
-        <form>
-          {$formElements}
-          <button>{'Sign In'}</button>
-          <p>{'Forgot your password?'}</p>
-        </form>
-      </Grid>
+      <Form className="admin-login-form" onSubmit={handleSubmit}>
+        <TextField
+          className="admin-login-form__input"
+          error={touched.email && Boolean(errors.email)}
+          fullWidth={true}
+          id="email"
+          label="email"
+          margin="normal"
+          onChange={event => this.changeHandler('email', event)}
+          onBlur={handleBlur}
+          value={email}
+        />
+        <div className="admin-login-form__input__error-wrapper">
+          <ErrorMessage
+            className="admin-login-form__error"
+            component="div"
+            name="email"
+          />
+        </div>
+        <TextField
+          className="admin-login-form__input"
+          error={touched.password && Boolean(errors.password)}
+          fullWidth={true}
+          id="password"
+          label="password"
+          onChange={event => this.changeHandler('password', event)}
+          value={password}
+          onBlur={handleBlur}
+        />
+        <div className="admin-login-form__input__error-wrapper">
+          <ErrorMessage
+            className="admin-login-form__error"
+            component="div"
+            name="password"
+          />
+        </div>
+        <button type="submit" disabled={!isValid || isSubmitting}>
+          Submit
+        </button>
+      </Form>
     );
   }
 }

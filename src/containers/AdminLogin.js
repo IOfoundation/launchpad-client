@@ -27,7 +27,6 @@ class AdminLogin extends PureComponent {
   render() {
     const {width, homePage} = this.state;
 
-    console.log(width);
     return (
       <MainLayout windowWidth={width} homePage={homePage}>
         <AdminLoginContent />
