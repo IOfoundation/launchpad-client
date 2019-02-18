@@ -17,6 +17,7 @@ import BusinessesContainer from './containers/Businesses';
 import BusinessDetails from './containers/BusinessDetails';
 import Blog from './containers/Blog';
 import Events from './containers/Events';
+import AdminLogin from './containers/AdminLogin';
 
 export default (
   <Route path="/" component={App}>
@@ -29,6 +30,7 @@ export default (
     <Route path="privacy-policy" component={PrivacyPolicy} />
     <Route path="/blog" component={Blog} />
     <Route path="/events" component={Events} />
+    <Route path="/admin-login" component={AdminLogin} />
     <Route path="*" component={NotFound} />
   </Route>
 );

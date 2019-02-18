@@ -9,12 +9,12 @@ import * as actions from '../actions/business';
 
 export class Businesses extends PureComponent {
   state = {
-    width: window.innerWidth,
-    showLoading: true,
-    homePage: false,
     businessPageLoaded: false,
-    organizations: this.props.businesses.organizations,
+    homePage: false,
     listener: () => this.handleWindowSizeChange(),
+    organizations: this.props.businesses.organizations,
+    showLoading: true,
+    width: window.innerWidth,
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
