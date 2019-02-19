@@ -40,6 +40,10 @@ const Container = props => {
 };
 
 Container.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
   classes: PropTypes.shape({
     content: PropTypes.string,
     container: PropTypes.string,

@@ -6,7 +6,7 @@ import SignInFormContainer from './elements/SignInFormContainer';
 import {withStyles} from '@material-ui/core/styles';
 import Container from './Container';
 
-const styles = theme => ({
+const styles = () => ({
   subTitle: {
     fontSize: '24px',
     lineHeight: '32px',

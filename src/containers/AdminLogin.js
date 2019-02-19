@@ -1,4 +1,5 @@
 import React, {PureComponent} from 'react';
+import {PropTypes} from 'prop-types';
 import MainLayout from '../components/layouts/Main';
 import {sizeCheck} from '../utils/sizeCheck';
 import {viewport} from '../utils/viewPort';
@@ -33,5 +34,12 @@ class AdminLogin extends PureComponent {
     );
   }
 }
+
+AdminLogin.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
+};
 
 export default AdminLogin;
