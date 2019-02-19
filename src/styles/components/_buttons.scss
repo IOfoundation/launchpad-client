@@ -162,6 +162,11 @@
     cursor: pointer;
   }
 
+  &:disabled,
+  &[disabled] {
+    background-color: lighten(#02ba81, 10%);
+  }
+
   &__submit {
     align-items: center;
     background-color: $green-color;
@@ -189,4 +194,12 @@
     text-align: center;
     width: 100%;
   }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.7) !important;
+  -webkit-box-shadow: 0 0 0px 1000px #333 inset !important;
 }

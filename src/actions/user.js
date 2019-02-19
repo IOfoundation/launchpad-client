@@ -101,8 +101,10 @@ export const login = ({password, email}) => {
   return post({
     url: '/api/users/sign_in',
     params: {
-      email,
-      password,
+      api_user: {
+        email,
+        password,
+      },
     },
     startFn: loginStart,
     successFn: loginSuccess,
