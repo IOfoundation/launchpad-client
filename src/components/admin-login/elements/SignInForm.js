@@ -1,5 +1,6 @@
 import React from 'react';
 import {Form} from 'formik';
+import {Link} from 'react-router';
 import {PropTypes} from 'prop-types';
 import FormTextField from '../../shared/FormElements/TextField';
 
@@ -42,7 +43,12 @@ const SingInForm = props => {
       >
         {'Submit'}
       </button>
-      <a className="btn__password text-thin">{'Forgot your password?'}</a>
+      <Link
+        className="btn__password text-thin"
+        to="/admin-login/password-reset"
+      >
+        {'Forgot your password?'}
+      </Link>
     </Form>
   );
 };

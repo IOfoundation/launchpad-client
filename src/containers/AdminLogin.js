@@ -1,6 +1,5 @@
 import React, {PureComponent} from 'react';
 import MainLayout from '../components/layouts/Main';
-import AdminLoginContent from '../components/admin-login/AdminLogin';
 import {sizeCheck} from '../utils/sizeCheck';
 import {viewport} from '../utils/viewPort';
 
@@ -29,7 +28,7 @@ class AdminLogin extends PureComponent {
 
     return (
       <MainLayout windowWidth={width} homePage={homePage}>
-        <AdminLoginContent />
+        {this.props.children}
       </MainLayout>
     );
   }

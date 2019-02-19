@@ -13,7 +13,7 @@ const SignupSchema = Yup.object().shape({
 
 const initialValues = {email: '', password: ''};
 
-const FormsContainer = () => {
+const SignInFormContainer = () => {
   return (
     <Grid item={true} xs={12} md={4}>
       <Formik
@@ -32,4 +32,4 @@ const FormsContainer = () => {
   );
 };
 
-export default FormsContainer;
+export default SignInFormContainer;
