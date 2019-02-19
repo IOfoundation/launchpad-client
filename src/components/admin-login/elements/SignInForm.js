@@ -6,14 +6,14 @@ import FormTextField from '../../shared/FormElements/TextField';
 
 const SingInForm = props => {
   const {
-    values: {email, password},
     errors,
-    touched,
-    handleSubmit,
-    isValid,
     handleBlur,
     handleChange,
+    handleSubmit,
     isSubmitting,
+    isValid,
+    touched,
+    values: {email, password},
   } = props;
 
   return (

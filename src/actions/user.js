@@ -8,10 +8,10 @@ const loginStart = config => {
   };
 };
 
-const loginSuccess = response => {
+const loginSuccess = authorization => {
   return {
     type: types.LOGIN_SUCCESS,
-    response,
+    authorization,
   };
 };
 
@@ -98,18 +98,20 @@ const post = ({url, params, startFn, successFn, errorFn}) => {
 };
 
 export const login = ({password, email}) => {
-  return post({
-    url: '/api/users/sign_in',
-    params: {
-      api_user: {
-        email,
-        password,
-      },
-    },
-    startFn: loginStart,
-    successFn: loginSuccess,
-    errorFn: loginError,
-  });
+  return async dispatch => {
+    try {
+      dispatch(loginStart());
+      const httpResponse = await httpRequest.post('/api/users/sign_in', {
+        api_user: {
+          email,
+          password,
+        },
+      });
+      dispatch(loginSuccess(httpResponse.headers.authorization));
+    } catch (error) {
+      dispatch(loginError(error));
+    }
+  };
 };
 
 export const singUp = ({

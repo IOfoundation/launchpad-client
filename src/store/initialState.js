@@ -37,7 +37,7 @@ const initialState = {
   },
   user: {
     loading: false,
-    token: '',
+    authorization: '',
   },
   snackbar: {
     visibility: false,

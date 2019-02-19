@@ -2,7 +2,7 @@ import {UserTypes as types} from '../action-types';
 
 const initialState = {
   loading: false,
-  token: '',
+  authorization: '',
 };
 
 export default function(state = initialState, action) {
@@ -14,10 +14,10 @@ export default function(state = initialState, action) {
     }
 
     case types.LOGIN_SUCCESS: {
-      const {response} = action;
+      const {authorization} = action;
       return {
         ...state,
-        response,
+        authorization,
         loading: false,
       };
     }
