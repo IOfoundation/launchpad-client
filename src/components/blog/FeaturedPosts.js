@@ -1,5 +1,5 @@
 import React from 'react';
-import {containerStyles} from '../../utils/containerStyles';
+import {containerStyles} from '../../utils';
 
 import FeaturedPost from './FeaturedPost';
 import {withStyles} from '@material-ui/core/styles';

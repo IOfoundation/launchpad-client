@@ -1,6 +1,6 @@
 import Axios from 'axios';
 
-const httpRequest = Axios.create({
+export const httpRequest = Axios.create({
   baseURL: process.env.API_URL,
   timeout: 10000,
   headers: {
@@ -8,5 +8,3 @@ const httpRequest = Axios.create({
     ContentType: 'application/json',
   },
 });
-
-export default httpRequest;

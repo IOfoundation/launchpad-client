@@ -5,8 +5,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {withRouter} from 'react-router';
 import * as actions from '../actions/business';
-import {sizeCheck} from '../utils/sizeCheck';
-import {viewport} from '../utils/viewPort';
+import {viewport, sizeCheck} from '../utils';
 
 import {PropTypes} from 'prop-types';
 

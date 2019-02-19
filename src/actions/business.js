@@ -1,6 +1,6 @@
 import {BusinessTypes as types} from '../action-types';
 import {CategoriesConstants} from '../constants';
-import httpRequest from '../utils/httpRequest';
+import {httpRequest} from '../utils';
 import {browserHistory} from 'react-router';
 import queryString from 'query-string';
 import {isEmpty, isString, cloneDeep, debounce} from 'lodash';
