@@ -26,6 +26,9 @@ const styles = () => ({
   cssDisabled: {},
   cssFocused: {
     color: 'white',
+    '&$cssLabel': {
+      color: 'rgba(255, 255, 255, 0.7)',
+    },
   },
   cssFormControl: {
     color: 'white',

@@ -3,12 +3,13 @@ import {PropTypes} from 'prop-types';
 
 import Caption from './elements/Caption';
 import Container from './Container';
+import PasswordResetContainer from './elements/PasswordResetContainer';
 
 const PasswordReset = () => {
   return (
     <Container>
-      <Caption title="Reset your password" />
-      <div>{'form recovery'}</div>
+      <Caption title="Reset your password." />
+      <PasswordResetContainer />
     </Container>
   );
 };

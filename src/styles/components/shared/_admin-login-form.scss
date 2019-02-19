@@ -1,6 +1,8 @@
 .admin-login-form {
   &__input {
     &__error-wrapper {
+      align-items: center;
+      display: flex;
       height: 25px;
     }
   }

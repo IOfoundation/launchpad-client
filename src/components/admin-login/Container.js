@@ -19,7 +19,7 @@ const styles = theme => ({
     display: 'flex',
     height: 'calc(100vh - 48px)',
     justifyContent: 'center',
-    [theme.breakpoints.up('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: '2em',
     },
   },
