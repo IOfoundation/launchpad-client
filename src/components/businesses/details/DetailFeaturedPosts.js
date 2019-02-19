@@ -22,7 +22,8 @@ class DetailFeaturedPosts extends PureComponent {
     viewMore: false,
   };
 
-  incrementPostViews = () => {
+  incrementPostViews = event => {
+    event.preventDefault();
     this.setState(prevState => {
       return {
         postViews: prevState.postViews + 3,

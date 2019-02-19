@@ -5,14 +5,11 @@
     position: relative;
 
     &:after {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 25%;
       background: #e1e1e1;
+      content: '';
       height: calc(100% - 80px);
       position: absolute;
-      right: 30.5%;
+      right: 35.4%;
       top: 40px;
       width: 1px;
     }
