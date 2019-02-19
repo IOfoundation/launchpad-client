@@ -1,0 +1,12 @@
+.admin-login-form {
+  &__input {
+    &__error-wrapper {
+      height: 25px;
+    }
+  }
+
+  &__error {
+    color: #d61600;
+    font-size: 12px;
+  }
+}

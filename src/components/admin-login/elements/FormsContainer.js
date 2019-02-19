@@ -11,9 +11,9 @@ const SignupSchema = Yup.object().shape({
   password: Yup.string().required('Required'),
 });
 
-const FormsContainer = () => {
-  const initialValues = {email: '', password: ''};
+const initialValues = {email: '', password: ''};
 
+const FormsContainer = () => {
   return (
     <Grid item={true} xs={12} md={4}>
       <Formik

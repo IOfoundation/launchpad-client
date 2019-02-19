@@ -1,86 +1,70 @@
-import React, {PureComponent} from 'react';
-import {Formik, Form, Field, ErrorMessage} from 'formik';
-import TextField from '@material-ui/core/TextField';
+import React from 'react';
+import {Form} from 'formik';
+import {PropTypes} from 'prop-types';
+import FormTextField from '../../shared/FormElements/TextField';
 
-import Grid from '@material-ui/core/Grid';
+const SingInForm = props => {
+  const {
+    values: {email, password},
+    errors,
+    touched,
+    handleSubmit,
+    isValid,
+    handleBlur,
+    handleChange,
+    isSubmitting,
+  } = props;
 
-class SingInForm extends PureComponent {
-  state = {
-    initialValues: {email: '', password: ''},
-  };
+  return (
+    <Form className="admin-login-form" onSubmit={handleSubmit}>
+      <FormTextField
+        id="email"
+        value={email}
+        label="Email Address"
+        error={touched.email && Boolean(errors.email)}
+        errors={errors}
+        handleBlur={handleBlur}
+        handleChange={handleChange}
+      />
+      <FormTextField
+        id="password"
+        value={password}
+        label="Password"
+        error={touched.password && Boolean(errors.password)}
+        errors={errors}
+        handleBlur={handleBlur}
+        handleChange={handleChange}
+      />
+      <button
+        className="btn btn__submit"
+        type="submit"
+        disabled={!isValid || isSubmitting}
+      >
+        {'Submit'}
+      </button>
+      <a className="btn__password text-thin">{'Forgot your password?'}</a>
+    </Form>
+  );
+};
 
-  submitHandler = (values, {setSubmitting}) => {
-    setTimeout(() => {
-      console.log(JSON.stringify(values, null, 2));
-      setSubmitting(false);
-    }, 400);
-  };
-
-  changeHandler = (name, event) => {
-    const {handleChange, errors, handleBlur} = this.props;
-
-    event.persist();
-    handleChange(event);
-
-    if (errors[name]) {
-      handleBlur(event);
-    }
-  };
-
-  render() {
-    const {
-      values: {email, password},
-      errors,
-      touched,
-      handleSubmit,
-      isValid,
-      handleBlur,
-      isSubmitting,
-    } = this.props;
-
-    return (
-      <Form className="admin-login-form" onSubmit={handleSubmit}>
-        <TextField
-          className="admin-login-form__input"
-          error={touched.email && Boolean(errors.email)}
-          fullWidth={true}
-          id="email"
-          label="email"
-          margin="normal"
-          onChange={event => this.changeHandler('email', event)}
-          onBlur={handleBlur}
-          value={email}
-        />
-        <div className="admin-login-form__input__error-wrapper">
-          <ErrorMessage
-            className="admin-login-form__error"
-            component="div"
-            name="email"
-          />
-        </div>
-        <TextField
-          className="admin-login-form__input"
-          error={touched.password && Boolean(errors.password)}
-          fullWidth={true}
-          id="password"
-          label="password"
-          onChange={event => this.changeHandler('password', event)}
-          value={password}
-          onBlur={handleBlur}
-        />
-        <div className="admin-login-form__input__error-wrapper">
-          <ErrorMessage
-            className="admin-login-form__error"
-            component="div"
-            name="password"
-          />
-        </div>
-        <button type="submit" disabled={!isValid || isSubmitting}>
-          Submit
-        </button>
-      </Form>
-    );
-  }
-}
+SingInForm.propTypes = {
+  errors: PropTypes.shape({
+    email: PropTypes.string,
+    password: PropTypes.string,
+  }),
+  handleBlur: PropTypes.func,
+  handleChange: PropTypes.func,
+  handleSubmit: PropTypes.func,
+  isSubmitting: PropTypes.bool,
+  isValid: PropTypes.bool,
+  touched: PropTypes.shape({
+    email: PropTypes.shape({}),
+    password: PropTypes.shape({}),
+  }),
+  values: PropTypes.shape({
+    email: PropTypes.string,
+    password: PropTypes.string,
+  }),
+};
 
 export default SingInForm;

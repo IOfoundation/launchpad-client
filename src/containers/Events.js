@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import MainLayout from '../components/layouts/Main';
 import EventsLayout from '../components/events/Events';
-import {viewport, sizeCheck} from '../utils';
+import {sizeCheck, viewport} from '../utils';
 
 class Events extends PureComponent {
   state = {
