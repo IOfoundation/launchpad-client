@@ -35,6 +35,10 @@ const initialState = {
   events: {
     data: [],
   },
+  user: {
+    loading: false,
+    token: '',
+  },
   snackbar: {
     visibility: false,
     message: 'placeholder message',
