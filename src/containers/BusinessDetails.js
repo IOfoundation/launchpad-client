@@ -13,10 +13,10 @@ import {PropTypes} from 'prop-types';
 
 class BusinessDetails extends PureComponent {
   state = {
-    width: viewport().width,
     breakpoint: '',
     homePage: false,
-    istener: () => sizeCheck(this.handleWindowSizeChange),
+    listener: () => sizeCheck(this.handleWindowSizeChange),
+    width: viewport().width,
   };
 
   componentDidMount() {

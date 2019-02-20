@@ -1,11 +1,26 @@
 import React, {PureComponent} from 'react';
 import MainLayout from '../components/layouts/Main';
 import EventsLayout from '../components/events/Events';
+import {viewport, sizeCheck} from '../utils';
 
 class Events extends PureComponent {
   state = {
-    width: window.innerWidth,
+    breakpoint: '',
     homePage: false,
+    listener: () => sizeCheck(this.handleWindowSizeChange),
+    width: viewport().width,
+  };
+
+  componentDidMount() {
+    window.addEventListener('resize', this.state.listener);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.state.listener);
+  }
+
+  handleWindowSizeChange = breakpoint => {
+    this.setState({breakpoint, width: viewport().width});
   };
 
   render() {

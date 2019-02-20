@@ -5,10 +5,10 @@ import {viewport, sizeCheck} from '../utils';
 
 class Blog extends PureComponent {
   state = {
-    width: viewport().width,
     breakpoint: '',
     homePage: false,
     listener: () => sizeCheck(this.handleWindowSizeChange),
+    width: viewport().width,
   };
 
   componentDidMount() {

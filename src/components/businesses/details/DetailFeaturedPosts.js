@@ -18,8 +18,7 @@ const styles = () => ({
 
 class DetailFeaturedPosts extends PureComponent {
   state = {
-    postViews: 3,
-    viewMore: false,
+    viewMore: true,
   };
 
   incrementPostViews = event => {
@@ -31,51 +30,75 @@ class DetailFeaturedPosts extends PureComponent {
     });
   };
 
+  viewMoreHandler = () => {
+    this.setState(prevState => {
+      return {
+        viewMore: !prevState.viewMore,
+      };
+    });
+  };
+
   render() {
     const {classes, posts} = this.props;
-    const {postViews} = this.state;
+    const {viewMore} = this.state;
     const results = posts.results;
-    let $viewMore = null;
-    let $posts = <Loading elementConfig={{style: {marginRight: '53px'}}} />;
+    let viewMoreElement = null;
+    let postsElements = (
+      <Loading elementConfig={{style: {marginRight: '53px'}}} />
+    );
 
     if (posts.noResults) {
-      $posts = null;
+      postsElements = null;
     }
 
     if (results.length > 0) {
-      if (results.length > 3 && postViews < 9) {
-        $viewMore = (
-          <a className="view-more" onClick={this.incrementPostViews}>
-            {'View More'}
+      let featuredPostsElements = null;
+      if (results.length > 3) {
+        viewMoreElement = (
+          <a className="view-more" onClick={this.viewMoreHandler}>
+            {viewMore ? 'View More' : 'View Less'}
           </a>
         );
       }
 
-      const $featuredPosts = results.slice(0, postViews).map(post => {
-        return (
-          <Grid key={post.id} item={true} xs={12} md={4}>
-            <DetailFeaturedPost
-              description={post.body}
-              date="February 2, 2019"
-            />
-          </Grid>
-        );
-      });
+      if (viewMore) {
+        featuredPostsElements = results.slice(0, 3).map(post => {
+          return (
+            <Grid key={post.id} item={true} xs={12} md={4}>
+              <DetailFeaturedPost
+                description={post.body}
+                date="February 2, 2019"
+              />
+            </Grid>
+          );
+        });
+      } else {
+        featuredPostsElements = results.map(post => {
+          return (
+            <Grid key={post.id} item={true} xs={12} md={4}>
+              <DetailFeaturedPost
+                description={post.body}
+                date="February 2, 2019"
+              />
+            </Grid>
+          );
+        });
+      }
 
-      $posts = (
+      postsElements = (
         <Fragment>
           <h2 className="detail-featured-posts__title">{'Posts'}</h2>
           <div className={classes.featuredPosts}>
             <Grid container={true} spacing={16}>
-              {$featuredPosts}
+              {featuredPostsElements}
             </Grid>
           </div>
-          {$viewMore}
+          {viewMoreElement}
         </Fragment>
       );
     }
 
-    return $posts;
+    return postsElements;
   }
 }
 
