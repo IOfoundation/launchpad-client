@@ -40,7 +40,7 @@ class Locations extends PureComponent {
     const {locations, classes} = this.props;
     const {organizationSelected} = this.state;
 
-    let $otherLocation = null;
+    let otherLocationElements = null;
 
     if (locations.length > 1) {
       const mapOtherLocations = locations.map((location, index) => {
@@ -67,12 +67,16 @@ class Locations extends PureComponent {
         );
       });
 
-      $otherLocation = [
-        ...mapOtherLocations,
-        <Link key={'link'} className="detail-locations__all-locations">
-          {'View All Locations'}
-        </Link>,
-      ];
+      if (mapOtherLocations.length > 2) {
+        otherLocationElements = [
+          ...mapOtherLocations,
+          <Link key={'link'} className="detail-locations__all-locations">
+            {'View All Locations'}
+          </Link>,
+        ];
+      } else {
+        otherLocationElements = [...mapOtherLocations];
+      }
     }
 
     return (
@@ -97,7 +101,7 @@ class Locations extends PureComponent {
           phone="(916) 514-7044"
           onDetailsClicked={() => this.detailsClickedHandler(locations[0])}
         />
-        {$otherLocation}
+        {otherLocationElements}
       </div>
     );
   }
