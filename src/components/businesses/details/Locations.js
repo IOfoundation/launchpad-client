@@ -27,6 +27,7 @@ class Locations extends PureComponent {
   state = {
     open: false,
     organizationSelected: this.props.locations[0],
+    viewMore: true,
   };
 
   detailsClickedHandler = organizationSelected => {
@@ -37,14 +38,23 @@ class Locations extends PureComponent {
     this.setState({open: false});
   };
 
+  viewMoreHandler = () => {
+    this.setState(prevState => {
+      return {
+        viewMore: !prevState.viewMore,
+      };
+    });
+  };
+
   render() {
     const {locations, classes} = this.props;
-    const {organizationSelected} = this.state;
+    const {organizationSelected, viewMore} = this.state;
+    let otherLocations;
 
     let otherLocationElements = null;
 
     if (locations.length > 1) {
-      const mapOtherLocations = locations.map((location, index) => {
+      otherLocations = locations.map((location, index) => {
         if (index === 0) {
           return (
             <h2 key={1} className="detail-locations__title text-bold">
@@ -68,15 +78,31 @@ class Locations extends PureComponent {
         );
       });
 
-      if (mapOtherLocations.length > 2) {
+      if (!viewMore) {
         otherLocationElements = [
-          ...mapOtherLocations,
-          <Link key={'link'} className="detail-locations__all-locations">
+          ...otherLocations,
+          <Link
+            key={'link'}
+            className="detail-locations__all-locations"
+            onClick={this.viewMoreHandler}
+          >
+            {'View Less'}
+          </Link>,
+        ];
+      } else if (otherLocations.length > 2) {
+        otherLocationElements = [
+          otherLocations[0],
+          otherLocations[1],
+          <Link
+            key={'link'}
+            className="detail-locations__all-locations"
+            onClick={this.viewMoreHandler}
+          >
             {'View All Locations'}
           </Link>,
         ];
       } else {
-        otherLocationElements = [...mapOtherLocations];
+        otherLocationElements = [...otherLocations];
       }
     }
 
