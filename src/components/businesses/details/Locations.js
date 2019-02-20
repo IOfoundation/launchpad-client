@@ -9,16 +9,17 @@ import LocationDetails from './LocationDetails';
 const styles = theme => ({
   paper: {
     backgroundColor: theme.palette.background.paper,
+    borderRadius: '5px',
     boxShadow: theme.shadows[5],
-    maxHeight: '70vh',
     left: '50%',
+    maxHeight: '70vh',
     outline: 'none',
+    overflow: 'auto',
     padding: '32px 24px',
     position: 'absolute',
-    top: '40%',
+    top: '45%',
     transform: 'translate(-50%, -50%)',
     width: theme.spacing.unit * 70,
-    borderRadius: '5px',
   },
 });
 
