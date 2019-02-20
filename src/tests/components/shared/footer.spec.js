@@ -26,14 +26,18 @@ describe('<Footer />', () => {
 
     it('Must have a link to admin login page', () => {
       const links = wrapper.find('[data-test="footer-login"]');
-      expect(links.contains(<Link to="">{'Admin Login'}</Link>)).toBe(true);
+      expect(
+        links.contains(<Link to="/admin-login">{'Admin Login'}</Link>)
+      ).toBe(true);
     });
 
     it('Must have a link to search, events and Blog page', () => {
       const links = wrapper.find('[data-test="footer-resources"]');
-      expect(links.contains(<Link to="">{'Search'}</Link>)).toBe(true);
-      expect(links.contains(<Link to="">{'Events'}</Link>)).toBe(true);
-      expect(links.contains(<Link to="">{'Blog'}</Link>)).toBe(true);
+      expect(links.contains(<Link to="/businesses">{'Search'}</Link>)).toBe(
+        true
+      );
+      expect(links.contains(<Link to="/events">{'Events'}</Link>)).toBe(true);
+      expect(links.contains(<Link to="/blog">{'Blog'}</Link>)).toBe(true);
     });
 
     it('Must have links to about, contact, terms & condicitons and privacy policy', () => {

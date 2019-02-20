@@ -1,8 +1,7 @@
 import React, {PureComponent} from 'react';
 import {PropTypes} from 'prop-types';
 import MainLayout from '../components/layouts/Main';
-import {sizeCheck} from '../utils/sizeCheck';
-import {viewport} from '../utils/viewPort';
+import {sizeCheck, viewport} from '../utils';
 
 class AdminLogin extends PureComponent {
   state = {

@@ -116,6 +116,7 @@ FormTextField.propTypes = {
   handleChange: PropTypes.func,
   id: PropTypes.string,
   label: PropTypes.string,
+  type: PropTypes.string,
   value: PropTypes.string,
 };
 
