@@ -20,16 +20,16 @@ const Footer = () => {
           className="col-md-2 col-md-offset-1 col-xs-2 text-xs-margin"
         >
           <p className="main-footer_subtitle text-regular">{'LOGIN'}</p>
-          <Link to="">{'Admin Login'}</Link>
+          <Link to="/admin-login">{'Admin Login'}</Link>
         </div>
         <div
           data-test="footer-resources"
           className="col-md-2 col-xs-2 text-xs-margin"
         >
           <p className="main-footer_subtitle text-regular">{'RESOURCES'}</p>
-          <Link to="">{'Search'}</Link>
-          <Link to="">{'Events'}</Link>
-          <Link to="">{'Blog'}</Link>
+          <Link to="/businesses">{'Search'}</Link>
+          <Link to="/events">{'Events'}</Link>
+          <Link to="/blog">{'Blog'}</Link>
         </div>
         <div
           data-test="footer-about"
