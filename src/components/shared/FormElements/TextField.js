@@ -50,7 +50,15 @@ class FormTextField extends PureComponent {
   };
 
   render() {
-    const {id, value, label, error, handleBlur, classes} = this.props;
+    const {
+      id,
+      value,
+      label,
+      error,
+      handleBlur,
+      classes,
+      type = 'text',
+    } = this.props;
 
     return (
       <Fragment>
@@ -59,6 +67,7 @@ class FormTextField extends PureComponent {
           fullWidth={true}
           id={id}
           label={label}
+          type={type}
           onChange={event => this.changeHandler(id, event)}
           onBlur={handleBlur}
           value={value}

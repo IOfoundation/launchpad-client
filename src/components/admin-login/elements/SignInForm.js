@@ -19,29 +19,30 @@ const SingInForm = props => {
   return (
     <Form className="admin-login-form" onSubmit={handleSubmit}>
       <FormTextField
-        id="email"
-        value={email}
-        label="Email Address"
         error={touched.email && Boolean(errors.email)}
         errors={errors}
         handleBlur={handleBlur}
         handleChange={handleChange}
+        id="email"
+        label="Email Address"
+        value={email}
       />
       <FormTextField
-        id="password"
-        value={password}
-        label="Password"
         error={touched.password && Boolean(errors.password)}
         errors={errors}
         handleBlur={handleBlur}
         handleChange={handleChange}
+        id="password"
+        label="Password"
+        type="password"
+        value={password}
       />
       <button
         className="btn btn__submit"
         type="submit"
         disabled={!isValid || isSubmitting}
       >
-        {'Submit'}
+        {'Sign In'}
       </button>
       <Link
         className="btn__password text-thin"
