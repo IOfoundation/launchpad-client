@@ -4,6 +4,7 @@ import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import {containerStyles} from '../../utils/containerStyles';
+import SnackbarUI from '../shared/SnackBar';
 
 const styles = theme => ({
   content: {
@@ -35,6 +36,7 @@ const Container = props => {
 
   return (
     <div className={['admin-login', classes.container].join(' ')}>
+      <SnackbarUI />
       <section className={['content-section', classes.content].join(' ')}>
         <Grid
           container={true}

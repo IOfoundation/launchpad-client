@@ -3,6 +3,12 @@ import PasswordResetForm from './PasswordResetForm';
 import {Formik} from 'formik';
 import Grid from '@material-ui/core/Grid';
 import * as Yup from 'yup';
+import {PropTypes} from 'prop-types';
+
+import * as user from '../../../actions/user';
+import * as snackbarActions from '../../../actions/snackbar';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 const SignupSchema = Yup.object().shape({
   email: Yup.string()
@@ -12,7 +18,7 @@ const SignupSchema = Yup.object().shape({
 
 const initialValues = {email: ''};
 
-const PasswordResetContainer = () => {
+const PasswordResetContainer = props => {
   return (
     <Grid item={true} xs={12} md={5}>
       <Formik
@@ -20,10 +26,12 @@ const PasswordResetContainer = () => {
         initialValues={initialValues}
         validationSchema={SignupSchema}
         onSubmit={(values, {setSubmitting}) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
+          props.user.passwordRecovery({email: values.email}).then(() => {
+            props.snackbar.showSnackbar({
+              message: 'Email Sent',
+            });
             setSubmitting(false);
-          }, 400);
+          });
         }}
         validateOnChange={false}
       />
@@ -31,4 +39,23 @@ const PasswordResetContainer = () => {
   );
 };
 
-export default PasswordResetContainer;
+const mapDispatchToProps = _dispatch => {
+  return {
+    user: bindActionCreators(user, _dispatch),
+    snackbar: bindActionCreators(snackbarActions, _dispatch),
+  };
+};
+
+PasswordResetContainer.propTypes = {
+  snackbar: PropTypes.shape({
+    showSnackbar: PropTypes.func,
+  }),
+  user: PropTypes.shape({
+    passwordRecovery: PropTypes.func,
+  }),
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(PasswordResetContainer);

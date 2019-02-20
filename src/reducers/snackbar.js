@@ -10,9 +10,17 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case types.SHOW_SNACKBAR: {
+      const {
+        message,
+        autoHideDuration = 10000,
+        actionText = 'DISMISS',
+      } = action;
       return {
         ...state,
         visibility: true,
+        message,
+        autoHideDuration,
+        actionText,
       };
     }
 

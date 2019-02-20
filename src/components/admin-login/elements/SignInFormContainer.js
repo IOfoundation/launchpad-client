@@ -9,7 +9,6 @@ import * as user from '../../../actions/user';
 import * as snackbarActions from '../../../actions/snackbar';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import SnackbarUI from '../../shared/SnackBar';
 
 const SignupSchema = Yup.object().shape({
   email: Yup.string()
@@ -23,7 +22,6 @@ const initialValues = {email: '', password: ''};
 const SignInFormContainer = props => {
   return (
     <Grid item={true} xs={12} md={5}>
-      <SnackbarUI />
       <Formik
         render={_props => <SingInForm {..._props} />}
         initialValues={initialValues}
@@ -36,7 +34,7 @@ const SignInFormContainer = props => {
             })
             .then(() => {
               setSubmitting(false);
-              props.snackbar.testingSnackbar({
+              props.snackbar.showSnackbar({
                 message: 'Login Successful',
               });
             });
@@ -56,7 +54,7 @@ const mapDispatchToProps = _dispatch => {
 
 SignInFormContainer.propTypes = {
   snackbar: PropTypes.shape({
-    testingSnackbar: PropTypes.func,
+    showSnackbar: PropTypes.func,
   }),
   user: PropTypes.shape({
     login: PropTypes.func,
