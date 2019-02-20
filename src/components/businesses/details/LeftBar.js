@@ -1,6 +1,5 @@
 import React, {PureComponent} from 'react';
 import {PropTypes} from 'prop-types';
-import {Link} from 'react-router';
 import {withStyles} from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 
@@ -29,6 +28,7 @@ class LeftBar extends PureComponent {
   state = {
     selectedEvent: this.props.events[0],
     openModal: false,
+    viewMoreEvents: true,
   };
 
   handlerModalVisibility = (event = null) => {
@@ -43,34 +43,58 @@ class LeftBar extends PureComponent {
     }
   };
 
+  viewMoreEventsHandler = () => {
+    this.setState(prevState => {
+      return {
+        viewMoreEvents: !prevState.viewMoreEvents,
+      };
+    });
+  };
+
   render() {
     const {organization, events, classes} = this.props;
-    const {openModal, selectedEvent} = this.state;
+    const {openModal, selectedEvent, viewMoreEvents} = this.state;
     let $events = <p>{'There are no upcoming Events'}</p>;
     let $button = null;
     let $modal = null;
 
     if (events && events.length > 0) {
-      $events = events.slice(0, 3).map(event => {
-        const date = getDateFromString(event.posted_at);
+      if (viewMoreEvents) {
+        $events = events.slice(0, 3).map(event => {
+          const date = getDateFromString(event.posted_at);
 
-        return (
-          <UpcomingEvents
-            key={event.id}
-            text={event.title}
-            day={date.day}
-            month={date.month}
-            clicked={() => this.handlerModalVisibility(event)}
-          />
-        );
-      });
+          return (
+            <UpcomingEvents
+              key={event.id}
+              text={event.title}
+              day={date.day}
+              month={date.month}
+              clicked={() => this.handlerModalVisibility(event)}
+            />
+          );
+        });
+      } else {
+        $events = events.map(event => {
+          const date = getDateFromString(event.posted_at);
+
+          return (
+            <UpcomingEvents
+              key={event.id}
+              text={event.title}
+              day={date.day}
+              month={date.month}
+              clicked={() => this.handlerModalVisibility(event)}
+            />
+          );
+        });
+      }
     }
 
     if (events && events.length > 3) {
       $button = (
-        <Link to="/events" className="view-more">
-          {'View More'}
-        </Link>
+        <div onClick={this.viewMoreEventsHandler} className="view-more">
+          {viewMoreEvents ? 'View More' : 'View Less'}
+        </div>
       );
     }
 

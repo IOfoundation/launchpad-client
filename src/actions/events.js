@@ -1,5 +1,5 @@
 import {EventsTypes as types} from '../action-types';
-import httpRequest from '../utils/httpRequest';
+import {httpRequest} from '../utils';
 
 const getAllEventsRequestStart = () => {
   return {

@@ -6,8 +6,7 @@ import {bindActionCreators} from 'redux';
 import {withRouter} from 'react-router';
 import * as business from '../actions/business';
 import * as events from '../actions/events';
-import {sizeCheck} from '../utils/sizeCheck';
-import {viewport} from '../utils/viewPort';
+import {sizeCheck, viewport} from '../utils';
 
 import {PropTypes} from 'prop-types';
 
