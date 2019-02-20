@@ -82,7 +82,9 @@ class LeftBar extends PureComponent {
               title={selectedEvent.title}
               postedBy={selectedEvent.organization}
               date={selectedEvent.starting_at}
-              address={`${selectedEvent.street_1}, ${selectedEvent.street_2}, ${selectedEvent.state_abbr}, ${selectedEvent.zip}`}
+              address={`${selectedEvent.street_1}, ${selectedEvent.street_2}, ${
+                selectedEvent.state_abbr
+              }, ${selectedEvent.zip}`}
               link={selectedEvent.external_url}
               description={selectedEvent.body}
               closed={this.handlerModalVisibility}
