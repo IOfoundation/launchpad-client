@@ -3,8 +3,8 @@
 *  Set $use-silent-classes false if you don't want to generate silent classes of the normal css classes
 */
 $use-silent-classes: true;
-$css-class: ".";
-$silent-class: "%";
+$css-class: '.';
+$silent-class: '%';
 
 //colors
 $primary-color: #000000;
@@ -22,6 +22,18 @@ $warning-color: #ffc000;
 $error-color: #ff0048;
 $white-color: #fff;
 $seconday-color-opacity: rgba(42, 213, 135, 0.17);
+
+// New color pallete
+$green-color: #00ba81;
+$green-color-hover: #ddf2f0;
+$gray-color-one: #f7f9fd;
+$gray-color-two: #eaecf0;
+$gray-color-three: #7b7c7e;
+$gray-color-four: #bfbfbf;
+$gray-color-five: #dedede;
+$black-color: #000000;
+$black-color-secondary: #070709;
+$red-color: #ff0048;
 
 //typography
 $font-family: 'proxima-nova-regular', Georgia, sans-serif;
