@@ -4,8 +4,9 @@ import BusinessDetailsContent from '../components/businesses/BusinessDetails';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {withRouter} from 'react-router';
-import * as actions from '../actions/business';
-import {viewport, sizeCheck} from '../utils';
+import * as business from '../actions/business';
+import * as events from '../actions/events';
+import {sizeCheck, viewport} from '../utils';
 
 import {PropTypes} from 'prop-types';
 
@@ -18,7 +19,8 @@ class BusinessDetails extends PureComponent {
   };
 
   componentDidMount() {
-    this.props.actions.fetchOrganizationById(this.props.params.id);
+    this.props.business.fetchOrganizationById(this.props.params.id);
+    this.props.events.getAllEventsById(this.props.params.id);
     window.addEventListener('resize', this.state.listener);
   }
 
@@ -32,19 +34,28 @@ class BusinessDetails extends PureComponent {
 
   render() {
     const {width, homePage} = this.state;
+    const {organization, eventsData} = this.props;
 
     return (
       <MainLayout windowWidth={width} homePage={homePage}>
-        <BusinessDetailsContent organization={this.props.organization} />
+        <BusinessDetailsContent
+          organization={organization}
+          events={eventsData}
+        />
       </MainLayout>
     );
   }
 }
 
 BusinessDetails.propTypes = {
-  actions: PropTypes.shape({
+  business: PropTypes.shape({
     fetchOrganizationById: PropTypes.func.isRequired,
   }),
+  events: PropTypes.shape({
+    getAllEvents: PropTypes.func.isRequired,
+    getAllEventsById: PropTypes.func.isRequired,
+  }),
+  eventsData: PropTypes.arrayOf(PropTypes.shape({})),
   organization: PropTypes.shape({}),
   params: PropTypes.shape({
     id: PropTypes.string,
@@ -52,16 +63,18 @@ BusinessDetails.propTypes = {
 };
 
 const mapStateToProps = _state => {
-  const {businesses} = _state;
+  const {businesses, events: _events} = _state;
 
   return {
     organization: businesses.organization,
+    eventsData: _events.data,
   };
 };
 
 const mapDispatchToProps = _dispatch => {
   return {
-    actions: bindActionCreators(actions, _dispatch),
+    business: bindActionCreators(business, _dispatch),
+    events: bindActionCreators(events, _dispatch),
   };
 };
 

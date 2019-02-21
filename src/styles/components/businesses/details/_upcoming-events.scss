@@ -1,0 +1,47 @@
+.upcoming-events {
+  background-color: $white-color;
+  border: 1px solid black;
+  border-radius: 3px;
+  cursor: pointer;
+  display: flex;
+  margin-bottom: 12px;
+
+  &__date {
+    align-items: center;
+    background-color: $primary-color;
+    color: $white-color;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    min-height: 70px;
+    padding: 0 18px;
+
+    &__month {
+      font-size: 12px;
+    }
+
+    &__day {
+      font-size: 24px;
+    }
+  }
+
+  &__text {
+    align-items: center;
+    box-sizing: border-box;
+    color: $eighth-color;
+    display: flex;
+    font-size: 12px;
+    opacity: 0.87;
+    padding: 12px;
+    width: 150px;
+  }
+
+  &:hover {
+    border: 1px solid $ninth-color;
+
+    .upcoming-events__date {
+      background-color: $ninth-color;
+    }
+  }
+}

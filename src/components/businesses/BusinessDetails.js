@@ -3,7 +3,6 @@ import {PropTypes} from 'prop-types';
 
 import MainSection from './details/MainSection';
 import ServicesOffered from './details/ServicesOffered';
-import Locations from './details/Locations';
 import SocialBar from './details/SocialBar';
 import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -14,9 +13,10 @@ const styles = theme => ({
     ...containerStyles(theme),
   },
 });
+import LeftBar from './details/LeftBar';
 
 const BusinessDetails = props => {
-  const {organization, classes} = props;
+  const {organization, classes, events} = props;
   let $details = (
     <div className="load-div">
       <img className="loader" src="/static-data/images/loader.gif" />
@@ -32,7 +32,7 @@ const BusinessDetails = props => {
     linkedin: organization.linkedin,
   };
 
-  if (Object.keys(organization).length) {
+  if (Object.keys(organization).length > 0) {
     $details = (
       <div className="business-deatils-wrapper">
         <MainSection organization={organization} />
@@ -44,7 +44,7 @@ const BusinessDetails = props => {
               <ServicesOffered services={organization.services} />
             </Grid>
             <Grid item={true} xs={12} md={3}>
-              <Locations locations={organization.locations} />
+              <LeftBar organization={organization} events={events} />
             </Grid>
           </Grid>
         </section>
@@ -59,6 +59,7 @@ BusinessDetails.propTypes = {
   classes: PropTypes.shape({
     content: PropTypes.string,
   }),
+  events: PropTypes.arrayOf(PropTypes.shape({})),
   organization: PropTypes.shape({
     services: PropTypes.arrayOf(PropTypes.object),
     locations: PropTypes.arrayOf(PropTypes.object),

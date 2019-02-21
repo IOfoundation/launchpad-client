@@ -28,6 +28,9 @@ const initialState = {
       category: null,
     },
   },
+  events: {
+    data: [],
+  },
   snackbar: {
     visibility: false,
     message: 'placeholder message',

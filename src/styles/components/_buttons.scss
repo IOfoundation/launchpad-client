@@ -1,37 +1,43 @@
 .btn {
-  padding: 20px 24px;
-  outline: none;
   border-radius: 0;
+  outline: none;
+  padding: 20px 24px;
+
   &:focus {
     outline: none;
   }
+
   &-outline {
+    align-items: center;
     background-color: transparent;
     border: 1px solid $primary-color;
-    align-items: center;
     display: flex;
   }
 
   &-search {
     width: 100%;
+
     .btn-outline {
       background-color: transparent;
       border: 1px solid $primary-color;
     }
+
     &-text {
-      width: 84%;
-      display: inline-block;
-      vertical-align: middle;
-      line-height: 24px;
       color: #000;
+      display: inline-block;
+      line-height: 24px;
+      vertical-align: middle;
+      width: 84%;
     }
+
     span {
       display: inline-block;
-      width: 100%;
+      line-height: normal;
       text-align: left;
       vertical-align: middle;
-      line-height: normal;
+      width: 100%;
     }
+
     &-icon {
       vertical-align: middle;
       width: 35px;
@@ -39,29 +45,35 @@
   }
 
   &-link {
-    border: 0px;
     background-color: transparent;
+    border: 0px;
     float: right;
     font-size: 14px;
-    text-align: right;
     font-weight: bold;
     margin-left: 16px;
+    text-align: right;
+
     &:focus {
       outline: none;
     }
+
     &-primary {
       color: $primary-color;
     }
   }
+
   &-clear {
     font-size: 16px;
+
     svg {
       margin-left: 16px;
     }
   }
+
   @media (max-width: 1181px) {
     padding: 10px 0 10px 5px;
   }
+
   @media (max-width: 60em) {
     padding: 8px;
   }
@@ -70,39 +82,46 @@
   text-decoration: underline;
   font-size: 12px;
 }
+
 .hide {
   display: none;
 }
+
 .show {
   display: initial;
 }
 
 .toggle-btn {
-  width: 25px;
-  height: 12px;
   border-radius: 13px;
-  padding: 1px 2px;
   border: 0px;
+  height: 12px;
   outline: none;
+  padding: 1px 2px;
   vertical-align: middle;
+  width: 25px;
+
   span {
+    background-color: #fff;
+    border-radius: 10px;
+    display: block;
     height: 8px;
     width: 8px;
-    display: block;
-    border-radius: 10px;
-    background-color: #fff;
   }
 }
+
 .toggle-on {
   background-color: #91e630;
   transition: all 0.4s ease-in;
+
   span {
     float: right;
     transition: all 0.4s ease-in;
   }
 }
+
 .toggle-off {
   background-color: #666666;
+
   span {
     float: left;
     transition: all 0.4s ease-out;
@@ -110,12 +129,12 @@
 }
 
 .button-outline {
-  outline: none;
-  padding: 0;
+  border-radius: 0;
   border: 0;
   font-size: 14px;
   line-height: 20px;
-  border-radius: 0;
+  outline: none;
+  padding: 0;
 
   &:focus {
     outline: none;
@@ -123,6 +142,17 @@
 
   &:hover {
     color: $ninth-color;
+    text-decoration: underline;
+  }
+}
+
+.view-more {
+  color: $ninth-color;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 20px;
+
+  &:hover {
     text-decoration: underline;
   }
 }
