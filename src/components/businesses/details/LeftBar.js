@@ -11,16 +11,17 @@ import Layout from './Modal/Content';
 const styles = theme => ({
   modal: {
     backgroundColor: theme.palette.background.paper,
+    borderRadius: '5px',
     boxShadow: theme.shadows[5],
-    height: '450px',
     left: '50%',
+    maxHeight: '70vh',
     outline: 'none',
     overflow: 'auto',
-    padding: theme.spacing.unit * 4,
+    padding: '32px 24px',
     position: 'absolute',
-    top: '50%',
+    top: '45%',
     transform: 'translate(-50%, -50%)',
-    width: '580px',
+    width: theme.spacing.unit * 70,
   },
 });
 
@@ -54,13 +55,13 @@ class LeftBar extends PureComponent {
   render() {
     const {organization, events, classes} = this.props;
     const {openModal, selectedEvent, viewMoreEvents} = this.state;
-    let $events = <p>{'There are no upcoming Events'}</p>;
-    let $button = null;
-    let $modal = null;
+    let eventsElement = <p>{'There are no upcoming Events'}</p>;
+    let buttonElement = null;
+    let modalElement = null;
 
     if (events && events.length > 0) {
       if (viewMoreEvents) {
-        $events = events.slice(0, 3).map(event => {
+        eventsElement = events.slice(0, 3).map(event => {
           const date = getDateFromString(event.posted_at);
 
           return (
@@ -74,7 +75,7 @@ class LeftBar extends PureComponent {
           );
         });
       } else {
-        $events = events.map(event => {
+        eventsElement = events.map(event => {
           const date = getDateFromString(event.posted_at);
 
           return (
@@ -91,7 +92,7 @@ class LeftBar extends PureComponent {
     }
 
     if (events && events.length > 3) {
-      $button = (
+      buttonElement = (
         <div onClick={this.viewMoreEventsHandler} className="view-more">
           {viewMoreEvents ? 'View More' : 'View Less'}
         </div>
@@ -99,7 +100,7 @@ class LeftBar extends PureComponent {
     }
 
     if (selectedEvent) {
-      $modal = (
+      modalElement = (
         <Modal open={openModal} onClose={this.handlerModalVisibility}>
           <div className={classes.modal}>
             <Layout
@@ -120,11 +121,11 @@ class LeftBar extends PureComponent {
 
     return (
       <div className="left-bar">
-        {$modal}
+        {modalElement}
         <Locations locations={organization.locations} />
         <h3 className="left-bar__title text-bold">{'Upcoming events'}</h3>
-        {$events}
-        {$button}
+        {eventsElement}
+        {buttonElement}
       </div>
     );
   }
