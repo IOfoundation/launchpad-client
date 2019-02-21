@@ -1,8 +1,7 @@
 import React, {PureComponent} from 'react';
-import {sizeCheck} from '../utils/sizeCheck';
 import MainLayout from '../components/layouts/Main';
 import BlogLayout from '../components/blog/Blog';
-import {viewport} from '../utils/viewPort';
+import {viewport, sizeCheck} from '../utils';
 
 class Blog extends PureComponent {
   state = {

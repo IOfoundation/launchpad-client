@@ -7,7 +7,7 @@ import Locations from './details/Locations';
 import SocialBar from './details/SocialBar';
 import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import {containerStyles} from '../../utils/containerStyles';
+import {containerStyles} from '../../utils';
 
 const styles = theme => ({
   content: {

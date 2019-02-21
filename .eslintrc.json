@@ -1,5 +1,5 @@
 {
-  "extends": [ "eslint:recommended", "plugin:react/recommended" ],
+  "extends": [ "plugin:prettier/recommended", "plugin:react/recommended", "eslint:recommended" ],
   "parser": "babel-eslint",
   "parserOptions": {
     "ecmaFeatures": {
@@ -21,7 +21,6 @@
   },
   "rules": {
     "prettier/prettier": [ "error", { "trailingComma": "es5", "singleQuote": true, "bracketSpacing": false } ],
-
     "array-bracket-spacing": 2,
     "array-callback-return": 2,
     "arrow-body-style": 0,

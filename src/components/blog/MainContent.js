@@ -1,5 +1,5 @@
 import React from 'react';
-import {containerStyles} from '../../utils/containerStyles';
+import {containerStyles} from '../../utils';
 import {withStyles} from '@material-ui/core/styles';
 import {PropTypes} from 'prop-types';
 import Categories from './Categories';

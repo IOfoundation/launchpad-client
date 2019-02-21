@@ -1,4 +1,4 @@
-import {viewport} from './viewPort';
+import {viewport} from './index';
 
 let currentBreakpoint = -1;
 const breakpoints = [1280, 960, 600, 0];

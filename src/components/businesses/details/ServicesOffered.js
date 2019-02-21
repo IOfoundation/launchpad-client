@@ -6,28 +6,9 @@ const ServicesOffered = props => {
   const {services} = props;
   let $services = null;
 
-  if (services) {
-    $services = services.map(service => {
-      if (service.email) {
-        return (
-          <Service
-            key={service.id}
-            title={service.name}
-            content={service.description}
-            extra={{label: 'Email', content: service.email}}
-          />
-        );
-      }
-
-      return (
-        <Service
-          key={service.id}
-          title={service.name}
-          content={service.description}
-        />
-      );
-    });
-  }
+  $services = services.map(service => {
+    return <Service key={service.id} service={service} />;
+  });
 
   return (
     <div className="services-offered">

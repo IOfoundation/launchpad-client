@@ -127,7 +127,10 @@ class BusinessesPage extends Component {
 BusinessesPage.propTypes = {
   businesses: PropTypes.shape({
     appliedFilters: PropTypes.shape({
-      category: PropTypes.arrayOf(PropTypes.string),
+      category: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.arrayOf(PropTypes.string),
+      ]),
     }),
     organizations: PropTypes.arrayOf(PropTypes.object),
   }).isRequired,

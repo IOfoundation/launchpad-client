@@ -18,6 +18,7 @@
     "clean-dist": "npm run remove-dist && mkdir dist",
     "remove-dist": "rimraf ./dist",
     "prebuild": "npm run clean-dist && npm run test",
+    "pre-commit": "lint-staged",
     "build": "babel-node tools/build.js",
     "test": "jest",
     "test:CI": "./node_modules/.bin/babel-node tools/testCi.js",
@@ -90,6 +91,7 @@
     "enzyme-adapter-react-16": "1.9.1",
     "enzyme-to-json": "3.3.5",
     "eslint": "5.13.0",
+    "eslint-config-prettier": "4.0.0",
     "eslint-plugin-import": "2.16.0",
     "eslint-plugin-prettier": "3.0.1",
     "eslint-plugin-react": "7.12.4",
@@ -102,6 +104,7 @@
     "jest-cli": "24.1.0",
     "jest-fetch-mock": "2.1.0",
     "json-loader": "0.5.7",
+    "lint-staged": "8.1.3",
     "mini-css-extract-plugin": "0.5.0",
     "mockdate": "2.0.2",
     "moxios": "^0.4.0",
@@ -110,6 +113,7 @@
     "npm-run-all": "^4.1.1",
     "opn-cli": "3.1.0",
     "postcss-loader": "3.0.0",
+    "pre-commit": "1.2.2",
     "prettier": "1.16.4",
     "prompt": "1.0.0",
     "react-addons-test-utils": "15.6.2",
@@ -134,13 +138,25 @@
     "url": ""
   },
   "jest": {
-    "setupFiles": [ "./src/tests/helpers/testHelpers.js" ],
-    "moduleDirectories": [ "node_modules", "src" ],
+    "setupFiles": [
+      "./src/tests/helpers/testHelpers.js"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
     "moduleNameMapper": {
       "\\.(css|scss)$": "identity-obj-proxy",
       "^.+\\.(gif|ttf|eot|svg|woff|woff2|ico)$": "<rootDir>/tools/fileMock.js"
     },
-    "coverageReporters": [ "html", "text-summary" ],
+    "coverageReporters": [
+      "html",
+      "text-summary"
+    ],
     "verbose": true
+  },
+  "pre-commit": [ "pre-commit" ],
+  "lint-staged": {
+    "*.js": [ "prettier --single-quote --bracket-spacing false --trailing-comma es5 --write '{src,__{tests,mocks}__}/**/*.js'", "git add" ]
   }
 }

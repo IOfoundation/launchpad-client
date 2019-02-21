@@ -1,5 +1,5 @@
 import {SnackbarTypes as types} from '../action-types';
-import httpRequest from '../utils/httpRequest';
+import {httpRequest} from '../utils';
 
 export const showSnackbar = () => {
   return {
