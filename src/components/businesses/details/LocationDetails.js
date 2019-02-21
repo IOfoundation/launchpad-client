@@ -18,7 +18,7 @@ const LocationDetails = props => {
       <i className="material-icons location-details__icon" onClick={closeModal}>
         {'close'}
       </i>
-      <h2 className="location-details__title">{organization.name}</h2>
+      <h2 className="location-details__title">{organization.address.city}</h2>
       <SmallSection title="Street Address" content={address} />
       <SmallSection
         title="Phone"
