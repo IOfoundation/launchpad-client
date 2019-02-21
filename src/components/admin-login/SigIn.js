@@ -33,7 +33,7 @@ const SignIn = props => {
           {"Have a resource you'd like listed?"}
         </p>
         <a className={[classes.anchor, 'text-thin'].join(' ')}>
-          {'Sign up here'}
+          {'Sign up here.'}
         </a>
       </Caption>
       <SignInFormContainer />
