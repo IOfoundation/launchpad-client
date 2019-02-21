@@ -9,7 +9,9 @@ const styles = () => ({
     fontSize: '48px',
     lineHeight: '60px',
     marginBottom: '24px',
-    maxWidth: '380px',
+  },
+  item: {
+    paddingRight: '10em',
   },
 });
 const Caption = props => {
@@ -25,7 +27,7 @@ const Caption = props => {
   }
 
   return (
-    <Grid item={true} xs={12} md={7}>
+    <Grid item={true} xs={12} md={7} classes={{item: classes.item}}>
       <h1 className={[classes.Title, 'text-semi'].join(' ')}>{title}</h1>
       {$content}
     </Grid>
@@ -39,6 +41,7 @@ Caption.propTypes = {
   ]),
   classes: PropTypes.shape({
     Title: PropTypes.string,
+    item: PropTypes.styring,
   }),
   content: PropTypes.string,
   title: PropTypes.string,
