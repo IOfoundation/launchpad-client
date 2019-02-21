@@ -58,6 +58,7 @@ class FormTextField extends PureComponent {
       handleBlur,
       classes,
       type = 'text',
+      autocomplete,
     } = this.props;
 
     return (
@@ -79,6 +80,7 @@ class FormTextField extends PureComponent {
               disabled: classes.cssDisabled,
             },
           }}
+          inputProps={{autoComplete: autocomplete}}
           InputProps={{
             classes: {
               root: classes.cssOutlinedInput,
@@ -102,6 +104,7 @@ class FormTextField extends PureComponent {
 }
 
 FormTextField.propTypes = {
+  autocomplete: PropTypes.string,
   classes: PropTypes.shape({
     cssLabel: PropTypes.string,
     cssOutlinedInput: PropTypes.string,

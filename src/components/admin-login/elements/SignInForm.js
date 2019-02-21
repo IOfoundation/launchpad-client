@@ -25,6 +25,7 @@ const SingInForm = props => {
         handleChange={handleChange}
         id="email"
         label="Email Address"
+        autocomplete="username email"
         value={email}
       />
       <FormTextField
@@ -35,6 +36,7 @@ const SingInForm = props => {
         id="password"
         label="Password"
         type="password"
+        autocomplete="current-password"
         value={password}
       />
       <button
@@ -65,8 +67,8 @@ SingInForm.propTypes = {
   isSubmitting: PropTypes.bool,
   isValid: PropTypes.bool,
   touched: PropTypes.shape({
-    email: PropTypes.shape({}),
-    password: PropTypes.shape({}),
+    email: PropTypes.bool,
+    password: PropTypes.bool,
   }),
   values: PropTypes.shape({
     email: PropTypes.string,
