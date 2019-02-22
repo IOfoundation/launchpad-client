@@ -38,6 +38,8 @@ const initialState = {
   user: {
     loading: false,
     authorization: '',
+    error: false,
+    emailReset: '',
   },
   snackbar: {
     visibility: false,

@@ -19,6 +19,18 @@ const SignupSchema = Yup.object().shape({
 const initialValues = {email: ''};
 
 const PasswordResetContainer = props => {
+  const {error, emailSent} = props;
+
+  if (error) {
+    props.snackbar.showSnackbar({
+      message: 'An error has occurred',
+    });
+  } else if (emailSent) {
+    props.snackbar.showSnackbar({
+      message: 'Email Sent',
+    });
+  }
+
   return (
     <Grid item={true} xs={12} md={5}>
       <Formik
@@ -27,9 +39,6 @@ const PasswordResetContainer = props => {
         validationSchema={SignupSchema}
         onSubmit={(values, {setSubmitting}) => {
           props.user.passwordRecovery({email: values.email}).then(() => {
-            props.snackbar.showSnackbar({
-              message: 'Email Sent',
-            });
             setSubmitting(false);
           });
         }}
@@ -37,6 +46,13 @@ const PasswordResetContainer = props => {
       />
     </Grid>
   );
+};
+
+const mapStateToProps = _state => {
+  return {
+    error: _state.user.error,
+    emailSent: _state.user.emailReset !== '',
+  };
 };
 
 const mapDispatchToProps = _dispatch => {
@@ -47,6 +63,8 @@ const mapDispatchToProps = _dispatch => {
 };
 
 PasswordResetContainer.propTypes = {
+  emailSent: PropTypes.bool,
+  error: PropTypes.bool,
   snackbar: PropTypes.shape({
     showSnackbar: PropTypes.func,
   }),
@@ -56,6 +74,6 @@ PasswordResetContainer.propTypes = {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(PasswordResetContainer);

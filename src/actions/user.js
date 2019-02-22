@@ -1,5 +1,5 @@
 import {UserTypes as types} from '../action-types';
-import httpRequest from '../utils/httpRequest';
+import {httpRequest} from '../utils';
 
 const loginStart = config => {
   return {
@@ -15,10 +15,9 @@ const loginSuccess = authorization => {
   };
 };
 
-const loginError = error => {
+const loginError = () => {
   return {
     type: types.LOGIN_ERROR,
-    error,
   };
 };
 
@@ -36,10 +35,9 @@ const singUpSuccess = response => {
   };
 };
 
-const singUpError = error => {
+const singUpError = () => {
   return {
     type: types.SIGN_UP_ERROR,
-    error,
   };
 };
 
@@ -57,10 +55,9 @@ const passwordRecoverySuccess = response => {
   };
 };
 
-const passwordRecoveryError = error => {
+const passwordRecoveryError = () => {
   return {
     type: types.PASSWORD_RECOVERY_ERROR,
-    error,
   };
 };
 
@@ -78,10 +75,9 @@ const signOutSuccess = response => {
   };
 };
 
-const signOutError = error => {
+const signOutError = () => {
   return {
     type: types.SIGN_OUT_ERROR,
-    error,
   };
 };
 
@@ -92,7 +88,7 @@ const post = ({url, params, startFn, successFn, errorFn}) => {
       const httpResponse = await httpRequest.post(url, params);
       dispatch(successFn(httpResponse.data));
     } catch (error) {
-      dispatch(errorFn(error));
+      dispatch(errorFn());
     }
   };
 };
@@ -107,9 +103,10 @@ export const login = ({password, email}) => {
           password,
         },
       });
+
       dispatch(loginSuccess(httpResponse.headers.authorization));
     } catch (error) {
-      dispatch(loginError(error));
+      dispatch(loginError());
     }
   };
 };
@@ -160,7 +157,13 @@ export const signOut = token => {
       );
       dispatch(signOutSuccess(httpResponse.data));
     } catch (error) {
-      dispatch(signOutError(error));
+      dispatch(signOutError());
     }
+  };
+};
+
+export const resetError = () => {
+  return {
+    type: types.RESET_ERROR,
   };
 };

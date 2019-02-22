@@ -11,6 +11,7 @@ const UserTypes = {
   SIGN_OUT_REQUEST: 'SIGN_OUT_REQUEST',
   SIGN_OUT_SUCCESS: 'SIGN_OUT_SUCCESS',
   SIGN_OUT_ERROR: 'SIGN_OUT_ERROR',
+  RESET_ERROR: 'RESET_ERROR',
 };
 
 export default UserTypes;

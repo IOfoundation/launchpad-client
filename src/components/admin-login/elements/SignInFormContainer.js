@@ -20,6 +20,18 @@ const SignupSchema = Yup.object().shape({
 const initialValues = {email: '', password: ''};
 
 const SignInFormContainer = props => {
+  const {error, isAuth} = props;
+
+  if (error) {
+    props.snackbar.showSnackbar({
+      message: 'Login Error',
+    });
+  } else if (isAuth) {
+    props.snackbar.showSnackbar({
+      message: 'Login Successful',
+    });
+  }
+
   return (
     <Grid item={true} xs={12} md={5}>
       <Formik
@@ -34,15 +46,19 @@ const SignInFormContainer = props => {
             })
             .then(() => {
               setSubmitting(false);
-              props.snackbar.showSnackbar({
-                message: 'Login Successful',
-              });
             });
         }}
         validateOnChange={false}
       />
     </Grid>
   );
+};
+
+const mapStateToProps = _state => {
+  return {
+    error: _state.user.error,
+    isAuth: _state.user.authorization !== '',
+  };
 };
 
 const mapDispatchToProps = _dispatch => {
@@ -53,6 +69,8 @@ const mapDispatchToProps = _dispatch => {
 };
 
 SignInFormContainer.propTypes = {
+  error: PropTypes.bool,
+  isAuth: PropTypes.bool,
   snackbar: PropTypes.shape({
     showSnackbar: PropTypes.func,
   }),
@@ -62,6 +80,6 @@ SignInFormContainer.propTypes = {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(SignInFormContainer);

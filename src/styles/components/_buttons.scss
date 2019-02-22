@@ -164,7 +164,7 @@
 
   &:disabled,
   &[disabled] {
-    background-color: lighten(#02ba81, 10%);
+    cursor: not-allowed;
   }
 
   &__submit {

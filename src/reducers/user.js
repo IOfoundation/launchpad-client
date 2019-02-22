@@ -3,6 +3,8 @@ import {UserTypes as types} from '../action-types';
 const initialState = {
   loading: false,
   authorization: '',
+  error: false,
+  emailReset: '',
 };
 
 export default function(state = initialState, action) {
@@ -19,14 +21,14 @@ export default function(state = initialState, action) {
         ...state,
         authorization,
         loading: false,
+        error: false,
       };
     }
 
     case types.LOGIN_ERROR: {
-      const {error} = action;
       return {
         ...state,
-        error,
+        error: true,
         loading: false,
       };
     }
@@ -43,15 +45,15 @@ export default function(state = initialState, action) {
         ...state,
         response,
         loading: false,
+        error: false,
       };
     }
 
     case types.SIGN_UP_ERROR: {
-      const {error} = action;
       return {
         ...state,
-        error,
         loading: false,
+        error: true,
       };
     }
 
@@ -62,19 +64,19 @@ export default function(state = initialState, action) {
     }
 
     case types.PASSWORD_RECOVERY_SUCCESS: {
-      const {response} = action;
+      const {email} = action;
       return {
         ...state,
-        response,
+        emailReset: email,
         loading: false,
+        error: false,
       };
     }
 
     case types.PASSWORD_RECOVERY_ERROR: {
-      const {error} = action;
       return {
         ...state,
-        error,
+        error: true,
         loading: false,
       };
     }
@@ -91,15 +93,22 @@ export default function(state = initialState, action) {
         ...state,
         response,
         loading: false,
+        error: false,
       };
     }
 
     case types.SIGN_OUT_ERROR: {
-      const {error} = action;
       return {
         ...state,
-        error,
+        error: true,
         loading: false,
+      };
+    }
+
+    case types.RESET_ERROR: {
+      return {
+        ...state,
+        error: false,
       };
     }
 
