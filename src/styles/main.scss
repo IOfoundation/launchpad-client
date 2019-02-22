@@ -1,33 +1,34 @@
 //abstracts
-@import "abstracts/variables";
-@import "abstracts/helpers";
+@import 'abstracts/variables';
+@import 'abstracts/helpers';
 
 //base
-@import "base/normalize";
-@import "base/typography";
-@import "base/margin";
-@import "base/padding";
+@import 'base/normalize';
+@import 'base/typography';
+@import 'base/margin';
+@import 'base/padding';
+@import 'base/details-titles';
 
 //Components
-@import "components/search";
-@import "components/links";
-@import "components/buttons";
-@import "components/pagination";
-@import "components/home/hero";
-@import "components/businesses/resultInfo";
-@import "components/shared/snackbar";
-@import "components/shared/jumbotron";
-@import "components/businesses/business-details";
-@import "components/blog/blog";
+@import 'components/search';
+@import 'components/links';
+@import 'components/buttons';
+@import 'components/pagination';
+@import 'components/home/hero';
+@import 'components/businesses/resultInfo';
+@import 'components/shared/snackbar';
+@import 'components/shared/jumbotron';
+@import 'components/businesses/business-details';
+@import 'components/blog/blog';
 @import './components/events/_events.scss';
 
 //layout
-@import "layout/header";
-@import "layout/container";
-@import "layout/grid";
-@import "layout/footer";
-@import "layout/mobile-footer";
-@import "layout/search-nav";
-@import "layout/business";
-@import "layout/search-nav-mobile";
-@import "layout/_result-page-mobile";
+@import 'layout/header';
+@import 'layout/container';
+@import 'layout/grid';
+@import 'layout/footer';
+@import 'layout/mobile-footer';
+@import 'layout/search-nav';
+@import 'layout/business';
+@import 'layout/search-nav-mobile';
+@import 'layout/_result-page-mobile';

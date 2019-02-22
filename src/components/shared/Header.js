@@ -3,6 +3,8 @@ import {PropTypes} from 'prop-types';
 import {Link} from 'react-router';
 import BarsIcon from '../shared/barsIcon';
 
+const activeStyles = {opacity: '1'};
+
 const Header = () => {
   return (
     <header className="headerContainer" htmlFor="header-dropdown">
@@ -18,17 +20,25 @@ const Header = () => {
         <label htmlFor="header-dropdown" className="collapse-menu-icon">
           <BarsIcon size={24} />
         </label>
-        <nav className="header_links-contact">
-          <Link className="header_link" to="/businesses">
+        <nav className="header_links-contact text-bold">
+          <Link
+            activeStyle={activeStyles}
+            className="header_link"
+            to="/businesses"
+          >
             {'Resources'}
           </Link>
-          <Link className="header_link" to="/events">
+          <Link activeStyle={activeStyles} className="header_link" to="/events">
             {'Events'}
           </Link>
-          <Link className="header_link" to="/blog">
+          <Link activeStyle={activeStyles} className="header_link" to="/blog">
             {'Blog'}
           </Link>
-          <Link className="header_link" to="/admin-login">
+          <Link
+            activeStyle={activeStyles}
+            className="header_link"
+            to="/admin-login"
+          >
             {'Admin Login'}
           </Link>
         </nav>

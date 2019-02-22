@@ -87,7 +87,9 @@ class DetailFeaturedPosts extends PureComponent {
 
       postsElements = (
         <Fragment>
-          <h2 className="detail-featured-posts__title">{'Posts'}</h2>
+          <h2 className="details-title details-title--large-space text-bold">
+            {'Posts'}
+          </h2>
           <div className={classes.featuredPosts}>
             <Grid container={true} spacing={16}>
               {featuredPostsElements}

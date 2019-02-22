@@ -116,7 +116,9 @@ class Locations extends PureComponent {
             />
           </div>
         </Modal>
-        <h2 className="detail-locations__title text-bold">{'Main Location'}</h2>
+        <h2 className="details-title details-title--small-space text-bold">
+          {'Main Location'}
+        </h2>
         <Location
           address={`${locations[0].address.address_1}, ${
             locations[0].address.address_2

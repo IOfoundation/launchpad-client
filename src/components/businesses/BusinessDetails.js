@@ -41,7 +41,7 @@ const BusinessDetails = props => {
 
         <section className={'content-section'}>
           <Grid container={true} className={classes.content}>
-            <Grid item={true} xs={12} md={9}>
+            <Grid item={true} xs={12} md={9} className="right-line">
               <MainContent services={organization.services} />
             </Grid>
             <Grid item={true} xs={12} md={3}>

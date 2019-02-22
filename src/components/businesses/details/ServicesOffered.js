@@ -12,7 +12,7 @@ const ServicesOffered = props => {
 
   return (
     <div className="services-offered">
-      <h2 className="services-offered__title text-semi">
+      <h2 className="details-title details-title--large-space text-bold">
         {'Services Offered'}
       </h2>
       {$services}

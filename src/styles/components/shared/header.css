@@ -1,4 +1,3 @@
-
 .header_title {
   margin-right: 16px;
   white-space: nowrap;
@@ -9,10 +8,15 @@
   font-weight: bold;
   line-height: 16px;
 }
+
 .header_link {
   color: white;
   margin-right: 24px;
   line-height: 16px;
+}
+
+.headerContainer .header_links-contact .header_link {
+  opacity: 0.75;
 }
 
 .header_link:last-child {

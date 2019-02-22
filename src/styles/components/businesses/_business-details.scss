@@ -2,15 +2,18 @@
   .content-section {
     background-color: #f7f9fd;
     padding: 40px 0 32px;
+  }
+
+  .right-line {
     position: relative;
 
     &:after {
       background: #e1e1e1;
       content: '';
-      height: calc(100% - 80px);
+      height: 100%;
       position: absolute;
-      right: 30.7%;
-      top: 40px;
+      right: -1px;
+      top: 0;
       width: 1px;
     }
 

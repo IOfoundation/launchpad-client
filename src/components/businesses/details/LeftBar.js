@@ -123,7 +123,9 @@ class LeftBar extends PureComponent {
       <div className="left-bar">
         {modalElement}
         <Locations locations={organization.locations} />
-        <h3 className="left-bar__title text-bold">{'Upcoming events'}</h3>
+        <h3 className="details-title details-title--small-space text-bold">
+          {'Upcoming events'}
+        </h3>
         {eventsElement}
         {buttonElement}
       </div>
