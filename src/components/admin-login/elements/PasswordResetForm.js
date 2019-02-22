@@ -9,7 +9,7 @@ const styles = () => {
     text: {
       fontSize: '16px',
       lineHeight: '24px',
-      marginBottom: '24px',
+      margin: '0 5em 24px 0',
     },
   };
 };

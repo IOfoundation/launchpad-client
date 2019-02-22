@@ -25,7 +25,7 @@ const Caption = props => {
   }
 
   return (
-    <Grid item={true} xs={12} md={8}>
+    <Grid item={true} xs={12} md={7}>
       <h1 className={[classes.Title, 'text-semi'].join(' ')}>{title}</h1>
       {$content}
     </Grid>

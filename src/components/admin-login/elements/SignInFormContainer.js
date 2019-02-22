@@ -15,7 +15,7 @@ const initialValues = {email: '', password: ''};
 
 const SignInFormContainer = () => {
   return (
-    <Grid item={true} xs={12} md={4}>
+    <Grid item={true} xs={12} md={5}>
       <Formik
         render={props => <SingInForm {...props} />}
         initialValues={initialValues}
