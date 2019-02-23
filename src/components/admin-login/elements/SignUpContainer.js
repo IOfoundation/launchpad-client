@@ -1,13 +1,15 @@
 import React, {PureComponent} from 'react';
-import SignUpForm from './SignUpForm';
-import {Formik} from 'formik';
-import Grid from '@material-ui/core/Grid';
+import {PropTypes} from 'prop-types';
+import {withRouter} from 'react-router';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import * as Yup from 'yup';
 import * as user from '../../../actions/user';
 import * as snackbarActions from '../../../actions/snackbar';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {PropTypes} from 'prop-types';
+import {Formik} from 'formik';
+
+import SignUpForm from './SignUpForm';
+import Grid from '@material-ui/core/Grid';
 
 const SignUpSchema = Yup.object().shape({
   name: Yup.string().required('Required'),
@@ -31,7 +33,7 @@ const initialValues = {
 
 class SignUpFormContainer extends PureComponent {
   componentDidUpdate(prevProps) {
-    const {errors, signUpSuccessfully, snackbar} = this.props;
+    const {errors, signUpSuccessfully, snackbar, router} = this.props;
 
     if (
       errors !== prevProps.errors ||
@@ -48,6 +50,8 @@ class SignUpFormContainer extends PureComponent {
         snackbar.showSnackbar({
           message: 'Sign Up Successful',
         });
+
+        router.push('/admin-login/account-requested');
       } else if (!errors) {
         snackbar.showSnackbar({
           message: 'Sign Up Error',
@@ -102,6 +106,9 @@ const mapDispatchToProps = _dispatch => {
 SignUpFormContainer.propTypes = {
   errors: PropTypes.arrayOf(PropTypes.shape({})),
   isAuth: PropTypes.bool,
+  router: PropTypes.shape({
+    push: PropTypes.func,
+  }),
   signUpSuccessfully: PropTypes.bool,
   snackbar: PropTypes.shape({
     showSnackbar: PropTypes.func,
@@ -111,7 +118,9 @@ SignUpFormContainer.propTypes = {
   }),
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SignUpFormContainer);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(SignUpFormContainer)
+);
