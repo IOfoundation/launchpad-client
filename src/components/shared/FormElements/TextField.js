@@ -22,6 +22,7 @@ const styles = () => ({
     '&:before': {
       borderColor: 'rgba(255, 255, 255, 0.7)',
     },
+    fontFamily: "'proxima-nova-thin', Georgia, sans-serif",
   },
   cssDisabled: {},
   cssFocused: {
@@ -57,8 +58,8 @@ class FormTextField extends PureComponent {
       handleBlur,
       id,
       label,
+      marginBottom,
       multiline,
-      spacing,
       type = 'text',
       value,
     } = this.props;
@@ -97,7 +98,7 @@ class FormTextField extends PureComponent {
         <div
           className={[
             'admin-login-form__input__error-wrapper',
-            spacing ? 'm-bot-28' : '',
+            marginBottom ? 'm-bot-24' : '',
           ].join(' ')}
         >
           <ErrorMessage
@@ -127,10 +128,8 @@ FormTextField.propTypes = {
   handleChange: PropTypes.func,
   id: PropTypes.string,
   label: PropTypes.string,
+  marginBottom: PropTypes.bool,
   multiline: PropTypes.bool,
-  spacing: PropTypes.shape({
-    margin: PropTypes.string,
-  }),
   type: PropTypes.string,
   value: PropTypes.string,
 };
