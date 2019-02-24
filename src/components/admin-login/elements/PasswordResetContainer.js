@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import PasswordResetForm from './PasswordResetForm';
 import {Formik} from 'formik';
 import Grid from '@material-ui/core/Grid';
 import * as Yup from 'yup';
 import {PropTypes} from 'prop-types';
+import {withRouter} from 'react-router';
 
 import * as user from '../../../actions/user';
 import * as snackbarActions from '../../../actions/snackbar';
@@ -18,35 +19,41 @@ const SignupSchema = Yup.object().shape({
 
 const initialValues = {email: ''};
 
-const PasswordResetContainer = props => {
-  const {error, emailSent} = props;
+class PasswordResetContainer extends PureComponent {
+  componentDidUpdate(prevProps) {
+    const {error, emailSent, snackbar, router} = this.props;
 
-  if (error) {
-    props.snackbar.showSnackbar({
-      message: 'An error has occurred',
-    });
-  } else if (emailSent) {
-    props.snackbar.showSnackbar({
-      message: 'Email Sent',
-    });
+    if (error !== prevProps.error || emailSent !== prevProps.emailSent) {
+      if (error) {
+        snackbar.showSnackbar({
+          message: 'An error has ocurred',
+        });
+      } else if (emailSent) {
+        router.push('/admin-login/password-reset-confirmation');
+      }
+    }
   }
 
-  return (
-    <Grid item={true} xs={12} md={5}>
-      <Formik
-        render={_props => <PasswordResetForm {..._props} />}
-        initialValues={initialValues}
-        validationSchema={SignupSchema}
-        onSubmit={(values, {setSubmitting}) => {
-          props.user.passwordRecovery({email: values.email}).then(() => {
-            setSubmitting(false);
-          });
-        }}
-        validateOnChange={false}
-      />
-    </Grid>
-  );
-};
+  render() {
+    const {user} = this.props;
+
+    return (
+      <Grid item={true} xs={12} md={5}>
+        <Formik
+          render={_props => <PasswordResetForm {..._props} />}
+          initialValues={initialValues}
+          validationSchema={SignupSchema}
+          onSubmit={(values, {setSubmitting}) => {
+            user.passwordRecovery({email: values.email}).then(() => {
+              setSubmitting(false);
+            });
+          }}
+          validateOnChange={false}
+        />
+      </Grid>
+    );
+  }
+}
 
 const mapStateToProps = _state => {
   return {
@@ -65,6 +72,9 @@ const mapDispatchToProps = _dispatch => {
 PasswordResetContainer.propTypes = {
   emailSent: PropTypes.bool,
   error: PropTypes.bool,
+  router: PropTypes.shape({
+    push: PropTypes.func,
+  }),
   snackbar: PropTypes.shape({
     showSnackbar: PropTypes.func,
   }),
@@ -76,4 +86,4 @@ PasswordResetContainer.propTypes = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(PasswordResetContainer);
+)(withRouter(PasswordResetContainer));

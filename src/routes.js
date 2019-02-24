@@ -20,6 +20,7 @@ import Events from './containers/Events';
 import SignInRoute from './containers/AdminLogin/SignIn';
 import PasswordResetRoute from './containers/AdminLogin/PasswordResetRoute';
 import SignUpRoute from './containers/AdminLogin/SignUp';
+import ResetYourPasswordRoute from './containers/AdminLogin/ResetYourPasswordRoute';
 
 export default (
   <Route path="/" component={App}>
@@ -35,6 +36,10 @@ export default (
     <Route path="/admin-login" component={SignInRoute} />
     <Route path="/admin-login/password-reset" component={PasswordResetRoute} />
     <Route path="/admin-login/sign-up" component={SignUpRoute} />
+    <Route
+      path="/admin-login/password-reset-confirmation"
+      component={ResetYourPasswordRoute}
+    />
     <Route path="*" component={NotFound} />
   </Route>
 );

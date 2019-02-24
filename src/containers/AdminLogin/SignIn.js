@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {PropTypes} from 'prop-types';
@@ -7,18 +7,26 @@ import * as userActions from '../../actions/user';
 import AdminLogin from '../AdminLogin';
 import SigIn from '../../components/admin-login/SigIn';
 
-const SignInRoute = props => {
-  const {user, error} = props;
-
-  if (error) {
-    user.resetError();
+class SignInRoute extends PureComponent {
+  componentDidMount() {
+    if (this.props.error) {
+      this.props.user.resetError();
+    }
   }
 
-  return (
-    <AdminLogin>
-      <SigIn />
-    </AdminLogin>
-  );
+  render() {
+    return (
+      <AdminLogin>
+        <SigIn />
+      </AdminLogin>
+    );
+  }
+}
+
+const mapStateToProps = _state => {
+  return {
+    error: _state.user.error,
+  };
 };
 
 const mapDispatchToProps = _dispatch => {
@@ -27,14 +35,7 @@ const mapDispatchToProps = _dispatch => {
   };
 };
 
-const mapStateToProps = _state => {
-  return {
-    error: _state.user.error,
-  };
-};
-
 SignInRoute.propTypes = {
-  error: PropTypes.bool,
   user: PropTypes.shape({
     resetError: PropTypes.func,
   }),

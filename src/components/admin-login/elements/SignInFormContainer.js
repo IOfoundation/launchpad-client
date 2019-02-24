@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import SingInForm from './SignInForm';
 import {Formik} from 'formik';
 import Grid from '@material-ui/core/Grid';
@@ -19,40 +19,48 @@ const SignupSchema = Yup.object().shape({
 
 const initialValues = {email: '', password: ''};
 
-const SignInFormContainer = props => {
-  const {error, isAuth} = props;
+class SignInFormContainer extends PureComponent {
+  componentDidUpdate(prevProps) {
+    const {error, isAuth, snackbar} = this.props;
 
-  if (error) {
-    props.snackbar.showSnackbar({
-      message: 'Login Error',
-    });
-  } else if (isAuth) {
-    props.snackbar.showSnackbar({
-      message: 'Login Successful',
-    });
+    if (error !== prevProps.error || isAuth !== prevProps.isAuth) {
+      if (error) {
+        snackbar.showSnackbar({
+          message: 'Login Error',
+        });
+      } else if (isAuth) {
+        snackbar.showSnackbar({
+          message: 'Login Successful',
+        });
+      }
+    }
   }
 
-  return (
-    <Grid item={true} xs={12} md={5}>
-      <Formik
-        render={_props => <SingInForm {..._props} />}
-        initialValues={initialValues}
-        validationSchema={SignupSchema}
-        onSubmit={(values, {setSubmitting}) => {
-          props.user
-            .login({
-              email: values.email,
-              password: values.password,
-            })
-            .then(() => {
-              setSubmitting(false);
-            });
-        }}
-        validateOnChange={false}
-      />
-    </Grid>
-  );
-};
+  render() {
+    const {user} = this.props;
+
+    return (
+      <Grid item={true} xs={12} md={5}>
+        <Formik
+          render={_props => <SingInForm {..._props} />}
+          initialValues={initialValues}
+          validationSchema={SignupSchema}
+          onSubmit={(values, {setSubmitting}) => {
+            user
+              .login({
+                email: values.email,
+                password: values.password,
+              })
+              .then(() => {
+                setSubmitting(false);
+              });
+          }}
+          validateOnChange={false}
+        />
+      </Grid>
+    );
+  }
+}
 
 const mapStateToProps = _state => {
   return {
