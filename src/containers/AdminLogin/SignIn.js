@@ -36,6 +36,7 @@ const mapDispatchToProps = _dispatch => {
 };
 
 SignInRoute.propTypes = {
+  error: PropTypes.bool,
   user: PropTypes.shape({
     resetError: PropTypes.func,
   }),

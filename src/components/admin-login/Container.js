@@ -29,13 +29,24 @@ const styles = theme => ({
   item: {
     marginRight: '2em',
   },
+  modifier: {
+    alignItems: 'flex-start',
+    paddingTop: '131px',
+    [theme.breakpoints.down('sm')]: {
+      padding: '10em 2em 2em',
+    },
+  },
 });
 
 const Container = props => {
-  const {classes, children, direction} = props;
+  const {classes, children, direction, modifier} = props;
 
   return (
-    <div className={['admin-login', classes.container].join(' ')}>
+    <div
+      className={['admin-login', classes.container, classes[modifier]].join(
+        ' '
+      )}
+    >
       <SnackbarUI />
       <section className={['content-section', classes.content].join(' ')}>
         <Grid
@@ -62,6 +73,7 @@ Container.propTypes = {
     item: PropTypes.string,
   }),
   direction: PropTypes.string,
+  modifier: PropTypes.string,
 };
 
 export default withStyles(styles)(Container);

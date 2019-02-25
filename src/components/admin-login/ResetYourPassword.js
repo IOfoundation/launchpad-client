@@ -3,7 +3,6 @@ import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
-import Caption from './elements/Caption';
 import Container from './Container';
 
 const styles = () => {
@@ -28,8 +27,8 @@ const ResetYourPassword = props => {
   const {classes} = props;
 
   return (
-    <Container>
-      <Grid item={true} xs={12} md={6} direction="column">
+    <Container direction="column" modifier="modifier">
+      <Grid item={true} xs={12} md={6}>
         <h1 className={[classes.Title, 'text-bold'].join(' ')}>
           {'Reset your password.'}
         </h1>

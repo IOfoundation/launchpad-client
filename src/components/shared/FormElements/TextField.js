@@ -72,7 +72,6 @@ class FormTextField extends PureComponent {
           id={id}
           type={type}
           label={label}
-          type={type}
           onChange={event => this.changeHandler(id, event)}
           onBlur={handleBlur}
           value={value}

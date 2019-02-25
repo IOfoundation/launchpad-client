@@ -35,7 +35,7 @@ class PasswordResetContainer extends PureComponent {
   }
 
   render() {
-    const {user} = this.props;
+    const {userActions} = this.props;
 
     return (
       <Grid item={true} xs={12} md={5}>
@@ -44,7 +44,7 @@ class PasswordResetContainer extends PureComponent {
           initialValues={initialValues}
           validationSchema={SignupSchema}
           onSubmit={(values, {setSubmitting}) => {
-            user.passwordRecovery({email: values.email}).then(() => {
+            userActions.passwordRecovery({email: values.email}).then(() => {
               setSubmitting(false);
             });
           }}
@@ -64,7 +64,7 @@ const mapStateToProps = _state => {
 
 const mapDispatchToProps = _dispatch => {
   return {
-    user: bindActionCreators(user, _dispatch),
+    userActions: bindActionCreators(user, _dispatch),
     snackbar: bindActionCreators(snackbarActions, _dispatch),
   };
 };
@@ -78,7 +78,7 @@ PasswordResetContainer.propTypes = {
   snackbar: PropTypes.shape({
     showSnackbar: PropTypes.func,
   }),
-  user: PropTypes.shape({
+  userActions: PropTypes.shape({
     passwordRecovery: PropTypes.func,
   }),
 };
