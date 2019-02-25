@@ -6,7 +6,7 @@ const initialState = {
   error: false,
   emailReset: '',
   signUpSuccessfully: false,
-  singUpErros: {},
+  singUpErros: [],
 };
 
 export default function(state = initialState, action) {
@@ -46,7 +46,7 @@ export default function(state = initialState, action) {
         ...state,
         signUpSuccessfully: true,
         loading: false,
-        singUpErros: {},
+        singUpErros: [],
       };
     }
 

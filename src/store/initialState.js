@@ -41,7 +41,7 @@ const initialState = {
     error: false,
     emailReset: '',
     signUpSuccessfully: false,
-    singUpErros: {},
+    singUpErros: [],
   },
   snackbar: {
     visibility: false,

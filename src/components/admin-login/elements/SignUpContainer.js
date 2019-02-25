@@ -29,12 +29,6 @@ const initialValues = {
   description: '',
 };
 
-const mappedErrors = {
-  name: 'Business/Resource Name Duplicated',
-  email: 'Email has already been taken',
-  general: 'Sing Up Error',
-};
-
 class SignUpFormContainer extends PureComponent {
   componentDidUpdate(prevProps) {
     const {errors, signUpSuccessfully, snackbar} = this.props;
@@ -43,11 +37,10 @@ class SignUpFormContainer extends PureComponent {
       errors !== prevProps.errors ||
       signUpSuccessfully !== prevProps.signUpSuccessfully
     ) {
-      const errorsKeys = Object.keys(errors);
-
-      if (errorsKeys.length > 0) {
-        const parsedError = errorsKeys.map(key => mappedErrors[key]);
-
+      if (errors && errors.length > 0) {
+        const parsedError = Object.keys(errors[0].detail).map(
+          key => `${key} ${errors[0].detail[key][0]}`
+        );
         snackbar.showSnackbar({
           message: parsedError[0],
         });
@@ -57,7 +50,7 @@ class SignUpFormContainer extends PureComponent {
         });
       } else if (!errors) {
         snackbar.showSnackbar({
-          message: mappedErrors.general,
+          message: 'Sign Up Error',
         });
       }
     }
@@ -85,6 +78,7 @@ class SignUpFormContainer extends PureComponent {
                 setSubmitting(false);
               });
           }}
+          validateOnChange={false}
         />
       </Grid>
     );
@@ -106,7 +100,7 @@ const mapDispatchToProps = _dispatch => {
 };
 
 SignUpFormContainer.propTypes = {
-  errors: PropTypes.shape({}),
+  errors: PropTypes.arrayOf(PropTypes.shape({})),
   isAuth: PropTypes.bool,
   signUpSuccessfully: PropTypes.bool,
   snackbar: PropTypes.shape({
