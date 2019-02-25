@@ -21,23 +21,22 @@ const loginError = () => {
   };
 };
 
-const singUpStart = config => {
+const singUpStart = () => {
   return {
     type: types.SIGN_UP_REQUEST,
-    ...config,
   };
 };
 
-const singUpSuccess = response => {
+const singUpSuccess = () => {
   return {
     type: types.SIGN_UP_SUCCESS,
-    response,
   };
 };
 
-const singUpError = () => {
+const singUpError = singUpErros => {
   return {
     type: types.SIGN_UP_ERROR,
+    singUpErros,
   };
 };
 
@@ -118,19 +117,24 @@ export const singUp = ({
   organization_name,
   organization_description,
 }) => {
-  return post({
-    url: '/api/users',
-    params: {
-      email,
-      password,
-      name,
-      organization_name,
-      organization_description,
-    },
-    startFn: singUpStart,
-    successFn: singUpSuccess,
-    errorFn: singUpError,
-  });
+  return async dispatch => {
+    try {
+      dispatch(singUpStart());
+      await httpRequest.post('/api/users', {
+        api_user: {
+          email,
+          password,
+          name,
+          organization_name,
+          organization_description,
+        },
+      });
+
+      dispatch(singUpSuccess());
+    } catch (error) {
+      dispatch(singUpError(error.data.errors));
+    }
+  };
 };
 
 export const passwordRecovery = ({email}) => {

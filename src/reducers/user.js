@@ -5,6 +5,8 @@ const initialState = {
   authorization: '',
   error: false,
   emailReset: '',
+  signUpSuccessfully: false,
+  singUpErros: {},
 };
 
 export default function(state = initialState, action) {
@@ -40,20 +42,20 @@ export default function(state = initialState, action) {
     }
 
     case types.SIGN_UP_SUCCESS: {
-      const {response} = action;
       return {
         ...state,
-        response,
+        signUpSuccessfully: true,
         loading: false,
-        error: false,
+        singUpErros: {},
       };
     }
 
     case types.SIGN_UP_ERROR: {
+      const {singUpErros} = action;
       return {
         ...state,
         loading: false,
-        error: true,
+        singUpErros,
       };
     }
 
