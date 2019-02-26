@@ -21,6 +21,8 @@ const styles = theme => ({
     justifyContent: 'center',
     [theme.breakpoints.down('sm')]: {
       padding: '2em',
+      height: 'auto',
+      marginTop: '52px',
     },
   },
   item: {

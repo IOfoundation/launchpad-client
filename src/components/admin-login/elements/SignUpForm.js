@@ -44,7 +44,7 @@ const SingUpForm = props => {
         label="Description"
         multiline={true}
         value={description}
-        spacing={{margin: '16px 0 20px'}}
+        marginBottom={true}
       />
       <FormTextField
         autocomplete="username email"
@@ -53,7 +53,7 @@ const SingUpForm = props => {
         handleBlur={handleBlur}
         handleChange={handleChange}
         id="email"
-        label="Email Address"
+        label="Your Email Address"
         value={email}
       />
       <FormTextField

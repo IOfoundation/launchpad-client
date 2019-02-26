@@ -4,7 +4,7 @@ import {withStyles} from '@material-ui/core/styles';
 
 import Grid from '@material-ui/core/Grid';
 
-const styles = () => ({
+const styles = theme => ({
   Title: {
     fontSize: '48px',
     lineHeight: '60px',
@@ -12,6 +12,9 @@ const styles = () => ({
   },
   item: {
     paddingRight: '10em',
+    [theme.breakpoints.down('sm')]: {
+      padding: '0',
+    },
   },
 });
 const Caption = props => {

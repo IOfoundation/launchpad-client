@@ -37,7 +37,7 @@ const SignIn = props => {
           to="/admin-login/sign-up"
           className={[classes.anchor, 'text-thin'].join(' ')}
         >
-          {'Sign up here'}
+          {'Sign up here.'}
         </Link>
       </Caption>
       <SignInFormContainer />
