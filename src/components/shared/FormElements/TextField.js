@@ -51,14 +51,16 @@ class FormTextField extends PureComponent {
 
   render() {
     const {
-      id,
-      value,
-      label,
+      autocomplete,
+      classes,
       error,
       handleBlur,
-      classes,
+      id,
+      label,
+      multiline,
+      spacing,
       type = 'text',
-      autocomplete,
+      value,
     } = this.props;
 
     return (
@@ -72,6 +74,7 @@ class FormTextField extends PureComponent {
           onChange={event => this.changeHandler(id, event)}
           onBlur={handleBlur}
           value={value}
+          multiline={multiline}
           InputLabelProps={{
             classes: {
               root: classes.cssLabel,
@@ -91,7 +94,12 @@ class FormTextField extends PureComponent {
             },
           }}
         />
-        <div className="admin-login-form__input__error-wrapper">
+        <div
+          className={[
+            'admin-login-form__input__error-wrapper',
+            spacing ? 'm-bot-28' : '',
+          ].join(' ')}
+        >
           <ErrorMessage
             className="admin-login-form__error"
             component="div"
@@ -119,6 +127,10 @@ FormTextField.propTypes = {
   handleChange: PropTypes.func,
   id: PropTypes.string,
   label: PropTypes.string,
+  multiline: PropTypes.bool,
+  spacing: PropTypes.shape({
+    margin: PropTypes.string,
+  }),
   type: PropTypes.string,
   value: PropTypes.string,
 };

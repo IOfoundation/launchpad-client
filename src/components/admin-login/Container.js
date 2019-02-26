@@ -23,15 +23,23 @@ const styles = theme => ({
       padding: '2em',
     },
   },
+  item: {
+    marginRight: '2em',
+  },
 });
 
 const Container = props => {
-  const {classes, children} = props;
+  const {classes, children, direction} = props;
 
   return (
     <div className={['admin-login', classes.container].join(' ')}>
       <section className={['content-section', classes.content].join(' ')}>
-        <Grid container={true} justify="center" alignItems="center">
+        <Grid
+          container={true}
+          justify="center"
+          alignItems="center"
+          direction={direction}
+        >
           {children}
         </Grid>
       </section>
@@ -47,7 +55,9 @@ Container.propTypes = {
   classes: PropTypes.shape({
     content: PropTypes.string,
     container: PropTypes.string,
+    item: PropTypes.string,
   }),
+  direction: PropTypes.string,
 };
 
 export default withStyles(styles)(Container);
