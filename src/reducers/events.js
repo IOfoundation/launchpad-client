@@ -2,6 +2,7 @@ import {EventsTypes as types} from '../action-types';
 
 const initialState = {
   data: [],
+  featuredEvents: [],
 };
 
 export default function(state = initialState, action) {
@@ -21,6 +22,28 @@ export default function(state = initialState, action) {
     }
 
     case types.GET_ALL_EVENTS_REQUEST_ERROR: {
+      const {error} = action;
+      return {
+        ...state,
+        error,
+      };
+    }
+
+    case types.GET_EVENTS_BY_MONTH_START: {
+      return {
+        ...state,
+      };
+    }
+
+    case types.GET_EVENTS_BY_MONTH_SUCCESS: {
+      const {featuredEvents} = action;
+      return {
+        ...state,
+        featuredEvents,
+      };
+    }
+
+    case types.GET_EVENTS_BY_MONTH_ERROR: {
       const {error} = action;
       return {
         ...state,

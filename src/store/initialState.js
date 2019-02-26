@@ -34,6 +34,7 @@ const initialState = {
   },
   events: {
     data: [],
+    featuredEvents: [],
   },
   snackbar: {
     visibility: false,

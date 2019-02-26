@@ -1,6 +1,6 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
-import {getDateFromString} from '../../../../utils/getDateFromString';
+import {getDate} from '../../../../utils';
 
 import Section from './Section';
 
@@ -9,7 +9,7 @@ export const DateSection = props => {
   let $content = null;
 
   if (date) {
-    const dateInformation = getDateFromString(date);
+    const dateInformation = getDate(date);
     $content = (
       <Section>
         <span className="text-bold">{`${dateInformation.monthLarge} ${
