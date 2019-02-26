@@ -1,9 +1,10 @@
 import {SnackbarTypes as types} from '../action-types';
 import {httpRequest} from '../utils';
 
-export const showSnackbar = () => {
+export const showSnackbar = config => {
   return {
     type: types.SHOW_SNACKBAR,
+    ...config,
   };
 };
 

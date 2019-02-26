@@ -70,8 +70,8 @@ class FormTextField extends PureComponent {
           error={error}
           fullWidth={true}
           id={id}
-          label={label}
           type={type}
+          label={label}
           onChange={event => this.changeHandler(id, event)}
           onBlur={handleBlur}
           value={value}
