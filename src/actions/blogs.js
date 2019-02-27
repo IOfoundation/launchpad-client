@@ -1,5 +1,6 @@
 import {BlogsTypes as types} from '../action-types';
 import {httpRequest} from '../utils';
+import {getDate} from '../utils';
 
 const getFeaturedPostsStarts = config => {
   return {
@@ -43,6 +44,27 @@ const getFeaturedPostsByIdError = error => {
   };
 };
 
+const getAllPostsStarts = config => {
+  return {
+    type: types.GET_ALL_POSTS_START,
+    ...config,
+  };
+};
+
+const getAllPostsSuccess = posts => {
+  return {
+    type: types.GET_ALL_POSTS_SUCCESS,
+    posts,
+  };
+};
+
+const getAllPostsError = error => {
+  return {
+    type: types.GET_ALL_POSTS_ERROR,
+    error,
+  };
+};
+
 export const noResults = value => {
   return {
     type: types.NO_RESULTS,
@@ -80,6 +102,30 @@ export const getFeaturedPost = () => {
       dispatch(getFeaturedPostsSuccess(httpResponse.data));
     } catch (error) {
       dispatch(getFeaturedPostsError(error));
+    }
+  };
+};
+
+export const getAllPosts = page => {
+  return async dispatch => {
+    try {
+      dispatch(getAllPostsStarts());
+      const httpResponse = await httpRequest.get(
+        `/api/blog_posts?page=${page}&per_page=5&filter[category]=${'front page'}`
+      );
+      if (httpResponse.data.length === 0) {
+        dispatch(noResults(true));
+      }
+
+      const formatedData = httpResponse.data.map(data => {
+        data.posted_at = getDate(data.posted_at);
+
+        return data;
+      });
+
+      dispatch(getAllPostsSuccess(formatedData));
+    } catch (error) {
+      dispatch(getAllPostsError(error));
     }
   };
 };
