@@ -4,6 +4,7 @@ const initialState = {
     noResults: false,
     organizationPosts: [],
     posts: [],
+    totalPages: 0,
   },
   businesses: {
     locations: [],

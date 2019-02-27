@@ -7,6 +7,7 @@ import {truncate, maxCharacters} from '../../utils';
 import PostListItem from './PostListItem';
 import * as actions from '../../actions/blogs';
 import Loading from '../shared/Loading';
+import Pagination from '../businesses/Pagination';
 
 class PostLists extends PureComponent {
   state = {
@@ -17,8 +18,19 @@ class PostLists extends PureComponent {
     this.props.actions.getAllPosts(this.state.page);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.page !== this.state.page) {
+      this.props.actions.getAllPosts(this.state.page);
+    }
+  }
+
+  handleChangePage = selected => {
+    this.setState({page: selected});
+  };
+
   render() {
     const {section, posts} = this.props;
+
     let resultsElements = (
       <Loading elementConfig={{style: {margin: '0 auto', padding: 0}}} />
     );
@@ -53,6 +65,19 @@ class PostLists extends PureComponent {
       <div className="blog-posts">
         <h2 className="blog-posts__title">{section}</h2>
         {resultsElements}
+        <Pagination
+          appliedFilters={{category: 'post-lists', page: this.state.page}}
+          handleChangePage={this.handleChangePage}
+          metadata={{
+            pagination: {
+              last: {
+                page: Number(posts.totalPages),
+              },
+              currentPage: this.state.page,
+            },
+            totalOrganization: '10',
+          }}
+        />
       </div>
     );
   }
@@ -62,7 +87,11 @@ const mapStateToProps = _state => {
   const {blogs: _blogs} = _state;
 
   return {
-    posts: {results: _blogs.posts, noResults: _blogs.noResults},
+    posts: {
+      results: _blogs.posts,
+      noResults: _blogs.noResults,
+      totalPages: _blogs.totalPages,
+    },
   };
 };
 

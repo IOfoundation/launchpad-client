@@ -51,10 +51,11 @@ const getAllPostsStarts = config => {
   };
 };
 
-const getAllPostsSuccess = posts => {
+const getAllPostsSuccess = (posts, totalPages) => {
   return {
     type: types.GET_ALL_POSTS_SUCCESS,
     posts,
+    totalPages,
   };
 };
 
@@ -113,6 +114,7 @@ export const getAllPosts = page => {
       const httpResponse = await httpRequest.get(
         `/api/blog_posts?page=${page}&per_page=5&filter[category]=${'front page'}`
       );
+
       if (httpResponse.data.length === 0) {
         dispatch(noResults(true));
       }
@@ -122,8 +124,9 @@ export const getAllPosts = page => {
 
         return data;
       });
+      const pages = parseInt(httpResponse.headers['x-total-count'], 10) / 5;
 
-      dispatch(getAllPostsSuccess(formatedData));
+      dispatch(getAllPostsSuccess(formatedData, pages));
     } catch (error) {
       dispatch(getAllPostsError(error));
     }
