@@ -9,6 +9,7 @@ import {withStyles} from '@material-ui/core/styles';
 import {PropTypes} from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Loading from '../shared/Loading';
+import {truncate} from '../../utils';
 
 const styles = theme => ({
   featuredPost: {
@@ -33,13 +34,24 @@ class FeaturedPosts extends PureComponent {
     );
 
     if (posts.results.length > 0) {
-      resultsElements = posts.results.map(post => {
+      resultsElements = posts.results.slice(0, 4).map(post => {
+        let description = post.body;
+        let title = post.title;
+
+        if (description.split('').length > 30) {
+          description = truncate(description, 30);
+        }
+
+        if (title.split('').length > 80) {
+          title = truncate(title, 80);
+        }
+
         return (
           <Grid item={true} xs={6} md={4} lg={3} key={post.id}>
             <FeaturedPost
               imageSrc={post.blog_post_attachments[0].file_url}
-              title={post.title}
-              description={post.body}
+              title={title}
+              description={description}
             />
           </Grid>
         );
