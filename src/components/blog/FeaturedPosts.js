@@ -2,7 +2,6 @@ import React, {PureComponent} from 'react';
 import {containerStyles} from '../../utils';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-
 import * as actions from '../../actions/blogs';
 import FeaturedPost from './FeaturedPost';
 import {withStyles} from '@material-ui/core/styles';
@@ -12,13 +11,17 @@ import Loading from '../shared/Loading';
 import {truncate} from '../../utils';
 
 const styles = theme => ({
-  featuredPost: {
+  container: {
     ...containerStyles(theme),
     alignItems: 'center',
     display: 'flex',
     margin: '0 auto 32px',
     minHeight: '297px',
     padding: 12,
+    overflowX: 'auto',
+  },
+  featuredPosts: {
+    minWidth: '960px',
   },
 });
 
@@ -47,7 +50,7 @@ class FeaturedPosts extends PureComponent {
         }
 
         return (
-          <Grid item={true} xs={6} md={4} lg={3} key={post.id}>
+          <Grid item={true} xs={3} key={post.id}>
             <FeaturedPost
               imageSrc={post.blog_post_attachments[0].file_url}
               title={title}
@@ -59,8 +62,8 @@ class FeaturedPosts extends PureComponent {
     }
 
     return (
-      <div className={classes.featuredPost}>
-        <Grid container={true} spacing={24}>
+      <div className={classes.container}>
+        <Grid container={true} spacing={24} className={classes.featuredPosts}>
           {resultsElements}
         </Grid>
       </div>
@@ -73,7 +76,8 @@ FeaturedPosts.propTypes = {
     getFeaturedPost: PropTypes.func,
   }),
   classes: PropTypes.shape({
-    featuredPost: PropTypes.string,
+    container: PropTypes.string,
+    featuredPosts: PropTypes.string,
   }),
   posts: PropTypes.shape({
     results: PropTypes.arrayOf(PropTypes.shape({})),

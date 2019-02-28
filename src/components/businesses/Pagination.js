@@ -9,14 +9,23 @@ const Pagination = props => {
     const selected = data.selected + 1;
     props.handleChangePage(selected);
   };
-
   const {last} = props.metadata.pagination;
   const {page} = props.appliedFilters;
+  const {noMargin} = props;
+  let classes = '';
+
+  if (noMargin) {
+    classes = 'pagination between-xs middle-xs';
+  } else {
+    classes = 'pagination between-xs middle-xs m-bot-100';
+  }
+
   if (!last.page) {
     return null;
   }
+
   return (
-    <div className={'pagination between-xs middle-xs m-bot-100'}>
+    <div className={classes}>
       <ReactPaginate
         previousLabel={
           <ArrowLeft
@@ -62,6 +71,7 @@ Pagination.propTypes = {
     }),
     totalOrganization: PropTypes.string,
   }).isRequired,
+  noMargin: PropTypes.bool,
 };
 
 export default Pagination;

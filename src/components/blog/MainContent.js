@@ -9,6 +9,11 @@ import Grid from '@material-ui/core/Grid';
 const styles = theme => ({
   content: {
     ...containerStyles(theme),
+    marginBottom: '95px',
+    [theme.breakpoints.down('sm')]: {
+      padding: '0 2em',
+      marginBottom: '20px',
+    },
   },
 });
 
@@ -26,7 +31,7 @@ const MainContent = props => {
           <Categories />
         </Grid>
         <Grid item={true} xs={12} sm={9}>
-          <PostLists section="Front Page" />
+          <PostLists />
         </Grid>
       </Grid>
     </div>

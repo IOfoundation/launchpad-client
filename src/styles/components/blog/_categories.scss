@@ -1,6 +1,13 @@
 .blog-categories {
   &__title {
+    display: flex;
+    font-size: 16px;
+    line-height: 24px;
     margin-bottom: 20px;
+
+    &__icon {
+      margin-right: 10px;
+    }
   }
 
   &__list {
@@ -10,10 +17,23 @@
 
     &__item {
       color: $primary-color;
+      cursor: pointer;
       font-size: 16px;
       line-height: 24px;
-      opacity: 0.5;
       margin-bottom: 8px;
+      opacity: 0.5;
+
+      &:hover {
+        color: $green-color;
+      }
     }
+
+    &__selected {
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 60em) {
+    margin-bottom: 24px;
   }
 }

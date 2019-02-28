@@ -1,8 +1,11 @@
 const initialState = {
   blogs: {
+    categories: [],
+    category: 'front page',
     featuredPosts: [],
     noResults: false,
     organizationPosts: [],
+    page: 1,
     posts: [],
     totalPages: 0,
   },
