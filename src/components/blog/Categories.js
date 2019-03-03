@@ -5,6 +5,7 @@ import {PropTypes} from 'prop-types';
 import * as actions from '../../actions/blogs';
 
 import Category from './Category';
+import CategoriesLoading from './Loading/Categories';
 
 class Categories extends PureComponent {
   state = {
@@ -31,10 +32,10 @@ class Categories extends PureComponent {
   render() {
     const {categories, categorySelected} = this.props;
     const {viewMore, onViewMoreActive} = this.state;
-    let categoriesElements = null;
+    let categoriesElements = <CategoriesLoading />;
     let viewMoreElement = null;
 
-    if (categories.length > 0) {
+    if (categories.length > 1) {
       if (viewMore) {
         categoriesElements = categories
           .slice(0, onViewMoreActive)
@@ -67,7 +68,7 @@ class Categories extends PureComponent {
     if (categories.length > onViewMoreActive) {
       viewMoreElement = (
         <button
-          className="button-outline text-bold"
+          className="button-outline view-more text-bold"
           onClick={this.viewMoreHandler}
         >
           {viewMore ? 'More Categories' : 'View Less'}

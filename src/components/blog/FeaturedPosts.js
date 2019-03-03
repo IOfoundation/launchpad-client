@@ -8,7 +8,7 @@ import {withStyles} from '@material-ui/core/styles';
 import {PropTypes} from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Loading from '../shared/Loading';
-import {truncate} from '../../utils';
+import {truncate, htmlStripper} from '../../utils';
 
 const styles = theme => ({
   container: {
@@ -38,7 +38,7 @@ class FeaturedPosts extends PureComponent {
 
     if (posts.results.length > 0) {
       resultsElements = posts.results.slice(0, 4).map(post => {
-        let description = post.body;
+        let description = htmlStripper(post.body);
         let title = post.title;
 
         if (description.split('').length > 30) {

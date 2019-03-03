@@ -8,3 +8,4 @@ export {truncate, maxCharacters} from './truncate';
 export {openUrl} from './utility';
 export {viewport} from './viewport';
 export {getDate} from './getDate';
+export {htmlStripper} from './htmlStripper';

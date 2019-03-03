@@ -2,11 +2,12 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {PropTypes} from 'prop-types';
-import {truncate, maxCharacters} from '../../utils';
+import {truncate, maxCharacters, htmlStripper} from '../../utils';
 
 import PostListItem from './PostListItem';
 import * as actions from '../../actions/blogs';
 import Pagination from '../businesses/Pagination';
+import PostListLoading from './Loading/PostListsLoading';
 
 class PostLists extends PureComponent {
   componentDidMount() {
@@ -21,12 +22,17 @@ class PostLists extends PureComponent {
     const {posts} = this.props;
     let resultsElements = null;
     let titleElement = null;
-    let paginationElement = null;
+    let paginationElement = <PostListLoading />;
 
-    if (posts.results.length > 0) {
+    if (posts.noResults) {
+      titleElement = (
+        <h2 className="blog-posts__title capitalize">{posts.category}</h2>
+      );
+      paginationElement = <p>{'There are no posts under this category.'}</p>;
+    } else if (posts.results.length > 0) {
       resultsElements = posts.results.map(post => {
         const date = post.posted_at;
-        let description = post.body;
+        let description = htmlStripper(post.body);
         let title = post.title;
 
         if (description.split('').length > maxCharacters) {
