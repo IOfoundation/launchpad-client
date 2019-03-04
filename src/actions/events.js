@@ -67,16 +67,19 @@ export const getAllEventsById = id => {
   };
 };
 
-export const getEventsByMonth = months => {
+export const getEventsByMonth = (months, filterBy = 'default') => {
   return async dispatch => {
     try {
       dispatch(getEventsByMonthStart());
 
       const responses = await Promise.all(
         months.map(async month => {
-          const httpResponse = await httpRequest.get(
-            `/api/events?month=${month}`
-          );
+          const url = {
+            featured: `/api/events?month=${month}&featured=true`,
+            default: `/api/events?month=${month}`,
+          };
+
+          const httpResponse = await httpRequest.get(url[filterBy]);
 
           const groupedData = httpResponse.data
             .slice(0, 3)

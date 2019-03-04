@@ -14,7 +14,8 @@
   "env": {
     "jest": true,
     "node": true,
-    "browser": true
+    "browser": true,
+    "es6": true
   },
   "globals": {
     "Uint8Array": true

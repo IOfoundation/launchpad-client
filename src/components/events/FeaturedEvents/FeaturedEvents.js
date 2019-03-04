@@ -20,7 +20,7 @@ const styles = theme => ({
 class FeaturedEvents extends PureComponent {
   componentDidMount() {
     const monthsNumber = getDate().nextThreeMonths.map(month => month.number);
-    this.props.actions.getEventsByMonth(monthsNumber);
+    this.props.actions.getEventsByMonth(monthsNumber, 'featured');
   }
 
   render() {
