@@ -1,10 +1,11 @@
 import {BlogsTypes as types} from '../action-types';
 
 const initialState = {
-  organizationPosts: [],
   featuredPosts: [],
-  posts: [],
   noResults: false,
+  organizationPosts: [],
+  posts: [],
+  totalPages: 0,
 };
 
 export default function(state = initialState, action) {
@@ -66,10 +67,11 @@ export default function(state = initialState, action) {
     }
 
     case types.GET_ALL_POSTS_SUCCESS: {
-      const {posts} = action;
+      const {posts, totalPages} = action;
       return {
         ...state,
         posts,
+        totalPages,
       };
     }
 

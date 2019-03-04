@@ -2,8 +2,8 @@ import React, {PureComponent} from 'react';
 import {containerStyles} from '../../utils';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as actions from '../../actions/blogs';
 
+import * as actions from '../../actions/blogs';
 import FeaturedPost from './FeaturedPost';
 import {withStyles} from '@material-ui/core/styles';
 import {PropTypes} from 'prop-types';
