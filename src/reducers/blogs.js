@@ -3,6 +3,7 @@ import {BlogsTypes as types} from '../action-types';
 const initialState = {
   organizationPosts: [],
   featuredPosts: [],
+  posts: [],
   noResults: false,
 };
 
@@ -49,6 +50,30 @@ export default function(state = initialState, action) {
     }
 
     case types.GET_FEATURED_POSTS_BY_ID_ERROR: {
+      const {error} = action;
+      return {
+        ...state,
+        error,
+      };
+    }
+
+    case types.GET_ALL_POSTS_START: {
+      return {
+        ...state,
+        noResults: false,
+        posts: [],
+      };
+    }
+
+    case types.GET_ALL_POSTS_SUCCESS: {
+      const {posts} = action;
+      return {
+        ...state,
+        posts,
+      };
+    }
+
+    case types.GET_ALL_POSTS_ERROR: {
       const {error} = action;
       return {
         ...state,
