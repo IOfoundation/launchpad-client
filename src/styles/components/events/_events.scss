@@ -1,8 +1,10 @@
 .events-container {
+  background: #f7f9fd;
   display: block;
+  padding-bottom: 80px;
 }
 
-@import "./jumbotron";
-@import "./featured_events";
-@import "./featured_event";
-@import "./modal-events";
+@import './jumbotron';
+@import './featured_events';
+@import './featured_event';
+@import './modal-events';

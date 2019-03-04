@@ -40,3 +40,8 @@
 @import '~@progress/kendo-theme-default/scss/button';
 @import '~@progress/kendo-theme-default/scss/window';
 @import '~@progress/kendo-theme-default/scss/scheduler';
+@import '~@progress/kendo-theme-default/scss/datetime';
+
+//Kendo overwrites
+@import './kendo/scheduler';
+@import './kendo/datetime';
