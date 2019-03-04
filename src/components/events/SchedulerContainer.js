@@ -26,14 +26,7 @@ class SchedulerContainer extends PureComponent {
         ],
       },
     ],
-    views: [
-      'day',
-      {type: 'workWeek', selected: true},
-      'week',
-      'month',
-      'agenda',
-      {type: 'timeline', eventHeight: 50},
-    ],
+    views: ['day', 'week', {type: 'month', selected: true}],
     dataSource: {
       batch: true,
       transport: {
@@ -104,14 +97,14 @@ class SchedulerContainer extends PureComponent {
 
   render() {
     const {classes} = this.props;
-    const {dataSource, startTime, resources} = this.state;
+    const {dataSource, startTime, resources, views} = this.state;
 
     return (
       <div className={classes.container}>
         <Scheduler
           height={600}
           change={this.onChange}
-          views={this.views}
+          views={views}
           dataBound={this.dataBound}
           dataSource={dataSource}
           date={this.state.date}
