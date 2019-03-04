@@ -55,7 +55,6 @@ class SignInFormContainer extends PureComponent {
                 setSubmitting(false);
               });
           }}
-          validateOnChange={false}
         />
       </Grid>
     );

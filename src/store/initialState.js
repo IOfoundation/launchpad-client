@@ -40,6 +40,8 @@ const initialState = {
     authorization: '',
     error: false,
     emailReset: '',
+    signUpSuccessfully: false,
+    singUpErros: {},
   },
   snackbar: {
     visibility: false,

@@ -48,7 +48,6 @@ class PasswordResetContainer extends PureComponent {
               setSubmitting(false);
             });
           }}
-          validateOnChange={false}
         />
       </Grid>
     );

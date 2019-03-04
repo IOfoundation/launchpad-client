@@ -8,3 +8,10 @@ export const httpRequest = Axios.create({
     ContentType: 'application/json',
   },
 });
+
+httpRequest.interceptors.response.use(
+  response => response,
+  error => {
+    return Promise.reject(error.response);
+  }
+);
