@@ -35,6 +35,7 @@ const initialState = {
   },
   events: {
     data: [],
+    featuredEvents: [],
   },
   user: {
     loading: false,

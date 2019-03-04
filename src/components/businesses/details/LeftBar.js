@@ -5,7 +5,7 @@ import Modal from '@material-ui/core/Modal';
 
 import Locations from './Locations';
 import UpcomingEvents from './UpcomingEvents';
-import {getDateFromString} from '../../../utils/getDateFromString';
+import {getDate} from '../../../utils';
 import Layout from './Modal/Content';
 
 const styles = theme => ({
@@ -62,7 +62,7 @@ class LeftBar extends PureComponent {
     if (events && events.length > 0) {
       if (viewMoreEvents) {
         eventsElement = events.slice(0, 3).map(event => {
-          const date = getDateFromString(event.posted_at);
+          const date = getDate(event.posted_at);
 
           return (
             <UpcomingEvents
@@ -76,7 +76,7 @@ class LeftBar extends PureComponent {
         });
       } else {
         eventsElement = events.map(event => {
-          const date = getDateFromString(event.posted_at);
+          const date = getDate(event.posted_at);
 
           return (
             <UpcomingEvents

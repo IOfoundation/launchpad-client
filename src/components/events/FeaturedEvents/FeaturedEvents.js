@@ -1,8 +1,12 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
+import {PropTypes} from 'prop-types';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 import {containerStyles} from '../../../utils';
-import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import {getDate} from '../../../utils';
+import * as actions from '../../../actions/events';
 
 import FeaturedEvent from './FeaturedEvent';
 
@@ -13,69 +17,76 @@ const styles = theme => ({
   },
 });
 
-const FeaturedEvents = props => {
-  const {classes} = props;
+class FeaturedEvents extends PureComponent {
+  componentDidMount() {
+    const monthsNumber = getDate().nextThreeMonths.map(month => month.number);
+    this.props.actions.getEventsByMonth(monthsNumber, 'featured');
+  }
 
-  return (
-    <div className={[classes.content, 'featured-events'].join(' ')}>
-      <Grid container={true} spacing={24}>
-        <Grid item={true} xs={4}>
-          <h2 className="featured-events__title text-bold">{'November'}</h2>
-          <FeaturedEvent
-            title="Special Conference for Lorem"
-            description="Donec sed odio dui. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
-            date="November 2, 2017"
-            name="Resource Name"
-          />
+  render() {
+    const {classes, featuredEvents} = this.props;
 
-          <FeaturedEvent
-            title="Raising Investor Capital The Right Way"
-            description="Donec id elit non mi porta gravida at eget metus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros"
-            date="November 2, 2017"
-            name="Resource Name"
-          />
+    let featuredEventsElements;
+    if (featuredEvents.length > 0) {
+      featuredEventsElements = featuredEvents.map(month => {
+        const infoElements = month[month.key].map(info => {
+          return (
+            <FeaturedEvent
+              key={info.id}
+              title={info.title}
+              description={info.body}
+              date={`${info.starting_at.monthLarge} ${info.starting_at.day}, ${
+                info.starting_at.year
+              }`}
+              name={info.organization.name}
+            />
+          );
+        });
+
+        return (
+          <Grid item={true} xs={4} key={month.key}>
+            <h2 className="featured-events__title text-bold">{month.title}</h2>
+            {infoElements}
+          </Grid>
+        );
+      });
+    }
+
+    return (
+      <div className={[classes.content, 'featured-events'].join(' ')}>
+        <Grid container={true} spacing={24}>
+          {featuredEventsElements}
         </Grid>
-        <Grid item={true} xs={4}>
-          <h2 className="featured-events__title text-bold">{'December'}</h2>
-          <FeaturedEvent
-            title="Raising Investor Capital The Right Way"
-            description="Donec id elit non mi porta gravida at eget metus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros"
-            date="November 12, 2017"
-            name="Resource Name"
-          />
+      </div>
+    );
+  }
+}
 
-          <FeaturedEvent
-            title="Special Conference for Long Name Ipsum"
-            description="Donec sed odio dui. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. "
-            date="November 2, 2017"
-            name="Resource Name"
-          />
+const mapPropsToState = _state => {
+  return {
+    featuredEvents: _state.events.featuredEvents,
+  };
+};
 
-          <FeaturedEvent
-            title="Managing Your Books"
-            description="Donec id elit non mi porta gravida at eget metus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros"
-            date="November 12, 2017"
-            name="Resource Name"
-          />
-        </Grid>
-        <Grid item={true} xs={4}>
-          <h2 className="featured-events__title text-bold">{'January'}</h2>
-          <FeaturedEvent
-            title="Managing Your Books"
-            description="Donec id elit non mi porta gravida at eget metus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros"
-            date="November 12, 2017"
-            name="Resource Name"
-          />
-        </Grid>
-      </Grid>
-    </div>
-  );
+const mapDispatchToProps = _dispatch => {
+  return {
+    actions: bindActionCreators(actions, _dispatch),
+  };
 };
 
 FeaturedEvents.propTypes = {
+  actions: PropTypes.shape({
+    getEventsByMonth: PropTypes.func,
+  }),
   classes: PropTypes.shape({
     content: PropTypes.string,
   }),
+  featuredEvents: PropTypes.arrayOf(PropTypes.shape({})),
 };
 
-export default withStyles(styles)(FeaturedEvents);
+export default withStyles(styles)(
+  connect(
+    mapPropsToState,
+    mapDispatchToProps
+  )(FeaturedEvents)
+);

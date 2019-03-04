@@ -1,5 +1,5 @@
 import {EventsTypes as types} from '../action-types';
-import {httpRequest} from '../utils';
+import {httpRequest, getDate} from '../utils';
 
 const getAllEventsRequestStart = () => {
   return {
@@ -17,6 +17,26 @@ const getAllEventsRequestSuccess = data => {
 const getAllEventsRequestError = error => {
   return {
     type: types.GET_ALL_EVENTS_REQUEST_ERROR,
+    error,
+  };
+};
+
+const getEventsByMonthStart = () => {
+  return {
+    type: types.GET_EVENTS_BY_MONTH_START,
+  };
+};
+
+const getEventsByMonthSuccess = featuredEvents => {
+  return {
+    type: types.GET_EVENTS_BY_MONTH_SUCCESS,
+    featuredEvents,
+  };
+};
+
+const getEventsByMonthError = error => {
+  return {
+    type: types.GET_EVENTS_BY_MONTH_ERROR,
     error,
   };
 };
@@ -43,6 +63,48 @@ export const getAllEventsById = id => {
       dispatch(getAllEventsRequestSuccess(httpResponse.data));
     } catch (error) {
       dispatch(getAllEventsRequestError(error));
+    }
+  };
+};
+
+export const getEventsByMonth = (months, filterBy = 'default') => {
+  return async dispatch => {
+    try {
+      dispatch(getEventsByMonthStart());
+
+      const responses = await Promise.all(
+        months.map(async month => {
+          const url = {
+            featured: `/api/events?month=${month}&featured=true`,
+            default: `/api/events?month=${month}`,
+          };
+
+          const httpResponse = await httpRequest.get(url[filterBy]);
+
+          const groupedData = httpResponse.data
+            .slice(0, 3)
+            .reduce((acc, data) => {
+              data.starting_at = getDate(data.starting_at);
+              data.posted_at = getDate(data.posted_at);
+              acc.title = data.starting_at.monthLarge;
+              acc.key = data.starting_at.month;
+
+              if (acc[data.starting_at.month]) {
+                acc[data.starting_at.month].push(data);
+              } else {
+                acc[data.starting_at.month] = [data];
+              }
+
+              return acc;
+            }, {});
+
+          return groupedData;
+        })
+      );
+
+      dispatch(getEventsByMonthSuccess(responses));
+    } catch (error) {
+      dispatch(getEventsByMonthError(error));
     }
   };
 };

@@ -6,6 +6,7 @@ import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import {PropTypes} from 'prop-types';
 import Loading from '../../shared/Loading';
+import {truncate} from '../../../utils';
 
 const styles = () => ({
   featuredPosts: {
@@ -63,10 +64,16 @@ class DetailFeaturedPosts extends PureComponent {
 
       if (viewMore) {
         featuredPostsElements = results.slice(0, 3).map(post => {
+          let description = post.body;
+
+          if (description.split('').length > 70) {
+            description = truncate(description, 70);
+          }
+
           return (
             <Grid key={post.id} item={true} xs={12} md={4}>
               <DetailFeaturedPost
-                description={post.body}
+                description={description}
                 date="February 2, 2019"
               />
             </Grid>
@@ -74,10 +81,16 @@ class DetailFeaturedPosts extends PureComponent {
         });
       } else {
         featuredPostsElements = results.map(post => {
+          let description = post.body;
+
+          if (description.split('').length > 70) {
+            description = truncate(description, 70);
+          }
+
           return (
             <Grid key={post.id} item={true} xs={12} md={4}>
               <DetailFeaturedPost
-                description={post.body}
+                description={description}
                 date="February 2, 2019"
               />
             </Grid>
