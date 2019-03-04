@@ -1,7 +1,8 @@
 const initialState = {
   blogs: {
-    organizationPosts: [],
     noResults: false,
+    featuredPosts: [],
+    organizationPosts: [],
   },
   businesses: {
     locations: [],

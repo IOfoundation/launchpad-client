@@ -2,6 +2,7 @@ import {BlogsTypes as types} from '../action-types';
 
 const initialState = {
   organizationPosts: [],
+  featuredPosts: [],
   noResults: false,
 };
 
@@ -11,11 +12,35 @@ export default function(state = initialState, action) {
       return {
         ...state,
         noResults: false,
-        organizationPosts: [],
+        featuredPosts: [],
       };
     }
 
     case types.GET_FEATURED_POSTS_SUCCESS: {
+      const {featuredPosts} = action;
+      return {
+        ...state,
+        featuredPosts,
+      };
+    }
+
+    case types.GET_FEATURED_POSTS_ERROR: {
+      const {error} = action;
+      return {
+        ...state,
+        error,
+      };
+    }
+
+    case types.GET_FEATURED_POSTS_BY_ID_START: {
+      return {
+        ...state,
+        noResults: false,
+        organizationPosts: [],
+      };
+    }
+
+    case types.GET_FEATURED_POSTS_BY_ID_SUCCESS: {
       const {organizationPosts} = action;
       return {
         ...state,
@@ -23,7 +48,7 @@ export default function(state = initialState, action) {
       };
     }
 
-    case types.GET_FEATURED_POSTS_ERROR: {
+    case types.GET_FEATURED_POSTS_BY_ID_ERROR: {
       const {error} = action;
       return {
         ...state,

@@ -7,6 +7,7 @@ import Header from '../../../components/shared/Header';
 const props = {
   homePage: false,
 };
+const activeStyles = {opacity: '1'};
 
 describe('<Header />', () => {
   it('Render a header tag', () => {
@@ -29,7 +30,11 @@ describe('<Header />', () => {
       const wrapper = shallow(<Header {...props} />);
       expect(
         wrapper.contains(
-          <Link className="header_link" to="/businesses">
+          <Link
+            activeStyle={activeStyles}
+            className="header_link"
+            to="/businesses"
+          >
             {'Resources'}
           </Link>
         )
@@ -40,7 +45,7 @@ describe('<Header />', () => {
       const wrapper = shallow(<Header {...props} />);
       expect(
         wrapper.contains(
-          <Link className="header_link" to="/events">
+          <Link activeStyle={activeStyles} className="header_link" to="/events">
             {'Events'}
           </Link>
         )
@@ -51,7 +56,7 @@ describe('<Header />', () => {
       const wrapper = shallow(<Header {...props} />);
       expect(
         wrapper.contains(
-          <Link className="header_link" to="/blog">
+          <Link activeStyle={activeStyles} to="/blog" className="header_link">
             {'Blog'}
           </Link>
         )
@@ -62,7 +67,11 @@ describe('<Header />', () => {
       const wrapper = shallow(<Header {...props} />);
       expect(
         wrapper.contains(
-          <Link className="header_link" to="/admin-login">
+          <Link
+            className="header_link"
+            to="/admin-login"
+            activeStyle={activeStyles}
+          >
             {'Admin Login'}
           </Link>
         )
