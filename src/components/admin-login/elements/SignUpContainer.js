@@ -1,13 +1,15 @@
 import React, {PureComponent} from 'react';
-import SignUpForm from './SignUpForm';
-import {Formik} from 'formik';
-import Grid from '@material-ui/core/Grid';
+import {PropTypes} from 'prop-types';
+import {withRouter} from 'react-router';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import * as Yup from 'yup';
 import * as user from '../../../actions/user';
 import * as snackbarActions from '../../../actions/snackbar';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {PropTypes} from 'prop-types';
+import {Formik} from 'formik';
+
+import SignUpForm from './SignUpForm';
+import Grid from '@material-ui/core/Grid';
 
 const SignUpSchema = Yup.object().shape({
   name: Yup.string().required('Required'),
@@ -29,25 +31,18 @@ const initialValues = {
   description: '',
 };
 
-const mappedErrors = {
-  name: 'Business/Resource Name Duplicated',
-  email: 'Email has already been taken',
-  general: 'Sing Up Error',
-};
-
 class SignUpFormContainer extends PureComponent {
   componentDidUpdate(prevProps) {
-    const {errors, signUpSuccessfully, snackbar} = this.props;
+    const {errors, signUpSuccessfully, snackbar, router} = this.props;
 
     if (
       errors !== prevProps.errors ||
       signUpSuccessfully !== prevProps.signUpSuccessfully
     ) {
-      const errorsKeys = Object.keys(errors);
-
-      if (errorsKeys.length > 0) {
-        const parsedError = errorsKeys.map(key => mappedErrors[key]);
-
+      if (errors && errors.length > 0) {
+        const parsedError = Object.keys(errors[0].detail).map(
+          key => `${key} ${errors[0].detail[key][0]}`
+        );
         snackbar.showSnackbar({
           message: parsedError[0],
         });
@@ -55,9 +50,11 @@ class SignUpFormContainer extends PureComponent {
         snackbar.showSnackbar({
           message: 'Sign Up Successful',
         });
+
+        router.push('/admin-login/account-requested');
       } else if (!errors) {
         snackbar.showSnackbar({
-          message: mappedErrors.general,
+          message: 'Sign Up Error',
         });
       }
     }
@@ -85,6 +82,7 @@ class SignUpFormContainer extends PureComponent {
                 setSubmitting(false);
               });
           }}
+          validateOnChange={false}
         />
       </Grid>
     );
@@ -106,8 +104,11 @@ const mapDispatchToProps = _dispatch => {
 };
 
 SignUpFormContainer.propTypes = {
-  errors: PropTypes.shape({}),
+  errors: PropTypes.arrayOf(PropTypes.shape({})),
   isAuth: PropTypes.bool,
+  router: PropTypes.shape({
+    push: PropTypes.func,
+  }),
   signUpSuccessfully: PropTypes.bool,
   snackbar: PropTypes.shape({
     showSnackbar: PropTypes.func,
@@ -117,7 +118,9 @@ SignUpFormContainer.propTypes = {
   }),
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SignUpFormContainer);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(SignUpFormContainer)
+);
