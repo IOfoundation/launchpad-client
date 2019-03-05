@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Blog /> renders snapshot of Blog 1`] = `
+<div
+  className="blog-container"
+>
+  <Jumbotron
+    background="blog-header"
+    description="Find content relevant to your industry and business stage."
+    descriptionModifacor="full-white"
+    title="Resource Finder Blog"
+  />
+  <WithStyles(Connect(FeaturedPosts)) />
+  <WithStyles(MainContent)
+    breakpoint="sm"
+  />
+</div>
+`;

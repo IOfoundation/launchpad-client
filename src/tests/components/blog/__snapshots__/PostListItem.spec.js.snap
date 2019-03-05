@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PostListItem /> renders snapshot of Category 1`] = `
+<div
+  className="post-lists-item"
+>
+  <h3
+    className="post-lists-item__title text-bold"
+  >
+    title
+  </h3>
+  <p
+    className="post-lists-item__description"
+  >
+    testing description
+  </p>
+  <div
+    className="post-lists-item__tags"
+  >
+    <span
+      className="post-lists-item__tags__name text-semi"
+    >
+      tag
+    </span>
+     | 
+    <span
+      className="post-lists-item__tags__date"
+    >
+      05/09/2019
+    </span>
+  </div>
+</div>
+`;

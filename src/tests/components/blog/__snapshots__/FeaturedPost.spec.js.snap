@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FeaturedPost /> renders snapshot of Category 1`] = `
+<div
+  className="featured-post"
+>
+  <div
+    className="featured-post__img-container"
+  >
+    <img
+      className="featured-post__img-container__img"
+      src="testimage"
+    />
+  </div>
+  <h3
+    className="featured-post__title text-bold"
+  >
+    title
+  </h3>
+  <p
+    className="featured-post__description"
+  >
+    testing description
+  </p>
+</div>
+`;
