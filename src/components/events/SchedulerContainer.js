@@ -1,9 +1,12 @@
 import React, {PureComponent} from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 import {Scheduler} from '@progress/kendo-scheduler-react-wrapper';
-import kendo from '@progress/kendo-ui';
+import '@progress/kendo-ui';
 import {withStyles} from '@material-ui/core/styles';
 import {containerStyles} from '../../utils';
 import {PropTypes} from 'prop-types';
+import * as actions from '../../actions/events';
 
 const styles = theme => ({
   container: {
@@ -14,114 +17,109 @@ const styles = theme => ({
 
 class SchedulerContainer extends PureComponent {
   state = {
-    date: new Date('2013/6/13'),
-    resiurces: [
-      {
-        field: 'ownerId',
-        title: 'Owner',
-        dataSource: [
-          {text: 'Alex', value: 1, color: '#f8a398'},
-          {text: 'Bob', value: 2, color: '#51a0ed'},
-          {text: 'Charlie', value: 3, color: '#56ca85'},
-        ],
-      },
-    ],
+    date: new Date(),
     views: ['day', 'week', {type: 'month', selected: true}],
-    dataSource: {
-      batch: true,
-      transport: {
-        read: {
-          url: 'https://demos.telerik.com/kendo-ui/service/tasks',
-          dataType: 'jsonp',
-        },
-        update: {
-          url: 'https://demos.telerik.com/kendo-ui/service/tasks/update',
-          dataType: 'jsonp',
-        },
-        create: {
-          url: 'https://demos.telerik.com/kendo-ui/service/tasks/create',
-          dataType: 'jsonp',
-        },
-        destroy: {
-          url: 'https://demos.telerik.com/kendo-ui/service/tasks/destroy',
-          dataType: 'jsonp',
-        },
-        parameterMap(options, operation) {
-          if (operation !== 'read' && options.models) {
-            return {models: kendo.stringify(options.models)};
-          }
-        },
-      },
-      schema: {
-        model: {
-          id: 'taskId',
-          fields: {
-            taskId: {from: 'TaskID', type: 'number'},
-            title: {
-              from: 'Title',
-              defaultValue: 'No title',
-              validation: {required: true},
-            },
-            start: {type: 'date', from: 'Start'},
-            end: {type: 'date', from: 'End'},
-            startTimezone: {from: 'StartTimezone'},
-            endTimezone: {from: 'EndTimezone'},
-            description: {from: 'Description'},
-            recurrenceId: {from: 'RecurrenceID'},
-            recurrenceRule: {from: 'RecurrenceRule'},
-            recurrenceException: {from: 'RecurrenceException'},
-            ownerId: {from: 'OwnerID', defaultValue: 1},
-            isAllDay: {type: 'boolean', from: 'IsAllDay'},
-          },
-        },
-      },
-      filter: {
-        logic: 'or',
-        filters: [
-          {field: 'ownerId', operator: 'eq', value: 1},
-          {field: 'ownerId', operator: 'eq', value: 2},
-        ],
-      },
-    },
+    events: [],
   };
 
-  onDataBound = () => {
-    // console.log('event :: dataBound');
-    // console.log(e);
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.events.length !== prevState.events.length) {
+      const mappedEvents = nextProps.events.map(event => {
+        return {
+          ID: event.id,
+          title: event.title,
+          start: event.starting_at,
+          end: event.ending_at,
+          description: event.body,
+          recurrenceId: event.organization_id,
+        };
+      });
+      return {events: mappedEvents};
+    }
+    return null;
+  }
+
+  componentDidMount() {
+    this.props.actions.getAllEvents();
+    this._schedulerRef.widgetInstance.element[0].addEventListener(
+      'click',
+      this._schedulerClicked
+    );
+  }
+
+  componentWillUnmount() {
+    this._schedulerRef.widgetInstance.element[0].removeEventListener(
+      'click',
+      this._schedulerClicked
+    );
+  }
+
+  _schedulerRef = null;
+  _schedulerClicked = event => {
+    const className = event.target.className;
+
+    if (className === 'k-event-template') {
+      this.openModal(event.target.textContent);
+    }
   };
 
-  onChange = () => {
-    // console.log('event :: change');
-    // console.log(e);
+  openModal = text => {
+    const modalInformation = this.props.events.find(
+      _event => _event.title === text
+    );
+
+    console.log(modalInformation);
   };
 
   render() {
     const {classes, breakpoint} = this.props;
-    const {dataSource, startTime, resources, views} = this.state;
+    const {startTime, views, events} = this.state;
 
     return (
       <div className={classes.container}>
         <Scheduler
           height={600}
-          change={this.onChange}
           views={views}
-          dataBound={this.dataBound}
-          dataSource={dataSource}
+          dataSource={events}
           date={this.state.date}
           startTime={startTime}
-          resources={resources}
           mobile={breakpoint === 'xs'}
+          editable={false}
+          ref={_ref => {
+            this._schedulerRef = _ref;
+          }}
         />
       </div>
     );
   }
 }
 
+const mapPropsToState = _state => {
+  return {
+    events: _state.events.data,
+  };
+};
+
+const mapDispatchToProps = _dispatch => {
+  return {
+    actions: bindActionCreators(actions, _dispatch),
+  };
+};
+
 SchedulerContainer.propTypes = {
+  actions: PropTypes.shape({
+    getAllEvents: PropTypes.func,
+  }),
   breakpoint: PropTypes.string,
   classes: PropTypes.shape({
     container: PropTypes.string,
   }),
+  events: PropTypes.arrayOf(PropTypes.shape({})),
 };
 
-export default withStyles(styles)(SchedulerContainer);
+export default withStyles(styles)(
+  connect(
+    mapPropsToState,
+    mapDispatchToProps
+  )(SchedulerContainer)
+);

@@ -126,7 +126,7 @@
   .k-event-template {
     font-size: 10px;
     overflow: hidden;
-    padding: 5px 14px 5px 3px;
+    padding: 5px;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
@@ -214,4 +214,14 @@
     opacity: 1;
     backface-visibility: hidden;
   }
+}
+
+.k-event-actions,
+.k-event-top-actions {
+  display: none;
+}
+
+.k-event-template {
+  cursor: pointer;
+  width: 100%;
 }
