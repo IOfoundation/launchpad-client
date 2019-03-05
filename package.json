@@ -22,7 +22,7 @@
     "build": "babel-node tools/build.js",
     "test": "jest",
     "test:CI": "./node_modules/.bin/babel-node tools/testCi.js",
-    "test:cover": "npm run test -- --coverage ",
+    "test:cover": "npm run test -- --coverage",
     "test:cover:CI": "npm run test:CI -- --coverage && cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js",
     "test:watch": "npm run test -- --watch",
     "heroku-postbuild": "npm run build",
@@ -161,6 +161,9 @@
     "pre-commit"
   ],
   "lint-staged": {
-    "*.js": [ "prettier --single-quote --bracket-spacing false --trailing-comma es5 --write '{src,__{tests,mocks}__}/**/*.js'", "git add" ]
+    "*.js": [
+      "prettier --single-quote --bracket-spacing false --trailing-comma es5 --write '{src,__{tests,mocks}__}/**/*.js'",
+      "git add"
+    ]
   }
 }
