@@ -174,3 +174,44 @@
     }
   }
 }
+
+@media (max-width: 60em) {
+  .k-state-default.k-nav-current {
+    display: none;
+  }
+
+  .k-scheduler-views {
+    top: 0px;
+    right: 12px;
+    z-index: 2;
+
+    &.k-state-expanded {
+      background: $green-color;
+
+      .k-link {
+        backface-visibility: hidden;
+        opacity: 1;
+      }
+    }
+
+    .k-current-view {
+      display: block;
+    }
+
+    .k-state-default {
+      background: $primary-color;
+      border: 0;
+      display: none;
+
+      &.k-state-selected {
+        background: $green-color;
+        opacity: 1;
+      }
+    }
+  }
+
+  .k-scheduler-views li {
+    opacity: 1;
+    backface-visibility: hidden;
+  }
+}

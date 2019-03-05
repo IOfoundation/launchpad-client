@@ -11,9 +11,13 @@ import * as actions from '../../../actions/events';
 import FeaturedEvent from './FeaturedEvent';
 
 const styles = theme => ({
-  content: {
-    padding: 12,
+  container: {
     ...containerStyles(theme),
+    padding: 12,
+    overflowX: 'auto',
+  },
+  featuredEvents: {
+    minWidth: theme.breakpoints.values.md,
   },
 });
 
@@ -53,8 +57,8 @@ class FeaturedEvents extends PureComponent {
     }
 
     return (
-      <div className={[classes.content, 'featured-events'].join(' ')}>
-        <Grid container={true} spacing={24}>
+      <div className={[classes.container, 'featured-events'].join(' ')}>
+        <Grid container={true} spacing={24} className={classes.featuredEvents}>
           {featuredEventsElements}
         </Grid>
       </div>
@@ -79,7 +83,8 @@ FeaturedEvents.propTypes = {
     getEventsByMonth: PropTypes.func,
   }),
   classes: PropTypes.shape({
-    content: PropTypes.string,
+    container: PropTypes.string,
+    featuredEvents: PropTypes.string,
   }),
   featuredEvents: PropTypes.arrayOf(PropTypes.shape({})),
 };

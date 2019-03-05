@@ -96,7 +96,7 @@ class SchedulerContainer extends PureComponent {
   };
 
   render() {
-    const {classes} = this.props;
+    const {classes, breakpoint} = this.props;
     const {dataSource, startTime, resources, views} = this.state;
 
     return (
@@ -110,6 +110,7 @@ class SchedulerContainer extends PureComponent {
           date={this.state.date}
           startTime={startTime}
           resources={resources}
+          mobile={breakpoint === 'xs'}
         />
       </div>
     );
@@ -117,6 +118,7 @@ class SchedulerContainer extends PureComponent {
 }
 
 SchedulerContainer.propTypes = {
+  breakpoint: PropTypes.string,
   classes: PropTypes.shape({
     container: PropTypes.string,
   }),
