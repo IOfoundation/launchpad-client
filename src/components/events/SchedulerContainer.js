@@ -7,11 +7,27 @@ import {withStyles} from '@material-ui/core/styles';
 import {containerStyles} from '../../utils';
 import {PropTypes} from 'prop-types';
 import * as actions from '../../actions/events';
+import Content from './Modal/Content';
+import Modal from '@material-ui/core/Modal';
 
 const styles = theme => ({
   container: {
     padding: 12,
     ...containerStyles(theme),
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    borderRadius: '5px',
+    boxShadow: theme.shadows[5],
+    left: '50%',
+    maxHeight: '70vh',
+    outline: 'none',
+    overflow: 'auto',
+    padding: '32px 24px',
+    position: 'absolute',
+    top: '45%',
+    transform: 'translate(-50%, -50%)',
+    width: theme.spacing.unit * 70,
   },
 });
 
@@ -20,6 +36,8 @@ class SchedulerContainer extends PureComponent {
     date: new Date(),
     views: ['day', 'week', {type: 'month', selected: true}],
     events: [],
+    selectedEvent: {},
+    openModal: false,
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -68,15 +86,46 @@ class SchedulerContainer extends PureComponent {
       _event => _event.title === text
     );
 
-    console.log(modalInformation);
+    this.handlerModalVisibility(modalInformation);
+  };
+
+  handlerModalVisibility = modalInformation => {
+    this.setState(prevState => {
+      if (modalInformation) {
+        return {
+          selectedEvent: modalInformation,
+          openModal: !prevState.openModal,
+        };
+      }
+
+      return {
+        openModal: !prevState.openModal,
+      };
+    });
   };
 
   render() {
     const {classes, breakpoint} = this.props;
-    const {startTime, views, events} = this.state;
+    const {startTime, views, events, openModal, selectedEvent} = this.state;
 
     return (
       <div className={classes.container}>
+        <Modal open={openModal} onClose={this.handlerModalVisibility}>
+          <div className={classes.paper}>
+            <Content
+              title={selectedEvent.title}
+              postedBy={selectedEvent.organization}
+              start={selectedEvent.starting_at}
+              end={selectedEvent.ending_at}
+              address={`${selectedEvent.street_1}, ${selectedEvent.street_2}, ${
+                selectedEvent.state_abbr
+              }, ${selectedEvent.zip}`}
+              link={selectedEvent.external_url}
+              description={selectedEvent.body}
+              closed={this.handlerModalVisibility}
+            />
+          </div>
+        </Modal>
         <Scheduler
           height={600}
           views={views}
@@ -113,6 +162,7 @@ SchedulerContainer.propTypes = {
   breakpoint: PropTypes.string,
   classes: PropTypes.shape({
     container: PropTypes.string,
+    paper: PropTypes.string,
   }),
   events: PropTypes.arrayOf(PropTypes.shape({})),
 };

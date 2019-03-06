@@ -1,12 +1,12 @@
 import React, {Fragment} from 'react';
 import {PropTypes} from 'prop-types';
 
-import DateSection from './DateSection';
-import Section from './Section';
-import PostedBy from './PostedBy';
-import Link from './Link';
+import DateSection from '../../businesses/details/Modal/DateSection';
+import Section from '../../businesses/details/Modal/Section';
+import PostedBy from '../../businesses/details/Modal/PostedBy';
+import Link from '../../businesses/details/Modal/Link';
 
-const Layout = props => {
+const Content = props => {
   const {
     title,
     postedBy,
@@ -33,7 +33,7 @@ const Layout = props => {
   );
 };
 
-Layout.propTypes = {
+Content.propTypes = {
   address: PropTypes.string,
   closed: PropTypes.func,
   description: PropTypes.string,
@@ -47,4 +47,4 @@ Layout.propTypes = {
   title: PropTypes.string,
 };
 
-export default Layout;
+export default Content;

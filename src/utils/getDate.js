@@ -17,6 +17,10 @@ export const getDate = str => {
       getMonthByIndex(date, 2),
       getMonthByIndex(date, 3),
     ],
+    time: date.toLocaleTimeString('en-us', {
+      hour: '2-digit',
+      minute: '2-digit',
+    }),
   };
 };
 

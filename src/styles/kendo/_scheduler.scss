@@ -183,7 +183,7 @@
   .k-scheduler-views {
     top: 0px;
     right: 12px;
-    z-index: 2;
+    z-index: 3;
 
     &.k-state-expanded {
       background: $green-color;
@@ -217,11 +217,46 @@
 }
 
 .k-event-actions,
-.k-event-top-actions {
+.k-event-top-actions,
+.k-event-bottom-actions {
   display: none;
 }
 
 .k-event-template {
   cursor: pointer;
   width: 100%;
+}
+
+.k-event {
+  background: $green-color;
+
+  & > div {
+    z-index: 1;
+  }
+}
+
+.k-scheduler-footer {
+  padding: 0 1.6em;
+  height: 45px;
+
+  .k-header {
+    height: 100%;
+  }
+
+  li {
+    height: 100%;
+    display: flex;
+    background: transparent;
+    box-sizing: border-box;
+    border-radius: 0;
+
+    .k-link {
+      color: white;
+      height: 100%;
+    }
+
+    &:hover {
+      background: $green-color;
+    }
+  }
 }

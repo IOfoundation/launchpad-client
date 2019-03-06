@@ -106,7 +106,8 @@ class LeftBar extends PureComponent {
             <Layout
               title={selectedEvent.title}
               postedBy={selectedEvent.organization}
-              date={selectedEvent.starting_at}
+              start={selectedEvent.starting_at}
+              end={selectedEvent.ending_at}
               address={`${selectedEvent.street_1}, ${selectedEvent.street_2}, ${
                 selectedEvent.state_abbr
               }, ${selectedEvent.zip}`}
