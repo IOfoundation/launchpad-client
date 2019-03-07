@@ -106,6 +106,14 @@
   }
 }
 
+.k-scheduler-header-wrap {
+  border: 0;
+}
+
+.k-scheduler-content {
+  overflow-y: overlay;
+}
+
 .k-scheduler-content .k-event {
   background-color: $primary-color;
 
@@ -121,14 +129,6 @@
     .k-resize-handle {
       visibility: hidden;
     }
-  }
-
-  .k-event-template {
-    font-size: 10px;
-    overflow: hidden;
-    padding: 5px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
   }
 
   .k-i-reload {
@@ -175,46 +175,8 @@
   }
 }
 
-@media (max-width: 60em) {
-  .k-state-default.k-nav-current {
-    display: none;
-  }
-
-  .k-scheduler-views {
-    top: 0px;
-    right: 12px;
-    z-index: 3;
-
-    &.k-state-expanded {
-      background: $green-color;
-
-      .k-link {
-        backface-visibility: hidden;
-        opacity: 1;
-      }
-    }
-
-    .k-current-view {
-      display: block;
-    }
-
-    .k-state-default {
-      background: $primary-color;
-      border: 0;
-      display: none;
-
-      &.k-state-selected {
-        background: $green-color;
-        opacity: 1;
-      }
-    }
-  }
-
-  .k-scheduler-views li {
-    opacity: 1;
-    backface-visibility: hidden;
-  }
-}
+@import './schedule-mobile';
+@import './scheduler-ipad';
 
 .k-event-actions,
 .k-event-top-actions,
@@ -259,4 +221,13 @@
       background: $green-color;
     }
   }
+}
+
+.k-event .k-event-template {
+  font-size: 11px;
+  overflow: hidden;
+  padding: 2px 0 0 6px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-sizing: border-box;
 }

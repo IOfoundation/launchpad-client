@@ -1,34 +1,71 @@
+export const timeZone = 'America/Los_Angeles';
+export const locales = 'en-US';
 export const getDate = str => {
-  let date;
+  let date = new Date();
 
   if (str) {
     date = new Date(str);
-  } else {
-    date = new Date();
   }
 
+  const _toLocaleString = toLocaleString(date);
+  const _getMonthByIndex = getMonthByIndex(_toLocaleString);
+
   return {
-    day: String(date.getDate()),
-    month: date.toLocaleDateString('en-us', {month: 'short'}),
-    monthLarge: date.toLocaleDateString('en-us', {month: 'long'}),
-    year: date.getFullYear(),
+    day: _toLocaleString({
+      day: '2-digit',
+    }),
+    month: _toLocaleString({
+      month: 'short',
+    }),
+    monthLarge: _toLocaleString({
+      month: 'long',
+    }),
+    dayNumber: _toLocaleString({
+      day: 'numeric',
+    }),
+    year: _toLocaleString({
+      year: 'numeric',
+    }),
     nextThreeMonths: [
-      getMonthByIndex(date, 1),
-      getMonthByIndex(date, 2),
-      getMonthByIndex(date, 3),
+      _getMonthByIndex(date),
+      _getMonthByIndex(1),
+      _getMonthByIndex(2),
     ],
-    time: date.toLocaleTimeString('en-us', {
+    time: _toLocaleString({
       hour: '2-digit',
       minute: '2-digit',
+    }).replace(/\s/g, ''),
+    fullDate: _toLocaleString({
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      month: 'long',
+      timeZoneName: 'long',
+      year: 'numeric',
     }),
+    pacificTime: _toLocaleString({}),
   };
 };
 
-function getMonthByIndex(date, index = 1) {
-  const nextDate = new Date(date.getFullYear(), date.getMonth() + index, 0);
+const toLocaleString = date => {
+  return options => {
+    return date.toLocaleString(locales, {timeZone, ...options});
+  };
+};
 
-  return {
-    name: nextDate.toLocaleDateString('en-us', {month: 'long'}),
-    number: nextDate.getMonth() + 1,
+function getMonthByIndex(localDate) {
+  return (index = 0) => {
+    const year = localDate({
+      year: 'numeric',
+    });
+    const month = localDate({
+      month: 'numeric',
+    });
+    const nextDate = new Date(year, Number(month) + index, 0);
+
+    return {
+      name: nextDate.toLocaleString('en-US', {month: 'long'}),
+      number: Number(month) + index,
+    };
   };
 }

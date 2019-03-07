@@ -14,12 +14,28 @@ export const DateSection = props => {
 
     contentElement = (
       <Section>
-        <span className="text-bold">{`${dateStart.monthLarge} ${
+        <span className="text-bold m-right-8">{`${dateStart.monthLarge} ${
           dateStart.day
         }, ${dateStart.year}`}</span>
         <span> {`${dateStart.time} - ${dateEnd.time}`}</span>
       </Section>
     );
+
+    if (dateStart.dayNumber < dateEnd.dayNumber) {
+      contentElement = (
+        <Section>
+          <span className="text-bold m-right-8">{`${dateStart.monthLarge} ${
+            dateStart.day
+          }, ${dateStart.year}`}</span>
+          <span>{`${dateStart.time}`}</span>
+          <span className="m-x-8">{'-'}</span>
+          <span className="text-bold m-right-8">{`${dateEnd.monthLarge} ${
+            dateEnd.day
+          }, ${dateEnd.year}`}</span>
+          <span>{`${dateEnd.time}`}</span>
+        </Section>
+      );
+    }
   }
 
   return contentElement;

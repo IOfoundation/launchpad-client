@@ -2,13 +2,14 @@ import React, {PureComponent} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {Scheduler} from '@progress/kendo-scheduler-react-wrapper';
-import '@progress/kendo-ui';
 import {withStyles} from '@material-ui/core/styles';
-import {containerStyles} from '../../utils';
+import {containerStyles, getDate} from '../../utils';
 import {PropTypes} from 'prop-types';
 import * as actions from '../../actions/events';
 import Content from './Modal/Content';
 import Modal from '@material-ui/core/Modal';
+import '@progress/kendo-ui';
+import '@progress/kendo-ui/js/kendo.timezones';
 
 const styles = theme => ({
   container: {
@@ -28,6 +29,10 @@ const styles = theme => ({
     top: '45%',
     transform: 'translate(-50%, -50%)',
     width: theme.spacing.unit * 70,
+    [theme.breakpoints.down('xs')]: {
+      width: '100%',
+      boxSizing: 'border-box',
+    },
   },
 });
 
@@ -43,11 +48,14 @@ class SchedulerContainer extends PureComponent {
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.events.length !== prevState.events.length) {
       const mappedEvents = nextProps.events.map(event => {
+        const start = getDate(event.starting_at);
+        const end = getDate(event.ending_at);
+
         return {
           ID: event.id,
           title: event.title,
-          start: event.starting_at,
-          end: event.ending_at,
+          start: new Date(start.pacificTime),
+          end: new Date(end.pacificTime),
           description: event.body,
           recurrenceId: event.organization_id,
         };
@@ -127,7 +135,7 @@ class SchedulerContainer extends PureComponent {
           </div>
         </Modal>
         <Scheduler
-          height={600}
+          height={660}
           views={views}
           dataSource={events}
           date={this.state.date}
