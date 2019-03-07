@@ -2,8 +2,32 @@ import React from 'react';
 import {withStyles} from '@material-ui/core/styles';
 import {PropTypes} from 'prop-types';
 import Grid from '@material-ui/core/Grid';
+import {POST} from './post.mock';
+import DOMPurify from 'dompurify';
 
 const styles = theme => ({
+  body: {
+    '& p': {
+      color: '#070709',
+      fontSize: '16px',
+      lineHeight: '24px',
+      opacity: '0.87',
+    },
+    '& h2': {
+      color: '#070709',
+      fontFamily: '"proxima-nova-bold", Georgia, sans-serif',
+      fontSize: '24px',
+      lineHeight: '32px',
+      opacity: '0.87',
+    },
+    '& h3': {
+      color: '#070709',
+      fontFamily: '"proxima-nova-semi", Georgia, sans-serif',
+      fontSize: '20px',
+      lineHeight: '28px',
+      opacity: '0.87',
+    },
+  },
   categories: {
     display: 'flex',
     alignItems: 'center',
@@ -81,7 +105,7 @@ const PostDetails = props => {
         alignItems="center"
         direction="row"
       >
-        <Grid item={true} xs={8}>
+        <Grid item={true} xs={12} md={8}>
           <div className={classes.categories}>
             <i className="material-icons">{'label'}</i>
             <span className="text-semi">{'Categories'}</span>
@@ -102,7 +126,7 @@ const PostDetails = props => {
           </div>
           <div />
         </Grid>
-        <Grid item={true} xs={10} className={classes.figure}>
+        <Grid item={true} xs={12} md={10} className={classes.figure}>
           <img
             src="https://robohash.org/repellendusetnulla.png?size=300x300&set=set1"
             alt="testing"
@@ -113,12 +137,14 @@ const PostDetails = props => {
         </Grid>
         <Grid
           item={true}
-          xs={8}
+          xs={12}
+          md={8}
           className={[classes.content, 'bottom-line'].join(' ')}
         >
-          {`Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac ut consequat semper viverra. Facilisis mauris sit amet massa vitae tortor condimentum lacinia quis. Nulla posuere sollicitudin aliquam ultrices sagittis. Nec feugiat nisl pretium fusce id velit ut. Ut morbi tincidunt augue interdum velit euismod in pellentesque massa. 
-
-Lacus viverra vitae congue eu consequat ac felis donec. Id diam vel quam elementum pulvinar. Laoreet suspendisse interdum consectetur libero id faucibus nisl tincidunt. Nec ullamcorper sit amet risus nullam eget felis. Rutrum quisque non tellus orci ac. Egestas integer eget aliquet nibh praesent tristique magna.`}
+          <div
+            className={classes.body}
+            dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(POST)}}
+          />
         </Grid>
       </Grid>
     </div>
@@ -127,6 +153,7 @@ Lacus viverra vitae congue eu consequat ac felis donec. Id diam vel quam element
 
 PostDetails.propTypes = {
   classes: PropTypes.shape({
+    body: PropTypes.string,
     categories: PropTypes.string,
     container: PropTypes.string,
     content: PropTypes.string,
