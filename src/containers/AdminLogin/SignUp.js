@@ -1,12 +1,12 @@
 import React from 'react';
-import AdminLogin from '../AdminLogin';
+import Layout from '../Layout';
 import SigUp from '../../components/admin-login/SignUp';
 
 const SignUpRoute = () => {
   return (
-    <AdminLogin>
+    <Layout>
       <SigUp />
-    </AdminLogin>
+    </Layout>
   );
 };
 

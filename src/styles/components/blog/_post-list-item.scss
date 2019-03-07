@@ -1,5 +1,6 @@
 .post-lists-item {
   background-color: $sixth-color;
+  cursor: pointer;
   margin-bottom: 24px;
   padding: 48px;
 
@@ -30,6 +31,10 @@
       opacity: 0.5;
       color: $primary-color;
     }
+  }
+
+  &:hover {
+    background-color: $green-color-hover;
   }
 }
 

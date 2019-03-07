@@ -15,7 +15,8 @@ import NotFound from './components/static-pages/not-found';
 import HomeContainer from './containers/Home';
 import BusinessesContainer from './containers/Businesses';
 import BusinessDetails from './containers/BusinessDetails';
-import Blog from './containers/Blog';
+import BlogRoute from './containers/Blogs/Blog';
+import PostDetails from './containers/Blogs/PostDetails';
 import Events from './containers/Events';
 import SignInRoute from './containers/AdminLogin/SignIn';
 import PasswordResetRoute from './containers/AdminLogin/PasswordResetRoute';
@@ -32,7 +33,8 @@ export default (
     <Route path="contact-us" component={ContactUs} />
     <Route path="terms-of-use" component={TermsOfUse} />
     <Route path="privacy-policy" component={PrivacyPolicy} />
-    <Route path="/blog" component={Blog} />
+    <Route path="/blog" exact={true} component={BlogRoute} />
+    <Route path="/blog/:id" component={PostDetails} />
     <Route path="/events" component={Events} />
     <Route path="/admin-login" component={SignInRoute} />
     <Route path="/admin-login/password-reset" component={PasswordResetRoute} />

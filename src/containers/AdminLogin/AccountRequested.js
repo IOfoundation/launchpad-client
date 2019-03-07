@@ -1,12 +1,12 @@
 import React from 'react';
-import AdminLogin from '../AdminLogin';
+import Layout from '../Layout';
 import AccountRequested from '../../components/admin-login/AccountRequested';
 
 const AccountRequestedRoute = () => {
   return (
-    <AdminLogin>
+    <Layout>
       <AccountRequested />
-    </AdminLogin>
+    </Layout>
   );
 };
 

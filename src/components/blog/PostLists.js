@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router';
 import {bindActionCreators} from 'redux';
 import {PropTypes} from 'prop-types';
 import {truncate, maxCharacters, htmlStripper} from '../../utils';
@@ -50,6 +51,7 @@ class PostLists extends PureComponent {
             description={description}
             tag={post.organization.name}
             date={`${date.monthLarge} ${date.day}, ${date.year}`}
+            clicked={() => router.push(`/blog/${post.id}`)}
           />
         );
       });
@@ -115,9 +117,15 @@ PostLists.propTypes = {
     totalPages: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     page: PropTypes.page,
   }),
+  router: PropTypes.shape({
+    push: PropTypes.func,
+  }),
+  section: PropTypes.string,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PostLists);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(PostLists)
+);

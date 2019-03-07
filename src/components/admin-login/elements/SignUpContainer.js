@@ -118,9 +118,7 @@ SignUpFormContainer.propTypes = {
   }),
 };
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(SignUpFormContainer)
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(SignUpFormContainer));
