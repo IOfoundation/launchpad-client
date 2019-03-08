@@ -315,7 +315,7 @@ exports[`<Categories /> renders snapshot of Categories 1`] = `
           </Category>
         </ul>
         <button
-          className="button-outline text-bold"
+          className="button-outline view-more text-bold"
           onClick={[Function]}
         >
           More Categories
