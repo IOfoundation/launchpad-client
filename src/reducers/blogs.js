@@ -1,9 +1,12 @@
 import {BlogsTypes as types} from '../action-types';
 
 const initialState = {
+  categories: [],
+  category: 'front page',
   featuredPosts: [],
   noResults: false,
   organizationPosts: [],
+  page: 1,
   posts: [],
   totalPages: 0,
 };
@@ -67,15 +70,40 @@ export default function(state = initialState, action) {
     }
 
     case types.GET_ALL_POSTS_SUCCESS: {
-      const {posts, totalPages} = action;
+      const {posts, totalPages, page, category} = action;
       return {
         ...state,
         posts,
         totalPages,
+        page,
+        category,
       };
     }
 
     case types.GET_ALL_POSTS_ERROR: {
+      const {error} = action;
+      return {
+        ...state,
+        error,
+      };
+    }
+
+    case types.GET_POSTS_CATEGORIES_START: {
+      return {
+        ...state,
+        categories: [],
+      };
+    }
+
+    case types.GET_POSTS_CATEGORIES_SUCCESS: {
+      const {categories} = action;
+      return {
+        ...state,
+        categories,
+      };
+    }
+
+    case types.GET_POSTS_CATEGORIES_ERROR: {
       const {error} = action;
       return {
         ...state,

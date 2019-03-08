@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Category /> renders snapshot of Category 1`] = `
+<li
+  className="blog-categories capitalize testing-class"
+  onClick={[MockFunction]}
+>
+  Testing Label
+</li>
+`;

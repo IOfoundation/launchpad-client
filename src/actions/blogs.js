@@ -51,11 +51,13 @@ const getAllPostsStarts = config => {
   };
 };
 
-const getAllPostsSuccess = (posts, totalPages) => {
+const getAllPostsSuccess = (posts, totalPages, page, category) => {
   return {
     type: types.GET_ALL_POSTS_SUCCESS,
     posts,
     totalPages,
+    page,
+    category,
   };
 };
 
@@ -63,6 +65,52 @@ const getAllPostsError = error => {
   return {
     type: types.GET_ALL_POSTS_ERROR,
     error,
+  };
+};
+
+const getPostsCategoriesStart = () => {
+  return {
+    type: types.GET_POSTS_CATEGORIES_START,
+  };
+};
+
+const getPostsCategoriesSuccess = categories => {
+  return {
+    type: types.GET_POSTS_CATEGORIES_SUCCESS,
+    categories,
+  };
+};
+
+const getPostsCategoriesError = error => {
+  return {
+    type: types.GET_POSTS_CATEGORIES_ERROR,
+    error,
+  };
+};
+
+export const getCategories = () => {
+  return async dispatch => {
+    try {
+      dispatch(getPostsCategoriesStart());
+      const httpResponse = await httpRequest.get('/api/blog_posts/categories');
+
+      let frontPage;
+      const categories = httpResponse.data
+        .filter(data => {
+          if (data.name === 'front page') {
+            frontPage = data;
+            return false;
+          }
+          return true;
+        })
+        .sort((a, b) => {
+          return a.name.localeCompare(b.name);
+        });
+      categories.unshift(frontPage);
+      dispatch(getPostsCategoriesSuccess(categories));
+    } catch (error) {
+      dispatch(getPostsCategoriesError(error));
+    }
   };
 };
 
@@ -107,13 +155,21 @@ export const getFeaturedPost = () => {
   };
 };
 
-export const getAllPosts = page => {
+export const getAllPosts = (page, category) => {
   return async dispatch => {
     try {
       dispatch(getAllPostsStarts());
-      const httpResponse = await httpRequest.get(
-        `/api/blog_posts?page=${page}&per_page=5&filter[category]=${'front page'}`
-      );
+      let httpResponse;
+
+      if (category) {
+        httpResponse = await httpRequest.get(
+          `/api/blog_posts??page=${page}&per_page=5&filter[category]=${category}`
+        );
+      } else {
+        httpResponse = await httpRequest.get(
+          `/api/blog_posts??page=${page}&per_page=5`
+        );
+      }
 
       if (httpResponse.data.length === 0) {
         dispatch(noResults(true));
@@ -124,9 +180,10 @@ export const getAllPosts = page => {
 
         return data;
       });
-      const pages = parseInt(httpResponse.headers['x-total-count'], 10) / 5;
+      const totalPages =
+        parseInt(httpResponse.headers['x-total-count'], 10) / 5;
 
-      dispatch(getAllPostsSuccess(formatedData, pages));
+      dispatch(getAllPostsSuccess(formatedData, totalPages, page, category));
     } catch (error) {
       dispatch(getAllPostsError(error));
     }

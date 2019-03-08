@@ -6,34 +6,22 @@ import {truncate, maxCharacters} from '../../utils';
 
 import PostListItem from './PostListItem';
 import * as actions from '../../actions/blogs';
-import Loading from '../shared/Loading';
 import Pagination from '../businesses/Pagination';
 
 class PostLists extends PureComponent {
-  state = {
-    page: 1,
-  };
-
   componentDidMount() {
-    this.props.actions.getAllPosts(this.state.page);
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.page !== this.state.page) {
-      this.props.actions.getAllPosts(this.state.page);
-    }
+    this.props.actions.getAllPosts(1, this.props.posts.category);
   }
 
   handleChangePage = selected => {
-    this.setState({page: selected});
+    this.props.actions.getAllPosts(selected, this.props.posts.category);
   };
 
   render() {
-    const {section, posts} = this.props;
-
-    let resultsElements = (
-      <Loading elementConfig={{style: {margin: '0 auto', padding: 0}}} />
-    );
+    const {posts} = this.props;
+    let resultsElements = null;
+    let titleElement = null;
+    let paginationElement = null;
 
     if (posts.results.length > 0) {
       resultsElements = posts.results.map(post => {
@@ -59,25 +47,32 @@ class PostLists extends PureComponent {
           />
         );
       });
-    }
-
-    return (
-      <div className="blog-posts">
-        <h2 className="blog-posts__title">{section}</h2>
-        {resultsElements}
+      titleElement = (
+        <h2 className="blog-posts__title capitalize">{posts.category}</h2>
+      );
+      paginationElement = (
         <Pagination
-          appliedFilters={{category: 'post-lists', page: this.state.page}}
+          appliedFilters={{category: 'post-lists', page: this.props.posts.page}}
           handleChangePage={this.handleChangePage}
           metadata={{
             pagination: {
               last: {
                 page: Number(posts.totalPages),
               },
-              currentPage: this.state.page,
+              currentPage: this.props.posts.page,
             },
             totalOrganization: '10',
           }}
+          noMargin={true}
         />
+      );
+    }
+
+    return (
+      <div className="blog-posts">
+        {titleElement}
+        {resultsElements}
+        {paginationElement}
       </div>
     );
   }
@@ -91,6 +86,8 @@ const mapStateToProps = _state => {
       results: _blogs.posts,
       noResults: _blogs.noResults,
       totalPages: _blogs.totalPages,
+      page: _blogs.page,
+      category: _blogs.category,
     },
   };
 };
@@ -106,10 +103,12 @@ PostLists.propTypes = {
     getAllPosts: PropTypes.func,
   }),
   posts: PropTypes.shape({
+    category: PropTypes.string,
     results: PropTypes.arrayOf(PropTypes.shape({})),
     noResults: PropTypes.bool,
+    totalPages: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    page: PropTypes.page,
   }),
-  section: PropTypes.string,
 };
 
 export default connect(

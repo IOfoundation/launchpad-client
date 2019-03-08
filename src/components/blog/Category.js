@@ -1,21 +1,26 @@
 import React from 'react';
-import {Link} from 'react-router';
 import {PropTypes} from 'prop-types';
 
 const Category = props => {
-  const {to, label, className} = props;
+  const {label, className, clicked, isSelected} = props;
+  const classes = ['blog-categories capitalize', className];
+
+  if (isSelected) {
+    classes.push('blog-categories__list__selected');
+  }
 
   return (
-    <li className={['post-category', className].join(' ')}>
-      <Link to={to}>{label}</Link>
+    <li className={classes.join(' ')} onClick={clicked}>
+      {label}
     </li>
   );
 };
 
 Category.propTypes = {
   className: PropTypes.string.isRequired,
+  clicked: PropTypes.func,
+  isSelected: PropTypes.bool,
   label: PropTypes.string.isRequired,
-  to: PropTypes.string.isRequired,
 };
 
 export default Category;

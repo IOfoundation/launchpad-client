@@ -13,6 +13,7 @@ class Blog extends PureComponent {
 
   componentDidMount() {
     window.addEventListener('resize', this.state.listener);
+    sizeCheck(this.handleWindowSizeChange);
   }
 
   componentWillUnmount() {
