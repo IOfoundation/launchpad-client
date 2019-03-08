@@ -28,7 +28,7 @@ class PostLists extends PureComponent {
       titleElement = (
         <h2 className="blog-posts__title capitalize">{posts.category}</h2>
       );
-      paginationElement = <p>{'There are no posts under this category.'}</p>;
+      paginationElement = <p>{'There are no posts in this category.'}</p>;
     } else if (posts.results.length > 0) {
       resultsElements = posts.results.map(post => {
         const date = post.posted_at;
