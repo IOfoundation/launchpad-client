@@ -3,7 +3,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {Scheduler} from '@progress/kendo-scheduler-react-wrapper';
 import {withStyles} from '@material-ui/core/styles';
-import {containerStyles, getDate} from '../../utils';
+import {containerStyles, getDate, mobileDaysMap} from '../../utils';
 import {PropTypes} from 'prop-types';
 import * as actions from '../../actions/events';
 import Content from './Modal/Content';
@@ -88,6 +88,7 @@ class SchedulerContainer extends PureComponent {
       this.openModal(event.target.textContent);
     }
   };
+  _changeName = true;
 
   openModal = text => {
     const modalInformation = this.props.events.find(
@@ -110,6 +111,23 @@ class SchedulerContainer extends PureComponent {
         openModal: !prevState.openModal,
       };
     });
+  };
+
+  checkLabels = e => {
+    if (e.sender._selectedViewName === 'week' && this._changeName) {
+      const weekDate = this._schedulerRef.widgetInstance.element[0].querySelectorAll(
+        '.k-scheduler-header .k-nav-day'
+      );
+
+      weekDate.forEach(date => {
+        const parse = date.textContent.split(' ');
+
+        date.textContent = `${mobileDaysMap[parse[0]]} ${parse[1]}`;
+      });
+      this._changeName = false;
+    } else if (e.sender._selectedViewName !== 'week') {
+      this._changeName = true;
+    }
   };
 
   render() {
@@ -145,6 +163,7 @@ class SchedulerContainer extends PureComponent {
           ref={_ref => {
             this._schedulerRef = _ref;
           }}
+          dataBound={e => this.checkLabels(e)}
         />
       </div>
     );

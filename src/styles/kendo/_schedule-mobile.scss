@@ -37,4 +37,14 @@
     opacity: 1;
     backface-visibility: hidden;
   }
+
+  .k-scheduler-header {
+    th {
+      padding: 8px 0;
+    }
+
+    .k-nav-day {
+      font-size: 10px;
+    }
+  }
 }
