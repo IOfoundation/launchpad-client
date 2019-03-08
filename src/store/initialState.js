@@ -6,6 +6,7 @@ const initialState = {
     noResults: false,
     organizationPosts: [],
     page: 1,
+    post: {},
     posts: [],
     totalPages: 0,
   },

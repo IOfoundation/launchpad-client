@@ -9,3 +9,11 @@
 .link-primary {
   color: $primary-color;
 }
+
+.title-as-link {
+  cursor: pointer;
+
+  &:hover {
+    color: $green-color;
+  }
+}

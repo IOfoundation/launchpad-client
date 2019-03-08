@@ -20,7 +20,7 @@ class PostLists extends PureComponent {
   };
 
   render() {
-    const {posts} = this.props;
+    const {posts, router} = this.props;
     let resultsElements = null;
     let titleElement = null;
     let paginationElement = <PostListLoading />;
