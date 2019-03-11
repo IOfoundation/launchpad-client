@@ -1,14 +1,12 @@
 import React, {PureComponent} from 'react';
 import {PropTypes} from 'prop-types';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
 import {containerStyles} from '../../../utils';
 import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import {getDate} from '../../../utils';
-import * as actions from '../../../actions/events';
 
 import FeaturedEvent from './FeaturedEvent';
+import Loading from '../../shared/Loading';
 
 const styles = theme => ({
   container: {
@@ -29,8 +27,8 @@ class FeaturedEvents extends PureComponent {
 
   render() {
     const {classes, featuredEvents} = this.props;
+    let featuredEventsElements = <Loading />;
 
-    let featuredEventsElements;
     if (featuredEvents.length > 0) {
       featuredEventsElements = featuredEvents.map(month => {
         const infoElements = month[month.key].map(info => {
@@ -54,29 +52,23 @@ class FeaturedEvents extends PureComponent {
           </Grid>
         );
       });
+
+      featuredEventsElements = (
+        <div className={[classes.container, 'featured-events'].join(' ')}>
+          <Grid
+            container={true}
+            spacing={24}
+            className={classes.featuredEvents}
+          >
+            {featuredEventsElements}
+          </Grid>
+        </div>
+      );
     }
 
-    return (
-      <div className={[classes.container, 'featured-events'].join(' ')}>
-        <Grid container={true} spacing={24} className={classes.featuredEvents}>
-          {featuredEventsElements}
-        </Grid>
-      </div>
-    );
+    return featuredEventsElements;
   }
 }
-
-const mapPropsToState = _state => {
-  return {
-    featuredEvents: _state.events.featuredEvents,
-  };
-};
-
-const mapDispatchToProps = _dispatch => {
-  return {
-    actions: bindActionCreators(actions, _dispatch),
-  };
-};
 
 FeaturedEvents.propTypes = {
   actions: PropTypes.shape({
@@ -89,9 +81,4 @@ FeaturedEvents.propTypes = {
   featuredEvents: PropTypes.arrayOf(PropTypes.shape({})),
 };
 
-export default withStyles(styles)(
-  connect(
-    mapPropsToState,
-    mapDispatchToProps
-  )(FeaturedEvents)
-);
+export default withStyles(styles)(FeaturedEvents);

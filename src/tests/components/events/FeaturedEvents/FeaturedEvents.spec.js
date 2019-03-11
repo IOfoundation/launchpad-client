@@ -1,10 +1,7 @@
 /* eslint-env jest */
 import React from 'react';
 import {mount} from 'enzyme';
-import thunk from 'redux-thunk';
 import toJson from 'enzyme-to-json';
-import configureStore from 'redux-mock-store';
-import {Provider} from 'react-redux';
 
 import {featuredEvents} from '../mock/featuredEvents';
 import FeaturedEvents from '../../../../components/events/FeaturedEvents/FeaturedEvents';
@@ -22,31 +19,26 @@ Date = class extends Date {
 };
 /*eslint-enable */
 
-const initialState = {
-  events: {
-    featuredEvents: [...featuredEvents],
+const getEventsByMonth = jest.fn();
+
+const props = {
+  featuredEvents: [...featuredEvents],
+  actions: {
+    getEventsByMonth,
   },
 };
-const mockStore = configureStore([thunk]);
-const props = {};
-let store;
 let wrapper;
 
 describe('<FeaturedEvents />', () => {
   beforeEach(() => {
-    store = mockStore(initialState);
-    wrapper = mount(
-      <Provider store={store}>
-        <FeaturedEvents {...props} />
-      </Provider>
-    );
+    wrapper = mount(<FeaturedEvents {...props} />);
   });
 
   it('renders snapshot of FeaturedEvents', () => {
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
-  it('should get all the events', () => {
-    expect(store.getActions()).toEqual([{type: 'GET_EVENTS_BY_MONTH_START'}]);
+  it('should get events by month', () => {
+    expect(getEventsByMonth).toHaveBeenCalled();
   });
 });

@@ -1,14 +1,12 @@
 import React, {PureComponent} from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
 import {Scheduler} from '@progress/kendo-scheduler-react-wrapper';
 import {withStyles} from '@material-ui/core/styles';
 import {containerStyles, getDate, mobileDaysMap} from '../../utils';
 import {PropTypes} from 'prop-types';
-import * as actions from '../../actions/events';
 import Content from './Modal/Content';
 import Modal from '@material-ui/core/Modal';
 import '@progress/kendo-ui';
+import kendo from '@progress/kendo-ui';
 import '@progress/kendo-ui/js/kendo.timezones';
 
 const styles = theme => ({
@@ -140,9 +138,23 @@ class SchedulerContainer extends PureComponent {
     }
 
     if (monthNumeric !== this._month) {
+      this.setLoadingStatusOnScheduler(true);
       this._month = monthNumeric;
       this.props.actions.getAllEventsByMonth(monthNumeric);
     }
+  };
+
+  handlerDataBinding = e => {
+    if (e.action === 'rebind' && e.items.length > 0) {
+      this.setLoadingStatusOnScheduler(false);
+    } else {
+      this.setLoadingStatusOnScheduler(true);
+    }
+  };
+
+  setLoadingStatusOnScheduler = value => {
+    const scheduler = this._schedulerRef.widgetInstance.element.getKendoScheduler();
+    kendo.ui.progress(scheduler.element.find('.k-scheduler-content'), value);
   };
 
   render() {
@@ -179,23 +191,12 @@ class SchedulerContainer extends PureComponent {
             this._schedulerRef = _ref;
           }}
           dataBound={e => this.updateCalendar(e)}
+          dataBinding={e => this.handlerDataBinding(e)}
         />
       </div>
     );
   }
 }
-
-const mapPropsToState = _state => {
-  return {
-    events: _state.events.eventsByMonth,
-  };
-};
-
-const mapDispatchToProps = _dispatch => {
-  return {
-    actions: bindActionCreators(actions, _dispatch),
-  };
-};
 
 SchedulerContainer.propTypes = {
   actions: PropTypes.shape({
@@ -209,9 +210,4 @@ SchedulerContainer.propTypes = {
   events: PropTypes.arrayOf(PropTypes.shape({})),
 };
 
-export default withStyles(styles)(
-  connect(
-    mapPropsToState,
-    mapDispatchToProps
-  )(SchedulerContainer)
-);
+export default withStyles(styles)(SchedulerContainer);
