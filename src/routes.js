@@ -50,3 +50,8 @@ export default (
     <Route path="*" component={NotFound} />
   </Route>
 );
+
+/*render={props => {
+        debugger;
+        return <PostDetails id={props.match.params.id} {...props} />;
+      }}*/

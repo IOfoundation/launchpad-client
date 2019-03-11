@@ -1,13 +1,15 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {withStyles} from '@material-ui/core/styles';
 import {PropTypes} from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import DOMPurify from 'dompurify';
-import {getDate} from '../../../utils';
 import {withRouter} from 'react-router';
 import * as blogActions from '../../../actions/blogs';
 import {bindActionCreators} from 'redux';
+import Loading from '../../shared/Loading';
+import RecentPosts from './RecentPost';
+import PostDateInformation from './PostDateInformation';
 
 const styles = theme => ({
   body: {
@@ -74,24 +76,6 @@ const styles = theme => ({
       textAlign: 'center',
     },
   },
-  postedBy: {
-    fontSize: '12px',
-    lineHeight: '16px',
-  },
-  tag: {
-    borderBottom: '1px solid black',
-    display: 'flex',
-    fontSize: '16px',
-    lineHeight: '24px',
-    marginBottom: '30px',
-    opacity: '0.87',
-    paddingBottom: '30px',
-    '& div': {
-      marginRight: '12px',
-      paddingRight: '12px',
-      textDecoration: 'underline',
-    },
-  },
   title: {
     color: '#070709',
     fontSize: '34px',
@@ -101,76 +85,112 @@ const styles = theme => ({
   },
 });
 
-const PostDetails = props => {
-  const {classes, post, router, actions} = props;
-  const images = post.blog_post_attachments;
-  const date = getDate(post.posted_at);
-  const category = post.categories && post.categories[0].name;
-  const id = post.organization && post.organization.id;
+class PostDetails extends PureComponent {
+  componentDidUpdate(prevProps) {
+    const {
+      params: {id},
+      getPosts,
+    } = this.props;
+    const {
+      params: {id: prevId},
+    } = prevProps;
+    if (id !== prevId) {
+      getPosts();
+      window.scrollTo(0, 0);
+    }
+  }
 
-  const navigateBlog = () => {
+  navigateToBlogIndexWithCategory = category => {
+    const {router, actions} = this.props;
+
     actions.setCategory(category);
     router.push('/blog');
   };
 
-  return (
-    <div className="post-details">
-      <Grid
-        container={true}
-        className={classes.container}
-        justify="center"
-        alignItems="center"
-        direction="row"
-      >
-        <Grid item={true} xs={12} md={8}>
-          <div className={classes.categories}>
-            <i className="material-icons">{'label'}</i>
-            <span className="text-semi title-as-link" onClick={navigateBlog}>
-              {category}
-            </span>
-          </div>
-          <h1 className={[classes.title, 'text-bold'].join(' ')}>
-            {post.title}
-          </h1>
-          <p className={[classes.postedBy, 'text-semi'].join(' ')}>
-            {'Posted By:'}
-          </p>
-          <div className={classes.tag}>
-            <div
-              className="right-line right-line--text post-details__link"
-              onClick={() => router.push(`/businesses/${id}`)}
+  navigateToBlogWithId = id => {
+    const {router} = this.props;
+
+    router.push(`/blog/${id}`);
+  };
+
+  render() {
+    const {classes, post, posts, actions, router} = this.props;
+    const images = post.blog_post_attachments;
+    const category = post.categories && post.categories[0].name;
+    const id = this.props.post.organization && this.props.post.organization.id;
+    let postsDetailsElement = <Loading />;
+
+    if (Object.keys(post).length > 0) {
+      postsDetailsElement = (
+        <div className="post-details">
+          <Grid
+            container={true}
+            className={classes.container}
+            justify="center"
+            alignItems="center"
+            direction="row"
+          >
+            <Grid item={true} xs={12} md={8}>
+              <div className={classes.categories}>
+                <i className="material-icons">{'label'}</i>
+                <span
+                  className="text-semi title-as-link"
+                  onClick={() => this.navigateToBlogIndexWithCategory(category)}
+                >
+                  {category}
+                </span>
+              </div>
+              <h1 className={[classes.title, 'text-bold'].join(' ')}>
+                {post.title}
+              </h1>
+              <PostDateInformation
+                post={post}
+                actions={actions}
+                router={router}
+              />
+            </Grid>
+            <Grid item={true} xs={12} md={10} className={classes.figure}>
+              <img
+                src={images && images[0].file_url}
+                alt={images && images[0].file_legend}
+              />
+              <figcaption>{images && images[0].file_legend}</figcaption>
+            </Grid>
+            <Grid
+              item={true}
+              xs={12}
+              md={8}
+              className={[classes.content, 'bottom-line'].join(' ')}
             >
-              {post.organization && post.organization.name}
-            </div>
-            <span>{`${date.monthLarge} ${date.day}, ${date.year}`}</span>
-          </div>
-        </Grid>
-        <Grid item={true} xs={12} md={10} className={classes.figure}>
-          <img
-            src={images && images[0].file_url}
-            alt={images && images[0].file_legend}
-          />
-          <figcaption>{images && images[0].file_legend}</figcaption>
-        </Grid>
-        <Grid
-          item={true}
-          xs={12}
-          md={8}
-          className={[classes.content, 'bottom-line'].join(' ')}
-        >
-          <div
-            className={classes.body}
-            dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(post.body)}}
-          />
-        </Grid>
-      </Grid>
-    </div>
-  );
-};
+              <div
+                className={classes.body}
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(post.body),
+                }}
+              />
+            </Grid>
+          </Grid>
+          {id ? (
+            <RecentPosts
+              posts={posts.results}
+              getFeaturedPostById={actions.getFeaturedPostById}
+              id={id}
+              router={router}
+              navigateToBlog={this.navigateToBlogWithId}
+            />
+          ) : null}
+        </div>
+      );
+    }
+
+    return postsDetailsElement;
+  }
+}
 
 PostDetails.propTypes = {
   actions: PropTypes.shape({
     setCategory: PropTypes.func,
+    getFeaturedPostById: PropTypes.func,
   }),
   classes: PropTypes.shape({
     body: PropTypes.string,
@@ -181,6 +201,10 @@ PostDetails.propTypes = {
     postedBy: PropTypes.string,
     tag: PropTypes.string,
     title: PropTypes.string,
+  }),
+  getPosts: PropTypes.func,
+  params: PropTypes.shape({
+    id: PropTypes.string,
   }),
   post: PropTypes.shape({
     blog_post_attachments: PropTypes.arrayOf(
@@ -196,10 +220,15 @@ PostDetails.propTypes = {
       })
     ),
     organization: PropTypes.shape({
+      id: PropTypes.number,
       name: PropTypes.string,
     }),
     posted_at: PropTypes.string,
     title: PropTypes.string,
+  }),
+  posts: PropTypes.shape({
+    results: PropTypes.arrayOf(PropTypes.shape({})),
+    noResults: PropTypes.bool,
   }),
   router: PropTypes.shape({
     push: PropTypes.func,
@@ -212,7 +241,14 @@ const mapDispatchToProps = _dispatch => {
   };
 };
 
+const mapStateToProps = _state => {
+  const {blogs: _blogs} = _state;
+  return {
+    posts: {results: _blogs.organizationPosts, noResults: _blogs.noResults},
+  };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(withStyles(styles)(withRouter(PostDetails)));
