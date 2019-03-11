@@ -20,6 +20,9 @@ export const getDate = str => {
     monthLarge: _toLocaleString({
       month: 'long',
     }),
+    monthNumeric: _toLocaleString({
+      month: 'numeric',
+    }),
     dayNumber: _toLocaleString({
       day: 'numeric',
     }),
@@ -27,7 +30,7 @@ export const getDate = str => {
       year: 'numeric',
     }),
     nextThreeMonths: [
-      _getMonthByIndex(date),
+      _getMonthByIndex(),
       _getMonthByIndex(1),
       _getMonthByIndex(2),
     ],
@@ -44,6 +47,7 @@ export const getDate = str => {
       year: 'numeric',
     }),
     pacificTime: _toLocaleString({}),
+    date,
   };
 };
 

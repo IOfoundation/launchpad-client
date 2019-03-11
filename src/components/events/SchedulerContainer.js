@@ -38,7 +38,6 @@ const styles = theme => ({
 
 class SchedulerContainer extends PureComponent {
   state = {
-    date: new Date(),
     views: ['day', 'week', {type: 'month', selected: true}],
     events: [],
     selectedEvent: {},
@@ -46,7 +45,10 @@ class SchedulerContainer extends PureComponent {
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.events.length !== prevState.events.length) {
+    if (
+      nextProps.events &&
+      nextProps.events.length !== prevState.events.length
+    ) {
       const mappedEvents = nextProps.events.map(event => {
         const start = getDate(event.starting_at);
         const end = getDate(event.ending_at);
@@ -62,11 +64,12 @@ class SchedulerContainer extends PureComponent {
       });
       return {events: mappedEvents};
     }
+
     return null;
   }
 
   componentDidMount() {
-    this.props.actions.getAllEvents();
+    this.props.actions.getAllEventsByMonth(this._date.monthNumeric);
     this._schedulerRef.widgetInstance.element[0].addEventListener(
       'click',
       this._schedulerClicked
@@ -89,6 +92,8 @@ class SchedulerContainer extends PureComponent {
     }
   };
   _changeName = true;
+  _date = getDate();
+  _month = this._date.monthNumeric;
 
   openModal = text => {
     const modalInformation = this.props.events.find(
@@ -113,7 +118,12 @@ class SchedulerContainer extends PureComponent {
     });
   };
 
-  checkLabels = e => {
+  updateCalendar = e => {
+    const pickedDate = getDate(e.sender._model.selectedDate);
+    const monthNumeric = pickedDate.date.toLocaleString('en-US', {
+      month: 'numeric',
+    });
+
     if (e.sender._selectedViewName === 'week' && this._changeName) {
       const weekDate = this._schedulerRef.widgetInstance.element[0].querySelectorAll(
         '.k-scheduler-header .k-nav-day'
@@ -127,6 +137,11 @@ class SchedulerContainer extends PureComponent {
       this._changeName = false;
     } else if (e.sender._selectedViewName !== 'week') {
       this._changeName = true;
+    }
+
+    if (monthNumeric !== this._month) {
+      this._month = monthNumeric;
+      this.props.actions.getAllEventsByMonth(monthNumeric);
     }
   };
 
@@ -156,14 +171,14 @@ class SchedulerContainer extends PureComponent {
           height={660}
           views={views}
           dataSource={events}
-          date={this.state.date}
+          date={this._date.date}
           startTime={startTime}
           mobile={breakpoint === 'xs'}
           editable={false}
           ref={_ref => {
             this._schedulerRef = _ref;
           }}
-          dataBound={e => this.checkLabels(e)}
+          dataBound={e => this.updateCalendar(e)}
         />
       </div>
     );
@@ -172,7 +187,7 @@ class SchedulerContainer extends PureComponent {
 
 const mapPropsToState = _state => {
   return {
-    events: _state.events.data,
+    events: _state.events.eventsByMonth,
   };
 };
 
@@ -184,7 +199,7 @@ const mapDispatchToProps = _dispatch => {
 
 SchedulerContainer.propTypes = {
   actions: PropTypes.shape({
-    getAllEvents: PropTypes.func,
+    getAllEventsByMonth: PropTypes.func,
   }),
   breakpoint: PropTypes.string,
   classes: PropTypes.shape({

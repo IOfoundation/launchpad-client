@@ -27,6 +27,7 @@ exports[`<FeaturedEvents /> renders snapshot of FeaturedEvents 1`] = `
           Object {
             "getAllEvents": [Function],
             "getAllEventsById": [Function],
+            "getAllEventsByMonth": [Function],
             "getEventsByMonth": [Function],
           }
         }

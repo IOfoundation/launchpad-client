@@ -50,7 +50,7 @@ describe('<SchedulerContainer />', () => {
 
   it('should get all the events', () => {
     expect(store.getActions()).toEqual([
-      {type: 'GET_ALL_EVENTS_REQUEST_START'},
+      {type: 'GET_ALL_EVENTS_BY_MONTH_START'},
     ]);
   });
 });
