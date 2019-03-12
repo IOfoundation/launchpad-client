@@ -9,6 +9,7 @@ import * as user from '../../../actions/user';
 import * as snackbarActions from '../../../actions/snackbar';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import {withRouter} from 'react-router';
 
 const SignupSchema = Yup.object().shape({
   email: Yup.string()
@@ -21,7 +22,7 @@ const initialValues = {email: '', password: ''};
 
 class SignInFormContainer extends PureComponent {
   componentDidUpdate(prevProps) {
-    const {error, isAuth, snackbar} = this.props;
+    const {error, isAuth, snackbar, router} = this.props;
 
     if (error !== prevProps.error || isAuth !== prevProps.isAuth) {
       if (error) {
@@ -32,6 +33,7 @@ class SignInFormContainer extends PureComponent {
         snackbar.showSnackbar({
           message: 'Login Successful',
         });
+        router.push('/admin/landing');
       }
     }
   }
@@ -78,6 +80,9 @@ const mapDispatchToProps = _dispatch => {
 SignInFormContainer.propTypes = {
   error: PropTypes.bool,
   isAuth: PropTypes.bool,
+  router: PropTypes.shape({
+    push: PropTypes.func,
+  }),
   snackbar: PropTypes.shape({
     showSnackbar: PropTypes.func,
   }),
@@ -89,4 +94,4 @@ SignInFormContainer.propTypes = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SignInFormContainer);
+)(withRouter(SignInFormContainer));
