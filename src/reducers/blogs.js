@@ -7,6 +7,7 @@ const initialState = {
   noResults: false,
   organizationPosts: [],
   page: 1,
+  post: {},
   posts: [],
   totalPages: 0,
 };
@@ -108,6 +109,39 @@ export default function(state = initialState, action) {
       return {
         ...state,
         error,
+      };
+    }
+
+    case types.GET_POST_BY_ID_START: {
+      return {
+        ...state,
+        noResults: false,
+        post: {},
+      };
+    }
+
+    case types.GET_POST_BY_ID_SUCCESS: {
+      const {post} = action;
+      return {
+        ...state,
+        post,
+      };
+    }
+
+    case types.GET_POST_BY_ID_ERROR: {
+      const {error} = action;
+      return {
+        ...state,
+        error,
+      };
+    }
+
+    case types.SET_CATEGORY: {
+      const {category} = action;
+
+      return {
+        ...state,
+        category,
       };
     }
 

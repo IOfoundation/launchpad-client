@@ -10,7 +10,7 @@ exports[`<Blog /> renders snapshot of Blog 1`] = `
     descriptionModifacor="full-white"
     title="Resource Finder Blog"
   />
-  <WithStyles(Connect(FeaturedPosts)) />
+  <WithStyles(Connect(withRouter(FeaturedPosts))) />
   <WithStyles(MainContent)
     breakpoint="sm"
   />

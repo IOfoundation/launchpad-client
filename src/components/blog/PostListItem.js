@@ -2,10 +2,10 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 
 const PostListItem = props => {
-  const {title, description, tag, date} = props;
+  const {title, description, tag, date, clicked} = props;
 
   return (
-    <div className="post-lists-item">
+    <div className="post-lists-item" onClick={clicked}>
       <h3 className="post-lists-item__title text-bold">{title}</h3>
       <p className="post-lists-item__description">{description}</p>
       <div className="post-lists-item__tags">
@@ -18,6 +18,7 @@ const PostListItem = props => {
 };
 
 PostListItem.propTypes = {
+  clicked: PropTypes.func,
   date: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   tag: PropTypes.string.isRequired,

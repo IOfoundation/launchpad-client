@@ -1,13 +1,13 @@
 import React from 'react';
 
-import AdminLogin from '../AdminLogin';
+import Layout from '../Layout';
 import ResetYourPassword from '../../components/admin-login/ResetYourPassword';
 
 const ResetYourPasswordRoute = () => {
   return (
-    <AdminLogin>
+    <Layout>
       <ResetYourPassword />
-    </AdminLogin>
+    </Layout>
   );
 };
 

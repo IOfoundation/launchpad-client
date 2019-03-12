@@ -2,6 +2,8 @@ import React, {PureComponent} from 'react';
 import {containerStyles} from '../../utils';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import {withRouter} from 'react-router';
+
 import * as actions from '../../actions/blogs';
 import FeaturedPost from './FeaturedPost';
 import {withStyles} from '@material-ui/core/styles';
@@ -31,7 +33,7 @@ class FeaturedPosts extends PureComponent {
   }
 
   render() {
-    const {classes, posts} = this.props;
+    const {classes, posts, router} = this.props;
     let resultsElements = (
       <Loading elementConfig={{style: {margin: '0 auto', padding: 0}}} />
     );
@@ -55,6 +57,7 @@ class FeaturedPosts extends PureComponent {
               imageSrc={post.blog_post_attachments[0].file_url}
               title={title}
               description={description}
+              clicked={() => router.push(`/blog/${post.id}`)}
             />
           </Grid>
         );
@@ -83,6 +86,9 @@ FeaturedPosts.propTypes = {
     results: PropTypes.arrayOf(PropTypes.shape({})),
     noResults: PropTypes.bool,
   }),
+  router: PropTypes.shape({
+    push: PropTypes.func,
+  }),
 };
 
 const mapStateToProps = _state => {
@@ -103,5 +109,5 @@ export default withStyles(styles)(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(FeaturedPosts)
+  )(withRouter(FeaturedPosts))
 );

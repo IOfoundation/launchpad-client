@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {PropTypes} from 'prop-types';
 
-import AdminLogin from '../AdminLogin';
+import Layout from '../Layout';
 import PasswordReset from '../../components/admin-login/PasswordReset';
 import * as userActions from '../../actions/user';
 
@@ -16,9 +16,9 @@ class PasswordResetRoute extends PureComponent {
 
   render() {
     return (
-      <AdminLogin>
+      <Layout>
         <PasswordReset />
-      </AdminLogin>
+      </Layout>
     );
   }
 }

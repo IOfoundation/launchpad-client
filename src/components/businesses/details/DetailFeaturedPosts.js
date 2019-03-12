@@ -6,7 +6,8 @@ import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import {PropTypes} from 'prop-types';
 import Loading from '../../shared/Loading';
-import {truncate} from '../../../utils';
+import {truncate, htmlStripper} from '../../../utils';
+import {withRouter} from 'react-router';
 
 const styles = () => ({
   featuredPosts: {
@@ -40,7 +41,7 @@ class DetailFeaturedPosts extends PureComponent {
   };
 
   render() {
-    const {classes, posts} = this.props;
+    const {classes, posts, router} = this.props;
     const {viewMore} = this.state;
     const results = posts.results;
     let viewMoreElement = null;
@@ -64,7 +65,7 @@ class DetailFeaturedPosts extends PureComponent {
 
       if (viewMore) {
         featuredPostsElements = results.slice(0, 3).map(post => {
-          let description = post.body;
+          let description = htmlStripper(post.body);
 
           if (description.split('').length > 70) {
             description = truncate(description, 70);
@@ -75,13 +76,14 @@ class DetailFeaturedPosts extends PureComponent {
               <DetailFeaturedPost
                 description={description}
                 date="February 2, 2019"
+                clicked={() => router.push(`/blog/${post.id}`)}
               />
             </Grid>
           );
         });
       } else {
         featuredPostsElements = results.map(post => {
-          let description = post.body;
+          let description = htmlStripper(post.body);
 
           if (description.split('').length > 70) {
             description = truncate(description, 70);
@@ -92,6 +94,7 @@ class DetailFeaturedPosts extends PureComponent {
               <DetailFeaturedPost
                 description={description}
                 date="February 2, 2019"
+                clicked={() => router.push(`/blog/${post.id}`)}
               />
             </Grid>
           );
@@ -125,6 +128,9 @@ DetailFeaturedPosts.propTypes = {
     results: PropTypes.arrayOf(PropTypes.object),
     noResults: PropTypes.bool,
   }),
+  router: PropTypes.shape({
+    push: PropTypes.func,
+  }),
 };
 
 const mapStateToProps = _state => {
@@ -136,5 +142,5 @@ const mapStateToProps = _state => {
 };
 
 export default connect(mapStateToProps)(
-  withStyles(styles)(DetailFeaturedPosts)
+  withStyles(styles)(withRouter(DetailFeaturedPosts))
 );

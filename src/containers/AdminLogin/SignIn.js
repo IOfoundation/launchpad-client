@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 import {PropTypes} from 'prop-types';
 
 import * as userActions from '../../actions/user';
-import AdminLogin from '../AdminLogin';
+import Layout from '../Layout';
 import SigIn from '../../components/admin-login/SigIn';
 
 class SignInRoute extends PureComponent {
@@ -16,9 +16,9 @@ class SignInRoute extends PureComponent {
 
   render() {
     return (
-      <AdminLogin>
+      <Layout>
         <SigIn />
-      </AdminLogin>
+      </Layout>
     );
   }
 }

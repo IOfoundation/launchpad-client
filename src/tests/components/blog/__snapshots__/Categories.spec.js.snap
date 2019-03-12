@@ -21,7 +21,9 @@ exports[`<Categories /> renders snapshot of Categories 1`] = `
           "getCategories": [Function],
           "getFeaturedPost": [Function],
           "getFeaturedPostById": [Function],
+          "getPostById": [Function],
           "noResults": [Function],
+          "setCategory": [Function],
         }
       }
       categories={

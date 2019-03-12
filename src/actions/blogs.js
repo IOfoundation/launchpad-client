@@ -23,6 +23,23 @@ const getFeaturedPostsError = error => {
   };
 };
 
+export const getFeaturedPost = () => {
+  return async dispatch => {
+    try {
+      dispatch(getFeaturedPostsStarts());
+      const httpResponse = await httpRequest.get(
+        '/api/blog_posts?filter[category]=featured'
+      );
+      if (httpResponse.data.length === 0) {
+        dispatch(noResults(true));
+      }
+      dispatch(getFeaturedPostsSuccess(httpResponse.data));
+    } catch (error) {
+      dispatch(getFeaturedPostsError(error));
+    }
+  };
+};
+
 const getFeaturedPostsByIdStart = config => {
   return {
     type: types.GET_FEATURED_POSTS_BY_ID_START,
@@ -41,6 +58,23 @@ const getFeaturedPostsByIdError = error => {
   return {
     type: types.GET_FEATURED_POSTS_BY_ID_ERROR,
     error,
+  };
+};
+
+export const getFeaturedPostById = id => {
+  return async dispatch => {
+    try {
+      dispatch(getFeaturedPostsByIdStart());
+      const httpResponse = await httpRequest.get(
+        `/api/blog_posts?filter[organization_id]=${id}`
+      );
+      if (httpResponse.data.length === 0) {
+        dispatch(noResults(true));
+      }
+      dispatch(getFeaturedPostsByIdSuccess(httpResponse.data));
+    } catch (error) {
+      dispatch(getFeaturedPostsByIdError(error));
+    }
   };
 };
 
@@ -97,6 +131,10 @@ export const getCategories = () => {
       let frontPage;
       const categories = httpResponse.data
         .filter(data => {
+          if (data.name === 'featured') {
+            return false;
+          }
+
           if (data.name === 'front page') {
             frontPage = data;
             return false;
@@ -110,47 +148,6 @@ export const getCategories = () => {
       dispatch(getPostsCategoriesSuccess(categories));
     } catch (error) {
       dispatch(getPostsCategoriesError(error));
-    }
-  };
-};
-
-export const noResults = value => {
-  return {
-    type: types.NO_RESULTS,
-    noResults: value,
-  };
-};
-
-export const getFeaturedPostById = id => {
-  return async dispatch => {
-    try {
-      dispatch(getFeaturedPostsByIdStart());
-      const httpResponse = await httpRequest.get(
-        `/api/blog_posts?filter[organization_id]=${id}`
-      );
-      if (httpResponse.data.length === 0) {
-        dispatch(noResults(true));
-      }
-      dispatch(getFeaturedPostsByIdSuccess(httpResponse.data));
-    } catch (error) {
-      dispatch(getFeaturedPostsByIdError(error));
-    }
-  };
-};
-
-export const getFeaturedPost = () => {
-  return async dispatch => {
-    try {
-      dispatch(getFeaturedPostsStarts());
-      const httpResponse = await httpRequest.get(
-        '/api/blog_posts?filter[category]=featured'
-      );
-      if (httpResponse.data.length === 0) {
-        dispatch(noResults(true));
-      }
-      dispatch(getFeaturedPostsSuccess(httpResponse.data));
-    } catch (error) {
-      dispatch(getFeaturedPostsError(error));
     }
   };
 };
@@ -187,5 +184,54 @@ export const getAllPosts = (page, category) => {
     } catch (error) {
       dispatch(getAllPostsError(error));
     }
+  };
+};
+
+const getPostByIdStarts = () => {
+  return {
+    type: types.GET_POST_BY_ID_START,
+  };
+};
+
+const getPostByIdSuccess = post => {
+  return {
+    type: types.GET_POST_BY_ID_SUCCESS,
+    post,
+  };
+};
+
+const getPostByIdError = error => {
+  return {
+    type: types.GET_POST_BY_ID_ERROR,
+    error,
+  };
+};
+
+export const getPostById = id => {
+  return async dispatch => {
+    try {
+      dispatch(getPostByIdStarts());
+      const httpResponse = await httpRequest.get(`/api/blog_posts/${id}`);
+      if (httpResponse.data.length === 0) {
+        dispatch(noResults(true));
+      }
+      dispatch(getPostByIdSuccess(httpResponse.data));
+    } catch (error) {
+      dispatch(getPostByIdError(error));
+    }
+  };
+};
+
+export const noResults = value => {
+  return {
+    type: types.NO_RESULTS,
+    noResults: value,
+  };
+};
+
+export const setCategory = category => {
+  return {
+    type: types.SET_CATEGORY,
+    category,
   };
 };

@@ -3,7 +3,7 @@ import {PropTypes} from 'prop-types';
 import MainLayout from '../components/layouts/Main';
 import {viewport, sizeCheck} from '../utils';
 
-class AdminLogin extends PureComponent {
+class Layout extends PureComponent {
   state = {
     breakpoint: '',
     homePage: false,
@@ -34,11 +34,11 @@ class AdminLogin extends PureComponent {
   }
 }
 
-AdminLogin.propTypes = {
+Layout.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
 };
 
-export default AdminLogin;
+export default Layout;

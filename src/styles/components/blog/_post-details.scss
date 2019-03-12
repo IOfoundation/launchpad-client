@@ -1,0 +1,16 @@
+.post-details {
+  background: #f7f9fd;
+  padding-top: 48px;
+
+  @media (max-width: 60em) {
+    padding: 5em 1.5em 0;
+  }
+
+  &__link {
+    cursor: pointer;
+
+    &:hover {
+      color: $green-color;
+    }
+  }
+}
