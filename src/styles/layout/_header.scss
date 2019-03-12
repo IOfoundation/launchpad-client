@@ -8,11 +8,11 @@
   .header_title .white-link {
     color: #fff;
   }
-  
+
   input {
     display: none;
   }
-  
+
   .collapse-menu-icon,
   img {
     display: none;
@@ -20,36 +20,36 @@
     vertical-align: middle;
     width: 32px;
   }
-  
+
   .collapse-menu-icon {
     float: right;
   }
-  
+
   @media (max-width: 60em) {
     font-size: 14px;
     height: auto;
     position: fixed;
     top: 0px;
     width: 100%;
-    z-index: 3;
+    z-index: 4;
 
     .collapse-menu-icon,
     img {
       display: initial;
     }
-    
+
     input:checked ~ nav.header_links-contact {
       height: 100vh;
       transition: height 0.5s ease-in;
     }
-    
+
     .header_links {
       &-title {
         max-width: 30%;
         display: inline-block;
       }
 
-      &-contact{
+      &-contact {
         max-width: 70%;
         display: inline-block;
       }

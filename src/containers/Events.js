@@ -24,11 +24,11 @@ class Events extends PureComponent {
   };
 
   render() {
-    const {width, homePage} = this.state;
+    const {width, homePage, breakpoint} = this.state;
 
     return (
       <MainLayout windowWidth={width} homePage={homePage}>
-        <EventsLayout />
+        <EventsLayout breakpoint={breakpoint} />
       </MainLayout>
     );
   }

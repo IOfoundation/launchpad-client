@@ -40,6 +40,7 @@ const initialState = {
   },
   events: {
     data: [],
+    eventsByMonth: [],
     featuredEvents: [],
   },
   user: {

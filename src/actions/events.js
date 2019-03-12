@@ -53,6 +53,47 @@ export const getAllEvents = () => {
   };
 };
 
+const getAllEventsByMonthStart = () => {
+  return {
+    type: types.GET_ALL_EVENTS_BY_MONTH_START,
+  };
+};
+
+const getAllEventsByMonthSuccess = eventsByMonth => {
+  return {
+    type: types.GET_ALL_EVENTS_BY_MONTH_SUCCESS,
+    eventsByMonth,
+  };
+};
+
+const getAllEventsByMonthError = error => {
+  return {
+    type: types.GET_ALL_EVENTS_BY_MONTH_ERROR,
+    error,
+  };
+};
+
+export const getAllEventsByMonth = month => {
+  return async dispatch => {
+    try {
+      dispatch(getAllEventsByMonthStart());
+      const httpResponse = await httpRequest.get(`/api/events?month=${month}`);
+      const totalCount = parseInt(httpResponse.headers['x-total-count'], 10);
+
+      if (totalCount > 200) {
+        const totalHttpResponse = await httpRequest.get(
+          `/api/events?month=${month}&perPage=${totalCount}`
+        );
+        dispatch(getAllEventsByMonthSuccess(totalHttpResponse.data));
+      } else {
+        dispatch(getAllEventsByMonthSuccess(httpResponse.data));
+      }
+    } catch (error) {
+      dispatch(getAllEventsByMonthError(error));
+    }
+  };
+};
+
 export const getAllEventsById = id => {
   return async dispatch => {
     try {

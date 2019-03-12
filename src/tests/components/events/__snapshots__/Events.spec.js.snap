@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Events /> renders snapshot of Events 1`] = `
+<div
+  className="events-container"
+>
+  <Jumbotron />
+  <WithStyles(Connect(FeaturedEvents)) />
+  <WithStyles(Connect(SchedulerContainer))
+    breakpoint="sm"
+  />
+</div>
+`;

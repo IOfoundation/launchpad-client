@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SchedulerContainer /> renders snapshot of SchedulerContainer 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <WithStyles(Connect(SchedulerContainer))>
+    <Connect(SchedulerContainer)
+      classes={
+        Object {
+          "container": "Connect-SchedulerContainer--container-1",
+          "paper": "Connect-SchedulerContainer--paper-2",
+        }
+      }
+    >
+      <SchedulerContainer
+        actions={
+          Object {
+            "getAllEvents": [Function],
+            "getAllEventsById": [Function],
+            "getAllEventsByMonth": [Function],
+            "getEventsByMonth": [Function],
+          }
+        }
+        classes={
+          Object {
+            "container": "Connect-SchedulerContainer--container-1",
+            "paper": "Connect-SchedulerContainer--paper-2",
+          }
+        }
+      >
+        <div
+          className="Connect-SchedulerContainer--container-1"
+        >
+          <WithStyles(Modal)
+            onClose={[Function]}
+            open={false}
+          >
+            <Modal
+              BackdropComponent={[Function]}
+              classes={
+                Object {
+                  "hidden": "MuiModal-hidden-4",
+                  "root": "MuiModal-root-3",
+                }
+              }
+              closeAfterTransition={false}
+              disableAutoFocus={false}
+              disableBackdropClick={false}
+              disableEnforceFocus={false}
+              disableEscapeKeyDown={false}
+              disablePortal={false}
+              disableRestoreFocus={false}
+              hideBackdrop={false}
+              keepMounted={false}
+              manager={
+                ModalManager {
+                  "data": Array [],
+                  "handleContainerOverflow": true,
+                  "hideSiblingNodes": true,
+                  "modals": Array [],
+                }
+              }
+              onClose={[Function]}
+              open={false}
+            />
+          </WithStyles(Modal)>
+          <Scheduler
+            dataBound={[Function]}
+            dataSource={Array []}
+            date={1989-05-08T05:00:00.000Z}
+            editable={false}
+            height={660}
+            mobile={false}
+            views={
+              Array [
+                "day",
+                "week",
+                Object {
+                  "selected": true,
+                  "type": "month",
+                },
+              ]
+            }
+          >
+            <div />
+          </Scheduler>
+        </div>
+      </SchedulerContainer>
+    </Connect(SchedulerContainer)>
+  </WithStyles(Connect(SchedulerContainer))>
+</Provider>
+`;

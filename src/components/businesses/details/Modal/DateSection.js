@@ -5,25 +5,46 @@ import {getDate} from '../../../../utils';
 import Section from './Section';
 
 export const DateSection = props => {
-  const {date} = props;
-  let $content = null;
+  const {start, end} = props;
+  let contentElement = null;
 
-  if (date) {
-    const dateInformation = getDate(date);
-    $content = (
+  if (start) {
+    const dateStart = getDate(start);
+    const dateEnd = getDate(end);
+
+    contentElement = (
       <Section>
-        <span className="text-bold">{`${dateInformation.monthLarge} ${
-          dateInformation.day
-        }, ${dateInformation.year}`}</span>
+        <span className="text-bold m-right-8">{`${dateStart.monthLarge} ${
+          dateStart.day
+        }, ${dateStart.year}`}</span>
+        <span> {`${dateStart.time} - ${dateEnd.time}`}</span>
       </Section>
     );
+
+    if (dateStart.dayNumber < dateEnd.dayNumber) {
+      contentElement = (
+        <Section>
+          <span className="text-bold m-right-8">{`${dateStart.monthLarge} ${
+            dateStart.day
+          }, ${dateStart.year}`}</span>
+          <span>{`${dateStart.time}`}</span>
+          <span className="m-x-8">{'-'}</span>
+          <span className="text-bold m-right-8">{`${dateEnd.monthLarge} ${
+            dateEnd.day
+          }, ${dateEnd.year}`}</span>
+          <span>{`${dateEnd.time}`}</span>
+        </Section>
+      );
+    }
   }
 
-  return $content;
+  return contentElement;
 };
 
 DateSection.propTypes = {
   date: PropTypes.string,
+  end: PropTypes.string,
+  start: PropTypes.string,
 };
 
 export default DateSection;
