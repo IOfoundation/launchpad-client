@@ -34,7 +34,7 @@ class SignInFormContainer extends PureComponent {
         snackbar.showSnackbar({
           message: 'Login Successful',
         });
-        router.push('/admin/landing');
+        router.push('/admin/profile');
       }
     }
   }

@@ -9,7 +9,7 @@ const styles = () => {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'flex-end',
-      paddingBottom: '24px',
+      paddingBottom: '28px',
       '& .btn': {
         width: 'auto',
         padding: '9px 25px',
@@ -25,6 +25,7 @@ const styles = () => {
       display: 'flex',
       justifyContent: 'space-between',
       borderBottom: '2px solid black',
+      marginBottom: '28px',
     },
     Title: {
       fontSize: '34px',

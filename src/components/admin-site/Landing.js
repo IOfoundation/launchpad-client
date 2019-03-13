@@ -4,7 +4,6 @@ import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
 import Container from './Container';
-import Title from './Title';
 import Navigation from './Navigation';
 
 const styles = () => {
@@ -39,7 +38,7 @@ const styles = () => {
 };
 
 const LandingComponent = props => {
-  const {classes} = props;
+  const {classes, children} = props;
 
   return (
     <Container>
@@ -51,13 +50,17 @@ const LandingComponent = props => {
         </div>
       </Grid>
       <Grid item={true} xs={9} className={classes.Content}>
-        <Title />
+        {children}
       </Grid>
     </Container>
   );
 };
 
 LandingComponent.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
   classes: PropTypes.shape({
     Content: PropTypes.string,
     Description: PropTypes.string,
