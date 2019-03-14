@@ -11,3 +11,4 @@ export {getDate} from './getDate';
 export {htmlStripper} from './htmlStripper';
 export {mobileDaysMap} from './mobileDaysMap';
 export {deepCopy} from './deepCopy';
+export {combineStyles} from './combineStyles';
