@@ -1,7 +1,8 @@
 import React, {Fragment} from 'react';
-import {getDate} from '../../../utils';
 import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
+
+import {getDate} from 'Utils';
 
 const styles = () => {
   return {

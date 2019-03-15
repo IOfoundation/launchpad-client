@@ -1,15 +1,17 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router';
 import {withStyles} from '@material-ui/core/styles';
 import {PropTypes} from 'prop-types';
-import Grid from '@material-ui/core/Grid';
-import DOMPurify from 'dompurify';
-import {withRouter} from 'react-router';
-import * as blogActions from '../../../actions/blogs';
 import {bindActionCreators} from 'redux';
-import Loading from '../../shared/Loading';
+import DOMPurify from 'dompurify';
+import Grid from '@material-ui/core/Grid';
+
+import Loading from 'Shared/Loading';
 import RecentPosts from './RecentPost';
 import PostDateInformation from './PostDateInformation';
+
+import * as blogActions from 'Actions/blogs';
 
 const styles = theme => ({
   body: {

@@ -2,9 +2,11 @@ import React, {PureComponent, Fragment} from 'react';
 import Grid from '@material-ui/core/Grid';
 import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import {truncate} from '../../../utils';
+
 import PostDateInformation from './PostDateInformation';
 import RecentPostLoading from './RecentPostLoading';
+
+import {truncate} from 'Utils';
 
 const styles = theme => {
   return {
