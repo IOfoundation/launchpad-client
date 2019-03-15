@@ -2,27 +2,9 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import {withRouter} from 'react-router';
-
-import Container from './Container';
 import Grid from '@material-ui/core/Grid';
 
-const styles = () => ({
-  Title: {
-    fontSize: '48px',
-    lineHeight: '60px',
-    marginBottom: '24px',
-    textAlign: 'center',
-  },
-  Information: {
-    fontSize: '24px',
-    lineHeight: '32px',
-    textAlign: 'center',
-  },
-  Button: {
-    maxWidth: '386px',
-    margin: '0 auto',
-  },
-});
+import Container from './Container';
 
 const AccountRequested = props => {
   const {classes, router} = props;
@@ -49,6 +31,24 @@ const AccountRequested = props => {
     </Container>
   );
 };
+
+const styles = () => ({
+  Title: {
+    fontSize: '48px',
+    lineHeight: '60px',
+    marginBottom: '24px',
+    textAlign: 'center',
+  },
+  Information: {
+    fontSize: '24px',
+    lineHeight: '32px',
+    textAlign: 'center',
+  },
+  Button: {
+    maxWidth: '386px',
+    margin: '0 auto',
+  },
+});
 
 AccountRequested.propTypes = {
   classes: PropTypes.shape({

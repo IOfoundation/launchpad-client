@@ -1,22 +1,8 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-
 import Grid from '@material-ui/core/Grid';
 
-const styles = theme => ({
-  Title: {
-    fontSize: '48px',
-    lineHeight: '60px',
-    marginBottom: '24px',
-  },
-  item: {
-    paddingRight: '10em',
-    [theme.breakpoints.down('sm')]: {
-      padding: '0',
-    },
-  },
-});
 const Caption = props => {
   const {title, content, children, classes} = props;
   let $content;
@@ -36,6 +22,20 @@ const Caption = props => {
     </Grid>
   );
 };
+
+const styles = theme => ({
+  Title: {
+    fontSize: '48px',
+    lineHeight: '60px',
+    marginBottom: '24px',
+  },
+  item: {
+    paddingRight: '10em',
+    [theme.breakpoints.down('sm')]: {
+      padding: '0',
+    },
+  },
+});
 
 Caption.propTypes = {
   children: PropTypes.oneOfType([

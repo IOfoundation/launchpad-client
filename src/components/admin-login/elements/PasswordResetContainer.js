@@ -1,15 +1,16 @@
 import React, {PureComponent} from 'react';
-import PasswordResetForm from './PasswordResetForm';
 import {Formik} from 'formik';
 import Grid from '@material-ui/core/Grid';
 import * as Yup from 'yup';
 import {PropTypes} from 'prop-types';
 import {withRouter} from 'react-router';
-
-import * as user from '../../../actions/user';
-import * as snackbarActions from '../../../actions/snackbar';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+
+import PasswordResetForm from './PasswordResetForm';
+
+import * as user from 'Actions/user';
+import * as snackbarActions from 'Actions/snackbar';
 
 const SignupSchema = Yup.object().shape({
   email: Yup.string()

@@ -1,18 +1,10 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
+import {withStyles} from '@material-ui/core/styles';
 
 import Caption from './elements/Caption';
 import SignUpContainer from './elements/SignUpContainer';
-import {withStyles} from '@material-ui/core/styles';
 import Container from './Container';
-
-const styles = () => ({
-  subTitle: {
-    fontSize: '24px',
-    lineHeight: '32px',
-    marginBottom: '8px',
-  },
-});
 
 const SignUp = props => {
   const {classes} = props;
@@ -30,6 +22,14 @@ const SignUp = props => {
     </Container>
   );
 };
+
+const styles = () => ({
+  subTitle: {
+    fontSize: '24px',
+    lineHeight: '32px',
+    marginBottom: '8px',
+  },
+});
 
 SignUp.propTypes = {
   classes: PropTypes.shape({

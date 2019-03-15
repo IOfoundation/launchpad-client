@@ -2,17 +2,8 @@ import React, {Fragment} from 'react';
 import {Form} from 'formik';
 import {withStyles} from '@material-ui/core/styles';
 import {PropTypes} from 'prop-types';
-import FormTextField from '../../shared/FormElements/TextField';
 
-const styles = () => {
-  return {
-    text: {
-      fontSize: '16px',
-      lineHeight: '24px',
-      margin: '0 5em 24px 0',
-    },
-  };
-};
+import FormTextField from 'Shared/FormElements/TextField';
 
 const PasswordResetForm = props => {
   const {
@@ -54,6 +45,16 @@ const PasswordResetForm = props => {
       </Form>
     </Fragment>
   );
+};
+
+const styles = () => {
+  return {
+    text: {
+      fontSize: '16px',
+      lineHeight: '24px',
+      margin: '0 5em 24px 0',
+    },
+  };
 };
 
 PasswordResetForm.propTypes = {

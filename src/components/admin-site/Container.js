@@ -5,6 +5,20 @@ import Grid from '@material-ui/core/Grid';
 
 import {containerStyles} from 'Utils/containerStyles';
 
+const Container = props => {
+  const {classes, children} = props;
+
+  return (
+    <div className={['admin-login', classes.container].join(' ')}>
+      <section className={['content-section', classes.content].join(' ')}>
+        <Grid container={true} justify="center" alignItems="flex-start">
+          {children}
+        </Grid>
+      </section>
+    </div>
+  );
+};
+
 const styles = theme => ({
   content: {
     ...containerStyles(theme),
@@ -23,20 +37,6 @@ const styles = theme => ({
     },
   },
 });
-
-const Container = props => {
-  const {classes, children} = props;
-
-  return (
-    <div className={['admin-login', classes.container].join(' ')}>
-      <section className={['content-section', classes.content].join(' ')}>
-        <Grid container={true} justify="center" alignItems="flex-start">
-          {children}
-        </Grid>
-      </section>
-    </div>
-  );
-};
 
 Container.propTypes = {
   children: PropTypes.oneOfType([

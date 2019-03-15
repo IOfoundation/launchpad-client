@@ -1,92 +1,17 @@
 import React, {Fragment} from 'react';
 import {Form, FieldArray} from 'formik';
 import {PropTypes} from 'prop-types';
-import FormTextField from '../../shared/FormElements/TextFieldDefault';
-import SelectElement from '../../shared/FormElements/Select';
+import {withStyles} from '@material-ui/core/styles';
+
+import FormTextField from 'Shared/FormElements/TextFieldDefault';
+import SelectElement from 'Shared/FormElements/Select';
+
 import {
   sectionOnePhoto,
   sectionOneRegular,
   socialSection,
   phoneNumberSection,
 } from './ProfileForm/elements';
-import {withStyles} from '@material-ui/core/styles';
-
-const styles = () => {
-  return {
-    containerFlex: {
-      display: 'flex',
-    },
-    sectionOnePhotoElement: {
-      flex: 1,
-    },
-    sectionOnePhotoPhoto: {
-      height: '200px',
-      width: '222px',
-      border: '1px solid black',
-      marginLeft: '24px',
-    },
-    sectionOneRegular: {
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
-    sectionOneItem: {
-      width: '100%',
-      boxSizing: 'border-box',
-      '&:nth-child(4)': {
-        width: 'calc(33.3% - 24px)',
-        marginRight: '24px',
-      },
-      '&:nth-child(5)': {
-        width: 'calc(33.3% - 24px)',
-        marginRight: '24px',
-      },
-      '&:nth-child(6)': {
-        width: '33.3%',
-      },
-    },
-    card: {
-      border: '1px solid black',
-      marginBottom: '40px',
-    },
-    cardTitle: {
-      color: 'white',
-      background: 'black',
-      padding: '8px 12px',
-      '&__media': {
-        fontSize: '16px',
-        lineHeight: '24px',
-        marginRight: '8px',
-      },
-      '&__small': {
-        fontSize: '12px',
-        lineHeight: '16px',
-        opacity: '0.75',
-      },
-    },
-    cardContent: {
-      padding: '16px',
-      background: 'white',
-    },
-    phoneItemWrapper: {
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
-    phoneItem: {
-      width: 'calc(45% - 24px)',
-      marginRight: '24px',
-    },
-    btnWrapper: {
-      width: '100%',
-    },
-    btn: {
-      width: '260px',
-      margin: '15px 0',
-    },
-    bottomLine: {
-      borderBottom: '1px solid #E0E0E0',
-    },
-  };
-};
 
 const ProfileForm = props => {
   const {
@@ -254,7 +179,7 @@ const ProfileForm = props => {
                           disabled={values.phones.length === 1}
                           onClick={() => arrayHelpers.remove(index)}
                         >
-                          {'DELETE PHONE NUMBER'}
+                          {'Delete Phone Number'}
                         </button>
                       </div>
                       <div className={classes.btnWrapper}>
@@ -285,6 +210,83 @@ const ProfileForm = props => {
       </div>
     </Form>
   );
+};
+
+const styles = () => {
+  return {
+    containerFlex: {
+      display: 'flex',
+    },
+    sectionOnePhotoElement: {
+      flex: 1,
+    },
+    sectionOnePhotoPhoto: {
+      height: '200px',
+      width: '222px',
+      border: '1px solid black',
+      marginLeft: '24px',
+    },
+    sectionOneRegular: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
+    sectionOneItem: {
+      width: '100%',
+      boxSizing: 'border-box',
+      '&:nth-child(4)': {
+        width: 'calc(33.3% - 24px)',
+        marginRight: '24px',
+      },
+      '&:nth-child(5)': {
+        width: 'calc(33.3% - 24px)',
+        marginRight: '24px',
+      },
+      '&:nth-child(6)': {
+        width: '33.3%',
+      },
+    },
+    card: {
+      border: '1px solid black',
+      marginBottom: '40px',
+    },
+    cardTitle: {
+      color: 'white',
+      background: 'black',
+      padding: '8px 12px',
+      '&__media': {
+        fontSize: '16px',
+        lineHeight: '24px',
+        marginRight: '8px',
+      },
+      '&__small': {
+        fontSize: '12px',
+        lineHeight: '16px',
+        opacity: '0.75',
+      },
+    },
+    cardContent: {
+      padding: '16px',
+      background: 'white',
+    },
+    phoneItemWrapper: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
+    phoneItem: {
+      width: 'calc(45% - 24px)',
+      marginRight: '24px',
+    },
+    btnWrapper: {
+      width: '100%',
+    },
+    btn: {
+      width: '260px',
+      margin: '15px 0',
+    },
+    bottomLine: {
+      borderBottom: '1px solid #E0E0E0',
+    },
+  };
 };
 
 ProfileForm.propTypes = {

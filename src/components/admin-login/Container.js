@@ -1,10 +1,35 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
-
 import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import {containerStyles} from '../../utils/containerStyles';
-import SnackbarUI from '../shared/SnackBar';
+
+import SnackbarUI from 'Shared/SnackBar';
+
+import {containerStyles} from 'Utils/containerStyles';
+
+const Container = props => {
+  const {classes, children, direction, modifier} = props;
+
+  return (
+    <div
+      className={['admin-login', classes.container, classes[modifier]].join(
+        ' '
+      )}
+    >
+      <SnackbarUI />
+      <section className={['content-section', classes.content].join(' ')}>
+        <Grid
+          container={true}
+          justify="center"
+          alignItems="center"
+          direction={direction}
+        >
+          {children}
+        </Grid>
+      </section>
+    </div>
+  );
+};
 
 const styles = theme => ({
   content: {
@@ -37,30 +62,6 @@ const styles = theme => ({
     },
   },
 });
-
-const Container = props => {
-  const {classes, children, direction, modifier} = props;
-
-  return (
-    <div
-      className={['admin-login', classes.container, classes[modifier]].join(
-        ' '
-      )}
-    >
-      <SnackbarUI />
-      <section className={['content-section', classes.content].join(' ')}>
-        <Grid
-          container={true}
-          justify="center"
-          alignItems="center"
-          direction={direction}
-        >
-          {children}
-        </Grid>
-      </section>
-    </div>
-  );
-};
 
 Container.propTypes = {
   children: PropTypes.oneOfType([

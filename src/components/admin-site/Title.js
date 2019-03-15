@@ -2,6 +2,28 @@ import React from 'react';
 import {withStyles} from '@material-ui/core/styles';
 import {PropTypes} from 'prop-types';
 
+const Title = props => {
+  const {classes} = props;
+
+  return (
+    <div className={classes.Container}>
+      <h1 className={classes.Title}>{'Profile'}</h1>
+      <div className={classes.Buttons}>
+        <a className="title-as-link m-right-24">{'Cancel'}</a>
+        <button className="btn btn__submit">{'Save Changes'}</button>
+      </div>
+    </div>
+  );
+};
+
+Title.propTypes = {
+  classes: PropTypes.shape({
+    Buttons: PropTypes.string,
+    Container: PropTypes.string,
+    Title: PropTypes.string,
+  }),
+};
+
 const styles = () => {
   return {
     Buttons: {
@@ -34,28 +56,6 @@ const styles = () => {
       color: '#070709',
     },
   };
-};
-
-const Title = props => {
-  const {classes} = props;
-
-  return (
-    <div className={classes.Container}>
-      <h1 className={classes.Title}>{'Profile'}</h1>
-      <div className={classes.Buttons}>
-        <a className="title-as-link m-right-24">{'Cancel'}</a>
-        <button className="btn btn__submit">{'Save Changes'}</button>
-      </div>
-    </div>
-  );
-};
-
-Title.propTypes = {
-  classes: PropTypes.shape({
-    Buttons: PropTypes.string,
-    Container: PropTypes.string,
-    Title: PropTypes.string,
-  }),
 };
 
 export default withStyles(styles)(Title);

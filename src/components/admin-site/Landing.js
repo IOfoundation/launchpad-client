@@ -6,6 +6,25 @@ import Grid from '@material-ui/core/Grid';
 import Container from './Container';
 import Navigation from './Navigation';
 
+const LandingComponent = props => {
+  const {classes, children} = props;
+
+  return (
+    <Container>
+      <Grid item={true} xs={3}>
+        <Navigation />
+        <div className={classes.Edit}>
+          <i className="material-icons">{'person'}</i>
+          <span>{'Edit Your Account'}</span>
+        </div>
+      </Grid>
+      <Grid item={true} xs={9} className={classes.Content}>
+        {children}
+      </Grid>
+    </Container>
+  );
+};
+
 const styles = () => {
   return {
     Title: {
@@ -35,25 +54,6 @@ const styles = () => {
       },
     },
   };
-};
-
-const LandingComponent = props => {
-  const {classes, children} = props;
-
-  return (
-    <Container>
-      <Grid item={true} xs={3}>
-        <Navigation />
-        <div className={`${classes.Edit} title-as-link`}>
-          <i className="material-icons">{'person'}</i>
-          <span>{'Edit Your Account'}</span>
-        </div>
-      </Grid>
-      <Grid item={true} xs={9} className={classes.Content}>
-        {children}
-      </Grid>
-    </Container>
-  );
 };
 
 LandingComponent.propTypes = {

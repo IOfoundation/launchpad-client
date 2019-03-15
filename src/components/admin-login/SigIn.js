@@ -1,28 +1,11 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 import {Link} from 'react-router';
+import {withStyles} from '@material-ui/core/styles';
 
 import Caption from './elements/Caption';
 import SignInFormContainer from './elements/SignInFormContainer';
-import {withStyles} from '@material-ui/core/styles';
 import Container from './Container';
-
-const styles = () => ({
-  subTitle: {
-    fontSize: '24px',
-    lineHeight: '32px',
-    marginBottom: '8px',
-  },
-  anchor: {
-    color: 'white',
-    fontSize: '24px',
-    lineHeight: '32px',
-    textDecoration: 'underline',
-    '&:hover': {
-      color: '#02ba81',
-    },
-  },
-});
 
 const SignIn = props => {
   const {classes} = props;
@@ -44,6 +27,23 @@ const SignIn = props => {
     </Container>
   );
 };
+
+const styles = () => ({
+  subTitle: {
+    fontSize: '24px',
+    lineHeight: '32px',
+    marginBottom: '8px',
+  },
+  anchor: {
+    color: 'white',
+    fontSize: '24px',
+    lineHeight: '32px',
+    textDecoration: 'underline',
+    '&:hover': {
+      color: '#02ba81',
+    },
+  },
+});
 
 SignIn.propTypes = {
   classes: PropTypes.shape({

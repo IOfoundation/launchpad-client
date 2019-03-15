@@ -1,11 +1,11 @@
 import React, {PureComponent} from 'react';
-import {Formik} from 'formik';
 import Grid from '@material-ui/core/Grid';
 import * as Yup from 'yup';
 import {PropTypes} from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {withRouter} from 'react-router';
+import {Formik} from 'formik';
 
 import SingInForm from './SignInForm';
 
