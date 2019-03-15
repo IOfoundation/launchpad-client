@@ -2,11 +2,12 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import * as eventActions from '../../actions/events';
 
 import Jumbotron from './Jumbotron';
 import FeaturedEvents from './FeaturedEvents/FeaturedEvents';
 import SchedulerContainer from './SchedulerContainer';
+
+import * as eventActions from 'Actions/events';
 
 const Events = props => {
   const {breakpoint, actions, featuredEvents, eventsByMonth} = props;

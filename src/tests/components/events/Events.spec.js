@@ -9,8 +9,8 @@ import Events from '../../../components/events/Events';
 import {EVENTS} from './mock/events';
 
 jest.useFakeTimers();
-/*eslint-disable */
 Date.now = jest.fn(() => new Date(Date.UTC(2019, 0, 1, 0, 0, 0)));
+/* eslint-disable no-global-assign, no-native-reassign, constructor-super */
 Date = class extends Date {
   constructor(date) {
     if (date) {
@@ -19,7 +19,7 @@ Date = class extends Date {
     return new Date('05-08-89');
   }
 };
-/*eslint-enable */
+/* eslint-enable */
 
 const initialState = {
   events: {
