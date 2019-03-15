@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router';
 import {withStyles} from '@material-ui/core/styles';
 import {PropTypes} from 'prop-types';
 
@@ -13,10 +14,22 @@ const Navigation = props => {
       </p>
       <ul className={classes.navigation}>
         <li>
-          <a className={classes.link}>{'Profile'}</a>
+          <Link
+            activeStyle={activeStyles}
+            className={classes.link}
+            to="/admin/profile"
+          >
+            {'Profile'}
+          </Link>
         </li>
         <li>
-          <a className={classes.link}>{'Locations'}</a>
+          <Link
+            activeStyle={activeStyles}
+            className={classes.link}
+            to="/admin/location"
+          >
+            {'Locations'}
+          </Link>
         </li>
         <li>
           <a className={classes.link}>{'Services'}</a>
@@ -35,11 +48,17 @@ const Navigation = props => {
   );
 };
 
+const activeStyles = {
+  color: '#00ba81',
+  opacity: 1,
+  fontFamily: '"proxima-nova-bold", Georgia, sans-serif',
+};
+
 const styles = () => {
   return {
     container: {
       background: 'black',
-      margin: '63px 0 24px',
+      margin: '68px 0 24px',
       padding: '24px',
     },
     title: {

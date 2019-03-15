@@ -1,12 +1,14 @@
 import React, {PureComponent} from 'react';
 import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import {sharedStyles, sharedClasses} from '../styles';
+import {sharedStyles} from '../styles';
 
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
+
+import {combineStyles} from '../../../../../utils';
 
 class AddNew extends PureComponent {
   state = {
@@ -23,7 +25,7 @@ class AddNew extends PureComponent {
   };
 
   render() {
-    const {classes} = this.props;
+    const {classes, errors} = this.props;
 
     return (
       <FormControl className={classes.formControl} style={{minWidth: '100%'}}>
@@ -31,6 +33,7 @@ class AddNew extends PureComponent {
           {'Select One or More Languages'}
         </InputLabel>
         <Select
+          errors={errors}
           open={this.state.open}
           value={this.state.language}
           onChange={this.updateValue}
@@ -39,6 +42,9 @@ class AddNew extends PureComponent {
           inputProps={{
             name: 'language',
             id: 'language-options',
+            classes: {
+              icon: classes.icon,
+            },
           }}
         >
           <MenuItem value="">
@@ -53,10 +59,20 @@ class AddNew extends PureComponent {
   }
 }
 
+const styles = () => ({
+  icon: {
+    color: '#272729',
+  },
+});
+
 AddNew.propTypes = {
   arrayHelpers: PropTypes.shape({}),
-  classes: sharedClasses,
+  classes: PropTypes.shape({
+    formControl: PropTypes.string,
+    icon: PropTypes.string,
+  }),
+  errors: PropTypes.shape({}),
   handleChange: PropTypes.func,
 };
 
-export default withStyles(sharedStyles)(AddNew);
+export default withStyles(combineStyles(sharedStyles, styles))(AddNew);

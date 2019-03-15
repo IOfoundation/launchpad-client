@@ -11,6 +11,7 @@ import {bindActionCreators} from 'redux';
 import {withRouter} from 'react-router';
 import LandingComponent from '../Landing';
 import Title from '../Title';
+import Buttons from '../Buttons';
 
 const SignupSchema = Yup.object().shape({
   locationName: Yup.string().required('Required'),
@@ -23,51 +24,49 @@ const SignupSchema = Yup.object().shape({
   locationWebsite: Yup.string().required('Required'),
   services: Yup.array().of(
     Yup.object().shape({
-      name: Yup.string().required('Required'),
-      id: Yup.string().required('Required'),
+      name: Yup.string(),
+      id: Yup.string(),
     })
   ),
   streetAddress: Yup.object().shape({
-    address: Yup.string().required('Required'),
-    address2: Yup.string().required('Required'),
-    city: Yup.string().required('Required'),
-    state: Yup.string().required('Required'),
-    zip: Yup.string().required('Required'),
+    address: Yup.string(),
+    address2: Yup.string(),
+    city: Yup.string(),
+    state: Yup.string(),
+    zip: Yup.string(),
   }),
   mailingAddress: Yup.object().shape({
-    attention: Yup.string().required('Required'),
-    address: Yup.string().required('Required'),
-    address2: Yup.string().required('Required'),
-    city: Yup.string().required('Required'),
-    state: Yup.string().required('Required'),
-    zip: Yup.string().required('Required'),
+    attention: Yup.string(),
+    address: Yup.string(),
+    address2: Yup.string(),
+    city: Yup.string(),
+    state: Yup.string(),
+    zip: Yup.string(),
   }),
-  phones: Yup.array()
-    .of(
-      Yup.object().shape({
-        phoneNumber: Yup.string().required('Required'),
-        ext: Yup.string().required('Required'),
-        vanityNumber: Yup.string().required('Required'),
-        numberType: Yup.string().required('Required'),
-        department: Yup.string(),
-        countryExt: Yup.string(),
-      })
-    )
-    .required('Must have phones'),
-  languages: Yup.string(),
+  phones: Yup.array().of(
+    Yup.object().shape({
+      phoneNumber: Yup.string(),
+      ext: Yup.string(),
+      vanityNumber: Yup.string(),
+      numberType: Yup.string(),
+      department: Yup.string(),
+      countryExt: Yup.string(),
+    })
+  ),
+  languages: Yup.string().required('Required'),
   hours: Yup.object().shape({
     regular: Yup.array().of(
       Yup.object().shape({
-        day: Yup.string().required('Required'),
-        opensAt: Yup.string().required('Required'),
-        closesAt: Yup.string().required('Required'),
+        day: Yup.string(),
+        opensAt: Yup.string(),
+        closesAt: Yup.string(),
       })
     ),
     holidays: Yup.array().of(
       Yup.object().shape({
-        day: Yup.string().required('Required'),
-        opensAt: Yup.string().required('Required'),
-        closesAt: Yup.string().required('Required'),
+        day: Yup.string(),
+        opensAt: Yup.string(),
+        closesAt: Yup.string(),
       })
     ),
   }),
@@ -109,29 +108,41 @@ const initialValues = {
     },
   ],
   languages: [],
-  hours: {
-    regular: [
-      {
-        day: '',
-        opensAt: '',
-        closesAt: '',
-      },
-    ],
-    holidays: [],
-  },
+  hoursRegular: [],
+  hoursHolidays: [],
   transportation: '',
-  accessibility: '',
+  accessibility: {
+    informationOnCd: false,
+    interpreterForTheDeaf: false,
+    disabledParking: false,
+    elevator: false,
+    ramp: false,
+  },
 };
 
-const LocationFormContainer = () => {
+const LocationFormContainer = props => {
+  const goToLocation = () => {
+    props.router.push('/admin/location');
+  };
+
   return (
-    <LandingComponent>
-      <Title />
+    <LandingComponent navigation={false}>
+      <Title
+        titleText="Create A Location"
+        hideCancelAction={false}
+        submitLabel={'Save location'}
+        cancelClicked={goToLocation}
+      />
       <Formik
         render={_props => <LocationForm {..._props} />}
         initialValues={initialValues}
         validationSchema={SignupSchema}
         onSubmit={() => {}}
+      />
+      <Buttons
+        hideCancelAction={false}
+        submitLabel={'Save location'}
+        cancelClicked={goToLocation}
       />
     </LandingComponent>
   );

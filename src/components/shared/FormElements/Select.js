@@ -6,6 +6,13 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import {ErrorMessage} from 'formik';
+import {withStyles} from '@material-ui/core/styles';
+
+const styles = () => ({
+  icon: {
+    color: '#272729',
+  },
+});
 
 class SelectElement extends PureComponent {
   changeHandler = (name, event) => {
@@ -28,6 +35,7 @@ class SelectElement extends PureComponent {
       value,
       helperText,
       displayEmpty,
+      classes,
     } = this.props;
 
     return (
@@ -43,6 +51,9 @@ class SelectElement extends PureComponent {
           inputProps={{
             name: id,
             id,
+            classes: {
+              icon: classes.icon,
+            },
           }}
         >
           <MenuItem value="">
@@ -72,6 +83,9 @@ class SelectElement extends PureComponent {
 
 SelectElement.propTypes = {
   autocomplete: PropTypes.string,
+  classes: PropTypes.shape({
+    icon: PropTypes.string,
+  }),
   displayEmpty: PropTypes.bool,
   error: PropTypes.bool,
   errors: PropTypes.shape({}),
@@ -86,4 +100,4 @@ SelectElement.propTypes = {
   value: PropTypes.string,
 };
 
-export default SelectElement;
+export default withStyles(styles)(SelectElement);

@@ -8,13 +8,13 @@ import AddNew from './Languages/AddNew';
 import Item from './Languages/Item';
 
 const Languages = props => {
-  const {values, classes, handleChange} = props;
+  const {values, classes, handleChange, errors} = props;
 
   return (
     <div className={classes.card}>
       <div className={classes.cardTitle}>
         <span className={`${classes.cardTitle}__media`}>
-          {'Services at this Location'}
+          {'Languages Spoken at Location'}
         </span>
       </div>
       <div className={classes.cardContent}>
@@ -42,6 +42,7 @@ const Languages = props => {
                 </Fragment>
               ) : (
                 <AddNew
+                  errors={errors}
                   arrayHelpers={arrayHelpers}
                   handleChange={handleChange}
                 />

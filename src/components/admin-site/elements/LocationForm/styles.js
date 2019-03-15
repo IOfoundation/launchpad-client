@@ -74,6 +74,7 @@ export const sharedStyles = () => {
         marginRight: '8px',
       },
       '&__small': {
+        fontFamily: '"proxima-nova-thin", Georgia, sans-serif',
         fontSize: '12px',
         lineHeight: '16px',
         opacity: '0.75',
@@ -105,6 +106,12 @@ export const sharedStyles = () => {
     },
     serviceSelected: {
       color: 'black',
+      display: 'flex',
+      alignItems: 'center',
+      marginBottom: '8px',
+      '& span': {
+        marginRight: '8px',
+      },
     },
     phoneItemWrapper: {
       display: 'flex',

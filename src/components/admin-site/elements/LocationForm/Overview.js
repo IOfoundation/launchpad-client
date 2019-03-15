@@ -13,9 +13,9 @@ export const Overview = props => {
       <h2 className={classes.title}>{'Overview'}</h2>
       <Checkbox
         label="Check if this is the main location"
-        name="handleChange"
+        name="isMainLocation"
         onChange={handleChange}
-        value={values.handleChange}
+        value={values.isMainLocation}
       />
       <div className={classes.wrapper}>
         <div className={classes.halfs}>
@@ -54,7 +54,7 @@ export const Overview = props => {
           handleChange={handleChange}
           helperText="A description of the location's services."
           id={'locationDescription'}
-          label={'Description'}
+          label={'Location Description'}
           multiline={true}
           value={values.locationDescription}
         />

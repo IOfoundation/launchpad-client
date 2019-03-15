@@ -19,16 +19,22 @@ class FormTextFieldDefault extends PureComponent {
       autocomplete,
       error,
       handleBlur,
+      helperText,
       id,
       label,
       marginBottom,
       multiline,
+      name,
       type = 'text',
       value,
-      helperText,
-      name,
     } = this.props;
+    let InputLabelProps = null;
 
+    if (type === 'time') {
+      InputLabelProps = {
+        shrink: true,
+      };
+    }
     return (
       <Fragment>
         <TextField
@@ -42,8 +48,12 @@ class FormTextFieldDefault extends PureComponent {
           value={value}
           name={name}
           multiline={multiline}
-          inputProps={{autoComplete: autocomplete}}
           helperText={helperText}
+          inputProps={{
+            autoComplete: autocomplete,
+            step: 300,
+          }}
+          InputLabelProps={InputLabelProps}
         />
         <div
           className={[

@@ -87,7 +87,7 @@ const Phones = props => {
                         disabled={values.phones.length === 1}
                         onClick={() => arrayHelpers.remove(index)}
                       >
-                        {'DELETE PHONE NUMBER'}
+                        {'Delete Phone Number'}
                       </button>
                     </div>
                     <div className={classes.btnWrapper}>

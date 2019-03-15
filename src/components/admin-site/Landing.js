@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -7,16 +7,25 @@ import Container from './Container';
 import Navigation from './Navigation';
 
 const LandingComponent = props => {
-  const {classes, children} = props;
+  const {classes, children, navigation} = props;
+  let navigationElement = null;
 
-  return (
-    <Container>
-      <Grid item={true} xs={3}>
+  if (navigation) {
+    navigationElement = (
+      <Fragment>
         <Navigation />
         <div className={classes.Edit}>
           <i className="material-icons">{'person'}</i>
           <span>{'Edit Your Account'}</span>
         </div>
+      </Fragment>
+    );
+  }
+
+  return (
+    <Container>
+      <Grid item={true} xs={3}>
+        {navigationElement}
       </Grid>
       <Grid item={true} xs={9} className={classes.Content}>
         {children}
@@ -67,6 +76,7 @@ LandingComponent.propTypes = {
     Edit: PropTypes.string,
     Title: PropTypes.string,
   }),
+  navigation: PropTypes.bool,
 };
 
 export default withStyles(styles)(LandingComponent);

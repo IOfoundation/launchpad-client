@@ -9,6 +9,10 @@ import Phones from './LocationForm/Phones';
 import StreetAddress from './LocationForm/StreetAddress';
 import MailingAddress from './LocationForm/MailingAddress';
 import Languages from './LocationForm/Languages';
+import Transportation from './LocationForm/Transportation';
+import Accessibility from './LocationForm/Accessibility';
+import DangerZone from './LocationForm/DangerZone';
+import Hours from './LocationForm/Hours';
 
 const LocationForm = props => {
   const {
@@ -32,10 +36,14 @@ const LocationForm = props => {
       <Overview {...shared} />
       <Details {...shared} />
       <Services {...shared} />
-      <Phones {...shared} />
       <StreetAddress {...shared} />
       <MailingAddress {...shared} />
+      <Phones {...shared} />
       <Languages {...shared} />
+      <Hours {...shared} />
+      <Transportation {...shared} />
+      <Accessibility {...shared} />
+      <DangerZone />
     </Form>
   );
 };

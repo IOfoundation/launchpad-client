@@ -74,8 +74,12 @@ const initialValues = {
 
 const ProfileFormContainer = () => {
   return (
-    <LandingComponent>
-      <Title />
+    <LandingComponent navigation={true}>
+      <Title
+        titleText="Profile"
+        hideCancelAction={false}
+        submitLabel={'Save Changes'}
+      />
       <Formik
         render={_props => <ProfileForm {..._props} />}
         initialValues={initialValues}

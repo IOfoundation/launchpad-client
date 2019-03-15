@@ -1,11 +1,13 @@
 import React, {PureComponent} from 'react';
 import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import {sharedStyles, sharedClasses} from '../styles';
+import {sharedStyles} from '../styles';
 
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+
+import {combineStyles} from '../../../../../utils';
 
 class AddNewService extends PureComponent {
   state = {
@@ -53,6 +55,9 @@ class AddNewService extends PureComponent {
             inputProps={{
               name: 'service',
               id: 'service-options',
+              classes: {
+                icon: classes.icon,
+              },
             }}
             className={`${classes.floating} ${classes.back}`}
           >
@@ -69,10 +74,23 @@ class AddNewService extends PureComponent {
   }
 }
 
+const styles = () => ({
+  icon: {
+    color: '#272729',
+  },
+});
+
 AddNewService.propTypes = {
   arrayHelpers: PropTypes.shape({}),
-  classes: sharedClasses,
+  classes: PropTypes.shape({
+    formControl: PropTypes.string,
+    hideSelect: PropTypes.string,
+    floating: PropTypes.string,
+    front: PropTypes.string,
+    back: PropTypes.string,
+    icon: PropTypes.string,
+  }),
   handleChange: PropTypes.func,
 };
 
-export default withStyles(sharedStyles)(AddNewService);
+export default withStyles(combineStyles(sharedStyles, styles))(AddNewService);

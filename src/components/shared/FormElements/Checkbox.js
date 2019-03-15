@@ -21,6 +21,7 @@ const styles = () => ({
     position: 'relative',
     fontSize: '16px',
     lineHeight: '24px',
+    width: '100%',
   },
 });
 

@@ -34,7 +34,10 @@ class Item extends PureComponent {
 
     return (
       <div className={classes.serviceSelected}>
-        {service.name} {service.id}
+        <span>
+          {service.name}
+          {service.id}
+        </span>
         <i
           className="material-icons"
           aria-owns={anchorEl ? 'service-menu-item' : null}

@@ -15,7 +15,7 @@ class Item extends PureComponent {
 
     return (
       <div className={classes.serviceSelected}>
-        {language}
+        <span>{language}</span>
         <i
           className="material-icons title-as-link"
           aria-owns={'service-menu-item'}

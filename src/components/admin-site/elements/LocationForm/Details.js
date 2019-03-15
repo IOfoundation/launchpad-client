@@ -19,7 +19,7 @@ export const Details = props => {
             handleBlur={handleBlur}
             handleChange={handleChange}
             id={'locationEmail'}
-            label={'General Contact Email'}
+            label={'Location Email Address'}
             value={values.locationEmail}
             helperText="The location's general email."
           />
