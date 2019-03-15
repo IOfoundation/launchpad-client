@@ -1,15 +1,16 @@
 import React, {PureComponent} from 'react';
-import SingInForm from './SignInForm';
 import {Formik} from 'formik';
 import Grid from '@material-ui/core/Grid';
 import * as Yup from 'yup';
 import {PropTypes} from 'prop-types';
-
-import * as user from '../../../actions/user';
-import * as snackbarActions from '../../../actions/snackbar';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {withRouter} from 'react-router';
+
+import SingInForm from './SignInForm';
+
+import * as user from 'Actions/user';
+import * as snackbarActions from 'Actions/snackbar';
 
 const SignupSchema = Yup.object().shape({
   email: Yup.string()

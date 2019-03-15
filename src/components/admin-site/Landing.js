@@ -45,7 +45,7 @@ const LandingComponent = props => {
     <Container>
       <Grid item={true} xs={3}>
         <Navigation />
-        <div className={classes.Edit}>
+        <div className={`${classes.Edit} title-as-link`}>
           <i className="material-icons">{'person'}</i>
           <span>{'Edit Your Account'}</span>
         </div>

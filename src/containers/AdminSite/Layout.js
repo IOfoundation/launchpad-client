@@ -1,7 +1,9 @@
 import React, {PureComponent} from 'react';
 import {PropTypes} from 'prop-types';
+
 import AdminLayout from '../../components/layouts/Admin';
-import {viewport, sizeCheck} from '../../utils';
+
+import {viewport, sizeCheck} from 'Utils';
 
 class Layout extends PureComponent {
   state = {

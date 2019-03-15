@@ -1,5 +1,6 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
+
 import AdminHeader from '../shared/AdminHeader';
 import Footer from '../shared/Footer';
 import MobileFooter from '../shared/MobileFooter';
