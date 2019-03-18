@@ -8,15 +8,23 @@ import * as actions from '../../actions/blogs';
 
 class PostDetailsRoute extends PureComponent {
   componentDidMount() {
-    this.props.actions.getPostById(this.props.params.id);
+    this.getPosts();
   }
+
+  getPosts = () => {
+    this.props.actions.getPostById(this.props.params.id);
+  };
 
   render() {
     const {breakpoint, post} = this.props;
 
     return (
       <Layout>
-        <PostDetails breakpoint={breakpoint} post={post.result} />
+        <PostDetails
+          breakpoint={breakpoint}
+          post={post.result}
+          getPosts={this.getPosts}
+        />
       </Layout>
     );
   }
