@@ -7,7 +7,7 @@ import {sharedStyles} from './styles';
 
 import {combineStyles} from '@Utils';
 
-const styles = () => {
+const styles = theme => {
   return {
     dangerTitle: {
       color: 'black',
@@ -23,7 +23,11 @@ const styles = () => {
       opacity: 0.5,
     },
     dangerButton: {
-      maxWidth: '55%',
+      maxWidth: '70%',
+      [theme.breakpoints.down('sm')]: {
+        maxWidth: '424px',
+        width: '100%',
+      },
     },
   };
 };

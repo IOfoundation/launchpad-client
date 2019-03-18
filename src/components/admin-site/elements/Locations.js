@@ -7,7 +7,7 @@ import {withRouter} from 'react-router';
 import LandingComponent from '../Landing';
 import Title from '../Title';
 
-const styles = () => {
+const styles = theme => {
   return {
     item: {
       background: '#EAECF0',
@@ -18,6 +18,9 @@ const styles = () => {
       padding: '16px',
       '&:hover': {
         background: '#ddf2f0',
+      },
+      [theme.breakpoints.down('sm')]: {
+        height: 'auto',
       },
     },
   };
@@ -50,7 +53,7 @@ const Locations = props => {
             <i className="material-icons">{'location_on'}</i>
           </Grid>
           <Grid item={true}>{'Sacramento'}</Grid>
-          <Grid item={true} xs={8}>
+          <Grid item={true} xs={12} md={8}>
             {'12345 Main Street, Suite 120, Sacramento, CA 95746'}
           </Grid>
         </Grid>
@@ -66,7 +69,7 @@ const Locations = props => {
             <i className="material-icons">{'location_on'}</i>
           </Grid>
           <Grid item={true}>{'West Sacramento'}</Grid>
-          <Grid item={true} xs={8}>
+          <Grid item={true} xs={12} md={8}>
             {'12345 Main Street, Suite 120, West Sacramento, CA 95746'}
           </Grid>
         </Grid>

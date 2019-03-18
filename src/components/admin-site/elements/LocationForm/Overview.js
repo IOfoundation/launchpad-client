@@ -1,9 +1,10 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 
-import FormTextField from '@Shared/FormElements/TextFieldDefault';
-import Checkbox from '@Shared/FormElements/Checkbox';
+import FormTextField from '../../../shared/FormElements/TextFieldDefault';
+import Checkbox from '../../../shared/FormElements/Checkbox';
 
 import {sharedStyles, sharedClasses} from './styles';
 
@@ -11,7 +12,7 @@ export const Overview = props => {
   const {errors, touched, handleBlur, handleChange, values, classes} = props;
 
   return (
-    <div className="m-bot-40">
+    <div className="m-bot-8" style={{padding: 8}}>
       <h2 className={classes.title}>{'Overview'}</h2>
       <Checkbox
         label="Check if this is the main location"
@@ -19,8 +20,8 @@ export const Overview = props => {
         onChange={handleChange}
         value={values.isMainLocation}
       />
-      <div className={classes.wrapper}>
-        <div className={classes.halfs}>
+      <Grid container={true} spacing={16}>
+        <Grid item={true} xs={12} md={6}>
           <FormTextField
             autocomplete="off"
             error={touched.locationName && Boolean(errors.locationName)}
@@ -32,8 +33,9 @@ export const Overview = props => {
             label="Location Name"
             value={values.locationName}
           />
-        </div>
-        <div className={classes.halfs}>
+        </Grid>
+
+        <Grid item={true} xs={12} md={6}>
           <FormTextField
             autocomplete={'off'}
             error={touched.alternateName && Boolean(errors.alternateName)}
@@ -45,23 +47,24 @@ export const Overview = props => {
             label={'Alternate Name'}
             value={values.alternateName}
           />
-        </div>
-
-        <FormTextField
-          autocomplete={'off'}
-          error={
-            touched.locationDescription && Boolean(errors.locationDescription)
-          }
-          errors={errors}
-          handleBlur={handleBlur}
-          handleChange={handleChange}
-          helperText="A description of the location's services."
-          id={'locationDescription'}
-          label={'Location Description'}
-          multiline={true}
-          value={values.locationDescription}
-        />
-      </div>
+        </Grid>
+        <Grid item={true} xs={12}>
+          <FormTextField
+            autocomplete={'off'}
+            error={
+              touched.locationDescription && Boolean(errors.locationDescription)
+            }
+            errors={errors}
+            handleBlur={handleBlur}
+            handleChange={handleChange}
+            helperText="A description of the location's services."
+            id={'locationDescription'}
+            label={'Location Description'}
+            multiline={true}
+            value={values.locationDescription}
+          />
+        </Grid>
+      </Grid>
     </div>
   );
 };

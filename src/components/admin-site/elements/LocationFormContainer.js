@@ -135,22 +135,24 @@ const LocationFormContainer = props => {
   return (
     <LandingComponent navigation={false}>
       <Title
-        titleText="Create A Location"
+        cancelClicked={goToLocation}
         hideCancelAction={false}
         submitLabel={'Save location'}
-        cancelClicked={goToLocation}
+        titleText="Create A Location"
       />
       <Formik
         initialValues={initialValues}
         onSubmit={() => {}}
-        render={_props => <LocationForm {..._props} />}
+        render={_props => (
+          <LocationForm {..._props} breakpoint={props.breakpoint} />
+        )}
         validateOnChange={true}
         validationSchema={LocationSchema}
       />
       <Buttons
+        cancelClicked={goToLocation}
         hideCancelAction={false}
         submitLabel={'Save location'}
-        cancelClicked={goToLocation}
       />
     </LandingComponent>
   );
@@ -171,6 +173,7 @@ const mapDispatchToProps = _dispatch => {
 };
 
 LocationFormContainer.propTypes = {
+  breakpoint: PropTypes.string,
   error: PropTypes.bool,
   isAuth: PropTypes.bool,
   router: PropTypes.shape({
