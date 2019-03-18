@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, {PureComponent, cloneElement} from 'react';
 import {PropTypes} from 'prop-types';
 
 import AdminLayout from '../../components/layouts/Admin';
@@ -15,6 +15,7 @@ class Layout extends PureComponent {
 
   componentDidMount() {
     window.addEventListener('resize', this.state.listener);
+    sizeCheck(this.handleWindowSizeChange);
   }
 
   componentWillUnmount() {
@@ -26,11 +27,11 @@ class Layout extends PureComponent {
   };
 
   render() {
-    const {width, homePage} = this.state;
+    const {width, homePage, breakpoint} = this.state;
 
     return (
       <AdminLayout windowWidth={width} homePage={homePage}>
-        {this.props.children}
+        {cloneElement(this.props.children, {breakpoint})}
       </AdminLayout>
     );
   }

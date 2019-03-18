@@ -1,13 +1,18 @@
 import React from 'react';
-import Layout from '../Layout';
+import {PropTypes} from 'prop-types';
+import Layout from './Layout';
 import ProfileFormContainer from '../../components/admin-site/elements/ProfileFormContainer';
 
-const ProfileRoute = () => {
+const ProfileRoute = props => {
   return (
     <Layout>
-      <ProfileFormContainer />
+      <ProfileFormContainer breakpoint={props.breakpoint} />
     </Layout>
   );
+};
+
+ProfileRoute.propTypes = {
+  breakpoint: PropTypes.string,
 };
 
 export default ProfileRoute;

@@ -2,6 +2,7 @@ import React, {Fragment} from 'react';
 import {Form, FieldArray} from 'formik';
 import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 
 import FormTextField from '@Shared/FormElements/TextFieldDefault';
 import SelectElement from '@Shared/FormElements/Select';
@@ -15,19 +16,27 @@ import {
 
 const ProfileForm = props => {
   const {
+    breakpoint,
+    classes,
     errors,
     handleBlur,
     handleChange,
     handleSubmit,
     touched,
     values,
-    classes,
   } = props;
 
+  console.log(breakpoint);
   return (
-    <Form className="profile-form" onSubmit={handleSubmit}>
-      <div className={classes.containerFlex}>
-        <div className={classes.sectionOnePhotoElement}>
+    <Form className="profile-form" onSubmit={handleSubmit} style={{padding: 8}}>
+      <Grid
+        container={true}
+        spacing={16}
+        direction={
+          breakpoint === 'xs' || breakpoint === 'sm' ? 'column-reverse' : 'row'
+        }
+      >
+        <Grid item={true} xs={12} md={8}>
           {sectionOnePhoto.map(form => {
             return (
               <FormTextField
@@ -44,18 +53,21 @@ const ProfileForm = props => {
               />
             );
           })}
-        </div>
-        <div
-          className={['img-wrapper', classes.sectionOnePhotoPhoto].join(' ')}
-        >
-          <img src="https://via.placeholder.com/150" />
-        </div>
-      </div>
-      <div className={classes.sectionOneRegular}>
-        {sectionOneRegular.map(form => {
-          return (
-            <div key={form.key} className={classes.sectionOneItem}>
+        </Grid>
+        <Grid item={true} xs={12} md={4}>
+          <div
+            className={`img-wrapper img-wrapper--border ${classes.imageHeight}`}
+          >
+            <img src="https://via.placeholder.com/150" />
+          </div>
+        </Grid>
+      </Grid>
+      <Grid container={true} spacing={16}>
+        <Grid item={true} xs={12}>
+          {sectionOneRegular.map(form => {
+            return (
               <FormTextField
+                key={form.key}
                 error={touched[form.key] && Boolean(errors[form.key])}
                 errors={errors}
                 handleBlur={handleBlur}
@@ -67,10 +79,10 @@ const ProfileForm = props => {
                 value={values[form.key]}
                 helperText={form.helperText}
               />
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </Grid>
+      </Grid>
       <div className={`${classes.card} m-top-16`}>
         <div className={classes.cardTitle}>
           <span className={`${classes.cardTitle}__media`}>
@@ -80,23 +92,27 @@ const ProfileForm = props => {
             {'Please enter the full URL for social media sites.'}
           </span>
         </div>
-        <div className={`${classes.cardContent}`}>
-          {socialSection.map(form => {
-            return (
-              <FormTextField
-                key={form.key}
-                error={touched[form.key] && Boolean(errors[form.key])}
-                errors={errors}
-                handleBlur={handleBlur}
-                handleChange={handleChange}
-                id={form.key}
-                label={form.label}
-                autocomplete={form.autocomplete}
-                value={values[form.key]}
-                helperText={form.helperText}
-              />
-            );
-          })}
+        <div className={`${classes.cardContent}`} style={{padding: 8}}>
+          <Grid container={true} spacing={16}>
+            <Grid item={true} xs={12}>
+              {socialSection.map(form => {
+                return (
+                  <FormTextField
+                    key={form.key}
+                    error={touched[form.key] && Boolean(errors[form.key])}
+                    errors={errors}
+                    handleBlur={handleBlur}
+                    handleChange={handleChange}
+                    id={form.key}
+                    label={form.label}
+                    autocomplete={form.autocomplete}
+                    value={values[form.key]}
+                    helperText={form.helperText}
+                  />
+                );
+              })}
+            </Grid>
+          </Grid>
         </div>
       </div>
 
@@ -111,108 +127,108 @@ const ProfileForm = props => {
             }
           </span>
         </div>
-        <div className={`${classes.cardContent} ${classes.phoneItemWrapper}`}>
-          <FieldArray
-            name="phones"
-            render={arrayHelpers => (
-              <Fragment>
-                {values.phones.map((phone, index) => {
-                  const phoneMap = Object.keys(phone).map((key, i) => {
-                    const id = `phones[${index}].${key}`;
-                    const map = phoneNumberSection[i];
-                    const error =
-                      touched.phones &&
-                      touched.phones[index] &&
-                      touched.phones[index][key] &&
-                      Boolean(
-                        errors.phones &&
-                          errors.phones[index] &&
-                          errors.phones[index][key]
+        <div className={classes.cardContent} style={{padding: 8}}>
+          <Grid container={true} spacing={16}>
+            <FieldArray
+              name="phones"
+              render={arrayHelpers => (
+                <Fragment>
+                  {values.phones.map((phone, index) => {
+                    const phoneMap = Object.keys(phone).map((key, i) => {
+                      const id = `phones[${index}].${key}`;
+                      const map = phoneNumberSection[i];
+                      const error =
+                        touched.phones &&
+                        touched.phones[index] &&
+                        touched.phones[index][key] &&
+                        Boolean(
+                          errors.phones &&
+                            errors.phones[index] &&
+                            errors.phones[index][key]
+                        );
+
+                      return (
+                        <Grid key={id} item={true} xs={12} md={6}>
+                          {map.select ? (
+                            <SelectElement
+                              errors={errors}
+                              field="phones"
+                              handleBlur={handleBlur}
+                              handleChange={handleChange}
+                              id={id}
+                              key={id}
+                              label={map.label}
+                              name={id}
+                              value={phone[key]}
+                            />
+                          ) : (
+                            <FormTextField
+                              autocomplete={map.autocomplete}
+                              error={error}
+                              errors={errors}
+                              field="phones"
+                              handleBlur={handleBlur}
+                              handleChange={handleChange}
+                              helperText={map.helperText}
+                              id={key}
+                              key={id}
+                              label={map.label}
+                              name={id}
+                              value={phone[key]}
+                            />
+                          )}
+                        </Grid>
                       );
+                    });
 
                     return (
-                      <div key={id} className={classes.phoneItem}>
-                        {map.select ? (
-                          <SelectElement
-                            errors={errors}
-                            field="phones"
-                            handleBlur={handleBlur}
-                            handleChange={handleChange}
-                            id={id}
-                            key={id}
-                            label={map.label}
-                            name={id}
-                            value={phone[key]}
-                          />
-                        ) : (
-                          <FormTextField
-                            autocomplete={map.autocomplete}
-                            error={error}
-                            errors={errors}
-                            field="phones"
-                            handleBlur={handleBlur}
-                            handleChange={handleChange}
-                            helperText={map.helperText}
-                            id={key}
-                            key={id}
-                            label={map.label}
-                            name={id}
-                            value={phone[key]}
-                          />
-                        )}
-                      </div>
+                      // eslint-disable-next-line react/no-array-index-key
+                      <Fragment key={index}>
+                        {phoneMap}
+                        <Grid item={true} xs={12}>
+                          <div className={classes.bottomLine}>
+                            <button
+                              type="button"
+                              className={`btn btn__red ${classes.btn}`}
+                              disabled={values.phones.length === 1}
+                              onClick={() => arrayHelpers.remove(index)}
+                            >
+                              {'Delete Phone Number'}
+                            </button>
+                          </div>
+                        </Grid>
+                        <Grid item={true} xs={12}>
+                          <button
+                            type="button"
+                            className={`btn btn__submit ${classes.btn}`}
+                            onClick={() =>
+                              arrayHelpers.insert(index, {
+                                phoneNumber: '1',
+                                ext: '',
+                                vanityNumber: '',
+                                numberType: '',
+                                department: '',
+                                countryExt: '',
+                              })
+                            }
+                          >
+                            {'Add New Phone Number'}
+                          </button>
+                        </Grid>
+                      </Fragment>
                     );
-                  });
-
-                  return (
-                    // eslint-disable-next-line react/no-array-index-key
-                    <Fragment key={index}>
-                      {phoneMap}
-                      <div
-                        className={`${classes.btnWrapper} ${
-                          classes.bottomLine
-                        }`}
-                      >
-                        <button
-                          type="button"
-                          className={`btn btn__red ${classes.btn}`}
-                          disabled={values.phones.length === 1}
-                          onClick={() => arrayHelpers.remove(index)}
-                        >
-                          {'Delete Phone Number'}
-                        </button>
-                      </div>
-                      <div className={classes.btnWrapper}>
-                        <button
-                          type="button"
-                          className={`btn btn__submit ${classes.btn}`}
-                          onClick={() =>
-                            arrayHelpers.insert(index, {
-                              phoneNumber: '1',
-                              ext: '',
-                              vanityNumber: '',
-                              numberType: '',
-                              department: '',
-                              countryExt: '',
-                            })
-                          }
-                        >
-                          {'Add New Phone Number'}
-                        </button>
-                      </div>
-                    </Fragment>
-                  );
-                })}
-              </Fragment>
-            )}
-          />
+                  })}
+                </Fragment>
+              )}
+            />
+          </Grid>
         </div>
       </div>
     </Form>
   );
 };
 
-const styles = () => {
+const styles = theme => {
   return {
     containerFlex: {
       display: 'flex',
@@ -281,23 +297,37 @@ const styles = () => {
     },
     btn: {
       width: '260px',
-      margin: '15px 0',
+      margin: '0 0 16px',
+      [theme.breakpoints.down('sm')]: {
+        width: '100%',
+      },
     },
     bottomLine: {
       borderBottom: '1px solid #E0E0E0',
+    },
+    imageHeight: {
+      [theme.breakpoints.down('sm')]: {
+        width: '200px',
+        margin: '0 auto',
+      },
+      [theme.breakpoints.only('sm')]: {
+        width: '400px',
+      },
     },
   };
 };
 
 ProfileForm.propTypes = {
+  breakpoint: PropTypes.string,
   classes: PropTypes.shape({
+    bottomLine: PropTypes.string,
     btn: PropTypes.string,
     btnWrapper: PropTypes.string,
-    bottomLine: PropTypes.string,
     card: PropTypes.string,
     cardContent: PropTypes.string,
     cardTitle: PropTypes.string,
     containerFlex: PropTypes.string,
+    imageHeight: PropTypes.string,
     phoneItem: PropTypes.string,
     phoneItemWrapper: PropTypes.string,
     sectionOnePhotoElement: PropTypes.string,

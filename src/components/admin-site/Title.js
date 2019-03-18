@@ -1,10 +1,11 @@
 import React from 'react';
 import {withStyles} from '@material-ui/core/styles';
 import {PropTypes} from 'prop-types';
+import Grid from '@material-ui/core/Grid';
 
 import Buttons from './Buttons';
 
-const styles = () => {
+const styles = theme => {
   return {
     Buttons: {
       flex: 1,
@@ -22,10 +23,11 @@ const styles = () => {
       '& a': {
         color: '#7B7C7E',
       },
+      [theme.breakpoints.down('sm')]: {
+        justifyContent: 'flex-start',
+      },
     },
     Container: {
-      display: 'flex',
-      justifyContent: 'space-between',
       borderBottom: '2px solid black',
       marginBottom: '28px',
     },
@@ -34,6 +36,9 @@ const styles = () => {
       lineHeight: '40px',
       fontFamily: '"proxima-nova-bold", Georgia, sans-serif',
       color: '#070709',
+      [theme.breakpoints.down('sm')]: {
+        marginBottom: '16px',
+      },
     },
   };
 };

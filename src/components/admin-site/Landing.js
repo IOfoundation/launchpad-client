@@ -12,7 +12,7 @@ const LandingComponent = props => {
 
   if (navigation) {
     navigationElement = (
-      <Grid item={true} xs={3}>
+      <Grid item={true} xs={12} md={3}>
         <Navigation />
         <div className={`${classes.Edit} title-as-link`}>
           <i className="material-icons">{'person'}</i>
@@ -32,7 +32,7 @@ const LandingComponent = props => {
   );
 };
 
-const styles = () => {
+const styles = theme => {
   return {
     Title: {
       textAlign: 'center',
@@ -42,6 +42,9 @@ const styles = () => {
     },
     Content: {
       paddingLeft: '24px',
+      [theme.breakpoints.down('sm')]: {
+        paddingLeft: '0',
+      },
     },
     Description: {
       fontSize: '16px',
@@ -59,11 +62,15 @@ const styles = () => {
       '& i': {
         marginRight: '8px',
       },
+      [theme.breakpoints.down('sm')]: {
+        marginBottom: '16px',
+      },
     },
   };
 };
 
 LandingComponent.propTypes = {
+  breakpoint: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
