@@ -1,10 +1,7 @@
 /* eslint-env jest */
 import React from 'react';
 import {mount} from 'enzyme';
-import thunk from 'redux-thunk';
 import toJson from 'enzyme-to-json';
-import configureStore from 'redux-mock-store';
-import {Provider} from 'react-redux';
 
 import {EVENTS} from './mock/events';
 import SchedulerContainer from '../../../components/events/SchedulerContainer';
@@ -22,25 +19,18 @@ Date = class extends Date {
 };
 /*eslint-enable */
 
-const initialState = {
-  events: {
-    data: [...EVENTS],
-    featuredEvents: [],
+const getAllEventsByMonth = jest.fn();
+const props = {
+  events: [...EVENTS],
+  actions: {
+    getAllEventsByMonth,
   },
 };
-const mockStore = configureStore([thunk]);
-const props = {};
-let store;
 let wrapper;
 
 describe('<SchedulerContainer />', () => {
   beforeEach(() => {
-    store = mockStore(initialState);
-    wrapper = mount(
-      <Provider store={store}>
-        <SchedulerContainer {...props} />
-      </Provider>
-    );
+    wrapper = mount(<SchedulerContainer {...props} />);
   });
 
   it('renders snapshot of SchedulerContainer', () => {
@@ -49,8 +39,6 @@ describe('<SchedulerContainer />', () => {
   });
 
   it('should get all the events', () => {
-    expect(store.getActions()).toEqual([
-      {type: 'GET_ALL_EVENTS_BY_MONTH_START'},
-    ]);
+    expect(getAllEventsByMonth).toHaveBeenCalled();
   });
 });

@@ -1,15 +1,15 @@
 import React, {PureComponent} from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-import {Scheduler} from '@progress/kendo-scheduler-react-wrapper';
-import {withStyles} from '@material-ui/core/styles';
-import {containerStyles, getDate, mobileDaysMap} from '../../utils';
-import {PropTypes} from 'prop-types';
-import * as actions from '../../actions/events';
-import Content from './Modal/Content';
-import Modal from '@material-ui/core/Modal';
 import '@progress/kendo-ui';
 import '@progress/kendo-ui/js/kendo.timezones';
+import {PropTypes} from 'prop-types';
+import {Scheduler} from '@progress/kendo-scheduler-react-wrapper';
+import {withStyles} from '@material-ui/core/styles';
+import kendo from '@progress/kendo-ui';
+import Modal from '@material-ui/core/Modal';
+
+import Content from './Modal/Content';
+
+import {containerStyles, getDate, mobileDaysMap} from 'Utils';
 
 const styles = theme => ({
   container: {
@@ -118,13 +118,13 @@ class SchedulerContainer extends PureComponent {
     });
   };
 
-  updateCalendar = e => {
-    const pickedDate = getDate(e.sender._model.selectedDate);
+  updateCalendar = event => {
+    const pickedDate = getDate(event.sender._model.selectedDate);
     const monthNumeric = pickedDate.date.toLocaleString('en-US', {
       month: 'numeric',
     });
 
-    if (e.sender._selectedViewName === 'week' && this._changeName) {
+    if (event.sender._selectedViewName === 'week' && this._changeName) {
       const weekDate = this._schedulerRef.widgetInstance.element[0].querySelectorAll(
         '.k-scheduler-header .k-nav-day'
       );
@@ -135,14 +135,28 @@ class SchedulerContainer extends PureComponent {
         date.textContent = `${mobileDaysMap[parse[0]]} ${parse[1]}`;
       });
       this._changeName = false;
-    } else if (e.sender._selectedViewName !== 'week') {
+    } else if (event.sender._selectedViewName !== 'week') {
       this._changeName = true;
     }
 
     if (monthNumeric !== this._month) {
+      this.setLoadingStatusOnScheduler(true);
       this._month = monthNumeric;
       this.props.actions.getAllEventsByMonth(monthNumeric);
     }
+  };
+
+  handlerDataBinding = event => {
+    if (event.action === 'rebind' && event.items.length > 0) {
+      this.setLoadingStatusOnScheduler(false);
+    } else {
+      this.setLoadingStatusOnScheduler(true);
+    }
+  };
+
+  setLoadingStatusOnScheduler = value => {
+    const scheduler = this._schedulerRef.widgetInstance.element.getKendoScheduler();
+    kendo.ui.progress(scheduler.element.find('.k-scheduler-content'), value);
   };
 
   render() {
@@ -178,24 +192,13 @@ class SchedulerContainer extends PureComponent {
           ref={_ref => {
             this._schedulerRef = _ref;
           }}
-          dataBound={e => this.updateCalendar(e)}
+          dataBound={event => this.updateCalendar(event)}
+          dataBinding={event => this.handlerDataBinding(event)}
         />
       </div>
     );
   }
 }
-
-const mapPropsToState = _state => {
-  return {
-    events: _state.events.eventsByMonth,
-  };
-};
-
-const mapDispatchToProps = _dispatch => {
-  return {
-    actions: bindActionCreators(actions, _dispatch),
-  };
-};
 
 SchedulerContainer.propTypes = {
   actions: PropTypes.shape({
@@ -209,9 +212,4 @@ SchedulerContainer.propTypes = {
   events: PropTypes.arrayOf(PropTypes.shape({})),
 };
 
-export default withStyles(styles)(
-  connect(
-    mapPropsToState,
-    mapDispatchToProps
-  )(SchedulerContainer)
-);
+export default withStyles(styles)(SchedulerContainer);
