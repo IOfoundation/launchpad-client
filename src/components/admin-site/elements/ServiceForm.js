@@ -17,6 +17,7 @@ import Buttons from '../Buttons';
 const ServiceForm = props => {
   const {
     errors,
+    goToServices,
     handleBlur,
     handleChange,
     handleSubmit,
@@ -71,13 +72,18 @@ const ServiceForm = props => {
       />
       <Keywords {...shared} />
       <DangerZone />
-      <Buttons />
+      <Buttons
+        hideCancelAction={false}
+        submitLabel={'Save Service'}
+        cancelClicked={goToServices}
+      />
     </Form>
   );
 };
 
 ServiceForm.propTypes = {
   errors: PropTypes.shape({}),
+  goToServices: PropTypes.func,
   handleBlur: PropTypes.func,
   handleChange: PropTypes.func,
   handleSubmit: PropTypes.func,

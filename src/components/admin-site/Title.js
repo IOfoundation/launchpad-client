@@ -6,6 +6,23 @@ import Buttons from './Buttons';
 
 const styles = () => {
   return {
+    Buttons: {
+      flex: 1,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      paddingBottom: '28px',
+      '& .btn': {
+        width: 'auto',
+        padding: '9px 25px',
+        fontSize: '14px',
+        fontFamily: '"proxima-nova-semi", Georgia, sans-serif',
+        margin: 0,
+      },
+      '& a': {
+        color: '#7B7C7E',
+      },
+    },
     Container: {
       display: 'flex',
       justifyContent: 'space-between',
@@ -47,6 +64,7 @@ const Title = props => {
 Title.propTypes = {
   cancelClicked: PropTypes.func,
   classes: PropTypes.shape({
+    Buttons: PropTypes.string,
     Container: PropTypes.string,
     Title: PropTypes.string,
   }),

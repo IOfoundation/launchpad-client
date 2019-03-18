@@ -27,14 +27,40 @@ class FormTextFieldDefault extends PureComponent {
       name,
       type = 'text',
       value,
+      novalidate,
     } = this.props;
     let InputLabelProps = null;
+    let displayError = (
+      <div
+        className={[
+          'admin-login-form__input__error-wrapper',
+          marginBottom ? 'm-bot-24' : '',
+        ].join(' ')}
+      >
+        <ErrorMessage
+          className="admin-login-form__error"
+          component="div"
+          name={name || id}
+        />
+      </div>
+    );
 
     if (type === 'time') {
       InputLabelProps = {
         shrink: true,
       };
     }
+
+    if (novalidate) {
+      displayError = null;
+    }
+
+    if (type === 'time') {
+      InputLabelProps = {
+        shrink: true,
+      };
+    }
+
     return (
       <Fragment>
         <TextField
@@ -55,18 +81,7 @@ class FormTextFieldDefault extends PureComponent {
           }}
           InputLabelProps={InputLabelProps}
         />
-        <div
-          className={[
-            'admin-login-form__input__error-wrapper',
-            marginBottom ? 'm-bot-24' : '',
-          ].join(' ')}
-        >
-          <ErrorMessage
-            className="admin-login-form__error"
-            component="div"
-            name={name || id}
-          />
-        </div>
+        {displayError}
       </Fragment>
     );
   }
@@ -85,6 +100,7 @@ FormTextFieldDefault.propTypes = {
   marginBottom: PropTypes.bool,
   multiline: PropTypes.bool,
   name: PropTypes.string,
+  novalidate: PropTypes.bool,
   phones: PropTypes.string,
   type: PropTypes.string,
   value: PropTypes.string,

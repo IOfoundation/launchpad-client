@@ -23,9 +23,7 @@ const Keywords = props => {
   return (
     <div className={classes.card}>
       <div className={classes.cardTitle}>
-        <span className={`${classes.cardTitle}__media`}>
-          {'Transportation Options'}
-        </span>
+        <span className={`${classes.cardTitle}__media`}>{'Keywords'}</span>
       </div>
       <div className={classes.cardContent}>
         <Grid container={true} spacing={16}>

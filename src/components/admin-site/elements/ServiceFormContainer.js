@@ -19,34 +19,34 @@ const SignupSchema = Yup.object().shape({
   email: Yup.string()
     .email('Invalid email address')
     .required('Required'),
-  website: Yup.string().required('Required'),
+  website: Yup.string(),
   status: Yup.string().required('Required'),
   servicesAreas: Yup.string().required('Required'),
-  audience: Yup.string().required('Required'),
-  eligibility: Yup.string().required('Required'),
-  fees: Yup.string().required('Required'),
-  acceptedPaymentMethods: Yup.string().required('Required'),
-  fundingSources: Yup.string().required('Required'),
+  audience: Yup.string(),
+  eligibility: Yup.string(),
+  fees: Yup.string(),
+  acceptedPaymentMethods: Yup.string(),
+  fundingSources: Yup.string(),
   hoursRegular: Yup.array().of(
     Yup.object().shape({
-      day: Yup.string().required('Required'),
-      opensAt: Yup.string().required('Required'),
-      closesAt: Yup.string().required('Required'),
+      day: Yup.string(),
+      opensAt: Yup.string(),
+      closesAt: Yup.string(),
     })
   ),
   hoursHolidays: Yup.array().of(
     Yup.object().shape({
-      day: Yup.string().required('Required'),
-      opensAt: Yup.string().required('Required'),
-      closesAt: Yup.string().required('Required'),
+      day: Yup.string(),
+      opensAt: Yup.string(),
+      closesAt: Yup.string(),
     })
   ),
-  applicationProcess: Yup.string().required('Required'),
-  requiredDocuments: Yup.string().required('Required'),
-  serviceLanguages: Yup.string().required('Required'),
-  interpretationServices: Yup.string().required('Required'),
-  waitTime: Yup.string().required('Required'),
-  keywords: Yup.string().required('Required'),
+  applicationProcess: Yup.string(),
+  requiredDocuments: Yup.string(),
+  serviceLanguages: Yup.string(),
+  interpretationServices: Yup.string(),
+  waitTime: Yup.string(),
+  keywords: Yup.string(),
 });
 
 const initialValues = {
@@ -134,12 +134,23 @@ const initialValues = {
   },
 };
 
-const ServiceFormContainer = () => {
+const ServiceFormContainer = props => {
+  const goToServices = () => {
+    props.router.push('/admin/services');
+  };
+
   return (
     <LandingComponent>
-      <Title titleText="Create A Service" />
+      <Title
+        titleText="Create A Service"
+        hideCancelAction={false}
+        submitLabel={'Save Service'}
+        cancelClicked={goToServices}
+      />
       <Formik
-        render={_props => <ServiceForm {..._props} />}
+        render={_props => (
+          <ServiceForm {..._props} goToServices={goToServices} />
+        )}
         initialValues={initialValues}
         validationSchema={SignupSchema}
         onSubmit={() => {}}
