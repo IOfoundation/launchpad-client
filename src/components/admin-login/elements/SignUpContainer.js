@@ -9,8 +9,8 @@ import {Formik} from 'formik';
 
 import SignUpForm from './SignUpForm';
 
-import * as user from 'Actions/user';
-import * as snackbarActions from 'Actions/snackbar';
+import * as user from '@Actions/user';
+import * as snackbarActions from '@Actions/snackbar';
 
 const SignUpSchema = Yup.object().shape({
   name: Yup.string().required('Required'),

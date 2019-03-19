@@ -9,8 +9,8 @@ import {Formik} from 'formik';
 
 import SingInForm from './SignInForm';
 
-import * as user from 'Actions/user';
-import * as snackbarActions from 'Actions/snackbar';
+import * as user from '@Actions/user';
+import * as snackbarActions from '@Actions/snackbar';
 
 const SignupSchema = Yup.object().shape({
   email: Yup.string()

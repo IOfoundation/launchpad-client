@@ -9,8 +9,8 @@ import {bindActionCreators} from 'redux';
 
 import PasswordResetForm from './PasswordResetForm';
 
-import * as user from 'Actions/user';
-import * as snackbarActions from 'Actions/snackbar';
+import * as user from '@Actions/user';
+import * as snackbarActions from '@Actions/snackbar';
 
 const SignupSchema = Yup.object().shape({
   email: Yup.string()

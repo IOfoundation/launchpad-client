@@ -3,9 +3,9 @@ import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
-import SnackbarUI from 'Shared/SnackBar';
+import SnackbarUI from '@Shared/SnackBar';
 
-import {containerStyles} from 'Utils/containerStyles';
+import {containerStyles} from '@Utils/containerStyles';
 
 const Container = props => {
   const {classes, children, direction, modifier} = props;

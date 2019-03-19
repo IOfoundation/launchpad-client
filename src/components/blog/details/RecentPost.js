@@ -6,7 +6,7 @@ import {withStyles} from '@material-ui/core/styles';
 import PostDateInformation from './PostDateInformation';
 import RecentPostLoading from './RecentPostLoading';
 
-import {truncate} from 'Utils';
+import {truncate} from '@Utils';
 
 const styles = theme => {
   return {

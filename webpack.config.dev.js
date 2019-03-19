@@ -11,9 +11,9 @@ export default {
     modules: ['babel-polyfill', path.resolve('src'), 'node_modules'],
     extensions: ['*', '.js', '.json'],
     alias: {
-      Actions: path.resolve(__dirname, 'src/actions/'),
-      Shared: path.resolve(__dirname, 'src/components/shared/'),
-      Utils: path.resolve(__dirname, 'src/utils/'),
+      '@Actions': path.resolve(__dirname, 'src/actions/'),
+      '@Shared': path.resolve(__dirname, 'src/components/shared/'),
+      '@Utils': path.resolve(__dirname, 'src/utils/'),
     },
   },
   // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool

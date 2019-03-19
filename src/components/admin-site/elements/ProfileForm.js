@@ -3,8 +3,8 @@ import {Form, FieldArray} from 'formik';
 import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 
-import FormTextField from 'Shared/FormElements/TextFieldDefault';
-import SelectElement from 'Shared/FormElements/Select';
+import FormTextField from '@Shared/FormElements/TextFieldDefault';
+import SelectElement from '@Shared/FormElements/Select';
 
 import {
   sectionOnePhoto,

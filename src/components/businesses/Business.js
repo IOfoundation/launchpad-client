@@ -93,13 +93,47 @@ class Business extends PureComponent {
       </div>
     );
   };
+
+  _renderMainLocations = main_location => {
+    return (
+      <div className="col-lg-4 col-md-4 col-xs-12 p-0 m-right-52 main-location">
+        <p className="business-title">{'Main Location:'}</p>
+        <h4>{main_location.address.address_1}</h4>
+        {main_location.address.address_2 ? (
+          <h4>{main_location.address.address_2}</h4>
+        ) : (
+          ''
+        )}
+        <h4>{`${main_location.address.city}, ${
+          main_location.address.state_province
+        }`}</h4>
+      </div>
+    );
+  };
+
+  _renderLocationInfo = locations => {
+    const main_location = locations[0];
+    const locationText = locations.length === 1 ? ' Location' : ' Locations';
+    const totalLocations = locations.length;
+
+    return (
+      <p className="location text-bold">
+        <span>{`${totalLocations} ${locationText}`}</span>
+        <span className="m-x-7">{'|'}</span>
+        <span>
+          {locations.length > 1 && 'Main location in '}
+          {main_location.address.city}
+          {', '}
+          {main_location.address.state_province}
+        </span>
+      </p>
+    );
+  };
+
   render() {
     const {business, isMobile} = this.props;
     const locations = business.locations;
     const [main_location, ...other_locations] = locations;
-    const locationText = locations.length === 1 ? ' Location' : ' Locations';
-    const totalLocations = locations.length;
-
     let description = business.description;
 
     if (description.split('').length > maxCharacters) {
@@ -174,18 +208,8 @@ class Business extends PureComponent {
           </div>
           <div className="grid col-lg-12 col-md-12 col-xs-12 full-information p-0">
             <div className="grid col-lg-12 col-md-12 col-xs-12 p-0 m-bot-25">
-              <div className="col-lg-4 col-md-4 col-xs-12 p-0 m-right-52 main-location">
-                <p className="business-title">{'Main Location:'}</p>
-                <h4>{main_location.address.address_1}</h4>
-                {main_location.address.address_2 ? (
-                  <h4>{main_location.address.address_2}</h4>
-                ) : (
-                  ''
-                )}
-                <h4>{`${main_location.address.city}, ${
-                  main_location.address.state_province
-                }`}</h4>
-              </div>
+              {!isEmpty(main_location) &&
+                this._renderMainLocations(main_location)}
               {!isEmpty(business.contacts) &&
                 this._renderContacts(business.contacts[0])}
             </div>
@@ -243,16 +267,7 @@ class Business extends PureComponent {
               </div>
             )}
           </div>
-          <p className="location text-bold">
-            <span>{`${totalLocations} ${locationText}`}</span>
-            <span className="m-x-7">{'|'}</span>
-            <span>
-              {locations.length > 1 && 'Main location in '}
-              {main_location.address.city}
-              {', '}
-              {main_location.address.state_province}
-            </span>
-          </p>
+          {!isEmpty(main_location) && this._renderLocationInfo(locations)}
         </div>
       </div>
     );

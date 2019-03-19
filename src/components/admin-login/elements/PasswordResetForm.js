@@ -3,7 +3,7 @@ import {Form} from 'formik';
 import {withStyles} from '@material-ui/core/styles';
 import {PropTypes} from 'prop-types';
 
-import FormTextField from 'Shared/FormElements/TextField';
+import FormTextField from '@Shared/FormElements/TextField';
 
 const PasswordResetForm = props => {
   const {

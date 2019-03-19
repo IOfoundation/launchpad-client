@@ -10,8 +10,8 @@ import ProfileForm from './ProfileForm';
 import LandingComponent from '../Landing';
 import Title from '../Title';
 
-import * as user from 'Actions/user';
-import * as snackbarActions from 'Actions/snackbar';
+import * as user from '@Actions/user';
+import * as snackbarActions from '@Actions/snackbar';
 
 const SignupSchema = Yup.object().shape({
   contactEmail: Yup.string()
@@ -21,28 +21,26 @@ const SignupSchema = Yup.object().shape({
   name: Yup.string().required('Required'),
   website: Yup.string().required('Required'),
   description: Yup.string().required('Required'),
-  accreditations: Yup.string().required('Required'),
-  dateIncorporation: Yup.string().required('Required'),
-  legalStatus: Yup.string().required('Required'),
-  fundingSources: Yup.string().required('Required'),
-  licenses: Yup.string().required('Required'),
-  taxIdentifier: Yup.string().required('Required'),
-  taxStatus: Yup.string().required('Required'),
+  accreditations: Yup.string(),
+  dateIncorporation: Yup.string(),
+  legalStatus: Yup.string(),
+  fundingSources: Yup.string(),
+  licenses: Yup.string(),
+  taxIdentifier: Yup.string(),
+  taxStatus: Yup.string(),
   twitter: Yup.string(),
   facebook: Yup.string(),
   linkedin: Yup.string(),
-  phones: Yup.array()
-    .of(
-      Yup.object().shape({
-        phoneNumber: Yup.string().required('Required'),
-        ext: Yup.string().required('Required'),
-        vanityNumber: Yup.string().required('Required'),
-        numberType: Yup.string().required('Required'),
-        department: Yup.string(),
-        countryExt: Yup.string(),
-      })
-    )
-    .required('Must have phones'),
+  phones: Yup.array().of(
+    Yup.object().shape({
+      phoneNumber: Yup.string(),
+      ext: Yup.string(),
+      vanityNumber: Yup.string(),
+      numberType: Yup.string(),
+      department: Yup.string(),
+      countryExt: Yup.string(),
+    })
+  ),
 });
 
 const initialValues = {
@@ -64,7 +62,7 @@ const initialValues = {
   linkedin: '',
   phones: [
     {
-      phoneNumber: '1',
+      phoneNumber: '',
       ext: '',
       vanityNumber: '',
       numberType: '',

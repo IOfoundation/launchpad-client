@@ -4,9 +4,9 @@ import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
 import FeaturedEvent from './FeaturedEvent';
-import Loading from 'Shared/Loading';
+import Loading from '@Shared/Loading';
 
-import {getDate, containerStyles} from 'Utils';
+import {getDate, containerStyles} from '@Utils';
 
 const styles = theme => ({
   container: {
