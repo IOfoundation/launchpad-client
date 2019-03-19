@@ -31,7 +31,7 @@ const styles = theme => ({
     padding: '46px 0',
     justifyContent: 'center',
     [theme.breakpoints.down('sm')]: {
-      padding: '2em',
+      padding: '1em',
       height: 'auto',
       marginTop: '52px',
     },

@@ -16,23 +16,26 @@ exports[`Admin-site <Title /> renders snapshot of Title 1`] = `
     >
       <h1
         className="Title-Title-3"
-      >
-        Profile
-      </h1>
-      <div
-        className="Title-Buttons-1"
-      >
-        <a
-          className="title-as-link m-right-24"
+      />
+      <WithStyles(Buttons)>
+        <Buttons
+          classes={
+            Object {
+              "Buttons": "Buttons-Buttons-4",
+            }
+          }
         >
-          Cancel
-        </a>
-        <button
-          className="btn btn__submit"
-        >
-          Save Changes
-        </button>
-      </div>
+          <div
+            className="Buttons-Buttons-4"
+          >
+            <button
+              className="btn btn__submit"
+            >
+              Save Changes
+            </button>
+          </div>
+        </Buttons>
+      </WithStyles(Buttons)>
     </div>
   </Title>
 </WithStyles(Title)>

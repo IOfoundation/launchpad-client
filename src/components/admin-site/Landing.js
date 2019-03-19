@@ -25,7 +25,12 @@ const LandingComponent = props => {
   return (
     <Container>
       {navigationElement}
-      <Grid item={true} xs={navigation ? 9 : 10} className={classes.Content}>
+      <Grid
+        item={true}
+        xs={12}
+        md={navigation ? 9 : 10}
+        className={classes.Content}
+      >
         {children}
       </Grid>
     </Container>

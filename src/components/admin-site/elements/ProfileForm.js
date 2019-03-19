@@ -7,6 +7,8 @@ import Grid from '@material-ui/core/Grid';
 import FormTextField from '@Shared/FormElements/TextFieldDefault';
 import SelectElement from '@Shared/FormElements/Select';
 
+import {truncate} from '@Utils';
+
 import {
   sectionOnePhoto,
   sectionOneRegular,
@@ -26,7 +28,6 @@ const ProfileForm = props => {
     values,
   } = props;
 
-  console.log(breakpoint);
   return (
     <Form className="profile-form" onSubmit={handleSubmit} style={{padding: 8}}>
       <Grid
@@ -146,6 +147,11 @@ const ProfileForm = props => {
                             errors.phones[index] &&
                             errors.phones[index][key]
                         );
+                      let label = map.label;
+
+                      if (label.split('').length > 25) {
+                        label = truncate(label, 25);
+                      }
 
                       return (
                         <Grid key={id} item={true} xs={12} md={6}>
@@ -157,7 +163,7 @@ const ProfileForm = props => {
                               handleChange={handleChange}
                               id={id}
                               key={id}
-                              label={map.label}
+                              label={label}
                               name={id}
                               value={phone[key]}
                             />
@@ -172,7 +178,7 @@ const ProfileForm = props => {
                               helperText={map.helperText}
                               id={key}
                               key={id}
-                              label={map.label}
+                              label={label}
                               name={id}
                               value={phone[key]}
                             />
@@ -299,6 +305,7 @@ const styles = theme => {
       width: '260px',
       margin: '0 0 16px',
       [theme.breakpoints.down('sm')]: {
+        maxWidth: '243px',
         width: '100%',
       },
     },
