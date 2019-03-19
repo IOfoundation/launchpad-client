@@ -8,7 +8,7 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 
-import {combineStyles} from '../../../../../utils';
+import {combineStyles} from '@Utils';
 
 class AddNew extends PureComponent {
   state = {

@@ -1,11 +1,13 @@
 import React, {PureComponent, Fragment} from 'react';
 import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import {sharedStyles, sharedClasses} from '../styles';
 import {FieldArray} from 'formik';
-import SelectElement from '../../../../shared/FormElements/Select';
-import FormTextField from '../../../../shared/FormElements/TextFieldDefault';
 import Grid from '@material-ui/core/Grid';
+
+import SelectElement from '@Shared/FormElements/Select';
+import FormTextField from '@Shared/FormElements/TextFieldDefault';
+
+import {sharedStyles, sharedClasses} from '../styles';
 
 class Item extends PureComponent {
   deleteItem = () => {

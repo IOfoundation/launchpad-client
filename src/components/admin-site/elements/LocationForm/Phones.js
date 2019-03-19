@@ -1,12 +1,13 @@
 import React, {Fragment} from 'react';
 import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import {sharedStyles, sharedClasses} from './styles';
-import {phoneNumberSection} from '../ProfileForm/elements';
 import {FieldArray} from 'formik';
 
-import FormTextField from '../../../shared/FormElements/TextFieldDefault';
-import SelectElement from '../../../shared/FormElements/Select';
+import FormTextField from '@Shared/FormElements/TextFieldDefault';
+import SelectElement from '@Shared/FormElements/Select';
+
+import {sharedStyles, sharedClasses} from './styles';
+import {phoneNumberSection} from '../ProfileForm/elements';
 
 const Phones = props => {
   const {classes, touched, errors, handleChange, handleBlur, values} = props;

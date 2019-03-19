@@ -1,11 +1,12 @@
 import React, {Fragment} from 'react';
 import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import {sharedStyles, sharedClasses} from './styles';
 import {FieldArray} from 'formik';
 
 import AddNew from './Languages/AddNew';
 import Item from './Languages/Item';
+
+import {sharedStyles, sharedClasses} from './styles';
 
 const Languages = props => {
   const {values, classes, handleChange, errors} = props;

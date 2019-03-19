@@ -1,7 +1,9 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import FormTextField from '../../../shared/FormElements/TextFieldDefault';
+
+import FormTextField from '@Shared/FormElements/TextFieldDefault';
+
 import {sharedStyles, sharedClasses} from './styles';
 
 export const Details = props => {

@@ -1,10 +1,11 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import {sharedStyles} from './styles';
 import Grid from '@material-ui/core/Grid';
 
-import {combineStyles} from '../../../../utils';
+import {sharedStyles} from './styles';
+
+import {combineStyles} from '@Utils';
 
 const styles = () => {
   return {
@@ -22,7 +23,7 @@ const styles = () => {
       opacity: 0.5,
     },
     dangerButton: {
-      maxWidth: '70%',
+      maxWidth: '55%',
     },
   };
 };

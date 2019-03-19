@@ -1,9 +1,10 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import {sharedStyles, sharedClasses} from './styles';
 
 import Item from './Hours/Item';
+
+import {sharedStyles, sharedClasses} from './styles';
 
 const Hours = props => {
   const {values, classes, handleChange, errors, handleBlur} = props;

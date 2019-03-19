@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
+
 import {sharedStyles, sharedClasses} from '../styles';
 
 class Item extends PureComponent {

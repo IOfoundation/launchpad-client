@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -12,22 +12,20 @@ const LandingComponent = props => {
 
   if (navigation) {
     navigationElement = (
-      <Fragment>
+      <Grid item={true} xs={3}>
         <Navigation />
-        <div className={classes.Edit}>
+        <div className={`${classes.Edit} title-as-link`}>
           <i className="material-icons">{'person'}</i>
           <span>{'Edit Your Account'}</span>
         </div>
-      </Fragment>
+      </Grid>
     );
   }
 
   return (
     <Container>
-      <Grid item={true} xs={3}>
-        {navigationElement}
-      </Grid>
-      <Grid item={true} xs={9} className={classes.Content}>
+      {navigationElement}
+      <Grid item={true} xs={navigation ? 9 : 10} className={classes.Content}>
         {children}
       </Grid>
     </Container>

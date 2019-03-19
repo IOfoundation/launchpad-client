@@ -32,7 +32,7 @@ const LocationForm = props => {
   };
 
   return (
-    <Form className="profile-form" onSubmit={handleSubmit}>
+    <Form className="location-form" onSubmit={handleSubmit}>
       <Overview {...shared} />
       <Details {...shared} />
       <Services {...shared} />
@@ -63,8 +63,11 @@ LocationForm.propTypes = {
     sectionOnePhotoPhoto: PropTypes.string,
   }),
   errors: PropTypes.shape({
-    email: PropTypes.string,
-    password: PropTypes.string,
+    locationName: PropTypes.string,
+    alternateName: PropTypes.string,
+    locationDescription: PropTypes.string,
+    locationEmail: PropTypes.string,
+    locationWebsite: PropTypes.string,
   }),
   handleBlur: PropTypes.func,
   handleChange: PropTypes.func,

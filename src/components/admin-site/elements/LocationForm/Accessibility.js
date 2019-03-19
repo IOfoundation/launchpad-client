@@ -1,10 +1,11 @@
 import React, {PureComponent} from 'react';
 import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import {sharedStyles, sharedClasses} from './styles';
 import Grid from '@material-ui/core/Grid';
 
-import Checkbox from '../../../shared/FormElements/Checkbox';
+import Checkbox from '@Shared/FormElements/Checkbox';
+
+import {sharedStyles, sharedClasses} from './styles';
 
 class Accessibility extends PureComponent {
   handleChange = event => {

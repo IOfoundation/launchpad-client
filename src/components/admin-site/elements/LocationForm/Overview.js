@@ -1,9 +1,11 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import FormTextField from '../../../shared/FormElements/TextFieldDefault';
+
+import FormTextField from '@Shared/FormElements/TextFieldDefault';
+import Checkbox from '@Shared/FormElements/Checkbox';
+
 import {sharedStyles, sharedClasses} from './styles';
-import Checkbox from '../../../shared/FormElements/Checkbox';
 
 export const Overview = props => {
   const {errors, touched, handleBlur, handleChange, values, classes} = props;
@@ -20,13 +22,14 @@ export const Overview = props => {
       <div className={classes.wrapper}>
         <div className={classes.halfs}>
           <FormTextField
-            autocomplete={'off'}
+            autocomplete="off"
             error={touched.locationName && Boolean(errors.locationName)}
             errors={errors}
             handleBlur={handleBlur}
             handleChange={handleChange}
-            id={'locationName'}
-            label={'Location Name'}
+            id="locationName"
+            name="locationName"
+            label="Location Name"
             value={values.locationName}
           />
         </div>

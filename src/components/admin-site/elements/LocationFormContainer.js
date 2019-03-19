@@ -1,23 +1,24 @@
 import React from 'react';
-import LocationForm from './LocationForm';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {PropTypes} from 'prop-types';
-
-import * as user from '../../../actions/user';
-import * as snackbarActions from '../../../actions/snackbar';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {withRouter} from 'react-router';
+
+import LocationForm from './LocationForm';
 import LandingComponent from '../Landing';
 import Title from '../Title';
 import Buttons from '../Buttons';
 
-const SignupSchema = Yup.object().shape({
+import * as user from '@Actions/user';
+import * as snackbarActions from '@Actions/snackbar';
+
+const LocationSchema = Yup.object().shape({
   locationName: Yup.string().required('Required'),
   alternateName: Yup.string().required('Required'),
   locationDescription: Yup.string().required('Required'),
-  isMainLocation: Yup.boolean,
+  isMainLocation: Yup.boolean(),
   locationEmail: Yup.string()
     .email('Invalid email address')
     .required('Required'),
@@ -36,42 +37,54 @@ const SignupSchema = Yup.object().shape({
     zip: Yup.string(),
   }),
   mailingAddress: Yup.object().shape({
-    attention: Yup.string(),
     address: Yup.string(),
     address2: Yup.string(),
+    attention: Yup.string(),
     city: Yup.string(),
     state: Yup.string(),
     zip: Yup.string(),
   }),
   phones: Yup.array().of(
     Yup.object().shape({
-      phoneNumber: Yup.string(),
-      ext: Yup.string(),
-      vanityNumber: Yup.string(),
-      numberType: Yup.string(),
-      department: Yup.string(),
       countryExt: Yup.string(),
+      department: Yup.string(),
+      ext: Yup.string(),
+      numberType: Yup.string(),
+      phoneNumber: Yup.string(),
+      vanityNumber: Yup.string(),
     })
   ),
-  languages: Yup.string().required('Required'),
-  hours: Yup.object().shape({
-    regular: Yup.array().of(
-      Yup.object().shape({
-        day: Yup.string(),
-        opensAt: Yup.string(),
-        closesAt: Yup.string(),
-      })
-    ),
-    holidays: Yup.array().of(
-      Yup.object().shape({
-        day: Yup.string(),
-        opensAt: Yup.string(),
-        closesAt: Yup.string(),
-      })
-    ),
-  }),
+  languages: Yup.array()
+    .of(Yup.string())
+    .required('Required'),
+  hoursRegular: Yup.array().of(
+    Yup.object().shape({
+      countryExt: Yup.string(),
+      department: Yup.string(),
+      ext: Yup.string(),
+      numberType: Yup.string(),
+      phoneNumber: Yup.string(),
+      vanityNumber: Yup.string(),
+    })
+  ),
+  hoursHolidays: Yup.array().of(
+    Yup.object().shape({
+      countryExt: Yup.string(),
+      department: Yup.string(),
+      ext: Yup.string(),
+      numberType: Yup.string(),
+      phoneNumber: Yup.string(),
+      vanityNumber: Yup.string(),
+    })
+  ),
   transportation: Yup.string(),
-  accessibility: Yup.string(),
+  accessibility: Yup.object().shape({
+    disabledParking: Yup.boolean(),
+    elevator: Yup.boolean(),
+    informationOnCd: Yup.boolean(),
+    interpreterForTheDeaf: Yup.boolean(),
+    ramp: Yup.boolean(),
+  }),
 });
 
 const initialValues = {
@@ -134,10 +147,11 @@ const LocationFormContainer = props => {
         cancelClicked={goToLocation}
       />
       <Formik
-        render={_props => <LocationForm {..._props} />}
         initialValues={initialValues}
-        validationSchema={SignupSchema}
         onSubmit={() => {}}
+        render={_props => <LocationForm {..._props} />}
+        validateOnChange={true}
+        validationSchema={LocationSchema}
       />
       <Buttons
         hideCancelAction={false}
