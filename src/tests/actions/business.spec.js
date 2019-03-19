@@ -1,5 +1,5 @@
 import nock from 'nock';
-import * as actions from 'actions/business';
+import * as actions from '@Actions/business';
 import {BusinessTypes as types} from 'action-types';
 
 describe.skip('filterOrganizations', () => {

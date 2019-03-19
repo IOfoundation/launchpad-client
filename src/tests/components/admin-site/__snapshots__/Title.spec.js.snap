@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Admin-site <Title /> renders snapshot of Title 1`] = `
+<WithStyles(Title)>
+  <Title
+    classes={
+      Object {
+        "Buttons": "Title-Buttons-1",
+        "Container": "Title-Container-2",
+        "Title": "Title-Title-3",
+      }
+    }
+  >
+    <div
+      className="Title-Container-2"
+    >
+      <h1
+        className="Title-Title-3"
+      >
+        Profile
+      </h1>
+      <div
+        className="Title-Buttons-1"
+      >
+        <a
+          className="title-as-link m-right-24"
+        >
+          Cancel
+        </a>
+        <button
+          className="btn btn__submit"
+        >
+          Save Changes
+        </button>
+      </div>
+    </div>
+  </Title>
+</WithStyles(Title)>
+`;

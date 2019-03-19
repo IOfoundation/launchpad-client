@@ -7,11 +7,11 @@ import {bindActionCreators} from 'redux';
 import DOMPurify from 'dompurify';
 import Grid from '@material-ui/core/Grid';
 
-import Loading from 'Shared/Loading';
+import Loading from '@Shared/Loading';
 import RecentPosts from './RecentPost';
 import PostDateInformation from './PostDateInformation';
 
-import * as blogActions from 'Actions/blogs';
+import * as blogActions from '@Actions/blogs';
 
 const styles = theme => ({
   body: {

@@ -5,24 +5,6 @@ import Grid from '@material-ui/core/Grid';
 
 import Container from './Container';
 
-const styles = () => {
-  return {
-    Title: {
-      textAlign: 'center',
-      fontSize: '48px',
-      marginBottom: '32px',
-      lineHeight: '60px',
-    },
-    Description: {
-      fontSize: '16px',
-      lineHeight: '24px',
-      margin: '0 auto',
-      maxWidth: '420px',
-      textAlign: 'center',
-    },
-  };
-};
-
 const ResetYourPassword = props => {
   const {classes} = props;
 
@@ -40,6 +22,24 @@ const ResetYourPassword = props => {
       </Grid>
     </Container>
   );
+};
+
+const styles = () => {
+  return {
+    Title: {
+      textAlign: 'center',
+      fontSize: '48px',
+      marginBottom: '32px',
+      lineHeight: '60px',
+    },
+    Description: {
+      fontSize: '16px',
+      lineHeight: '24px',
+      margin: '0 auto',
+      maxWidth: '420px',
+      textAlign: 'center',
+    },
+  };
 };
 
 ResetYourPassword.propTypes = {

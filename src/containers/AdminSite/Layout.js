@@ -3,7 +3,7 @@ import {PropTypes} from 'prop-types';
 
 import AdminLayout from '../../components/layouts/Admin';
 
-import {viewport, sizeCheck} from 'Utils';
+import {viewport, sizeCheck} from '@Utils';
 
 class Layout extends PureComponent {
   state = {

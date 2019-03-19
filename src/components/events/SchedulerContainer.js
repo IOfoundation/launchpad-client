@@ -9,7 +9,7 @@ import Modal from '@material-ui/core/Modal';
 
 import Content from './Modal/Content';
 
-import {containerStyles, getDate, mobileDaysMap} from 'Utils';
+import {containerStyles, getDate, mobileDaysMap} from '@Utils';
 
 const styles = theme => ({
   container: {

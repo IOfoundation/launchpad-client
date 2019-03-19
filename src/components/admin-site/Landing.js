@@ -4,8 +4,26 @@ import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
 import Container from './Container';
-import Title from './Title';
 import Navigation from './Navigation';
+
+const LandingComponent = props => {
+  const {classes, children} = props;
+
+  return (
+    <Container>
+      <Grid item={true} xs={3}>
+        <Navigation />
+        <div className={classes.Edit}>
+          <i className="material-icons">{'person'}</i>
+          <span>{'Edit Your Account'}</span>
+        </div>
+      </Grid>
+      <Grid item={true} xs={9} className={classes.Content}>
+        {children}
+      </Grid>
+    </Container>
+  );
+};
 
 const styles = () => {
   return {
@@ -38,26 +56,11 @@ const styles = () => {
   };
 };
 
-const LandingComponent = props => {
-  const {classes} = props;
-
-  return (
-    <Container>
-      <Grid item={true} xs={3}>
-        <Navigation />
-        <div className={`${classes.Edit} title-as-link`}>
-          <i className="material-icons">{'person'}</i>
-          <span>{'Edit Your Account'}</span>
-        </div>
-      </Grid>
-      <Grid item={true} xs={9} className={classes.Content}>
-        <Title />
-      </Grid>
-    </Container>
-  );
-};
-
 LandingComponent.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
   classes: PropTypes.shape({
     Content: PropTypes.string,
     Description: PropTypes.string,

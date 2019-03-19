@@ -2,7 +2,8 @@ import React from 'react';
 import {Form} from 'formik';
 import {Link} from 'react-router';
 import {PropTypes} from 'prop-types';
-import FormTextField from '../../shared/FormElements/TextField';
+
+import FormTextField from '@Shared/FormElements/TextField';
 
 const SingInForm = props => {
   const {

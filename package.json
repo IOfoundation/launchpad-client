@@ -154,7 +154,10 @@
     ],
     "moduleNameMapper": {
       "\\.(css|scss)$": "identity-obj-proxy",
-      "^.+\\.(gif|ttf|eot|svg|woff|woff2|ico)$": "<rootDir>/tools/fileMock.js"
+      "^.+\\.(gif|ttf|eot|svg|woff|woff2|ico)$": "<rootDir>/tools/fileMock.js",
+      "@Actions(.*)$": "<rootDir>/src/actions/$1",
+      "@Shared(.*)$": "<rootDir>/src/components/shared/$1",
+      "@Utils(.*)$": "<rootDir>/src/utils/$1"
     },
     "coverageReporters": [
       "html",

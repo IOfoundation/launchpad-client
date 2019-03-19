@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Admin-site <Navigation /> renders snapshot of Navigation 1`] = `
+<WithStyles(Navigation)>
+  <Navigation
+    classes={
+      Object {
+        "container": "Navigation-container-1",
+        "description": "Navigation-description-3",
+        "link": "Navigation-link-5",
+        "navigation": "Navigation-navigation-4",
+        "title": "Navigation-title-2",
+      }
+    }
+  >
+    <div
+      className="Navigation-container-1"
+    >
+      <h3
+        className="Navigation-title-2"
+      >
+        Your organization
+      </h3>
+      <p
+        className="Navigation-description-3"
+      >
+        Governor's Office of Business and Economic Development
+      </p>
+      <ul
+        className="Navigation-navigation-4"
+      >
+        <li>
+          <a
+            className="Navigation-link-5"
+          >
+            Profile
+          </a>
+        </li>
+        <li>
+          <a
+            className="Navigation-link-5"
+          >
+            Locations
+          </a>
+        </li>
+        <li>
+          <a
+            className="Navigation-link-5"
+          >
+            Services
+          </a>
+        </li>
+        <li>
+          <a
+            className="Navigation-link-5"
+          >
+            Blog Posts
+          </a>
+        </li>
+        <li>
+          <a
+            className="Navigation-link-5"
+          >
+            Events
+          </a>
+        </li>
+      </ul>
+      <h3
+        className="Navigation-title-2 m-top-16"
+      >
+        Status
+      </h3>
+      <p
+        className="Navigation-description-3"
+      >
+        Published
+      </p>
+      <button
+        className="btn btn__red"
+      >
+        Unpublish
+      </button>
+    </div>
+  </Navigation>
+</WithStyles(Navigation)>
+`;

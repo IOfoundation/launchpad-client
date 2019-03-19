@@ -2,39 +2,6 @@ import React from 'react';
 import {withStyles} from '@material-ui/core/styles';
 import {PropTypes} from 'prop-types';
 
-const styles = () => {
-  return {
-    Buttons: {
-      flex: 1,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'flex-end',
-      paddingBottom: '24px',
-      '& .btn': {
-        width: 'auto',
-        padding: '9px 25px',
-        fontSize: '14px',
-        fontFamily: '"proxima-nova-semi", Georgia, sans-serif',
-        margin: 0,
-      },
-      '& a': {
-        color: '#7B7C7E',
-      },
-    },
-    Container: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      borderBottom: '2px solid black',
-    },
-    Title: {
-      fontSize: '34px',
-      lineHeight: '40px',
-      fontFamily: '"proxima-nova-bold", Georgia, sans-serif',
-      color: '#070709',
-    },
-  };
-};
-
 const Title = props => {
   const {classes} = props;
 
@@ -55,6 +22,40 @@ Title.propTypes = {
     Container: PropTypes.string,
     Title: PropTypes.string,
   }),
+};
+
+const styles = () => {
+  return {
+    Buttons: {
+      flex: 1,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      paddingBottom: '28px',
+      '& .btn': {
+        width: 'auto',
+        padding: '9px 25px',
+        fontSize: '14px',
+        fontFamily: '"proxima-nova-semi", Georgia, sans-serif',
+        margin: 0,
+      },
+      '& a': {
+        color: '#7B7C7E',
+      },
+    },
+    Container: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      borderBottom: '2px solid black',
+      marginBottom: '28px',
+    },
+    Title: {
+      fontSize: '34px',
+      lineHeight: '40px',
+      fontFamily: '"proxima-nova-bold", Georgia, sans-serif',
+      color: '#070709',
+    },
+  };
 };
 
 export default withStyles(styles)(Title);

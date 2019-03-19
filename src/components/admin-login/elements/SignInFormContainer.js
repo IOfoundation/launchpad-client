@@ -1,16 +1,16 @@
 import React, {PureComponent} from 'react';
-import {Formik} from 'formik';
 import Grid from '@material-ui/core/Grid';
 import * as Yup from 'yup';
 import {PropTypes} from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {withRouter} from 'react-router';
+import {Formik} from 'formik';
 
 import SingInForm from './SignInForm';
 
-import * as user from 'Actions/user';
-import * as snackbarActions from 'Actions/snackbar';
+import * as user from '@Actions/user';
+import * as snackbarActions from '@Actions/snackbar';
 
 const SignupSchema = Yup.object().shape({
   email: Yup.string()
@@ -34,7 +34,7 @@ class SignInFormContainer extends PureComponent {
         snackbar.showSnackbar({
           message: 'Login Successful',
         });
-        router.push('/admin/landing');
+        router.push('/admin/profile');
       }
     }
   }

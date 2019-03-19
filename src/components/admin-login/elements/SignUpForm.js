@@ -1,7 +1,8 @@
 import React from 'react';
 import {Form} from 'formik';
 import {PropTypes} from 'prop-types';
-import FormTextField from '../../shared/FormElements/TextField';
+
+import FormTextField from '@Shared/FormElements/TextField';
 
 const SingUpForm = props => {
   const {
