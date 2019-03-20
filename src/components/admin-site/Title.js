@@ -5,6 +5,8 @@ import Grid from '@material-ui/core/Grid';
 
 import Buttons from './Buttons';
 
+import Buttons from './Buttons';
+
 const Title = props => {
   const {
     classes,
