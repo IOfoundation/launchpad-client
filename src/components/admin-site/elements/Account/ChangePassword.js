@@ -17,7 +17,7 @@ export const ChangePassword = props => {
       <Grid container={true} spacing={16}>
         <Grid item={true} xs={5}>
           <FormTextField
-            autocomplete={'off'}
+            autocomplete="user-password"
             error={touched.currentPassword && Boolean(errors.currentPassword)}
             errors={errors}
             handleBlur={handleBlur}

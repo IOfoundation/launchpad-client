@@ -8,11 +8,13 @@ const loginStart = config => {
   };
 };
 
-const loginSuccess = (authorization, organizationId) => {
+const loginSuccess = ({authorization, username, organizationId, email}) => {
   return {
     type: types.LOGIN_SUCCESS,
     authorization,
     organizationId,
+    username,
+    email,
   };
 };
 
@@ -126,16 +128,17 @@ export const login = ({password, email}) => {
           password,
         },
       });
+      const data = {
+        authorization: httpResponse.headers.authorization,
+        username: httpResponse.data.name,
+        email: httpResponse.data.email,
+        organizationId: httpResponse.data.organization_id,
+      };
 
       localStorage.setItem('userAuth', httpResponse.headers.authorization);
       localStorage.setItem('userEmail', email);
       localStorage.setItem('organizationId', httpResponse.data.organization_id);
-      dispatch(
-        loginSuccess(
-          httpResponse.headers.authorization,
-          httpResponse.data.organization_id
-        )
-      );
+      dispatch(loginSuccess(data));
     } catch (errors) {
       dispatch(loginError(errors.data.error));
     }

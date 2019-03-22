@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {PropTypes} from 'prop-types';
@@ -25,41 +25,58 @@ const AccountSchema = Yup.object().shape({
     .required('Required'),
 });
 
-const initialValues = {
-  fullName: '',
-  emailAddress: '',
-  currentPassword: '',
-  newPassword: '',
-  confirmPassword: '',
-};
-
-const AccountContainer = props => {
-  const goToProfile = () => {
-    props.router.push('/admin/profile');
+class AccountContainer extends PureComponent {
+  goToProfile = () => {
+    this.props.router.push('/admin/profile');
+  };
+  submitMyForm = null;
+  getValues = e => {
+    if (this.submitMyForm) {
+      this.submitMyForm(e);
+    }
   };
 
-  return (
-    <LandingComponent navigation={false}>
-      <Title
-        titleText="Edit Your Account"
-        hideCancelAction={false}
-        submitLabel={'Update'}
-        cancelClicked={goToProfile}
-      />
-      <Formik
-        render={_props => <Account {..._props} />}
-        initialValues={initialValues}
-        validationSchema={AccountSchema}
-        onSubmit={() => {}}
-      />
-    </LandingComponent>
-  );
-};
+  render() {
+    const {userInformation} = this.props;
+    const initialValues = {
+      fullName: userInformation.username,
+      emailAddress: userInformation.email,
+      currentPassword: '',
+      newPassword: '',
+      confirmPassword: '',
+    };
+    return (
+      <LandingComponent navigation={false}>
+        <Title
+          titleText="Edit Your Account"
+          hideCancelAction={false}
+          submitLabel={'Update'}
+          cancelClicked={this.goToProfile}
+          submitClicked={this.getValues}
+        />
+        <Formik
+          render={_props => {
+            this.submitMyForm = _props.submitForm;
+            return <Account {..._props} />;
+          }}
+          initialValues={initialValues}
+          validationSchema={AccountSchema}
+          onSubmit={values => {
+            console.log(values);
+          }}
+        >
+          {}
+        </Formik>
+      </LandingComponent>
+    );
+  }
+}
 
 const mapStateToProps = _state => {
   return {
     error: _state.user.error,
     isAuth: _state.user.authorization !== '',
+    userInformation: _state.user.userInformation,
   };
 };
 
@@ -81,6 +98,13 @@ AccountContainer.propTypes = {
   }),
   userActions: PropTypes.shape({
     login: PropTypes.func,
+  }),
+  userInformation: PropTypes.shape({
+    fullName: PropTypes.string,
+    emailAddress: PropTypes.string,
+    currentPassword: PropTypes.string,
+    newPassword: PropTypes.string,
+    confirmPassword: PropTypes.string,
   }),
 };
 

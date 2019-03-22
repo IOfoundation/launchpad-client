@@ -7,14 +7,7 @@ import ChangePassword from './Account/ChangePassword';
 import CancelAccount from './Account/CancelAccount';
 
 const ProfileForm = props => {
-  const {
-    errors,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-    touched,
-    values,
-  } = props;
+  const {errors, handleBlur, handleChange, touched, values} = props;
 
   const shared = {
     errors,
@@ -25,7 +18,7 @@ const ProfileForm = props => {
   };
 
   return (
-    <Form className="profile-form" onSubmit={handleSubmit}>
+    <Form className="profile-form">
       <Basic {...shared} />
       <ChangePassword {...shared} />
       <CancelAccount />

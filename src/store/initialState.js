@@ -95,6 +95,10 @@ const initialState = {
       success: false,
       loading: false,
     },
+    userInformation: {
+      username: '',
+      email: '',
+    },
   },
   snackbar: {
     visibility: false,

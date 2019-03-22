@@ -19,6 +19,10 @@ const initialState = {
     success: false,
     loading: false,
   },
+  userInformation: {
+    username: '',
+    email: '',
+  },
 };
 
 export default function(state = initialState, action) {
@@ -31,11 +35,15 @@ export default function(state = initialState, action) {
         error: false,
         loginError: '',
         organizationId: 0,
+        userInformation: {
+          username: '',
+          email: '',
+        },
       };
     }
 
     case types.LOGIN_SUCCESS: {
-      const {authorization, organizationId} = action;
+      const {authorization, organizationId, username, email} = action;
       return {
         ...state,
         authorization,
@@ -43,6 +51,10 @@ export default function(state = initialState, action) {
         error: false,
         loginError: '',
         organizationId,
+        userInformation: {
+          username,
+          email,
+        },
       };
     }
 

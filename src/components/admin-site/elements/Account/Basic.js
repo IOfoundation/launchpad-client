@@ -12,7 +12,7 @@ export const Basic = props => {
       <Grid container={true}>
         <Grid item={true} xs={8}>
           <FormTextField
-            autocomplete={'off'}
+            autocomplete="off"
             error={touched.fullName && Boolean(errors.fullName)}
             errors={errors}
             handleBlur={handleBlur}
@@ -24,7 +24,7 @@ export const Basic = props => {
         </Grid>
         <Grid item={true} xs={8}>
           <FormTextField
-            autocomplete={'off'}
+            autocomplete="off"
             error={touched.emailAddress && Boolean(errors.emailAddress)}
             errors={errors}
             handleBlur={handleBlur}
