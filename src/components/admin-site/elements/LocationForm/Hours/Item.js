@@ -75,7 +75,7 @@ class Item extends PureComponent {
                           id={opensAt}
                           label="Opens At"
                           field={field}
-                          value={hour.closesAt}
+                          value={hour.opensAt}
                           type="time"
                         />
                       </Grid>

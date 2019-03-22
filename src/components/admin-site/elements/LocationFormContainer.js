@@ -1,9 +1,7 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {PropTypes} from 'prop-types';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
 import {withRouter} from 'react-router';
 
 import LocationForm from './LocationForm';
@@ -11,8 +9,7 @@ import LandingComponent from '../Landing';
 import Title from '../Title';
 import Buttons from '../Buttons';
 
-import * as user from '@Actions/user';
-import * as snackbarActions from '@Actions/snackbar';
+import {getDate, timeConversion} from '@Utils';
 
 const LocationSchema = Yup.object().shape({
   locationName: Yup.string().required('Required'),
@@ -127,67 +124,105 @@ const initialValues = {
   },
 };
 
-const LocationFormContainer = props => {
-  const goToLocation = () => {
-    props.router.push('/admin/location');
+class LocationFormContainer extends PureComponent {
+  _getAddres(address) {
+    return {
+      address: (address && address.address_1) || '',
+      address2: (address && address.address_2) || '',
+      city: (address && address.city) || '',
+      state: (address && address.state_province) || '',
+      zip: (address && address.postal_code) || '',
+      attention: (address && address.attention) || '',
+    };
+  }
+
+  _getHours(schedule) {
+    return schedule.map(hour => {
+      const open = getDate(hour.opens_at);
+      const closes = getDate(hour.closes_at);
+
+      return {
+        closesAt: timeConversion(closes.time),
+        day: 'Option One',
+        opensAt: timeConversion(open.time),
+      };
+    });
+  }
+
+  _getPhones(phones) {
+    return phones.map(phone => ({
+      department: phone.department,
+      ext: phone.extension,
+      numberType: phone.number_type,
+      phoneNumber: phone.number,
+      vanityNumber: phone.vanity_number,
+    }));
+  }
+
+  _dataToForm(data) {
+    return {
+      ...initialValues,
+      locationName: data.name || '',
+      alternateName: data.alternate_name || '',
+      locationDescription: data.description || '',
+      locationEmail: data.email || '',
+      locationWebsite: data.website || '',
+      streetAddress: this._getAddres(data.address),
+      mailingAddress: this._getAddres(data.mail_address),
+      phones: this._getPhones(data.phones),
+      hoursRegular: this._getHours(data.regular_schedules),
+      hoursHolidays: this._getHours(data.holiday_schedules),
+      services: data.services.map(service => ({
+        id: service.id,
+        name: service.name,
+      })),
+      transportation: data.transportation || '',
+      languages: data.languages || [],
+    };
+  }
+
+  goToLocation = () => {
+    this.props.router.push('/admin/location');
   };
 
-  return (
-    <LandingComponent navigation={false}>
-      <Title
-        cancelClicked={goToLocation}
-        hideCancelAction={false}
-        submitLabel={'Save location'}
-        titleText="Create A Location"
-      />
-      <Formik
-        initialValues={initialValues}
-        onSubmit={() => {}}
-        render={_props => (
-          <LocationForm {..._props} breakpoint={props.breakpoint} />
-        )}
-        validateOnChange={true}
-        validationSchema={LocationSchema}
-      />
-      <Buttons
-        cancelClicked={goToLocation}
-        hideCancelAction={false}
-        submitLabel={'Save location'}
-      />
-    </LandingComponent>
-  );
-};
+  render() {
+    const {data, breakpoint} = this.props;
 
-const mapStateToProps = _state => {
-  return {
-    error: _state.user.error,
-    isAuth: _state.user.authorization !== '',
-  };
-};
-
-const mapDispatchToProps = _dispatch => {
-  return {
-    userActions: bindActionCreators(user, _dispatch),
-    snackbar: bindActionCreators(snackbarActions, _dispatch),
-  };
-};
+    return (
+      <LandingComponent navigation={false}>
+        <Title
+          cancelClicked={goToLocation}
+          hideCancelAction={false}
+          submitLabel={'Save location'}
+          titleText="Create A Location"
+        />
+        <Formik
+          initialValues={this._dataToForm(data)}
+          onSubmit={() => {}}
+          render={_props => (
+            <LocationForm {..._props} breakpoint={breakpoint} />
+          )}
+          validateOnChange={true}
+          validationSchema={LocationSchema}
+        />
+        <Buttons
+          cancelClicked={this.goToLocation}
+          hideCancelAction={false}
+          submitLabel={'Save location'}
+        />
+      </LandingComponent>
+    );
+  }
+}
 
 LocationFormContainer.propTypes = {
   breakpoint: PropTypes.string,
+  data: PropTypes.shape({}),
   error: PropTypes.bool,
   isAuth: PropTypes.bool,
   router: PropTypes.shape({
     push: PropTypes.func,
   }),
-  snackbar: PropTypes.shape({
-    showSnackbar: PropTypes.func,
-  }),
-  userActions: PropTypes.shape({
-    login: PropTypes.func,
-  }),
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(LocationFormContainer));
+export default withRouter(LocationFormContainer);

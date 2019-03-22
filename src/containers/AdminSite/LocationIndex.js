@@ -1,19 +1,57 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
+import Layout from '../Layout';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import {PropTypes} from 'prop-types';
 
-import Layout from './Layout';
 import Locations from '../../components/admin-site/elements/Locations';
+import Loading from '@Shared/Loading';
 
-const LocationsRoute = props => {
-  return (
-    <Layout router={props.router}>
-      <Locations />
-    </Layout>
-  );
+import * as locationsActions from '@Actions/locations';
+
+class LocationsRoute extends PureComponent {
+  componentDidMount() {
+    this.props.locationsActions.getAllLocations();
+  }
+
+  render() {
+    const {locations} = this.props;
+    let locationsElement = <Loading />;
+
+    if (locations.length > 0) {
+      locationsElement = <Locations locations={locations} />;
+    }
+
+    return <Layout>{locationsElement}</Layout>;
+  }
+}
+
+const mapStateToProps = _state => {
+  return {
+    error: _state.user.error,
+    isAuth: _state.user.authorization !== '',
+    locations: _state.locations.locations,
+    noResults: _state.locations.locations.length === 0,
+  };
+};
+
+const mapDispatchToProps = _dispatch => {
+  return {
+    locationsActions: bindActionCreators(locationsActions, _dispatch),
+  };
 };
 
 LocationsRoute.propTypes = {
-  router: PropTypes.shape({}),
+  error: PropTypes.bool,
+  isAuth: PropTypes.bool,
+  locations: PropTypes.arrayOf(PropTypes.shape({})),
+  locationsActions: PropTypes.shape({
+    getAllLocations: PropTypes.func,
+  }),
+  noResults: PropTypes.bool,
 };
 
-export default LocationsRoute;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LocationsRoute);

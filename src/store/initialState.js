@@ -102,6 +102,14 @@ const initialState = {
       loading: false,
     },
   },
+  locations: {
+    error: false,
+    errors: [],
+    loading: true,
+    location: {},
+    locations: [],
+    noResults: false,
+  },
   user: {
     loading: false,
     authorization: '',

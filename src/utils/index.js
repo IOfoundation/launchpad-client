@@ -14,3 +14,4 @@ export {deepCopy} from './deepCopy';
 export {combineStyles} from './combineStyles';
 export {getVideoSrc} from './getVideoSrc';
 export {falsyToString} from './falsyToString';
+export {timeConversion} from './timeConversion';
