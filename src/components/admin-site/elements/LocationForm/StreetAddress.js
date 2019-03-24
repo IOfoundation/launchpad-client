@@ -7,6 +7,7 @@ import FormTextField from '@Shared/FormElements/TextFieldDefault';
 import SelectElement from '@Shared/FormElements/Select';
 
 import {sharedStyles, sharedClasses} from './styles';
+import {states} from '@StaticData/data';
 
 const StreetAddress = props => {
   const {values, classes, handleChange, handleBlur, errors} = props;
@@ -73,6 +74,7 @@ const StreetAddress = props => {
                   label={'State'}
                   name={'streetAddress.state'}
                   value={values.streetAddress.state}
+                  selectOptions={states}
                 />
               </Grid>
               <Grid item={true} xs={3}>

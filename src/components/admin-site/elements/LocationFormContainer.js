@@ -10,6 +10,7 @@ import Title from '../Title';
 import Buttons from '../Buttons';
 
 import {getDate, timeConversion} from '@Utils';
+import {accesibility} from '@StaticData/data';
 
 const LocationSchema = Yup.object().shape({
   locationName: Yup.string().required('Required'),
@@ -34,49 +35,61 @@ const LocationSchema = Yup.object().shape({
     zip: Yup.string(),
   }),
   mailingAddress: Yup.object().shape({
-    attention: Yup.string().required('Required'),
-    address: Yup.string().required('Required'),
-    address2: Yup.string().required('Required'),
-    city: Yup.string().required('Required'),
-    state: Yup.string().required('Required'),
-    zip: Yup.string().required('Required'),
+    attention: Yup.string(),
+    address: Yup.string(),
+    address2: Yup.string(),
+    city: Yup.string(),
+    state: Yup.string(),
+    zip: Yup.string(),
   }),
-  phones: Yup.array()
-    .of(
-      Yup.object().shape({
-        phoneNumber: Yup.string().required('Required'),
-        ext: Yup.string().required('Required'),
-        vanityNumber: Yup.string().required('Required'),
-        numberType: Yup.string().required('Required'),
-        department: Yup.string(),
-        countryExt: Yup.string(),
-      })
-    )
-    .required('Must have phones'),
+  phones: Yup.array().of(
+    Yup.object().shape({
+      phoneNumber: Yup.string(),
+      ext: Yup.string(),
+      vanityNumber: Yup.string(),
+      numberType: Yup.string(),
+      department: Yup.string(),
+      countryExt: Yup.string(),
+    })
+  ),
   languages: Yup.string(),
   hoursRegular: Yup.array().of(
     Yup.object().shape({
-      day: Yup.string().required('Required'),
-      opensAt: Yup.string().required('Required'),
-      closesAt: Yup.string().required('Required'),
+      day: Yup.string(),
+      opensAt: Yup.string(),
+      closesAt: Yup.string(),
     })
   ),
   hoursHolidays: Yup.array().of(
     Yup.object().shape({
-      day: Yup.string().required('Required'),
-      opensAt: Yup.string().required('Required'),
-      closesAt: Yup.string().required('Required'),
+      day: Yup.string(),
+      opensAt: Yup.string(),
+      closesAt: Yup.string(),
     })
   ),
   transportation: Yup.string(),
   accessibility: Yup.object().shape({
+    cd: Yup.boolean(),
+    deafInterpreter: Yup.boolean(),
     disabledParking: Yup.boolean(),
     elevator: Yup.boolean(),
-    informationOnCd: Yup.boolean(),
-    interpreterForTheDeaf: Yup.boolean(),
     ramp: Yup.boolean(),
+    restroom: Yup.boolean(),
+    tapeBraille: Yup.boolean(),
+    tty: Yup.boolean(),
+    wheelchair: Yup.boolean(),
+    wheelchairVan: Yup.boolean(),
   }),
 });
+
+const emptyPhone = {
+  phoneNumber: '',
+  ext: '',
+  vanityNumber: '',
+  numberType: '',
+  department: '',
+  countryExt: '',
+};
 
 const initialValues = {
   locationName: '',
@@ -116,11 +129,16 @@ const initialValues = {
   hoursHolidays: [],
   transportation: '',
   accessibility: {
-    informationOnCd: false,
-    interpreterForTheDeaf: false,
+    cd: false,
+    deafInterpreter: false,
     disabledParking: false,
     elevator: false,
     ramp: false,
+    restroom: false,
+    tapeBraille: false,
+    tty: false,
+    wheelchair: false,
+    wheelchairVan: false,
   },
 };
 
@@ -150,13 +168,48 @@ class LocationFormContainer extends PureComponent {
   }
 
   _getPhones(phones) {
-    return phones.map(phone => ({
-      department: phone.department,
-      ext: phone.extension,
-      numberType: phone.number_type,
-      phoneNumber: phone.number,
-      vanityNumber: phone.vanity_number,
-    }));
+    if (phones.length > 0) {
+      return phones.map(phone => ({
+        id: phone.id,
+        department: falsyToString(phone.department),
+        ext: falsyToString(phone.extension),
+        numberType: falsyToString(phone.number_type),
+        phoneNumber: falsyToString(phone.number),
+        vanityNumber: falsyToString(phone.vanity_number),
+        countryExt: falsyToString(phone.country_prefix),
+      }));
+    }
+    return [{...emptyPhone}];
+  }
+
+  _putPhones(phones) {
+    return phones.map(phone => {
+      const mappedPhone = {
+        department: phone.department,
+        extension: phone.ext,
+        number_type: phone.numberType,
+        number: phone.phoneNumber,
+        vanity_number: phone.vanityNumber,
+        country_prefix: phone.countryExt,
+        _destroy: false,
+      };
+
+      if (phone.id) {
+        mappedPhone.id = phone.id;
+      }
+
+      return mappedPhone;
+    });
+  }
+
+  _getAccessibility(options) {
+    return options.reduce((acc, option) => {
+      const activeAccesibility = accesibility.find(
+        data => option === data.value
+      );
+      acc[activeAccesibility.key] = true;
+      return acc;
+    }, initialValues.accessibility);
   }
 
   _dataToForm(data) {
@@ -178,6 +231,7 @@ class LocationFormContainer extends PureComponent {
       })),
       transportation: data.transportation || '',
       languages: data.languages || [],
+      accessibility: this._getAccessibility(data.accessibility),
     };
   }
 
@@ -197,6 +251,7 @@ class LocationFormContainer extends PureComponent {
           titleText="Create A Location"
         />
         <Formik
+          enableReinitialize={true}
           initialValues={this._dataToForm(data)}
           onSubmit={() => {}}
           render={_props => (

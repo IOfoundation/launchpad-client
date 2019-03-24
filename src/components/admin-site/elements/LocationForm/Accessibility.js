@@ -28,15 +28,15 @@ class Accessibility extends PureComponent {
             <Grid item={true} xs={12} md={6} className="p-bot-0">
               <Checkbox
                 label="Information on CD"
-                name="accessibility.informationOnCd"
+                name="accessibility.cd"
                 onChange={this.handleChange}
-                value={values.accessibility.informationOnCd}
+                value={values.accessibility.cd}
               />
               <Checkbox
                 label="Interpreter for the deaf"
-                name="accessibility.interpreterForTheDeaf"
+                name="accessibility.deafInterpreter"
                 onChange={this.handleChange}
-                value={values.accessibility.interpreterForTheDeaf}
+                value={values.accessibility.deafInterpreter}
               />
               <Checkbox
                 label="Disabled Parking"
@@ -60,15 +60,15 @@ class Accessibility extends PureComponent {
             <Grid item={true} xs={12} md={6} className="p-top-0">
               <Checkbox
                 label="Disabled Restroom"
-                name="accessibility.disabledRestroom"
+                name="accessibility.restroom"
                 onChange={this.handleChange}
-                value={values.accessibility.disabledRestroom}
+                value={values.accessibility.restroom}
               />
               <Checkbox
                 label="Information on tape or in Braille"
-                name="accessibility.informationOnTapeOrInBraille"
+                name="accessibility.tapeBraille"
                 onChange={this.handleChange}
-                value={values.accessibility.informationOnTapeOrInBraille}
+                value={values.accessibility.tapeBraille}
               />
               <Checkbox
                 label="TTY"
@@ -84,9 +84,9 @@ class Accessibility extends PureComponent {
               />
               <Checkbox
                 label="Wheelchair-accessible van"
-                name="accessibility.wheelchairAccessibleVan"
+                name="accessibility.wheelchairVan"
                 onChange={this.handleChange}
-                value={values.accessibility.wheelchairAccessibleVan}
+                value={values.accessibility.wheelchairVan}
               />
             </Grid>
           </Grid>

@@ -1,3 +1,5 @@
+import {numberType} from '@StaticData/data';
+
 export const sectionOnePhoto = [
   {
     key: 'name',
@@ -77,6 +79,7 @@ export const phoneNumberSection = [
     label: 'Number Type',
     autocomplete: 'off',
     select: true,
+    options: numberType,
   },
   {
     key: 'department',
