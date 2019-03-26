@@ -96,7 +96,9 @@ const Phones = props => {
                       <Grid item={true} xs={12}>
                         <button
                           type="button"
-                          className={`btn btn__submit ${classes.btn}`}
+                          className={`btn btn__submit ${classes.btn} ${
+                            classes.lastBtn
+                          }`}
                           onClick={() =>
                             arrayHelpers.insert(index, {
                               phoneNumber: '1',

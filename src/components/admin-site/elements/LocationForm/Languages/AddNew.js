@@ -19,9 +19,11 @@ class AddNew extends PureComponent {
     const {handleChange, arrayHelpers} = this.props;
     const info = event.target;
 
-    handleChange(event);
-    this.setState({[event.target.name]: info.value});
-    arrayHelpers.push(info.value);
+    if (info.value) {
+      handleChange(event);
+      this.setState({[event.target.name]: info.value});
+      arrayHelpers.push(info.value);
+    }
   };
 
   render() {

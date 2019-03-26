@@ -25,7 +25,7 @@ class Accessibility extends PureComponent {
         </div>
         <div className={classes.cardContent}>
           <Grid container={true} spacing={16}>
-            <Grid item={true} xs={12} md={6}>
+            <Grid item={true} xs={12} md={6} className="p-bot-0">
               <Checkbox
                 label="Information on CD"
                 name="accessibility.informationOnCd"
@@ -57,7 +57,7 @@ class Accessibility extends PureComponent {
                 value={values.accessibility.ramp}
               />
             </Grid>
-            <Grid item={true} xs={12} md={6}>
+            <Grid item={true} xs={12} md={6} className="p-top-0">
               <Checkbox
                 label="Disabled Restroom"
                 name="accessibility.disabledRestroom"

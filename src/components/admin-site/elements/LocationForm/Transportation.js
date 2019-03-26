@@ -13,7 +13,7 @@ const Transportation = props => {
     'What public transportation options are nearby? (Bus stops, train stations, etc.)';
 
   if (breakpoint === 'xs') {
-    label = 'What public transportation are?';
+    label = 'List public transportation options';
   }
 
   return (
