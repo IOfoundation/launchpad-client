@@ -31,9 +31,6 @@ class SignInFormContainer extends PureComponent {
           message: 'Login Error',
         });
       } else if (isAuth) {
-        snackbar.showSnackbar({
-          message: 'Login Successful',
-        });
         router.push('/admin/profile');
       }
     }

@@ -14,6 +14,9 @@ export default function(state = initialState, action) {
     case types.LOGIN_REQUEST: {
       return {
         ...state,
+        authorization: '',
+        loading: true,
+        error: false,
       };
     }
 
@@ -38,6 +41,8 @@ export default function(state = initialState, action) {
     case types.SIGN_UP_REQUEST: {
       return {
         ...state,
+        loading: true,
+        singUpErros: [],
       };
     }
 
@@ -62,6 +67,7 @@ export default function(state = initialState, action) {
     case types.PASSWORD_RECOVERY_REQUEST: {
       return {
         ...state,
+        loading: true,
       };
     }
 

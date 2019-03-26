@@ -60,12 +60,15 @@ const activeStyles = {
   fontFamily: '"proxima-nova-bold", Georgia, sans-serif',
 };
 
-const styles = () => {
+const styles = theme => {
   return {
     container: {
       background: 'black',
       margin: '68px 0 24px',
       padding: '24px',
+      [theme.breakpoints.down('sm')]: {
+        margin: '0 0 12px',
+      },
     },
     title: {
       fontFamily: '"proxima-nova-bold", Georgia, sans-serif',

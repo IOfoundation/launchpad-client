@@ -6,7 +6,6 @@ import {bindActionCreators} from 'redux';
 import MainLayout from '../components/layouts/Main';
 import HomeView from '../components/home/Main';
 import * as actions from '../actions/business';
-import * as snackbarActions from '../actions/snackbar';
 import SnackbarUI from '../components/shared/SnackBar';
 
 export class Home extends Component {
@@ -16,9 +15,6 @@ export class Home extends Component {
   };
 
   componentDidMount() {
-    this.props.snackbar.testingSnackbar({
-      message: 'This is a test',
-    });
     window.addEventListener('resize', this.handleWindowSizeChange);
   }
 
@@ -55,9 +51,6 @@ Home.propTypes = {
   }),
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   location: PropTypes.shape({}),
-  snackbar: PropTypes.shape({
-    testingSnackbar: PropTypes.func.isRequired,
-  }),
 };
 
 const mapStateToProps = _state => {
@@ -71,7 +64,6 @@ const mapStateToProps = _state => {
 const mapDispatchToProps = _dispatch => {
   return {
     actions: bindActionCreators(actions, _dispatch),
-    snackbar: bindActionCreators(snackbarActions, _dispatch),
   };
 };
 

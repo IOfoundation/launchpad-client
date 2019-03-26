@@ -72,16 +72,18 @@ const initialValues = {
   ],
 };
 
-const ProfileFormContainer = () => {
+const ProfileFormContainer = props => {
   return (
-    <LandingComponent navigation={true}>
+    <LandingComponent breakpoint={props.breakpoint} navigation={true}>
       <Title
         titleText="Profile"
         hideCancelAction={false}
         submitLabel={'Save Changes'}
       />
       <Formik
-        render={_props => <ProfileForm {..._props} />}
+        render={_props => (
+          <ProfileForm {..._props} breakpoint={props.breakpoint} />
+        )}
         initialValues={initialValues}
         validationSchema={SignupSchema}
         onSubmit={() => {}}
@@ -105,6 +107,7 @@ const mapDispatchToProps = _dispatch => {
 };
 
 ProfileFormContainer.propTypes = {
+  breakpoint: PropTypes.string,
   error: PropTypes.bool,
   isAuth: PropTypes.bool,
   router: PropTypes.shape({
