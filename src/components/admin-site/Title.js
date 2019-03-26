@@ -2,27 +2,7 @@ import React from 'react';
 import {withStyles} from '@material-ui/core/styles';
 import {PropTypes} from 'prop-types';
 
-const Title = props => {
-  const {classes} = props;
-
-  return (
-    <div className={classes.Container}>
-      <h1 className={classes.Title}>{'Profile'}</h1>
-      <div className={classes.Buttons}>
-        <a className="title-as-link m-right-24">{'Cancel'}</a>
-        <button className="btn btn__submit">{'Save Changes'}</button>
-      </div>
-    </div>
-  );
-};
-
-Title.propTypes = {
-  classes: PropTypes.shape({
-    Buttons: PropTypes.string,
-    Container: PropTypes.string,
-    Title: PropTypes.string,
-  }),
-};
+import Buttons from './Buttons';
 
 const styles = () => {
   return {
@@ -56,6 +36,42 @@ const styles = () => {
       color: '#070709',
     },
   };
+};
+
+const Title = props => {
+  const {
+    classes,
+    titleText,
+    submitLabel,
+    hideCancelAction,
+    submitClicked,
+    cancelClicked,
+  } = props;
+
+  return (
+    <div className={classes.Container}>
+      <h1 className={classes.Title}>{titleText}</h1>
+      <Buttons
+        submitLabel={submitLabel}
+        hideCancelAction={hideCancelAction}
+        submitClicked={submitClicked}
+        cancelClicked={cancelClicked}
+      />
+    </div>
+  );
+};
+
+Title.propTypes = {
+  cancelClicked: PropTypes.func,
+  classes: PropTypes.shape({
+    Buttons: PropTypes.string,
+    Container: PropTypes.string,
+    Title: PropTypes.string,
+  }),
+  hideCancelAction: PropTypes.bool,
+  submitClicked: PropTypes.func,
+  submitLabel: PropTypes.string,
+  titleText: PropTypes.string,
 };
 
 export default withStyles(styles)(Title);

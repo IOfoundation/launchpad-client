@@ -7,18 +7,25 @@ import Container from './Container';
 import Navigation from './Navigation';
 
 const LandingComponent = props => {
-  const {classes, children} = props;
+  const {classes, children, navigation} = props;
+  let navigationElement = null;
 
-  return (
-    <Container>
+  if (navigation) {
+    navigationElement = (
       <Grid item={true} xs={3}>
         <Navigation />
-        <div className={classes.Edit}>
+        <div className={`${classes.Edit} title-as-link`}>
           <i className="material-icons">{'person'}</i>
           <span>{'Edit Your Account'}</span>
         </div>
       </Grid>
-      <Grid item={true} xs={9} className={classes.Content}>
+    );
+  }
+
+  return (
+    <Container>
+      {navigationElement}
+      <Grid item={true} xs={navigation ? 9 : 10} className={classes.Content}>
         {children}
       </Grid>
     </Container>
@@ -67,6 +74,7 @@ LandingComponent.propTypes = {
     Edit: PropTypes.string,
     Title: PropTypes.string,
   }),
+  navigation: PropTypes.bool,
 };
 
 export default withStyles(styles)(LandingComponent);
