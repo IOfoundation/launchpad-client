@@ -1,6 +1,6 @@
 import {PropTypes} from 'prop-types';
 
-export const sharedStyles = () => {
+export const sharedStyles = theme => {
   return {
     wrapper: {
       display: 'flex',
@@ -126,7 +126,14 @@ export const sharedStyles = () => {
     },
     btn: {
       width: '260px',
-      margin: '15px 0',
+      margin: '16px 0',
+      [theme.breakpoints.down('sm')]: {
+        width: '100%',
+        maxWidth: '260px',
+      },
+    },
+    lastBtn: {
+      margin: '0 0 8px',
     },
     bottomLine: {
       borderBottom: '1px solid #E0E0E0',

@@ -5,6 +5,37 @@ import Grid from '@material-ui/core/Grid';
 
 import Buttons from './Buttons';
 
+const Title = props => {
+  const {
+    classes,
+    titleText,
+    submitLabel,
+    hideCancelAction,
+    submitClicked,
+    cancelClicked,
+  } = props;
+
+  return (
+    <Grid
+      className={classes.Container}
+      container={true}
+      justify="space-between"
+    >
+      <Grid item={true} xs={12} md={5}>
+        <h1 className={classes.Title}>{titleText}</h1>
+      </Grid>
+      <Grid item={true} xs={12} md={7}>
+        <Buttons
+          submitLabel={submitLabel}
+          hideCancelAction={hideCancelAction}
+          submitClicked={submitClicked}
+          cancelClicked={cancelClicked}
+        />
+      </Grid>
+    </Grid>
+  );
+};
+
 const styles = theme => {
   return {
     Buttons: {
@@ -41,29 +72,6 @@ const styles = theme => {
       },
     },
   };
-};
-
-const Title = props => {
-  const {
-    classes,
-    titleText,
-    submitLabel,
-    hideCancelAction,
-    submitClicked,
-    cancelClicked,
-  } = props;
-
-  return (
-    <div className={classes.Container}>
-      <h1 className={classes.Title}>{titleText}</h1>
-      <Buttons
-        submitLabel={submitLabel}
-        hideCancelAction={hideCancelAction}
-        submitClicked={submitClicked}
-        cancelClicked={cancelClicked}
-      />
-    </div>
-  );
 };
 
 Title.propTypes = {

@@ -16,6 +16,7 @@ import Hours from './LocationForm/Hours';
 
 const LocationForm = props => {
   const {
+    breakpoint,
     errors,
     handleBlur,
     handleChange,
@@ -41,7 +42,7 @@ const LocationForm = props => {
       <Phones {...shared} />
       <Languages {...shared} />
       <Hours {...shared} />
-      <Transportation {...shared} />
+      <Transportation {...shared} breakpoint={breakpoint} />
       <Accessibility {...shared} />
       <DangerZone />
     </Form>
@@ -49,6 +50,7 @@ const LocationForm = props => {
 };
 
 LocationForm.propTypes = {
+  breakpoint: PropTypes.string,
   classes: PropTypes.shape({
     btn: PropTypes.string,
     btnWrapper: PropTypes.string,

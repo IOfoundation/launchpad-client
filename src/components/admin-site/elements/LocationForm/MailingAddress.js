@@ -19,9 +19,9 @@ const MailingAddress = props => {
           {'Mailing Address'}
         </span>
       </div>
-      <div className={classes.cardContent} style={{padding: 32}}>
+      <div className={classes.cardContent}>
         <Grid container={true} spacing={16}>
-          <Grid item={true} xs={3}>
+          <Grid item={true} xs={12} md={3}>
             <FormTextField
               autocomplete={'off'}
               errors={errors}
@@ -34,7 +34,7 @@ const MailingAddress = props => {
               values={values}
             />
           </Grid>
-          <Grid item={true} xs={9}>
+          <Grid item={true} xs={12} md={9}>
             <Grid container={true} spacing={16}>
               <Grid item={true} xs={12}>
                 <FormTextField

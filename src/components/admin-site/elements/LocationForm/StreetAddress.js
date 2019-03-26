@@ -23,7 +23,7 @@ const StreetAddress = props => {
       </div>
       <div className={classes.cardContent}>
         <Grid container={true} spacing={16}>
-          <Grid item={true} xs={9}>
+          <Grid item={true} xs={12} md={9}>
             <Grid container={true} spacing={16}>
               <Grid item={true} xs={12}>
                 <FormTextField

@@ -1,13 +1,19 @@
 import React from 'react';
-import Layout from '../Layout';
+import {PropTypes} from 'prop-types';
+
+import Layout from './Layout';
 import LocationFormContainer from '../../components/admin-site/elements/LocationFormContainer';
 
-const LocationFormRoute = () => {
+const LocationFormRoute = props => {
   return (
     <Layout>
-      <LocationFormContainer />
+      <LocationFormContainer breakpoint={props.breakpoint} />
     </Layout>
   );
+};
+
+LocationFormRoute.propTypes = {
+  breakpoint: PropTypes.string,
 };
 
 export default LocationFormRoute;
