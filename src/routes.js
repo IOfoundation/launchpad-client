@@ -27,6 +27,8 @@ import AdminLanding from './containers/AdminSite/Landing';
 import ProfileRoute from './containers/AdminSite/Profile';
 import LocationFormRoute from './containers/AdminSite/Location';
 import LocationsRoute from './containers/AdminSite/LocationIndex';
+import ServiceRoute from './containers/AdminSite/Service';
+import ServiceIndex from './containers/AdminSite/ServiceIndex';
 
 export default (
   <Route path="/" component={App}>
@@ -47,6 +49,8 @@ export default (
     <Route path="/admin/profile" component={ProfileRoute} />
     <Route path="/admin/location" exact={true} component={LocationsRoute} />
     <Route path="/admin/location/:id" component={LocationFormRoute} />
+    <Route path="/admin/services" component={ServiceIndex} />
+    <Route path="/admin/services/:id" component={ServiceRoute} />
     <Route
       path="/admin-login/password-reset-confirmation"
       component={ResetYourPasswordRoute}

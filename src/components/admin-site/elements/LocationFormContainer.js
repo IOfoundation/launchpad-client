@@ -37,44 +37,38 @@ const LocationSchema = Yup.object().shape({
     zip: Yup.string(),
   }),
   mailingAddress: Yup.object().shape({
-    address: Yup.string(),
-    address2: Yup.string(),
-    attention: Yup.string(),
-    city: Yup.string(),
-    state: Yup.string(),
-    zip: Yup.string(),
+    attention: Yup.string().required('Required'),
+    address: Yup.string().required('Required'),
+    address2: Yup.string().required('Required'),
+    city: Yup.string().required('Required'),
+    state: Yup.string().required('Required'),
+    zip: Yup.string().required('Required'),
   }),
-  phones: Yup.array().of(
-    Yup.object().shape({
-      countryExt: Yup.string(),
-      department: Yup.string(),
-      ext: Yup.string(),
-      numberType: Yup.string(),
-      phoneNumber: Yup.string(),
-      vanityNumber: Yup.string(),
-    })
-  ),
-  languages: Yup.array()
-    .of(Yup.string())
-    .required('Required'),
+  phones: Yup.array()
+    .of(
+      Yup.object().shape({
+        phoneNumber: Yup.string().required('Required'),
+        ext: Yup.string().required('Required'),
+        vanityNumber: Yup.string().required('Required'),
+        numberType: Yup.string().required('Required'),
+        department: Yup.string(),
+        countryExt: Yup.string(),
+      })
+    )
+    .required('Must have phones'),
+  languages: Yup.string(),
   hoursRegular: Yup.array().of(
     Yup.object().shape({
-      countryExt: Yup.string(),
-      department: Yup.string(),
-      ext: Yup.string(),
-      numberType: Yup.string(),
-      phoneNumber: Yup.string(),
-      vanityNumber: Yup.string(),
+      day: Yup.string().required('Required'),
+      opensAt: Yup.string().required('Required'),
+      closesAt: Yup.string().required('Required'),
     })
   ),
   hoursHolidays: Yup.array().of(
     Yup.object().shape({
-      countryExt: Yup.string(),
-      department: Yup.string(),
-      ext: Yup.string(),
-      numberType: Yup.string(),
-      phoneNumber: Yup.string(),
-      vanityNumber: Yup.string(),
+      day: Yup.string().required('Required'),
+      opensAt: Yup.string().required('Required'),
+      closesAt: Yup.string().required('Required'),
     })
   ),
   transportation: Yup.string(),

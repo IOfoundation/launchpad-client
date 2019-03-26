@@ -32,7 +32,13 @@ const Navigation = props => {
           </Link>
         </li>
         <li>
-          <a className={classes.link}>{'Services'}</a>
+          <Link
+            activeStyle={activeStyles}
+            className={classes.link}
+            to="/admin/services"
+          >
+            {'Services'}
+          </Link>
         </li>
         <li>
           <a className={classes.link}>{'Blog Posts'}</a>

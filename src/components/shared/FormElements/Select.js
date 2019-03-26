@@ -36,7 +36,27 @@ class SelectElement extends PureComponent {
       helperText,
       displayEmpty,
       classes,
+      novalidate,
     } = this.props;
+
+    let displayError = (
+      <div
+        className={[
+          'admin-login-form__input__error-wrapper',
+          marginBottom ? 'm-bot-24' : '',
+        ].join(' ')}
+      >
+        <ErrorMessage
+          className="admin-login-form__error"
+          component="div"
+          name={id}
+        />
+      </div>
+    );
+
+    if (novalidate) {
+      displayError = null;
+    }
 
     return (
       <FormControl style={{minWidth: '100%'}}>
@@ -64,18 +84,7 @@ class SelectElement extends PureComponent {
           <MenuItem value={'Option Three'}>{'Option Three'}</MenuItem>
         </Select>
         {helperText && <FormHelperText>{helperText}</FormHelperText>}
-        <div
-          className={[
-            'admin-login-form__input__error-wrapper',
-            marginBottom ? 'm-bot-24' : '',
-          ].join(' ')}
-        >
-          <ErrorMessage
-            className="admin-login-form__error"
-            component="div"
-            name={id}
-          />
-        </div>
+        {displayError}
       </FormControl>
     );
   }
@@ -96,6 +105,7 @@ SelectElement.propTypes = {
   label: PropTypes.string,
   marginBottom: PropTypes.bool,
   multiline: PropTypes.bool,
+  novalidate: PropTypes.bool,
   type: PropTypes.string,
   value: PropTypes.string,
 };
