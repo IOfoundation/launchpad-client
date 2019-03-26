@@ -23,7 +23,7 @@ class CheckboxGroup extends PureComponent {
 
         <div className={classes.cardContent}>
           <Grid container={true} spacing={16}>
-            <Grid item={true} xs={12} md={md}>
+            <Grid item={true} xs={12} md={md} className="p-bot-0">
               {data.leftColumn &&
                 data.leftColumn.map((item, index) => {
                   return (
@@ -38,7 +38,7 @@ class CheckboxGroup extends PureComponent {
                   );
                 })}
             </Grid>
-            <Grid item={true} xs={12} md={md}>
+            <Grid item={true} xs={12} md={md} className="p-top-0">
               {data.rightColumn &&
                 data.rightColumn.map((item, index) => {
                   return (
