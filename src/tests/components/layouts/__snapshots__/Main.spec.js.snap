@@ -2,7 +2,7 @@
 
 exports[`<Main /> renders snapshot of Main 1`] = `
 <div>
-  <Header
+  <Connect(Header)
     homePage={false}
   />
   <MobileFooter />

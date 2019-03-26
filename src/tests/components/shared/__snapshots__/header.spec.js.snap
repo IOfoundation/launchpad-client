@@ -1,0 +1,175 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header /> Nav Bar Must have a link to blog page 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <Connect(Header)
+    homePage={false}
+  >
+    <Header
+      actions={
+        Object {
+          "getAllPosts": [Function],
+          "getCategories": [Function],
+          "getFeaturedPost": [Function],
+          "getFeaturedPostById": [Function],
+          "getPostById": [Function],
+          "noResults": [Function],
+          "setCategory": [Function],
+        }
+      }
+      homePage={false}
+    >
+      <header
+        className="headerContainer"
+        htmlFor="header-dropdown"
+      >
+        <div
+          className="contentContainer header grid between-xs middle-xs text-semi"
+        >
+          <div
+            className="header_links-title"
+          >
+            <span
+              className="header_title"
+            >
+              <Link
+                className="white-link"
+                onlyActiveOnIndex={false}
+                style={Object {}}
+                to="/"
+              >
+                <a
+                  className="white-link"
+                  onClick={[Function]}
+                  style={Object {}}
+                >
+                  Welcome to Resource Finder
+                </a>
+              </Link>
+            </span>
+          </div>
+          <input
+            id="header-dropdown"
+            name="dropdown"
+            type="checkbox"
+          />
+          <label
+            className="collapse-menu-icon"
+            htmlFor="header-dropdown"
+          >
+            <BarsIcon
+              size={24}
+            >
+              <svg
+                fill="currentColor"
+                height={24}
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 40 40"
+                width={24}
+              >
+                <g>
+                  <path
+                    d="m37.3 30v2.9q0 0.5-0.4 1t-1 0.4h-31.5q-0.6 0-1-0.4t-0.4-1v-2.9q0-0.6 0.4-1t1-0.4h31.5q0.5 0 1 0.4t0.4 1z m0-11.4v2.8q0 0.6-0.4 1t-1 0.5h-31.5q-0.6 0-1-0.5t-0.4-1v-2.8q0-0.6 0.4-1t1-0.5h31.5q0.5 0 1 0.5t0.4 1z m0-11.5v2.9q0 0.6-0.4 1t-1 0.4h-31.5q-0.6 0-1-0.4t-0.4-1v-2.9q0-0.5 0.4-1t1-0.4h31.5q0.5 0 1 0.4t0.4 1z"
+                  />
+                </g>
+              </svg>
+            </BarsIcon>
+          </label>
+          <nav
+            className="header_links-contact text-bold"
+          >
+            <Link
+              activeStyle={
+                Object {
+                  "opacity": "1",
+                }
+              }
+              className="header_link"
+              onlyActiveOnIndex={false}
+              style={Object {}}
+              to="/businesses"
+            >
+              <a
+                className="header_link"
+                onClick={[Function]}
+                style={Object {}}
+              >
+                Resources
+              </a>
+            </Link>
+            <Link
+              activeStyle={
+                Object {
+                  "opacity": "1",
+                }
+              }
+              className="header_link"
+              onlyActiveOnIndex={false}
+              style={Object {}}
+              to="/events"
+            >
+              <a
+                className="header_link"
+                onClick={[Function]}
+                style={Object {}}
+              >
+                Events
+              </a>
+            </Link>
+            <Link
+              activeStyle={
+                Object {
+                  "opacity": "1",
+                }
+              }
+              className="header_link"
+              onClick={[Function]}
+              onlyActiveOnIndex={false}
+              style={Object {}}
+              to="/blog"
+            >
+              <a
+                className="header_link"
+                onClick={[Function]}
+                style={Object {}}
+              >
+                Blog
+              </a>
+            </Link>
+            <Link
+              activeStyle={
+                Object {
+                  "opacity": "1",
+                }
+              }
+              className="header_link"
+              onlyActiveOnIndex={false}
+              style={Object {}}
+              to="/admin-login"
+            >
+              <a
+                className="header_link"
+                onClick={[Function]}
+                style={Object {}}
+              >
+                Admin Login
+              </a>
+            </Link>
+          </nav>
+        </div>
+      </header>
+    </Header>
+  </Connect(Header)>
+</Provider>
+`;

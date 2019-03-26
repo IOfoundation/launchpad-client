@@ -1,33 +1,46 @@
 import React from 'react';
-import {shallow} from 'enzyme';
+import {mount} from 'enzyme';
 import {Link} from 'react-router';
+import configureStore from 'redux-mock-store';
+import {Provider} from 'react-redux';
+import thunk from 'redux-thunk';
+import toJson from 'enzyme-to-json';
 
 import Header from '../../../components/shared/Header';
 
+const initialState = {};
 const props = {
   homePage: false,
 };
 const activeStyles = {opacity: '1'};
+const mockStore = configureStore([thunk]);
+let store;
+let wrapper;
 
 describe('<Header />', () => {
+  beforeEach(() => {
+    store = mockStore(initialState);
+    wrapper = mount(
+      <Provider store={store}>
+        <Header {...props} />
+      </Provider>
+    );
+  });
+
   it('Render a header tag', () => {
-    const wrapper = shallow(<Header {...props} />);
     expect(wrapper.find('header').length).toEqual(1);
   });
 
   describe('Nav Bar', () => {
     it('Render a nav bar', () => {
-      const wrapper = shallow(<Header {...props} />);
       expect(wrapper.find('nav').length).toEqual(1);
     });
 
     it('Render 5 links in the nav bar', () => {
-      const wrapper = shallow(<Header {...props} />);
       expect(wrapper.find(Link).length).toEqual(5);
     });
 
     it('Must have a link to businesses page', () => {
-      const wrapper = shallow(<Header {...props} />);
       expect(
         wrapper.contains(
           <Link
@@ -42,7 +55,6 @@ describe('<Header />', () => {
     });
 
     it('Must have a link to events page', () => {
-      const wrapper = shallow(<Header {...props} />);
       expect(
         wrapper.contains(
           <Link activeStyle={activeStyles} className="header_link" to="/events">
@@ -53,18 +65,10 @@ describe('<Header />', () => {
     });
 
     it('Must have a link to blog page', () => {
-      const wrapper = shallow(<Header {...props} />);
-      expect(
-        wrapper.contains(
-          <Link activeStyle={activeStyles} to="/blog" className="header_link">
-            {'Blog'}
-          </Link>
-        )
-      ).toBe(true);
+      expect(toJson(wrapper)).toMatchSnapshot();
     });
 
     it('Must have a link to admin-login page', () => {
-      const wrapper = shallow(<Header {...props} />);
       expect(
         wrapper.contains(
           <Link
