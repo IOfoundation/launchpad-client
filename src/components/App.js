@@ -17,6 +17,9 @@ const muiTheme = createMuiTheme({
   layout: {
     maxWidth: 1300,
   },
+  fonts: {
+    bold: '"proxima-nova-bold", Georgia, sans-serif',
+  },
 });
 
 // This is a class-based component because the current

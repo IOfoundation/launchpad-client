@@ -41,7 +41,13 @@ const Navigation = props => {
           </Link>
         </li>
         <li>
-          <a className={classes.link}>{'Blog Posts'}</a>
+          <Link
+            activeStyle={activeStyles}
+            className={classes.link}
+            to="/admin/blog"
+          >
+            {'Blog Posts'}
+          </Link>
         </li>
         <li>
           <a className={classes.link}>{'Events'}</a>
