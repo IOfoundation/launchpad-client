@@ -1,23 +1,31 @@
 import React from 'react';
-import {mount} from 'enzyme';
+import {shallow} from 'enzyme';
 import toJson from 'enzyme-to-json';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import configureStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import {Provider} from 'react-redux';
 
 import BlogPosts from '../../../../components/admin-site/elements/BlogPosts';
 
 import {muiTheme} from '../../../helpers/theme';
 
 const props = {
-  router: {
-    push: jest.fn(),
+  location: {
+    pathname: '/admin/profile',
   },
 };
+const mockStore = configureStore([thunk]);
+let store;
 
 describe('Admin-site <BlogPosts />', () => {
   it('renders snapshot of BlogPosts', () => {
-    const wrapper = mount(
+    store = mockStore({});
+    const wrapper = shallow(
       <MuiThemeProvider theme={muiTheme}>
-        <BlogPosts {...props} />
+        <Provider store={store}>
+          <BlogPosts {...props} />
+        </Provider>
       </MuiThemeProvider>
     );
     expect(toJson(wrapper)).toMatchSnapshot();

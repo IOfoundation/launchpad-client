@@ -62,10 +62,21 @@ class Item extends PureComponent {
                   icon: classes.icon,
                 },
               }}
+              MenuProps={{
+                MenuListProps: {
+                  classes: {
+                    root: classes.rootMenuListCss,
+                  },
+                },
+              }}
               className={`${classes.floating} ${classes.back}`}
             >
-              <MenuItem value="Edit">{'Edit'}</MenuItem>
-              <MenuItem value="Delete">{'Delete'}</MenuItem>
+              <MenuItem value="Edit" className={classes.menuListCss}>
+                {'Edit'}
+              </MenuItem>
+              <MenuItem value="Delete" className={classes.menuListCss}>
+                {'Delete'}
+              </MenuItem>
             </Select>
           </div>
 
@@ -133,6 +144,15 @@ const styles = theme => {
       opacity: '0',
       zIndex: '1',
     },
+    rootMenuListCss: {
+      borderRadius: '3px',
+      padding: 0,
+    },
+    menuListCss: {
+      fontSize: '16px',
+      lineHeight: '24px',
+      width: '88px',
+    },
   };
 };
 
@@ -145,6 +165,8 @@ Item.propTypes = {
     dateContainer: PropTypes.string,
     description: PropTypes.string,
     label: PropTypes.string,
+    rootMenuListCss: PropTypes.string,
+    menuListCss: PropTypes.string,
     title: PropTypes.string,
   }),
   date: PropTypes.string,
