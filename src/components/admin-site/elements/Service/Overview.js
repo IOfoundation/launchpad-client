@@ -65,7 +65,7 @@ export const Overview = props => {
             value={values.email}
           />
         </Grid>
-        <Grid item={true} xs={8}>
+        <Grid item={true} xs={12} md={8}>
           <FormTextField
             autocomplete={'off'}
             error={touched.website && Boolean(errors.website)}
@@ -77,7 +77,7 @@ export const Overview = props => {
             value={values.website}
           />
         </Grid>
-        <Grid item={true} xs={4}>
+        <Grid item={true} xs={12} md={4}>
           <FormTextField
             autocomplete={'off'}
             error={touched.status && Boolean(errors.status)}

@@ -1,18 +1,20 @@
 import React from 'react';
 import {Form} from 'formik';
 import {PropTypes} from 'prop-types';
+
 import Overview from './Service/Overview';
 import Hours from './LocationForm/Hours';
 import Detail from './Service/Detail';
 import CheckboxGroup from './Service/CheckboxGroup';
 import Keywords from './Service/Keywords';
 import DangerZone from './LocationForm/DangerZone';
+import Buttons from '../Buttons';
+
 import {Categories} from './Service/Categories';
 import {BusinessType} from './Service/BusinessType';
 import {BusinessStage} from './Service/BusinessStage';
 import {UnderservedCommunities} from './Service/UnderservedCommunities';
 import {Industry} from './Service/Industry';
-import Buttons from '../Buttons';
 
 const ServiceForm = props => {
   const {

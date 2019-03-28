@@ -23,9 +23,9 @@ const styles = theme => {
       opacity: 0.5,
     },
     dangerButton: {
-      maxWidth: '70%',
+      maxWidth: '424px',
+      width: '70%',
       [theme.breakpoints.down('sm')]: {
-        maxWidth: '424px',
         width: '100%',
       },
     },
