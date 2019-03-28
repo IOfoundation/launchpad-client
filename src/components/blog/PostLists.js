@@ -12,7 +12,9 @@ import PostListLoading from './Loading/PostListsLoading';
 
 class PostLists extends PureComponent {
   componentDidMount() {
-    this.props.actions.getAllPosts(1, this.props.posts.category);
+    const {category} = this.props.posts;
+
+    this.props.actions.getAllPosts(1, category);
   }
 
   handleChangePage = selected => {
@@ -96,6 +98,7 @@ const mapStateToProps = _state => {
       totalPages: _blogs.totalPages,
       page: _blogs.page,
       category: _blogs.category,
+      pickCategory: _blogs.pickCategory,
     },
   };
 };

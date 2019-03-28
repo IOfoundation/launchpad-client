@@ -13,6 +13,13 @@
   color: white;
   margin-right: 24px;
   line-height: 16px;
+  outline: 0;
+}
+
+.header_link:hover,
+.header_link:active,
+.header_link:focus {
+  outline: 0;
 }
 
 .headerContainer .header_links-contact .header_link {

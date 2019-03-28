@@ -1,11 +1,19 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 import {Link} from 'react-router';
-import BarsIcon from '../shared/barsIcon';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+
+import BarsIcon from '@Shared/barsIcon';
+
+import * as blogsActions from '@Actions/blogs';
 
 const activeStyles = {opacity: '1'};
 
-const Header = () => {
+const Header = props => {
+  const setDefaultCategory = () => {
+    props.actions.setCategory('front page');
+  };
   return (
     <header className="headerContainer" htmlFor="header-dropdown">
       <div className="contentContainer header grid between-xs middle-xs text-semi">
@@ -31,7 +39,12 @@ const Header = () => {
           <Link activeStyle={activeStyles} className="header_link" to="/events">
             {'Events'}
           </Link>
-          <Link activeStyle={activeStyles} className="header_link" to="/blog">
+          <Link
+            activeStyle={activeStyles}
+            className="header_link"
+            to="/blog"
+            onClick={setDefaultCategory}
+          >
             {'Blog'}
           </Link>
           <Link
@@ -47,8 +60,20 @@ const Header = () => {
   );
 };
 
+const mapDispatchToProps = _dispatch => {
+  return {
+    actions: bindActionCreators(blogsActions, _dispatch),
+  };
+};
+
 Header.propTypes = {
+  actions: PropTypes.shape({
+    setCategory: PropTypes.func,
+  }),
   homePage: PropTypes.bool.isRequired,
 };
 
-export default Header;
+export default connect(
+  null,
+  mapDispatchToProps
+)(Header);
