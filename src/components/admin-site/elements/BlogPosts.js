@@ -26,29 +26,28 @@ class BlogPosts extends PureComponent {
 
   render() {
     const handleChangePage = () => {};
-    const {drafts, posted} = this.props;
+    const {drafts, posted, noResults} = this.props;
     let draftsElements = <Loading />;
     let postedElements = <Loading />;
+    let pagination = null;
 
-    if (drafts.data.length > 0) {
-      draftsElements = <Items items={drafts.data} />;
-    }
+    if (noResults) {
+      draftsElements = (
+        <p className="text-regular paragraph">{'No posts available.'}</p>
+      );
+      postedElements = (
+        <p className="text-regular paragraph">{'No posts available.'}</p>
+      );
+    } else {
+      if (drafts.data.length > 0) {
+        draftsElements = <Items items={drafts.data} />;
+      }
 
-    if (posted.data.length > 0) {
-      postedElements = <Items items={posted.data} />;
-    }
+      if (posted.data.length > 0) {
+        postedElements = <Items items={posted.data} />;
+      }
 
-    return (
-      <LandingComponent navigation={true}>
-        <Title
-          titleText="Your Blog Posts"
-          hideCancelAction={true}
-          submitLabel="Create Blog Post"
-        />
-        <CustomTabs tabs={this._tabOptions} changed={this.menuChanged}>
-          {draftsElements}
-          {postedElements}
-        </CustomTabs>
+      pagination = (
         <Pagination
           appliedFilters={{category: 'admin-posts', page: 1}}
           handleChangePage={handleChangePage}
@@ -63,6 +62,21 @@ class BlogPosts extends PureComponent {
           }}
           noMargin={true}
         />
+      );
+    }
+
+    return (
+      <LandingComponent navigation={true}>
+        <Title
+          titleText="Your Blog Posts"
+          hideCancelAction={true}
+          submitLabel="Create Blog Post"
+        />
+        <CustomTabs tabs={this._tabOptions} changed={this.menuChanged}>
+          {draftsElements}
+          {postedElements}
+        </CustomTabs>
+        {pagination}
       </LandingComponent>
     );
   }
@@ -76,12 +90,12 @@ function postToBlogPosts(posts, draft = false) {
     let description = htmlStripper(post.body);
     let title = post.title;
 
-    if (description.split('').length > 120) {
-      description = truncate(description, 120);
+    if (description.split('').length > 190) {
+      description = truncate(description, 190);
     }
 
-    if (title.split('').length > 70) {
-      title = truncate(title, 70);
+    if (title.split('').length > 130) {
+      title = truncate(title, 130);
     }
 
     return {
@@ -112,6 +126,7 @@ const mapStateToProps = _state => {
       page: posted.page,
       totalPages: posted.totalPages,
     },
+    noResults: _state.adminBlogs.noResults,
   };
 };
 
@@ -127,13 +142,12 @@ BlogPosts.propTypes = {
   }),
   drafts: PropTypes.shape({
     data: PropTypes.arrayOf(PropTypes.shape({})),
-    noResults: PropTypes.bool,
     page: PropTypes.number,
     totalPages: PropTypes.number,
   }),
+  noResults: PropTypes.bool,
   posted: PropTypes.shape({
     data: PropTypes.arrayOf(PropTypes.shape({})),
-    noResults: PropTypes.bool,
     page: PropTypes.number,
     totalPages: PropTypes.number,
   }),

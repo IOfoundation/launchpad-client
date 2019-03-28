@@ -12,6 +12,7 @@ const initialState = {
       page: 1,
       totalPages: 0,
     },
+    noResults: false,
   },
   blogs: {
     categories: [],

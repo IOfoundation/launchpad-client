@@ -13,6 +13,7 @@ const initialState = {
     page: 1,
     totalPages: 0,
   },
+  noResults: false,
 };
 
 export default function(state = initialState, action) {
@@ -64,6 +65,15 @@ export default function(state = initialState, action) {
       return {
         ...state,
         errors,
+      };
+    }
+
+    case types.NO_RESULTS: {
+      const {noResults} = action;
+
+      return {
+        ...state,
+        noResults,
       };
     }
 
