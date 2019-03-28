@@ -28,7 +28,7 @@ class SignInFormContainer extends PureComponent {
     if (error !== prevProps.error || isAuth !== prevProps.isAuth) {
       if (error) {
         snackbar.showSnackbar({
-          message: 'Login Error',
+          message: error,
         });
       } else if (isAuth) {
         router.push('/admin/profile');
@@ -63,7 +63,7 @@ class SignInFormContainer extends PureComponent {
 
 const mapStateToProps = _state => {
   return {
-    error: _state.user.error,
+    error: _state.user.loginError,
     isAuth: _state.user.authorization !== '',
   };
 };
@@ -76,7 +76,7 @@ const mapDispatchToProps = _dispatch => {
 };
 
 SignInFormContainer.propTypes = {
-  error: PropTypes.bool,
+  error: PropTypes.string,
   isAuth: PropTypes.bool,
   router: PropTypes.shape({
     push: PropTypes.func,

@@ -54,6 +54,8 @@ const initialState = {
       model: '',
       errors: {},
     },
+    loginError: '',
+    passwordResetSuccess: false,
   },
   snackbar: {
     visibility: false,

@@ -38,10 +38,7 @@ class SignUpFormContainer extends PureComponent {
     const {errorsModel, signUpSuccessfully, snackbar, router} = this.props;
     const differentErrors = !isEqual(errorsModel, prevProps.errorsModel);
 
-    if (
-      differentErrors ||
-      signUpSuccessfully !== prevProps.signUpSuccessfully
-    ) {
+    if (differentErrors) {
       const errorKeys = Object.keys(errorsModel.errors);
 
       if (errorKeys.length > 0) {
@@ -52,13 +49,15 @@ class SignUpFormContainer extends PureComponent {
         snackbar.showSnackbar({
           message: parsedError[0],
         });
-      } else if (signUpSuccessfully) {
-        snackbar.showSnackbar({
-          message: 'Sign Up Successful',
-        });
-
-        router.push('/admin-login/account-requested');
       }
+    }
+
+    if (signUpSuccessfully !== prevProps.signUpSuccessfully) {
+      snackbar.showSnackbar({
+        message: 'Sign Up Successful',
+      });
+
+      router.push('/admin-login/account-requested');
     }
   }
 

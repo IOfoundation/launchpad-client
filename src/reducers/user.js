@@ -10,6 +10,8 @@ const initialState = {
     model: '',
     errors: {},
   },
+  loginError: '',
+  passwordResetSuccess: false,
 };
 
 export default function(state = initialState, action) {
@@ -20,6 +22,7 @@ export default function(state = initialState, action) {
         authorization: '',
         loading: true,
         error: false,
+        loginError: '',
       };
     }
 
@@ -30,14 +33,17 @@ export default function(state = initialState, action) {
         authorization,
         loading: false,
         error: false,
+        loginError: '',
       };
     }
 
     case types.LOGIN_ERROR: {
+      const {loginError} = action;
       return {
         ...state,
         error: true,
         loading: false,
+        loginError,
       };
     }
 
@@ -45,6 +51,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         loading: true,
+        signUpSuccessfully: false,
         singUpErrors: {
           model: '',
           errors: {},
@@ -57,10 +64,6 @@ export default function(state = initialState, action) {
         ...state,
         signUpSuccessfully: true,
         loading: false,
-        singUpErrors: {
-          model: '',
-          errors: {},
-        },
       };
     }
 
@@ -70,6 +73,7 @@ export default function(state = initialState, action) {
         ...state,
         loading: false,
         singUpErrors,
+        signUpSuccessfully: false,
       };
     }
 
@@ -126,6 +130,31 @@ export default function(state = initialState, action) {
       return {
         ...state,
         error: false,
+      };
+    }
+
+    case types.PASSWORD_RESET_REQUEST: {
+      return {
+        ...state,
+        passwordResetSuccess: false,
+      };
+    }
+
+    case types.PASSWORD_RESET_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        passwordResetSuccess: true,
+        error: false,
+      };
+    }
+
+    case types.PASSWORD_RESET_ERROR: {
+      return {
+        ...state,
+        error: true,
+        passwordResetSuccess: false,
+        loading: false,
       };
     }
 
