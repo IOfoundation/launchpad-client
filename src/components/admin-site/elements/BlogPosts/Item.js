@@ -117,6 +117,7 @@ const styles = theme => {
     },
     category: {
       fontFamily: theme.fonts.bold,
+      textTransform: 'capitalize',
     },
     date: {
       marginRight: '4px',

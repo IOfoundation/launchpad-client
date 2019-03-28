@@ -1,6 +1,9 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import toJson from 'enzyme-to-json';
+import thunk from 'redux-thunk';
+import configureStore from 'redux-mock-store';
+import {Provider} from 'react-redux';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
@@ -15,19 +18,39 @@ const props = {
     pathname: '/admin/profile',
   },
 };
+const initialState = {
+  adminBlogs: {
+    drafts: {
+      data: [],
+      noResults: false,
+      page: 1,
+      totalPages: 0,
+    },
+    posted: {
+      data: [],
+      noResults: false,
+      page: 1,
+      totalPages: 0,
+    },
+  },
+};
 const mockStore = configureStore([thunk]);
 let store;
+let wrapper;
 
 describe('Admin-site <BlogPosts />', () => {
-  it('renders snapshot of BlogPosts', () => {
-    store = mockStore({});
-    const wrapper = shallow(
-      <MuiThemeProvider theme={muiTheme}>
-        <Provider store={store}>
+  beforeEach(() => {
+    store = mockStore(initialState);
+    wrapper = mount(
+      <Provider store={store}>
+        <MuiThemeProvider theme={muiTheme}>
           <BlogPosts {...props} />
-        </Provider>
-      </MuiThemeProvider>
+        </MuiThemeProvider>
+      </Provider>
     );
+  });
+
+  it('renders snapshot of BlogPosts', () => {
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 });

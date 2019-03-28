@@ -1,4 +1,18 @@
 const initialState = {
+  adminBlogs: {
+    drafts: {
+      data: [],
+      noResults: false,
+      page: 1,
+      totalPages: 0,
+    },
+    posted: {
+      data: [],
+      noResults: false,
+      page: 1,
+      totalPages: 0,
+    },
+  },
   blogs: {
     categories: [],
     category: 'front page',
