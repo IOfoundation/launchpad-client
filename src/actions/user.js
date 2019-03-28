@@ -33,10 +33,10 @@ const singUpSuccess = () => {
   };
 };
 
-const singUpError = singUpErros => {
+const singUpError = singUpErrors => {
   return {
     type: types.SIGN_UP_ERROR,
-    singUpErros,
+    singUpErrors,
   };
 };
 
@@ -132,7 +132,7 @@ export const singUp = ({
 
       dispatch(singUpSuccess());
     } catch (error) {
-      dispatch(singUpError(error.data.errors));
+      dispatch(singUpError(error.data));
     }
   };
 };

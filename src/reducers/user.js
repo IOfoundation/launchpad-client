@@ -6,7 +6,10 @@ const initialState = {
   error: false,
   emailReset: '',
   signUpSuccessfully: false,
-  singUpErros: [],
+  singUpErrors: {
+    model: '',
+    errors: {},
+  },
 };
 
 export default function(state = initialState, action) {
@@ -42,7 +45,10 @@ export default function(state = initialState, action) {
       return {
         ...state,
         loading: true,
-        singUpErros: [],
+        singUpErrors: {
+          model: '',
+          errors: {},
+        },
       };
     }
 
@@ -51,16 +57,19 @@ export default function(state = initialState, action) {
         ...state,
         signUpSuccessfully: true,
         loading: false,
-        singUpErros: [],
+        singUpErrors: {
+          model: '',
+          errors: {},
+        },
       };
     }
 
     case types.SIGN_UP_ERROR: {
-      const {singUpErros} = action;
+      const {singUpErrors} = action;
       return {
         ...state,
         loading: false,
-        singUpErros,
+        singUpErrors,
       };
     }
 

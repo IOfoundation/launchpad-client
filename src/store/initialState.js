@@ -50,7 +50,10 @@ const initialState = {
     error: false,
     emailReset: '',
     signUpSuccessfully: false,
-    singUpErros: [],
+    singUpErrors: {
+      model: '',
+      errors: {},
+    },
   },
   snackbar: {
     visibility: false,

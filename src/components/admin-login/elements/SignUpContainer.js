@@ -6,6 +6,7 @@ import {bindActionCreators} from 'redux';
 import Grid from '@material-ui/core/Grid';
 import * as Yup from 'yup';
 import {Formik} from 'formik';
+import {isEqual} from 'lodash';
 
 import SignUpForm from './SignUpForm';
 
@@ -34,16 +35,20 @@ const initialValues = {
 
 class SignUpFormContainer extends PureComponent {
   componentDidUpdate(prevProps) {
-    const {errors, signUpSuccessfully, snackbar, router} = this.props;
+    const {errorsModel, signUpSuccessfully, snackbar, router} = this.props;
+    const differentErrors = !isEqual(errorsModel, prevProps.errorsModel);
 
     if (
-      errors !== prevProps.errors ||
+      differentErrors ||
       signUpSuccessfully !== prevProps.signUpSuccessfully
     ) {
-      if (errors && errors.length > 0) {
-        const parsedError = Object.keys(errors[0].detail).map(
-          key => `${key} ${errors[0].detail[key][0]}`
+      const errorKeys = Object.keys(errorsModel.errors);
+
+      if (errorKeys.length > 0) {
+        const parsedError = errorKeys.map(
+          key => `${errorsModel.model} ${key} ${errorsModel.errors[key][0]}`
         );
+
         snackbar.showSnackbar({
           message: parsedError[0],
         });
@@ -53,10 +58,6 @@ class SignUpFormContainer extends PureComponent {
         });
 
         router.push('/admin-login/account-requested');
-      } else if (!errors) {
-        snackbar.showSnackbar({
-          message: 'Sign Up Error',
-        });
       }
     }
   }
@@ -92,7 +93,7 @@ class SignUpFormContainer extends PureComponent {
 
 const mapStateToProps = _state => {
   return {
-    errors: _state.user.singUpErros,
+    errorsModel: _state.user.singUpErrors,
     signUpSuccessfully: _state.user.signUpSuccessfully,
   };
 };
@@ -105,7 +106,15 @@ const mapDispatchToProps = _dispatch => {
 };
 
 SignUpFormContainer.propTypes = {
-  errors: PropTypes.arrayOf(PropTypes.shape({})),
+  errorsModel: PropTypes.shape({
+    model: PropTypes.string,
+    errors: PropTypes.shape({
+      description: PropTypes.arrayOf(PropTypes.string),
+      email: PropTypes.arrayOf(PropTypes.string),
+      name: PropTypes.arrayOf(PropTypes.string),
+      password: PropTypes.arrayOf(PropTypes.string),
+    }),
+  }),
   isAuth: PropTypes.bool,
   router: PropTypes.shape({
     push: PropTypes.func,
