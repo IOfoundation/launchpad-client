@@ -1282,7 +1282,7 @@ exports[`<Events /> renders snapshot of Events 1`] = `
     }
   }
 >
-  <Connect(Events)
+  <Connect(WithStyles(Events))
     breakpoint="sm"
   />
 </ContextProvider>

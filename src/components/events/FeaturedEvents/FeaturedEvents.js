@@ -25,8 +25,17 @@ class FeaturedEvents extends PureComponent {
     this.props.actions.getEventsByMonth(monthsNumber, 'featured');
   }
 
+  mapDataToModal(info) {
+    return {
+      ...info,
+      ending_at: info.ending_at.pacificTime,
+      posted_at: info.posted_at.pacificTime,
+      starting_at: info.starting_at.pacificTime,
+    };
+  }
+
   render() {
-    const {classes, featuredEvents} = this.props;
+    const {classes, featuredEvents, handlerModalVisibility} = this.props;
     let featuredEventsElements = <Loading />;
 
     if (featuredEvents.length > 0) {
@@ -41,6 +50,9 @@ class FeaturedEvents extends PureComponent {
                 info.starting_at.year
               }`}
               name={info.organization.name}
+              handlerModalVisibility={() =>
+                handlerModalVisibility(this.mapDataToModal(info))
+              }
             />
           );
         });
@@ -78,7 +90,9 @@ FeaturedEvents.propTypes = {
     container: PropTypes.string,
     featuredEvents: PropTypes.string,
   }),
+  events: PropTypes.arrayOf(PropTypes.shape({})),
   featuredEvents: PropTypes.arrayOf(PropTypes.shape({})),
+  handlerModalVisibility: PropTypes.func,
 };
 
 export default withStyles(styles)(FeaturedEvents);

@@ -5,9 +5,6 @@ import {PropTypes} from 'prop-types';
 import {Scheduler} from '@progress/kendo-scheduler-react-wrapper';
 import {withStyles} from '@material-ui/core/styles';
 import kendo from '@progress/kendo-ui';
-import Modal from '@material-ui/core/Modal';
-
-import Content from './Modal/Content';
 
 import {containerStyles, getDate, mobileDaysMap} from '@Utils';
 
@@ -40,8 +37,6 @@ class SchedulerContainer extends PureComponent {
   state = {
     views: ['day', 'week', {type: 'month', selected: true}],
     events: [],
-    selectedEvent: {},
-    openModal: false,
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -100,22 +95,7 @@ class SchedulerContainer extends PureComponent {
       _event => _event.title === text
     );
 
-    this.handlerModalVisibility(modalInformation);
-  };
-
-  handlerModalVisibility = modalInformation => {
-    this.setState(prevState => {
-      if (modalInformation) {
-        return {
-          selectedEvent: modalInformation,
-          openModal: !prevState.openModal,
-        };
-      }
-
-      return {
-        openModal: !prevState.openModal,
-      };
-    });
+    this.props.handlerModalVisibility(modalInformation);
   };
 
   updateCalendar = event => {
@@ -161,26 +141,10 @@ class SchedulerContainer extends PureComponent {
 
   render() {
     const {classes, breakpoint} = this.props;
-    const {startTime, views, events, openModal, selectedEvent} = this.state;
+    const {startTime, views, events} = this.state;
 
     return (
       <div className={classes.container}>
-        <Modal open={openModal} onClose={this.handlerModalVisibility}>
-          <div className={classes.paper}>
-            <Content
-              title={selectedEvent.title}
-              postedBy={selectedEvent.organization}
-              start={selectedEvent.starting_at}
-              end={selectedEvent.ending_at}
-              address={`${selectedEvent.street_1}, ${selectedEvent.street_2}, ${
-                selectedEvent.state_abbr
-              }, ${selectedEvent.zip}`}
-              link={selectedEvent.external_url}
-              description={selectedEvent.body}
-              closed={this.handlerModalVisibility}
-            />
-          </div>
-        </Modal>
         <Scheduler
           height={660}
           views={views}
@@ -210,6 +174,7 @@ SchedulerContainer.propTypes = {
     paper: PropTypes.string,
   }),
   events: PropTypes.arrayOf(PropTypes.shape({})),
+  handlerModalVisibility: PropTypes.func,
 };
 
 export default withStyles(styles)(SchedulerContainer);

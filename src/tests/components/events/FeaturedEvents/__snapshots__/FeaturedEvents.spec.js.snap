@@ -1839,6 +1839,7 @@ exports[`<FeaturedEvents /> renders snapshot of FeaturedEvents 1`] = `
                   <FeaturedEvent
                     date="March 2, 2019"
                     description="Consequatur fugit sed. Ipsam eligendi distinctio. Excepturi iusto optio."
+                    handlerModalVisibility={[Function]}
                     key="293"
                     name="Brakus-Harvey"
                     title="Lead Farming Developer"
@@ -1848,6 +1849,7 @@ exports[`<FeaturedEvents /> renders snapshot of FeaturedEvents 1`] = `
                     >
                       <h3
                         className="featured-event__title text-bold"
+                        onClick={[Function]}
                       >
                         Lead Farming Developer
                       </h3>
@@ -1876,6 +1878,7 @@ exports[`<FeaturedEvents /> renders snapshot of FeaturedEvents 1`] = `
                   <FeaturedEvent
                     date="March 3, 2019"
                     description="Minima id reprehenderit. Beatae repudiandae inventore. Magni amet sit."
+                    handlerModalVisibility={[Function]}
                     key="269"
                     name="Brakus-Harvey"
                     title="Forward Consulting Planner"
@@ -1885,6 +1888,7 @@ exports[`<FeaturedEvents /> renders snapshot of FeaturedEvents 1`] = `
                     >
                       <h3
                         className="featured-event__title text-bold"
+                        onClick={[Function]}
                       >
                         Forward Consulting Planner
                       </h3>
@@ -1913,6 +1917,7 @@ exports[`<FeaturedEvents /> renders snapshot of FeaturedEvents 1`] = `
                   <FeaturedEvent
                     date="March 3, 2019"
                     description="Fugit mollitia eos. Consequatur quia natus. Modi quam sit."
+                    handlerModalVisibility={[Function]}
                     key="290"
                     name="Brakus-Harvey"
                     title="Forward Administration Producer"
@@ -1922,6 +1927,7 @@ exports[`<FeaturedEvents /> renders snapshot of FeaturedEvents 1`] = `
                     >
                       <h3
                         className="featured-event__title text-bold"
+                        onClick={[Function]}
                       >
                         Forward Administration Producer
                       </h3>
@@ -2084,6 +2090,7 @@ exports[`<FeaturedEvents /> renders snapshot of FeaturedEvents 1`] = `
                   <FeaturedEvent
                     date="April 3, 2019"
                     description="Aspernatur quo et. Voluptatem voluptas similique. Illo iure perspiciatis."
+                    handlerModalVisibility={[Function]}
                     key="300"
                     name="Hilll-Donnelly"
                     title="Education Assistant"
@@ -2093,6 +2100,7 @@ exports[`<FeaturedEvents /> renders snapshot of FeaturedEvents 1`] = `
                     >
                       <h3
                         className="featured-event__title text-bold"
+                        onClick={[Function]}
                       >
                         Education Assistant
                       </h3>
@@ -2121,6 +2129,7 @@ exports[`<FeaturedEvents /> renders snapshot of FeaturedEvents 1`] = `
                   <FeaturedEvent
                     date="April 26, 2019"
                     description="Nemo voluptatem architecto. Labore rerum asperiores. Est voluptatem nesciunt."
+                    handlerModalVisibility={[Function]}
                     key="301"
                     name="Hilll-Donnelly"
                     title="Real-Estate Producer"
@@ -2130,6 +2139,7 @@ exports[`<FeaturedEvents /> renders snapshot of FeaturedEvents 1`] = `
                     >
                       <h3
                         className="featured-event__title text-bold"
+                        onClick={[Function]}
                       >
                         Real-Estate Producer
                       </h3>
@@ -2158,6 +2168,7 @@ exports[`<FeaturedEvents /> renders snapshot of FeaturedEvents 1`] = `
                   <FeaturedEvent
                     date="April 27, 2019"
                     description="Distinctio atque quidem. Esse minus porro. Repellendus velit consequuntur."
+                    handlerModalVisibility={[Function]}
                     key="299"
                     name="Hilll-Donnelly"
                     title="Banking Architect"
@@ -2167,6 +2178,7 @@ exports[`<FeaturedEvents /> renders snapshot of FeaturedEvents 1`] = `
                     >
                       <h3
                         className="featured-event__title text-bold"
+                        onClick={[Function]}
                       >
                         Banking Architect
                       </h3>
@@ -2329,6 +2341,7 @@ exports[`<FeaturedEvents /> renders snapshot of FeaturedEvents 1`] = `
                   <FeaturedEvent
                     date="May 2, 2019"
                     description="Explicabo omnis non. Quia fugit et. Quos occaecati qui."
+                    handlerModalVisibility={[Function]}
                     key="303"
                     name="Kuphal, Kulas and Lang"
                     title="Principal Planner"
@@ -2338,6 +2351,7 @@ exports[`<FeaturedEvents /> renders snapshot of FeaturedEvents 1`] = `
                     >
                       <h3
                         className="featured-event__title text-bold"
+                        onClick={[Function]}
                       >
                         Principal Planner
                       </h3>
@@ -2366,6 +2380,7 @@ exports[`<FeaturedEvents /> renders snapshot of FeaturedEvents 1`] = `
                   <FeaturedEvent
                     date="May 3, 2019"
                     description="Aut in et. Facere rem debitis. Dolorum aspernatur voluptates."
+                    handlerModalVisibility={[Function]}
                     key="308"
                     name="Kuphal, Kulas and Lang"
                     title="National Technician"
@@ -2375,6 +2390,7 @@ exports[`<FeaturedEvents /> renders snapshot of FeaturedEvents 1`] = `
                     >
                       <h3
                         className="featured-event__title text-bold"
+                        onClick={[Function]}
                       >
                         National Technician
                       </h3>
@@ -2403,6 +2419,7 @@ exports[`<FeaturedEvents /> renders snapshot of FeaturedEvents 1`] = `
                   <FeaturedEvent
                     date="May 4, 2019"
                     description="Exercitationem qui nihil. Ut saepe velit. Veniam dolor doloribus."
+                    handlerModalVisibility={[Function]}
                     key="309"
                     name="Kuphal, Kulas and Lang"
                     title="Farming Specialist"
@@ -2412,6 +2429,7 @@ exports[`<FeaturedEvents /> renders snapshot of FeaturedEvents 1`] = `
                     >
                       <h3
                         className="featured-event__title text-bold"
+                        onClick={[Function]}
                       >
                         Farming Specialist
                       </h3>
