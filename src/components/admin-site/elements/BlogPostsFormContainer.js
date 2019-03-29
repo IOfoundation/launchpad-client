@@ -14,71 +14,24 @@ import * as user from '@Actions/user';
 import * as snackbarActions from '@Actions/snackbar';
 
 const blogPostsSchema = Yup.object().shape({
-  contactEmail: Yup.string()
-    .email('Invalid email address')
-    .required('Required'),
-  organizationName: Yup.string().required('Required'),
-  name: Yup.string().required('Required'),
-  website: Yup.string().required('Required'),
-  description: Yup.string().required('Required'),
-  accreditations: Yup.string(),
-  dateIncorporation: Yup.string(),
-  legalStatus: Yup.string(),
-  fundingSources: Yup.string(),
-  licenses: Yup.string(),
-  taxIdentifier: Yup.string(),
-  taxStatus: Yup.string(),
-  twitter: Yup.string(),
-  facebook: Yup.string(),
-  linkedin: Yup.string(),
-  phones: Yup.array().of(
-    Yup.object().shape({
-      phoneNumber: Yup.string(),
-      ext: Yup.string(),
-      vanityNumber: Yup.string(),
-      numberType: Yup.string(),
-      department: Yup.string(),
-      countryExt: Yup.string(),
-    })
-  ),
+  category: Yup.string().required('Required'),
+  title: Yup.string().required('Required'),
+  body: Yup.string().required('Required'),
 });
 
 const initialValues = {
-  password: '',
-  contactEmail: '',
-  organizationName: '',
-  name: '',
-  website: '',
-  description: '',
-  accreditations: '',
-  dateIncorporation: '',
-  legalStatus: '',
-  fundingSources: '',
-  licenses: '',
-  taxIdentifier: '',
-  taxStatus: '',
-  twitter: '',
-  facebook: '',
-  linkedin: '',
-  phones: [
-    {
-      phoneNumber: '',
-      ext: '',
-      vanityNumber: '',
-      numberType: '',
-      department: '',
-      countryExt: '',
-    },
-  ],
+  category: '',
+  title: '',
+  body: '',
 };
 
 const ProfileFormContainer = props => {
   return (
-    <LandingComponent breakpoint={props.breakpoint} navigation={true}>
+    <LandingComponent breakpoint={props.breakpoint} navigation={false}>
       <Title
-        titleText="Profile"
+        titleText="Create Post"
         hideCancelAction={false}
-        submitLabel={'Save Changes'}
+        submitLabel={'Publish'}
       />
       <Formik
         render={_props => (

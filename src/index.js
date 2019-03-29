@@ -37,6 +37,8 @@ require('static-data/images/ic_map_green.png');
 require('static-data/images/ic_map_grey.png');
 require('static-data/backgrounds/blog-header.png');
 require('static-data/backgrounds/events.png');
+require('medium-editor/dist/css/medium-editor.css');
+require('medium-editor/dist/css/themes/default.css');
 
 const store = configureStore(initialState);
 
