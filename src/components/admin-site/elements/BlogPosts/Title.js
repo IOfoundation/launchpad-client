@@ -1,16 +1,15 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
 import TitleField from '@Shared/FormElements/TitleField';
 
 export const Title = props => {
-  const {errors, touched, handleBlur, handleChange, values, classes} = props;
+  const {errors, touched, handleBlur, handleChange, values} = props;
 
   return (
-    <div className="m-bot-8" style={{padding: 8}}>
-      <Grid container={true} spacing={16}>
+    <div className="m-bot-8">
+      <Grid container={true}>
         <Grid item={true} xs={12}>
           <TitleField
             autocomplete="off"
@@ -30,10 +29,6 @@ export const Title = props => {
   );
 };
 
-const styles = () => {
-  return {};
-};
-
 Title.propTypes = {
   classes: PropTypes.shape({}),
   errors: PropTypes.shape({}),
@@ -43,4 +38,4 @@ Title.propTypes = {
   values: PropTypes.shape({}),
 };
 
-export default withStyles(styles)(Title);
+export default Title;

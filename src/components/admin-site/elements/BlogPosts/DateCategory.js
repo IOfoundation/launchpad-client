@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import SelectElement from '@Shared/FormElements/Select';
 
 export const DateCategory = props => {
-  const {errors, touched, handleBlur, handleChange, values, classes} = props;
+  const {errors, handleBlur, handleChange, values, classes} = props;
 
   return (
     <div className="m-bot-8" style={{padding: 8}}>

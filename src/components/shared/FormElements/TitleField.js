@@ -1,45 +1,24 @@
 import React, {Fragment, PureComponent} from 'react';
 import {PropTypes} from 'prop-types';
-import TextField from '@material-ui/core/TextField';
 import {withStyles} from '@material-ui/core/styles';
 import {ErrorMessage} from 'formik';
+import TextareaAutosize from 'react-autosize-textarea';
 
-const styles = () => ({
-  cssLabel: {
-    color: '#8E8F92',
+const styles = theme => ({
+  textarea: {
+    width: '100%',
+    border: 0,
+    borderBottom: '1px solid #E9EAEB',
+    outline: 0,
+    background: 'none',
+    resize: 'none',
     fontSize: '34px',
-    lineHeight: '40px',
-    fontFamily: '"proxima-nova-regular", Georgia, sans-serif',
-  },
-  cssOutlinedInput: {
-    '&$cssFocused': {
-      borderColor: '#E9EAEB',
+    lineHeight: '40px !important',
+    fontFamily: theme.fonts.bold,
+    padding: '0 0 16px',
+    '&::placeholder': {
+      color: '#8E8F92',
     },
-    '&:after, &:hover:before': {
-      borderColor: '#E9EAEB',
-    },
-    '&:hover:not($cssDisabled):not($cssError):before': {
-      borderBottom: '2px solid rgba(233, 234, 235, 0.7) !important',
-    },
-    '&:before': {
-      borderColor: '#E9EAEB',
-    },
-    fontFamily: "'proxima-nova-regular', Georgia, sans-serif",
-  },
-  cssDisabled: {},
-  cssFocused: {
-    color: 'black',
-    '&$cssLabel': {
-      color: 'black',
-    },
-  },
-  cssFormControl: {
-    color: 'black',
-    fontSize: '34px',
-    lineHeight: '40px',
-  },
-  cssError: {
-    color: '#D61600 !important',
   },
 });
 
@@ -55,49 +34,16 @@ class TitleField extends PureComponent {
   };
 
   render() {
-    const {
-      autocomplete,
-      classes,
-      error,
-      handleBlur,
-      id,
-      label,
-      marginBottom,
-      multiline,
-      type = 'text',
-      value,
-    } = this.props;
+    const {classes, id, marginBottom, value} = this.props;
 
     return (
       <Fragment>
-        <TextField
-          error={error}
-          fullWidth={true}
+        <TextareaAutosize
+          className={classes.textarea}
+          placeholder="Add a Title..."
           id={id}
-          type={type}
-          placeholder={label}
-          onChange={event => this.changeHandler(id, event)}
-          onBlur={handleBlur}
           value={value}
-          multiline={multiline}
-          InputLabelProps={{
-            classes: {
-              root: classes.cssLabel,
-              focused: classes.cssFocused,
-              error: classes.cssError,
-              disabled: classes.cssDisabled,
-            },
-          }}
-          inputProps={{autoComplete: autocomplete}}
-          InputProps={{
-            classes: {
-              root: classes.cssOutlinedInput,
-              focused: classes.cssFocused,
-              formControl: classes.cssFormControl,
-              error: classes.cssError,
-              disabled: classes.cssDisabled,
-            },
-          }}
+          onChange={event => this.changeHandler(id, event)}
         />
         <div
           className={[
