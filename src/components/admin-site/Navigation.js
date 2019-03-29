@@ -1,10 +1,24 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import {Link} from 'react-router';
 import {withStyles} from '@material-ui/core/styles';
 import {PropTypes} from 'prop-types';
+import {withRouter} from 'react-router';
 
 const Navigation = props => {
   const {classes} = props;
+  const navigationClasses = [classes.navigation];
+  let status = null;
+
+  if (props.location.pathname === '/admin/profile') {
+    navigationClasses.push(classes.addBorder);
+    status = (
+      <Fragment>
+        <h3 className={`${classes.title} m-top-16`}>{'Status'}</h3>
+        <p className={classes.description}>{'Published'}</p>
+        <button className="btn btn__red">{'Unpublish'}</button>
+      </Fragment>
+    );
+  }
 
   return (
     <div className={classes.container}>
@@ -12,7 +26,7 @@ const Navigation = props => {
       <p className={classes.description}>
         {"Governor's Office of Business and Economic Development"}
       </p>
-      <ul className={classes.navigation}>
+      <ul className={navigationClasses.join(' ')}>
         <li>
           <Link
             activeStyle={activeStyles}
@@ -41,15 +55,19 @@ const Navigation = props => {
           </Link>
         </li>
         <li>
-          <a className={classes.link}>{'Blog Posts'}</a>
+          <Link
+            activeStyle={activeStyles}
+            className={classes.link}
+            to="/admin/blog"
+          >
+            {'Blog Posts'}
+          </Link>
         </li>
         <li>
           <a className={classes.link}>{'Events'}</a>
         </li>
       </ul>
-      <h3 className={`${classes.title} m-top-16`}>{'Status'}</h3>
-      <p className={classes.description}>{'Published'}</p>
-      <button className="btn btn__red">{'Unpublish'}</button>
+      {status}
     </div>
   );
 };
@@ -86,8 +104,16 @@ const styles = theme => {
       listStyleType: 'none',
       margin: 0,
       padding: 0,
-      borderBottom: '1px solid #1F1F1F',
       '& li': {
+        marginBottom: '16px',
+      },
+      '& li:last-child': {
+        marginBottom: '0',
+      },
+    },
+    addBorder: {
+      borderBottom: '1px solid #1F1F1F',
+      '& li:last-child': {
         marginBottom: '16px',
       },
     },
@@ -108,8 +134,12 @@ Navigation.propTypes = {
     description: PropTypes.string,
     link: PropTypes.string,
     navigation: PropTypes.string,
+    noBorder: PropTypes.string,
     title: PropTypes.string,
+  }),
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
   }),
 };
 
-export default withStyles(styles)(Navigation);
+export default withStyles(styles)(withRouter(Navigation));

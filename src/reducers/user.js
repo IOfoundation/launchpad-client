@@ -6,7 +6,12 @@ const initialState = {
   error: false,
   emailReset: '',
   signUpSuccessfully: false,
-  singUpErros: [],
+  singUpErrors: {
+    model: '',
+    errors: {},
+  },
+  loginError: '',
+  passwordResetSuccess: false,
 };
 
 export default function(state = initialState, action) {
@@ -17,6 +22,7 @@ export default function(state = initialState, action) {
         authorization: '',
         loading: true,
         error: false,
+        loginError: '',
       };
     }
 
@@ -27,14 +33,17 @@ export default function(state = initialState, action) {
         authorization,
         loading: false,
         error: false,
+        loginError: '',
       };
     }
 
     case types.LOGIN_ERROR: {
+      const {loginError} = action;
       return {
         ...state,
         error: true,
         loading: false,
+        loginError,
       };
     }
 
@@ -42,7 +51,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         loading: true,
-        singUpErros: [],
+        signUpSuccessfully: false,
+        singUpErrors: {
+          model: '',
+          errors: {},
+        },
       };
     }
 
@@ -51,16 +64,16 @@ export default function(state = initialState, action) {
         ...state,
         signUpSuccessfully: true,
         loading: false,
-        singUpErros: [],
       };
     }
 
     case types.SIGN_UP_ERROR: {
-      const {singUpErros} = action;
+      const {singUpErrors} = action;
       return {
         ...state,
         loading: false,
-        singUpErros,
+        singUpErrors,
+        signUpSuccessfully: false,
       };
     }
 
@@ -117,6 +130,31 @@ export default function(state = initialState, action) {
       return {
         ...state,
         error: false,
+      };
+    }
+
+    case types.PASSWORD_RESET_REQUEST: {
+      return {
+        ...state,
+        passwordResetSuccess: false,
+      };
+    }
+
+    case types.PASSWORD_RESET_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        passwordResetSuccess: true,
+        error: false,
+      };
+    }
+
+    case types.PASSWORD_RESET_ERROR: {
+      return {
+        ...state,
+        error: true,
+        passwordResetSuccess: false,
+        loading: false,
       };
     }
 

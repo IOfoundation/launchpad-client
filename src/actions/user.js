@@ -15,9 +15,10 @@ const loginSuccess = authorization => {
   };
 };
 
-const loginError = () => {
+const loginError = _loginError => {
   return {
     type: types.LOGIN_ERROR,
+    loginError: _loginError,
   };
 };
 
@@ -33,10 +34,10 @@ const singUpSuccess = () => {
   };
 };
 
-const singUpError = singUpErros => {
+const singUpError = singUpErrors => {
   return {
     type: types.SIGN_UP_ERROR,
-    singUpErros,
+    singUpErrors,
   };
 };
 
@@ -104,8 +105,8 @@ export const login = ({password, email}) => {
       });
 
       dispatch(loginSuccess(httpResponse.headers.authorization));
-    } catch (error) {
-      dispatch(loginError());
+    } catch (errors) {
+      dispatch(loginError(errors.data.error));
     }
   };
 };
@@ -132,7 +133,7 @@ export const singUp = ({
 
       dispatch(singUpSuccess());
     } catch (error) {
-      dispatch(singUpError(error.data.errors));
+      dispatch(singUpError(error.data));
     }
   };
 };
@@ -169,5 +170,38 @@ export const signOut = token => {
 export const resetError = () => {
   return {
     type: types.RESET_ERROR,
+  };
+};
+
+const passwordResetStart = () => {
+  return {
+    type: types.PASSWORD_RESET_REQUEST,
+  };
+};
+
+const passwordResetSuccess = () => {
+  return {
+    type: types.PASSWORD_RESET_SUCCESS,
+  };
+};
+
+const passwordResetError = singUpErrors => {
+  return {
+    type: types.PASSWORD_RESET_ERROR,
+    singUpErrors,
+  };
+};
+
+export const passwordReset = (token, password, newPassword) => {
+  return async dispatch => {
+    try {
+      dispatch(passwordResetStart());
+      await httpRequest.put(
+        `/users/password?user[reset_password_token]=${token}&user[password]=${password}&user[password_confirmation]=${newPassword}`
+      );
+      dispatch(passwordResetSuccess());
+    } catch (error) {
+      dispatch(passwordResetError(error));
+    }
   };
 };

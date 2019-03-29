@@ -1,134 +1,180 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Admin-site <Navigation /> renders snapshot of Navigation 1`] = `
-<WithStyles(Navigation)>
-  <Navigation
+<WithStyles(withRouter(Navigation))
+  location={
+    Object {
+      "pathname": "/admin/profile",
+    }
+  }
+>
+  <withRouter(Navigation)
     classes={
       Object {
-        "container": "Navigation-container-1",
-        "description": "Navigation-description-3",
-        "link": "Navigation-link-5",
-        "navigation": "Navigation-navigation-4",
-        "title": "Navigation-title-2",
+        "addBorder": "withRouter-Navigation--addBorder-5",
+        "container": "withRouter-Navigation--container-1",
+        "description": "withRouter-Navigation--description-3",
+        "link": "withRouter-Navigation--link-6",
+        "navigation": "withRouter-Navigation--navigation-4",
+        "title": "withRouter-Navigation--title-2",
+      }
+    }
+    location={
+      Object {
+        "pathname": "/admin/profile",
       }
     }
   >
-    <div
-      className="Navigation-container-1"
+    <Navigation
+      classes={
+        Object {
+          "addBorder": "withRouter-Navigation--addBorder-5",
+          "container": "withRouter-Navigation--container-1",
+          "description": "withRouter-Navigation--description-3",
+          "link": "withRouter-Navigation--link-6",
+          "navigation": "withRouter-Navigation--navigation-4",
+          "title": "withRouter-Navigation--title-2",
+        }
+      }
+      location={
+        Object {
+          "pathname": "/admin/profile",
+        }
+      }
     >
-      <h3
-        className="Navigation-title-2"
+      <div
+        className="withRouter-Navigation--container-1"
       >
-        Your organization
-      </h3>
-      <p
-        className="Navigation-description-3"
-      >
-        Governor's Office of Business and Economic Development
-      </p>
-      <ul
-        className="Navigation-navigation-4"
-      >
-        <li>
-          <Link
-            activeStyle={
-              Object {
-                "color": "#00ba81",
-                "fontFamily": "\\"proxima-nova-bold\\", Georgia, sans-serif",
-                "opacity": 1,
+        <h3
+          className="withRouter-Navigation--title-2"
+        >
+          Your organization
+        </h3>
+        <p
+          className="withRouter-Navigation--description-3"
+        >
+          Governor's Office of Business and Economic Development
+        </p>
+        <ul
+          className="withRouter-Navigation--navigation-4 withRouter-Navigation--addBorder-5"
+        >
+          <li>
+            <Link
+              activeStyle={
+                Object {
+                  "color": "#00ba81",
+                  "fontFamily": "\\"proxima-nova-bold\\", Georgia, sans-serif",
+                  "opacity": 1,
+                }
               }
-            }
-            className="Navigation-link-5"
-            onlyActiveOnIndex={false}
-            style={Object {}}
-            to="/admin/profile"
-          >
-            <a
-              className="Navigation-link-5"
-              onClick={[Function]}
+              className="withRouter-Navigation--link-6"
+              onlyActiveOnIndex={false}
               style={Object {}}
+              to="/admin/profile"
             >
-              Profile
-            </a>
-          </Link>
-        </li>
-        <li>
-          <Link
-            activeStyle={
-              Object {
-                "color": "#00ba81",
-                "fontFamily": "\\"proxima-nova-bold\\", Georgia, sans-serif",
-                "opacity": 1,
+              <a
+                className="withRouter-Navigation--link-6"
+                onClick={[Function]}
+                style={Object {}}
+              >
+                Profile
+              </a>
+            </Link>
+          </li>
+          <li>
+            <Link
+              activeStyle={
+                Object {
+                  "color": "#00ba81",
+                  "fontFamily": "\\"proxima-nova-bold\\", Georgia, sans-serif",
+                  "opacity": 1,
+                }
               }
-            }
-            className="Navigation-link-5"
-            onlyActiveOnIndex={false}
-            style={Object {}}
-            to="/admin/location"
-          >
-            <a
-              className="Navigation-link-5"
-              onClick={[Function]}
+              className="withRouter-Navigation--link-6"
+              onlyActiveOnIndex={false}
               style={Object {}}
+              to="/admin/location"
             >
-              Locations
-            </a>
-          </Link>
-        </li>
-        <li>
-          <Link
-            activeStyle={
-              Object {
-                "color": "#00ba81",
-                "fontFamily": "\\"proxima-nova-bold\\", Georgia, sans-serif",
-                "opacity": 1,
+              <a
+                className="withRouter-Navigation--link-6"
+                onClick={[Function]}
+                style={Object {}}
+              >
+                Locations
+              </a>
+            </Link>
+          </li>
+          <li>
+            <Link
+              activeStyle={
+                Object {
+                  "color": "#00ba81",
+                  "fontFamily": "\\"proxima-nova-bold\\", Georgia, sans-serif",
+                  "opacity": 1,
+                }
               }
-            }
-            className="Navigation-link-5"
-            onlyActiveOnIndex={false}
-            style={Object {}}
-            to="/admin/services"
-          >
-            <a
-              className="Navigation-link-5"
-              onClick={[Function]}
+              className="withRouter-Navigation--link-6"
+              onlyActiveOnIndex={false}
               style={Object {}}
+              to="/admin/services"
             >
-              Services
+              <a
+                className="withRouter-Navigation--link-6"
+                onClick={[Function]}
+                style={Object {}}
+              >
+                Services
+              </a>
+            </Link>
+          </li>
+          <li>
+            <Link
+              activeStyle={
+                Object {
+                  "color": "#00ba81",
+                  "fontFamily": "\\"proxima-nova-bold\\", Georgia, sans-serif",
+                  "opacity": 1,
+                }
+              }
+              className="withRouter-Navigation--link-6"
+              onlyActiveOnIndex={false}
+              style={Object {}}
+              to="/admin/blog"
+            >
+              <a
+                className="withRouter-Navigation--link-6"
+                onClick={[Function]}
+                style={Object {}}
+              >
+                Blog Posts
+              </a>
+            </Link>
+          </li>
+          <li>
+            <a
+              className="withRouter-Navigation--link-6"
+            >
+              Events
             </a>
-          </Link>
-        </li>
-        <li>
-          <a
-            className="Navigation-link-5"
-          >
-            Blog Posts
-          </a>
-        </li>
-        <li>
-          <a
-            className="Navigation-link-5"
-          >
-            Events
-          </a>
-        </li>
-      </ul>
-      <h3
-        className="Navigation-title-2 m-top-16"
-      >
-        Status
-      </h3>
-      <p
-        className="Navigation-description-3"
-      >
-        Published
-      </p>
-      <button
-        className="btn btn__red"
-      >
-        Unpublish
-      </button>
-    </div>
-  </Navigation>
-</WithStyles(Navigation)>
+          </li>
+        </ul>
+        <h3
+          className="withRouter-Navigation--title-2 m-top-16"
+        >
+          Status
+        </h3>
+        <p
+          className="withRouter-Navigation--description-3"
+        >
+          Published
+        </p>
+        <button
+          className="btn btn__red"
+        >
+          Unpublish
+        </button>
+      </div>
+    </Navigation>
+  </withRouter(Navigation)>
+</WithStyles(withRouter(Navigation))>
 `;
