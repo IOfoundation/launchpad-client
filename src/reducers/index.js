@@ -5,13 +5,15 @@ import snackbar from './snackbar';
 import events from './events';
 import blogs from './blogs';
 import user from './user';
+import adminBlogs from './admin-blogs';
 
 const rootReducer = combineReducers({
   routing: routerReducer,
-  businesses,
-  snackbar,
-  events,
+  adminBlogs,
   blogs,
+  businesses,
+  events,
+  snackbar,
   user,
 });
 

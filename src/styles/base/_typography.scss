@@ -1,9 +1,9 @@
 .hero h2 {
- font-size: $font-size-header;
- font-weight: bold;
- line-height: 54px;
- margin: auto;
- margin-top: 32px;
+  font-size: $font-size-header;
+  font-weight: bold;
+  line-height: 54px;
+  margin: auto;
+  margin-top: 32px;
 }
 .hero p {
   font-size: $font-size-paragraphe;
@@ -13,7 +13,9 @@
     margin-top: 16px;
   }
 }
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-weight: normal !important;
 }
 .text-regular {
@@ -31,4 +33,7 @@ h1, h2, h3 {
 
 .text-center {
   text-align: center;
+}
+.paragraph {
+  color: $primary-color;
 }

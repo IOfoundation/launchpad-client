@@ -11,7 +11,10 @@ class CustomTabs extends PureComponent {
   };
 
   handleChange = (event, value) => {
+    const {changed} = this.props;
+
     this.setState({value});
+    changed(value);
   };
 
   handleChangeIndex = index => {
@@ -95,6 +98,7 @@ const styles = () => {
 };
 
 CustomTabs.propTypes = {
+  changed: PropTypes.func,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
