@@ -6,8 +6,12 @@ import Grid from '@material-ui/core/Grid';
 import SelectElement from '@Shared/FormElements/Select';
 
 export const DateCategory = props => {
-  const {errors, handleBlur, handleChange, values, classes} = props;
+  const {errors, handleBlur, handleChange, values, classes, categories} = props;
 
+  const selectCategories = categories.map(categorie => ({
+    value: categorie.id,
+    name: categorie.name,
+  }));
   return (
     <div className="m-bot-8" style={{padding: 8}}>
       <Grid container={true} spacing={16} alignItems="center">
@@ -23,6 +27,7 @@ export const DateCategory = props => {
             label={'Category Title'}
             name={'category'}
             value={values.category}
+            selectOptions={selectCategories}
           />
         </Grid>
       </Grid>
@@ -39,6 +44,12 @@ const styles = () => {
 };
 
 DateCategory.propTypes = {
+  categories: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+    })
+  ),
   classes: PropTypes.shape({}),
   errors: PropTypes.shape({}),
   handleBlur: PropTypes.func,

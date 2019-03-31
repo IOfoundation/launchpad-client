@@ -159,7 +159,8 @@
       "^.+\\.(gif|ttf|eot|svg|woff|woff2|ico)$": "<rootDir>/tools/fileMock.js",
       "@Actions(.*)$": "<rootDir>/src/actions/$1",
       "@Shared(.*)$": "<rootDir>/src/components/shared/$1",
-      "@Utils(.*)$": "<rootDir>/src/utils/$1"
+      "@Utils(.*)$": "<rootDir>/src/utils/$1",
+      "@StaticData(.*)$": "<rootDir>/src/static-data/$1"
     },
     "coverageReporters": [
       "html",

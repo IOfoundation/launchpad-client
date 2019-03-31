@@ -10,9 +10,11 @@ const Title = props => {
     classes,
     titleText,
     submitLabel,
+    extraLabel,
     hideCancelAction,
     submitClicked,
     cancelClicked,
+    extraClicked,
   } = props;
 
   return (
@@ -30,6 +32,8 @@ const Title = props => {
           hideCancelAction={hideCancelAction}
           submitClicked={submitClicked}
           cancelClicked={cancelClicked}
+          extraLabel={extraLabel}
+          extraClicked={extraClicked}
         />
       </Grid>
     </Grid>
@@ -81,6 +85,8 @@ Title.propTypes = {
     Container: PropTypes.string,
     Title: PropTypes.string,
   }),
+  extraClicked: PropTypes.func,
+  extraLabel: PropTypes.string,
   hideCancelAction: PropTypes.bool,
   submitClicked: PropTypes.func,
   submitLabel: PropTypes.string,

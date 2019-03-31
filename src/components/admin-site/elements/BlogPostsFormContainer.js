@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {PropTypes} from 'prop-types';
@@ -11,6 +11,7 @@ import LandingComponent from '../Landing';
 import Title from '../Title';
 
 import * as user from '@Actions/user';
+import * as blogs from '@Actions/blogs';
 import * as snackbarActions from '@Actions/snackbar';
 
 const blogPostsSchema = Yup.object().shape({
@@ -25,42 +26,79 @@ const initialValues = {
   body: '',
 };
 
-const ProfileFormContainer = props => {
-  return (
-    <LandingComponent breakpoint={props.breakpoint} navigation={false}>
-      <Title
-        titleText="Create Post"
-        hideCancelAction={false}
-        submitLabel={'Publish'}
-      />
-      <Formik
-        render={_props => (
-          <BlogPostsForm {..._props} breakpoint={props.breakpoint} />
-        )}
-        initialValues={initialValues}
-        validationSchema={blogPostsSchema}
-        onSubmit={() => {}}
-      />
-    </LandingComponent>
-  );
-};
+class ProfileFormContainer extends PureComponent {
+  componentDidMount() {
+    this.props.blogsActions.getCategories();
+  }
+
+  goToBlogs = () => {
+    this.props.router.push('/admin/blog');
+  };
+
+  saveDraftAction = () => {
+    this.props.snackbar.showSnackbar({
+      message: 'An error has ocurred',
+    });
+  };
+
+  render() {
+    const {breakpoint, categories, router} = this.props;
+
+    return (
+      <LandingComponent breakpoint={breakpoint} navigation={false}>
+        <Title
+          titleText="Create Post"
+          hideCancelAction={false}
+          submitLabel={'Publish'}
+          cancelClicked={this.goToBlogs}
+          extraLabel="Save Draft"
+          extraClicked={this.saveDraftAction}
+        />
+        <Formik
+          render={_props => (
+            <BlogPostsForm
+              {..._props}
+              breakpoint={breakpoint}
+              categories={categories}
+              router={router}
+            />
+          )}
+          initialValues={initialValues}
+          validationSchema={blogPostsSchema}
+          onSubmit={() => {}}
+        />
+      </LandingComponent>
+    );
+  }
+}
 
 const mapStateToProps = _state => {
   return {
     error: _state.user.error,
     isAuth: _state.user.authorization !== '',
+    categories: _state.blogs.categories,
   };
 };
 
 const mapDispatchToProps = _dispatch => {
   return {
     userActions: bindActionCreators(user, _dispatch),
+    blogsActions: bindActionCreators(blogs, _dispatch),
     snackbar: bindActionCreators(snackbarActions, _dispatch),
   };
 };
 
 ProfileFormContainer.propTypes = {
+  blogsActions: PropTypes.shape({
+    getCategories: PropTypes.func,
+  }),
   breakpoint: PropTypes.string,
+  categories: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+    })
+  ),
   error: PropTypes.bool,
   isAuth: PropTypes.bool,
   router: PropTypes.shape({

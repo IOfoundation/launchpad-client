@@ -408,7 +408,7 @@ exports[`Admin-site <Title /> renders snapshot of Title 1`] = `
                       className="Buttons-Buttons-101"
                     >
                       <button
-                        className="btn btn__submit"
+                        className="btn btn__submit margin-0"
                       >
                         Save Changes
                       </button>

@@ -16,6 +16,7 @@ const BlogPostsForm = props => {
     touched,
     values,
     classes,
+    categories,
   } = props;
   const shared = {
     errors,
@@ -27,7 +28,7 @@ const BlogPostsForm = props => {
 
   return (
     <Form className="location-form" onSubmit={handleSubmit}>
-      <DateCategory {...shared} />
+      <DateCategory {...shared} categories={categories} />
       <Title {...shared} />
       <Editor
         text={values.body}
@@ -64,6 +65,12 @@ const styles = theme => {
 };
 
 BlogPostsForm.propTypes = {
+  categories: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+    })
+  ),
   classes: PropTypes.shape({
     editor: PropTypes.string,
   }),
@@ -77,6 +84,9 @@ BlogPostsForm.propTypes = {
   handleSubmit: PropTypes.func,
   isSubmitting: PropTypes.bool,
   isValid: PropTypes.bool,
+  router: PropTypes.shape({
+    push: PropTypes.func,
+  }),
   touched: PropTypes.shape({
     category: PropTypes.bool,
     title: PropTypes.bool,

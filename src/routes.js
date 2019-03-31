@@ -55,7 +55,7 @@ export default (
     <Route path="/admin/location/:id" component={LocationFormRoute} />
     <Route path="/admin/services" component={ServiceIndex} />
     <Route path="/admin/services/:id" component={ServiceRoute} />
-    <Route path="/admin/blog" component={BlogPostsIndex} />
+    <Route path="/admin/blog" exact={true} component={BlogPostsIndex} />
     <Route path="/admin/blog/:id" component={BlogPosts} />
     <Route
       path="/admin-login/password-reset-confirmation"

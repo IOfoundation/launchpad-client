@@ -37,7 +37,22 @@ class SelectElement extends PureComponent {
       displayEmpty,
       classes,
       novalidate,
+      selectOptions,
     } = this.props;
+    let Options = [
+      <MenuItem value="" key={1}>
+        <em>{'Select One'}</em>
+      </MenuItem>,
+      <MenuItem value={'Option One'} key={2}>
+        {'Option One'}
+      </MenuItem>,
+      <MenuItem value={'Option Two'} key={3}>
+        {'Option Two'}
+      </MenuItem>,
+      <MenuItem value={'Option Three'} key={4}>
+        {'Option Three'}
+      </MenuItem>,
+    ];
 
     let displayError = (
       <div
@@ -58,6 +73,16 @@ class SelectElement extends PureComponent {
       displayError = null;
     }
 
+    if (selectOptions) {
+      Options = selectOptions.map(data => {
+        return (
+          <MenuItem key={data.value} value={data.value}>
+            {data.name}
+          </MenuItem>
+        );
+      });
+    }
+
     return (
       <FormControl style={{minWidth: '100%'}}>
         <InputLabel htmlFor={id}>{label}</InputLabel>
@@ -76,12 +101,7 @@ class SelectElement extends PureComponent {
             },
           }}
         >
-          <MenuItem value="">
-            <em>{'Select One'}</em>
-          </MenuItem>
-          <MenuItem value={'Option One'}>{'Option One'}</MenuItem>
-          <MenuItem value={'Option Two'}>{'Option Two'}</MenuItem>
-          <MenuItem value={'Option Three'}>{'Option Three'}</MenuItem>
+          {Options}
         </Select>
         {helperText && <FormHelperText>{helperText}</FormHelperText>}
         {displayError}
@@ -106,6 +126,12 @@ SelectElement.propTypes = {
   marginBottom: PropTypes.bool,
   multiline: PropTypes.bool,
   novalidate: PropTypes.bool,
+  selectOptions: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    })
+  ),
   type: PropTypes.string,
   value: PropTypes.string,
 };
