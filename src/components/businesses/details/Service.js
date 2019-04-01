@@ -46,7 +46,7 @@ class Service extends PureComponent {
       $extraInformation = (
         <Fragment>
           <Grid container={true} className="service--margin-bottom ">
-            <NewColumn title="Service Phone" content={email} />
+            <NewColumn title="Service Email" content={email} />
             <NewColumn
               title="Service Phone"
               content={phone && phone[0].number}
