@@ -30,6 +30,7 @@ const initialValues = {
 class ProfileFormContainer extends PureComponent {
   componentDidMount() {
     this.props.blogsActions.getCategories();
+    this.props.adminBlogsActions.hideFooter(true);
   }
 
   componentDidUpdate(prevProps) {
@@ -42,6 +43,10 @@ class ProfileFormContainer extends PureComponent {
         });
       }
     }
+  }
+
+  componentWillUnmount() {
+    this.props.adminBlogsActions.hideFooter(false);
   }
 
   _submitForm;
@@ -71,10 +76,14 @@ class ProfileFormContainer extends PureComponent {
   };
 
   render() {
-    const {breakpoint, categories, router} = this.props;
+    const {breakpoint, categories, router, hideFooter} = this.props;
 
     return (
-      <LandingComponent breakpoint={breakpoint} navigation={false}>
+      <LandingComponent
+        breakpoint={breakpoint}
+        navigation={false}
+        hideFooter={hideFooter}
+      >
         <Title
           titleText="Create Post"
           hideCancelAction={false}
@@ -83,7 +92,7 @@ class ProfileFormContainer extends PureComponent {
           cancelClicked={this.goToBlogs}
           extraLabel="Save Draft"
           extraClicked={this.saveDraftAction}
-          noMargin={true}
+          noMargin={breakpoint !== 'xs'}
         />
         <Formik
           render={_props => {
@@ -114,6 +123,7 @@ const mapStateToProps = _state => {
     isAuth: _state.user.authorization !== '',
     categories: _state.blogs.categories,
     savePostError: Object.keys(_state.adminBlogs.savePost.errors).length > 0,
+    hideFooter: _state.adminBlogs.hideFooter,
   };
 };
 
@@ -129,6 +139,7 @@ const mapDispatchToProps = _dispatch => {
 ProfileFormContainer.propTypes = {
   adminBlogsActions: PropTypes.shape({
     savePost: PropTypes.func,
+    hideFooter: PropTypes.func,
   }),
   blogsActions: PropTypes.shape({
     getCategories: PropTypes.func,
@@ -141,6 +152,7 @@ ProfileFormContainer.propTypes = {
     })
   ),
   error: PropTypes.bool,
+  hideFooter: PropTypes.bool,
   isAuth: PropTypes.bool,
   router: PropTypes.shape({
     push: PropTypes.func,

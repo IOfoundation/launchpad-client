@@ -6,10 +6,15 @@ import Grid from '@material-ui/core/Grid';
 import {containerStyles} from '@Utils/containerStyles';
 
 const Container = props => {
-  const {classes, children} = props;
+  const {classes, children, hideFooter} = props;
+  const containerClasses = ['admin-login', classes.container];
+
+  if (hideFooter) {
+    containerClasses.push(classes.fullHeight);
+  }
 
   return (
-    <div className={['admin-login', classes.container].join(' ')}>
+    <div className={containerClasses.join(' ')}>
       <section className={['content-section', classes.content].join(' ')}>
         <Grid container={true} justify="center" alignItems="flex-start">
           {children}
@@ -25,7 +30,7 @@ const styles = theme => ({
     color: 'white',
   },
   container: {
-    alignItems: 'center',
+    alignItems: 'flex-start',
     backgroundColor: '#F7F9FD',
     display: 'flex',
     padding: '46px 0',
@@ -35,6 +40,9 @@ const styles = theme => ({
       height: 'auto',
       marginTop: '52px',
     },
+  },
+  fullHeight: {
+    height: '100vh',
   },
 });
 
@@ -46,8 +54,10 @@ Container.propTypes = {
   classes: PropTypes.shape({
     container: PropTypes.string,
     content: PropTypes.string,
+    fullHeight: PropTypes.string,
     item: PropTypes.string,
   }),
+  hideFooter: PropTypes.bool,
 };
 
 export default withStyles(styles)(Container);

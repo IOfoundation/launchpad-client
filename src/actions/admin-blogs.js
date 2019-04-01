@@ -78,6 +78,13 @@ export const noResults = value => {
   };
 };
 
+export const hideFooter = hide => {
+  return {
+    type: types.HIDE_FOOTER,
+    hideFooter: hide,
+  };
+};
+
 const savePostStart = () => {
   return {
     type: types.SAVE_POSTS_START,

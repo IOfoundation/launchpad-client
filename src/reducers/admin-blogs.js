@@ -19,6 +19,7 @@ const initialState = {
     loading: false,
     errors: {},
   },
+  hideFooter: false,
 };
 
 export default function(state = initialState, action) {
@@ -112,6 +113,14 @@ export default function(state = initialState, action) {
           loading: false,
           errors,
         },
+      };
+    }
+
+    case types.HIDE_FOOTER: {
+      const {hideFooter} = action;
+      return {
+        ...state,
+        hideFooter,
       };
     }
 

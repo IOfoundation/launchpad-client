@@ -9,15 +9,16 @@ import DateCategory from './BlogPosts/DateCategory';
 
 const BlogPostsForm = props => {
   const {
+    breakpoint,
+    categories,
+    classes,
     errors,
     handleBlur,
     handleChange,
     handleSubmit,
+    setFieldValue,
     touched,
     values,
-    classes,
-    categories,
-    setFieldValue,
   } = props;
   const shared = {
     errors,
@@ -29,7 +30,11 @@ const BlogPostsForm = props => {
 
   return (
     <Form className="location-form" onSubmit={handleSubmit}>
-      <DateCategory {...shared} categories={categories} />
+      <DateCategory
+        {...shared}
+        categories={categories}
+        breakpoint={breakpoint}
+      />
       <Title {...shared} />
       <Editor
         text={values.body}
@@ -66,6 +71,7 @@ const styles = theme => {
 };
 
 BlogPostsForm.propTypes = {
+  breakpoint: PropTypes.string,
   categories: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number,

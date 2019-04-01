@@ -18,6 +18,7 @@ const initialState = {
       loading: false,
       errors: {},
     },
+    hideFooter: false,
   },
   blogs: {
     categories: [],

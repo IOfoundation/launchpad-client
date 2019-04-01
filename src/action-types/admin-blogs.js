@@ -9,6 +9,8 @@ const AdminBlogsTypes = {
   SAVE_POSTS_FAIL: 'SAVE_POSTS_FAIL',
 
   NO_RESULTS: 'NO_RESULTS',
+
+  HIDE_FOOTER: 'HIDE_FOOTER',
 };
 
 export default AdminBlogsTypes;

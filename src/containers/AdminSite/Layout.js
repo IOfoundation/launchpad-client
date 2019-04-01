@@ -1,5 +1,6 @@
 import React, {PureComponent, cloneElement} from 'react';
 import {PropTypes} from 'prop-types';
+import {connect} from 'react-redux';
 
 import AdminLayout from '../../components/layouts/Admin';
 
@@ -28,9 +29,14 @@ class Layout extends PureComponent {
 
   render() {
     const {width, homePage, breakpoint} = this.state;
+    const {hideFooter} = this.props;
 
     return (
-      <AdminLayout windowWidth={width} homePage={homePage}>
+      <AdminLayout
+        windowWidth={width}
+        homePage={homePage}
+        hideFooter={hideFooter}
+      >
         {cloneElement(this.props.children, {breakpoint})}
       </AdminLayout>
     );
@@ -42,6 +48,13 @@ Layout.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
+  hideFooter: PropTypes.bool,
 };
 
-export default Layout;
+const mapStateToProps = _state => {
+  return {
+    hideFooter: _state.adminBlogs.hideFooter,
+  };
+};
+
+export default connect(mapStateToProps)(Layout);
