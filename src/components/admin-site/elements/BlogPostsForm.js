@@ -17,6 +17,7 @@ const BlogPostsForm = props => {
     values,
     classes,
     categories,
+    setFieldValue,
   } = props;
   const shared = {
     errors,
@@ -32,7 +33,7 @@ const BlogPostsForm = props => {
       <Title {...shared} />
       <Editor
         text={values.body}
-        onChange={handleChange}
+        onChange={value => setFieldValue('body', value)}
         options={{
           style: [{prop: 'color', value: 'black'}],
           placeholder: {
@@ -87,13 +88,14 @@ BlogPostsForm.propTypes = {
   router: PropTypes.shape({
     push: PropTypes.func,
   }),
+  setFieldValue: PropTypes.func,
   touched: PropTypes.shape({
     category: PropTypes.bool,
     title: PropTypes.bool,
     body: PropTypes.bool,
   }),
   values: PropTypes.shape({
-    category: PropTypes.string,
+    category: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     title: PropTypes.string,
     body: PropTypes.string,
   }),

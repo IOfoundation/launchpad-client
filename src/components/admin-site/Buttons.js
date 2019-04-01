@@ -21,11 +21,19 @@ export const Buttons = props => {
         </a>
       )}
       {extraLabel && (
-        <button className="btn btn__black m-right-16" onClick={extraClicked}>
+        <button
+          className="btn btn__black m-right-16"
+          onClick={extraClicked}
+          type="button"
+        >
           {extraLabel}
         </button>
       )}
-      <button className="btn btn__submit margin-0" onClick={submitClicked}>
+      <button
+        className="btn btn__submit margin-0"
+        onClick={submitClicked}
+        type="button"
+      >
         {submitLabel}
       </button>
     </div>

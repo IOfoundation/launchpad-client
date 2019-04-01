@@ -14,6 +14,11 @@ const initialState = {
     totalPages: 0,
   },
   noResults: false,
+  savePost: {
+    data: {},
+    loading: false,
+    errors: {},
+  },
 };
 
 export default function(state = initialState, action) {
@@ -74,6 +79,39 @@ export default function(state = initialState, action) {
       return {
         ...state,
         noResults,
+      };
+    }
+
+    case types.SAVE_POSTS_START: {
+      return {
+        ...state,
+        savePost: {
+          data: {},
+          loading: true,
+          errors: {},
+        },
+      };
+    }
+
+    case types.SAVE_POSTS_SUCCESS: {
+      const {post} = action;
+      return {
+        ...state,
+        savePost: {
+          data: post,
+          loading: false,
+        },
+      };
+    }
+
+    case types.SAVE_POSTS_FAIL: {
+      const {errors} = action;
+      return {
+        ...state,
+        savePost: {
+          loading: false,
+          errors,
+        },
       };
     }
 

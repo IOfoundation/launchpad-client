@@ -12,12 +12,13 @@ import Title from '../Title';
 
 import * as user from '@Actions/user';
 import * as blogs from '@Actions/blogs';
+import * as adminBlogs from '@Actions/admin-blogs';
 import * as snackbarActions from '@Actions/snackbar';
 
 const blogPostsSchema = Yup.object().shape({
   category: Yup.string().required('Required'),
   title: Yup.string().required('Required'),
-  body: Yup.string().required('Required'),
+  body: Yup.string(),
 });
 
 const initialValues = {
@@ -31,6 +32,20 @@ class ProfileFormContainer extends PureComponent {
     this.props.blogsActions.getCategories();
   }
 
+  componentDidUpdate(prevProps) {
+    const {snackbar, savePostError} = this.props;
+
+    if (savePostError !== prevProps.savePostError) {
+      if (savePostError) {
+        snackbar.showSnackbar({
+          message: 'An error has ocurred while Save Post',
+        });
+      }
+    }
+  }
+
+  _submitForm;
+
   goToBlogs = () => {
     this.props.router.push('/admin/blog');
   };
@@ -39,6 +54,20 @@ class ProfileFormContainer extends PureComponent {
     this.props.snackbar.showSnackbar({
       message: 'An error has ocurred',
     });
+  };
+
+  openSnackbar = message => {
+    this.props.snackbar.showSnackbar({
+      message,
+    });
+  };
+
+  submitFormToSaveData = () => {
+    this._submitForm();
+  };
+
+  savePostAction = values => {
+    this.props.adminBlogsActions.savePost(values);
   };
 
   render() {
@@ -50,22 +79,28 @@ class ProfileFormContainer extends PureComponent {
           titleText="Create Post"
           hideCancelAction={false}
           submitLabel={'Publish'}
+          submitClicked={this.submitFormToSaveData}
           cancelClicked={this.goToBlogs}
           extraLabel="Save Draft"
           extraClicked={this.saveDraftAction}
         />
         <Formik
-          render={_props => (
-            <BlogPostsForm
-              {..._props}
-              breakpoint={breakpoint}
-              categories={categories}
-              router={router}
-            />
-          )}
+          render={_props => {
+            this._submitForm = _props.submitForm;
+            return (
+              <BlogPostsForm
+                {..._props}
+                breakpoint={breakpoint}
+                categories={categories}
+                router={router}
+              />
+            );
+          }}
           initialValues={initialValues}
           validationSchema={blogPostsSchema}
-          onSubmit={() => {}}
+          onSubmit={values => {
+            this.savePostAction(values);
+          }}
         />
       </LandingComponent>
     );
@@ -77,6 +112,7 @@ const mapStateToProps = _state => {
     error: _state.user.error,
     isAuth: _state.user.authorization !== '',
     categories: _state.blogs.categories,
+    savePostError: Object.keys(_state.adminBlogs.savePost.errors).length > 0,
   };
 };
 
@@ -85,10 +121,14 @@ const mapDispatchToProps = _dispatch => {
     userActions: bindActionCreators(user, _dispatch),
     blogsActions: bindActionCreators(blogs, _dispatch),
     snackbar: bindActionCreators(snackbarActions, _dispatch),
+    adminBlogsActions: bindActionCreators(adminBlogs, _dispatch),
   };
 };
 
 ProfileFormContainer.propTypes = {
+  adminBlogsActions: PropTypes.shape({
+    savePost: PropTypes.func,
+  }),
   blogsActions: PropTypes.shape({
     getCategories: PropTypes.func,
   }),
@@ -104,6 +144,7 @@ ProfileFormContainer.propTypes = {
   router: PropTypes.shape({
     push: PropTypes.func,
   }),
+  savePostError: PropTypes.bool,
   snackbar: PropTypes.shape({
     showSnackbar: PropTypes.func,
   }),

@@ -9,7 +9,7 @@ export const DateCategory = props => {
   const {errors, handleBlur, handleChange, values, classes, categories} = props;
 
   const selectCategories = categories.map(categorie => ({
-    value: categorie.id,
+    value: String(categorie.id),
     name: categorie.name,
   }));
   return (
