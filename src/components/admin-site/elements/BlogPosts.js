@@ -15,17 +15,45 @@ import {htmlStripper, truncate, getDate} from '@Utils';
 
 class BlogPosts extends PureComponent {
   componentDidMount() {
-    this.props.actions.getAdminPost(1);
+    this.getAdminPosts(1);
   }
 
   menuChanged = index => {
-    this.props.actions.getAdminPost(1, this._tabOptions[index]);
+    this._tabSelected = this._tabOptions[index];
+    this.getAdminPosts(1, this._tabSelected);
+  };
+
+  handleChangePage = page => {
+    this.getAdminPosts(page, this._tabSelected);
+  };
+
+  getAdminPosts = (page, option) => {
+    this.props.actions.getAdminPost(page, option);
+  };
+
+  _getPagination = (page, totalPages) => {
+    return (
+      <Pagination
+        appliedFilters={{category: 'admin-posts', page}}
+        handleChangePage={this.handleChangePage}
+        metadata={{
+          pagination: {
+            last: {
+              page: totalPages,
+            },
+            currentPage: page,
+          },
+          totalOrganization: String(totalPages),
+        }}
+        noMargin={true}
+      />
+    );
   };
 
   _tabOptions = ['Drafts', 'Posted'];
+  _tabSelected = 'Drafts';
 
   render() {
-    const handleChangePage = () => {};
     const {drafts, posted, noResults} = this.props;
     let draftsElements = <Loading />;
     let postedElements = <Loading />;
@@ -41,28 +69,13 @@ class BlogPosts extends PureComponent {
     } else {
       if (drafts.data.length > 0) {
         draftsElements = <Items items={drafts.data} />;
+        pagination = this._getPagination(drafts.page, drafts.totalPages);
       }
 
       if (posted.data.length > 0) {
         postedElements = <Items items={posted.data} />;
+        pagination = this._getPagination(posted.page, posted.totalPages);
       }
-
-      pagination = (
-        <Pagination
-          appliedFilters={{category: 'admin-posts', page: 1}}
-          handleChangePage={handleChangePage}
-          metadata={{
-            pagination: {
-              last: {
-                page: 10,
-              },
-              currentPage: 1,
-            },
-            totalOrganization: '10',
-          }}
-          noMargin={true}
-        />
-      );
     }
 
     return (
