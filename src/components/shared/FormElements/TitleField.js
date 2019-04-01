@@ -40,7 +40,7 @@ class TitleField extends PureComponent {
       <Fragment>
         <TextareaAutosize
           className={classes.textarea}
-          placeholder="Add a Title..."
+          placeholder="Add a title..."
           id={id}
           value={value}
           onChange={event => this.changeHandler(id, event)}

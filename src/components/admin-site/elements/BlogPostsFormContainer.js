@@ -38,7 +38,7 @@ class ProfileFormContainer extends PureComponent {
     if (savePostError !== prevProps.savePostError) {
       if (savePostError) {
         snackbar.showSnackbar({
-          message: 'An error has ocurred while Save Post',
+          message: 'An error has occurred while Publishing your post',
         });
       }
     }
@@ -83,6 +83,7 @@ class ProfileFormContainer extends PureComponent {
           cancelClicked={this.goToBlogs}
           extraLabel="Save Draft"
           extraClicked={this.saveDraftAction}
+          noMargin={true}
         />
         <Formik
           render={_props => {

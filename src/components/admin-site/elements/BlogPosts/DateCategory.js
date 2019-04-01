@@ -24,7 +24,7 @@ export const DateCategory = props => {
             handleBlur={handleBlur}
             handleChange={handleChange}
             id={'category'}
-            label={'Category Title'}
+            label={'Select Category'}
             name={'category'}
             value={values.category}
             selectOptions={selectCategories}

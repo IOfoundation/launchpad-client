@@ -15,11 +15,17 @@ const Title = props => {
     submitClicked,
     cancelClicked,
     extraClicked,
+    noMargin,
   } = props;
+  const containerClasses = [classes.Container];
+
+  if (noMargin) {
+    containerClasses.push('margin-0');
+  }
 
   return (
     <Grid
-      className={classes.Container}
+      className={containerClasses.join(' ')}
       container={true}
       justify="space-between"
     >
@@ -88,6 +94,7 @@ Title.propTypes = {
   extraClicked: PropTypes.func,
   extraLabel: PropTypes.string,
   hideCancelAction: PropTypes.bool,
+  noMargin: PropTypes.bool,
   submitClicked: PropTypes.func,
   submitLabel: PropTypes.string,
   titleText: PropTypes.string,

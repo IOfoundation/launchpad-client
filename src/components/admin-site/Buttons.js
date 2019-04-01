@@ -40,7 +40,7 @@ export const Buttons = props => {
   );
 };
 
-const styles = () => {
+const styles = theme => {
   return {
     Buttons: {
       flex: 1,
@@ -56,6 +56,13 @@ const styles = () => {
       },
       '& a': {
         color: '#7B7C7E',
+      },
+    },
+    [theme.breakpoints.down('sm')]: {
+      Buttons: {
+        '& .btn': {
+          padding: '9px 16px',
+        },
       },
     },
   };
