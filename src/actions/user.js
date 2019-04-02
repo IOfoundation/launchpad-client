@@ -104,6 +104,8 @@ export const login = ({password, email}) => {
         },
       });
 
+      localStorage.setItem('userAuth', httpResponse.headers.authorization);
+      localStorage.setItem('userEmail', email);
       dispatch(loginSuccess(httpResponse.headers.authorization));
     } catch (errors) {
       dispatch(loginError(errors.data.error));

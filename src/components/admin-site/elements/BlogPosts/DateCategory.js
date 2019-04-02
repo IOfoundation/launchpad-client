@@ -20,7 +20,7 @@ export const DateCategory = props => {
   } = props;
 
   const selectCategories = categories.map(categorie => ({
-    value: String(categorie.id),
+    value: categorie.name,
     name: categorie.name,
   }));
   const date = getDate();

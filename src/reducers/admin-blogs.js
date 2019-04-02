@@ -99,6 +99,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         savePost: {
+          ...state.savePost,
           data: post,
           loading: false,
         },
@@ -110,6 +111,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         savePost: {
+          ...state.savePost,
           loading: false,
           errors,
         },

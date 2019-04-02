@@ -34,13 +34,22 @@ class ProfileFormContainer extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const {snackbar, savePostError} = this.props;
+    const {snackbar, savePostError, postSaved, router} = this.props;
 
     if (savePostError !== prevProps.savePostError) {
       if (savePostError) {
         snackbar.showSnackbar({
           message: 'An error has occurred while Publishing your post',
         });
+      }
+    }
+
+    if (postSaved !== prevProps.postSaved) {
+      if (postSaved) {
+        snackbar.showSnackbar({
+          message: 'Post published successfully',
+        });
+        router.push('/admin/blog');
       }
     }
   }
@@ -72,7 +81,11 @@ class ProfileFormContainer extends PureComponent {
   };
 
   savePostAction = values => {
-    this.props.adminBlogsActions.savePost(values);
+    this.props.adminBlogsActions.savePost({
+      ...values,
+      auth: this.props.auth,
+      published: true,
+    });
   };
 
   render() {
@@ -118,12 +131,15 @@ class ProfileFormContainer extends PureComponent {
 }
 
 const mapStateToProps = _state => {
+  const auth = _state.user.authorization || localStorage.getItem('userAuth');
+
   return {
     error: _state.user.error,
-    isAuth: _state.user.authorization !== '',
+    auth,
     categories: _state.blogs.categories,
     savePostError: Object.keys(_state.adminBlogs.savePost.errors).length > 0,
     hideFooter: _state.adminBlogs.hideFooter,
+    postSaved: Object.keys(_state.adminBlogs.savePost.data).length > 0,
   };
 };
 
@@ -141,6 +157,7 @@ ProfileFormContainer.propTypes = {
     savePost: PropTypes.func,
     hideFooter: PropTypes.func,
   }),
+  auth: PropTypes.string,
   blogsActions: PropTypes.shape({
     getCategories: PropTypes.func,
   }),
@@ -154,6 +171,7 @@ ProfileFormContainer.propTypes = {
   error: PropTypes.bool,
   hideFooter: PropTypes.bool,
   isAuth: PropTypes.bool,
+  postSaved: PropTypes.bool,
   router: PropTypes.shape({
     push: PropTypes.func,
   }),

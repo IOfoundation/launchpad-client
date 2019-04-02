@@ -105,14 +105,20 @@ const savePostFail = errors => {
   };
 };
 
-export const savePost = () => {
+export const savePost = ({title, body, category, auth, published}) => {
   return async dispatch => {
     try {
+      const config = {
+        headers: {Authorization: auth},
+      };
       dispatch(savePostStart());
-      const httpResponse = await httpRequest.get('/api/save-post-wrong');
-      if (httpResponse.data.length === 0) {
-        dispatch(noResults(true));
-      }
+      const httpResponse = await httpRequest.post(
+        '/api/blog_posts',
+        {
+          blog_post: {title, body, category, is_published: published},
+        },
+        config
+      );
       dispatch(savePostSuccess(httpResponse.data));
     } catch (errors) {
       dispatch(savePostFail(errors));
