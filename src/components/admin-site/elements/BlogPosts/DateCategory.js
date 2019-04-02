@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import SelectElement from '@Shared/FormElements/Select';
 
 import {getDate} from '@Utils';
+import {Colors} from '@Styles/Colors';
 
 export const DateCategory = props => {
   const {
@@ -55,10 +56,10 @@ export const DateCategory = props => {
   );
 };
 
-const styles = theme => {
+const styles = () => {
   return {
     date: {
-      color: theme.palette.grey.one,
+      color: Colors.mainGrey,
     },
   };
 };
