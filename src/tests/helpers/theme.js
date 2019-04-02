@@ -5,6 +5,9 @@ export const muiTheme = createMuiTheme({
     primary: {main: '#fff'},
     secondary: {main: '#fff'},
     terciary: {main: '#fff'},
+    grey: {
+      main: '#7B7C7E',
+    },
   },
   typography: {
     useNextVariants: true,

@@ -55,10 +55,10 @@ export const DateCategory = props => {
   );
 };
 
-const styles = () => {
+const styles = theme => {
   return {
     date: {
-      color: '#7B7C7E',
+      color: theme.palette.grey.one,
     },
   };
 };

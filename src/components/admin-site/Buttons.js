@@ -77,7 +77,7 @@ Buttons.propTypes = {
   extraLabel: PropTypes.string,
   hideCancelAction: PropTypes.bool,
   submitClicked: PropTypes.func,
-  submitLabel: PropTypes.string,
+  submitLabel: PropTypes.string.isRequired,
 };
 
 export default withStyles(styles)(Buttons);

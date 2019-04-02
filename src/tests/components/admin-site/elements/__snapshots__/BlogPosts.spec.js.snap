@@ -117,6 +117,7 @@ exports[`Admin-site <BlogPosts /> renders snapshot of BlogPosts 1`] = `
             "A200": "#aaaaaa",
             "A400": "#303030",
             "A700": "#616161",
+            "main": "#7B7C7E",
           },
           "primary": Object {
             "contrastText": "rgba(0, 0, 0, 0.87)",
