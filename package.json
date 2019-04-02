@@ -53,6 +53,7 @@
     "prop-types": "15.5.10",
     "query-string": "^4.3.4",
     "react": "16.8.1",
+    "react-autosize-textarea": "7.0.0",
     "react-dom": "16.8.1",
     "react-medium-editor": "1.8.1",
     "react-onclickoutside": "6.7.1",
@@ -158,7 +159,9 @@
       "^.+\\.(gif|ttf|eot|svg|woff|woff2|ico)$": "<rootDir>/tools/fileMock.js",
       "@Actions(.*)$": "<rootDir>/src/actions/$1",
       "@Shared(.*)$": "<rootDir>/src/components/shared/$1",
-      "@Utils(.*)$": "<rootDir>/src/utils/$1"
+      "@Utils(.*)$": "<rootDir>/src/utils/$1",
+      "@StaticData(.*)$": "<rootDir>/src/static-data/$1",
+      "@Styles(.*)$": "<rootDir>/src/styles/$1"
     },
     "coverageReporters": [
       "html",

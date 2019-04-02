@@ -13,6 +13,12 @@ const initialState = {
       totalPages: 0,
     },
     noResults: false,
+    savePost: {
+      data: {},
+      loading: false,
+      errors: {},
+    },
+    hideFooter: false,
   },
   blogs: {
     categories: [],

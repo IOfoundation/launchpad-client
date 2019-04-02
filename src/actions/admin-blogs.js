@@ -77,3 +77,45 @@ export const noResults = value => {
     noResults: value,
   };
 };
+
+export const hideFooter = hide => {
+  return {
+    type: types.HIDE_FOOTER,
+    hideFooter: hide,
+  };
+};
+
+const savePostStart = () => {
+  return {
+    type: types.SAVE_POSTS_START,
+  };
+};
+
+const savePostSuccess = post => {
+  return {
+    type: types.SAVE_POSTS_SUCCESS,
+    post,
+  };
+};
+
+const savePostFail = errors => {
+  return {
+    type: types.SAVE_POSTS_FAIL,
+    errors,
+  };
+};
+
+export const savePost = () => {
+  return async dispatch => {
+    try {
+      dispatch(savePostStart());
+      const httpResponse = await httpRequest.get('/api/save-post-wrong');
+      if (httpResponse.data.length === 0) {
+        dispatch(noResults(true));
+      }
+      dispatch(savePostSuccess(httpResponse.data));
+    } catch (errors) {
+      dispatch(savePostFail(errors));
+    }
+  };
+};

@@ -50,6 +50,10 @@ class BlogPosts extends PureComponent {
     );
   };
 
+  goToBlogCreate = () => {
+    this.props.router.push('/admin/blog/1');
+  };
+
   _tabOptions = ['Drafts', 'Posted'];
   _tabSelected = 'Drafts';
 
@@ -84,6 +88,7 @@ class BlogPosts extends PureComponent {
           titleText="Your Blog Posts"
           hideCancelAction={true}
           submitLabel="Create Blog Post"
+          submitClicked={this.goToBlogCreate}
         />
         <CustomTabs tabs={this._tabOptions} changed={this.menuChanged}>
           {draftsElements}

@@ -31,6 +31,7 @@ import LocationsRoute from './containers/AdminSite/LocationIndex';
 import ServiceRoute from './containers/AdminSite/Service';
 import ServiceIndex from './containers/AdminSite/ServiceIndex';
 import BlogPostsIndex from './containers/AdminSite/BlogPostsIndex';
+import BlogPosts from './containers/AdminSite/BlogPosts';
 
 export default (
   <Route path="/" component={App}>
@@ -54,7 +55,8 @@ export default (
     <Route path="/admin/location/:id" component={LocationFormRoute} />
     <Route path="/admin/services" component={ServiceIndex} />
     <Route path="/admin/services/:id" component={ServiceRoute} />
-    <Route path="/admin/blog" component={BlogPostsIndex} />
+    <Route path="/admin/blog" exact={true} component={BlogPostsIndex} />
+    <Route path="/admin/blog/:id" component={BlogPosts} />
     <Route
       path="/admin-login/password-reset-confirmation"
       component={ResetYourPasswordRoute}

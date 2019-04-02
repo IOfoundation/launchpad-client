@@ -5,9 +5,10 @@ import Grid from '@material-ui/core/Grid';
 
 import Container from './Container';
 import Navigation from './Navigation';
+import SnackbarUI from '@Shared/SnackBar';
 
 const LandingComponent = props => {
-  const {classes, children, navigation} = props;
+  const {classes, children, navigation, hideFooter} = props;
   let navigationElement = null;
 
   if (navigation) {
@@ -23,7 +24,8 @@ const LandingComponent = props => {
   }
 
   return (
-    <Container>
+    <Container hideFooter={hideFooter}>
+      <SnackbarUI />
       {navigationElement}
       <Grid
         item={true}
@@ -86,6 +88,7 @@ LandingComponent.propTypes = {
     Edit: PropTypes.string,
     Title: PropTypes.string,
   }),
+  hideFooter: PropTypes.bool,
   navigation: PropTypes.bool,
 };
 

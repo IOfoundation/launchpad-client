@@ -1,7 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Admin-site <Title /> renders snapshot of Title 1`] = `
-<WithStyles(Title)>
+<WithStyles(Title)
+  submitClicked={[MockFunction]}
+  submitLabel="label"
+>
   <Title
     classes={
       Object {
@@ -10,6 +13,8 @@ exports[`Admin-site <Title /> renders snapshot of Title 1`] = `
         "Title": "Title-Title-3",
       }
     }
+    submitClicked={[MockFunction]}
+    submitLabel="label"
   >
     <WithStyles(Grid)
       className="Title-Container-2"
@@ -396,21 +401,28 @@ exports[`Admin-site <Title /> renders snapshot of Title 1`] = `
               <div
                 className="MuiGrid-item-5 MuiGrid-grid-xs-12-44 MuiGrid-grid-md-7-67"
               >
-                <WithStyles(Buttons)>
+                <WithStyles(Buttons)
+                  submitClicked={[MockFunction]}
+                  submitLabel="label"
+                >
                   <Buttons
                     classes={
                       Object {
                         "Buttons": "Buttons-Buttons-101",
                       }
                     }
+                    submitClicked={[MockFunction]}
+                    submitLabel="label"
                   >
                     <div
                       className="Buttons-Buttons-101"
                     >
                       <button
-                        className="btn btn__submit"
+                        className="btn btn__submit margin-0"
+                        onClick={[MockFunction]}
+                        type="button"
                       >
-                        Save Changes
+                        label
                       </button>
                     </div>
                   </Buttons>

@@ -9,6 +9,8 @@ export const Buttons = props => {
     hideCancelAction = true,
     cancelClicked,
     submitClicked,
+    extraClicked,
+    extraLabel,
   } = props;
 
   return (
@@ -18,14 +20,27 @@ export const Buttons = props => {
           {'Cancel'}
         </a>
       )}
-      <button className="btn btn__submit" onClick={submitClicked}>
+      {extraLabel && (
+        <button
+          className="btn btn__black m-right-16"
+          onClick={extraClicked}
+          type="button"
+        >
+          {extraLabel}
+        </button>
+      )}
+      <button
+        className="btn btn__submit margin-0"
+        onClick={submitClicked}
+        type="button"
+      >
         {submitLabel}
       </button>
     </div>
   );
 };
 
-const styles = () => {
+const styles = theme => {
   return {
     Buttons: {
       flex: 1,
@@ -38,10 +53,16 @@ const styles = () => {
         padding: '9px 25px',
         fontSize: '14px',
         fontFamily: '"proxima-nova-semi", Georgia, sans-serif',
-        margin: 0,
       },
       '& a': {
         color: '#7B7C7E',
+      },
+    },
+    [theme.breakpoints.down('sm')]: {
+      Buttons: {
+        '& .btn': {
+          padding: '9px 16px',
+        },
       },
     },
   };
@@ -52,9 +73,11 @@ Buttons.propTypes = {
   classes: PropTypes.shape({
     Buttons: PropTypes.string,
   }),
+  extraClicked: PropTypes.func,
+  extraLabel: PropTypes.string,
   hideCancelAction: PropTypes.bool,
   submitClicked: PropTypes.func,
-  submitLabel: PropTypes.string,
+  submitLabel: PropTypes.string.isRequired,
 };
 
 export default withStyles(styles)(Buttons);
