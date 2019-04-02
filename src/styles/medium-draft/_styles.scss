@@ -1,0 +1,36 @@
+.location-form {
+  .md-RichEditor-root {
+    background: none;
+    color: $primary-color;
+    padding: 0;
+  }
+
+  .md-sb-button,
+  .md-sb-button.md-sb-img-button {
+    background: $primary-color;
+    color: $green-color;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+
+    .material-icons {
+      font-size: 21px;
+    }
+
+    svg path {
+      fill: $green-color;
+    }
+  }
+
+  .md-side-toolbar {
+    top: 43px;
+  }
+
+  .md-RichEditor-styleButton:hover {
+    color: $green-color;
+  }
+
+  figure.md-block-image {
+    background: none;
+  }
+}

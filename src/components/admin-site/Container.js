@@ -42,7 +42,8 @@ const styles = theme => ({
     },
   },
   fullHeight: {
-    height: '100vh',
+    height: '100%',
+    minHeight: '100vh',
   },
 });
 
