@@ -153,10 +153,12 @@ class PostDetails extends PureComponent {
             </Grid>
             <Grid item={true} xs={12} md={10} className={classes.figure}>
               <img
-                src={images && images[0].file_url}
-                alt={images && images[0].file_legend}
+                src={images.length > 0 && images[0].file_url}
+                alt={images.length > 0 && images[0].file_legend}
               />
-              <figcaption>{images && images[0].file_legend}</figcaption>
+              <figcaption>
+                {images.length > 0 && images[0].file_legend}
+              </figcaption>
             </Grid>
             <Grid
               item={true}

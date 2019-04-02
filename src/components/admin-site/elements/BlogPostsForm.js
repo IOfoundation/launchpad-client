@@ -96,6 +96,7 @@ class BlogPostsForm extends PureComponent {
       values,
       classes,
       categories,
+      breakpoint,
     } = this.props;
     const shared = {
       errors,
