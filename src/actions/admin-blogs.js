@@ -125,3 +125,41 @@ export const savePost = ({title, body, category, auth, published}) => {
     }
   };
 };
+
+const deletePostStarts = () => {
+  return {
+    type: types.DELETE_POST_START,
+  };
+};
+
+const deletePostSuccess = data => {
+  return {
+    type: types.DELETE_POST_SUCCESS,
+    data,
+  };
+};
+
+const deletePostError = error => {
+  return {
+    type: types.DELETE_POST_FAIL,
+    error,
+  };
+};
+
+export const deletePost = ({id, auth}) => {
+  return async dispatch => {
+    try {
+      const config = {
+        headers: {Authorization: auth},
+      };
+      dispatch(deletePostStarts());
+      const httpResponse = await httpRequest.delete(
+        `/api/blog_posts/${id}`,
+        config
+      );
+      dispatch(deletePostSuccess(httpResponse.data));
+    } catch (errors) {
+      dispatch(deletePostError(errors));
+    }
+  };
+};

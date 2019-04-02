@@ -18,6 +18,11 @@ const initialState = {
       loading: false,
       errors: {},
     },
+    deletePost: {
+      errors: {},
+      loading: false,
+      success: false,
+    },
     hideFooter: false,
   },
   blogs: {

@@ -19,6 +19,11 @@ const initialState = {
     loading: false,
     errors: {},
   },
+  deletePost: {
+    errors: {},
+    loading: false,
+    success: false,
+  },
   hideFooter: false,
 };
 
@@ -112,6 +117,40 @@ export default function(state = initialState, action) {
         ...state,
         savePost: {
           ...state.savePost,
+          loading: false,
+          errors,
+        },
+      };
+    }
+
+    case types.DELETE_POST_START: {
+      return {
+        ...state,
+        deletePost: {
+          errors: {},
+          loading: true,
+          success: false,
+        },
+      };
+    }
+
+    case types.DELETE_POST_SUCCESS: {
+      return {
+        ...state,
+        deletePost: {
+          ...state.deletePost,
+          loading: false,
+          success: true,
+        },
+      };
+    }
+
+    case types.DELETE_POST_FAIL: {
+      const {errors} = action;
+      return {
+        ...state,
+        deletePost: {
+          ...state.deletePost,
           loading: false,
           errors,
         },
