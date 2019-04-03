@@ -19,13 +19,35 @@ const AccountSchema = Yup.object().shape({
     .email('Invalid email address')
     .required('Required'),
   currentPassword: Yup.string().required('Required'),
-  newPassword: Yup.string().required('Required'),
+  newPassword: Yup.string()
+    .min(8)
+    .required('Required'),
   confirmPassword: Yup.string()
+    .min(8)
     .oneOf([Yup.ref('newPassword'), null], "Password don't match")
     .required('Required'),
 });
 
 class AccountContainer extends PureComponent {
+  componentDidUpdate(prevProps) {
+    const {userUpdated, snackbar, error} = this.props;
+
+    if (userUpdated !== prevProps.userUpdated) {
+      if (userUpdated) {
+        snackbar.showSnackbar({
+          message: 'User information updated successfully',
+        });
+        this.goToProfile();
+      }
+    }
+
+    if (error.length !== prevProps.error.length) {
+      snackbar.showSnackbar({
+        message: 'There was a problem',
+      });
+    }
+  }
+
   goToProfile = () => {
     this.props.router.push('/admin/profile');
   };
@@ -37,7 +59,7 @@ class AccountContainer extends PureComponent {
   };
 
   render() {
-    const {userInformation} = this.props;
+    const {userInformation, userActions, Authorization} = this.props;
     const initialValues = {
       fullName: userInformation.username,
       emailAddress: userInformation.email,
@@ -62,21 +84,47 @@ class AccountContainer extends PureComponent {
           initialValues={initialValues}
           validationSchema={AccountSchema}
           onSubmit={values => {
-            console.log(values);
+            const {
+              confirmPassword: password_confirmation,
+              currentPassword: current_password,
+              emailAddress: email,
+              fullName: name,
+              newPassword: password,
+            } = values;
+            userActions.updateUserInformation({Authorization, name, email});
+            userActions.updatePassword({
+              Authorization,
+              current_password,
+              password,
+              password_confirmation,
+            });
           }}
-        >
-          {}
-        </Formik>
+        />
       </LandingComponent>
     );
   }
 }
 
 const mapStateToProps = _state => {
+  const {userInformation, updateInformation} = _state.user;
+  const {errorsPassword, errorsInfo} = updateInformation;
+  let error = [];
+
+  if (errorsInfo && errorsInfo.length > 0) {
+    error = errorsInfo;
+  }
+
+  if (errorsPassword && errorsPassword.length > 0) {
+    error = errorsPassword;
+  }
+
   return {
-    error: _state.user.error,
+    error,
     isAuth: _state.user.authorization !== '',
-    userInformation: _state.user.userInformation,
+    Authorization: _state.user.authorization,
+    userInformation,
+    userUpdated:
+      updateInformation.successInfo && updateInformation.successPassword,
   };
 };
 
@@ -88,7 +136,8 @@ const mapDispatchToProps = _dispatch => {
 };
 
 AccountContainer.propTypes = {
-  error: PropTypes.bool,
+  Authorization: PropTypes.string,
+  error: PropTypes.arrayOf(PropTypes.shape({})),
   isAuth: PropTypes.bool,
   router: PropTypes.shape({
     push: PropTypes.func,
@@ -98,6 +147,8 @@ AccountContainer.propTypes = {
   }),
   userActions: PropTypes.shape({
     login: PropTypes.func,
+    updateUserInformation: PropTypes.func,
+    updatePassword: PropTypes.func,
   }),
   userInformation: PropTypes.shape({
     fullName: PropTypes.string,
@@ -106,6 +157,7 @@ AccountContainer.propTypes = {
     newPassword: PropTypes.string,
     confirmPassword: PropTypes.string,
   }),
+  userUpdated: PropTypes.bool,
 };
 
 export default connect(

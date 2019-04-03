@@ -23,6 +23,14 @@ const initialState = {
     username: '',
     email: '',
   },
+  updateInformation: {
+    loading: false,
+    response: {},
+    errorsInfo: [],
+    errorsPassword: [],
+    successInfo: false,
+    successPassword: false,
+  },
 };
 
 export default function(state = initialState, action) {
@@ -167,28 +175,77 @@ export default function(state = initialState, action) {
       };
     }
 
-    case types.PASSWORD_RESET_REQUEST: {
+    case types.UPDATE_USER_INFORMATION_START: {
       return {
         ...state,
-        passwordResetSuccess: false,
+        updateInformation: {
+          loading: true,
+          response: {},
+          errorsInfo: [],
+          successInfo: false,
+        },
       };
     }
 
-    case types.PASSWORD_RESET_SUCCESS: {
+    case types.UPDATE_USER_INFORMATION_SUCCESS: {
+      const {response} = action;
       return {
         ...state,
-        loading: false,
-        passwordResetSuccess: true,
-        error: false,
+        updateInformation: {
+          ...state.updateInformation,
+          loading: false,
+          response,
+          successInfo: true,
+        },
       };
     }
 
-    case types.PASSWORD_RESET_ERROR: {
+    case types.UPDATE_USER_INFORMATION_FAIL: {
+      const {errors} = action;
       return {
         ...state,
-        error: true,
-        passwordResetSuccess: false,
-        loading: false,
+        updateInformation: {
+          ...state.updateInformation,
+          loading: false,
+          errorsInfo: errors,
+        },
+      };
+    }
+
+    case types.UPDATE_PASSWORD_START: {
+      return {
+        ...state,
+        updateInformation: {
+          loading: true,
+          response: {},
+          errorsPassword: [],
+          successPassword: false,
+        },
+      };
+    }
+
+    case types.UPDATE_PASSWORD_SUCCESS: {
+      const {response} = action;
+      return {
+        ...state,
+        updateInformation: {
+          ...state.updateInformation,
+          loading: false,
+          response,
+          successPassword: true,
+        },
+      };
+    }
+
+    case types.UPDATE_PASSWORD_FAIL: {
+      const {errors} = action;
+      return {
+        ...state,
+        updateInformation: {
+          ...state.updateInformation,
+          loading: false,
+          errorsPassword: errors,
+        },
       };
     }
 

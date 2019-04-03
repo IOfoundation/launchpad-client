@@ -99,6 +99,14 @@ const initialState = {
       username: '',
       email: '',
     },
+    updateInformation: {
+      loading: false,
+      response: {},
+      errorsInfo: [],
+      errorsPassword: [],
+      successInfo: false,
+      successPassword: false,
+    },
   },
   snackbar: {
     visibility: false,
