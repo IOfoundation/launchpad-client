@@ -28,7 +28,7 @@ class BlogPosts extends PureComponent {
   };
 
   getAdminPosts = (page, option) => {
-    this.props.actions.getAdminPost(page, option);
+    this.props.actions.getAdminPost(page, option, this.props.organizationId);
   };
 
   _getPagination = (page, totalPages) => {
@@ -130,6 +130,8 @@ function postToBlogPosts(posts, draft = false) {
 const mapStateToProps = _state => {
   const drafts = _state.adminBlogs.drafts;
   const posted = _state.adminBlogs.posted;
+  const organizationId =
+    _state.user.organizationId || localStorage.getItem('organizationId');
 
   return {
     drafts: {
@@ -145,6 +147,7 @@ const mapStateToProps = _state => {
       totalPages: posted.totalPages,
     },
     noResults: _state.adminBlogs.noResults,
+    organizationId,
   };
 };
 
@@ -164,6 +167,7 @@ BlogPosts.propTypes = {
     totalPages: PropTypes.number,
   }),
   noResults: PropTypes.bool,
+  organizationId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   posted: PropTypes.shape({
     data: PropTypes.arrayOf(PropTypes.shape({})),
     page: PropTypes.number,

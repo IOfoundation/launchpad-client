@@ -66,7 +66,7 @@ export const getFeaturedPostById = id => {
     try {
       dispatch(getFeaturedPostsByIdStart());
       const httpResponse = await httpRequest.get(
-        `/api/blog_posts?filter[organization_id]=${id}`
+        `/api/blog_posts?filter[organization_id]=${id}&filter[draft]=false`
       );
       if (httpResponse.data.length === 0) {
         dispatch(noResults(true));

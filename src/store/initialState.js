@@ -77,6 +77,13 @@ const initialState = {
     },
     loginError: '',
     passwordResetSuccess: false,
+    organizationId: 0,
+    signOut: {
+      data: {},
+      errors: {},
+      success: false,
+      loading: false,
+    },
   },
   snackbar: {
     visibility: false,

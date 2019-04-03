@@ -12,6 +12,13 @@ const initialState = {
   },
   loginError: '',
   passwordResetSuccess: false,
+  organizationId: 0,
+  signOut: {
+    data: {},
+    errors: {},
+    success: false,
+    loading: false,
+  },
 };
 
 export default function(state = initialState, action) {
@@ -23,17 +30,19 @@ export default function(state = initialState, action) {
         loading: true,
         error: false,
         loginError: '',
+        organizationId: 0,
       };
     }
 
     case types.LOGIN_SUCCESS: {
-      const {authorization} = action;
+      const {authorization, organizationId} = action;
       return {
         ...state,
         authorization,
         loading: false,
         error: false,
         loginError: '',
+        organizationId,
       };
     }
 
@@ -105,6 +114,12 @@ export default function(state = initialState, action) {
     case types.SIGN_OUT_REQUEST: {
       return {
         ...state,
+        signOut: {
+          data: {},
+          errors: {},
+          success: false,
+          loading: true,
+        },
       };
     }
 
@@ -112,17 +127,24 @@ export default function(state = initialState, action) {
       const {response} = action;
       return {
         ...state,
-        response,
-        loading: false,
-        error: false,
+        signOut: {
+          ...state.signOut,
+          data: response,
+          success: true,
+          loading: false,
+        },
       };
     }
 
     case types.SIGN_OUT_ERROR: {
+      const {errors} = action;
       return {
         ...state,
-        error: true,
-        loading: false,
+        signOut: {
+          ...state.signOut,
+          errors,
+          loading: false,
+        },
       };
     }
 
