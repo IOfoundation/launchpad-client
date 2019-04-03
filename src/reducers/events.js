@@ -1,7 +1,14 @@
 import {EventsTypes as types} from '../action-types';
 
 const initialState = {
-  data: [],
+  events: {
+    data: [],
+    errors: {},
+    loading: false,
+    noResults: false,
+    page: 1,
+    totalPages: 0,
+  },
   eventsByMonth: [],
   featuredEvents: [],
 };
@@ -11,14 +18,29 @@ export default function(state = initialState, action) {
     case types.GET_ALL_EVENTS_REQUEST_START: {
       return {
         ...state,
+        events: {
+          data: [],
+          errors: {},
+          loading: true,
+          noResults: false,
+          page: 1,
+          totalPages: 0,
+        },
       };
     }
 
     case types.GET_ALL_EVENTS_REQUEST_SUCCESS: {
-      const {data} = action;
+      const {data, totalPages, page} = action;
       return {
         ...state,
-        data,
+        events: {
+          ...state.events,
+          data,
+          loading: false,
+          noResults: false,
+          page,
+          totalPages,
+        },
       };
     }
 
@@ -26,7 +48,11 @@ export default function(state = initialState, action) {
       const {error} = action;
       return {
         ...state,
-        error,
+        events: {
+          ...state.events,
+          error,
+          loading: false,
+        },
       };
     }
 
