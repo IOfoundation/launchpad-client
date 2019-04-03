@@ -160,7 +160,7 @@ export const getAllPosts = (page, category) => {
 
       if (category) {
         httpResponse = await httpRequest.get(
-          `/api/blog_posts?page=${page}&per_page=5&filter[category]=${category}`
+          `/api/blog_posts?page=${page}&per_page=5&filter[category]=${category}&filter[draft]=false`
         );
       } else {
         httpResponse = await httpRequest.get(
