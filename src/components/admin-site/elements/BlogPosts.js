@@ -69,12 +69,14 @@ class BlogPosts extends PureComponent {
   };
 
   goToBlogCreate = () => {
-    this.props.router.push('/admin/blog/1');
+    this.props.router.push('/admin/blog/new');
   };
 
   optionSelected = ({option, id}) => {
     if (option === 'Delete') {
       this.deletePost({id, auth: this.props.auth});
+    } else if (option === 'Edit') {
+      this.props.router.push(`/admin/blog/${id}`);
     }
   };
 

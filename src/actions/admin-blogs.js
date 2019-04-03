@@ -163,3 +163,44 @@ export const deletePost = ({id, auth}) => {
     }
   };
 };
+
+const updatePostStart = () => {
+  return {
+    type: types.UPDATE_POSTS_START,
+  };
+};
+
+const updatePostSuccess = post => {
+  return {
+    type: types.UPDATE_POSTS_SUCCESS,
+    post,
+  };
+};
+
+const updatePostFail = errors => {
+  return {
+    type: types.UPDATE_POSTS_FAIL,
+    errors,
+  };
+};
+
+export const updatePost = ({id, title, body, category, auth, published}) => {
+  return async dispatch => {
+    try {
+      const config = {
+        headers: {Authorization: auth},
+      };
+      dispatch(updatePostStart());
+      const httpResponse = await httpRequest.put(
+        `/api/blog_posts/${id}`,
+        {
+          blog_post: {title, body, category, is_published: published},
+        },
+        config
+      );
+      dispatch(updatePostSuccess(httpResponse.data));
+    } catch (errors) {
+      dispatch(updatePostFail(errors));
+    }
+  };
+};

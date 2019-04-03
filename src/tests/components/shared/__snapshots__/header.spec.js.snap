@@ -25,6 +25,7 @@ exports[`<Header /> Nav Bar Must have a link to blog page 1`] = `
           "getFeaturedPostById": [Function],
           "getPostById": [Function],
           "noResults": [Function],
+          "resetPostByID": [Function],
           "setCategory": [Function],
         }
       }
