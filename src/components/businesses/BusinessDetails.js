@@ -24,21 +24,24 @@ const BusinessDetails = props => {
       <h3 className="loader-text text-regular">{'Loading'}</h3>
     </div>
   );
-  const socialInformation = {
-    twitter: organization.twitter,
-    facebook: organization.facebook,
-    website: organization.website,
-    phone: organization.phones && organization.phones[0].number,
-    email: organization.email,
-    linkedin: organization.linkedin,
-  };
 
   if (Object.keys(organization).length > 0) {
+    const socialInformation = {
+      twitter: organization.twitter,
+      facebook: organization.facebook,
+      website: organization.website,
+      email: organization.email,
+      linkedin: organization.linkedin,
+    };
+
+    if (organization.phones.length > 0) {
+      socialInformation.phone = organization.phones[0].number;
+    }
+
     $details = (
       <div className="business-deatils-wrapper">
         <MainSection organization={organization} />
         <SocialBar socialInformation={socialInformation} />
-
         <section className={'content-section'}>
           <Grid container={true} className={classes.content}>
             <Grid item={true} xs={12} md={9} className="right-line">
