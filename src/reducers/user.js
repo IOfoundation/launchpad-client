@@ -1,5 +1,16 @@
 import {UserTypes as types} from '../action-types';
 
+const initialUpdateInformation = {
+  loading: false,
+  response: {},
+  errorsInfo: [],
+  errorsPassword: [],
+  errorsDelete: {},
+  successInfo: false,
+  successPassword: false,
+  successDelete: false,
+};
+
 const initialState = {
   loading: false,
   authorization: '',
@@ -23,233 +34,346 @@ const initialState = {
     username: '',
     email: '',
   },
-  updateInformation: {
-    loading: false,
-    response: {},
-    errorsInfo: [],
-    errorsPassword: [],
-    successInfo: false,
-    successPassword: false,
-  },
+  updateInformation: {...initialUpdateInformation},
 };
 
+const loginRequest = state => {
+  return {
+    ...state,
+    authorization: '',
+    loading: true,
+    error: false,
+    loginError: '',
+    organizationId: 0,
+    userInformation: {
+      username: '',
+      email: '',
+    },
+  };
+};
+
+const loginSuccess = (action, state) => {
+  const {authorization, organizationId, username, email} = action;
+  return {
+    ...state,
+    authorization,
+    loading: false,
+    error: false,
+    loginError: '',
+    organizationId,
+    userInformation: {
+      username,
+      email,
+    },
+  };
+};
+
+const loginError = (action, state) => {
+  const {loginError: _loginError} = action;
+  return {
+    ...state,
+    error: true,
+    loading: false,
+    loginError: _loginError,
+  };
+};
+
+const signUpRequest = state => {
+  return {
+    ...state,
+    loading: true,
+    signUpSuccessfully: false,
+    singUpErrors: {
+      model: '',
+      errors: {},
+    },
+  };
+};
+
+const signUpSuccess = state => {
+  return {
+    ...state,
+    signUpSuccessfully: true,
+    loading: false,
+  };
+};
+
+const signUpError = (action, state) => {
+  const {singUpErrors} = action;
+  return {
+    ...state,
+    loading: false,
+    singUpErrors,
+    signUpSuccessfully: false,
+  };
+};
+
+const passwordRecoveryRequest = state => {
+  return {
+    ...state,
+    loading: true,
+  };
+};
+
+const passwordRecoverySuccess = (action, state) => {
+  const {email} = action;
+  return {
+    ...state,
+    emailReset: email,
+    loading: false,
+    error: false,
+  };
+};
+
+const passwordRecoveryError = state => {
+  return {
+    ...state,
+    error: true,
+    loading: false,
+  };
+};
+
+const signOutRequest = state => {
+  return {
+    ...state,
+    signOut: {
+      data: {},
+      errors: {},
+      success: false,
+      loading: true,
+    },
+  };
+};
+
+const signOutSuccess = (action, state) => {
+  const {response} = action;
+  return {
+    ...state,
+    signOut: {
+      ...state.signOut,
+      data: response,
+      success: true,
+      loading: false,
+    },
+  };
+};
+
+const signOutError = state => {
+  const {errors} = action;
+  return {
+    ...state,
+    signOut: {
+      ...state.signOut,
+      errors,
+      loading: false,
+    },
+  };
+};
+
+const resetError = state => {
+  return {
+    ...state,
+    error: false,
+  };
+};
+
+const updateUserInformationStart = state => {
+  return {
+    ...state,
+    updateInformation: {...initialUpdateInformation},
+  };
+};
+
+const updateUserInformationSuccess = (action, state) => {
+  const {response} = action;
+  return {
+    ...state,
+    updateInformation: {
+      ...state.updateInformation,
+      loading: false,
+      response,
+      successInfo: true,
+    },
+    userInformation: {
+      username: response.name,
+      email: response.email,
+    },
+  };
+};
+
+const updateUserInformationFail = (action, state) => {
+  const {errors} = action;
+  return {
+    ...state,
+    updateInformation: {
+      ...state.updateInformation,
+      loading: false,
+      errorsInfo: errors,
+    },
+  };
+};
+
+const updatePasswordStart = state => {
+  return {
+    ...state,
+    updateInformation: {...initialUpdateInformation},
+  };
+};
+
+const updatePasswordSuccess = (action, state) => {
+  const {response} = action;
+  return {
+    ...state,
+    updateInformation: {
+      ...state.updateInformation,
+      loading: false,
+      response,
+      successPassword: true,
+    },
+    userInformation: {
+      username: response.name,
+      email: response.email,
+    },
+  };
+};
+
+const updatePasswordFail = (action, state) => {
+  const {errors} = action;
+  return {
+    ...state,
+    updateInformation: {
+      ...state.updateInformation,
+      loading: false,
+      errorsPassword: errors,
+    },
+  };
+};
+
+const deleteAccountStart = state => {
+  return {
+    ...state,
+    updateInformation: {...initialUpdateInformation},
+  };
+};
+
+const deleteAccountSuccess = (action, state) => {
+  const {response} = action;
+  return {
+    ...state,
+    updateInformation: {
+      ...state.updateInformation,
+      loading: false,
+      response,
+      successDelete: true,
+    },
+  };
+};
+
+const deleteAccountFail = (action, state) => {
+  const {errors} = action;
+  return {
+    ...state,
+    updateInformation: {
+      ...state.updateInformation,
+      loading: false,
+      errorsDelete: errors,
+    },
+  };
+};
+
+/* eslint-disable complexity */
 export default function(state = initialState, action) {
   switch (action.type) {
     case types.LOGIN_REQUEST: {
-      return {
-        ...state,
-        authorization: '',
-        loading: true,
-        error: false,
-        loginError: '',
-        organizationId: 0,
-        userInformation: {
-          username: '',
-          email: '',
-        },
-      };
+      return loginRequest(state);
     }
 
     case types.LOGIN_SUCCESS: {
-      const {authorization, organizationId, username, email} = action;
-      return {
-        ...state,
-        authorization,
-        loading: false,
-        error: false,
-        loginError: '',
-        organizationId,
-        userInformation: {
-          username,
-          email,
-        },
-      };
+      return loginSuccess(action, state);
     }
 
     case types.LOGIN_ERROR: {
-      const {loginError} = action;
-      return {
-        ...state,
-        error: true,
-        loading: false,
-        loginError,
-      };
+      return loginError(action, state);
     }
 
     case types.SIGN_UP_REQUEST: {
-      return {
-        ...state,
-        loading: true,
-        signUpSuccessfully: false,
-        singUpErrors: {
-          model: '',
-          errors: {},
-        },
-      };
+      return signUpRequest(state);
     }
 
     case types.SIGN_UP_SUCCESS: {
-      return {
-        ...state,
-        signUpSuccessfully: true,
-        loading: false,
-      };
+      return signUpSuccess(state);
     }
 
     case types.SIGN_UP_ERROR: {
-      const {singUpErrors} = action;
-      return {
-        ...state,
-        loading: false,
-        singUpErrors,
-        signUpSuccessfully: false,
-      };
+      return signUpError(action, state);
     }
 
     case types.PASSWORD_RECOVERY_REQUEST: {
-      return {
-        ...state,
-        loading: true,
-      };
+      return passwordRecoveryRequest(state);
     }
 
     case types.PASSWORD_RECOVERY_SUCCESS: {
-      const {email} = action;
-      return {
-        ...state,
-        emailReset: email,
-        loading: false,
-        error: false,
-      };
+      return passwordRecoverySuccess(action, state);
     }
 
     case types.PASSWORD_RECOVERY_ERROR: {
-      return {
-        ...state,
-        error: true,
-        loading: false,
-      };
+      return passwordRecoveryError(state);
     }
 
     case types.SIGN_OUT_REQUEST: {
-      return {
-        ...state,
-        signOut: {
-          data: {},
-          errors: {},
-          success: false,
-          loading: true,
-        },
-      };
+      return signOutRequest(state);
     }
 
     case types.SIGN_OUT_SUCCESS: {
-      const {response} = action;
-      return {
-        ...state,
-        signOut: {
-          ...state.signOut,
-          data: response,
-          success: true,
-          loading: false,
-        },
-      };
+      return signOutSuccess(action, state);
     }
 
     case types.SIGN_OUT_ERROR: {
-      const {errors} = action;
-      return {
-        ...state,
-        signOut: {
-          ...state.signOut,
-          errors,
-          loading: false,
-        },
-      };
+      return signOutError(state);
     }
 
     case types.RESET_ERROR: {
-      return {
-        ...state,
-        error: false,
-      };
+      return resetError(state);
     }
 
     case types.UPDATE_USER_INFORMATION_START: {
-      return {
-        ...state,
-        updateInformation: {
-          loading: true,
-          response: {},
-          errorsInfo: [],
-          successInfo: false,
-        },
-      };
+      return updateUserInformationStart(state);
     }
 
     case types.UPDATE_USER_INFORMATION_SUCCESS: {
-      const {response} = action;
-      return {
-        ...state,
-        updateInformation: {
-          ...state.updateInformation,
-          loading: false,
-          response,
-          successInfo: true,
-        },
-      };
+      return updateUserInformationSuccess(action, state);
     }
 
     case types.UPDATE_USER_INFORMATION_FAIL: {
-      const {errors} = action;
-      return {
-        ...state,
-        updateInformation: {
-          ...state.updateInformation,
-          loading: false,
-          errorsInfo: errors,
-        },
-      };
+      return updateUserInformationFail(action, state);
     }
 
     case types.UPDATE_PASSWORD_START: {
-      return {
-        ...state,
-        updateInformation: {
-          loading: true,
-          response: {},
-          errorsPassword: [],
-          successPassword: false,
-        },
-      };
+      return updatePasswordStart(state);
     }
 
     case types.UPDATE_PASSWORD_SUCCESS: {
-      const {response} = action;
-      return {
-        ...state,
-        updateInformation: {
-          ...state.updateInformation,
-          loading: false,
-          response,
-          successPassword: true,
-        },
-      };
+      return updatePasswordSuccess(action, state);
     }
 
     case types.UPDATE_PASSWORD_FAIL: {
-      const {errors} = action;
-      return {
-        ...state,
-        updateInformation: {
-          ...state.updateInformation,
-          loading: false,
-          errorsPassword: errors,
-        },
-      };
+      return updatePasswordFail(action, state);
+    }
+
+    case types.DELETE_ACCOUNT_START: {
+      return deleteAccountStart(state);
+    }
+
+    case types.DELETE_ACCOUNT_SUCCESS: {
+      return deleteAccountSuccess(action, state);
+    }
+
+    case types.DELETE_ACCOUNT_FAIL: {
+      return deleteAccountFail(action, state);
     }
 
     default:
       return state;
   }
 }
+/* eslint-enable complexity */

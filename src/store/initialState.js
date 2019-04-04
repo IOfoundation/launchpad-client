@@ -104,8 +104,10 @@ const initialState = {
       response: {},
       errorsInfo: [],
       errorsPassword: [],
+      errorsDelete: {},
       successInfo: false,
       successPassword: false,
+      successDelete: false,
     },
   },
   snackbar: {

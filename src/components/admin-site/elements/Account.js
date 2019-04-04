@@ -7,13 +7,19 @@ import ChangePassword from './Account/ChangePassword';
 import CancelAccount from './Account/CancelAccount';
 
 const ProfileForm = props => {
-  const {errors, handleBlur, handleChange, touched, values} = props;
-
-  const shared = {
+  const {
+    closeClicked,
     errors,
-    touched,
     handleBlur,
     handleChange,
+    touched,
+    values,
+  } = props;
+  const shared = {
+    errors,
+    handleBlur,
+    handleChange,
+    touched,
     values,
   };
 
@@ -21,12 +27,13 @@ const ProfileForm = props => {
     <Form className="profile-form">
       <Basic {...shared} />
       <ChangePassword {...shared} />
-      <CancelAccount />
+      <CancelAccount closeClicked={closeClicked} />
     </Form>
   );
 };
 
 ProfileForm.propTypes = {
+  closeClicked: PropTypes.func,
   errors: PropTypes.shape({
     fullName: PropTypes.string,
     contactEmail: PropTypes.string,

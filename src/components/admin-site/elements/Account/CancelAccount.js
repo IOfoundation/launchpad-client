@@ -3,7 +3,7 @@ import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 
 export const CancelAccount = props => {
-  const {classes} = props;
+  const {classes, closeClicked} = props;
 
   return (
     <div className="m-bot-40">
@@ -11,7 +11,11 @@ export const CancelAccount = props => {
       <p className={classes.description}>
         {"Unhappy? We'll be sad to see you go."}
       </p>
-      <button type="button" className={`btn btn__red ${classes.btn}`}>
+      <button
+        type="button"
+        className={`btn btn__red ${classes.btn}`}
+        onClick={closeClicked}
+      >
         {'CLOSE MY ACCOUNT'}
       </button>
     </div>
@@ -47,6 +51,7 @@ CancelAccount.propTypes = {
     description: PropTypes.string,
     title: PropTypes.string,
   }),
+  closeClicked: PropTypes.func,
   errors: PropTypes.shape({}),
   handleBlur: PropTypes.func,
   handleChange: PropTypes.func,

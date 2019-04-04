@@ -297,7 +297,8 @@ exports[`Admin-site <LandingComponent /> renders snapshot of LandingComponent 1`
                       <WithStyles(Grid)
                         className="withRouter-LandingComponent--Content-2"
                         item={true}
-                        xs={10}
+                        md={10}
+                        xs={12}
                       >
                         <Grid
                           alignContent="stretch"
@@ -410,16 +411,16 @@ exports[`Admin-site <LandingComponent /> renders snapshot of LandingComponent 1`
                           item={true}
                           justify="flex-start"
                           lg={false}
-                          md={false}
+                          md={10}
                           sm={false}
                           spacing={0}
                           wrap="wrap"
                           xl={false}
-                          xs={10}
+                          xs={12}
                           zeroMinWidth={false}
                         >
                           <div
-                            className="MuiGrid-item-8 MuiGrid-grid-xs-10-45 withRouter-LandingComponent--Content-2"
+                            className="MuiGrid-item-8 MuiGrid-grid-xs-12-47 MuiGrid-grid-md-10-73 withRouter-LandingComponent--Content-2"
                           />
                         </Grid>
                       </WithStyles(Grid)>

@@ -30,32 +30,78 @@ const AccountSchema = Yup.object().shape({
 
 class AccountContainer extends PureComponent {
   componentDidUpdate(prevProps) {
-    const {userUpdated, snackbar, error} = this.props;
+    const {userUpdated, error, deleteAccountError, userDeleted} = this.props;
+    const deleteErrors = Object.keys(deleteAccountError);
+    const prevDeleteErrors = Object.keys(prevProps.deleteAccountError);
 
+    this._userUpdatedSuccess(userUpdated, prevProps);
+    this._userDeletedSuccess(userDeleted, prevProps);
+    this._generalError(error, prevProps);
+    this._deleteError(deleteErrors, prevDeleteErrors);
+  }
+
+  submitMyForm = null;
+
+  _userDeletedSuccess = (userDeleted, prevProps) => {
+    if (userDeleted !== prevProps.userDeleted) {
+      if (userDeleted) {
+        this.props.snackbar.showSnackbar({
+          message: 'User was deleted successfully',
+        });
+        this.goToSignUp();
+      }
+    }
+  };
+
+  _userUpdatedSuccess = (userUpdated, prevProps) => {
     if (userUpdated !== prevProps.userUpdated) {
       if (userUpdated) {
-        snackbar.showSnackbar({
+        this.props.snackbar.showSnackbar({
           message: 'User information updated successfully',
         });
         this.goToProfile();
       }
     }
+  };
 
+  _generalError = (error, prevProps) => {
     if (error.length !== prevProps.error.length) {
-      snackbar.showSnackbar({
-        message: 'There was a problem',
-      });
+      if (error.length > 0) {
+        this.props.snackbar.showSnackbar({
+          message: 'There was a problem',
+        });
+      }
     }
-  }
+  };
+
+  _deleteError = (deleteErrors, prevDeleteErrors) => {
+    if (deleteErrors.length !== prevDeleteErrors.length) {
+      if (deleteErrors.length > 0) {
+        this.props.snackbar.showSnackbar({
+          message: 'There was a problem while deleting your account',
+        });
+      }
+    }
+  };
 
   goToProfile = () => {
     this.props.router.push('/admin/profile');
   };
-  submitMyForm = null;
+
+  goToSignUp = () => {
+    this.props.router.push('/admin-login/sign-up');
+  };
+
   getValues = e => {
     if (this.submitMyForm) {
       this.submitMyForm(e);
     }
+  };
+
+  deleteUser = () => {
+    const {Authorization, userActions} = this.props;
+
+    userActions.deleteAccount({Authorization});
   };
 
   render() {
@@ -79,7 +125,7 @@ class AccountContainer extends PureComponent {
         <Formik
           render={_props => {
             this.submitMyForm = _props.submitForm;
-            return <Account {..._props} />;
+            return <Account {..._props} closeClicked={this.deleteUser} />;
           }}
           initialValues={initialValues}
           validationSchema={AccountSchema}
@@ -107,8 +153,9 @@ class AccountContainer extends PureComponent {
 
 const mapStateToProps = _state => {
   const {userInformation, updateInformation} = _state.user;
-  const {errorsPassword, errorsInfo} = updateInformation;
+  const {errorsPassword, errorsInfo, errorsDelete} = updateInformation;
   let error = [];
+  let deleteAccountError = {};
 
   if (errorsInfo && errorsInfo.length > 0) {
     error = errorsInfo;
@@ -118,6 +165,10 @@ const mapStateToProps = _state => {
     error = errorsPassword;
   }
 
+  if (errorsDelete && Object.keys(errorsDelete).length > 0) {
+    deleteAccountError = errorsDelete;
+  }
+
   return {
     error,
     isAuth: _state.user.authorization !== '',
@@ -125,6 +176,8 @@ const mapStateToProps = _state => {
     userInformation,
     userUpdated:
       updateInformation.successInfo && updateInformation.successPassword,
+    userDeleted: updateInformation.successDelete,
+    deleteAccountError,
   };
 };
 
@@ -137,6 +190,7 @@ const mapDispatchToProps = _dispatch => {
 
 AccountContainer.propTypes = {
   Authorization: PropTypes.string,
+  deleteAccountError: PropTypes.shape({}),
   error: PropTypes.arrayOf(PropTypes.shape({})),
   isAuth: PropTypes.bool,
   router: PropTypes.shape({
@@ -149,7 +203,9 @@ AccountContainer.propTypes = {
     login: PropTypes.func,
     updateUserInformation: PropTypes.func,
     updatePassword: PropTypes.func,
+    deleteAccount: PropTypes.func,
   }),
+  userDeleted: PropTypes.bool,
   userInformation: PropTypes.shape({
     fullName: PropTypes.string,
     emailAddress: PropTypes.string,

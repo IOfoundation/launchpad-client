@@ -281,3 +281,38 @@ export const updatePassword = ({
     }
   };
 };
+
+const deleteAccountStart = () => {
+  return {
+    type: types.DELETE_ACCOUNT_START,
+  };
+};
+
+const deleteAccountSuccess = response => {
+  return {
+    type: types.DELETE_ACCOUNT_SUCCESS,
+    response,
+  };
+};
+
+const deleteAccountFail = errors => {
+  return {
+    type: types.DELETE_ACCOUNT_FAIL,
+    errors,
+  };
+};
+
+export const deleteAccount = ({Authorization}) => {
+  return async dispatch => {
+    try {
+      const config = {
+        headers: {Authorization},
+      };
+      dispatch(deleteAccountStart());
+      const httpResponse = await httpRequest.delete('/api/users', config);
+      dispatch(deleteAccountSuccess(httpResponse.data));
+    } catch (errors) {
+      dispatch(deleteAccountFail(errors.data));
+    }
+  };
+};
