@@ -35,6 +35,7 @@ class PostLists extends PureComponent {
     } else if (posts.results.length > 0) {
       resultsElements = posts.results.map(post => {
         const date = post.posted_at;
+        const tag = post.organization ? post.organization.name : '';
         let description = htmlStripper(post.body);
         let title = post.title;
 
@@ -51,7 +52,7 @@ class PostLists extends PureComponent {
             key={post.id}
             title={title}
             description={description}
-            tag={post.organization && post.organization.name}
+            tag={tag}
             date={`${date.monthLarge} ${date.day}, ${date.year}`}
             clicked={() => router.push(`/blog/${post.id}`)}
           />
