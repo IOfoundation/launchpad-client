@@ -28,7 +28,7 @@ class BlogPosts extends PureComponent {
   };
 
   getAdminPosts = (page, option) => {
-    this.props.actions.getAdminPost(page, option);
+    this.props.actions.getAdminPost(page, option, this.props.organizationId);
   };
 
   _getPagination = (page, totalPages) => {
@@ -58,28 +58,35 @@ class BlogPosts extends PureComponent {
   _tabSelected = 'Drafts';
 
   render() {
-    const {drafts, posted, noResults} = this.props;
+    const {drafts, posted} = this.props;
     let draftsElements = <Loading />;
     let postedElements = <Loading />;
     let pagination = null;
 
-    if (noResults) {
+    if (drafts.noResults) {
       draftsElements = (
         <p className="text-regular paragraph">{'No posts available.'}</p>
       );
+    } else {
+      draftsElements = (
+        <Items items={drafts.data} optionSelected={this.optionSelected} />
+      );
+    }
+
+    if (posted.noResults) {
       postedElements = (
         <p className="text-regular paragraph">{'No posts available.'}</p>
       );
     } else {
-      if (drafts.data.length > 0) {
-        draftsElements = <Items items={drafts.data} />;
-        pagination = this._getPagination(drafts.page, drafts.totalPages);
-      }
+      postedElements = (
+        <Items items={posted.data} optionSelected={this.optionSelected} />
+      );
+    }
 
-      if (posted.data.length > 0) {
-        postedElements = <Items items={posted.data} />;
-        pagination = this._getPagination(posted.page, posted.totalPages);
-      }
+    if (this._tabSelected === 'Drafts') {
+      pagination = this._getPagination(drafts.page, drafts.totalPages);
+    } else if (this._tabSelected === 'Posted') {
+      pagination = this._getPagination(posted.page, posted.totalPages);
     }
 
     return (
@@ -130,21 +137,24 @@ function postToBlogPosts(posts, draft = false) {
 const mapStateToProps = _state => {
   const drafts = _state.adminBlogs.drafts;
   const posted = _state.adminBlogs.posted;
+  const organizationId =
+    _state.user.organizationId || localStorage.getItem('organizationId');
 
   return {
     drafts: {
       data: postToBlogPosts(drafts.data, true),
-      noResults: drafts.data.length > 0,
+      noResults: drafts.data.length === 0,
       page: drafts.page,
       totalPages: drafts.totalPages,
     },
     posted: {
       data: postToBlogPosts(posted.data),
-      noResults: posted.data.length > 0,
+      noResults: posted.data.length === 0,
       page: posted.page,
       totalPages: posted.totalPages,
     },
     noResults: _state.adminBlogs.noResults,
+    organizationId,
   };
 };
 
@@ -164,6 +174,7 @@ BlogPosts.propTypes = {
     totalPages: PropTypes.number,
   }),
   noResults: PropTypes.bool,
+  organizationId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   posted: PropTypes.shape({
     data: PropTypes.arrayOf(PropTypes.shape({})),
     page: PropTypes.number,

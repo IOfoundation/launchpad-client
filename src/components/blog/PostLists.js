@@ -51,7 +51,7 @@ class PostLists extends PureComponent {
             key={post.id}
             title={title}
             description={description}
-            tag={post.organization.name}
+            tag={post.organization && post.organization.name}
             date={`${date.monthLarge} ${date.day}, ${date.year}`}
             clicked={() => router.push(`/blog/${post.id}`)}
           />

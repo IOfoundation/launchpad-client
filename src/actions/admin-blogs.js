@@ -32,7 +32,7 @@ const getAdminPostsError = error => {
   };
 };
 
-export const getAdminPost = (page, type = 'drafts') => {
+export const getAdminPost = (page, type = 'drafts', organizationId) => {
   return async dispatch => {
     try {
       let httpResponse;
@@ -42,11 +42,11 @@ export const getAdminPost = (page, type = 'drafts') => {
 
       if (typeNormalized === 'drafts') {
         httpResponse = await httpRequest.get(
-          `/api/blog_posts?page=${page}&per_page=5&filter[draft]=true`
+          `/api/blog_posts?page=${page}&per_page=5&filter[draft]=true&filter[organization_id]=${organizationId}`
         );
       } else if (typeNormalized === 'posted') {
         httpResponse = await httpRequest.get(
-          `/api/blog_posts?page=${page}&per_page=5&filter[draft]=false`
+          `/api/blog_posts?page=${page}&per_page=5&filter[draft]=false&filter[organization_id]=${organizationId}`
         );
       }
       const totalPages =

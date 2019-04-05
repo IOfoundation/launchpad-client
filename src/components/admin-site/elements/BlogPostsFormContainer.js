@@ -16,9 +16,9 @@ import * as adminBlogs from '@Actions/admin-blogs';
 import * as snackbarActions from '@Actions/snackbar';
 
 const blogPostsSchema = Yup.object().shape({
-  category: Yup.string().required('Required'),
-  title: Yup.string().required('Required'),
-  body: Yup.string(),
+  category: Yup.string().required('Category is Required'),
+  title: Yup.string().required('Title is Required'),
+  body: Yup.string().required('Content is Required'),
 });
 
 const initialValues = {
@@ -47,7 +47,9 @@ class ProfileFormContainer extends PureComponent {
     if (postSaved !== prevProps.postSaved) {
       if (postSaved) {
         snackbar.showSnackbar({
-          message: 'Post published successfully',
+          message: this._isPublished
+            ? 'Post published successfully'
+            : 'Draft created successfully',
         });
         router.push('/admin/blog');
       }
@@ -59,15 +61,10 @@ class ProfileFormContainer extends PureComponent {
   }
 
   _submitForm;
+  _isPublished;
 
   goToBlogs = () => {
     this.props.router.push('/admin/blog');
-  };
-
-  saveDraftAction = () => {
-    this.props.snackbar.showSnackbar({
-      message: 'An error has ocurred',
-    });
   };
 
   openSnackbar = message => {
@@ -76,7 +73,8 @@ class ProfileFormContainer extends PureComponent {
     });
   };
 
-  submitFormToSaveData = () => {
+  submitFormToSaveData = isPublished => {
+    this._isPublished = isPublished;
     this._submitForm();
   };
 
@@ -84,7 +82,7 @@ class ProfileFormContainer extends PureComponent {
     this.props.adminBlogsActions.savePost({
       ...values,
       auth: this.props.auth,
-      published: true,
+      published: this._isPublished,
     });
   };
 
@@ -98,14 +96,14 @@ class ProfileFormContainer extends PureComponent {
         hideFooter={hideFooter}
       >
         <Title
-          titleText="Create Post"
-          hideCancelAction={false}
-          submitLabel={'Publish'}
-          submitClicked={this.submitFormToSaveData}
           cancelClicked={this.goToBlogs}
+          extraClicked={() => this.submitFormToSaveData(false)}
           extraLabel="Save Draft"
-          extraClicked={this.saveDraftAction}
+          hideCancelAction={false}
           noMargin={breakpoint !== 'xs'}
+          submitClicked={() => this.submitFormToSaveData(true)}
+          submitLabel={'Publish'}
+          titleText="Create Post"
         />
         <Formik
           render={_props => {

@@ -65,7 +65,7 @@ class DetailFeaturedPosts extends PureComponent {
 
       if (viewMore) {
         featuredPostsElements = results.slice(0, 3).map(post => {
-          let description = htmlStripper(post.body);
+          let description = htmlStripper(post.title);
 
           if (description.split('').length > 70) {
             description = truncate(description, 70);
@@ -83,7 +83,7 @@ class DetailFeaturedPosts extends PureComponent {
         });
       } else {
         featuredPostsElements = results.map(post => {
-          let description = htmlStripper(post.body);
+          let description = htmlStripper(post.title);
 
           if (description.split('').length > 70) {
             description = truncate(description, 70);
