@@ -4,18 +4,19 @@ import {PropTypes} from 'prop-types';
 import Item from './Item';
 
 const Items = props => {
-  const {items} = props;
+  const {items, disable} = props;
 
   return (
     <div>
       {items.map(item => (
-        <Item key={item.id} {...item} />
+        <Item key={item.id} disable={disable} {...item} />
       ))}
     </div>
   );
 };
 
 Items.propTypes = {
+  disable: PropTypes.bool,
   items: PropTypes.arrayOf(
     PropTypes.shape({
       category: PropTypes.string,

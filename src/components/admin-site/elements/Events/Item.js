@@ -37,26 +37,74 @@ class Item extends PureComponent {
       classes,
       start,
       url,
+      disable,
     } = this.props;
-
+    const containerClasses = [classes.container];
     let truncateUrl = url;
+    let selectElement = (
+      <div className={classes.hideSelect}>
+        <i
+          className={`material-icons ${classes.floating} ${classes.front}`}
+          onClick={this.handleOpen}
+        >
+          {'keyboard_arrow_down'}
+        </i>
+        <Select
+          open={this.state.open}
+          value={this.state.option}
+          onChange={this.updateValue}
+          onClose={this.handleClose}
+          onOpen={this.handleOpen}
+          inputProps={{
+            name: 'service',
+            id: 'service-options',
+            classes: {
+              icon: classes.icon,
+            },
+          }}
+          MenuProps={{
+            MenuListProps: {
+              classes: {
+                root: classes.rootMenuListCss,
+              },
+            },
+          }}
+          className={`${classes.floating} ${classes.back}`}
+        >
+          <MenuItem value="Edit" className={classes.menuListCss}>
+            {'Edit'}
+          </MenuItem>
+          <MenuItem value="Delete" className={classes.menuListCss}>
+            {'Delete'}
+          </MenuItem>
+        </Select>
+      </div>
+    );
 
     if (truncateUrl.split('').length > 70) {
       truncateUrl = truncate(label, 70);
     }
 
+    if (disable) {
+      selectElement = null;
+      containerClasses.push(classes.disable);
+    }
+
     return (
-      <div className={classes.container}>
+      <div className={containerClasses.join(' ')}>
         <Grid container={true} justify="space-between" alignItems="center">
           <Grid item={true}>
             <h3 className={classes.title}>{title}</h3>
           </Grid>
           <Grid item={true}>
-            <span>{start}</span>
+            <span className={classes.floatingDate}>{start}</span>
           </Grid>
         </Grid>
         <div className="m-bot-8">
-          <a href={url} className="title-as-link title-as-link--small">
+          <a
+            href={url}
+            className="title-as-link title-as-link--small title-as-link--decoration"
+          >
             {truncateUrl}
           </a>
         </div>
@@ -71,44 +119,7 @@ class Item extends PureComponent {
           <Grid className={classes.date}>
             <span>{date}</span>
           </Grid>
-          <div className={classes.hideSelect}>
-            <i
-              className={`material-icons ${classes.floating} ${classes.front}`}
-              onClick={this.handleOpen}
-            >
-              {'keyboard_arrow_down'}
-            </i>
-            <Select
-              open={this.state.open}
-              value={this.state.option}
-              onChange={this.updateValue}
-              onClose={this.handleClose}
-              onOpen={this.handleOpen}
-              inputProps={{
-                name: 'service',
-                id: 'service-options',
-                classes: {
-                  icon: classes.icon,
-                },
-              }}
-              MenuProps={{
-                MenuListProps: {
-                  classes: {
-                    root: classes.rootMenuListCss,
-                  },
-                },
-              }}
-              className={`${classes.floating} ${classes.back}`}
-            >
-              <MenuItem value="Edit" className={classes.menuListCss}>
-                {'Edit'}
-              </MenuItem>
-              <MenuItem value="Delete" className={classes.menuListCss}>
-                {'Delete'}
-              </MenuItem>
-            </Select>
-          </div>
-
+          {selectElement}
           <Grid className={classes.category}>{category}</Grid>
         </Grid>
       </div>
@@ -183,6 +194,21 @@ const styles = theme => {
       lineHeight: '24px',
       width: '88px',
     },
+    floatingDate: {},
+    disable: {
+      '& a': {
+        color: '#7B7C7E',
+      },
+      '& $floatingDate': {
+        color: '#7B7C7E',
+      },
+      '& $title': {
+        color: '#7B7C7E',
+      },
+      '& $description': {
+        color: '#B8B9BC',
+      },
+    },
   };
 };
 
@@ -194,13 +220,16 @@ Item.propTypes = {
     date: PropTypes.string,
     dateContainer: PropTypes.string,
     description: PropTypes.string,
+    disable: PropTypes.string,
     label: PropTypes.string,
-    rootMenuListCss: PropTypes.string,
     menuListCss: PropTypes.string,
+    rootMenuListCss: PropTypes.string,
     title: PropTypes.string,
+    floatingDate: PropTypes.string,
   }),
   date: PropTypes.string,
   description: PropTypes.string,
+  disable: PropTypes.bool,
   label: PropTypes.string,
   start: PropTypes.string,
   title: PropTypes.string,

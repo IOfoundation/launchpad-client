@@ -47,10 +47,6 @@ class Events extends PureComponent {
     );
   };
 
-  goToBlogCreate = () => {
-    this.props.router.push('/admin/blog/1');
-  };
-
   _tabOptions = ['Upcoming', 'Past Events'];
   _tabSelected = 'Upcoming';
 
@@ -68,8 +64,8 @@ class Events extends PureComponent {
         <p className="text-regular paragraph">{'No posts available.'}</p>
       );
     } else if (events.length > 0 && !loading) {
-      upcomingElements = <Items items={events} />;
-      pastEventsElements = <Items items={events} />;
+      upcomingElements = <Items items={events} disable={false} />;
+      pastEventsElements = <Items items={events} disable={true} />;
     }
 
     return (
@@ -78,7 +74,6 @@ class Events extends PureComponent {
           titleText="Your Events"
           hideCancelAction={true}
           submitLabel="Create an Event"
-          submitClicked={this.goToBlogCreate}
         />
         <CustomTabs tabs={this._tabOptions} changed={this.menuChanged}>
           {upcomingElements}
