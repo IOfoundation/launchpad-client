@@ -15,7 +15,7 @@ export const ChangePassword = props => {
         {'You must enter your current password to make changes.'}
       </p>
       <Grid container={true} spacing={16}>
-        <Grid item={true} xs={5}>
+        <Grid item={true} xs={12} md={5}>
           <FormTextField
             autocomplete="user-password"
             error={touched.currentPassword && Boolean(errors.currentPassword)}
@@ -30,7 +30,7 @@ export const ChangePassword = props => {
         </Grid>
       </Grid>
       <Grid container={true} spacing={16}>
-        <Grid item={true} xs={5}>
+        <Grid item={true} xs={12} md={5}>
           <FormTextField
             autocomplete={'off'}
             error={touched.newPassword && Boolean(errors.newPassword)}
@@ -43,7 +43,7 @@ export const ChangePassword = props => {
             type="password"
           />
         </Grid>
-        <Grid item={true} xs={5}>
+        <Grid item={true} xs={12} md={5}>
           <FormTextField
             autocomplete={'off'}
             error={touched.confirmPassword && Boolean(errors.confirmPassword)}
