@@ -67,7 +67,7 @@ Pagination.propTypes = {
       first: PropTypes.object,
       last: PropTypes.object,
       next: PropTypes.object,
-      currentPage: PropTypes.number,
+      currentPage: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     }),
     totalOrganization: PropTypes.string,
   }).isRequired,

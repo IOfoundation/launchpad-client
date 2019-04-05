@@ -119,7 +119,7 @@ PostLists.propTypes = {
     results: PropTypes.arrayOf(PropTypes.shape({})),
     noResults: PropTypes.bool,
     totalPages: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    page: PropTypes.page,
+    page: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   }),
   router: PropTypes.shape({
     push: PropTypes.func,

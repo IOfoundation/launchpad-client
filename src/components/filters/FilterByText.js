@@ -220,7 +220,7 @@ FilterByText.propTypes = {
       PropTypes.string,
       PropTypes.arrayOf(PropTypes.string),
     ]),
-    page: PropTypes.number,
+    page: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   }),
   filterById: PropTypes.bool,
   getTextSearchResults: PropTypes.func.isRequired,
