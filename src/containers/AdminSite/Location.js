@@ -6,7 +6,7 @@ import LocationFormContainer from '../../components/admin-site/elements/Location
 
 const LocationFormRoute = props => {
   return (
-    <Layout>
+    <Layout router={props.router}>
       <LocationFormContainer breakpoint={props.breakpoint} />
     </Layout>
   );
@@ -14,6 +14,7 @@ const LocationFormRoute = props => {
 
 LocationFormRoute.propTypes = {
   breakpoint: PropTypes.string,
+  router: PropTypes.shape({}),
 };
 
 export default LocationFormRoute;

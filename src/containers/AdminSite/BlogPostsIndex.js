@@ -6,16 +6,14 @@ import BlogPosts from '../../components/admin-site/elements/BlogPosts';
 
 const BlogPostsIndex = props => {
   return (
-    <Layout>
+    <Layout router={props.router}>
       <BlogPosts router={props.router} />
     </Layout>
   );
 };
 
 BlogPostsIndex.propTypes = {
-  router: PropTypes.shape({
-    push: PropTypes.func,
-  }),
+  router: PropTypes.shape({}),
 };
 
 export default BlogPostsIndex;
