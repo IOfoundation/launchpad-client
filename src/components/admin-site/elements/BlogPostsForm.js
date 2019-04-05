@@ -4,17 +4,22 @@ import {withStyles} from '@material-ui/core/styles';
 import {PropTypes} from 'prop-types';
 import 'medium-draft/lib/index.css';
 import mediumDraftExporter from 'medium-draft/lib/exporter';
+import mediumDraftImporter from 'medium-draft/lib/importer';
 import {Editor, createEditorState} from 'medium-draft';
 import CustomImageSideButton from './BlogPosts/media/Images';
 import {ErrorMessage} from 'formik';
+import {convertToRaw} from 'draft-js';
 
 import Title from './BlogPosts/Title';
 import DateCategory from './BlogPosts/DateCategory';
 
 class BlogPostsForm extends PureComponent {
   state = {
-    editorState: createEditorState(),
+    editorState: createEditorState(
+      convertToRaw(mediumDraftImporter(this.props.initialValues.body))
+    ),
   };
+
   refsEditor = React.createRef();
   blockButtons = [
     {
@@ -175,6 +180,9 @@ BlogPostsForm.propTypes = {
   handleBlur: PropTypes.func,
   handleChange: PropTypes.func,
   handleSubmit: PropTypes.func,
+  initialValues: PropTypes.shape({
+    body: PropTypes.string,
+  }),
   isSubmitting: PropTypes.bool,
   isValid: PropTypes.bool,
   router: PropTypes.shape({

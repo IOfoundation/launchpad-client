@@ -400,6 +400,7 @@ exports[`Admin-site <Items /> renders snapshot of Items 1`] = `
         description="description"
         key="1"
         label="label"
+        optionSelected={[Function]}
         title="title"
       >
         <Item
@@ -424,6 +425,7 @@ exports[`Admin-site <Items /> renders snapshot of Items 1`] = `
           date="date"
           description="description"
           label="label"
+          optionSelected={[Function]}
           title="title"
         >
           <div

@@ -10,12 +10,26 @@ import Pagination from '../../businesses/Pagination';
 import CustomTabs from '@Shared/Tabs';
 import Loading from '@Shared/Loading';
 
-import * as getAdminPost from '@Actions/admin-blogs';
+import * as snackbarActions from '@Actions/snackbar';
+import * as adminPostActions from '@Actions/admin-blogs';
 import {htmlStripper, truncate, getDate} from '@Utils';
 
 class BlogPosts extends PureComponent {
   componentDidMount() {
     this.getAdminPosts(1);
+  }
+
+  componentDidUpdate(prevProps) {
+    const {snackbar, deleteSuccess} = this.props;
+
+    if (deleteSuccess !== prevProps.deleteSuccess) {
+      if (deleteSuccess) {
+        snackbar.showSnackbar({
+          message: 'Post deleted successfully',
+        });
+        this.getAdminPosts(1, this._tabSelected);
+      }
+    }
   }
 
   menuChanged = index => {
@@ -29,6 +43,10 @@ class BlogPosts extends PureComponent {
 
   getAdminPosts = (page, option) => {
     this.props.actions.getAdminPost(page, option, this.props.organizationId);
+  };
+
+  deletePost = deleteOptions => {
+    this.props.actions.deletePost(deleteOptions);
   };
 
   _getPagination = (page, totalPages) => {
@@ -51,7 +69,15 @@ class BlogPosts extends PureComponent {
   };
 
   goToBlogCreate = () => {
-    this.props.router.push('/admin/blog/1');
+    this.props.router.push('/admin/blog/new');
+  };
+
+  optionSelected = ({option, id}) => {
+    if (option === 'Delete') {
+      this.deletePost({id, auth: this.props.auth});
+    } else if (option === 'Edit') {
+      this.props.router.push(`/admin/blog/${id}`);
+    }
   };
 
   _tabOptions = ['Drafts', 'Posted'];
@@ -139,6 +165,7 @@ const mapStateToProps = _state => {
   const posted = _state.adminBlogs.posted;
   const organizationId =
     _state.user.organizationId || localStorage.getItem('organizationId');
+  const auth = _state.user.authorization || localStorage.getItem('userAuth');
 
   return {
     drafts: {
@@ -155,19 +182,25 @@ const mapStateToProps = _state => {
     },
     noResults: _state.adminBlogs.noResults,
     organizationId,
+    auth,
+    deleteSuccess: _state.adminBlogs.deletePost.success,
   };
 };
 
 const mapDispatchToProps = _dispatch => {
   return {
-    actions: bindActionCreators(getAdminPost, _dispatch),
+    actions: bindActionCreators(adminPostActions, _dispatch),
+    snackbar: bindActionCreators(snackbarActions, _dispatch),
   };
 };
 
 BlogPosts.propTypes = {
   actions: PropTypes.shape({
     getAdminPost: PropTypes.func,
+    deletePost: PropTypes.func,
   }),
+  auth: PropTypes.string,
+  deleteSuccess: PropTypes.bool,
   drafts: PropTypes.shape({
     data: PropTypes.arrayOf(PropTypes.shape({})),
     page: PropTypes.number,
@@ -182,6 +215,9 @@ BlogPosts.propTypes = {
   }),
   router: PropTypes.shape({
     push: PropTypes.func,
+  }),
+  snackbar: PropTypes.shape({
+    showSnackbar: PropTypes.func,
   }),
 };
 

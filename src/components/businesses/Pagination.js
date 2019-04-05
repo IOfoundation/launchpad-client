@@ -48,7 +48,7 @@ const Pagination = props => {
         containerClassName={'pagination-index text-bold'}
         subContainerClassName={'pagination-numbers '}
         activeClassName={'active'}
-        forcePage={page - 1}
+        forcePage={Number(page) - 1}
       />
     </div>
   );
@@ -59,7 +59,7 @@ Pagination.propTypes = {
       PropTypes.string,
       PropTypes.arrayOf(PropTypes.string),
     ]),
-    page: PropTypes.number,
+    page: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   }).isRequired,
   handleChangePage: PropTypes.func.isRequired,
   metadata: PropTypes.shape({
@@ -67,7 +67,7 @@ Pagination.propTypes = {
       first: PropTypes.object,
       last: PropTypes.object,
       next: PropTypes.object,
-      currentPage: PropTypes.number,
+      currentPage: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     }),
     totalOrganization: PropTypes.string,
   }).isRequired,

@@ -5,9 +5,10 @@ import DetailFeaturedPost from './DetailFeaturedPost';
 import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import {PropTypes} from 'prop-types';
-import Loading from '../../shared/Loading';
-import {truncate, htmlStripper} from '../../../utils';
 import {withRouter} from 'react-router';
+
+import Loading from '@Shared/Loading';
+import {truncate, htmlStripper, getDate} from '@Utils';
 
 const styles = () => ({
   featuredPosts: {
@@ -38,6 +39,12 @@ class DetailFeaturedPosts extends PureComponent {
         viewMore: !prevState.viewMore,
       };
     });
+  };
+
+  parsePostDate = toParseDate => {
+    const date = getDate(toParseDate);
+
+    return `${date.monthLarge} ${date.day}, ${date.year}`;
   };
 
   render() {
@@ -75,7 +82,7 @@ class DetailFeaturedPosts extends PureComponent {
             <Grid key={post.id} item={true} xs={12} md={4}>
               <DetailFeaturedPost
                 description={description}
-                date="February 2, 2019"
+                date={this.parsePostDate(post.posted_at)}
                 clicked={() => router.push(`/blog/${post.id}`)}
               />
             </Grid>
@@ -93,7 +100,7 @@ class DetailFeaturedPosts extends PureComponent {
             <Grid key={post.id} item={true} xs={12} md={4}>
               <DetailFeaturedPost
                 description={description}
-                date="February 2, 2019"
+                date={this.parsePostDate(post.posted_at)}
                 clicked={() => router.push(`/blog/${post.id}`)}
               />
             </Grid>

@@ -23,6 +23,7 @@ class Item extends PureComponent {
     const info = event.target;
 
     this.setState({[event.target.name]: info.value});
+    this.props.optionSelected(info.value);
   };
 
   render() {
@@ -173,6 +174,7 @@ Item.propTypes = {
   date: PropTypes.string,
   description: PropTypes.string,
   label: PropTypes.string,
+  optionSelected: PropTypes.func,
   title: PropTypes.string,
 };
 

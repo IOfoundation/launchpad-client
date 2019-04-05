@@ -18,6 +18,16 @@ const initialState = {
       loading: false,
       errors: {},
     },
+    updatePost: {
+      data: {},
+      loading: false,
+      errors: {},
+    },
+    deletePost: {
+      errors: {},
+      loading: false,
+      success: false,
+    },
     hideFooter: false,
   },
   blogs: {
@@ -28,6 +38,7 @@ const initialState = {
     organizationPosts: [],
     page: 1,
     post: {},
+    getPostIdSuccess: false,
     posts: [],
     totalPages: 0,
   },

@@ -125,3 +125,82 @@ export const savePost = ({title, body, category, auth, published}) => {
     }
   };
 };
+
+const deletePostStarts = () => {
+  return {
+    type: types.DELETE_POST_START,
+  };
+};
+
+const deletePostSuccess = data => {
+  return {
+    type: types.DELETE_POST_SUCCESS,
+    data,
+  };
+};
+
+const deletePostError = error => {
+  return {
+    type: types.DELETE_POST_FAIL,
+    error,
+  };
+};
+
+export const deletePost = ({id, auth}) => {
+  return async dispatch => {
+    try {
+      const config = {
+        headers: {Authorization: auth},
+      };
+      dispatch(deletePostStarts());
+      const httpResponse = await httpRequest.delete(
+        `/api/blog_posts/${id}`,
+        config
+      );
+      dispatch(deletePostSuccess(httpResponse.data));
+    } catch (errors) {
+      dispatch(deletePostError(errors));
+    }
+  };
+};
+
+const updatePostStart = () => {
+  return {
+    type: types.UPDATE_POSTS_START,
+  };
+};
+
+const updatePostSuccess = post => {
+  return {
+    type: types.UPDATE_POSTS_SUCCESS,
+    post,
+  };
+};
+
+const updatePostFail = errors => {
+  return {
+    type: types.UPDATE_POSTS_FAIL,
+    errors,
+  };
+};
+
+export const updatePost = ({id, title, body, category, auth, published}) => {
+  return async dispatch => {
+    try {
+      const config = {
+        headers: {Authorization: auth},
+      };
+      dispatch(updatePostStart());
+      const httpResponse = await httpRequest.put(
+        `/api/blog_posts/${id}`,
+        {
+          blog_post: {title, body, category, is_published: published},
+        },
+        config
+      );
+      dispatch(updatePostSuccess(httpResponse.data));
+    } catch (errors) {
+      dispatch(updatePostFail(errors));
+    }
+  };
+};

@@ -26,13 +26,20 @@ class Main extends Component {
       },
     };
   };
+
   getCoordinates = business => {
-    return business && business.coordinates;
+    if (business && business.coordinates) {
+      return business.coordinates;
+    }
+
+    return [38.57, -121.47];
   };
+
   handleBoundsChange = e => {
     this.setState({center: e.center, zoom: e.zoom});
     this.props.onBoundsChange(e);
   };
+
   _handleOnClick = (e, childProps) => {
     this.setState({
       selected: e,
@@ -42,14 +49,17 @@ class Main extends Component {
       },
     });
   };
+
   _handleCloseClick = () => {
     this.setState({selected: -1});
   };
+
   _handleChildMouseEnter = e => {
     this.props.highlightOrgCard(
       this.props.locations.find(x => String(x.id) === e).organization.id
     );
   };
+
   _handleChildMouseLeave = () => {
     this.props.highlightOrgCard(-1);
   };
@@ -132,6 +142,7 @@ class Main extends Component {
       map = (
         <GoogleMap
           center={center}
+          defaultZoom={0}
           zoom={zoom}
           onChange={this.handleBoundsChange}
           options={options}

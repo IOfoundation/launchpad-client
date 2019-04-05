@@ -19,6 +19,16 @@ const initialState = {
     loading: false,
     errors: {},
   },
+  updatePost: {
+    data: {},
+    loading: false,
+    errors: {},
+  },
+  deletePost: {
+    errors: {},
+    loading: false,
+    success: false,
+  },
   hideFooter: false,
 };
 
@@ -118,11 +128,80 @@ export default function(state = initialState, action) {
       };
     }
 
+    case types.DELETE_POST_START: {
+      return {
+        ...state,
+        deletePost: {
+          errors: {},
+          loading: true,
+          success: false,
+        },
+      };
+    }
+
+    case types.DELETE_POST_SUCCESS: {
+      return {
+        ...state,
+        deletePost: {
+          ...state.deletePost,
+          loading: false,
+          success: true,
+        },
+      };
+    }
+
+    case types.DELETE_POST_FAIL: {
+      const {errors} = action;
+      return {
+        ...state,
+        deletePost: {
+          ...state.deletePost,
+          loading: false,
+          errors,
+        },
+      };
+    }
+
     case types.HIDE_FOOTER: {
       const {hideFooter} = action;
       return {
         ...state,
         hideFooter,
+      };
+    }
+
+    case types.UPDATE_POSTS_START: {
+      return {
+        ...state,
+        updatePost: {
+          data: {},
+          loading: false,
+          errors: {},
+        },
+      };
+    }
+
+    case types.UPDATE_POSTS_SUCCESS: {
+      const {post} = action;
+      return {
+        ...state,
+        updatePost: {
+          ...state.savePost,
+          data: post,
+          loading: false,
+        },
+      };
+    }
+
+    case types.UPDATE_POSTS_FAIL: {
+      const {errors} = action;
+      return {
+        ...state,
+        updatePost: {
+          ...state.savePost,
+          loading: false,
+          errors,
+        },
       };
     }
 

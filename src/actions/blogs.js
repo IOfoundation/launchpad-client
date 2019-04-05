@@ -235,3 +235,9 @@ export const setCategory = category => {
     category,
   };
 };
+
+export const resetPostByID = () => {
+  return {
+    type: types.RESET_POST_BY_ID,
+  };
+};

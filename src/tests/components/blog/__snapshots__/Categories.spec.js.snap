@@ -23,6 +23,7 @@ exports[`<Categories /> renders snapshot of Categories 1`] = `
           "getFeaturedPostById": [Function],
           "getPostById": [Function],
           "noResults": [Function],
+          "resetPostByID": [Function],
           "setCategory": [Function],
         }
       }

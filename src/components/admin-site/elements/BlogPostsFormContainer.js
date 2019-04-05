@@ -9,6 +9,7 @@ import {withRouter} from 'react-router';
 import BlogPostsForm from './BlogPostsForm';
 import LandingComponent from '../Landing';
 import Title from '../Title';
+import Loading from '@Shared/Loading';
 
 import * as user from '@Actions/user';
 import * as blogs from '@Actions/blogs';
@@ -21,20 +22,28 @@ const blogPostsSchema = Yup.object().shape({
   body: Yup.string().required('Content is Required'),
 });
 
-const initialValues = {
-  category: '',
-  title: '',
-  body: '',
-};
-
 class ProfileFormContainer extends PureComponent {
+  state = {
+    renderForm: false,
+  };
+
   componentDidMount() {
     this.props.blogsActions.getCategories();
     this.props.adminBlogsActions.hideFooter(true);
+
+    if (this.props.router.params.id !== 'new') {
+      this.props.blogsActions.getPostById(this.props.router.params.id);
+    }
   }
 
   componentDidUpdate(prevProps) {
-    const {snackbar, savePostError, postSaved, router} = this.props;
+    const {
+      snackbar,
+      savePostError,
+      postSaved,
+      router,
+      postUpdated,
+    } = this.props;
 
     if (savePostError !== prevProps.savePostError) {
       if (savePostError) {
@@ -54,14 +63,31 @@ class ProfileFormContainer extends PureComponent {
         router.push('/admin/blog');
       }
     }
+
+    if (postUpdated !== prevProps.postUpdated) {
+      if (postUpdated) {
+        snackbar.showSnackbar({
+          message: this._isPublished
+            ? 'Post updated successfully'
+            : 'Draft updated successfully',
+        });
+        router.push('/admin/blog');
+      }
+    }
   }
 
   componentWillUnmount() {
     this.props.adminBlogsActions.hideFooter(false);
+    this.props.blogsActions.resetPostByID();
   }
 
   _submitForm;
   _isPublished;
+  _initialValues = {
+    category: '',
+    title: '',
+    body: '',
+  };
 
   goToBlogs = () => {
     this.props.router.push('/admin/blog');
@@ -86,8 +112,63 @@ class ProfileFormContainer extends PureComponent {
     });
   };
 
+  updatePostAction = values => {
+    this.props.adminBlogsActions.updatePost({
+      ...values,
+      id: values.id,
+      auth: this.props.auth,
+      published: this._isPublished,
+    });
+  };
+
+  _getForm = (initialValues, mode, id) => {
+    const {categories, breakpoint, router} = this.props;
+
+    return (
+      <Formik
+        enableReinitialize={true}
+        render={_props => {
+          this._submitForm = _props.submitForm;
+          return (
+            <BlogPostsForm
+              {..._props}
+              breakpoint={breakpoint}
+              categories={categories}
+              router={router}
+              initialValues={initialValues}
+            />
+          );
+        }}
+        initialValues={initialValues}
+        validationSchema={blogPostsSchema}
+        onSubmit={values => {
+          if (mode === 'new') {
+            this.savePostAction(values);
+          } else if (mode === 'edit') {
+            this.updatePostAction({...values, id});
+          }
+        }}
+      />
+    );
+  };
+
   render() {
-    const {breakpoint, categories, router, hideFooter} = this.props;
+    const {breakpoint, router, hideFooter, post, getPostIdSuccess} = this.props;
+    let form = <Loading />;
+
+    if (router.params.id === 'new') {
+      form = this._getForm(this._initialValues, 'new');
+    } else if (getPostIdSuccess) {
+      form = this._getForm(
+        {
+          category: post.result.categories[0].name,
+          title: post.result.title,
+          body: post.result.body,
+        },
+        'edit',
+        post.result.id
+      );
+    }
 
     return (
       <LandingComponent
@@ -105,24 +186,7 @@ class ProfileFormContainer extends PureComponent {
           submitLabel={'Publish'}
           titleText="Create Post"
         />
-        <Formik
-          render={_props => {
-            this._submitForm = _props.submitForm;
-            return (
-              <BlogPostsForm
-                {..._props}
-                breakpoint={breakpoint}
-                categories={categories}
-                router={router}
-              />
-            );
-          }}
-          initialValues={initialValues}
-          validationSchema={blogPostsSchema}
-          onSubmit={values => {
-            this.savePostAction(values);
-          }}
-        />
+        {form}
       </LandingComponent>
     );
   }
@@ -138,6 +202,12 @@ const mapStateToProps = _state => {
     savePostError: Object.keys(_state.adminBlogs.savePost.errors).length > 0,
     hideFooter: _state.adminBlogs.hideFooter,
     postSaved: Object.keys(_state.adminBlogs.savePost.data).length > 0,
+    postUpdated: Object.keys(_state.adminBlogs.updatePost.data).length > 0,
+    post: {
+      result: _state.blogs.post,
+      noResults: _state.blogs.noResults,
+    },
+    getPostIdSuccess: _state.blogs.getPostIdSuccess,
   };
 };
 
@@ -152,12 +222,15 @@ const mapDispatchToProps = _dispatch => {
 
 ProfileFormContainer.propTypes = {
   adminBlogsActions: PropTypes.shape({
-    savePost: PropTypes.func,
     hideFooter: PropTypes.func,
+    savePost: PropTypes.func,
+    updatePost: PropTypes.func,
   }),
   auth: PropTypes.string,
   blogsActions: PropTypes.shape({
     getCategories: PropTypes.func,
+    getPostById: PropTypes.func,
+    resetPostByID: PropTypes.func,
   }),
   breakpoint: PropTypes.string,
   categories: PropTypes.arrayOf(
@@ -167,11 +240,22 @@ ProfileFormContainer.propTypes = {
     })
   ),
   error: PropTypes.bool,
+  getPostIdSuccess: PropTypes.bool,
   hideFooter: PropTypes.bool,
   isAuth: PropTypes.bool,
+  post: PropTypes.shape({
+    result: PropTypes.shape({
+      result: PropTypes.shape({}),
+      noResults: PropTypes.bool,
+    }),
+  }),
   postSaved: PropTypes.bool,
+  postUpdated: PropTypes.bool,
   router: PropTypes.shape({
     push: PropTypes.func,
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
   }),
   savePostError: PropTypes.bool,
   snackbar: PropTypes.shape({
