@@ -6,6 +6,7 @@ import 'medium-draft/lib/index.css';
 import mediumDraftExporter from 'medium-draft/lib/exporter';
 import {Editor, createEditorState} from 'medium-draft';
 import CustomImageSideButton from './BlogPosts/media/Images';
+import {ErrorMessage} from 'formik';
 
 import Title from './BlogPosts/Title';
 import DateCategory from './BlogPosts/DateCategory';
@@ -125,6 +126,13 @@ class BlogPostsForm extends PureComponent {
           inlineButtons={this.inlineButtons}
           sideButtons={this.sideButtons}
         />
+        <div className={'admin-login-form__input__error-wrapper m-bot-24'}>
+          <ErrorMessage
+            className="admin-login-form__error"
+            component="div"
+            name="body"
+          />
+        </div>
       </Form>
     );
   }

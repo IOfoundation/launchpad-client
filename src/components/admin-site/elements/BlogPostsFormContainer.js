@@ -16,9 +16,9 @@ import * as adminBlogs from '@Actions/admin-blogs';
 import * as snackbarActions from '@Actions/snackbar';
 
 const blogPostsSchema = Yup.object().shape({
-  category: Yup.string().required('Required'),
-  title: Yup.string().required('Required'),
-  body: Yup.string(),
+  category: Yup.string().required('Category is Required'),
+  title: Yup.string().required('Title is Required'),
+  body: Yup.string().required('Content is Required'),
 });
 
 const initialValues = {
