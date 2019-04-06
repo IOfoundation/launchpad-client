@@ -9,12 +9,17 @@ import Items from './BlogPosts/Items';
 import Pagination from '../../businesses/Pagination';
 import CustomTabs from '@Shared/Tabs';
 import Loading from '@Shared/Loading';
+import Modal from './BlogPosts/Modal';
 
 import * as snackbarActions from '@Actions/snackbar';
 import * as adminPostActions from '@Actions/admin-blogs';
 import {htmlStripper, truncate, getDate} from '@Utils';
 
 class BlogPosts extends PureComponent {
+  state = {
+    openModal: false,
+  };
+
   componentDidMount() {
     this.getAdminPosts(1);
   }
@@ -27,6 +32,7 @@ class BlogPosts extends PureComponent {
         snackbar.showSnackbar({
           message: 'Post deleted successfully',
         });
+        this.handlerModalVisibility();
         this.getAdminPosts(1, this._tabSelected);
       }
     }
@@ -73,18 +79,34 @@ class BlogPosts extends PureComponent {
   };
 
   optionSelected = ({option, id}) => {
+    this._idSelected = id;
     if (option === 'Delete') {
-      this.deletePost({id, auth: this.props.auth});
+      this.handlerModalVisibility();
+      //this.deletePost({id, auth: this.props.auth});
     } else if (option === 'Edit') {
       this.props.router.push(`/admin/blog/${id}`);
     }
   };
 
+  handlerModalVisibility = () => {
+    this.setState(prevState => {
+      return {
+        openModal: !prevState.openModal,
+      };
+    });
+  };
+
+  modalClosed = () => {
+    this.handlerModalVisibility();
+  };
+
   _tabOptions = ['Drafts', 'Posted'];
   _tabSelected = 'Drafts';
+  _idSelected = '';
 
   render() {
-    const {drafts, posted} = this.props;
+    const {drafts, posted, auth} = this.props;
+    const {openModal} = this.state;
     let draftsElements = <Loading />;
     let postedElements = <Loading />;
     let pagination = null;
@@ -117,6 +139,12 @@ class BlogPosts extends PureComponent {
 
     return (
       <LandingComponent navigation={true}>
+        <Modal
+          open={openModal}
+          modalClosed={this.modalClosed}
+          cancelClicked={this.handlerModalVisibility}
+          deleteClicked={() => this.deletePost({auth, id: this._idSelected})}
+        />
         <Title
           titleText="Your Blog Posts"
           hideCancelAction={true}

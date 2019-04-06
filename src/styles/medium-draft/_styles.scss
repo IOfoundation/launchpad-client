@@ -3,6 +3,10 @@
     background: none;
     color: $primary-color;
     padding: 0;
+
+    @media (max-width: 60em) {
+      padding-left: 32px;
+    }
   }
 
   .md-sb-button,
