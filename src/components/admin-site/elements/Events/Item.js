@@ -92,22 +92,19 @@ class Item extends PureComponent {
 
     return (
       <div className={containerClasses.join(' ')}>
-        <Grid container={true} justify="space-between" alignItems="center">
-          <Grid item={true}>
-            <h3 className={classes.title}>{title}</h3>
-          </Grid>
-          <Grid item={true}>
-            <span className={classes.floatingDate}>{start}</span>
-          </Grid>
-        </Grid>
-        <div className="m-bot-8">
-          <a
-            href={url}
-            className="title-as-link title-as-link--small title-as-link--decoration"
-          >
-            {truncateUrl}
-          </a>
+        <div className="clearfix">
+          <h3 className={classes.title}>{title}</h3>
+          <div className={classes.floatingDate}>{start}</div>
         </div>
+
+        <a
+          href={url}
+          className={`title-as-link title-as-link--small title-as-link--decoration ${
+            classes.url
+          }`}
+        >
+          {truncateUrl}
+        </a>
         <p className={classes.description}>{description}</p>
         <Grid
           container={true}
@@ -140,6 +137,7 @@ const styles = theme => {
       fontSize: '16px',
       lineHeight: '24px',
       marginBottom: '8px',
+      float: 'left',
     },
     description: {
       color: '#7B7C7E',
@@ -168,11 +166,6 @@ const styles = theme => {
       position: 'relative',
       width: '24px',
     },
-    floating: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-    },
     front: {
       cursor: 'pointer',
       zIndex: '2',
@@ -194,7 +187,10 @@ const styles = theme => {
       lineHeight: '24px',
       width: '88px',
     },
-    floatingDate: {},
+    floatingDate: {
+      float: 'right',
+      lineHeight: '24px',
+    },
     disable: {
       '& a': {
         color: '#7B7C7E',
@@ -207,6 +203,12 @@ const styles = theme => {
       },
       '& $description': {
         color: '#B8B9BC',
+      },
+    },
+    url: {
+      [theme.breakpoints.down('sm')]: {
+        display: 'block',
+        width: '150px',
       },
     },
   };
@@ -226,6 +228,7 @@ Item.propTypes = {
     rootMenuListCss: PropTypes.string,
     title: PropTypes.string,
     floatingDate: PropTypes.string,
+    url: PropTypes.string,
   }),
   date: PropTypes.string,
   description: PropTypes.string,
