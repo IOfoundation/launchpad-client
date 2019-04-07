@@ -19,14 +19,11 @@ const AccountSchema = Yup.object().shape({
   emailAddress: Yup.string()
     .email('Invalid email address')
     .required('Required'),
-  currentPassword: Yup.string().required('Required'),
-  newPassword: Yup.string()
-    .min(8)
-    .required('Required'),
+  currentPassword: Yup.string(),
+  newPassword: Yup.string().min(8),
   confirmPassword: Yup.string()
     .min(8)
-    .oneOf([Yup.ref('newPassword'), null], "Password don't match")
-    .required('Required'),
+    .oneOf([Yup.ref('newPassword'), null], "Password don't match"),
 });
 
 class AccountContainer extends PureComponent {
@@ -35,17 +32,29 @@ class AccountContainer extends PureComponent {
   };
 
   componentDidUpdate(prevProps) {
-    const {userUpdated, error, deleteAccountError, userDeleted} = this.props;
+    const {
+      userUpdated,
+      error,
+      deleteAccountError,
+      userDeleted,
+      passwordUpdated,
+    } = this.props;
     const deleteErrors = Object.keys(deleteAccountError);
     const prevDeleteErrors = Object.keys(prevProps.deleteAccountError);
 
-    this._userUpdatedSuccess(userUpdated, prevProps);
+    if (this._checkBothSuccess) {
+      this._passwordUpdatedSuccess(userUpdated, passwordUpdated, prevProps);
+    } else {
+      this._userUpdatedSuccess(userUpdated, prevProps);
+    }
+
     this._userDeletedSuccess(userDeleted, prevProps);
     this._generalError(error, prevProps);
     this._deleteError(deleteErrors, prevDeleteErrors);
   }
 
   submitMyForm = null;
+  _checkBothSuccess = false;
 
   _userDeletedSuccess = (userDeleted, prevProps) => {
     if (userDeleted !== prevProps.userDeleted) {
@@ -69,12 +78,34 @@ class AccountContainer extends PureComponent {
     }
   };
 
+  _passwordUpdatedSuccess = (userUpdated, passwordUpdated, prevProps) => {
+    const userValidation = userUpdated !== prevProps.userUpdated;
+    const passwordValidation = passwordUpdated !== prevProps.passwordUpdated;
+
+    if (userValidation && passwordValidation) {
+      if (passwordUpdated && userUpdated) {
+        this.props.snackbar.showSnackbar({
+          message: 'Password updated successfully',
+        });
+        this.goToProfile();
+      }
+    }
+  };
+
   _generalError = (error, prevProps) => {
     if (error.length !== prevProps.error.length) {
       if (error.length > 0) {
-        this.props.snackbar.showSnackbar({
-          message: 'There was a problem',
-        });
+        const title = error[0] && error[0].title;
+
+        if (title) {
+          this.props.snackbar.showSnackbar({
+            message: title,
+          });
+        } else {
+          this.props.snackbar.showSnackbar({
+            message: 'There was a problem',
+          });
+        }
       }
     }
   };
@@ -160,13 +191,20 @@ class AccountContainer extends PureComponent {
               fullName: name,
               newPassword: password,
             } = values;
-            userActions.updateUserInformation({Authorization, name, email});
-            userActions.updatePassword({
-              Authorization,
-              current_password,
-              password,
-              password_confirmation,
-            });
+
+            if (current_password.length > 0 && password.length > 0) {
+              this._checkBothSuccess = true;
+              userActions.updateUserInformation({Authorization, name, email});
+              userActions.updatePassword({
+                Authorization,
+                current_password,
+                password,
+                password_confirmation,
+              });
+            } else {
+              this._checkBothSuccess = false;
+              userActions.updateUserInformation({Authorization, name, email});
+            }
           }}
         />
       </LandingComponent>
@@ -197,8 +235,8 @@ const mapStateToProps = _state => {
     isAuth: _state.user.authorization !== '',
     Authorization: _state.user.authorization,
     userInformation,
-    userUpdated:
-      updateInformation.successInfo && updateInformation.successPassword,
+    userUpdated: updateInformation.successInfo,
+    passwordUpdated: updateInformation.successPassword,
     userDeleted: updateInformation.successDelete,
     deleteAccountError,
   };
@@ -216,6 +254,7 @@ AccountContainer.propTypes = {
   deleteAccountError: PropTypes.shape({}),
   error: PropTypes.arrayOf(PropTypes.shape({})),
   isAuth: PropTypes.bool,
+  passwordUpdated: PropTypes.bool,
   router: PropTypes.shape({
     push: PropTypes.func,
   }),
