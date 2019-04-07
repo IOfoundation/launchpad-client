@@ -9,6 +9,7 @@ import {withRouter} from 'react-router';
 import Account from './Account';
 import LandingComponent from '../Landing';
 import Title from '../Title';
+import Modal from './Account/Modal';
 
 import * as user from '@Actions/user';
 import * as snackbarActions from '@Actions/snackbar';
@@ -29,6 +30,10 @@ const AccountSchema = Yup.object().shape({
 });
 
 class AccountContainer extends PureComponent {
+  state = {
+    openModal: false,
+  };
+
   componentDidUpdate(prevProps) {
     const {userUpdated, error, deleteAccountError, userDeleted} = this.props;
     const deleteErrors = Object.keys(deleteAccountError);
@@ -104,6 +109,14 @@ class AccountContainer extends PureComponent {
     userActions.deleteAccount({Authorization});
   };
 
+  handlerModalVisibility = () => {
+    this.setState(prevState => {
+      return {
+        openModal: !prevState.openModal,
+      };
+    });
+  };
+
   render() {
     const {userInformation, userActions, Authorization} = this.props;
     const initialValues = {
@@ -113,8 +126,16 @@ class AccountContainer extends PureComponent {
       newPassword: '',
       confirmPassword: '',
     };
+    const {openModal} = this.state;
+
     return (
       <LandingComponent navigation={false}>
+        <Modal
+          open={openModal}
+          modalClosed={this.handlerModalVisibility}
+          cancelClicked={this.handlerModalVisibility}
+          deleteClicked={this.deleteUser}
+        />
         <Title
           titleText="Edit Your Account"
           hideCancelAction={false}
@@ -125,7 +146,9 @@ class AccountContainer extends PureComponent {
         <Formik
           render={_props => {
             this.submitMyForm = _props.submitForm;
-            return <Account {..._props} closeClicked={this.deleteUser} />;
+            return (
+              <Account {..._props} closeClicked={this.handlerModalVisibility} />
+            );
           }}
           initialValues={initialValues}
           validationSchema={AccountSchema}
