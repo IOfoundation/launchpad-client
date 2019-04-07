@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import FormTextField from '@Shared/FormElements/TextFieldDefault';
 
 export const ChangePassword = props => {
-  const {errors, touched, handleBlur, handleChange, values, classes} = props;
+  const {errors, handleBlur, handleChange, values, classes} = props;
 
   return (
     <div className="m-bot-40">
@@ -18,7 +18,7 @@ export const ChangePassword = props => {
         <Grid item={true} xs={12} md={5}>
           <FormTextField
             autocomplete="user-password"
-            error={touched.currentPassword && Boolean(errors.currentPassword)}
+            error={Boolean(errors.currentPassword)}
             errors={errors}
             handleBlur={handleBlur}
             handleChange={handleChange}
@@ -33,7 +33,7 @@ export const ChangePassword = props => {
         <Grid item={true} xs={12} md={5}>
           <FormTextField
             autocomplete={'off'}
-            error={touched.newPassword && Boolean(errors.newPassword)}
+            error={Boolean(errors.newPassword)}
             errors={errors}
             handleBlur={handleBlur}
             handleChange={handleChange}
@@ -46,7 +46,7 @@ export const ChangePassword = props => {
         <Grid item={true} xs={12} md={5}>
           <FormTextField
             autocomplete={'off'}
-            error={touched.confirmPassword && Boolean(errors.confirmPassword)}
+            error={Boolean(errors.confirmPassword)}
             errors={errors}
             handleBlur={handleBlur}
             handleChange={handleChange}

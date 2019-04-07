@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, {PureComponent, Fragment} from 'react';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {PropTypes} from 'prop-types';
@@ -19,11 +19,24 @@ const AccountSchema = Yup.object().shape({
   emailAddress: Yup.string()
     .email('Invalid email address')
     .required('Required'),
-  currentPassword: Yup.string(),
-  newPassword: Yup.string().min(8),
-  confirmPassword: Yup.string()
-    .min(8)
-    .oneOf([Yup.ref('newPassword'), null], "Password don't match"),
+  currentPassword: Yup.string().notRequired(),
+  newPassword: Yup.string().when('currentPassword', {
+    is: val => Boolean(val),
+    then: Yup.string()
+      .required('Required')
+      .min(8),
+    otherwise: Yup.string().notRequired(),
+  }),
+  confirmPassword: Yup.string().when('newPassword', {
+    is: val => Boolean(val),
+    then: Yup.string()
+      .required('Required')
+      .oneOf(
+        [Yup.ref('newPassword'), null],
+        "Cofirmation Password does'nt match"
+      ),
+    otherwise: Yup.string().notRequired(),
+  }),
 });
 
 class AccountContainer extends PureComponent {
@@ -82,7 +95,7 @@ class AccountContainer extends PureComponent {
     const userValidation = userUpdated !== prevProps.userUpdated;
     const passwordValidation = passwordUpdated !== prevProps.passwordUpdated;
 
-    if (userValidation && passwordValidation) {
+    if (userValidation || passwordValidation) {
       if (passwordUpdated && userUpdated) {
         this.props.snackbar.showSnackbar({
           message: 'Password updated successfully',
@@ -167,18 +180,24 @@ class AccountContainer extends PureComponent {
           cancelClicked={this.handlerModalVisibility}
           deleteClicked={this.deleteUser}
         />
-        <Title
-          titleText="Edit Your Account"
-          hideCancelAction={false}
-          submitLabel={'Update'}
-          cancelClicked={this.goToProfile}
-          submitClicked={this.getValues}
-        />
         <Formik
           render={_props => {
             this.submitMyForm = _props.submitForm;
             return (
-              <Account {..._props} closeClicked={this.handlerModalVisibility} />
+              <Fragment>
+                <Title
+                  titleText="Edit Your Account"
+                  hideCancelAction={false}
+                  submitLabel={'Update'}
+                  cancelClicked={this.goToProfile}
+                  submitClicked={this.getValues}
+                  disableSubmit={Object.keys(_props.errors).length > 0}
+                />
+                <Account
+                  {..._props}
+                  closeClicked={this.handlerModalVisibility}
+                />
+              </Fragment>
             );
           }}
           initialValues={initialValues}

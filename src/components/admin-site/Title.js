@@ -16,6 +16,7 @@ const Title = props => {
     cancelClicked,
     extraClicked,
     noMargin,
+    disableSubmit,
   } = props;
   const containerClasses = [classes.Container];
 
@@ -34,12 +35,14 @@ const Title = props => {
       </Grid>
       <Grid item={true} xs={12} md={7}>
         <Buttons
-          submitLabel={submitLabel}
+          cancelClicked={cancelClicked}
+          disableSubmit={disableSubmit}
           hideCancelAction={hideCancelAction}
           submitClicked={submitClicked}
           cancelClicked={cancelClicked}
           extraLabel={extraLabel}
           extraClicked={extraClicked}
+          submitLabel={submitLabel}
         />
       </Grid>
     </Grid>
@@ -91,6 +94,7 @@ Title.propTypes = {
     Container: PropTypes.string,
     Title: PropTypes.string,
   }),
+  disableSubmit: PropTypes.bool,
   extraClicked: PropTypes.func,
   extraLabel: PropTypes.string,
   hideCancelAction: PropTypes.bool,
