@@ -181,7 +181,7 @@ class ProfileFormContainer extends PureComponent {
           extraClicked={() => this.submitFormToSaveData(false)}
           extraLabel="Save Draft"
           hideCancelAction={false}
-          noMargin={breakpoint !== 'xs'}
+          noMargin={breakpoint !== 'xs' && breakpoint !== 'sm'}
           submitClicked={() => this.submitFormToSaveData(true)}
           submitLabel={'Publish'}
           titleText="Create Post"
