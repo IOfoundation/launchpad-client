@@ -1,5 +1,5 @@
 import {EventsTypes as types} from '../action-types';
-import {httpRequest, getDate} from '../utils';
+import {httpRequest, getDate} from '@Utils';
 
 const getAllEventsRequestStart = () => {
   return {
@@ -146,6 +146,36 @@ export const getEventsByMonth = (months, filterBy = 'default') => {
       dispatch(getEventsByMonthSuccess(responses));
     } catch (error) {
       dispatch(getEventsByMonthError(error));
+    }
+  };
+};
+
+export const getAllEventsAfter = () => {
+  return async dispatch => {
+    try {
+      const today = getDate();
+      dispatch(getAllEventsRequestStart());
+      const httpResponse = await httpRequest.get(
+        `/api/events?starting_after="${today.date.toISOString()}"`
+      );
+      dispatch(getAllEventsRequestSuccess(httpResponse.data));
+    } catch (error) {
+      dispatch(getAllEventsRequestError(error));
+    }
+  };
+};
+
+export const getAllEventsBefore = () => {
+  return async dispatch => {
+    try {
+      const date = getDate();
+      dispatch(getAllEventsRequestStart());
+      const httpResponse = await httpRequest.get(
+        `/api/events?ending_before="${date.date.toISOString()}"`
+      );
+      dispatch(getAllEventsRequestSuccess(httpResponse.data));
+    } catch (error) {
+      dispatch(getAllEventsRequestError(error));
     }
   };
 };

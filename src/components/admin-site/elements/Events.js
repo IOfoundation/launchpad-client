@@ -21,17 +21,22 @@ class Events extends PureComponent {
   };
 
   componentDidMount() {
-    this.getEvents();
+    this.props.actions.getAllEventsAfter();
   }
 
   menuChanged = index => {
     this._tabSelected = this._tabOptions[index];
+    if (this._tabSelected === this._tabOptions[0]) {
+      this.props.actions.getAllEventsAfter();
+    } else if (this._tabSelected === this._tabOptions[1]) {
+      this.props.actions.getAllEventsBefore();
+    }
   };
 
   handleChangePage = () => {};
 
   getEvents = () => {
-    this.props.actions.getAllEvents();
+    this.props.actions.getAllEventsBefore();
   };
 
   _getPagination = (page, totalPages) => {
@@ -178,6 +183,8 @@ const mapDispatchToProps = _dispatch => {
 Events.propTypes = {
   actions: PropTypes.shape({
     getAllEvents: PropTypes.func,
+    getAllEventsAfter: PropTypes.func,
+    getAllEventsBefore: PropTypes.func,
   }),
   events: PropTypes.arrayOf(PropTypes.shape({})),
   loading: PropTypes.bool,
