@@ -36,10 +36,11 @@ class FeaturedEvents extends PureComponent {
 
   render() {
     const {classes, featuredEvents, handlerModalVisibility} = this.props;
+    const {data: events, loading} = featuredEvents;
     let featuredEventsElements = <Loading />;
 
-    if (featuredEvents.length > 0) {
-      featuredEventsElements = featuredEvents.map(month => {
+    if (events.length > 0 && !Array.isArray(events[0]) && !loading) {
+      featuredEventsElements = events.map(month => {
         const infoElements = month[month.key].map(info => {
           return (
             <FeaturedEvent
@@ -76,6 +77,8 @@ class FeaturedEvents extends PureComponent {
           </Grid>
         </div>
       );
+    } else if (!loading) {
+      featuredEventsElements = null;
     }
 
     return featuredEventsElements;
@@ -90,8 +93,14 @@ FeaturedEvents.propTypes = {
     container: PropTypes.string,
     featuredEvents: PropTypes.string,
   }),
-  events: PropTypes.arrayOf(PropTypes.shape({})),
-  featuredEvents: PropTypes.arrayOf(PropTypes.shape({})),
+  featuredEvents: PropTypes.shape({
+    data: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.shape({})),
+      PropTypes.arrayOf(PropTypes.array),
+    ]),
+    errors: PropTypes.shape({}),
+    loading: PropTypes.bool,
+  }),
   handlerModalVisibility: PropTypes.func,
 };
 

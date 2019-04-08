@@ -9,8 +9,16 @@ const initialState = {
     page: 1,
     totalPages: 0,
   },
-  eventsByMonth: [],
-  featuredEvents: [],
+  eventsByMonth: {
+    data: [],
+    errors: {},
+    loading: false,
+  },
+  featuredEvents: {
+    data: [],
+    errors: {},
+    loading: false,
+  },
 };
 
 export default function(state = initialState, action) {
@@ -59,6 +67,11 @@ export default function(state = initialState, action) {
     case types.GET_EVENTS_BY_MONTH_START: {
       return {
         ...state,
+        featuredEvents: {
+          data: [],
+          errors: {},
+          loading: true,
+        },
       };
     }
 
@@ -66,7 +79,11 @@ export default function(state = initialState, action) {
       const {featuredEvents} = action;
       return {
         ...state,
-        featuredEvents,
+        featuredEvents: {
+          ...state.featuredEvents,
+          data: featuredEvents,
+          loading: false,
+        },
       };
     }
 
@@ -75,12 +92,22 @@ export default function(state = initialState, action) {
       return {
         ...state,
         error,
+        featuredEvents: {
+          ...state.featuredEvents,
+          error,
+          loading: false,
+        },
       };
     }
 
     case types.GET_ALL_EVENTS_BY_MONTH_START: {
       return {
         ...state,
+        eventsByMonth: {
+          data: [],
+          errors: {},
+          loading: true,
+        },
       };
     }
 
@@ -88,7 +115,11 @@ export default function(state = initialState, action) {
       const {eventsByMonth} = action;
       return {
         ...state,
-        eventsByMonth,
+        eventsByMonth: {
+          ...state.eventsByMonth,
+          data: eventsByMonth,
+          loading: false,
+        },
       };
     }
 
@@ -96,7 +127,11 @@ export default function(state = initialState, action) {
       const {error} = action;
       return {
         ...state,
-        error,
+        eventsByMonth: {
+          ...state.eventsByMonth,
+          error,
+          loading: false,
+        },
       };
     }
 

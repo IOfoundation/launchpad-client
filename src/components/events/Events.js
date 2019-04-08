@@ -65,7 +65,6 @@ class Events extends PureComponent {
         <FeaturedEvents
           actions={actions}
           featuredEvents={featuredEvents}
-          events={eventsByMonth}
           handlerModalVisibility={this.handlerModalVisibility}
         />
         <SchedulerContainer
@@ -122,8 +121,19 @@ Events.propTypes = {
   classes: PropTypes.shape({
     paper: PropTypes.string,
   }),
-  eventsByMonth: PropTypes.arrayOf(PropTypes.shape({})),
-  featuredEvents: PropTypes.arrayOf(PropTypes.shape({})),
+  eventsByMonth: PropTypes.shape({
+    data: PropTypes.arrayOf(PropTypes.shape({})),
+    errors: PropTypes.shape({}),
+    loading: PropTypes.bool,
+  }),
+  featuredEvents: PropTypes.shape({
+    data: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.shape({})),
+      PropTypes.arrayOf(PropTypes.array),
+    ]),
+    errors: PropTypes.shape({}),
+    loading: PropTypes.bool,
+  }),
 };
 
 export default connect(

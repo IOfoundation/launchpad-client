@@ -121,10 +121,9 @@ export const getEventsByMonth = (months, filterBy = 'default') => {
           };
 
           const httpResponse = await httpRequest.get(url[filterBy]);
-
-          const groupedData = httpResponse.data
-            .slice(0, 3)
-            .reduce((acc, data) => {
+          let groupedData = [];
+          if (httpResponse.data.length > 0) {
+            groupedData = httpResponse.data.slice(0, 3).reduce((acc, data) => {
               data.starting_at = getDate(data.starting_at);
               data.posted_at = getDate(data.posted_at);
               acc.title = data.starting_at.monthLarge;
@@ -138,12 +137,14 @@ export const getEventsByMonth = (months, filterBy = 'default') => {
 
               return acc;
             }, {});
+          }
 
           return groupedData;
         })
       );
 
-      dispatch(getEventsByMonthSuccess(responses));
+      const filtered = responses.filter(response => response);
+      dispatch(getEventsByMonthSuccess(filtered));
     } catch (error) {
       dispatch(getEventsByMonthError(error));
     }
