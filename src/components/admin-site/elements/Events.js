@@ -100,16 +100,18 @@ class Events extends PureComponent {
     } else if (events.length > 0 && !loading) {
       upcomingElements = (
         <Items
-          items={events}
           disable={false}
+          items={events}
           titleClicked={this.handlerModalVisibility}
+          urlClicked={this.handlerModalVisibility}
         />
       );
       pastEventsElements = (
         <Items
-          items={events}
           disable={true}
+          items={events}
           titleClicked={this.handlerModalVisibility}
+          urlClicked={this.handlerModalVisibility}
         />
       );
     }

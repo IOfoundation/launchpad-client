@@ -6,6 +6,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
 import {truncate} from '@Utils';
+import {Colors} from '@Styles/Colors';
 
 class Item extends PureComponent {
   state = {
@@ -38,6 +39,7 @@ class Item extends PureComponent {
       start,
       url,
       disable,
+      urlClicked,
       titleClicked,
     } = this.props;
     const containerClasses = [classes.container];
@@ -103,14 +105,15 @@ class Item extends PureComponent {
           <div className={classes.floatingDate}>{start}</div>
         </div>
 
-        <a
+        <p
           href={url}
+          onClick={urlClicked}
           className={`title-as-link title-as-link--small title-as-link--decoration ${
             classes.url
           }`}
         >
           {truncateUrl}
-        </a>
+        </p>
         <p className={classes.description}>{description}</p>
         <Grid
           container={true}
@@ -199,19 +202,29 @@ const styles = theme => {
     },
     disable: {
       '& a': {
-        color: '#7B7C7E',
+        color: Colors.gray.disable,
       },
       '& $floatingDate': {
-        color: '#7B7C7E',
+        color: Colors.gray.disable,
       },
       '& $title': {
-        color: '#7B7C7E',
+        color: Colors.gray.disable,
+        '&:hover': {
+          color: Colors.green,
+        },
       },
       '& $description': {
-        color: '#B8B9BC',
+        color: Colors.gray.description,
+      },
+      '& $url': {
+        color: Colors.gray.disable,
+        '&:hover': {
+          color: Colors.green,
+        },
       },
     },
     url: {
+      marginBottom: '8px',
       [theme.breakpoints.down('sm')]: {
         display: 'block',
         width: '150px',
@@ -244,6 +257,7 @@ Item.propTypes = {
   title: PropTypes.string,
   titleClicked: PropTypes.func,
   url: PropTypes.string,
+  urlClicked: PropTypes.func,
 };
 
 export default withStyles(styles)(Item);
