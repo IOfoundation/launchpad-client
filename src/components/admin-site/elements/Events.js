@@ -12,6 +12,7 @@ import Loading from '@Shared/Loading';
 import Modal from './Events/Modal';
 
 import * as eventActions from '@Actions/events';
+import * as snackbarActions from '@Actions/snackbar';
 import {htmlStripper, truncate, getDate} from '@Utils';
 
 class Events extends PureComponent {
@@ -22,6 +23,18 @@ class Events extends PureComponent {
 
   componentDidMount() {
     this.props.actions.getAllEventsAfter();
+  }
+
+  componentDidUpdate(prevProps) {
+    const {errors, snackbar} = this.props;
+
+    if (errors.errors !== prevProps.errors.errors) {
+      if (errors.errors) {
+        snackbar.showSnackbar({
+          message: 'An error has ocurred',
+        });
+      }
+    }
   }
 
   menuChanged = index => {
@@ -173,12 +186,14 @@ const mapStateToProps = _state => {
     events: eventsToItemsProps(events.data),
     noResults: events.data.length === 0,
     loading: events.loading,
+    errors: events.errors,
   };
 };
 
 const mapDispatchToProps = _dispatch => {
   return {
     actions: bindActionCreators(eventActions, _dispatch),
+    snackbar: bindActionCreators(snackbarActions, _dispatch),
   };
 };
 
@@ -188,12 +203,16 @@ Events.propTypes = {
     getAllEventsAfter: PropTypes.func,
     getAllEventsBefore: PropTypes.func,
   }),
+  errors: PropTypes.shape({errors: PropTypes.bool}),
   events: PropTypes.arrayOf(PropTypes.shape({})),
   loading: PropTypes.bool,
   noResults: PropTypes.bool,
   rawEvents: PropTypes.arrayOf(PropTypes.shape({})),
   router: PropTypes.shape({
     push: PropTypes.func,
+  }),
+  snackbar: PropTypes.shape({
+    showSnackbar: PropTypes.func,
   }),
 };
 

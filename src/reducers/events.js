@@ -45,12 +45,12 @@ export default function(state = initialState, action) {
     }
 
     case types.GET_ALL_EVENTS_REQUEST_ERROR: {
-      const {error} = action;
+      const {errors} = action;
       return {
         ...state,
         events: {
           ...state.events,
-          error,
+          errors,
           loading: false,
         },
       };

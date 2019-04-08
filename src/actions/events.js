@@ -14,10 +14,10 @@ const getAllEventsRequestSuccess = data => {
   };
 };
 
-const getAllEventsRequestError = error => {
+const getAllEventsRequestError = errors => {
   return {
     type: types.GET_ALL_EVENTS_REQUEST_ERROR,
-    error,
+    errors,
   };
 };
 
@@ -159,8 +159,8 @@ export const getAllEventsAfter = () => {
         `/api/events?starting_after="${today.date.toISOString()}"`
       );
       dispatch(getAllEventsRequestSuccess(httpResponse.data));
-    } catch (error) {
-      dispatch(getAllEventsRequestError(error));
+    } catch (errors) {
+      dispatch(getAllEventsRequestError({errors: true}));
     }
   };
 };
@@ -174,8 +174,8 @@ export const getAllEventsBefore = () => {
         `/api/events?ending_before="${date.date.toISOString()}"`
       );
       dispatch(getAllEventsRequestSuccess(httpResponse.data));
-    } catch (error) {
-      dispatch(getAllEventsRequestError(error));
+    } catch (errors) {
+      dispatch(getAllEventsRequestError({errors: true}));
     }
   };
 };
