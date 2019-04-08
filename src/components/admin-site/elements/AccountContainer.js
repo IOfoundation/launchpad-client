@@ -24,7 +24,7 @@ const AccountSchema = Yup.object().shape({
     is: val => Boolean(val),
     then: Yup.string()
       .required('Required')
-      .min(8),
+      .min(8, 'New password must be at least 8 characters'),
     otherwise: Yup.string().notRequired(),
   }),
   confirmPassword: Yup.string().when('newPassword', {
@@ -33,7 +33,7 @@ const AccountSchema = Yup.object().shape({
       .required('Required')
       .oneOf(
         [Yup.ref('newPassword'), null],
-        "Cofirmation Password does'nt match"
+        'Confirmation password does not match'
       ),
     otherwise: Yup.string().notRequired(),
   }),
@@ -211,14 +211,19 @@ class AccountContainer extends PureComponent {
               newPassword: password,
             } = values;
 
-            if (current_password.length > 0 && password.length > 0) {
+            if (
+              current_password.length > 0 ||
+              password.length > 0 ||
+              password_confirmation.length > 0
+            ) {
               this._checkBothSuccess = true;
-              userActions.updateUserInformation({Authorization, name, email});
-              userActions.updatePassword({
+              userActions.updatePasswordAndInformation({
                 Authorization,
                 current_password,
                 password,
                 password_confirmation,
+                name,
+                email,
               });
             } else {
               this._checkBothSuccess = false;
@@ -283,7 +288,7 @@ AccountContainer.propTypes = {
   userActions: PropTypes.shape({
     login: PropTypes.func,
     updateUserInformation: PropTypes.func,
-    updatePassword: PropTypes.func,
+    updatePasswordAndInformation: PropTypes.func,
     deleteAccount: PropTypes.func,
   }),
   userDeleted: PropTypes.bool,

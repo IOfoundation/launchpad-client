@@ -252,11 +252,13 @@ const updatePasswordFail = errors => {
   };
 };
 
-export const updatePassword = ({
+export const updatePasswordAndInformation = ({
   Authorization,
   current_password,
   password,
   password_confirmation,
+  name,
+  email,
 }) => {
   return async dispatch => {
     try {
@@ -264,7 +266,7 @@ export const updatePassword = ({
         headers: {Authorization},
       };
       dispatch(updatePasswordStart());
-      const httpResponse = await httpRequest.put(
+      const passwordResponse = await httpRequest.put(
         '/api/users',
         {
           api_user: {
@@ -275,7 +277,19 @@ export const updatePassword = ({
         },
         config
       );
-      dispatch(updatePasswordSuccess(httpResponse.data));
+      dispatch(updateUserInformationStart());
+      const userInformationResponse = await httpRequest.put(
+        '/api/users',
+        {
+          api_user: {
+            name,
+            email,
+          },
+        },
+        config
+      );
+      dispatch(updatePasswordSuccess(passwordResponse.data));
+      dispatch(updateUserInformationSuccess(userInformationResponse.data));
     } catch (errors) {
       dispatch(updatePasswordFail(errors.data.errors));
     }
