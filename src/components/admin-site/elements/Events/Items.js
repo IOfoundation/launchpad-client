@@ -4,12 +4,17 @@ import {PropTypes} from 'prop-types';
 import Item from './Item';
 
 const Items = props => {
-  const {items, disable} = props;
+  const {items, disable, titleClicked} = props;
 
   return (
     <div>
       {items.map(item => (
-        <Item key={item.id} disable={disable} {...item} />
+        <Item
+          key={item.id}
+          disable={disable}
+          {...item}
+          titleClicked={() => titleClicked(item)}
+        />
       ))}
     </div>
   );
@@ -29,6 +34,7 @@ Items.propTypes = {
       start: PropTypes.string,
     })
   ),
+  titleClicked: PropTypes.func,
 };
 
 export default Items;

@@ -9,11 +9,17 @@ import Items from './Events/Items';
 import Pagination from '../../businesses/Pagination';
 import CustomTabs from '@Shared/Tabs';
 import Loading from '@Shared/Loading';
+import Modal from './Events/Modal';
 
 import * as eventActions from '@Actions/events';
 import {htmlStripper, truncate, getDate} from '@Utils';
 
 class Events extends PureComponent {
+  state = {
+    selectedEvent: {},
+    openModal: false,
+  };
+
   componentDidMount() {
     this.getEvents();
   }
@@ -47,11 +53,34 @@ class Events extends PureComponent {
     );
   };
 
+  handlerModalVisibility = modalInformation => {
+    this.setState(prevState => {
+      if (modalInformation) {
+        const {rawEvents} = this.props;
+        const selectedEvent = rawEvents.find(
+          event => event.id === modalInformation.id
+        );
+
+        if (selectedEvent) {
+          return {
+            selectedEvent,
+            openModal: !prevState.openModal,
+          };
+        }
+      }
+
+      return {
+        openModal: !prevState.openModal,
+      };
+    });
+  };
+
   _tabOptions = ['Upcoming', 'Past Events'];
   _tabSelected = 'Upcoming';
 
   render() {
     const {events, noResults, loading} = this.props;
+    const {openModal, selectedEvent} = this.state;
     let upcomingElements = <Loading />;
     let pastEventsElements = <Loading />;
     const pagination = null;
@@ -64,12 +93,29 @@ class Events extends PureComponent {
         <p className="text-regular paragraph">{'No posts available.'}</p>
       );
     } else if (events.length > 0 && !loading) {
-      upcomingElements = <Items items={events} disable={false} />;
-      pastEventsElements = <Items items={events} disable={true} />;
+      upcomingElements = (
+        <Items
+          items={events}
+          disable={false}
+          titleClicked={this.handlerModalVisibility}
+        />
+      );
+      pastEventsElements = (
+        <Items
+          items={events}
+          disable={true}
+          titleClicked={this.handlerModalVisibility}
+        />
+      );
     }
 
     return (
       <LandingComponent navigation={true}>
+        <Modal
+          openModal={openModal}
+          selectedEvent={selectedEvent}
+          handlerModalVisibility={this.handlerModalVisibility}
+        />
         <Title
           titleText="Your Events"
           hideCancelAction={true}
@@ -116,6 +162,7 @@ function eventsToItemsProps(events) {
 const mapStateToProps = _state => {
   const {events} = _state.events;
   return {
+    rawEvents: events.data,
     events: eventsToItemsProps(events.data),
     noResults: events.data.length === 0,
     loading: events.loading,
@@ -135,6 +182,7 @@ Events.propTypes = {
   events: PropTypes.arrayOf(PropTypes.shape({})),
   loading: PropTypes.bool,
   noResults: PropTypes.bool,
+  rawEvents: PropTypes.arrayOf(PropTypes.shape({})),
   router: PropTypes.shape({
     push: PropTypes.func,
   }),

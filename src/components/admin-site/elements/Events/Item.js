@@ -38,6 +38,7 @@ class Item extends PureComponent {
       start,
       url,
       disable,
+      titleClicked,
     } = this.props;
     const containerClasses = [classes.container];
     let truncateUrl = url;
@@ -93,7 +94,12 @@ class Item extends PureComponent {
     return (
       <div className={containerClasses.join(' ')}>
         <div className="clearfix">
-          <h3 className={classes.title}>{title}</h3>
+          <h3
+            className={`${classes.title} title-as-link`}
+            onClick={titleClicked}
+          >
+            {title}
+          </h3>
           <div className={classes.floatingDate}>{start}</div>
         </div>
 
@@ -236,6 +242,7 @@ Item.propTypes = {
   label: PropTypes.string,
   start: PropTypes.string,
   title: PropTypes.string,
+  titleClicked: PropTypes.func,
   url: PropTypes.string,
 };
 
