@@ -26,13 +26,20 @@ class Main extends Component {
       },
     };
   };
+
   getCoordinates = business => {
-    return business.coordinates;
+    if (business && business.coordinates) {
+      return business.coordinates;
+    }
+
+    return [38.57, -121.47];
   };
+
   handleBoundsChange = e => {
     this.setState({center: e.center, zoom: e.zoom});
     this.props.onBoundsChange(e);
   };
+
   _handleOnClick = (e, childProps) => {
     this.setState({
       selected: e,
@@ -42,14 +49,17 @@ class Main extends Component {
       },
     });
   };
+
   _handleCloseClick = () => {
     this.setState({selected: -1});
   };
+
   _handleChildMouseEnter = e => {
     this.props.highlightOrgCard(
       this.props.locations.find(x => String(x.id) === e).organization.id
     );
   };
+
   _handleChildMouseLeave = () => {
     this.props.highlightOrgCard(-1);
   };
@@ -125,7 +135,27 @@ class Main extends Component {
 
   render() {
     const {locations, showLoading} = this.props;
-    const {center, zoom, options} = this._createMapSettings();
+    let map = <p>{'There is no locations'}</p>;
+
+    if (locations.length > 0) {
+      const {center, zoom, options} = this._createMapSettings();
+      map = (
+        <GoogleMap
+          center={center}
+          defaultZoom={0}
+          zoom={zoom}
+          onChange={this.handleBoundsChange}
+          options={options}
+          resetBoundsOnResize={true}
+          onChildMouseEnter={this._handleChildMouseEnter}
+          onChildMouseLeave={this._handleChildMouseLeave}
+          onChildClick={this._handleOnClick}
+          bootstrapURLKeys={{key: process.env.GOOGLE_MAP_API_KEY}}
+        >
+          {locations.length > 0 ? this._renderMarkers(locations) : ''}
+        </GoogleMap>
+      );
+    }
     const loadingStyles = {
       fullscreenControl: false,
       styles: [
@@ -142,29 +172,16 @@ class Main extends Component {
     if (showLoading) {
       return (
         <GoogleMap
-          center={center}
-          zoom={zoom}
+          center={false}
+          zoom={false}
           resetBoundsOnResize={true}
           options={loadingStyles}
           bootstrapURLKeys={{key: process.env.GOOGLE_MAP_API_KEY}}
         />
       );
     }
-    return (
-      <GoogleMap
-        center={center}
-        zoom={zoom}
-        onChange={this.handleBoundsChange}
-        options={options}
-        resetBoundsOnResize={true}
-        onChildMouseEnter={this._handleChildMouseEnter}
-        onChildMouseLeave={this._handleChildMouseLeave}
-        onChildClick={this._handleOnClick}
-        bootstrapURLKeys={{key: process.env.GOOGLE_MAP_API_KEY}}
-      >
-        {locations ? this._renderMarkers(locations) : ''}
-      </GoogleMap>
-    );
+
+    return map;
   }
 }
 

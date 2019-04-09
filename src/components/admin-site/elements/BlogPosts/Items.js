@@ -4,7 +4,7 @@ import {PropTypes} from 'prop-types';
 import Item from './Item';
 
 const Items = props => {
-  const {items} = props;
+  const {items, optionSelected} = props;
 
   return (
     <div>
@@ -16,6 +16,7 @@ const Items = props => {
           description={item.description}
           label={item.label}
           title={item.title}
+          optionSelected={option => optionSelected({option, id: item.id})}
         />
       ))}
     </div>
@@ -33,6 +34,7 @@ Items.propTypes = {
       title: PropTypes.string,
     })
   ),
+  optionSelected: PropTypes.func,
 };
 
 export default Items;

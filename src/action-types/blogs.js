@@ -21,6 +21,7 @@ const BlogsTypes = {
 
   SET_CATEGORY: 'SET_CATEGORY',
   NO_RESULTS: 'NO_RESULTS',
+  RESET_POST_BY_ID: 'RESET_POST_BY_ID',
 };
 
 export default BlogsTypes;

@@ -8,6 +8,7 @@ const initialState = {
   organizationPosts: [],
   page: 1,
   post: {},
+  getPostIdSuccess: false,
   posts: [],
   totalPages: 0,
 };
@@ -115,6 +116,7 @@ export default function(state = initialState, action) {
     case types.GET_POST_BY_ID_START: {
       return {
         ...state,
+        getPostIdSuccess: false,
         noResults: false,
         post: {},
       };
@@ -124,6 +126,7 @@ export default function(state = initialState, action) {
       const {post} = action;
       return {
         ...state,
+        getPostIdSuccess: true,
         post,
       };
     }
@@ -133,6 +136,15 @@ export default function(state = initialState, action) {
       return {
         ...state,
         error,
+      };
+    }
+
+    case types.RESET_POST_BY_ID: {
+      return {
+        ...state,
+        noResults: false,
+        post: {},
+        getPostIdSuccess: false,
       };
     }
 

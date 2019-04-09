@@ -8,10 +8,11 @@ const loginStart = config => {
   };
 };
 
-const loginSuccess = authorization => {
+const loginSuccess = (authorization, organizationId) => {
   return {
     type: types.LOGIN_SUCCESS,
     authorization,
+    organizationId,
   };
 };
 
@@ -81,6 +82,28 @@ const signOutError = () => {
   };
 };
 
+export const signOut = Authorization => {
+  return async dispatch => {
+    try {
+      const config = {
+        headers: {Authorization},
+      };
+      dispatch(signOutStart());
+      const httpResponse = await httpRequest.delete(
+        '/api/users/sign_out',
+        null,
+        config
+      );
+      localStorage.removeItem('userAuth');
+      localStorage.removeItem('userEmail');
+      localStorage.removeItem('organizationId');
+      dispatch(signOutSuccess(httpResponse.data));
+    } catch (error) {
+      dispatch(signOutError());
+    }
+  };
+};
+
 const post = ({url, params, startFn, successFn, errorFn}) => {
   return async dispatch => {
     try {
@@ -104,7 +127,15 @@ export const login = ({password, email}) => {
         },
       });
 
-      dispatch(loginSuccess(httpResponse.headers.authorization));
+      localStorage.setItem('userAuth', httpResponse.headers.authorization);
+      localStorage.setItem('userEmail', email);
+      localStorage.setItem('organizationId', httpResponse.data.organization_id);
+      dispatch(
+        loginSuccess(
+          httpResponse.headers.authorization,
+          httpResponse.data.organization_id
+        )
+      );
     } catch (errors) {
       dispatch(loginError(errors.data.error));
     }
@@ -146,25 +177,6 @@ export const passwordRecovery = ({email}) => {
     successFn: passwordRecoverySuccess,
     errorFn: passwordRecoveryError,
   });
-};
-
-export const signOut = token => {
-  return async dispatch => {
-    try {
-      const config = {
-        headers: {Authorization: 'Bearer ' + token},
-      };
-      dispatch(signOutStart());
-      const httpResponse = await httpRequest.delete(
-        '/api/users/sign_out',
-        null,
-        config
-      );
-      dispatch(signOutSuccess(httpResponse.data));
-    } catch (error) {
-      dispatch(signOutError());
-    }
-  };
 };
 
 export const resetError = () => {

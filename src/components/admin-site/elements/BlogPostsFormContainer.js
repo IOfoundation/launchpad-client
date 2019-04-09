@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {PropTypes} from 'prop-types';
@@ -9,110 +9,255 @@ import {withRouter} from 'react-router';
 import BlogPostsForm from './BlogPostsForm';
 import LandingComponent from '../Landing';
 import Title from '../Title';
+import Loading from '@Shared/Loading';
 
 import * as user from '@Actions/user';
+import * as blogs from '@Actions/blogs';
+import * as adminBlogs from '@Actions/admin-blogs';
 import * as snackbarActions from '@Actions/snackbar';
 
 const blogPostsSchema = Yup.object().shape({
-  contactEmail: Yup.string()
-    .email('Invalid email address')
-    .required('Required'),
-  organizationName: Yup.string().required('Required'),
-  name: Yup.string().required('Required'),
-  website: Yup.string().required('Required'),
-  description: Yup.string().required('Required'),
-  accreditations: Yup.string(),
-  dateIncorporation: Yup.string(),
-  legalStatus: Yup.string(),
-  fundingSources: Yup.string(),
-  licenses: Yup.string(),
-  taxIdentifier: Yup.string(),
-  taxStatus: Yup.string(),
-  twitter: Yup.string(),
-  facebook: Yup.string(),
-  linkedin: Yup.string(),
-  phones: Yup.array().of(
-    Yup.object().shape({
-      phoneNumber: Yup.string(),
-      ext: Yup.string(),
-      vanityNumber: Yup.string(),
-      numberType: Yup.string(),
-      department: Yup.string(),
-      countryExt: Yup.string(),
-    })
-  ),
+  category: Yup.string().required('Category is Required'),
+  title: Yup.string().required('Title is Required'),
+  body: Yup.string().required('Content is Required'),
 });
 
-const initialValues = {
-  password: '',
-  contactEmail: '',
-  organizationName: '',
-  name: '',
-  website: '',
-  description: '',
-  accreditations: '',
-  dateIncorporation: '',
-  legalStatus: '',
-  fundingSources: '',
-  licenses: '',
-  taxIdentifier: '',
-  taxStatus: '',
-  twitter: '',
-  facebook: '',
-  linkedin: '',
-  phones: [
-    {
-      phoneNumber: '',
-      ext: '',
-      vanityNumber: '',
-      numberType: '',
-      department: '',
-      countryExt: '',
-    },
-  ],
-};
+class ProfileFormContainer extends PureComponent {
+  state = {
+    renderForm: false,
+  };
 
-const ProfileFormContainer = props => {
-  return (
-    <LandingComponent breakpoint={props.breakpoint} navigation={true}>
-      <Title
-        titleText="Profile"
-        hideCancelAction={false}
-        submitLabel={'Save Changes'}
-      />
+  componentDidMount() {
+    this.props.blogsActions.getCategories();
+    this.props.adminBlogsActions.hideFooter(true);
+
+    if (this.props.router.params.id !== 'new') {
+      this.props.blogsActions.getPostById(this.props.router.params.id);
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const {
+      snackbar,
+      savePostError,
+      postSaved,
+      router,
+      postUpdated,
+    } = this.props;
+
+    if (savePostError !== prevProps.savePostError) {
+      if (savePostError) {
+        snackbar.showSnackbar({
+          message: 'An error has occurred while Publishing your post',
+        });
+      }
+    }
+
+    if (postSaved !== prevProps.postSaved) {
+      if (postSaved) {
+        snackbar.showSnackbar({
+          message: this._isPublished
+            ? 'Post published successfully'
+            : 'Draft created successfully',
+        });
+        router.push('/admin/blog');
+      }
+    }
+
+    if (postUpdated !== prevProps.postUpdated) {
+      if (postUpdated) {
+        snackbar.showSnackbar({
+          message: this._isPublished
+            ? 'Post updated successfully'
+            : 'Draft updated successfully',
+        });
+        router.push('/admin/blog');
+      }
+    }
+  }
+
+  componentWillUnmount() {
+    this.props.adminBlogsActions.hideFooter(false);
+    this.props.blogsActions.resetPostByID();
+  }
+
+  _submitForm;
+  _isPublished;
+  _initialValues = {
+    category: '',
+    title: '',
+    body: '',
+  };
+
+  goToBlogs = () => {
+    this.props.router.push('/admin/blog');
+  };
+
+  openSnackbar = message => {
+    this.props.snackbar.showSnackbar({
+      message,
+    });
+  };
+
+  submitFormToSaveData = isPublished => {
+    this._isPublished = isPublished;
+    this._submitForm();
+  };
+
+  savePostAction = values => {
+    this.props.adminBlogsActions.savePost({
+      ...values,
+      auth: this.props.auth,
+      published: this._isPublished,
+    });
+  };
+
+  updatePostAction = values => {
+    this.props.adminBlogsActions.updatePost({
+      ...values,
+      id: values.id,
+      auth: this.props.auth,
+      published: this._isPublished,
+    });
+  };
+
+  _getForm = (initialValues, mode, id) => {
+    const {categories, breakpoint, router} = this.props;
+
+    return (
       <Formik
-        render={_props => (
-          <BlogPostsForm {..._props} breakpoint={props.breakpoint} />
-        )}
+        enableReinitialize={true}
+        render={_props => {
+          this._submitForm = _props.submitForm;
+          return (
+            <BlogPostsForm
+              {..._props}
+              breakpoint={breakpoint}
+              categories={categories}
+              router={router}
+              initialValues={initialValues}
+            />
+          );
+        }}
         initialValues={initialValues}
         validationSchema={blogPostsSchema}
-        onSubmit={() => {}}
+        onSubmit={values => {
+          if (mode === 'new') {
+            this.savePostAction(values);
+          } else if (mode === 'edit') {
+            this.updatePostAction({...values, id});
+          }
+        }}
       />
-    </LandingComponent>
-  );
-};
+    );
+  };
+
+  render() {
+    const {breakpoint, router, hideFooter, post, getPostIdSuccess} = this.props;
+    let form = <Loading />;
+
+    if (router.params.id === 'new') {
+      form = this._getForm(this._initialValues, 'new');
+    } else if (getPostIdSuccess) {
+      form = this._getForm(
+        {
+          category: post.result.categories[0].name,
+          title: post.result.title,
+          body: post.result.body,
+        },
+        'edit',
+        post.result.id
+      );
+    }
+
+    return (
+      <LandingComponent
+        breakpoint={breakpoint}
+        navigation={false}
+        hideFooter={hideFooter}
+      >
+        <Title
+          cancelClicked={this.goToBlogs}
+          extraClicked={() => this.submitFormToSaveData(false)}
+          extraLabel="Save Draft"
+          hideCancelAction={false}
+          noMargin={breakpoint !== 'xs' && breakpoint !== 'sm'}
+          submitClicked={() => this.submitFormToSaveData(true)}
+          submitLabel={'Publish'}
+          titleText="Create Post"
+        />
+        {form}
+      </LandingComponent>
+    );
+  }
+}
 
 const mapStateToProps = _state => {
+  const auth = _state.user.authorization || localStorage.getItem('userAuth');
+
   return {
     error: _state.user.error,
-    isAuth: _state.user.authorization !== '',
+    auth,
+    categories: _state.blogs.categories,
+    savePostError: Object.keys(_state.adminBlogs.savePost.errors).length > 0,
+    hideFooter: _state.adminBlogs.hideFooter,
+    postSaved: Object.keys(_state.adminBlogs.savePost.data).length > 0,
+    postUpdated: Object.keys(_state.adminBlogs.updatePost.data).length > 0,
+    post: {
+      result: _state.blogs.post,
+      noResults: _state.blogs.noResults,
+    },
+    getPostIdSuccess: _state.blogs.getPostIdSuccess,
   };
 };
 
 const mapDispatchToProps = _dispatch => {
   return {
     userActions: bindActionCreators(user, _dispatch),
+    blogsActions: bindActionCreators(blogs, _dispatch),
     snackbar: bindActionCreators(snackbarActions, _dispatch),
+    adminBlogsActions: bindActionCreators(adminBlogs, _dispatch),
   };
 };
 
 ProfileFormContainer.propTypes = {
+  adminBlogsActions: PropTypes.shape({
+    hideFooter: PropTypes.func,
+    savePost: PropTypes.func,
+    updatePost: PropTypes.func,
+  }),
+  auth: PropTypes.string,
+  blogsActions: PropTypes.shape({
+    getCategories: PropTypes.func,
+    getPostById: PropTypes.func,
+    resetPostByID: PropTypes.func,
+  }),
   breakpoint: PropTypes.string,
+  categories: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+    })
+  ),
   error: PropTypes.bool,
+  getPostIdSuccess: PropTypes.bool,
+  hideFooter: PropTypes.bool,
   isAuth: PropTypes.bool,
+  post: PropTypes.shape({
+    result: PropTypes.shape({
+      result: PropTypes.shape({}),
+      noResults: PropTypes.bool,
+    }),
+  }),
+  postSaved: PropTypes.bool,
+  postUpdated: PropTypes.bool,
   router: PropTypes.shape({
     push: PropTypes.func,
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
   }),
+  savePostError: PropTypes.bool,
   snackbar: PropTypes.shape({
     showSnackbar: PropTypes.func,
   }),

@@ -50,8 +50,8 @@ class Locations extends PureComponent {
     const {locations, classes} = this.props;
     const {organizationSelected, viewMore} = this.state;
     let otherLocations;
-
     let otherLocationElements = null;
+    let mainLocationsElements = null;
 
     if (locations.length > 1) {
       otherLocations = locations.map((location, index) => {
@@ -104,6 +104,20 @@ class Locations extends PureComponent {
       } else {
         otherLocationElements = [...otherLocations];
       }
+
+      mainLocationsElements = (
+        <Location
+          address={`${locations[0].address.address_1}, ${
+            locations[0].address.address_2
+          }, ${locations[0].address.state_province} ${
+            locations[0].address.postal_code
+          }`}
+          title={locations[0].address.city}
+          email="email@domaninname.com"
+          phone="(916) 514-7044"
+          onDetailsClicked={() => this.detailsClickedHandler(locations[0])}
+        />
+      );
     }
 
     return (
@@ -119,17 +133,7 @@ class Locations extends PureComponent {
         <h2 className="details-title details-title--small-space text-bold">
           {'Main Location'}
         </h2>
-        <Location
-          address={`${locations[0].address.address_1}, ${
-            locations[0].address.address_2
-          }, ${locations[0].address.state_province} ${
-            locations[0].address.postal_code
-          }`}
-          title={locations[0].address.city}
-          email="email@domaninname.com"
-          phone="(916) 514-7044"
-          onDetailsClicked={() => this.detailsClickedHandler(locations[0])}
-        />
+        {mainLocationsElements}
         {otherLocationElements}
       </div>
     );

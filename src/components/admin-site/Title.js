@@ -10,14 +10,22 @@ const Title = props => {
     classes,
     titleText,
     submitLabel,
+    extraLabel,
     hideCancelAction,
     submitClicked,
     cancelClicked,
+    extraClicked,
+    noMargin,
   } = props;
+  const containerClasses = [classes.Container];
+
+  if (noMargin) {
+    containerClasses.push('margin-0');
+  }
 
   return (
     <Grid
-      className={classes.Container}
+      className={containerClasses.join(' ')}
       container={true}
       justify="space-between"
     >
@@ -30,6 +38,8 @@ const Title = props => {
           hideCancelAction={hideCancelAction}
           submitClicked={submitClicked}
           cancelClicked={cancelClicked}
+          extraLabel={extraLabel}
+          extraClicked={extraClicked}
         />
       </Grid>
     </Grid>
@@ -81,7 +91,10 @@ Title.propTypes = {
     Container: PropTypes.string,
     Title: PropTypes.string,
   }),
+  extraClicked: PropTypes.func,
+  extraLabel: PropTypes.string,
   hideCancelAction: PropTypes.bool,
+  noMargin: PropTypes.bool,
   submitClicked: PropTypes.func,
   submitLabel: PropTypes.string,
   titleText: PropTypes.string,

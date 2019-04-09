@@ -159,6 +159,15 @@
 }
 
 .btn {
+  align-items: center;
+  border-radius: 3px;
+  display: flex;
+  min-height: 40px;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+
   &:hover {
     cursor: pointer;
   }
@@ -169,17 +178,10 @@
   }
 
   &__submit {
-    align-items: center;
+    margin: 20px 0 24px;
     background-color: $green-color;
     border-color: transparent;
-    border-radius: 3px;
     color: $white-color;
-    display: flex;
-    margin: 20px 0 24px;
-    height: 40px;
-    justify-content: center;
-    padding: 0;
-    width: 100%;
 
     &:disabled,
     &[disabled] {
@@ -201,21 +203,36 @@
   }
 
   &__red {
-    align-items: center;
     background-color: $red-color;
     border-color: transparent;
-    border-radius: 3px;
     color: $white-color;
-    display: flex;
-    margin: 0;
-    height: 40px;
-    justify-content: center;
-    padding: 0;
-    width: 100%;
 
     &:hover {
       background-color: $reb-btn-hover;
     }
+  }
+
+  &__black {
+    background-color: $black-color;
+    border-color: transparent;
+    color: $white-color;
+
+    &:hover {
+      background-color: $black-btn-hover;
+    }
+  }
+
+  &__outline {
+    border: 0;
+    color: #7c7c7c;
+
+    &:hover {
+      color: $green-color;
+    }
+  }
+
+  &--padding {
+    padding: 1em;
   }
 }
 

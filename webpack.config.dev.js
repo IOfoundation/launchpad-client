@@ -14,6 +14,8 @@ export default {
       '@Actions': path.resolve(__dirname, 'src/actions/'),
       '@Shared': path.resolve(__dirname, 'src/components/shared/'),
       '@Utils': path.resolve(__dirname, 'src/utils/'),
+      '@StaticData': path.resolve(__dirname, 'src/static-data/'),
+      '@Styles': path.resolve(__dirname, 'src/styles'),
     },
   },
   // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool

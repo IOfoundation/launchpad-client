@@ -18,7 +18,7 @@ class ResultInfo extends Component {
       <div className="business-type-container col-lg-12 p-0 grid">
         <div className="col-xs-4 col-md-4 col-lg-4 m-bot-16 p-0">
           <button
-            className="btn btn-search btn-outline"
+            className="btn btn-search btn-outline btn--padding"
             key={this.props.filterOptions[0].id}
             onClick={() => this._onClick(this.props.filterOptions[0])}
           >
@@ -38,7 +38,7 @@ class ResultInfo extends Component {
         </div>
         <div className="col-xs-4 col-md-4 col-lg-4 m-bot-16 p-right-0">
           <button
-            className="btn btn-search btn-outline"
+            className="btn btn-search btn-outline btn--padding"
             key={this.props.filterOptions[1].id}
             onClick={() => this._onClick(this.props.filterOptions[1])}
           >
@@ -58,7 +58,7 @@ class ResultInfo extends Component {
         </div>
         <div className="col-xs-4 col-md-4 col-lg-4 m-bot-16 p-right-0">
           <button
-            className="btn btn-search btn-outline"
+            className="btn btn-search btn-outline btn--padding"
             key={this.props.filterOptions[2].id}
             onClick={() => this._onClick(this.props.filterOptions[2])}
           >
@@ -115,7 +115,7 @@ ResultInfo.propTypes = {
       first: PropTypes.object,
       last: PropTypes.object,
       next: PropTypes.object,
-      currentPage: PropTypes.number,
+      currentPage: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     }),
     totalOrganization: PropTypes.string,
   }).isRequired,

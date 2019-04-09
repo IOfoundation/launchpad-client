@@ -13,6 +13,22 @@ const initialState = {
       totalPages: 0,
     },
     noResults: false,
+    savePost: {
+      data: {},
+      loading: false,
+      errors: {},
+    },
+    updatePost: {
+      data: {},
+      loading: false,
+      errors: {},
+    },
+    deletePost: {
+      errors: {},
+      loading: false,
+      success: false,
+    },
+    hideFooter: false,
   },
   blogs: {
     categories: [],
@@ -22,6 +38,7 @@ const initialState = {
     organizationPosts: [],
     page: 1,
     post: {},
+    getPostIdSuccess: false,
     posts: [],
     totalPages: 0,
   },
@@ -71,6 +88,13 @@ const initialState = {
     },
     loginError: '',
     passwordResetSuccess: false,
+    organizationId: 0,
+    signOut: {
+      data: {},
+      errors: {},
+      success: false,
+      loading: false,
+    },
   },
   snackbar: {
     visibility: false,

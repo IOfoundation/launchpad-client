@@ -66,7 +66,7 @@ export const getFeaturedPostById = id => {
     try {
       dispatch(getFeaturedPostsByIdStart());
       const httpResponse = await httpRequest.get(
-        `/api/blog_posts?filter[organization_id]=${id}`
+        `/api/blog_posts?filter[organization_id]=${id}&filter[draft]=false`
       );
       if (httpResponse.data.length === 0) {
         dispatch(noResults(true));
@@ -160,7 +160,7 @@ export const getAllPosts = (page, category) => {
 
       if (category) {
         httpResponse = await httpRequest.get(
-          `/api/blog_posts?page=${page}&per_page=5&filter[category]=${category}`
+          `/api/blog_posts?page=${page}&per_page=5&filter[category]=${category}&filter[draft]=false`
         );
       } else {
         httpResponse = await httpRequest.get(
@@ -233,5 +233,11 @@ export const setCategory = category => {
   return {
     type: types.SET_CATEGORY,
     category,
+  };
+};
+
+export const resetPostByID = () => {
+  return {
+    type: types.RESET_POST_BY_ID,
   };
 };

@@ -16,7 +16,7 @@ exports[`<ResultInfo /> renders snapshot of ResultInfo 1`] = `
       className="col-xs-4 col-md-4 col-lg-4 m-bot-16 p-0"
     >
       <button
-        className="btn btn-search btn-outline"
+        className="btn btn-search btn-outline btn--padding"
         key="142"
         onClick={[Function]}
       >
@@ -55,7 +55,7 @@ exports[`<ResultInfo /> renders snapshot of ResultInfo 1`] = `
       className="col-xs-4 col-md-4 col-lg-4 m-bot-16 p-right-0"
     >
       <button
-        className="btn btn-search btn-outline"
+        className="btn btn-search btn-outline btn--padding"
         key="143"
         onClick={[Function]}
       >
@@ -94,7 +94,7 @@ exports[`<ResultInfo /> renders snapshot of ResultInfo 1`] = `
       className="col-xs-4 col-md-4 col-lg-4 m-bot-16 p-right-0"
     >
       <button
-        className="btn btn-search btn-outline"
+        className="btn btn-search btn-outline btn--padding"
         key="144"
         onClick={[Function]}
       >

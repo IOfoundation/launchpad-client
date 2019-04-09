@@ -32,7 +32,7 @@ const getAdminPostsError = error => {
   };
 };
 
-export const getAdminPost = (page, type = 'drafts') => {
+export const getAdminPost = (page, type = 'drafts', organizationId) => {
   return async dispatch => {
     try {
       let httpResponse;
@@ -42,11 +42,11 @@ export const getAdminPost = (page, type = 'drafts') => {
 
       if (typeNormalized === 'drafts') {
         httpResponse = await httpRequest.get(
-          `/api/blog_posts?page=${page}&per_page=5&filter[draft]=true`
+          `/api/blog_posts?page=${page}&per_page=5&filter[draft]=true&filter[organization_id]=${organizationId}`
         );
       } else if (typeNormalized === 'posted') {
         httpResponse = await httpRequest.get(
-          `/api/blog_posts?page=${page}&per_page=5&filter[draft]=false`
+          `/api/blog_posts?page=${page}&per_page=5&filter[draft]=false&filter[organization_id]=${organizationId}`
         );
       }
       const totalPages =
@@ -75,5 +75,132 @@ export const noResults = value => {
   return {
     type: types.NO_RESULTS,
     noResults: value,
+  };
+};
+
+export const hideFooter = hide => {
+  return {
+    type: types.HIDE_FOOTER,
+    hideFooter: hide,
+  };
+};
+
+const savePostStart = () => {
+  return {
+    type: types.SAVE_POSTS_START,
+  };
+};
+
+const savePostSuccess = post => {
+  return {
+    type: types.SAVE_POSTS_SUCCESS,
+    post,
+  };
+};
+
+const savePostFail = errors => {
+  return {
+    type: types.SAVE_POSTS_FAIL,
+    errors,
+  };
+};
+
+export const savePost = ({title, body, category, auth, published}) => {
+  return async dispatch => {
+    try {
+      const config = {
+        headers: {Authorization: auth},
+      };
+      dispatch(savePostStart());
+      const httpResponse = await httpRequest.post(
+        '/api/blog_posts',
+        {
+          blog_post: {title, body, category, is_published: published},
+        },
+        config
+      );
+      dispatch(savePostSuccess(httpResponse.data));
+    } catch (errors) {
+      dispatch(savePostFail(errors));
+    }
+  };
+};
+
+const deletePostStarts = () => {
+  return {
+    type: types.DELETE_POST_START,
+  };
+};
+
+const deletePostSuccess = data => {
+  return {
+    type: types.DELETE_POST_SUCCESS,
+    data,
+  };
+};
+
+const deletePostError = error => {
+  return {
+    type: types.DELETE_POST_FAIL,
+    error,
+  };
+};
+
+export const deletePost = ({id, auth}) => {
+  return async dispatch => {
+    try {
+      const config = {
+        headers: {Authorization: auth},
+      };
+      dispatch(deletePostStarts());
+      const httpResponse = await httpRequest.delete(
+        `/api/blog_posts/${id}`,
+        config
+      );
+      dispatch(deletePostSuccess(httpResponse.data));
+    } catch (errors) {
+      dispatch(deletePostError(errors));
+    }
+  };
+};
+
+const updatePostStart = () => {
+  return {
+    type: types.UPDATE_POSTS_START,
+  };
+};
+
+const updatePostSuccess = post => {
+  return {
+    type: types.UPDATE_POSTS_SUCCESS,
+    post,
+  };
+};
+
+const updatePostFail = errors => {
+  return {
+    type: types.UPDATE_POSTS_FAIL,
+    errors,
+  };
+};
+
+export const updatePost = ({id, title, body, category, auth, published}) => {
+  return async dispatch => {
+    try {
+      const config = {
+        headers: {Authorization: auth},
+      };
+      dispatch(updatePostStart());
+      const httpResponse = await httpRequest.put(
+        `/api/blog_posts/${id}`,
+        {
+          blog_post: {title, body, category, is_published: published},
+        },
+        config
+      );
+      dispatch(updatePostSuccess(httpResponse.data));
+    } catch (errors) {
+      dispatch(updatePostFail(errors));
+    }
   };
 };

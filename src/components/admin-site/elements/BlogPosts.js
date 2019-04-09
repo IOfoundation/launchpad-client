@@ -9,13 +9,33 @@ import Items from './BlogPosts/Items';
 import Pagination from '../../businesses/Pagination';
 import CustomTabs from '@Shared/Tabs';
 import Loading from '@Shared/Loading';
+import Modal from './BlogPosts/Modal';
 
-import * as getAdminPost from '@Actions/admin-blogs';
+import * as snackbarActions from '@Actions/snackbar';
+import * as adminPostActions from '@Actions/admin-blogs';
 import {htmlStripper, truncate, getDate} from '@Utils';
 
 class BlogPosts extends PureComponent {
+  state = {
+    openModal: false,
+  };
+
   componentDidMount() {
     this.getAdminPosts(1);
+  }
+
+  componentDidUpdate(prevProps) {
+    const {snackbar, deleteSuccess} = this.props;
+
+    if (deleteSuccess !== prevProps.deleteSuccess) {
+      if (deleteSuccess) {
+        snackbar.showSnackbar({
+          message: 'Post deleted successfully',
+        });
+        this.handlerModalVisibility();
+        this.getAdminPosts(1, this._tabSelected);
+      }
+    }
   }
 
   menuChanged = index => {
@@ -28,7 +48,11 @@ class BlogPosts extends PureComponent {
   };
 
   getAdminPosts = (page, option) => {
-    this.props.actions.getAdminPost(page, option);
+    this.props.actions.getAdminPost(page, option, this.props.organizationId);
+  };
+
+  deletePost = deleteOptions => {
+    this.props.actions.deletePost(deleteOptions);
   };
 
   _getPagination = (page, totalPages) => {
@@ -50,40 +74,82 @@ class BlogPosts extends PureComponent {
     );
   };
 
+  goToBlogCreate = () => {
+    this.props.router.push('/admin/blog/new');
+  };
+
+  optionSelected = ({option, id}) => {
+    this._idSelected = id;
+    if (option === 'Delete') {
+      this.handlerModalVisibility();
+      //this.deletePost({id, auth: this.props.auth});
+    } else if (option === 'Edit') {
+      this.props.router.push(`/admin/blog/${id}`);
+    }
+  };
+
+  handlerModalVisibility = () => {
+    this.setState(prevState => {
+      return {
+        openModal: !prevState.openModal,
+      };
+    });
+  };
+
+  modalClosed = () => {
+    this.handlerModalVisibility();
+  };
+
   _tabOptions = ['Drafts', 'Posted'];
   _tabSelected = 'Drafts';
+  _idSelected = '';
 
   render() {
-    const {drafts, posted, noResults} = this.props;
+    const {drafts, posted, auth} = this.props;
+    const {openModal} = this.state;
     let draftsElements = <Loading />;
     let postedElements = <Loading />;
     let pagination = null;
 
-    if (noResults) {
+    if (drafts.noResults) {
       draftsElements = (
         <p className="text-regular paragraph">{'No posts available.'}</p>
       );
+    } else {
+      draftsElements = (
+        <Items items={drafts.data} optionSelected={this.optionSelected} />
+      );
+    }
+
+    if (posted.noResults) {
       postedElements = (
         <p className="text-regular paragraph">{'No posts available.'}</p>
       );
     } else {
-      if (drafts.data.length > 0) {
-        draftsElements = <Items items={drafts.data} />;
-        pagination = this._getPagination(drafts.page, drafts.totalPages);
-      }
+      postedElements = (
+        <Items items={posted.data} optionSelected={this.optionSelected} />
+      );
+    }
 
-      if (posted.data.length > 0) {
-        postedElements = <Items items={posted.data} />;
-        pagination = this._getPagination(posted.page, posted.totalPages);
-      }
+    if (this._tabSelected === 'Drafts') {
+      pagination = this._getPagination(drafts.page, drafts.totalPages);
+    } else if (this._tabSelected === 'Posted') {
+      pagination = this._getPagination(posted.page, posted.totalPages);
     }
 
     return (
       <LandingComponent navigation={true}>
+        <Modal
+          open={openModal}
+          modalClosed={this.modalClosed}
+          cancelClicked={this.handlerModalVisibility}
+          deleteClicked={() => this.deletePost({auth, id: this._idSelected})}
+        />
         <Title
           titleText="Your Blog Posts"
           hideCancelAction={true}
           submitLabel="Create Blog Post"
+          submitClicked={this.goToBlogCreate}
         />
         <CustomTabs tabs={this._tabOptions} changed={this.menuChanged}>
           {draftsElements}
@@ -125,40 +191,51 @@ function postToBlogPosts(posts, draft = false) {
 const mapStateToProps = _state => {
   const drafts = _state.adminBlogs.drafts;
   const posted = _state.adminBlogs.posted;
+  const organizationId =
+    _state.user.organizationId || localStorage.getItem('organizationId');
+  const auth = _state.user.authorization || localStorage.getItem('userAuth');
 
   return {
     drafts: {
       data: postToBlogPosts(drafts.data, true),
-      noResults: drafts.data.length > 0,
+      noResults: drafts.data.length === 0,
       page: drafts.page,
       totalPages: drafts.totalPages,
     },
     posted: {
       data: postToBlogPosts(posted.data),
-      noResults: posted.data.length > 0,
+      noResults: posted.data.length === 0,
       page: posted.page,
       totalPages: posted.totalPages,
     },
     noResults: _state.adminBlogs.noResults,
+    organizationId,
+    auth,
+    deleteSuccess: _state.adminBlogs.deletePost.success,
   };
 };
 
 const mapDispatchToProps = _dispatch => {
   return {
-    actions: bindActionCreators(getAdminPost, _dispatch),
+    actions: bindActionCreators(adminPostActions, _dispatch),
+    snackbar: bindActionCreators(snackbarActions, _dispatch),
   };
 };
 
 BlogPosts.propTypes = {
   actions: PropTypes.shape({
     getAdminPost: PropTypes.func,
+    deletePost: PropTypes.func,
   }),
+  auth: PropTypes.string,
+  deleteSuccess: PropTypes.bool,
   drafts: PropTypes.shape({
     data: PropTypes.arrayOf(PropTypes.shape({})),
     page: PropTypes.number,
     totalPages: PropTypes.number,
   }),
   noResults: PropTypes.bool,
+  organizationId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   posted: PropTypes.shape({
     data: PropTypes.arrayOf(PropTypes.shape({})),
     page: PropTypes.number,
@@ -166,6 +243,9 @@ BlogPosts.propTypes = {
   }),
   router: PropTypes.shape({
     push: PropTypes.func,
+  }),
+  snackbar: PropTypes.shape({
+    showSnackbar: PropTypes.func,
   }),
 };
 
