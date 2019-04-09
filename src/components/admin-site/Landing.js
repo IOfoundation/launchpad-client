@@ -1,21 +1,25 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
+import {withRouter} from 'react-router';
 import Grid from '@material-ui/core/Grid';
 
 import Container from './Container';
-import Navigation from './Navigation';
 import SnackbarUI from '@Shared/SnackBar';
+import Navigation from './Navigation';
 
 const LandingComponent = props => {
-  const {classes, children, navigation, hideFooter} = props;
+  const {classes, children, navigation, router, hideFooter} = props;
+  const goToAccount = () => {
+    router.push('/admin/account');
+  };
   let navigationElement = null;
 
   if (navigation) {
     navigationElement = (
       <Grid item={true} xs={12} md={3}>
         <Navigation />
-        <div className={`${classes.Edit} title-as-link`}>
+        <div className={`${classes.Edit} title-as-link`} onClick={goToAccount}>
           <i className="material-icons">{'person'}</i>
           <span>{'Edit Your Account'}</span>
         </div>
@@ -90,6 +94,9 @@ LandingComponent.propTypes = {
   }),
   hideFooter: PropTypes.bool,
   navigation: PropTypes.bool,
+  router: PropTypes.shape({
+    push: PropTypes.func,
+  }),
 };
 
-export default withStyles(styles)(LandingComponent);
+export default withStyles(styles)(withRouter(LandingComponent));

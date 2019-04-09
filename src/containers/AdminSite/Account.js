@@ -1,19 +1,18 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
-
 import Layout from './Layout';
-import LandingComponent from '../../components/admin-site/Landing';
+import AccountContainer from '../../components/admin-site/elements/AccountContainer';
 
-const Landing = props => {
+const AccountRoute = props => {
   return (
     <Layout router={props.router}>
-      <LandingComponent />
+      <AccountContainer />
     </Layout>
   );
 };
 
-Landing.propTypes = {
+AccountRoute.propTypes = {
   router: PropTypes.shape({}),
 };
 
-export default Landing;
+export default AccountRoute;

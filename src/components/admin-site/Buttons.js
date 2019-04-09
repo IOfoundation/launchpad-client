@@ -4,13 +4,14 @@ import {PropTypes} from 'prop-types';
 
 export const Buttons = props => {
   const {
-    classes,
-    submitLabel = 'Save Changes',
-    hideCancelAction = true,
     cancelClicked,
-    submitClicked,
+    classes,
+    disableSubmit,
     extraClicked,
     extraLabel,
+    hideCancelAction = true,
+    submitClicked,
+    submitLabel = 'Save Changes',
   } = props;
 
   return (
@@ -33,6 +34,7 @@ export const Buttons = props => {
         className="btn btn__submit margin-0"
         onClick={submitClicked}
         type="button"
+        disabled={disableSubmit}
       >
         {submitLabel}
       </button>
@@ -73,6 +75,7 @@ Buttons.propTypes = {
   classes: PropTypes.shape({
     Buttons: PropTypes.string,
   }),
+  disableSubmit: PropTypes.bool,
   extraClicked: PropTypes.func,
   extraLabel: PropTypes.string,
   hideCancelAction: PropTypes.bool,

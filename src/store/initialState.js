@@ -95,6 +95,20 @@ const initialState = {
       success: false,
       loading: false,
     },
+    userInformation: {
+      username: '',
+      email: '',
+    },
+    updateInformation: {
+      loading: false,
+      response: {},
+      errorsInfo: [],
+      errorsPassword: [],
+      errorsDelete: {},
+      successInfo: false,
+      successPassword: false,
+      successDelete: false,
+    },
   },
   snackbar: {
     visibility: false,

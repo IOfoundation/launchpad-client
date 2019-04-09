@@ -8,11 +8,13 @@ const loginStart = config => {
   };
 };
 
-const loginSuccess = (authorization, organizationId) => {
+const loginSuccess = ({authorization, username, organizationId, email}) => {
   return {
     type: types.LOGIN_SUCCESS,
     authorization,
     organizationId,
+    username,
+    email,
   };
 };
 
@@ -126,16 +128,17 @@ export const login = ({password, email}) => {
           password,
         },
       });
+      const data = {
+        authorization: httpResponse.headers.authorization,
+        username: httpResponse.data.name,
+        email: httpResponse.data.email,
+        organizationId: httpResponse.data.organization_id,
+      };
 
       localStorage.setItem('userAuth', httpResponse.headers.authorization);
       localStorage.setItem('userEmail', email);
       localStorage.setItem('organizationId', httpResponse.data.organization_id);
-      dispatch(
-        loginSuccess(
-          httpResponse.headers.authorization,
-          httpResponse.data.organization_id
-        )
-      );
+      dispatch(loginSuccess(data));
     } catch (errors) {
       dispatch(loginError(errors.data.error));
     }
@@ -185,35 +188,145 @@ export const resetError = () => {
   };
 };
 
-const passwordResetStart = () => {
+const updateUserInformationStart = () => {
   return {
-    type: types.PASSWORD_RESET_REQUEST,
+    type: types.UPDATE_USER_INFORMATION_START,
   };
 };
 
-const passwordResetSuccess = () => {
+const updateUserInformationSuccess = response => {
   return {
-    type: types.PASSWORD_RESET_SUCCESS,
+    type: types.UPDATE_USER_INFORMATION_SUCCESS,
+    response,
   };
 };
 
-const passwordResetError = singUpErrors => {
+const updateUserInformationFail = errors => {
   return {
-    type: types.PASSWORD_RESET_ERROR,
-    singUpErrors,
+    type: types.UPDATE_USER_INFORMATION_FAIL,
+    errors,
   };
 };
 
-export const passwordReset = (token, password, newPassword) => {
+export const updateUserInformation = ({Authorization, name, email}) => {
   return async dispatch => {
     try {
-      dispatch(passwordResetStart());
-      await httpRequest.put(
-        `/users/password?user[reset_password_token]=${token}&user[password]=${password}&user[password_confirmation]=${newPassword}`
+      const config = {
+        headers: {Authorization},
+      };
+      dispatch(updateUserInformationStart());
+      const httpResponse = await httpRequest.put(
+        '/api/users',
+        {
+          api_user: {
+            name,
+            email,
+          },
+        },
+        config
       );
-      dispatch(passwordResetSuccess());
-    } catch (error) {
-      dispatch(passwordResetError(error));
+      dispatch(updateUserInformationSuccess(httpResponse.data));
+    } catch (errors) {
+      dispatch(updateUserInformationFail(errors.data.errors));
+    }
+  };
+};
+
+const updatePasswordStart = () => {
+  return {
+    type: types.UPDATE_PASSWORD_START,
+  };
+};
+
+const updatePasswordSuccess = response => {
+  return {
+    type: types.UPDATE_PASSWORD_SUCCESS,
+    response,
+  };
+};
+
+const updatePasswordFail = errors => {
+  return {
+    type: types.UPDATE_PASSWORD_FAIL,
+    errors,
+  };
+};
+
+export const updatePasswordAndInformation = ({
+  Authorization,
+  current_password,
+  password,
+  password_confirmation,
+  name,
+  email,
+}) => {
+  return async dispatch => {
+    try {
+      const config = {
+        headers: {Authorization},
+      };
+      dispatch(updatePasswordStart());
+      const passwordResponse = await httpRequest.put(
+        '/api/users',
+        {
+          api_user: {
+            current_password,
+            password,
+            password_confirmation,
+          },
+        },
+        config
+      );
+      dispatch(updateUserInformationStart());
+      const userInformationResponse = await httpRequest.put(
+        '/api/users',
+        {
+          api_user: {
+            name,
+            email,
+          },
+        },
+        config
+      );
+      dispatch(updatePasswordSuccess(passwordResponse.data));
+      dispatch(updateUserInformationSuccess(userInformationResponse.data));
+    } catch (errors) {
+      dispatch(updatePasswordFail(errors.data.errors));
+    }
+  };
+};
+
+const deleteAccountStart = () => {
+  return {
+    type: types.DELETE_ACCOUNT_START,
+  };
+};
+
+const deleteAccountSuccess = response => {
+  return {
+    type: types.DELETE_ACCOUNT_SUCCESS,
+    response,
+  };
+};
+
+const deleteAccountFail = errors => {
+  return {
+    type: types.DELETE_ACCOUNT_FAIL,
+    errors,
+  };
+};
+
+export const deleteAccount = ({Authorization}) => {
+  return async dispatch => {
+    try {
+      const config = {
+        headers: {Authorization},
+      };
+      dispatch(deleteAccountStart());
+      const httpResponse = await httpRequest.delete('/api/users', config);
+      dispatch(deleteAccountSuccess(httpResponse.data));
+    } catch (errors) {
+      dispatch(deleteAccountFail(errors.data));
     }
   };
 };

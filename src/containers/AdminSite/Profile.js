@@ -6,7 +6,7 @@ import ProfileFormContainer from '../../components/admin-site/elements/ProfileFo
 
 const ProfileRoute = props => {
   return (
-    <Layout>
+    <Layout router={props.router}>
       <ProfileFormContainer breakpoint={props.breakpoint} />
     </Layout>
   );
@@ -14,6 +14,7 @@ const ProfileRoute = props => {
 
 ProfileRoute.propTypes = {
   breakpoint: PropTypes.string,
+  router: PropTypes.shape({}),
 };
 
 export default ProfileRoute;

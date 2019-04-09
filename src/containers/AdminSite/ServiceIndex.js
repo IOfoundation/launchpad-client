@@ -1,13 +1,19 @@
 import React from 'react';
-import Layout from '../Layout';
+import {PropTypes} from 'prop-types';
+
+import Layout from './Layout';
 import Services from '../../components/admin-site/elements/Services';
 
-const ServiceIndexRoute = () => {
+const ServiceIndexRoute = props => {
   return (
-    <Layout>
+    <Layout router={props.router}>
       <Services />
     </Layout>
   );
+};
+
+ServiceIndexRoute.propTypes = {
+  router: PropTypes.shape({}),
 };
 
 export default ServiceIndexRoute;
