@@ -1,44 +1,24 @@
-import React, {Component, Fragment} from 'react';
+import React, {Fragment, PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {PropTypes} from 'prop-types';
 
 import * as snackbarActions from '@Actions/snackbar';
 
-const withErrorHandler = (WrapperComponent, axios) => {
-  class WithErrorHandler extends Component {
-    constructor(props) {
-      super(props);
-      this.reqInterceptor = axios.interceptors.request.use(req => {
-        this.setState({error: null});
-        return req;
-      });
-      this.reqResponse = axios.interceptors.response.use(
-        res => res,
-        error => {
-          if (error && error.status === 401) {
-            props.snackbar.showSnackbar({
-              message: error.data.error,
-            });
-            props.router.push('/admin-login');
-          }
-          this.setState({error});
-          return Promise.reject(error);
-        }
-      );
-    }
-
+const withErrorHandler = WrapperComponent => {
+  class WithErrorHandler extends PureComponent {
     state = {
       error: {},
     };
 
-    componentWillUnmount() {
-      if (axios.interceptors.request) {
-        axios.interceptors.request.eject(this.reqInterceptor);
-      }
+    componentDidUpdate() {
+      const {userAuthorized, snackbar, router} = this.props;
 
-      if (axios.interceptors.reponse) {
-        axios.interceptors.reponse.eject(this.reqResponse);
+      if (!userAuthorized) {
+        snackbar.showSnackbar({
+          message: 'User Unauthorized',
+        });
+        router.push('/admin-login');
       }
     }
 
@@ -51,6 +31,11 @@ const withErrorHandler = (WrapperComponent, axios) => {
     }
   }
 
+  function mapStateToProps(_state) {
+    return {
+      userAuthorized: _state.errors.userAuthorized,
+    };
+  }
   function mapDispatchToProps(_dispatch) {
     return {
       snackbar: bindActionCreators(snackbarActions, _dispatch),
@@ -59,15 +44,16 @@ const withErrorHandler = (WrapperComponent, axios) => {
 
   WithErrorHandler.propTypes = {
     router: PropTypes.shape({
-      push: PropTypes.func,
+      push: PropTypes.func.isRequired,
     }),
     snackbar: PropTypes.shape({
-      showSnackbar: PropTypes.func,
+      showSnackbar: PropTypes.func.isRequired,
     }),
+    userAuthorized: PropTypes.boolisRequired,
   };
 
   return connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   )(WithErrorHandler);
 };

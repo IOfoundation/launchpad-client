@@ -1,5 +1,6 @@
 import {UserTypes as types} from '../action-types';
 import {httpRequest} from '../utils';
+import * as errorsActions from './errors';
 
 const loginStart = config => {
   return {
@@ -138,7 +139,9 @@ export const login = ({password, email}) => {
       localStorage.setItem('userAuth', httpResponse.headers.authorization);
       localStorage.setItem('userEmail', email);
       localStorage.setItem('organizationId', httpResponse.data.organization_id);
+
       dispatch(loginSuccess(data));
+      dispatch(errorsActions.userAuthorized());
     } catch (errors) {
       dispatch(loginError(errors.data.error));
     }

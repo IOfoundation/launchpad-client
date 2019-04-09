@@ -130,6 +130,9 @@ const initialState = {
     autoHideDuration: 10000,
     actionText: 'DISMISS',
   },
+  errors: {
+    userAuthorized: true,
+  },
 };
 
 export default initialState;

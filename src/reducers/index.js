@@ -6,6 +6,7 @@ import events from './events';
 import blogs from './blogs';
 import user from './user';
 import adminBlogs from './admin-blogs';
+import errors from './errors';
 
 const rootReducer = combineReducers({
   routing: routerReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   events,
   snackbar,
   user,
+  errors,
 });
 
 export default rootReducer;

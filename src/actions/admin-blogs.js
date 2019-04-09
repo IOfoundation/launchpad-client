@@ -1,5 +1,6 @@
 import {AdminBlogsTypes as types} from '../action-types';
 import {httpRequest} from '@Utils';
+import * as errorsActions from './errors';
 
 const getAdminPostsStarts = () => {
   return {
@@ -121,6 +122,9 @@ export const savePost = ({title, body, category, auth, published}) => {
       );
       dispatch(savePostSuccess(httpResponse.data));
     } catch (errors) {
+      if (errors && errors.status === 401) {
+        dispatch(errorsActions.userUnauthorized());
+      }
       dispatch(savePostFail(errors));
     }
   };
