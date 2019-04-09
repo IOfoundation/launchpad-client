@@ -7,16 +7,16 @@ import Buttons from './Buttons';
 
 const Title = props => {
   const {
+    cancelClicked,
     classes,
-    titleText,
-    submitLabel,
+    disableSubmit,
+    extraClicked,
     extraLabel,
     hideCancelAction,
-    submitClicked,
-    cancelClicked,
-    extraClicked,
     noMargin,
-    disableSubmit,
+    submitClicked,
+    submitLabel,
+    titleText,
   } = props;
   const containerClasses = [classes.Container];
 
@@ -37,11 +37,10 @@ const Title = props => {
         <Buttons
           cancelClicked={cancelClicked}
           disableSubmit={disableSubmit}
+          extraClicked={extraClicked}
+          extraLabel={extraLabel}
           hideCancelAction={hideCancelAction}
           submitClicked={submitClicked}
-          cancelClicked={cancelClicked}
-          extraLabel={extraLabel}
-          extraClicked={extraClicked}
           submitLabel={submitLabel}
         />
       </Grid>

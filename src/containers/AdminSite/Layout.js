@@ -60,8 +60,9 @@ class Layout extends PureComponent {
 }
 
 const mapStateToProps = _state => {
+  const auth = _state.user.authorization || localStorage.getItem('userAuth');
   return {
-    auth: _state.user.authorization !== '',
+    auth: auth !== '',
     hideFooter: _state.adminBlogs.hideFooter,
   };
 };

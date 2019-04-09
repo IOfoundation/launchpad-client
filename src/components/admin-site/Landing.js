@@ -7,7 +7,6 @@ import Grid from '@material-ui/core/Grid';
 import Container from './Container';
 import SnackbarUI from '@Shared/SnackBar';
 import Navigation from './Navigation';
-import SnackbarUI from '@Shared/SnackBar';
 
 const LandingComponent = props => {
   const {classes, children, navigation, router, hideFooter} = props;

@@ -158,7 +158,7 @@ const signOutSuccess = (action, state) => {
   };
 };
 
-const signOutError = state => {
+const signOutError = (action, state) => {
   const {errors} = action;
   return {
     ...state,
@@ -329,7 +329,7 @@ export default function(state = initialState, action) {
     }
 
     case types.SIGN_OUT_ERROR: {
-      return signOutError(state);
+      return signOutError(action, state);
     }
 
     case types.RESET_ERROR: {
