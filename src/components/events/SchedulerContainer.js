@@ -76,12 +76,15 @@ class SchedulerContainer extends PureComponent {
     const {data: nextEvents, loading: nextLoading} = this.props.events;
     const {data: currentEvents, loading: prevLoading} = prevProps.events;
 
-    if (nextEvents.length === currentEvents.length && nextEvents.length === 0) {
-      if (nextLoading !== prevLoading) {
-        if (!nextLoading) {
-          this.setLoadingStatusOnScheduler(false);
-        }
-      }
+    if (
+      this._thereIsNoEventsAndIsNotLoading(
+        nextEvents,
+        currentEvents,
+        nextLoading,
+        prevLoading
+      )
+    ) {
+      this.setLoadingStatusOnScheduler(false);
     }
   }
 
@@ -99,6 +102,19 @@ class SchedulerContainer extends PureComponent {
     if (className === 'k-event-template') {
       this.openModal(event.target.textContent);
     }
+  };
+  _thereIsNoEventsAndIsNotLoading = (
+    nextEvents,
+    currentEvents,
+    nextLoading,
+    prevLoading
+  ) => {
+    return (
+      nextEvents.length === currentEvents.length &&
+      nextEvents.length === 0 &&
+      nextLoading !== prevLoading &&
+      !nextLoading
+    );
   };
   _changeName = true;
   _date = getDate();

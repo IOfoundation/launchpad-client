@@ -1,10 +1,10 @@
 import React, {Fragment} from 'react';
 import {PropTypes} from 'prop-types';
 
-import DateSection from '../../../businesses/details/Modal/DateSection';
-import Section from '../../../businesses/details/Modal/Section';
-import PostedBy from '../../../businesses/details/Modal/PostedBy';
-import Link from '../../../businesses/details/Modal/Link';
+import DateSection from '@Components/businesses/details/Modal/DateSection';
+import Section from '@Components/businesses/details/Modal/Section';
+import PostedBy from '@Components/businesses/details/Modal/PostedBy';
+import Link from '@Components/businesses/details/Modal/Link';
 
 const Content = props => {
   const {

@@ -27,6 +27,7 @@ export default {
       '@Utils': path.resolve(__dirname, 'src/utils/'),
       '@StaticData': path.resolve(__dirname, 'src/static-data/'),
       '@Styles': path.resolve(__dirname, 'src/styles/'),
+      '@Components': path.resolve(__dirname, 'src/components'),
     },
   },
   // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool
