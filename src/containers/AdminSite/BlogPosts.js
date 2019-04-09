@@ -1,6 +1,10 @@
 import React from 'react';
+
 import Layout from './Layout';
 import BlogPostsFormContainer from '../../components/admin-site/elements/BlogPostsFormContainer';
+import withErrorHandler from '@HOC/withErrorHandler';
+
+import {httpRequest} from '@Utils';
 
 const BlogPosts = () => {
   return (
@@ -10,4 +14,4 @@ const BlogPosts = () => {
   );
 };
 
-export default BlogPosts;
+export default withErrorHandler(BlogPosts, httpRequest);

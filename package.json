@@ -165,7 +165,8 @@
       "@Utils(.*)$": "<rootDir>/src/utils/$1",
       "@StaticData(.*)$": "<rootDir>/src/static-data/$1",
       "@Styles(.*)$": "<rootDir>/src/styles/$1",
-      "@Components(.*)$": "<rootDir>/src/components/$1"
+      "@Components(.*)$": "<rootDir>/src/components/$1",
+      "@HOC(.*)$": "<rootDir>/src/hoc/$1"
     },
     "coverageReporters": [
       "html",
