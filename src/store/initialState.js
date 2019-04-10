@@ -30,6 +30,12 @@ const initialState = {
     },
     hideFooter: false,
   },
+  adminProfile: {
+    updatedOrganization: {
+      data: [],
+      loading: false,
+    },
+  },
   blogs: {
     categories: [],
     category: 'front page',
