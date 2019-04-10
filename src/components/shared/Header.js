@@ -1,6 +1,6 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
-import {Link} from 'react-router';
+import {Link, IndexLink} from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -19,9 +19,13 @@ const Header = props => {
       <div className="contentContainer header grid between-xs middle-xs text-semi">
         <div className="header_links-title">
           <span className="header_title">
-            <Link to="/" className="white-link">
+            <IndexLink
+              to="/"
+              className="white-link text-bold"
+              activeStyle={activeStyles}
+            >
               {'Welcome to Resource Finder'}
-            </Link>
+            </IndexLink>
           </span>
         </div>
         <input id="header-dropdown" type="checkbox" name="dropdown" />
@@ -31,17 +35,21 @@ const Header = props => {
         <nav className="header_links-contact text-bold">
           <Link
             activeStyle={activeStyles}
-            className="header_link"
+            className="header_link white-link "
             to="/businesses"
           >
             {'Resources'}
           </Link>
-          <Link activeStyle={activeStyles} className="header_link" to="/events">
+          <Link
+            activeStyle={activeStyles}
+            className="header_link white-link"
+            to="/events"
+          >
             {'Events'}
           </Link>
           <Link
             activeStyle={activeStyles}
-            className="header_link"
+            className="header_link white-link"
             to="/blog"
             onClick={setDefaultCategory}
           >
@@ -49,7 +57,7 @@ const Header = props => {
           </Link>
           <Link
             activeStyle={activeStyles}
-            className="header_link"
+            className="header_link white-link"
             to="/admin-login"
           >
             {'Admin Login'}

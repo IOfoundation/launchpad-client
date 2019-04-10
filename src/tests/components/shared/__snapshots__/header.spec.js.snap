@@ -44,20 +44,35 @@ exports[`<Header /> Nav Bar Must have a link to blog page 1`] = `
             <span
               className="header_title"
             >
-              <Link
-                className="white-link"
-                onlyActiveOnIndex={false}
-                style={Object {}}
+              <IndexLink
+                activeStyle={
+                  Object {
+                    "opacity": "1",
+                  }
+                }
+                className="white-link text-bold"
                 to="/"
               >
-                <a
-                  className="white-link"
-                  onClick={[Function]}
+                <Link
+                  activeStyle={
+                    Object {
+                      "opacity": "1",
+                    }
+                  }
+                  className="white-link text-bold"
+                  onlyActiveOnIndex={true}
                   style={Object {}}
+                  to="/"
                 >
-                  Welcome to Resource Finder
-                </a>
-              </Link>
+                  <a
+                    className="white-link text-bold"
+                    onClick={[Function]}
+                    style={Object {}}
+                  >
+                    Welcome to Resource Finder
+                  </a>
+                </Link>
+              </IndexLink>
             </span>
           </div>
           <input
@@ -96,13 +111,13 @@ exports[`<Header /> Nav Bar Must have a link to blog page 1`] = `
                   "opacity": "1",
                 }
               }
-              className="header_link"
+              className="header_link white-link "
               onlyActiveOnIndex={false}
               style={Object {}}
               to="/businesses"
             >
               <a
-                className="header_link"
+                className="header_link white-link "
                 onClick={[Function]}
                 style={Object {}}
               >
@@ -115,13 +130,13 @@ exports[`<Header /> Nav Bar Must have a link to blog page 1`] = `
                   "opacity": "1",
                 }
               }
-              className="header_link"
+              className="header_link white-link"
               onlyActiveOnIndex={false}
               style={Object {}}
               to="/events"
             >
               <a
-                className="header_link"
+                className="header_link white-link"
                 onClick={[Function]}
                 style={Object {}}
               >
@@ -134,14 +149,14 @@ exports[`<Header /> Nav Bar Must have a link to blog page 1`] = `
                   "opacity": "1",
                 }
               }
-              className="header_link"
+              className="header_link white-link"
               onClick={[Function]}
               onlyActiveOnIndex={false}
               style={Object {}}
               to="/blog"
             >
               <a
-                className="header_link"
+                className="header_link white-link"
                 onClick={[Function]}
                 style={Object {}}
               >
@@ -154,13 +169,13 @@ exports[`<Header /> Nav Bar Must have a link to blog page 1`] = `
                   "opacity": "1",
                 }
               }
-              className="header_link"
+              className="header_link white-link"
               onlyActiveOnIndex={false}
               style={Object {}}
               to="/admin-login"
             >
               <a
-                className="header_link"
+                className="header_link white-link"
                 onClick={[Function]}
                 style={Object {}}
               >
