@@ -21,7 +21,7 @@ const updateCompanyFail = errors => {
   };
 };
 
-export const updateCompany = ({organization, id, auth}) => {
+export const updateCompany = ({organization, organizationId, auth}) => {
   return async dispatch => {
     try {
       const config = {
@@ -29,7 +29,7 @@ export const updateCompany = ({organization, id, auth}) => {
       };
       dispatch(updateCompanyStart());
       const httpResponse = await httpRequest.put(
-        `/api/organizations/${id}`,
+        `/api/organizations/${organizationId}`,
         {
           organization,
         },
@@ -37,7 +37,7 @@ export const updateCompany = ({organization, id, auth}) => {
       );
       dispatch(updateCompanySuccess(httpResponse.data));
     } catch (errors) {
-      dispatch(updateCompanyFail(errors));
+      dispatch(updateCompanyFail(errors.data.errors));
     }
   };
 };

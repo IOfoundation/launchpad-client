@@ -4,6 +4,8 @@ const initialState = {
   updatedOrganization: {
     data: [],
     loading: false,
+    success: false,
+    errors: [],
   },
 };
 
@@ -16,6 +18,8 @@ export default function(state = initialState, action) {
           data: [],
           noResults: false,
           loading: true,
+          success: false,
+          errors: [],
         },
       };
     }
@@ -28,6 +32,7 @@ export default function(state = initialState, action) {
           ...state.updatedOrganization,
           data: organization,
           loading: false,
+          success: true,
         },
       };
     }

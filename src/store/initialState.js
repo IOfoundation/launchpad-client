@@ -34,6 +34,8 @@ const initialState = {
     updatedOrganization: {
       data: [],
       loading: false,
+      success: false,
+      errors: [],
     },
   },
   blogs: {
