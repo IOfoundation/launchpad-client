@@ -41,10 +41,10 @@ class SchedulerContainer extends PureComponent {
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (
-      nextProps.events &&
-      nextProps.events.length !== prevState.events.length
+      nextProps.events.data &&
+      nextProps.events.data.length !== prevState.events.length
     ) {
-      const mappedEvents = nextProps.events.map(event => {
+      const mappedEvents = nextProps.events.data.map(event => {
         const start = getDate(event.starting_at);
         const end = getDate(event.ending_at);
 
@@ -57,6 +57,7 @@ class SchedulerContainer extends PureComponent {
           recurrenceId: event.organization_id,
         };
       });
+
       return {events: mappedEvents};
     }
 
@@ -69,6 +70,22 @@ class SchedulerContainer extends PureComponent {
       'click',
       this._schedulerClicked
     );
+  }
+
+  componentDidUpdate(prevProps) {
+    const {data: nextEvents, loading: nextLoading} = this.props.events;
+    const {data: currentEvents, loading: prevLoading} = prevProps.events;
+
+    if (
+      this._thereIsNoEventsAndIsNotLoading(
+        nextEvents,
+        currentEvents,
+        nextLoading,
+        prevLoading
+      )
+    ) {
+      this.setLoadingStatusOnScheduler(false);
+    }
   }
 
   componentWillUnmount() {
@@ -86,12 +103,25 @@ class SchedulerContainer extends PureComponent {
       this.openModal(event.target.textContent);
     }
   };
+  _thereIsNoEventsAndIsNotLoading = (
+    nextEvents,
+    currentEvents,
+    nextLoading,
+    prevLoading
+  ) => {
+    return (
+      nextEvents.length === currentEvents.length &&
+      nextEvents.length === 0 &&
+      nextLoading !== prevLoading &&
+      !nextLoading
+    );
+  };
   _changeName = true;
   _date = getDate();
   _month = this._date.monthNumeric;
 
   openModal = text => {
-    const modalInformation = this.props.events.find(
+    const modalInformation = this.props.events.data.find(
       _event => _event.title === text
     );
 
@@ -173,7 +203,11 @@ SchedulerContainer.propTypes = {
     container: PropTypes.string,
     paper: PropTypes.string,
   }),
-  events: PropTypes.arrayOf(PropTypes.shape({})),
+  events: PropTypes.shape({
+    data: PropTypes.arrayOf(PropTypes.shape({})),
+    errors: PropTypes.shape({}),
+    loading: PropTypes.bool,
+  }),
   handlerModalVisibility: PropTypes.func,
 };
 

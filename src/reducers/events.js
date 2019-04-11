@@ -1,9 +1,24 @@
 import {EventsTypes as types} from '../action-types';
 
 const initialState = {
-  data: [],
-  eventsByMonth: [],
-  featuredEvents: [],
+  events: {
+    data: [],
+    errors: {},
+    loading: false,
+    noResults: false,
+    page: 1,
+    totalPages: 0,
+  },
+  eventsByMonth: {
+    data: [],
+    errors: {},
+    loading: false,
+  },
+  featuredEvents: {
+    data: [],
+    errors: {},
+    loading: false,
+  },
 };
 
 export default function(state = initialState, action) {
@@ -11,28 +26,52 @@ export default function(state = initialState, action) {
     case types.GET_ALL_EVENTS_REQUEST_START: {
       return {
         ...state,
+        events: {
+          data: [],
+          errors: {},
+          loading: true,
+          noResults: false,
+          page: 1,
+          totalPages: 0,
+        },
       };
     }
 
     case types.GET_ALL_EVENTS_REQUEST_SUCCESS: {
-      const {data} = action;
+      const {data, totalPages, page} = action;
       return {
         ...state,
-        data,
+        events: {
+          ...state.events,
+          data,
+          loading: false,
+          noResults: false,
+          page,
+          totalPages,
+        },
       };
     }
 
     case types.GET_ALL_EVENTS_REQUEST_ERROR: {
-      const {error} = action;
+      const {errors} = action;
       return {
         ...state,
-        error,
+        events: {
+          ...state.events,
+          errors,
+          loading: false,
+        },
       };
     }
 
     case types.GET_EVENTS_BY_MONTH_START: {
       return {
         ...state,
+        featuredEvents: {
+          data: [],
+          errors: {},
+          loading: true,
+        },
       };
     }
 
@@ -40,7 +79,11 @@ export default function(state = initialState, action) {
       const {featuredEvents} = action;
       return {
         ...state,
-        featuredEvents,
+        featuredEvents: {
+          ...state.featuredEvents,
+          data: featuredEvents,
+          loading: false,
+        },
       };
     }
 
@@ -49,12 +92,22 @@ export default function(state = initialState, action) {
       return {
         ...state,
         error,
+        featuredEvents: {
+          ...state.featuredEvents,
+          error,
+          loading: false,
+        },
       };
     }
 
     case types.GET_ALL_EVENTS_BY_MONTH_START: {
       return {
         ...state,
+        eventsByMonth: {
+          data: [],
+          errors: {},
+          loading: true,
+        },
       };
     }
 
@@ -62,7 +115,11 @@ export default function(state = initialState, action) {
       const {eventsByMonth} = action;
       return {
         ...state,
-        eventsByMonth,
+        eventsByMonth: {
+          ...state.eventsByMonth,
+          data: eventsByMonth,
+          loading: false,
+        },
       };
     }
 
@@ -70,7 +127,11 @@ export default function(state = initialState, action) {
       const {error} = action;
       return {
         ...state,
-        error,
+        eventsByMonth: {
+          ...state.eventsByMonth,
+          error,
+          loading: false,
+        },
       };
     }
 

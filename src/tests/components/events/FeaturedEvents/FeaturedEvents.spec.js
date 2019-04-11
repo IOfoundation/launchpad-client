@@ -22,7 +22,7 @@ Date = class extends Date {
 const getEventsByMonth = jest.fn();
 
 const props = {
-  featuredEvents: [...featuredEvents],
+  featuredEvents: {data: [...featuredEvents], loading: false},
   actions: {
     getEventsByMonth,
   },

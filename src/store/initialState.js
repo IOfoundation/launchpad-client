@@ -72,9 +72,23 @@ const initialState = {
     },
   },
   events: {
-    data: [],
-    eventsByMonth: [],
-    featuredEvents: [],
+    events: {
+      data: [],
+      noResults: false,
+      page: 1,
+      totalPages: 0,
+      errors: {},
+    },
+    eventsByMonth: {
+      data: [],
+      errors: {},
+      loading: false,
+    },
+    featuredEvents: {
+      data: [],
+      errors: {},
+      loading: false,
+    },
   },
   user: {
     loading: false,

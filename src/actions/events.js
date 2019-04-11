@@ -1,5 +1,5 @@
 import {EventsTypes as types} from '../action-types';
-import {httpRequest, getDate} from '../utils';
+import {httpRequest, getDate} from '@Utils';
 
 const getAllEventsRequestStart = () => {
   return {
@@ -14,10 +14,10 @@ const getAllEventsRequestSuccess = data => {
   };
 };
 
-const getAllEventsRequestError = error => {
+const getAllEventsRequestError = errors => {
   return {
     type: types.GET_ALL_EVENTS_REQUEST_ERROR,
-    error,
+    errors,
   };
 };
 
@@ -121,10 +121,9 @@ export const getEventsByMonth = (months, filterBy = 'default') => {
           };
 
           const httpResponse = await httpRequest.get(url[filterBy]);
-
-          const groupedData = httpResponse.data
-            .slice(0, 3)
-            .reduce((acc, data) => {
+          let groupedData = [];
+          if (httpResponse.data.length > 0) {
+            groupedData = httpResponse.data.slice(0, 3).reduce((acc, data) => {
               data.starting_at = getDate(data.starting_at);
               data.posted_at = getDate(data.posted_at);
               acc.title = data.starting_at.monthLarge;
@@ -138,14 +137,46 @@ export const getEventsByMonth = (months, filterBy = 'default') => {
 
               return acc;
             }, {});
+          }
 
           return groupedData;
         })
       );
 
-      dispatch(getEventsByMonthSuccess(responses));
+      const filtered = responses.filter(response => response);
+      dispatch(getEventsByMonthSuccess(filtered));
     } catch (error) {
       dispatch(getEventsByMonthError(error));
+    }
+  };
+};
+
+export const getAllEventsAfter = () => {
+  return async dispatch => {
+    try {
+      const today = getDate();
+      dispatch(getAllEventsRequestStart());
+      const httpResponse = await httpRequest.get(
+        `/api/events?starting_after="${today.date.toISOString()}"`
+      );
+      dispatch(getAllEventsRequestSuccess(httpResponse.data));
+    } catch (errors) {
+      dispatch(getAllEventsRequestError({errors: true}));
+    }
+  };
+};
+
+export const getAllEventsBefore = () => {
+  return async dispatch => {
+    try {
+      const date = getDate();
+      dispatch(getAllEventsRequestStart());
+      const httpResponse = await httpRequest.get(
+        `/api/events?ending_before="${date.date.toISOString()}"`
+      );
+      dispatch(getAllEventsRequestSuccess(httpResponse.data));
+    } catch (errors) {
+      dispatch(getAllEventsRequestError({errors: true}));
     }
   };
 };

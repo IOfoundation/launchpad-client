@@ -16,4 +16,12 @@
   &:hover {
     color: $green-color;
   }
+
+  &--small {
+    font-size: 14px;
+  }
+
+  &--decoration {
+    text-decoration: underline;
+  }
 }

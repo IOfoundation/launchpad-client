@@ -2,6 +2,7 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import SnackbarUI from '@Shared/SnackBar';
 
 import {containerStyles} from '@Utils/containerStyles';
 
@@ -14,7 +15,8 @@ const Container = props => {
   }
 
   return (
-    <div className={containerClasses.join(' ')}>
+    <div className={['admin-login', classes.container].join(' ')}>
+      <SnackbarUI />
       <section className={['content-section', classes.content].join(' ')}>
         <Grid container={true} justify="center" alignItems="flex-start">
           {children}

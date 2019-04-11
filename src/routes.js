@@ -33,6 +33,7 @@ import ServiceIndex from './containers/AdminSite/ServiceIndex';
 import BlogPostsIndex from './containers/AdminSite/BlogPostsIndex';
 import BlogPosts from './containers/AdminSite/BlogPosts';
 import AccountRoute from './containers/AdminSite/Account';
+import EventsIndex from './containers/AdminSite/EventsIndex';
 
 export default (
   <Route path="/" component={App}>
@@ -59,6 +60,7 @@ export default (
     <Route path="/admin/blog" exact={true} component={BlogPostsIndex} />
     <Route path="/admin/blog/:id" component={BlogPosts} />
     <Route path="/admin/account" component={AccountRoute} />
+    <Route path="/admin/events" exact={true} component={EventsIndex} />
     <Route
       path="/admin-login/password-reset-confirmation"
       component={ResetYourPasswordRoute}

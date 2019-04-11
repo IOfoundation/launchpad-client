@@ -64,7 +64,13 @@ const Navigation = props => {
           </Link>
         </li>
         <li>
-          <a className={classes.link}>{'Events'}</a>
+          <Link
+            activeStyle={activeStyles}
+            className={classes.link}
+            to="/admin/events"
+          >
+            {'Events'}
+          </Link>
         </li>
       </ul>
       {status}
