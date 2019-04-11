@@ -7,16 +7,18 @@ import blogs from './blogs';
 import user from './user';
 import adminBlogs from './admin-blogs';
 import errors from './errors';
+import userInformation from './user-information';
 
 const rootReducer = combineReducers({
   routing: routerReducer,
   adminBlogs,
   blogs,
   businesses,
+  errors,
   events,
   snackbar,
   user,
-  errors,
+  userInformation,
 });
 
 export default rootReducer;

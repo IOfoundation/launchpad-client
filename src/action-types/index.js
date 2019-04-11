@@ -5,6 +5,7 @@ import EventsTypes from './events';
 import SnackbarTypes from './snackbar';
 import UserTypes from './user';
 import ErrorsTypes from './errors';
+import UserInformationTypes from './user-information';
 export {
   AdminBlogsTypes,
   BlogsTypes,
@@ -13,6 +14,7 @@ export {
   SnackbarTypes,
   UserTypes,
   ErrorsTypes,
+  UserInformationTypes,
 };
 
 export default {
@@ -23,4 +25,5 @@ export default {
   SnackbarTypes,
   UserTypes,
   ErrorsTypes,
+  UserInformationTypes,
 };

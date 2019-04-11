@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import {PropTypes} from 'prop-types';
 
 import * as snackbarActions from '@Actions/snackbar';
+import * as userInformationActions from '@Actions/user-information';
 
 const withErrorHandler = WrapperComponent => {
   class WithErrorHandler extends PureComponent {
@@ -12,11 +13,12 @@ const withErrorHandler = WrapperComponent => {
     };
 
     componentDidMount() {
-      const {auth} = this.props;
+      const {auth, userInformation, Authorization} = this.props;
 
       if (auth === false) {
         this._displayErrorAndRedirect();
       }
+      userInformation.getUserInformation({Authorization});
     }
 
     componentDidUpdate() {
@@ -51,16 +53,19 @@ const withErrorHandler = WrapperComponent => {
     return {
       userAuthorized: _state.errors.userAuthorized,
       auth: auth !== '',
+      Authorization: auth,
     };
   }
   function mapDispatchToProps(_dispatch) {
     return {
       snackbar: bindActionCreators(snackbarActions, _dispatch),
+      userInformation: bindActionCreators(userInformationActions, _dispatch),
     };
   }
 
   WithErrorHandler.propTypes = {
     auth: PropTypes.bool,
+    Authorization: PropTypes.string,
     router: PropTypes.shape({
       push: PropTypes.func.isRequired,
     }),
@@ -68,6 +73,9 @@ const withErrorHandler = WrapperComponent => {
       showSnackbar: PropTypes.func.isRequired,
     }),
     userAuthorized: PropTypes.bool.isRequired,
+    userInformation: PropTypes.shape({
+      getUserInformation: PropTypes.func.isRequired,
+    }),
   };
 
   return connect(
