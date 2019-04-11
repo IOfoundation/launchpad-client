@@ -11,15 +11,29 @@ const withErrorHandler = WrapperComponent => {
       error: {},
     };
 
+    componentDidMount() {
+      const {auth} = this.props;
+
+      if (auth === false) {
+        this._displayErrorAndRedirect();
+      }
+    }
+
     componentDidUpdate() {
-      const {userAuthorized, snackbar, router} = this.props;
+      const {userAuthorized} = this.props;
 
       if (!userAuthorized) {
-        snackbar.showSnackbar({
-          message: 'User Unauthorized',
-        });
-        router.push('/admin-login');
+        this._displayErrorAndRedirect();
       }
+    }
+
+    _displayErrorAndRedirect() {
+      const {snackbar, router} = this.props;
+
+      snackbar.showSnackbar({
+        message: 'Unauthorized, please login again',
+      });
+      router.push('/admin-login');
     }
 
     render() {
@@ -32,8 +46,11 @@ const withErrorHandler = WrapperComponent => {
   }
 
   function mapStateToProps(_state) {
+    const auth = _state.user.authorization || localStorage.getItem('userAuth');
+
     return {
       userAuthorized: _state.errors.userAuthorized,
+      auth: auth !== '',
     };
   }
   function mapDispatchToProps(_dispatch) {
@@ -43,13 +60,14 @@ const withErrorHandler = WrapperComponent => {
   }
 
   WithErrorHandler.propTypes = {
+    auth: PropTypes.bool,
     router: PropTypes.shape({
       push: PropTypes.func.isRequired,
     }),
     snackbar: PropTypes.shape({
       showSnackbar: PropTypes.func.isRequired,
     }),
-    userAuthorized: PropTypes.boolisRequired,
+    userAuthorized: PropTypes.bool.isRequired,
   };
 
   return connect(

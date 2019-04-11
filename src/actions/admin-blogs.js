@@ -163,6 +163,9 @@ export const deletePost = ({id, auth}) => {
       );
       dispatch(deletePostSuccess(httpResponse.data));
     } catch (errors) {
+      if (errors && errors.status === 401) {
+        dispatch(errorsActions.userUnauthorized());
+      }
       dispatch(deletePostError(errors));
     }
   };
@@ -204,6 +207,9 @@ export const updatePost = ({id, title, body, category, auth, published}) => {
       );
       dispatch(updatePostSuccess(httpResponse.data));
     } catch (errors) {
+      if (errors && errors.status === 401) {
+        dispatch(errorsActions.userUnauthorized());
+      }
       dispatch(updatePostFail(errors));
     }
   };

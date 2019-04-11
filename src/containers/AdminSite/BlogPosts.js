@@ -1,15 +1,19 @@
 import React from 'react';
+import {PropTypes} from 'prop-types';
 
 import Layout from './Layout';
 import BlogPostsFormContainer from '../../components/admin-site/elements/BlogPostsFormContainer';
-import withErrorHandler from '@HOC/withErrorHandler';
 
-const BlogPosts = () => {
+const BlogPosts = props => {
   return (
-    <Layout>
+    <Layout router={props.router}>
       <BlogPostsFormContainer />
     </Layout>
   );
 };
 
-export default withErrorHandler(BlogPosts);
+BlogPosts.propTypes = {
+  router: PropTypes.shape({}),
+};
+
+export default BlogPosts;

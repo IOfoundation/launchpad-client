@@ -101,6 +101,7 @@ export const signOut = Authorization => {
       localStorage.removeItem('userEmail');
       localStorage.removeItem('organizationId');
       dispatch(signOutSuccess(httpResponse.data));
+      dispatch(errorsActions.userUnauthorized());
     } catch (error) {
       dispatch(signOutError());
     }
@@ -230,6 +231,9 @@ export const updateUserInformation = ({Authorization, name, email}) => {
       );
       dispatch(updateUserInformationSuccess(httpResponse.data));
     } catch (errors) {
+      if (errors && errors.status === 401) {
+        dispatch(errorsActions.userUnauthorized());
+      }
       dispatch(updateUserInformationFail(errors.data.errors));
     }
   };
@@ -294,6 +298,9 @@ export const updatePasswordAndInformation = ({
       dispatch(updatePasswordSuccess(passwordResponse.data));
       dispatch(updateUserInformationSuccess(userInformationResponse.data));
     } catch (errors) {
+      if (errors && errors.status === 401) {
+        dispatch(errorsActions.userUnauthorized());
+      }
       dispatch(updatePasswordFail(errors.data.errors));
     }
   };
@@ -329,6 +336,9 @@ export const deleteAccount = ({Authorization}) => {
       const httpResponse = await httpRequest.delete('/api/users', config);
       dispatch(deleteAccountSuccess(httpResponse.data));
     } catch (errors) {
+      if (errors && errors.status === 401) {
+        dispatch(errorsActions.userUnauthorized());
+      }
       dispatch(deleteAccountFail(errors.data));
     }
   };

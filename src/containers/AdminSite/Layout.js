@@ -7,6 +7,7 @@ import AdminLayout from '../../components/layouts/Admin';
 
 import {viewport, sizeCheck} from '@Utils';
 import * as snackbarActions from '@Actions/snackbar';
+import withErrorHandler from '@HOC/withErrorHandler';
 
 class Layout extends PureComponent {
   state = {
@@ -17,17 +18,8 @@ class Layout extends PureComponent {
   };
 
   componentDidMount() {
-    const {auth, router, snackbar} = this.props;
-
     window.addEventListener('resize', this.state.listener);
     sizeCheck(this.handleWindowSizeChange);
-
-    if (auth === false) {
-      router.push('/admin-login');
-      snackbar.showSnackbar({
-        message: 'Unauthorized, please login again',
-      });
-    }
   }
 
   componentWillUnmount() {
@@ -91,4 +83,4 @@ Layout.propTypes = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Layout);
+)(withErrorHandler(Layout));
