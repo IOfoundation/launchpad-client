@@ -37,6 +37,10 @@ const initialState = {
       success: false,
       errors: [],
     },
+    publishStatus: null,
+    publishSuccess: false,
+    publishLoading: false,
+    publishErrors: [],
   },
   blogs: {
     categories: [],

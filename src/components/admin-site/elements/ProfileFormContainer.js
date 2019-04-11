@@ -34,9 +34,9 @@ const SignupSchema = Yup.object().shape({
   licenses: Yup.string(),
   taxIdentifier: Yup.string(),
   taxStatus: Yup.string(),
-  twitter: Yup.string().url('URL invalid'),
-  facebook: Yup.string().url('URL invalid'),
-  linkedin: Yup.string().url('URL invalid'),
+  twitter: Yup.string(),
+  facebook: Yup.string(),
+  linkedin: Yup.string(),
   phones: Yup.array().of(
     Yup.object().shape({
       phoneNumber: Yup.string(),

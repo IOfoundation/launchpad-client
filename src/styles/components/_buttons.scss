@@ -212,6 +212,16 @@
     }
   }
 
+  &__green {
+    background-color: $green-color;
+    border-color: transparent;
+    color: $white-color;
+
+    &:hover {
+      background-color: $green-btn-hover;
+    }
+  }
+
   &__black {
     background-color: $black-color;
     border-color: transparent;

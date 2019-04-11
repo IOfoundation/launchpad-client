@@ -7,6 +7,10 @@ const initialState = {
     success: false,
     errors: [],
   },
+  publishStatus: null,
+  publishSuccess: false,
+  publishLoading: false,
+  publishErrors: [],
 };
 
 export default function(state = initialState, action) {
@@ -45,6 +49,45 @@ export default function(state = initialState, action) {
           ...state.updatedOrganization,
           errors,
           loading: false,
+        },
+      };
+    }
+
+    case types.UPDATE_PUBLISH_STATUS_START: {
+      return {
+        ...state,
+        publishStatus: null,
+        publishSuccess: false,
+        publishLoading: true,
+        publishErrors: [],
+        updatedOrganization: {
+          ...state.updatedOrganization,
+        },
+      };
+    }
+
+    case types.UPDATE_PUBLISH_STATUS_SUCCESS: {
+      const {publishStatus} = action;
+      return {
+        ...state,
+        publishStatus,
+        publishSuccess: true,
+        publishLoading: false,
+        updatedOrganization: {
+          ...state.updatedOrganization,
+        },
+      };
+    }
+
+    case types.UPDATE_PUBLISH_STATUS_FAIL: {
+      const {errors} = action;
+      return {
+        ...state,
+        publishSuccess: false,
+        publishLoading: true,
+        publishErrors: errors,
+        updatedOrganization: {
+          ...state.updatedOrganization,
         },
       };
     }

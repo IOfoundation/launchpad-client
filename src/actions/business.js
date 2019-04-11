@@ -35,7 +35,7 @@ const fetchOrganizationByIdRequestObject = () => {
   };
 };
 
-const fetchOrganizationByIdSuccessObject = organization => {
+export const fetchOrganizationByIdSuccessObject = organization => {
   return {
     type: types.FETCH_ORGANIZATION_BY_ID_SUCCESS,
     organization,
@@ -155,8 +155,8 @@ export function fetchOrganizationById(id) {
   return async dispatch => {
     dispatch(fetchOrganizationByIdRequestObject());
     try {
-      const httpResponse = await httpRequest.get(`api/organizations?id=${id}`);
-      dispatch(fetchOrganizationByIdSuccessObject(httpResponse.data[0]));
+      const httpResponse = await httpRequest.get(`api/organizations/${id}`);
+      dispatch(fetchOrganizationByIdSuccessObject(httpResponse.data));
     } catch (error) {
       dispatch(fetchOrganizationByIdErrorObject(error));
     }

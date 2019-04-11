@@ -1,82 +1,142 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, PureComponent} from 'react';
 import {Link} from 'react-router';
 import {withStyles} from '@material-ui/core/styles';
 import {PropTypes} from 'prop-types';
 import {withRouter} from 'react-router';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
-const Navigation = props => {
-  const {classes} = props;
-  const navigationClasses = [classes.navigation];
-  let status = null;
+import * as snackbarActions from '@Actions/snackbar';
+import * as profileActions from '@Actions/admin-profile';
 
-  if (props.location.pathname === '/admin/profile') {
-    navigationClasses.push(classes.addBorder);
-    status = (
-      <Fragment>
-        <h3 className={`${classes.title} m-top-16`}>{'Status'}</h3>
-        <p className={classes.description}>{'Published'}</p>
-        <button className="btn btn__red">{'Unpublish'}</button>
-      </Fragment>
-    );
+class Navigation extends PureComponent {
+  componentDidUpdate(prevProps) {
+    const {errors, snackbar, success, organization} = this.props;
+
+    if (errors.length !== prevProps.errors.length) {
+      const title = errors[0].title;
+      if (title) {
+        snackbar.showSnackbar({
+          message: title,
+        });
+      }
+    }
+
+    if (success !== prevProps.success) {
+      if (success) {
+        snackbar.showSnackbar({
+          message: organization.is_published
+            ? 'Organization published successfully'
+            : 'Organization unpublished successfully',
+        });
+      }
+    }
   }
 
-  return (
-    <div className={classes.container}>
-      <h3 className={classes.title}>{'Your organization'}</h3>
-      <p className={classes.description}>
-        {"Governor's Office of Business and Economic Development"}
-      </p>
-      <ul className={navigationClasses.join(' ')}>
-        <li>
-          <Link
-            activeStyle={activeStyles}
-            className={classes.link}
-            to="/admin/profile"
+  updatePublishStatus = publishStatus => {
+    const {profile, organizationId, auth} = this.props;
+    profile.updatePublishStatus({publishStatus, organizationId, auth});
+  };
+
+  render() {
+    const {classes, organization, location} = this.props;
+    const navigationClasses = [classes.navigation];
+    let status = null;
+
+    if (location.pathname === '/admin/profile') {
+      navigationClasses.push(classes.addBorder);
+      let button = null;
+      let description = null;
+
+      if (organization.is_published) {
+        button = (
+          <button
+            className="btn btn__red"
+            onClick={() => this.updatePublishStatus(false)}
           >
-            {'Profile'}
-          </Link>
-        </li>
-        <li>
-          <Link
-            activeStyle={activeStyles}
-            className={classes.link}
-            to="/admin/location"
+            {'Unpublish'}
+          </button>
+        );
+        description = 'Published';
+      } else {
+        button = (
+          <button
+            className="btn btn__green"
+            onClick={() => this.updatePublishStatus(true)}
           >
-            {'Locations'}
-          </Link>
-        </li>
-        <li>
-          <Link
-            activeStyle={activeStyles}
-            className={classes.link}
-            to="/admin/services"
-          >
-            {'Services'}
-          </Link>
-        </li>
-        <li>
-          <Link
-            activeStyle={activeStyles}
-            className={classes.link}
-            to="/admin/blog"
-          >
-            {'Blog Posts'}
-          </Link>
-        </li>
-        <li>
-          <Link
-            activeStyle={activeStyles}
-            className={classes.link}
-            to="/admin/events"
-          >
-            {'Events'}
-          </Link>
-        </li>
-      </ul>
-      {status}
-    </div>
-  );
-};
+            {'Publish'}
+          </button>
+        );
+        description = 'Unpublish';
+      }
+
+      status = (
+        <Fragment>
+          <h3 className={`${classes.title} m-top-16`}>{'Status'}</h3>
+          <p className={classes.description}>{description}</p>
+          {button}
+        </Fragment>
+      );
+    }
+
+    return (
+      <div className={classes.container}>
+        <h3 className={classes.title}>{'Your organization'}</h3>
+        <p className={classes.description}>
+          {"Governor's Office of Business and Economic Development"}
+        </p>
+        <ul className={navigationClasses.join(' ')}>
+          <li>
+            <Link
+              activeStyle={activeStyles}
+              className={classes.link}
+              to="/admin/profile"
+            >
+              {'Profile'}
+            </Link>
+          </li>
+          <li>
+            <Link
+              activeStyle={activeStyles}
+              className={classes.link}
+              to="/admin/location"
+            >
+              {'Locations'}
+            </Link>
+          </li>
+          <li>
+            <Link
+              activeStyle={activeStyles}
+              className={classes.link}
+              to="/admin/services"
+            >
+              {'Services'}
+            </Link>
+          </li>
+          <li>
+            <Link
+              activeStyle={activeStyles}
+              className={classes.link}
+              to="/admin/blog"
+            >
+              {'Blog Posts'}
+            </Link>
+          </li>
+          <li>
+            <Link
+              activeStyle={activeStyles}
+              className={classes.link}
+              to="/admin/events"
+            >
+              {'Events'}
+            </Link>
+          </li>
+        </ul>
+        {status}
+      </div>
+    );
+  }
+}
 
 const activeStyles = {
   color: '#00ba81',
@@ -134,7 +194,29 @@ const styles = theme => {
   };
 };
 
+const mapStateToProps = _state => {
+  const organizationId =
+    _state.user.organizationId || localStorage.getItem('organizationId');
+  const auth = _state.user.authorization || localStorage.getItem('userAuth');
+
+  return {
+    auth,
+    organizationId,
+    organization: _state.businesses.organization,
+    success: _state.adminProfile.publishSuccess,
+    errors: _state.adminProfile.publishErrors,
+  };
+};
+
+const mapDispatchToProps = _dispatch => {
+  return {
+    snackbar: bindActionCreators(snackbarActions, _dispatch),
+    profile: bindActionCreators(profileActions, _dispatch),
+  };
+};
+
 Navigation.propTypes = {
+  auth: PropTypes.string,
   classes: PropTypes.shape({
     container: PropTypes.string,
     description: PropTypes.string,
@@ -143,9 +225,22 @@ Navigation.propTypes = {
     noBorder: PropTypes.string,
     title: PropTypes.string,
   }),
+  errors: PropTypes.arrayOf(PropTypes.shape({})),
   location: PropTypes.shape({
-    pathname: PropTypes.string,
+    pathname: PropTypes.string.isRequired,
   }),
+  organization: PropTypes.shape({}),
+  organizationId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  profile: PropTypes.shape({
+    updatePublishStatus: PropTypes.func.isRequired,
+  }),
+  snackbar: PropTypes.shape({
+    showSnackbar: PropTypes.func.isRequired,
+  }),
+  success: PropTypes.bool,
 };
 
-export default withStyles(styles)(withRouter(Navigation));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(withRouter(Navigation)));
