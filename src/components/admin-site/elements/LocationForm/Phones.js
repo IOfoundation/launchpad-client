@@ -3,7 +3,7 @@ import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 
 import {sharedStyles, sharedClasses} from './styles';
-import Phones from './Phones';
+import PhonesElements from './PhonesElements';
 
 const Phones = props => {
   const {classes, touched, errors, handleChange, handleBlur, values} = props;
@@ -19,7 +19,7 @@ const Phones = props => {
         </span>
       </div>
       <div className={classes.cardContent} style={{padding: 8}}>
-        <Phones
+        <PhonesElements
           handleBlur={handleBlur}
           handleChange={handleChange}
           values={values}

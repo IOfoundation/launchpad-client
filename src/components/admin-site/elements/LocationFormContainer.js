@@ -9,7 +9,7 @@ import LandingComponent from '../Landing';
 import Title from '../Title';
 import Buttons from '../Buttons';
 
-import {getDate, timeConversion} from '@Utils';
+import {getDate, timeConversion, falsyToString} from '@Utils';
 import {accesibility} from '@StaticData/data';
 
 const LocationSchema = Yup.object().shape({
@@ -330,7 +330,6 @@ class LocationFormContainer extends PureComponent {
     return (
       <LandingComponent navigation={false}>
         <Title
-          cancelClicked={goToLocation}
           hideCancelAction={false}
           submitLabel={'Save location'}
           titleText="Create A Location"

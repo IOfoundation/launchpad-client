@@ -53,7 +53,6 @@ class SelectElement extends PureComponent {
         {'Option Three'}
       </MenuItem>,
     ];
-
     let displayError = (
       <div
         className={[
@@ -73,33 +72,6 @@ class SelectElement extends PureComponent {
       displayError = null;
     }
 
-    if (selectOptions) {
-      Options = selectOptions.map(data => {
-        return (
-          <MenuItem key={data.value} value={data.value}>
-            {data.name}
-          </MenuItem>
-        );
-      });
-    }
-
-    let Options = [
-      <MenuItem value="" key={1}>
-        <em>{'Select One'}</em>
-      </MenuItem>,
-      <MenuItem value={'Option One'} key={2}>
-        {'Option One'}
-      </MenuItem>,
-      <MenuItem value={'Option Two'} key={3}>
-        {'Option Two'}
-      </MenuItem>,
-      <MenuItem value={'Option Three'} key={4}>
-        {'Option Three'}
-      </MenuItem>,
-    ];
-
-    //console.log(selectOptions);
-    //console.log(value);
     if (selectOptions) {
       Options = selectOptions.map(data => {
         return (

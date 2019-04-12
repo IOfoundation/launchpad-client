@@ -15,3 +15,4 @@ export {combineStyles} from './combineStyles';
 export {getVideoSrc} from './getVideoSrc';
 export {falsyToString} from './falsyToString';
 export {timeConversion} from './timeConversion';
+export {falsyToString} from './falsyToString';
