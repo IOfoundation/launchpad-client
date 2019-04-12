@@ -6,6 +6,8 @@ import Grid from '@material-ui/core/Grid';
 
 import FormTextField from '@Shared/FormElements/TextFieldDefault';
 import Phones from './ProfileForm/Phones';
+import ThreeColumns from './ProfileForm/ThreeColumns';
+import Licenses from './ProfileForm/Licenses';
 
 import {
   sectionOnePhoto,
@@ -24,6 +26,13 @@ const ProfileForm = props => {
     touched,
     values,
   } = props;
+  const shared = {
+    errors,
+    handleBlur,
+    handleChange,
+    touched,
+    values,
+  };
 
   return (
     <Form className="profile-form" onSubmit={handleSubmit} style={{padding: 8}}>
@@ -82,6 +91,8 @@ const ProfileForm = props => {
           })}
         </Grid>
       </Grid>
+      <ThreeColumns {...shared} />
+      <Licenses {...shared} />
       <div className={`${classes.card} m-top-16`}>
         <div className={classes.cardTitle}>
           <span className={`${classes.cardTitle}__media`}>

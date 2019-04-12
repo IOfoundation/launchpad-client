@@ -36,41 +36,6 @@ export const sectionOneRegular = [
     helperText:
       'You can enter multiple terms in this box by pressing the comma key after each one.',
   },
-  {
-    key: 'dateIncorporation',
-    label: 'Date of Incorporation',
-    autocomplete: 'off',
-  },
-  {
-    key: 'legalStatus',
-    label: 'Legal Status',
-    autocomplete: 'off',
-  },
-  {
-    key: 'fundingSources',
-    label: 'Funding Sources',
-    autocomplete: 'off',
-  },
-  {
-    key: 'licenses',
-    label: 'Licenses',
-    autocomplete: 'off',
-    helperText:
-      'You can enter multiple terms in this box by pressing the comma key after each one.',
-  },
-  {
-    key: 'taxIdentifier',
-    label: 'Tax Identifier',
-    autocomplete: 'off',
-    helperText:
-      'Tax identifier such as the Federal Employer Identification Number.',
-  },
-  {
-    key: 'taxStatus',
-    label: 'Tax Status',
-    autocomplete: 'off',
-    helperText: 'Internal Revenue Service tax designation, such as 501(c)(3).',
-  },
 ];
 
 export const socialSection = [

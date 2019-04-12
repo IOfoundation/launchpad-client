@@ -34,9 +34,15 @@ const SignupSchema = Yup.object().shape({
   licenses: Yup.string(),
   taxIdentifier: Yup.string(),
   taxStatus: Yup.string(),
-  twitter: Yup.string(),
-  facebook: Yup.string(),
-  linkedin: Yup.string(),
+  twitter: Yup.string()
+    .url('URL invalid')
+    .notRequired(),
+  facebook: Yup.string()
+    .url('URL invalid')
+    .notRequired(),
+  linkedin: Yup.string()
+    .url('URL invalid')
+    .notRequired(),
   phones: Yup.array().of(
     Yup.object().shape({
       phoneNumber: Yup.string(),
@@ -66,15 +72,25 @@ class ProfileFormContainer extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const {errors, snackbar, success} = this.props;
+    const {
+      errors,
+      snackbar,
+      success,
+      organization,
+      updatedOrganization,
+    } = this.props;
 
     if (errors.length !== prevProps.errors.length) {
-      const title = errors[0].title;
-      if (title) {
-        snackbar.showSnackbar({
-          message: title,
-        });
+      let title;
+      if (errors[0]) {
+        title = errors[0].title;
+      } else {
+        title = 'There was a problem';
       }
+
+      snackbar.showSnackbar({
+        message: title,
+      });
     }
 
     if (success !== prevProps.success) {
@@ -82,7 +98,15 @@ class ProfileFormContainer extends PureComponent {
         snackbar.showSnackbar({
           message: 'Profile updated successfully',
         });
+        this.__initialValues = updatedOrganization;
       }
+    }
+
+    if (
+      Object.keys(organization).length !==
+      Object.keys(prevProps.organization).length
+    ) {
+      this.__initialValues = organization;
     }
   }
 
@@ -174,6 +198,9 @@ class ProfileFormContainer extends PureComponent {
       date_incorporated: values.dateIncorporation,
     };
   }
+
+  _initialValues;
+
   render() {
     const {
       auth,
@@ -197,6 +224,7 @@ class ProfileFormContainer extends PureComponent {
                 hideCancelAction={false}
                 submitLabel={'Save Changes'}
                 submitClicked={_props.submitForm}
+                cancelClicked={() => _props.resetForm(this._initialValues)}
               />
               <ProfileForm {..._props} breakpoint={breakpoint} />
             </Fragment>
