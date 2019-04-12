@@ -126,7 +126,7 @@ exports[`Admin-site <Navigation /> renders snapshot of Navigation 1`] = `
             <p
               className="withRouter-Navigation--description-3"
             >
-              Governor's Office of Business and Economic Development
+              Display name has not been setted.
             </p>
             <ul
               className="withRouter-Navigation--navigation-4 withRouter-Navigation--addBorder-5"

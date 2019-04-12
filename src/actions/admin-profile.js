@@ -36,7 +36,7 @@ export const updateCompany = ({organization, organizationId, auth}) => {
         },
         config
       );
-      dispatch(updateCompanySuccess(httpResponse.data));
+      dispatch(updateCompanySuccess(httpResponse.data[0]));
     } catch (errors) {
       dispatch(updateCompanyFail(errors.data.errors));
     }

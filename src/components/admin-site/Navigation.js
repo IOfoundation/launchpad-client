@@ -39,7 +39,7 @@ class Navigation extends PureComponent {
   };
 
   render() {
-    const {classes, organization, location} = this.props;
+    const {classes, organization, location, displayName = ''} = this.props;
     const navigationClasses = [classes.navigation];
     let status = null;
 
@@ -83,7 +83,7 @@ class Navigation extends PureComponent {
       <div className={classes.container}>
         <h3 className={classes.title}>{'Your organization'}</h3>
         <p className={classes.description}>
-          {"Governor's Office of Business and Economic Development"}
+          {displayName || 'Display name has not been setted.'}
         </p>
         <ul className={navigationClasses.join(' ')}>
           <li>
@@ -225,6 +225,7 @@ Navigation.propTypes = {
     noBorder: PropTypes.string,
     title: PropTypes.string,
   }),
+  displayName: PropTypes.string,
   errors: PropTypes.arrayOf(PropTypes.shape({})),
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,

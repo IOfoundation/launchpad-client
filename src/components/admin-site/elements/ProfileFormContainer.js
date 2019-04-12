@@ -176,13 +176,15 @@ class ProfileFormContainer extends PureComponent {
   }
   render() {
     const {
+      auth,
       breakpoint,
       organization,
-      profile,
       organizationId,
-      auth,
+      profile,
+      updatedOrganization,
     } = this.props;
     let form = <Loading />;
+    let displayName = organization.alternate_name;
 
     if (Object.keys(organization).length > 0) {
       form = (
@@ -213,8 +215,16 @@ class ProfileFormContainer extends PureComponent {
       );
     }
 
+    if (updatedOrganization.alternate_name) {
+      displayName = updatedOrganization.alternate_name;
+    }
+
     return (
-      <LandingComponent breakpoint={breakpoint} navigation={true}>
+      <LandingComponent
+        breakpoint={breakpoint}
+        navigation={true}
+        displayName={displayName}
+      >
         {form}
       </LandingComponent>
     );
@@ -233,6 +243,7 @@ const mapStateToProps = _state => {
     organization: _state.businesses.organization,
     organizationId,
     success: _state.adminProfile.updatedOrganization.success,
+    updatedOrganization: _state.adminProfile.updatedOrganization.data,
   };
 };
 
@@ -265,6 +276,7 @@ ProfileFormContainer.propTypes = {
     showSnackbar: PropTypes.func,
   }),
   success: PropTypes.bool,
+  updatedOrganization: PropTypes.shape({}),
   userActions: PropTypes.shape({
     login: PropTypes.func,
   }),

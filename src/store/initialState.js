@@ -32,7 +32,7 @@ const initialState = {
   },
   adminProfile: {
     updatedOrganization: {
-      data: [],
+      data: {},
       loading: false,
       success: false,
       errors: [],

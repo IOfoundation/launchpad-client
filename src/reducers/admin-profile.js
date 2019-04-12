@@ -2,7 +2,7 @@ import {AdminProfileTypes as types} from '../action-types';
 
 const initialState = {
   updatedOrganization: {
-    data: [],
+    data: {},
     loading: false,
     success: false,
     errors: [],
@@ -19,7 +19,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         updatedOrganization: {
-          data: [],
+          data: {},
           noResults: false,
           loading: true,
           success: false,

@@ -9,7 +9,14 @@ import SnackbarUI from '@Shared/SnackBar';
 import Navigation from './Navigation';
 
 const LandingComponent = props => {
-  const {classes, children, navigation, router, hideFooter} = props;
+  const {
+    classes,
+    children,
+    navigation,
+    router,
+    hideFooter,
+    displayName,
+  } = props;
   const goToAccount = () => {
     router.push('/admin/account');
   };
@@ -18,7 +25,7 @@ const LandingComponent = props => {
   if (navigation) {
     navigationElement = (
       <Grid item={true} xs={12} md={3}>
-        <Navigation />
+        <Navigation displayName={displayName} />
         <div className={`${classes.Edit} title-as-link`} onClick={goToAccount}>
           <i className="material-icons">{'person'}</i>
           <span>{'Edit Your Account'}</span>
@@ -92,6 +99,7 @@ LandingComponent.propTypes = {
     Edit: PropTypes.string,
     Title: PropTypes.string,
   }),
+  displayName: PropTypes.string,
   hideFooter: PropTypes.bool,
   navigation: PropTypes.bool,
   router: PropTypes.shape({
