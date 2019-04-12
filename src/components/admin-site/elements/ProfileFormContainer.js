@@ -17,7 +17,7 @@ import * as businessActions from '@Actions/business';
 import * as profileActions from '@Actions/admin-profile';
 import {falsyToString} from '@Utils';
 
-const SignupSchema = Yup.object().shape({
+export const ProfileSchema = Yup.object().shape({
   contactEmail: Yup.string()
     .email('Invalid email address')
     .required('Required'),
@@ -163,11 +163,11 @@ class ProfileFormContainer extends PureComponent {
       description: clean.description,
       accreditations: this._joinBy(clean.accreditations, ','),
       dateIncorporation: clean.date_incorporated,
-      legalStatus: '',
+      legalStatus: clean.legal_status,
       fundingSources: this._joinBy(clean.funding_sources, ','),
       licenses: this._joinBy(clean.licenses, ','),
-      taxIdentifier: '',
-      taxStatus: '',
+      taxIdentifier: clean.tax_id,
+      taxStatus: clean.tax_status,
       twitter: clean.twitter,
       facebook: clean.facebook,
       linkedin: clean.linkedin,
@@ -230,7 +230,7 @@ class ProfileFormContainer extends PureComponent {
             </Fragment>
           )}
           initialValues={this._mapInitialValues(organization)}
-          validationSchema={SignupSchema}
+          validationSchema={ProfileSchema}
           onSubmit={values => {
             const organizationToServer = this._mapFormToServer(values);
             profile.updateCompany({

@@ -14,6 +14,19 @@ const initialState = {
     autoHideDuration: 10000,
     actionText: 'DISMISS',
   },
+  adminProfile: {
+    updatedOrganization: {
+      data: [],
+    },
+    publishErrors: false,
+  },
+  businesses: {
+    organization: {},
+  },
+  validateYup: {
+    success: false,
+    error: false,
+  },
 };
 const mockStore = configureStore([thunk]);
 const props = {};

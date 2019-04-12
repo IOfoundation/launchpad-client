@@ -36,6 +36,8 @@ exports[`Admin-site <Navigation /> renders snapshot of Navigation 1`] = `
           "updatePublishStatus": [Function],
         }
       }
+      schemaFail={false}
+      schemaValidated={false}
       snackbar={
         Object {
           "hideSnackbar": [Function],
@@ -44,6 +46,12 @@ exports[`Admin-site <Navigation /> renders snapshot of Navigation 1`] = `
         }
       }
       success={false}
+      updatedOrganization={Object {}}
+      yupActions={
+        Object {
+          "validateSchema": [Function],
+        }
+      }
     >
       <withRouter(Navigation)
         auth={null}
@@ -71,6 +79,8 @@ exports[`Admin-site <Navigation /> renders snapshot of Navigation 1`] = `
             "updatePublishStatus": [Function],
           }
         }
+        schemaFail={false}
+        schemaValidated={false}
         snackbar={
           Object {
             "hideSnackbar": [Function],
@@ -79,6 +89,12 @@ exports[`Admin-site <Navigation /> renders snapshot of Navigation 1`] = `
           }
         }
         success={false}
+        updatedOrganization={Object {}}
+        yupActions={
+          Object {
+            "validateSchema": [Function],
+          }
+        }
       >
         <Navigation
           auth={null}
@@ -106,6 +122,8 @@ exports[`Admin-site <Navigation /> renders snapshot of Navigation 1`] = `
               "updatePublishStatus": [Function],
             }
           }
+          schemaFail={false}
+          schemaValidated={false}
           snackbar={
             Object {
               "hideSnackbar": [Function],
@@ -114,10 +132,77 @@ exports[`Admin-site <Navigation /> renders snapshot of Navigation 1`] = `
             }
           }
           success={false}
+          updatedOrganization={Object {}}
+          yupActions={
+            Object {
+              "validateSchema": [Function],
+            }
+          }
         >
           <div
             className="withRouter-Navigation--container-1"
           >
+            <WithStyles(Modal)
+              activeClicked={[Function]}
+              cancelClicked={[Function]}
+              modalClosed={[Function]}
+              open={false}
+              schemaFail={false}
+              schemaValidated={false}
+              statusPicked={false}
+            >
+              <Modal
+                activeClicked={[Function]}
+                cancelClicked={[Function]}
+                classes={
+                  Object {
+                    "alert": "Modal-alert-7",
+                    "btn": "Modal-btn-9",
+                    "modal": "Modal-modal-8",
+                    "title": "Modal-title-10",
+                  }
+                }
+                modalClosed={[Function]}
+                open={false}
+                schemaFail={false}
+                schemaValidated={false}
+                statusPicked={false}
+              >
+                <WithStyles(Modal)
+                  onClose={[Function]}
+                  open={false}
+                >
+                  <Modal
+                    BackdropComponent={[Function]}
+                    classes={
+                      Object {
+                        "hidden": "MuiModal-hidden-12",
+                        "root": "MuiModal-root-11",
+                      }
+                    }
+                    closeAfterTransition={false}
+                    disableAutoFocus={false}
+                    disableBackdropClick={false}
+                    disableEnforceFocus={false}
+                    disableEscapeKeyDown={false}
+                    disablePortal={false}
+                    disableRestoreFocus={false}
+                    hideBackdrop={false}
+                    keepMounted={false}
+                    manager={
+                      ModalManager {
+                        "data": Array [],
+                        "handleContainerOverflow": true,
+                        "hideSiblingNodes": true,
+                        "modals": Array [],
+                      }
+                    }
+                    onClose={[Function]}
+                    open={false}
+                  />
+                </WithStyles(Modal)>
+              </Modal>
+            </WithStyles(Modal)>
             <h3
               className="withRouter-Navigation--title-2"
             >

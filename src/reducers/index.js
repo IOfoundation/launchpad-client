@@ -9,6 +9,9 @@ import events from './events';
 import snackbar from './snackbar';
 import user from './user';
 import userInformation from './user-information';
+import adminBlogs from './admin-blogs';
+import adminProfile from './admin-profile';
+import validateYup from './validate-yup';
 
 const rootReducer = combineReducers({
   routing: routerReducer,
@@ -21,6 +24,7 @@ const rootReducer = combineReducers({
   snackbar,
   user,
   userInformation,
+  validateYup,
 });
 
 export default rootReducer;

@@ -8,8 +8,18 @@ import {bindActionCreators} from 'redux';
 
 import * as snackbarActions from '@Actions/snackbar';
 import * as profileActions from '@Actions/admin-profile';
+import * as yupActions from '@Actions/validate-yup';
+import Modal from './Modal';
+
+import {ProfileSchema} from './elements/ProfileFormContainer';
+import {falsyToString} from '@Utils';
 
 class Navigation extends PureComponent {
+  state = {
+    openModal: false,
+    statusPicked: false,
+  };
+
   componentDidUpdate(prevProps) {
     const {errors, snackbar, success, organization} = this.props;
 
@@ -26,20 +36,82 @@ class Navigation extends PureComponent {
       if (success) {
         snackbar.showSnackbar({
           message: organization.is_published
-            ? 'Organization published successfully'
-            : 'Organization unpublished successfully',
+            ? 'Organization unpublished successfully'
+            : 'Organization published successfully',
         });
       }
     }
   }
 
-  updatePublishStatus = publishStatus => {
-    const {profile, organizationId, auth} = this.props;
-    profile.updatePublishStatus({publishStatus, organizationId, auth});
+  updatePublishStatus = () => {
+    const {profile, organizationId, auth, schemaValidated} = this.props;
+    const {statusPicked} = this.state;
+
+    if (schemaValidated) {
+      profile.updatePublishStatus({
+        publishStatus: statusPicked,
+        organizationId,
+        auth,
+      });
+    }
+    this.handlerModalVisibility();
   };
 
+  openModal = status => {
+    this.setState({statusPicked: status});
+    let validate;
+
+    if (Object.keys(this.props.updatedOrganization).length > 0) {
+      validate = this._mapToValidate(this.props.updatedOrganization);
+    } else {
+      validate = this._mapToValidate(this.props.organization);
+    }
+
+    this.props.yupActions.validateSchema(ProfileSchema, validate);
+    this.handlerModalVisibility();
+  };
+
+  _mapToValidate(organization) {
+    const clean = Object.keys(organization).reduce((acc, key) => {
+      acc[key] = falsyToString(organization[key]);
+      return acc;
+    }, {});
+    return {
+      id: clean.id,
+      contactEmail: clean.email,
+      organizationName: clean.alternate_name,
+      name: clean.name,
+      website: clean.website,
+      description: clean.description,
+      dateIncorporation: clean.date_incorporated,
+      legalStatus: '',
+      taxIdentifier: '',
+      taxStatus: '',
+      twitter: clean.twitter,
+      facebook: clean.facebook,
+      linkedin: clean.linkedin,
+    };
+  }
+
+  handlerModalVisibility = () => {
+    this.setState(prevState => {
+      return {
+        openModal: !prevState.openModal,
+      };
+    });
+  };
+  _statusPicked;
+
   render() {
-    const {classes, organization, location, displayName = ''} = this.props;
+    const {
+      classes,
+      organization,
+      location,
+      displayName = '',
+      schemaFail,
+      schemaValidated,
+    } = this.props;
+    const {statusPicked} = this.state;
     const navigationClasses = [classes.navigation];
     let status = null;
 
@@ -52,7 +124,7 @@ class Navigation extends PureComponent {
         button = (
           <button
             className="btn btn__red"
-            onClick={() => this.updatePublishStatus(false)}
+            onClick={() => this.openModal(false)}
           >
             {'Unpublish'}
           </button>
@@ -62,7 +134,7 @@ class Navigation extends PureComponent {
         button = (
           <button
             className="btn btn__green"
-            onClick={() => this.updatePublishStatus(true)}
+            onClick={() => this.openModal(true)}
           >
             {'Publish'}
           </button>
@@ -81,6 +153,15 @@ class Navigation extends PureComponent {
 
     return (
       <div className={classes.container}>
+        <Modal
+          open={this.state.openModal}
+          modalClosed={this.handlerModalVisibility}
+          cancelClicked={this.handlerModalVisibility}
+          statusPicked={statusPicked}
+          activeClicked={this.updatePublishStatus}
+          schemaFail={schemaFail}
+          schemaValidated={schemaValidated}
+        />
         <h3 className={classes.title}>{'Your organization'}</h3>
         <p className={classes.description}>
           {displayName || 'Display name has not been setted.'}
@@ -201,10 +282,13 @@ const mapStateToProps = _state => {
 
   return {
     auth,
-    organizationId,
-    organization: _state.businesses.organization,
-    success: _state.adminProfile.publishSuccess,
     errors: _state.adminProfile.publishErrors,
+    organization: _state.businesses.organization,
+    organizationId,
+    success: _state.adminProfile.publishSuccess,
+    updatedOrganization: _state.adminProfile.updatedOrganization.data,
+    schemaValidated: _state.validateYup.success,
+    schemaFail: _state.validateYup.error,
   };
 };
 
@@ -212,6 +296,7 @@ const mapDispatchToProps = _dispatch => {
   return {
     snackbar: bindActionCreators(snackbarActions, _dispatch),
     profile: bindActionCreators(profileActions, _dispatch),
+    yupActions: bindActionCreators(yupActions, _dispatch),
   };
 };
 
@@ -235,10 +320,16 @@ Navigation.propTypes = {
   profile: PropTypes.shape({
     updatePublishStatus: PropTypes.func.isRequired,
   }),
+  schemaFail: PropTypes.bool,
+  schemaValidated: PropTypes.bool,
   snackbar: PropTypes.shape({
     showSnackbar: PropTypes.func.isRequired,
   }),
   success: PropTypes.bool,
+  updatedOrganization: PropTypes.shape({}),
+  yupActions: PropTypes.shape({
+    validateSchema: PropTypes.func,
+  }),
 };
 
 export default connect(

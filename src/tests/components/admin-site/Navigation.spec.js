@@ -10,7 +10,7 @@ import Navigation from '../../../components/admin-site/Navigation';
 const initialState = {
   adminProfile: {
     updatedOrganization: {
-      data: [],
+      data: {},
       loading: false,
       success: false,
       errors: [],
@@ -25,6 +25,10 @@ const initialState = {
   },
   businesses: {
     organization: {},
+  },
+  validateYup: {
+    success: false,
+    error: false,
   },
 };
 const mockStore = configureStore([thunk]);

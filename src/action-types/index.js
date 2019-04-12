@@ -7,6 +7,8 @@ import UserTypes from './user';
 import ErrorsTypes from './errors';
 import UserInformationTypes from './user-information';
 import AdminProfileTypes from './admin-profile';
+import ValidateYupTypes from './validate-yup';
+
 export {
   AdminBlogsTypes,
   AdminProfileTypes,
@@ -17,6 +19,7 @@ export {
   SnackbarTypes,
   UserInformationTypes,
   UserTypes,
+  ValidateYupTypes,
 };
 
 export default {
@@ -29,4 +32,5 @@ export default {
   SnackbarTypes,
   UserInformationTypes,
   UserTypes,
+  ValidateYupTypes,
 };

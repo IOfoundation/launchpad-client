@@ -145,6 +145,11 @@ const initialState = {
   errors: {
     userAuthorized: true,
   },
+  validateYup: {
+    loading: false,
+    success: false,
+    error: false,
+  },
 };
 
 export default initialState;
