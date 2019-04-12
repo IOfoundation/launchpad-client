@@ -107,6 +107,7 @@ const initialState = {
     errors: [],
     loading: true,
     location: {},
+    locationByIdSuccess: false,
     locations: [],
     noResults: false,
   },

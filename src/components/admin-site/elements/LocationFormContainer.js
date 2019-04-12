@@ -11,6 +11,7 @@ import Buttons from '../Buttons';
 
 import {getDate, timeConversion, falsyToString} from '@Utils';
 import {accesibility} from '@StaticData/data';
+import Loading from '@Shared/Loading';
 
 const LocationSchema = Yup.object().shape({
   locationName: Yup.string().required('Required'),
@@ -91,55 +92,58 @@ const emptyPhone = {
   countryExt: '',
 };
 
-const initialValues = {
-  locationName: '',
-  alternateName: '',
-  locationDescription: '',
-  isMainLocation: false,
-  locationEmail: '',
-  locationWebsite: '',
-  services: [],
-  streetAddress: {
-    address: '',
-    address2: '',
-    city: '',
-    state: '',
-    zip: '',
-  },
-  mailingAddress: {
-    attention: '',
-    address: '',
-    address2: '',
-    city: '',
-    state: '',
-    zip: '',
-  },
-  phones: [
-    {
-      phoneNumber: '',
-      ext: '',
-      vanityNumber: '',
-      numberType: '',
-      department: '',
-      countryExt: '',
+const emptyAccesibility = {
+  cd: false,
+  deafInterpreter: false,
+  disabledParking: false,
+  elevator: false,
+  ramp: false,
+  restroom: false,
+  tapeBraille: false,
+  tty: false,
+  wheelchair: false,
+  wheelchairVan: false,
+};
+
+const emtpyStreetAddress = {
+  address: '',
+  address2: '',
+  city: '',
+  state: '',
+  zip: '',
+};
+
+const emptyMailingAddress = {
+  attention: '',
+  address: '',
+  address2: '',
+  city: '',
+  state: '',
+  zip: '',
+};
+
+const getInitialValues = () => {
+  return {
+    locationName: '',
+    alternateName: '',
+    locationDescription: '',
+    isMainLocation: false,
+    locationEmail: '',
+    locationWebsite: '',
+    services: [],
+    streetAddress: {
+      ...emtpyStreetAddress,
     },
-  ],
-  languages: [],
-  hoursRegular: [],
-  hoursHolidays: [],
-  transportation: '',
-  accessibility: {
-    cd: false,
-    deafInterpreter: false,
-    disabledParking: false,
-    elevator: false,
-    ramp: false,
-    restroom: false,
-    tapeBraille: false,
-    tty: false,
-    wheelchair: false,
-    wheelchairVan: false,
-  },
+    mailingAddress: {
+      ...emptyMailingAddress,
+    },
+    phones: [{...emptyPhone}],
+    languages: [],
+    hoursRegular: [],
+    hoursHolidays: [],
+    transportation: '',
+    accessibility: {...emptyAccesibility},
+  };
 };
 
 class LocationFormContainer extends PureComponent {
@@ -242,13 +246,16 @@ class LocationFormContainer extends PureComponent {
   }
 
   _getAccessibility(options) {
-    return options.reduce((acc, option) => {
-      const activeAccesibility = accesibility.find(
-        data => option === data.value
-      );
-      acc[activeAccesibility.key] = true;
-      return acc;
-    }, initialValues.accessibility);
+    return options.reduce(
+      (acc, option) => {
+        const activeAccesibility = accesibility.find(
+          data => option === data.value
+        );
+        acc[activeAccesibility.key] = true;
+        return acc;
+      },
+      {...emptyAccesibility}
+    );
   }
 
   _getAccessibilityNames(checked) {
@@ -265,7 +272,7 @@ class LocationFormContainer extends PureComponent {
   _dataToForm(data) {
     this._apiData = data;
     return {
-      ...initialValues,
+      ...getInitialValues(),
       locationName: data.name || '',
       alternateName: data.alternate_name || '',
       locationDescription: data.description || '',
@@ -324,8 +331,47 @@ class LocationFormContainer extends PureComponent {
     this._submit();
   };
 
+  _getForm = (mode, id) => {
+    const {data, breakpoint, loadingFinished} = this.props;
+    let _initialValues;
+
+    if (mode === 'new') {
+      _initialValues = getInitialValues();
+    } else if (loadingFinished) {
+      _initialValues = this._dataToForm(data);
+    }
+
+    return (
+      <Formik
+        enableReinitialize={true}
+        initialValues={_initialValues}
+        onSubmit={values => {
+          const form = this._formToApi(values);
+          if (mode === 'new') {
+            console.log('new', form);
+          } else if (mode === 'edit') {
+            console.log('edit', form, id);
+          }
+        }}
+        render={_props => {
+          this._submit = _props.handleSubmit;
+          return <LocationForm {..._props} breakpoint={breakpoint} />;
+        }}
+        validateOnChange={true}
+        validationSchema={LocationSchema}
+      />
+    );
+  };
+
   render() {
-    const {data, breakpoint} = this.props;
+    const {router, loadingFinished} = this.props;
+    let form = <Loading />;
+
+    if (router.params.id === 'new') {
+      form = this._getForm('new');
+    } else if (loadingFinished) {
+      form = this._getForm('edit', router.params.id);
+    }
 
     return (
       <LandingComponent navigation={false}>
@@ -336,21 +382,7 @@ class LocationFormContainer extends PureComponent {
           cancelClicked={this.goToLocation}
           submitClicked={this.saveLocation}
         />
-        <Formik
-          enableReinitialize={true}
-          initialValues={this._dataToForm(data)}
-          onSubmit={values => {
-            const form = this._formToApi(values);
-            console.log(values);
-            console.log(form);
-          }}
-          render={_props => {
-            this._submit = _props.handleSubmit;
-            return <LocationForm {..._props} breakpoint={breakpoint} />;
-          }}
-          validateOnChange={true}
-          validationSchema={LocationSchema}
-        />
+        {form}
         <Buttons
           cancelClicked={this.goToLocation}
           hideCancelAction={false}
@@ -366,6 +398,7 @@ LocationFormContainer.propTypes = {
   data: PropTypes.shape({}),
   error: PropTypes.bool,
   isAuth: PropTypes.bool,
+  loadingFinished: PropTypes.bool,
   router: PropTypes.shape({
     push: PropTypes.func,
   }),

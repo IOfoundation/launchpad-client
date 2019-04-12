@@ -64,3 +64,10 @@ export const getLocatonById = id => {
     }
   };
 };
+
+export const setLoading = loading => {
+  return {
+    type: types.SET_LOADING,
+    loading,
+  };
+};

@@ -12,13 +12,17 @@ const Locations = props => {
     router.push(`/admin/location/${id}`);
   };
 
+  const createLocation = () => {
+    router.push('/admin/location/new');
+  };
+
   return (
     <LandingComponent navigation={true}>
       <Title
         titleText="Locations"
         hideCancelAction={true}
         submitLabel={'Add Location'}
-        submitClicked={createEditLocation}
+        submitClicked={createLocation}
       />
       <div style={{padding: 8}}>
         {locations.map(location => {

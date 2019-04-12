@@ -7,6 +7,7 @@ const initialState = {
   location: {},
   locations: [],
   noResults: false,
+  locationByIdSuccess: false,
 };
 
 export default function(state = initialState, action) {
@@ -50,8 +51,10 @@ export default function(state = initialState, action) {
     case types.GET_LOCATION_BY_ID_START: {
       return {
         ...state,
-        loading: true,
         error: false,
+        loading: true,
+        location: {},
+        locationByIdSuccess: false,
       };
     }
 
@@ -59,9 +62,9 @@ export default function(state = initialState, action) {
       const {location} = action;
       return {
         ...state,
-        location,
         loading: false,
-        error: false,
+        location,
+        locationByIdSuccess: true,
       };
     }
 
@@ -72,6 +75,14 @@ export default function(state = initialState, action) {
         errors,
         loading: false,
         error: true,
+      };
+    }
+
+    case types.SET_LOADING: {
+      const {loading} = action;
+      return {
+        ...state,
+        loading,
       };
     }
 

@@ -47,6 +47,7 @@ LocationsRoute.propTypes = {
   locations: PropTypes.arrayOf(PropTypes.shape({})),
   locationsActions: PropTypes.shape({
     getAllLocations: PropTypes.func,
+    setLoading: PropTypes.func,
   }),
   noResults: PropTypes.bool,
 };
