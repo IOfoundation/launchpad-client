@@ -139,7 +139,7 @@ class Navigation extends PureComponent {
             {'Publish'}
           </button>
         );
-        description = 'Unpublish';
+        description = 'Not Published';
       }
 
       status = (
