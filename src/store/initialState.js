@@ -118,6 +118,13 @@ const initialState = {
     locations: [],
     noResults: false,
   },
+  getLocationByOrganization: {
+    error: false,
+    errors: [],
+    loading: false,
+    locations: [],
+    success: false,
+  },
   user: {
     loading: false,
     authorization: '',

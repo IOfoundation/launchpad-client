@@ -4,13 +4,10 @@ import {withRouter} from 'react-router';
 
 import LandingComponent from '../Landing';
 import Title from '../Title';
-import Item from './Locations/Item';
+import Items from './Locations/Items';
 
 const Locations = props => {
   const {router, locations} = props;
-  const createEditLocation = id => {
-    router.push(`/admin/location/${id}`);
-  };
 
   const createLocation = () => {
     router.push('/admin/location/new');
@@ -25,19 +22,7 @@ const Locations = props => {
         submitClicked={createLocation}
       />
       <div style={{padding: 8}}>
-        {locations.map(location => {
-          const {address} = location;
-          return (
-            <Item
-              key={location.id}
-              name={location.name}
-              address={` ${address.address_1}, ${address.city}, ${
-                address.state_province
-              } ${address.postal_code}`}
-              clicked={() => createEditLocation(location.id)}
-            />
-          );
-        })}
+        <Items locations={locations} router={router} />
       </div>
     </LandingComponent>
   );
@@ -46,7 +31,7 @@ const Locations = props => {
 Locations.propTypes = {
   locations: PropTypes.arrayOf(PropTypes.shape({})),
   router: PropTypes.shape({
-    push: PropTypes.func,
+    push: PropTypes.func.isRequired,
   }),
 };
 

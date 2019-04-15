@@ -7,18 +7,24 @@ import {PropTypes} from 'prop-types';
 import Locations from '../../components/admin-site/elements/Locations';
 import Loading from '@Shared/Loading';
 
-import * as locationsActions from '@Actions/locations';
+//import * as locationsActions from '@Actions/locations';
+import * as locationsActions from '@Actions/locations/getByOrganization';
 
 class LocationsRoute extends PureComponent {
   componentDidMount() {
-    this.props.locationsActions.getAllLocations();
+    const {organizationId, Authorization} = this.props;
+
+    this.props.locationsActions.getLocationByOrganization({
+      organizationId,
+      Authorization,
+    });
   }
 
   render() {
-    const {locations} = this.props;
+    const {locations, loading} = this.props;
     let locationsElement = <Loading />;
 
-    if (locations.length > 0) {
+    if (locations.length > 0 || !loading) {
       locationsElement = <Locations locations={locations} />;
     }
 
@@ -27,11 +33,18 @@ class LocationsRoute extends PureComponent {
 }
 
 const mapStateToProps = _state => {
+  const organizationId =
+    _state.user.organizationId || localStorage.getItem('organizationId');
+  const auth = _state.user.authorization || localStorage.getItem('userAuth');
+
   return {
     error: _state.user.error,
     isAuth: _state.user.authorization !== '',
-    locations: _state.locations.locations,
-    noResults: _state.locations.locations.length === 0,
+    Authorization: auth,
+    locations: _state.getLocationByOrganization.locations,
+    noResults: _state.getLocationByOrganization.locations.length === 0,
+    loading: _state.getLocationByOrganization.loading,
+    organizationId,
   };
 };
 
@@ -42,14 +55,17 @@ const mapDispatchToProps = _dispatch => {
 };
 
 LocationsRoute.propTypes = {
+  Authorization: PropTypes.string,
   error: PropTypes.bool,
   isAuth: PropTypes.bool,
+  loading: PropTypes.bool,
   locations: PropTypes.arrayOf(PropTypes.shape({})),
   locationsActions: PropTypes.shape({
-    getAllLocations: PropTypes.func,
+    getLocationByOrganization: PropTypes.func,
     setLoading: PropTypes.func,
   }),
   noResults: PropTypes.bool,
+  organizationId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
 export default connect(

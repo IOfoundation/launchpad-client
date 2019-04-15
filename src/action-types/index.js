@@ -5,6 +5,7 @@ import BusinessTypes from './business';
 import CreateLocationTypes from './locations/create';
 import ErrorsTypes from './errors';
 import EventsTypes from './events';
+import GetLocationByOrganizationTypes from './locations/getByOrganization';
 import LocationsTypes from './locations';
 import SnackbarTypes from './snackbar';
 import UserInformationTypes from './user-information';
@@ -17,8 +18,10 @@ export {
   BlogsTypes,
   BusinessTypes,
   CreateLocationTypes,
+  CreateLocationTypes,
   ErrorsTypes,
   EventsTypes,
+  GetLocationByOrganizationTypes,
   LocationsTypes,
   SnackbarTypes,
   UserInformationTypes,
@@ -32,8 +35,10 @@ export default {
   BlogsTypes,
   BusinessTypes,
   CreateLocationTypes,
+  CreateLocationTypes,
   ErrorsTypes,
   EventsTypes,
+  GetLocationByOrganizationTypes,
   LocationsTypes,
   SnackbarTypes,
   UserInformationTypes,

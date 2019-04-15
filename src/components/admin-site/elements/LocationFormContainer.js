@@ -155,14 +155,20 @@ class LocationFormContainer extends PureComponent {
   _submit;
   _apiData;
   _getAddress(address) {
+    if (address !== null) {
+      return {
+        id: address.id,
+        address: (address && address.address_1) || '',
+        address2: (address && address.address_2) || '',
+        city: (address && address.city) || '',
+        state: (address && address.state_province) || '',
+        zip: (address && address.postal_code) || '',
+        attention: (address && address.attention) || '',
+      };
+    }
+
     return {
-      id: address.id,
-      address: (address && address.address_1) || '',
-      address2: (address && address.address_2) || '',
-      city: (address && address.city) || '',
-      state: (address && address.state_province) || '',
-      zip: (address && address.postal_code) || '',
-      attention: (address && address.attention) || '',
+      ...emtpyStreetAddress,
     };
   }
 
@@ -371,8 +377,8 @@ class LocationFormContainer extends PureComponent {
               location,
             });
           } else if (mode === 'edit') {
-            const location = this._editFormToApi(values);
-            console.log('edit', location, locationId);
+            //const location = this._editFormToApi(values);
+            //console.log('edit', location, locationId);
           }
         }}
         render={_props => {

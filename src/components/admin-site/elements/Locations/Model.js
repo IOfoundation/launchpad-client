@@ -29,9 +29,7 @@ class Location {
       this.description = locationDescription;
     }
 
-    if (isMainLocation) {
-      this.active = isMainLocation;
-    }
+    this.active = isMainLocation;
 
     if (locationEmail) {
       this.email = locationEmail;
@@ -88,6 +86,8 @@ class Location {
     if (phones.length > 1 || phones[0].phoneNumber) {
       this.phones_attributes = this._getApiPhones(phones);
     }
+
+    this.virtual = true;
   }
 
   _getApiHours(schedule) {
