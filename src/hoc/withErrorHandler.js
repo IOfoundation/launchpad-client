@@ -13,12 +13,13 @@ const withErrorHandler = WrapperComponent => {
     };
 
     componentDidMount() {
-      const {auth, userInformation, Authorization} = this.props;
+      const {Authorization, userInformation} = this.props;
 
-      if (auth === false) {
+      if (Boolean(Authorization) === false) {
         this._displayErrorAndRedirect();
+      } else {
+        userInformation.getUserInformation({Authorization});
       }
-      userInformation.getUserInformation({Authorization});
     }
 
     componentDidUpdate() {
@@ -36,6 +37,9 @@ const withErrorHandler = WrapperComponent => {
         message: 'Unauthorized, please login again',
       });
       router.push('/admin-login');
+      localStorage.removeItem('userAuth');
+      localStorage.removeItem('userEmail');
+      localStorage.removeItem('organizationId');
     }
 
     render() {
@@ -52,7 +56,6 @@ const withErrorHandler = WrapperComponent => {
 
     return {
       userAuthorized: _state.errors.userAuthorized,
-      auth: auth !== '',
       Authorization: auth,
     };
   }
@@ -64,7 +67,6 @@ const withErrorHandler = WrapperComponent => {
   }
 
   WithErrorHandler.propTypes = {
-    auth: PropTypes.bool,
     Authorization: PropTypes.string,
     router: PropTypes.shape({
       push: PropTypes.func.isRequired,

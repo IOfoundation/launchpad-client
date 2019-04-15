@@ -66,8 +66,11 @@ export const getAdminPost = (page, type = 'drafts', organizationId) => {
           getAdminPostedPostsSuccess(httpResponse.data, totalPages, page)
         );
       }
-    } catch (error) {
-      dispatch(getAdminPostsError(error));
+    } catch (errors) {
+      if (errors && errors.status === 401) {
+        dispatch(errorsActions.userUnauthorized());
+      }
+      dispatch(getAdminPostsError(errors));
     }
   };
 };
