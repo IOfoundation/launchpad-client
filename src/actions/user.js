@@ -97,9 +97,9 @@ export const signOut = Authorization => {
         null,
         config
       );
-      localStorage.removeItem('userAuth');
-      localStorage.removeItem('userEmail');
-      localStorage.removeItem('organizationId');
+      sessionStorage.removeItem('userAuth');
+      sessionStorage.removeItem('userEmail');
+      sessionStorage.removeItem('organizationId');
       dispatch(signOutSuccess(httpResponse.data));
       dispatch(errorsActions.userUnauthorized());
     } catch (error) {
@@ -137,9 +137,12 @@ export const login = ({password, email}) => {
         organizationId: httpResponse.data.organization_id,
       };
 
-      localStorage.setItem('userAuth', httpResponse.headers.authorization);
-      localStorage.setItem('userEmail', email);
-      localStorage.setItem('organizationId', httpResponse.data.organization_id);
+      sessionStorage.setItem('userAuth', httpResponse.headers.authorization);
+      sessionStorage.setItem('userEmail', email);
+      sessionStorage.setItem(
+        'organizationId',
+        httpResponse.data.organization_id
+      );
 
       dispatch(loginSuccess(data));
       dispatch(errorsActions.userAuthorized());

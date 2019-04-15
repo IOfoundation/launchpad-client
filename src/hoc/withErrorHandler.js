@@ -37,9 +37,9 @@ const withErrorHandler = WrapperComponent => {
         message: 'Unauthorized, please login again',
       });
       router.push('/admin-login');
-      localStorage.removeItem('userAuth');
-      localStorage.removeItem('userEmail');
-      localStorage.removeItem('organizationId');
+      sessionStorage.removeItem('userAuth');
+      sessionStorage.removeItem('userEmail');
+      sessionStorage.removeItem('organizationId');
     }
 
     render() {
@@ -52,7 +52,8 @@ const withErrorHandler = WrapperComponent => {
   }
 
   function mapStateToProps(_state) {
-    const auth = _state.user.authorization || localStorage.getItem('userAuth');
+    const auth =
+      _state.user.authorization || sessionStorage.getItem('userAuth');
 
     return {
       userAuthorized: _state.errors.userAuthorized,
