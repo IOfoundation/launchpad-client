@@ -132,7 +132,11 @@ SelectElement.propTypes = {
     })
   ),
   type: PropTypes.string,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+    PropTypes.number,
+  ]),
 };
 
 export default withStyles(styles)(SelectElement);

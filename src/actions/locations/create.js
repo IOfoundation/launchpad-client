@@ -21,20 +21,39 @@ const createLocationError = errors => {
   };
 };
 
-export const createLocation = ({Authorization, location, organizationId}) => {
+export const createLocation = ({
+  Authorization,
+  location,
+  organizationId,
+  locationId,
+  mode,
+}) => {
   return async dispatch => {
     try {
       dispatch(createLocationStart());
       const config = {
         headers: {Authorization},
       };
-      const httpResponse = await httpRequest.post(
-        `/api/organizations/${organizationId}/locations`,
-        {
-          ...location,
-        },
-        config
-      );
+      let httpResponse;
+
+      if (mode === 'new') {
+        httpResponse = await httpRequest.post(
+          `/api/organizations/${organizationId}/locations`,
+          {
+            ...location,
+          },
+          config
+        );
+      } else if (mode === 'edit') {
+        httpResponse = await httpRequest.put(
+          `/api/locations/${locationId}`,
+          {
+            ...location,
+          },
+          config
+        );
+      }
+
       dispatch(createLocationSuccess(httpResponse.data));
     } catch (errors) {
       dispatch(createLocationError(errors.data));

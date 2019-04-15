@@ -2,20 +2,23 @@ import {accesibility} from '@StaticData/data';
 
 class Location {
   constructor({
-    locationName,
+    accessibility,
     alternateName,
-    locationDescription,
+    deletedPhones,
+    hoursHolidays,
+    hoursRegular,
     isMainLocation,
+    languages,
+    locationDescription,
     locationEmail,
+    locationName,
     locationWebsite,
-    streetAddress,
     mailingAddress,
     phones,
-    languages,
-    hoursRegular,
-    hoursHolidays,
+    streetAddress,
     transportation,
-    accessibility,
+    delete_hoursRegular,
+    delete_hoursHolidays,
   }) {
     if (locationName) {
       this.name = locationName;
@@ -75,46 +78,101 @@ class Location {
       this.accessibility = accessibilityNames;
     }
 
-    if (hoursRegular.length > 0) {
+    if (hoursRegular.length > 0 || delete_hoursRegular.length > 0) {
       this.regular_schedules_attributes = this._getApiHours(hoursRegular);
+
+      if (delete_hoursRegular.length > 0) {
+        this.regular_schedules_attributes = [
+          ...this.regular_schedules_attributes,
+          ...delete_hoursRegular,
+        ];
+      }
     }
 
-    if (hoursHolidays.length > 0) {
-      this.holiday_schedules_attributes = this._getApiHours(hoursHolidays);
+    if (hoursHolidays.length > 0 || delete_hoursHolidays.length > 0) {
+      this.holiday_schedules_attributes = this._getHolidayHours(hoursHolidays);
+
+      if (delete_hoursHolidays.length > 0) {
+        this.holiday_schedules_attributes = [
+          ...this.holiday_schedules_attributes,
+          ...delete_hoursHolidays,
+        ];
+      }
     }
 
     if (phones.length > 1 || phones[0].phoneNumber) {
       this.phones_attributes = this._getApiPhones(phones);
+
+      if (deletedPhones.length > 0) {
+        this.phones_attributes = [...this.phones_attributes, ...deletedPhones];
+      }
     }
 
     this.virtual = true;
   }
 
-  _getApiHours(schedule) {
-    return schedule.map(hour => {
-      return {
-        weekday: hour.open.day,
-        opens_at: hour.open.fullDate,
-        closes_at: hour.closes.fullDate,
+  _getApiHours(schedules) {
+    return schedules.map(schedule => {
+      const mapSchedule = {
+        weekday: schedule.day,
+        opens_at: schedule.opensAt,
+        closes_at: schedule.closesAt,
       };
+
+      if (schedule.id) {
+        mapSchedule.id = schedule.id;
+      }
+
+      return mapSchedule;
+    });
+  }
+
+  _getHolidayHours(schedules) {
+    return schedules.map(schedule => {
+      const mapSchedule = {
+        closes_at: schedule.closesAt,
+        end_date: schedule.endDate,
+        opens_at: schedule.opensAt,
+        start_date: schedule.startDate,
+      };
+
+      if (schedule.closed === 'true') {
+        mapSchedule.closed = true;
+      } else if (schedule.closed === 'false') {
+        mapSchedule.closed = false;
+      }
+
+      if (schedule.id) {
+        mapSchedule.id = schedule.id;
+      }
+
+      return mapSchedule;
     });
   }
 
   _getApiPhones(phones) {
-    return phones.map(phone => ({
-      department: phone.department,
-      extension: phone.ext,
-      number: phone.phoneNumber,
-      number_type: phone.numberType,
-      vanity_number: phone.vanityNumber,
-    }));
+    return phones.map(phone => {
+      const mapPhone = {
+        department: phone.department,
+        extension: phone.ext,
+        number: phone.phoneNumber,
+        number_type: phone.numberType,
+        vanity_number: phone.vanityNumber,
+      };
+
+      if (phone.id) {
+        mapPhone.id = phone.id;
+      }
+
+      return mapPhone;
+    });
   }
 
   _getAccessibilityNames(checked) {
     return Object.keys(checked).reduce((acc, key) => {
       if (checked[key]) {
         const activeAccesibility = accesibility.find(data => key === data.key);
-        acc.push(activeAccesibility.value);
+        acc.push(activeAccesibility.key);
       }
 
       return acc;

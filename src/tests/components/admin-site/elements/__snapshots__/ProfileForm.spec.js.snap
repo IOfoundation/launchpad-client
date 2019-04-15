@@ -641,12 +641,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                         fullWidth={true}
                                         id="name"
                                         inputComponent="input"
-                                        inputProps={
-                                          Object {
-                                            "autoComplete": "off",
-                                            "step": 300,
-                                          }
-                                        }
+                                        inputProps={Object {}}
                                         multiline={false}
                                         onBlur={[MockFunction]}
                                         onChange={[Function]}
@@ -678,12 +673,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                           fullWidth={true}
                                           id="name"
                                           inputComponent="input"
-                                          inputProps={
-                                            Object {
-                                              "autoComplete": "off",
-                                              "step": 300,
-                                            }
-                                          }
+                                          inputProps={Object {}}
                                           muiFormControl={
                                             Object {
                                               "adornedStart": false,
@@ -712,7 +702,6 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                           >
                                             <input
                                               aria-invalid={false}
-                                              autoComplete="off"
                                               className="MuiInputBase-input-157 MuiInput-input-142"
                                               disabled={false}
                                               id="name"
@@ -720,7 +709,6 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                               onChange={[Function]}
                                               onFocus={[Function]}
                                               required={false}
-                                              step={300}
                                               type="text"
                                               value=""
                                             />
@@ -2155,12 +2143,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                     }
                                     fullWidth={true}
                                     id="description"
-                                    inputProps={
-                                      Object {
-                                        "autoComplete": "off",
-                                        "step": 300,
-                                      }
-                                    }
+                                    inputProps={Object {}}
                                     multiline={true}
                                     onBlur={[MockFunction]}
                                     onChange={[Function]}
@@ -2565,12 +2548,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                 <WithStyles(Input)
                                   fullWidth={true}
                                   id="contactEmail"
-                                  inputProps={
-                                    Object {
-                                      "autoComplete": "off",
-                                      "step": 300,
-                                    }
-                                  }
+                                  inputProps={Object {}}
                                   onBlur={[MockFunction]}
                                   onChange={[Function]}
                                   type="text"
@@ -3028,12 +3006,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                         fullWidth={true}
                                         id="accreditations"
                                         inputComponent="input"
-                                        inputProps={
-                                          Object {
-                                            "autoComplete": "off",
-                                            "step": 300,
-                                          }
-                                        }
+                                        inputProps={Object {}}
                                         multiline={false}
                                         onBlur={[MockFunction]}
                                         onChange={[Function]}
@@ -3066,12 +3039,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                           fullWidth={true}
                                           id="accreditations"
                                           inputComponent="input"
-                                          inputProps={
-                                            Object {
-                                              "autoComplete": "off",
-                                              "step": 300,
-                                            }
-                                          }
+                                          inputProps={Object {}}
                                           muiFormControl={
                                             Object {
                                               "adornedStart": false,
@@ -3101,7 +3069,6 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                             <input
                                               aria-describedby="accreditations-helper-text"
                                               aria-invalid={false}
-                                              autoComplete="off"
                                               className="MuiInputBase-input-157 MuiInput-input-142"
                                               disabled={false}
                                               id="accreditations"
@@ -3109,7 +3076,6 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                               onChange={[Function]}
                                               onFocus={[Function]}
                                               required={false}
-                                              step={300}
                                               type="text"
                                               value=""
                                             />
@@ -3497,7 +3463,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                           handleBlur={[MockFunction]}
                           handleChange={[MockFunction]}
                           id="dateIncorporation"
-                          key="dateIncorporation"
+                          inputProps={Object {}}
                           label="Date of Incorporation"
                           type="date"
                           value=""
@@ -3645,20 +3611,41 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                                 }
                                               }
                                             >
-                                              <label
-                                                className="MuiFormLabel-root-127 MuiInputLabel-root-116 MuiInputLabel-formControl-121 MuiInputLabel-animated-124 MuiInputLabel-shrink-123"
-                                                data-shrink={true}
-                                                htmlFor="dateIncorporation"
-                                              >
-                                                Date of Incorporation
-                                              </label>
-                                            </FormLabel>
-                                          </WithFormControlContext(FormLabel)>
-                                        </WithStyles(WithFormControlContext(FormLabel))>
-                                      </InputLabel>
-                                    </WithFormControlContext(InputLabel)>
-                                  </WithStyles(WithFormControlContext(InputLabel))>
-                                  <WithStyles(Input)
+                                              Date of Incorporation
+                                            </label>
+                                          </FormLabel>
+                                        </WithFormControlContext(FormLabel)>
+                                      </WithStyles(WithFormControlContext(FormLabel))>
+                                    </InputLabel>
+                                  </WithFormControlContext(InputLabel)>
+                                </WithStyles(WithFormControlContext(InputLabel))>
+                                <WithStyles(Input)
+                                  fullWidth={true}
+                                  id="dateIncorporation"
+                                  inputProps={Object {}}
+                                  onBlur={[MockFunction]}
+                                  onChange={[Function]}
+                                  type="text"
+                                  value=""
+                                >
+                                  <Input
+                                    classes={
+                                      Object {
+                                        "disabled": "MuiInput-disabled-137",
+                                        "error": "MuiInput-error-139",
+                                        "focused": "MuiInput-focused-136",
+                                        "formControl": "MuiInput-formControl-135",
+                                        "fullWidth": "MuiInput-fullWidth-141",
+                                        "input": "MuiInput-input-142",
+                                        "inputMarginDense": "MuiInput-inputMarginDense-143",
+                                        "inputMultiline": "MuiInput-inputMultiline-144",
+                                        "inputType": "MuiInput-inputType-145",
+                                        "inputTypeSearch": "MuiInput-inputTypeSearch-146",
+                                        "multiline": "MuiInput-multiline-140",
+                                        "root": "MuiInput-root-134",
+                                        "underline": "MuiInput-underline-138",
+                                      }
+                                    }
                                     fullWidth={true}
                                     id="dateIncorporation"
                                     inputProps={Object {}}
@@ -3687,7 +3674,9 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                       }
                                       fullWidth={true}
                                       id="dateIncorporation"
+                                      inputComponent="input"
                                       inputProps={Object {}}
+                                      multiline={false}
                                       onBlur={[MockFunction]}
                                       onChange={[Function]}
                                       type="text"
@@ -3718,12 +3707,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                         fullWidth={true}
                                         id="dateIncorporation"
                                         inputComponent="input"
-                                        inputProps={
-                                          Object {
-                                            "autoComplete": "off",
-                                            "step": 300,
-                                          }
-                                        }
+                                        inputProps={Object {}}
                                         multiline={false}
                                         onBlur={[MockFunction]}
                                         onChange={[Function]}
@@ -3755,12 +3739,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                           fullWidth={true}
                                           id="dateIncorporation"
                                           inputComponent="input"
-                                          inputProps={
-                                            Object {
-                                              "autoComplete": "off",
-                                              "step": 300,
-                                            }
-                                          }
+                                          inputProps={Object {}}
                                           muiFormControl={
                                             Object {
                                               "adornedStart": false,
@@ -3789,7 +3768,6 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                           >
                                             <input
                                               aria-invalid={false}
-                                              autoComplete="off"
                                               className="MuiInputBase-input-157 MuiInput-input-142"
                                               disabled={false}
                                               id="dateIncorporation"
@@ -3797,7 +3775,6 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                               onChange={[Function]}
                                               onFocus={[Function]}
                                               required={false}
-                                              step={300}
                                               type="text"
                                               value=""
                                             />
@@ -3842,12 +3819,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                           InputLabelProps={null}
                           fullWidth={true}
                           id="legalStatus"
-                          inputProps={
-                            Object {
-                              "autoComplete": "off",
-                              "step": 300,
-                            }
-                          }
+                          inputProps={Object {}}
                           label="Legal Status"
                           onBlur={[MockFunction]}
                           onChange={[Function]}
@@ -3984,12 +3956,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                 <WithStyles(Input)
                                   fullWidth={true}
                                   id="legalStatus"
-                                  inputProps={
-                                    Object {
-                                      "autoComplete": "off",
-                                      "step": 300,
-                                    }
-                                  }
+                                  inputProps={Object {}}
                                   onBlur={[MockFunction]}
                                   onChange={[Function]}
                                   type="text"
@@ -4041,7 +4008,9 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                       }
                                       fullWidth={true}
                                       id="legalStatus"
+                                      inputComponent="input"
                                       inputProps={Object {}}
+                                      multiline={false}
                                       onBlur={[MockFunction]}
                                       onChange={[Function]}
                                       type="text"
@@ -4101,88 +4070,61 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                           id="legalStatus"
                                           inputComponent="input"
                                           inputProps={Object {}}
+                                          muiFormControl={
+                                            Object {
+                                              "adornedStart": false,
+                                              "disabled": false,
+                                              "error": false,
+                                              "filled": false,
+                                              "focused": false,
+                                              "margin": "none",
+                                              "onBlur": [Function],
+                                              "onEmpty": [Function],
+                                              "onFilled": [Function],
+                                              "onFocus": [Function],
+                                              "required": false,
+                                              "variant": "standard",
+                                            }
+                                          }
                                           multiline={false}
                                           onBlur={[MockFunction]}
                                           onChange={[Function]}
                                           type="text"
                                           value=""
                                         >
-                                          <InputBase
-                                            classes={
-                                              Object {
-                                                "adornedEnd": "MuiInputBase-adornedEnd-152",
-                                                "adornedStart": "MuiInputBase-adornedStart-151",
-                                                "disabled": "MuiInputBase-disabled-150 MuiInput-disabled-137",
-                                                "error": "MuiInputBase-error-153 MuiInput-error-139",
-                                                "focused": "MuiInputBase-focused-149 MuiInput-focused-136",
-                                                "formControl": "MuiInputBase-formControl-148 MuiInput-formControl-135",
-                                                "fullWidth": "MuiInputBase-fullWidth-156 MuiInput-fullWidth-141",
-                                                "input": "MuiInputBase-input-157 MuiInput-input-142",
-                                                "inputAdornedEnd": "MuiInputBase-inputAdornedEnd-163",
-                                                "inputAdornedStart": "MuiInputBase-inputAdornedStart-162",
-                                                "inputMarginDense": "MuiInputBase-inputMarginDense-158 MuiInput-inputMarginDense-143",
-                                                "inputMultiline": "MuiInputBase-inputMultiline-159 MuiInput-inputMultiline-144",
-                                                "inputType": "MuiInputBase-inputType-160 MuiInput-inputType-145",
-                                                "inputTypeSearch": "MuiInputBase-inputTypeSearch-161 MuiInput-inputTypeSearch-146",
-                                                "marginDense": "MuiInputBase-marginDense-154",
-                                                "multiline": "MuiInputBase-multiline-155 MuiInput-multiline-140",
-                                                "root": "MuiInputBase-root-147 MuiInput-root-134 MuiInput-underline-138",
-                                              }
-                                            }
-                                            fullWidth={true}
-                                            id="legalStatus"
-                                            inputComponent="input"
-                                            inputProps={Object {}}
-                                            muiFormControl={
-                                              Object {
-                                                "adornedStart": false,
-                                                "disabled": false,
-                                                "error": false,
-                                                "filled": false,
-                                                "focused": false,
-                                                "margin": "none",
-                                                "onBlur": [Function],
-                                                "onEmpty": [Function],
-                                                "onFilled": [Function],
-                                                "onFocus": [Function],
-                                                "required": false,
-                                                "variant": "standard",
-                                              }
-                                            }
-                                            multiline={false}
-                                            onBlur={[MockFunction]}
-                                            onChange={[Function]}
-                                            type="text"
-                                            value=""
+                                          <div
+                                            className="MuiInputBase-root-147 MuiInput-root-134 MuiInput-underline-138 MuiInputBase-fullWidth-156 MuiInput-fullWidth-141 MuiInputBase-formControl-148 MuiInput-formControl-135"
+                                            onClick={[Function]}
                                           >
-                                            <div
-                                              className="MuiInputBase-root-147 MuiInput-root-134 MuiInput-underline-138 MuiInputBase-fullWidth-156 MuiInput-fullWidth-141 MuiInputBase-formControl-148 MuiInput-formControl-135"
-                                              onClick={[Function]}
-                                            >
-                                              <input
-                                                aria-invalid={false}
-                                                className="MuiInputBase-input-157 MuiInput-input-142"
-                                                disabled={false}
-                                                id="legalStatus"
-                                                onBlur={[Function]}
-                                                onChange={[Function]}
-                                                onFocus={[Function]}
-                                                required={false}
-                                                type="text"
-                                                value=""
-                                              />
-                                            </div>
-                                          </InputBase>
-                                        </WithFormControlContext(InputBase)>
-                                      </WithStyles(WithFormControlContext(InputBase))>
-                                    </Input>
-                                  </WithStyles(Input)>
-                                </div>
-                              </FormControl>
-                            </WithStyles(FormControl)>
-                          </TextField>
-                          <div
-                            className="admin-login-form__input__error-wrapper "
+                                            <input
+                                              aria-invalid={false}
+                                              className="MuiInputBase-input-157 MuiInput-input-142"
+                                              disabled={false}
+                                              id="legalStatus"
+                                              onBlur={[Function]}
+                                              onChange={[Function]}
+                                              onFocus={[Function]}
+                                              required={false}
+                                              type="text"
+                                              value=""
+                                            />
+                                          </div>
+                                        </InputBase>
+                                      </WithFormControlContext(InputBase)>
+                                    </WithStyles(WithFormControlContext(InputBase))>
+                                  </Input>
+                                </WithStyles(Input)>
+                              </div>
+                            </FormControl>
+                          </WithStyles(FormControl)>
+                        </TextField>
+                        <div
+                          className="admin-login-form__input__error-wrapper "
+                        >
+                          <FormikConnect(ErrorMessageImpl)
+                            className="admin-login-form__error"
+                            component="div"
+                            name="legalStatus"
                           >
                             <FormikConnect(ErrorMessageImpl)
                               className="admin-login-form__error"
@@ -4332,7 +4274,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                           handleBlur={[MockFunction]}
                           handleChange={[MockFunction]}
                           id="fundingSources"
-                          key="fundingSources"
+                          inputProps={Object {}}
                           label="Funding Sources"
                           type="text"
                           value=""
@@ -4484,12 +4426,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                 <WithStyles(Input)
                                   fullWidth={true}
                                   id="fundingSources"
-                                  inputProps={
-                                    Object {
-                                      "autoComplete": "off",
-                                      "step": 300,
-                                    }
-                                  }
+                                  inputProps={Object {}}
                                   onBlur={[MockFunction]}
                                   onChange={[Function]}
                                   type="text"
@@ -4541,7 +4478,9 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                       }
                                       fullWidth={true}
                                       id="fundingSources"
+                                      inputComponent="input"
                                       inputProps={Object {}}
+                                      multiline={false}
                                       onBlur={[MockFunction]}
                                       onChange={[Function]}
                                       type="text"
@@ -4601,6 +4540,22 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                           id="fundingSources"
                                           inputComponent="input"
                                           inputProps={Object {}}
+                                          muiFormControl={
+                                            Object {
+                                              "adornedStart": false,
+                                              "disabled": false,
+                                              "error": false,
+                                              "filled": false,
+                                              "focused": false,
+                                              "margin": "none",
+                                              "onBlur": [Function],
+                                              "onEmpty": [Function],
+                                              "onFilled": [Function],
+                                              "onFocus": [Function],
+                                              "required": false,
+                                              "variant": "standard",
+                                            }
+                                          }
                                           multiline={false}
                                           onBlur={[MockFunction]}
                                           onChange={[Function]}
@@ -4655,34 +4610,35 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                             type="text"
                                             value=""
                                           >
-                                            <div
-                                              className="MuiInputBase-root-147 MuiInput-root-134 MuiInput-underline-138 MuiInputBase-fullWidth-156 MuiInput-fullWidth-141 MuiInputBase-formControl-148 MuiInput-formControl-135"
-                                              onClick={[Function]}
-                                            >
-                                              <input
-                                                aria-invalid={false}
-                                                className="MuiInputBase-input-157 MuiInput-input-142"
-                                                disabled={false}
-                                                id="fundingSources"
-                                                onBlur={[Function]}
-                                                onChange={[Function]}
-                                                onFocus={[Function]}
-                                                required={false}
-                                                type="text"
-                                                value=""
-                                              />
-                                            </div>
-                                          </InputBase>
-                                        </WithFormControlContext(InputBase)>
-                                      </WithStyles(WithFormControlContext(InputBase))>
-                                    </Input>
-                                  </WithStyles(Input)>
-                                </div>
-                              </FormControl>
-                            </WithStyles(FormControl)>
-                          </TextField>
-                          <div
-                            className="admin-login-form__input__error-wrapper "
+                                            <input
+                                              aria-invalid={false}
+                                              className="MuiInputBase-input-157 MuiInput-input-142"
+                                              disabled={false}
+                                              id="fundingSources"
+                                              onBlur={[Function]}
+                                              onChange={[Function]}
+                                              onFocus={[Function]}
+                                              required={false}
+                                              type="text"
+                                              value=""
+                                            />
+                                          </div>
+                                        </InputBase>
+                                      </WithFormControlContext(InputBase)>
+                                    </WithStyles(WithFormControlContext(InputBase))>
+                                  </Input>
+                                </WithStyles(Input)>
+                              </div>
+                            </FormControl>
+                          </WithStyles(FormControl)>
+                        </TextField>
+                        <div
+                          className="admin-login-form__input__error-wrapper "
+                        >
+                          <FormikConnect(ErrorMessageImpl)
+                            className="admin-login-form__error"
+                            component="div"
+                            name="fundingSources"
                           >
                             <FormikConnect(ErrorMessageImpl)
                               className="admin-login-form__error"
@@ -4998,7 +4954,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                           handleChange={[MockFunction]}
                           helperText="You can enter multiple terms in this box by pressing the comma key after each one."
                           id="licenses"
-                          key="licenses"
+                          inputProps={Object {}}
                           label="Licenses"
                           type="text"
                           value=""
@@ -5139,20 +5095,25 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                                 }
                                               }
                                             >
-                                              <label
-                                                className="MuiFormLabel-root-127 MuiInputLabel-root-116 MuiInputLabel-formControl-121 MuiInputLabel-animated-124"
-                                                data-shrink={false}
-                                                htmlFor="licenses"
-                                              >
-                                                Licenses
-                                              </label>
-                                            </FormLabel>
-                                          </WithFormControlContext(FormLabel)>
-                                        </WithStyles(WithFormControlContext(FormLabel))>
-                                      </InputLabel>
-                                    </WithFormControlContext(InputLabel)>
-                                  </WithStyles(WithFormControlContext(InputLabel))>
-                                  <WithStyles(Input)
+                                              Licenses
+                                            </label>
+                                          </FormLabel>
+                                        </WithFormControlContext(FormLabel)>
+                                      </WithStyles(WithFormControlContext(FormLabel))>
+                                    </InputLabel>
+                                  </WithFormControlContext(InputLabel)>
+                                </WithStyles(WithFormControlContext(InputLabel))>
+                                <WithStyles(Input)
+                                  aria-describedby="licenses-helper-text"
+                                  fullWidth={true}
+                                  id="licenses"
+                                  inputProps={Object {}}
+                                  onBlur={[MockFunction]}
+                                  onChange={[Function]}
+                                  type="text"
+                                  value=""
+                                >
+                                  <Input
                                     aria-describedby="licenses-helper-text"
                                     fullWidth={true}
                                     id="licenses"
@@ -5183,7 +5144,9 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                       }
                                       fullWidth={true}
                                       id="licenses"
+                                      inputComponent="input"
                                       inputProps={Object {}}
+                                      multiline={false}
                                       onBlur={[MockFunction]}
                                       onChange={[Function]}
                                       type="text"
@@ -5215,12 +5178,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                         fullWidth={true}
                                         id="licenses"
                                         inputComponent="input"
-                                        inputProps={
-                                          Object {
-                                            "autoComplete": "off",
-                                            "step": 300,
-                                          }
-                                        }
+                                        inputProps={Object {}}
                                         multiline={false}
                                         onBlur={[MockFunction]}
                                         onChange={[Function]}
@@ -5253,12 +5211,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                           fullWidth={true}
                                           id="licenses"
                                           inputComponent="input"
-                                          inputProps={
-                                            Object {
-                                              "autoComplete": "off",
-                                              "step": 300,
-                                            }
-                                          }
+                                          inputProps={Object {}}
                                           muiFormControl={
                                             Object {
                                               "adornedStart": false,
@@ -5288,7 +5241,6 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                             <input
                                               aria-describedby="licenses-helper-text"
                                               aria-invalid={false}
-                                              autoComplete="off"
                                               className="MuiInputBase-input-157 MuiInput-input-142"
                                               disabled={false}
                                               id="licenses"
@@ -5296,7 +5248,6 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                               onChange={[Function]}
                                               onFocus={[Function]}
                                               required={false}
-                                              step={300}
                                               type="text"
                                               value=""
                                             />
@@ -5536,7 +5487,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                           handleChange={[MockFunction]}
                           helperText="Tax identifier such as the Federal Employer Identification Number."
                           id="taxIdentifier"
-                          key="taxIdentifier"
+                          inputProps={Object {}}
                           label="Tax Identifier"
                           type="text"
                           value=""
@@ -5677,20 +5628,25 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                                 }
                                               }
                                             >
-                                              <label
-                                                className="MuiFormLabel-root-127 MuiInputLabel-root-116 MuiInputLabel-formControl-121 MuiInputLabel-animated-124"
-                                                data-shrink={false}
-                                                htmlFor="taxIdentifier"
-                                              >
-                                                Tax Identifier
-                                              </label>
-                                            </FormLabel>
-                                          </WithFormControlContext(FormLabel)>
-                                        </WithStyles(WithFormControlContext(FormLabel))>
-                                      </InputLabel>
-                                    </WithFormControlContext(InputLabel)>
-                                  </WithStyles(WithFormControlContext(InputLabel))>
-                                  <WithStyles(Input)
+                                              Tax Identifier
+                                            </label>
+                                          </FormLabel>
+                                        </WithFormControlContext(FormLabel)>
+                                      </WithStyles(WithFormControlContext(FormLabel))>
+                                    </InputLabel>
+                                  </WithFormControlContext(InputLabel)>
+                                </WithStyles(WithFormControlContext(InputLabel))>
+                                <WithStyles(Input)
+                                  aria-describedby="taxIdentifier-helper-text"
+                                  fullWidth={true}
+                                  id="taxIdentifier"
+                                  inputProps={Object {}}
+                                  onBlur={[MockFunction]}
+                                  onChange={[Function]}
+                                  type="text"
+                                  value=""
+                                >
+                                  <Input
                                     aria-describedby="taxIdentifier-helper-text"
                                     fullWidth={true}
                                     id="taxIdentifier"
@@ -5721,7 +5677,9 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                       }
                                       fullWidth={true}
                                       id="taxIdentifier"
+                                      inputComponent="input"
                                       inputProps={Object {}}
+                                      multiline={false}
                                       onBlur={[MockFunction]}
                                       onChange={[Function]}
                                       type="text"
@@ -5753,12 +5711,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                         fullWidth={true}
                                         id="taxIdentifier"
                                         inputComponent="input"
-                                        inputProps={
-                                          Object {
-                                            "autoComplete": "off",
-                                            "step": 300,
-                                          }
-                                        }
+                                        inputProps={Object {}}
                                         multiline={false}
                                         onBlur={[MockFunction]}
                                         onChange={[Function]}
@@ -5791,12 +5744,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                           fullWidth={true}
                                           id="taxIdentifier"
                                           inputComponent="input"
-                                          inputProps={
-                                            Object {
-                                              "autoComplete": "off",
-                                              "step": 300,
-                                            }
-                                          }
+                                          inputProps={Object {}}
                                           muiFormControl={
                                             Object {
                                               "adornedStart": false,
@@ -5826,7 +5774,6 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                             <input
                                               aria-describedby="taxIdentifier-helper-text"
                                               aria-invalid={false}
-                                              autoComplete="off"
                                               className="MuiInputBase-input-157 MuiInput-input-142"
                                               disabled={false}
                                               id="taxIdentifier"
@@ -5834,7 +5781,6 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                               onChange={[Function]}
                                               onFocus={[Function]}
                                               required={false}
-                                              step={300}
                                               type="text"
                                               value=""
                                             />
@@ -6074,7 +6020,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                           handleChange={[MockFunction]}
                           helperText="Internal Revenue Service tax designation, such as 501(c)(3)."
                           id="taxStatus"
-                          key="taxStatus"
+                          inputProps={Object {}}
                           label="Tax Status"
                           type="text"
                           value=""
@@ -6215,20 +6161,25 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                                 }
                                               }
                                             >
-                                              <label
-                                                className="MuiFormLabel-root-127 MuiInputLabel-root-116 MuiInputLabel-formControl-121 MuiInputLabel-animated-124"
-                                                data-shrink={false}
-                                                htmlFor="taxStatus"
-                                              >
-                                                Tax Status
-                                              </label>
-                                            </FormLabel>
-                                          </WithFormControlContext(FormLabel)>
-                                        </WithStyles(WithFormControlContext(FormLabel))>
-                                      </InputLabel>
-                                    </WithFormControlContext(InputLabel)>
-                                  </WithStyles(WithFormControlContext(InputLabel))>
-                                  <WithStyles(Input)
+                                              Tax Status
+                                            </label>
+                                          </FormLabel>
+                                        </WithFormControlContext(FormLabel)>
+                                      </WithStyles(WithFormControlContext(FormLabel))>
+                                    </InputLabel>
+                                  </WithFormControlContext(InputLabel)>
+                                </WithStyles(WithFormControlContext(InputLabel))>
+                                <WithStyles(Input)
+                                  aria-describedby="taxStatus-helper-text"
+                                  fullWidth={true}
+                                  id="taxStatus"
+                                  inputProps={Object {}}
+                                  onBlur={[MockFunction]}
+                                  onChange={[Function]}
+                                  type="text"
+                                  value=""
+                                >
+                                  <Input
                                     aria-describedby="taxStatus-helper-text"
                                     fullWidth={true}
                                     id="taxStatus"
@@ -6259,7 +6210,9 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                       }
                                       fullWidth={true}
                                       id="taxStatus"
+                                      inputComponent="input"
                                       inputProps={Object {}}
+                                      multiline={false}
                                       onBlur={[MockFunction]}
                                       onChange={[Function]}
                                       type="text"
@@ -6321,6 +6274,22 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                           id="taxStatus"
                                           inputComponent="input"
                                           inputProps={Object {}}
+                                          muiFormControl={
+                                            Object {
+                                              "adornedStart": false,
+                                              "disabled": false,
+                                              "error": false,
+                                              "filled": false,
+                                              "focused": false,
+                                              "margin": "none",
+                                              "onBlur": [Function],
+                                              "onEmpty": [Function],
+                                              "onFilled": [Function],
+                                              "onFocus": [Function],
+                                              "required": false,
+                                              "variant": "standard",
+                                            }
+                                          }
                                           multiline={false}
                                           onBlur={[MockFunction]}
                                           onChange={[Function]}
@@ -6376,30 +6345,41 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                             type="text"
                                             value=""
                                           >
-                                            <div
-                                              className="MuiInputBase-root-147 MuiInput-root-134 MuiInput-underline-138 MuiInputBase-fullWidth-156 MuiInput-fullWidth-141 MuiInputBase-formControl-148 MuiInput-formControl-135"
-                                              onClick={[Function]}
-                                            >
-                                              <input
-                                                aria-describedby="taxStatus-helper-text"
-                                                aria-invalid={false}
-                                                className="MuiInputBase-input-157 MuiInput-input-142"
-                                                disabled={false}
-                                                id="taxStatus"
-                                                onBlur={[Function]}
-                                                onChange={[Function]}
-                                                onFocus={[Function]}
-                                                required={false}
-                                                type="text"
-                                                value=""
-                                              />
-                                            </div>
-                                          </InputBase>
-                                        </WithFormControlContext(InputBase)>
-                                      </WithStyles(WithFormControlContext(InputBase))>
-                                    </Input>
-                                  </WithStyles(Input)>
-                                  <WithStyles(WithFormControlContext(FormHelperText))
+                                            <input
+                                              aria-describedby="taxStatus-helper-text"
+                                              aria-invalid={false}
+                                              className="MuiInputBase-input-157 MuiInput-input-142"
+                                              disabled={false}
+                                              id="taxStatus"
+                                              onBlur={[Function]}
+                                              onChange={[Function]}
+                                              onFocus={[Function]}
+                                              required={false}
+                                              type="text"
+                                              value=""
+                                            />
+                                          </div>
+                                        </InputBase>
+                                      </WithFormControlContext(InputBase)>
+                                    </WithStyles(WithFormControlContext(InputBase))>
+                                  </Input>
+                                </WithStyles(Input)>
+                                <WithStyles(WithFormControlContext(FormHelperText))
+                                  id="taxStatus-helper-text"
+                                >
+                                  <WithFormControlContext(FormHelperText)
+                                    classes={
+                                      Object {
+                                        "contained": "MuiFormHelperText-contained-168",
+                                        "disabled": "MuiFormHelperText-disabled-166",
+                                        "error": "MuiFormHelperText-error-165",
+                                        "filled": "MuiFormHelperText-filled-170",
+                                        "focused": "MuiFormHelperText-focused-169",
+                                        "marginDense": "MuiFormHelperText-marginDense-167",
+                                        "required": "MuiFormHelperText-required-171",
+                                        "root": "MuiFormHelperText-root-164",
+                                      }
+                                    }
                                     id="taxStatus-helper-text"
                                   >
                                     <WithFormControlContext(FormHelperText)
@@ -6775,12 +6755,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                               InputLabelProps={null}
                               fullWidth={true}
                               id="twitter"
-                              inputProps={
-                                Object {
-                                  "autoComplete": "off",
-                                  "step": 300,
-                                }
-                              }
+                              inputProps={Object {}}
                               label="Twitter URL"
                               onBlur={[MockFunction]}
                               onChange={[Function]}
@@ -7512,12 +7487,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                               InputLabelProps={null}
                               fullWidth={true}
                               id="linkedin"
-                              inputProps={
-                                Object {
-                                  "autoComplete": "off",
-                                  "step": 300,
-                                }
-                              }
+                              inputProps={Object {}}
                               label="Linkedin URL"
                               onBlur={[MockFunction]}
                               onChange={[Function]}
@@ -8140,29 +8110,16 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                   InputLabelProps={null}
                                   fullWidth={true}
                                   id="phoneNumber"
-                                  inputProps={
-                                    Object {
-                                      "autoComplete": "off",
-                                      "step": 300,
-                                    }
-                                  }
-                                }
-                                component="div"
-                                container={false}
-                                direction="row"
-                                item={true}
-                                justify="flex-start"
-                                lg={false}
-                                md={6}
-                                sm={false}
-                                spacing={0}
-                                wrap="wrap"
-                                xl={false}
-                                xs={12}
-                                zeroMinWidth={false}
-                              >
-                                <div
-                                  className="MuiGrid-item-16 MuiGrid-grid-xs-12-55 MuiGrid-grid-md-6-77"
+                                  inputProps={Object {}}
+                                  label="Number"
+                                  name="phones[0].phoneNumber"
+                                  onBlur={[MockFunction]}
+                                  onChange={[Function]}
+                                  required={false}
+                                  select={false}
+                                  type="text"
+                                  value=""
+                                  variant="standard"
                                 >
                                   <WithStyles(FormControl)
                                     fullWidth={true}
@@ -8313,12 +8270,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                         <WithStyles(Input)
                                           fullWidth={true}
                                           id="phoneNumber"
-                                          inputProps={
-                                            Object {
-                                              "autoComplete": "off",
-                                              "step": 300,
-                                            }
-                                          }
+                                          inputProps={Object {}}
                                           name="phones[0].phoneNumber"
                                           onBlur={[MockFunction]}
                                           onChange={[Function]}
@@ -8345,12 +8297,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                             }
                                             fullWidth={true}
                                             id="phoneNumber"
-                                            inputProps={
-                                              Object {
-                                                "autoComplete": "off",
-                                                "step": 300,
-                                              }
-                                            }
+                                            inputProps={Object {}}
                                             name="phones[0].phoneNumber"
                                             onBlur={[MockFunction]}
                                             onChange={[Function]}
@@ -8377,7 +8324,9 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                               }
                                               fullWidth={true}
                                               id="phoneNumber"
+                                              inputComponent="input"
                                               inputProps={Object {}}
+                                              multiline={false}
                                               name="phones[0].phoneNumber"
                                               onBlur={[MockFunction]}
                                               onChange={[Function]}
@@ -8404,7 +8353,9 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                                 }
                                                 fullWidth={true}
                                                 id="phoneNumber"
+                                                inputComponent="input"
                                                 inputProps={Object {}}
+                                                multiline={false}
                                                 name="phones[0].phoneNumber"
                                                 onBlur={[MockFunction]}
                                                 onChange={[Function]}
@@ -8433,6 +8384,22 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                                   id="phoneNumber"
                                                   inputComponent="input"
                                                   inputProps={Object {}}
+                                                  muiFormControl={
+                                                    Object {
+                                                      "adornedStart": false,
+                                                      "disabled": false,
+                                                      "error": false,
+                                                      "filled": false,
+                                                      "focused": false,
+                                                      "margin": "none",
+                                                      "onBlur": [Function],
+                                                      "onEmpty": [Function],
+                                                      "onFilled": [Function],
+                                                      "onFocus": [Function],
+                                                      "required": false,
+                                                      "variant": "standard",
+                                                    }
+                                                  }
                                                   multiline={false}
                                                   name="phones[0].phoneNumber"
                                                   onBlur={[MockFunction]}
@@ -8440,62 +8407,14 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                                   type="text"
                                                   value=""
                                                 >
-                                                  <WithFormControlContext(InputBase)
-                                                    classes={
-                                                      Object {
-                                                        "adornedEnd": "MuiInputBase-adornedEnd-152",
-                                                        "adornedStart": "MuiInputBase-adornedStart-151",
-                                                        "disabled": "MuiInputBase-disabled-150 MuiInput-disabled-137",
-                                                        "error": "MuiInputBase-error-153 MuiInput-error-139",
-                                                        "focused": "MuiInputBase-focused-149 MuiInput-focused-136",
-                                                        "formControl": "MuiInputBase-formControl-148 MuiInput-formControl-135",
-                                                        "fullWidth": "MuiInputBase-fullWidth-156 MuiInput-fullWidth-141",
-                                                        "input": "MuiInputBase-input-157 MuiInput-input-142",
-                                                        "inputAdornedEnd": "MuiInputBase-inputAdornedEnd-163",
-                                                        "inputAdornedStart": "MuiInputBase-inputAdornedStart-162",
-                                                        "inputMarginDense": "MuiInputBase-inputMarginDense-158 MuiInput-inputMarginDense-143",
-                                                        "inputMultiline": "MuiInputBase-inputMultiline-159 MuiInput-inputMultiline-144",
-                                                        "inputType": "MuiInputBase-inputType-160 MuiInput-inputType-145",
-                                                        "inputTypeSearch": "MuiInputBase-inputTypeSearch-161 MuiInput-inputTypeSearch-146",
-                                                        "marginDense": "MuiInputBase-marginDense-154",
-                                                        "multiline": "MuiInputBase-multiline-155 MuiInput-multiline-140",
-                                                        "root": "MuiInputBase-root-147 MuiInput-root-134 MuiInput-underline-138",
-                                                      }
-                                                    }
-                                                    fullWidth={true}
-                                                    id="phoneNumber"
-                                                    inputComponent="input"
-                                                    inputProps={Object {}}
-                                                    multiline={false}
-                                                    name="phones[0].phoneNumber"
-                                                    onBlur={[MockFunction]}
-                                                    onChange={[Function]}
-                                                    type="text"
-                                                    value=""
+                                                  <div
+                                                    className="MuiInputBase-root-147 MuiInput-root-134 MuiInput-underline-138 MuiInputBase-fullWidth-156 MuiInput-fullWidth-141 MuiInputBase-formControl-148 MuiInput-formControl-135"
+                                                    onClick={[Function]}
                                                   >
-                                                    <InputBase
-                                                      classes={
-                                                        Object {
-                                                          "adornedEnd": "MuiInputBase-adornedEnd-152",
-                                                          "adornedStart": "MuiInputBase-adornedStart-151",
-                                                          "disabled": "MuiInputBase-disabled-150 MuiInput-disabled-137",
-                                                          "error": "MuiInputBase-error-153 MuiInput-error-139",
-                                                          "focused": "MuiInputBase-focused-149 MuiInput-focused-136",
-                                                          "formControl": "MuiInputBase-formControl-148 MuiInput-formControl-135",
-                                                          "fullWidth": "MuiInputBase-fullWidth-156 MuiInput-fullWidth-141",
-                                                          "input": "MuiInputBase-input-157 MuiInput-input-142",
-                                                          "inputAdornedEnd": "MuiInputBase-inputAdornedEnd-163",
-                                                          "inputAdornedStart": "MuiInputBase-inputAdornedStart-162",
-                                                          "inputMarginDense": "MuiInputBase-inputMarginDense-158 MuiInput-inputMarginDense-143",
-                                                          "inputMultiline": "MuiInputBase-inputMultiline-159 MuiInput-inputMultiline-144",
-                                                          "inputType": "MuiInputBase-inputType-160 MuiInput-inputType-145",
-                                                          "inputTypeSearch": "MuiInputBase-inputTypeSearch-161 MuiInput-inputTypeSearch-146",
-                                                          "marginDense": "MuiInputBase-marginDense-154",
-                                                          "multiline": "MuiInputBase-multiline-155 MuiInput-multiline-140",
-                                                          "root": "MuiInputBase-root-147 MuiInput-root-134 MuiInput-underline-138",
-                                                        }
-                                                      }
-                                                      fullWidth={true}
+                                                    <input
+                                                      aria-invalid={false}
+                                                      className="MuiInputBase-input-157 MuiInput-input-142"
+                                                      disabled={false}
                                                       id="phoneNumber"
                                                       inputComponent="input"
                                                       inputProps={Object {}}
@@ -8519,6 +8438,8 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                                       name="phones[0].phoneNumber"
                                                       onBlur={[MockFunction]}
                                                       onChange={[Function]}
+                                                      onFocus={[Function]}
+                                                      required={false}
                                                       type="text"
                                                       value=""
                                                     />
@@ -8695,29 +8616,16 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                   InputLabelProps={null}
                                   fullWidth={true}
                                   id="ext"
-                                  inputProps={
-                                    Object {
-                                      "autoComplete": "off",
-                                      "step": 300,
-                                    }
-                                  }
-                                }
-                                component="div"
-                                container={false}
-                                direction="row"
-                                item={true}
-                                justify="flex-start"
-                                lg={false}
-                                md={6}
-                                sm={false}
-                                spacing={0}
-                                wrap="wrap"
-                                xl={false}
-                                xs={12}
-                                zeroMinWidth={false}
-                              >
-                                <div
-                                  className="MuiGrid-item-16 MuiGrid-grid-xs-12-55 MuiGrid-grid-md-6-77"
+                                  inputProps={Object {}}
+                                  label="Extension"
+                                  name="phones[0].ext"
+                                  onBlur={[MockFunction]}
+                                  onChange={[Function]}
+                                  required={false}
+                                  select={false}
+                                  type="text"
+                                  value=""
+                                  variant="standard"
                                 >
                                   <WithStyles(FormControl)
                                     fullWidth={true}
@@ -8850,12 +8758,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                         <WithStyles(Input)
                                           fullWidth={true}
                                           id="ext"
-                                          inputProps={
-                                            Object {
-                                              "autoComplete": "off",
-                                              "step": 300,
-                                            }
-                                          }
+                                          inputProps={Object {}}
                                           name="phones[0].ext"
                                           onBlur={[MockFunction]}
                                           onChange={[Function]}
@@ -8882,12 +8785,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                             }
                                             fullWidth={true}
                                             id="ext"
-                                            inputProps={
-                                              Object {
-                                                "autoComplete": "off",
-                                                "step": 300,
-                                              }
-                                            }
+                                            inputProps={Object {}}
                                             name="phones[0].ext"
                                             onBlur={[MockFunction]}
                                             onChange={[Function]}
@@ -8914,7 +8812,9 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                               }
                                               fullWidth={true}
                                               id="ext"
+                                              inputComponent="input"
                                               inputProps={Object {}}
+                                              multiline={false}
                                               name="phones[0].ext"
                                               onBlur={[MockFunction]}
                                               onChange={[Function]}
@@ -8941,7 +8841,9 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                                 }
                                                 fullWidth={true}
                                                 id="ext"
+                                                inputComponent="input"
                                                 inputProps={Object {}}
+                                                multiline={false}
                                                 name="phones[0].ext"
                                                 onBlur={[MockFunction]}
                                                 onChange={[Function]}
@@ -8970,6 +8872,22 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                                   id="ext"
                                                   inputComponent="input"
                                                   inputProps={Object {}}
+                                                  muiFormControl={
+                                                    Object {
+                                                      "adornedStart": false,
+                                                      "disabled": false,
+                                                      "error": false,
+                                                      "filled": false,
+                                                      "focused": false,
+                                                      "margin": "none",
+                                                      "onBlur": [Function],
+                                                      "onEmpty": [Function],
+                                                      "onFilled": [Function],
+                                                      "onFocus": [Function],
+                                                      "required": false,
+                                                      "variant": "standard",
+                                                    }
+                                                  }
                                                   multiline={false}
                                                   name="phones[0].ext"
                                                   onBlur={[MockFunction]}
@@ -9010,29 +8928,10 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                                     type="text"
                                                     value=""
                                                   >
-                                                    <InputBase
-                                                      classes={
-                                                        Object {
-                                                          "adornedEnd": "MuiInputBase-adornedEnd-152",
-                                                          "adornedStart": "MuiInputBase-adornedStart-151",
-                                                          "disabled": "MuiInputBase-disabled-150 MuiInput-disabled-137",
-                                                          "error": "MuiInputBase-error-153 MuiInput-error-139",
-                                                          "focused": "MuiInputBase-focused-149 MuiInput-focused-136",
-                                                          "formControl": "MuiInputBase-formControl-148 MuiInput-formControl-135",
-                                                          "fullWidth": "MuiInputBase-fullWidth-156 MuiInput-fullWidth-141",
-                                                          "input": "MuiInputBase-input-157 MuiInput-input-142",
-                                                          "inputAdornedEnd": "MuiInputBase-inputAdornedEnd-163",
-                                                          "inputAdornedStart": "MuiInputBase-inputAdornedStart-162",
-                                                          "inputMarginDense": "MuiInputBase-inputMarginDense-158 MuiInput-inputMarginDense-143",
-                                                          "inputMultiline": "MuiInputBase-inputMultiline-159 MuiInput-inputMultiline-144",
-                                                          "inputType": "MuiInputBase-inputType-160 MuiInput-inputType-145",
-                                                          "inputTypeSearch": "MuiInputBase-inputTypeSearch-161 MuiInput-inputTypeSearch-146",
-                                                          "marginDense": "MuiInputBase-marginDense-154",
-                                                          "multiline": "MuiInputBase-multiline-155 MuiInput-multiline-140",
-                                                          "root": "MuiInputBase-root-147 MuiInput-root-134 MuiInput-underline-138",
-                                                        }
-                                                      }
-                                                      fullWidth={true}
+                                                    <input
+                                                      aria-invalid={false}
+                                                      className="MuiInputBase-input-157 MuiInput-input-142"
+                                                      disabled={false}
                                                       id="ext"
                                                       inputComponent="input"
                                                       inputProps={Object {}}
@@ -9056,6 +8955,8 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                                       name="phones[0].ext"
                                                       onBlur={[MockFunction]}
                                                       onChange={[Function]}
+                                                      onFocus={[Function]}
+                                                      required={false}
                                                       type="text"
                                                       value=""
                                                     >
@@ -9251,12 +9152,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                   InputLabelProps={null}
                                   fullWidth={true}
                                   id="vanityNumber"
-                                  inputProps={
-                                    Object {
-                                      "autoComplete": "off",
-                                      "step": 300,
-                                    }
-                                  }
+                                  inputProps={Object {}}
                                   label="Vanity Number (ex: 650-12..."
                                   name="phones[0].vanityNumber"
                                   onBlur={[MockFunction]}
@@ -9383,12 +9279,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                         <WithStyles(Input)
                                           fullWidth={true}
                                           id="vanityNumber"
-                                          inputProps={
-                                            Object {
-                                              "autoComplete": "off",
-                                              "step": 300,
-                                            }
-                                          }
+                                          inputProps={Object {}}
                                           name="phones[0].vanityNumber"
                                           onBlur={[MockFunction]}
                                           onChange={[Function]}
@@ -9415,12 +9306,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                             }
                                             fullWidth={true}
                                             id="vanityNumber"
-                                            inputProps={
-                                              Object {
-                                                "autoComplete": "off",
-                                                "step": 300,
-                                              }
-                                            }
+                                            inputProps={Object {}}
                                             name="phones[0].vanityNumber"
                                             onBlur={[MockFunction]}
                                             onChange={[Function]}
@@ -9448,12 +9334,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                               fullWidth={true}
                                               id="vanityNumber"
                                               inputComponent="input"
-                                              inputProps={
-                                                Object {
-                                                  "autoComplete": "off",
-                                                  "step": 300,
-                                                }
-                                              }
+                                              inputProps={Object {}}
                                               multiline={false}
                                               name="phones[0].vanityNumber"
                                               onBlur={[MockFunction]}
@@ -9486,12 +9367,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                                 fullWidth={true}
                                                 id="vanityNumber"
                                                 inputComponent="input"
-                                                inputProps={
-                                                  Object {
-                                                    "autoComplete": "off",
-                                                    "step": 300,
-                                                  }
-                                                }
+                                                inputProps={Object {}}
                                                 multiline={false}
                                                 name="phones[0].vanityNumber"
                                                 onBlur={[MockFunction]}
@@ -9524,12 +9400,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                                   fullWidth={true}
                                                   id="vanityNumber"
                                                   inputComponent="input"
-                                                  inputProps={
-                                                    Object {
-                                                      "autoComplete": "off",
-                                                      "step": 300,
-                                                    }
-                                                  }
+                                                  inputProps={Object {}}
                                                   muiFormControl={
                                                     Object {
                                                       "adornedStart": false,
@@ -9559,7 +9430,6 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                                   >
                                                     <input
                                                       aria-invalid={false}
-                                                      autoComplete="off"
                                                       className="MuiInputBase-input-157 MuiInput-input-142"
                                                       disabled={false}
                                                       id="vanityNumber"
@@ -9568,7 +9438,6 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                                       onChange={[Function]}
                                                       onFocus={[Function]}
                                                       required={false}
-                                                      step={300}
                                                       type="text"
                                                       value=""
                                                     />
@@ -11192,29 +11061,16 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                   InputLabelProps={null}
                                   fullWidth={true}
                                   id="department"
-                                  inputProps={
-                                    Object {
-                                      "autoComplete": "off",
-                                      "step": 300,
-                                    }
-                                  }
-                                }
-                                component="div"
-                                container={false}
-                                direction="row"
-                                item={true}
-                                justify="flex-start"
-                                lg={false}
-                                md={6}
-                                sm={false}
-                                spacing={0}
-                                wrap="wrap"
-                                xl={false}
-                                xs={12}
-                                zeroMinWidth={false}
-                              >
-                                <div
-                                  className="MuiGrid-item-16 MuiGrid-grid-xs-12-55 MuiGrid-grid-md-6-77"
+                                  inputProps={Object {}}
+                                  label="Department"
+                                  name="phones[0].department"
+                                  onBlur={[MockFunction]}
+                                  onChange={[Function]}
+                                  required={false}
+                                  select={false}
+                                  type="text"
+                                  value=""
+                                  variant="standard"
                                 >
                                   <WithStyles(FormControl)
                                     fullWidth={true}
@@ -11347,12 +11203,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                         <WithStyles(Input)
                                           fullWidth={true}
                                           id="department"
-                                          inputProps={
-                                            Object {
-                                              "autoComplete": "off",
-                                              "step": 300,
-                                            }
-                                          }
+                                          inputProps={Object {}}
                                           name="phones[0].department"
                                           onBlur={[MockFunction]}
                                           onChange={[Function]}
@@ -11379,12 +11230,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                             }
                                             fullWidth={true}
                                             id="department"
-                                            inputProps={
-                                              Object {
-                                                "autoComplete": "off",
-                                                "step": 300,
-                                              }
-                                            }
+                                            inputProps={Object {}}
                                             name="phones[0].department"
                                             onBlur={[MockFunction]}
                                             onChange={[Function]}
@@ -11411,7 +11257,9 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                               }
                                               fullWidth={true}
                                               id="department"
+                                              inputComponent="input"
                                               inputProps={Object {}}
+                                              multiline={false}
                                               name="phones[0].department"
                                               onBlur={[MockFunction]}
                                               onChange={[Function]}
@@ -11438,7 +11286,9 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                                 }
                                                 fullWidth={true}
                                                 id="department"
+                                                inputComponent="input"
                                                 inputProps={Object {}}
+                                                multiline={false}
                                                 name="phones[0].department"
                                                 onBlur={[MockFunction]}
                                                 onChange={[Function]}
@@ -11467,6 +11317,22 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                                   id="department"
                                                   inputComponent="input"
                                                   inputProps={Object {}}
+                                                  muiFormControl={
+                                                    Object {
+                                                      "adornedStart": false,
+                                                      "disabled": false,
+                                                      "error": false,
+                                                      "filled": false,
+                                                      "focused": false,
+                                                      "margin": "none",
+                                                      "onBlur": [Function],
+                                                      "onEmpty": [Function],
+                                                      "onFilled": [Function],
+                                                      "onFocus": [Function],
+                                                      "required": false,
+                                                      "variant": "standard",
+                                                    }
+                                                  }
                                                   multiline={false}
                                                   name="phones[0].department"
                                                   onBlur={[MockFunction]}
@@ -11507,29 +11373,10 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                                     type="text"
                                                     value=""
                                                   >
-                                                    <InputBase
-                                                      classes={
-                                                        Object {
-                                                          "adornedEnd": "MuiInputBase-adornedEnd-152",
-                                                          "adornedStart": "MuiInputBase-adornedStart-151",
-                                                          "disabled": "MuiInputBase-disabled-150 MuiInput-disabled-137",
-                                                          "error": "MuiInputBase-error-153 MuiInput-error-139",
-                                                          "focused": "MuiInputBase-focused-149 MuiInput-focused-136",
-                                                          "formControl": "MuiInputBase-formControl-148 MuiInput-formControl-135",
-                                                          "fullWidth": "MuiInputBase-fullWidth-156 MuiInput-fullWidth-141",
-                                                          "input": "MuiInputBase-input-157 MuiInput-input-142",
-                                                          "inputAdornedEnd": "MuiInputBase-inputAdornedEnd-163",
-                                                          "inputAdornedStart": "MuiInputBase-inputAdornedStart-162",
-                                                          "inputMarginDense": "MuiInputBase-inputMarginDense-158 MuiInput-inputMarginDense-143",
-                                                          "inputMultiline": "MuiInputBase-inputMultiline-159 MuiInput-inputMultiline-144",
-                                                          "inputType": "MuiInputBase-inputType-160 MuiInput-inputType-145",
-                                                          "inputTypeSearch": "MuiInputBase-inputTypeSearch-161 MuiInput-inputTypeSearch-146",
-                                                          "marginDense": "MuiInputBase-marginDense-154",
-                                                          "multiline": "MuiInputBase-multiline-155 MuiInput-multiline-140",
-                                                          "root": "MuiInputBase-root-147 MuiInput-root-134 MuiInput-underline-138",
-                                                        }
-                                                      }
-                                                      fullWidth={true}
+                                                    <input
+                                                      aria-invalid={false}
+                                                      className="MuiInputBase-input-157 MuiInput-input-142"
+                                                      disabled={false}
                                                       id="department"
                                                       inputComponent="input"
                                                       inputProps={Object {}}
@@ -11553,6 +11400,8 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                                       name="phones[0].department"
                                                       onBlur={[MockFunction]}
                                                       onChange={[Function]}
+                                                      onFocus={[Function]}
+                                                      required={false}
                                                       type="text"
                                                       value=""
                                                     />
@@ -11729,12 +11578,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                   InputLabelProps={null}
                                   fullWidth={true}
                                   id="countryExt"
-                                  inputProps={
-                                    Object {
-                                      "autoComplete": "off",
-                                      "step": 300,
-                                    }
-                                  }
+                                  inputProps={Object {}}
                                   label="Country Prefix Code (for ..."
                                   name="phones[0].countryExt"
                                   onBlur={[MockFunction]}
@@ -11876,12 +11720,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                         <WithStyles(Input)
                                           fullWidth={true}
                                           id="countryExt"
-                                          inputProps={
-                                            Object {
-                                              "autoComplete": "off",
-                                              "step": 300,
-                                            }
-                                          }
+                                          inputProps={Object {}}
                                           name="phones[0].countryExt"
                                           onBlur={[MockFunction]}
                                           onChange={[Function]}
@@ -11908,12 +11747,7 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                             }
                                             fullWidth={true}
                                             id="countryExt"
-                                            inputProps={
-                                              Object {
-                                                "autoComplete": "off",
-                                                "step": 300,
-                                              }
-                                            }
+                                            inputProps={Object {}}
                                             name="phones[0].countryExt"
                                             onBlur={[MockFunction]}
                                             onChange={[Function]}
@@ -11940,7 +11774,9 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                               }
                                               fullWidth={true}
                                               id="countryExt"
+                                              inputComponent="input"
                                               inputProps={Object {}}
+                                              multiline={false}
                                               name="phones[0].countryExt"
                                               onBlur={[MockFunction]}
                                               onChange={[Function]}
@@ -11967,7 +11803,9 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                                 }
                                                 fullWidth={true}
                                                 id="countryExt"
+                                                inputComponent="input"
                                                 inputProps={Object {}}
+                                                multiline={false}
                                                 name="phones[0].countryExt"
                                                 onBlur={[MockFunction]}
                                                 onChange={[Function]}
@@ -11996,6 +11834,22 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                                   id="countryExt"
                                                   inputComponent="input"
                                                   inputProps={Object {}}
+                                                  muiFormControl={
+                                                    Object {
+                                                      "adornedStart": false,
+                                                      "disabled": false,
+                                                      "error": false,
+                                                      "filled": false,
+                                                      "focused": false,
+                                                      "margin": "none",
+                                                      "onBlur": [Function],
+                                                      "onEmpty": [Function],
+                                                      "onFilled": [Function],
+                                                      "onFocus": [Function],
+                                                      "required": false,
+                                                      "variant": "standard",
+                                                    }
+                                                  }
                                                   multiline={false}
                                                   name="phones[0].countryExt"
                                                   onBlur={[MockFunction]}
@@ -12036,29 +11890,10 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                                     type="text"
                                                     value=""
                                                   >
-                                                    <InputBase
-                                                      classes={
-                                                        Object {
-                                                          "adornedEnd": "MuiInputBase-adornedEnd-152",
-                                                          "adornedStart": "MuiInputBase-adornedStart-151",
-                                                          "disabled": "MuiInputBase-disabled-150 MuiInput-disabled-137",
-                                                          "error": "MuiInputBase-error-153 MuiInput-error-139",
-                                                          "focused": "MuiInputBase-focused-149 MuiInput-focused-136",
-                                                          "formControl": "MuiInputBase-formControl-148 MuiInput-formControl-135",
-                                                          "fullWidth": "MuiInputBase-fullWidth-156 MuiInput-fullWidth-141",
-                                                          "input": "MuiInputBase-input-157 MuiInput-input-142",
-                                                          "inputAdornedEnd": "MuiInputBase-inputAdornedEnd-163",
-                                                          "inputAdornedStart": "MuiInputBase-inputAdornedStart-162",
-                                                          "inputMarginDense": "MuiInputBase-inputMarginDense-158 MuiInput-inputMarginDense-143",
-                                                          "inputMultiline": "MuiInputBase-inputMultiline-159 MuiInput-inputMultiline-144",
-                                                          "inputType": "MuiInputBase-inputType-160 MuiInput-inputType-145",
-                                                          "inputTypeSearch": "MuiInputBase-inputTypeSearch-161 MuiInput-inputTypeSearch-146",
-                                                          "marginDense": "MuiInputBase-marginDense-154",
-                                                          "multiline": "MuiInputBase-multiline-155 MuiInput-multiline-140",
-                                                          "root": "MuiInputBase-root-147 MuiInput-root-134 MuiInput-underline-138",
-                                                        }
-                                                      }
-                                                      fullWidth={true}
+                                                    <input
+                                                      aria-invalid={false}
+                                                      className="MuiInputBase-input-157 MuiInput-input-142"
+                                                      disabled={false}
                                                       id="countryExt"
                                                       inputComponent="input"
                                                       inputProps={Object {}}
@@ -12082,6 +11917,8 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                                       name="phones[0].countryExt"
                                                       onBlur={[MockFunction]}
                                                       onChange={[Function]}
+                                                      onFocus={[Function]}
+                                                      required={false}
                                                       type="text"
                                                       value=""
                                                     >

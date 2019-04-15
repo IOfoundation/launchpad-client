@@ -16,3 +16,4 @@ export {getVideoSrc} from './getVideoSrc';
 export {falsyToString} from './falsyToString';
 export {timeConversion} from './timeConversion';
 export {falsyToString} from './falsyToString';
+export {timeToTwelveHourFormat} from './timeToTwelveHourFormat';

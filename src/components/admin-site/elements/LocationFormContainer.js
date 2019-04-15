@@ -11,7 +11,7 @@ import LandingComponent from '../Landing';
 import Title from '../Title';
 import Buttons from '../Buttons';
 
-import {getDate, timeConversion, falsyToString} from '@Utils';
+import {falsyToString} from '@Utils';
 import {accesibility} from '@StaticData/data';
 import Loading from '@Shared/Loading';
 import * as locationCreateActions from '@Actions/locations/create';
@@ -68,9 +68,11 @@ const LocationSchema = Yup.object().shape({
   ),
   hoursHolidays: Yup.array().of(
     Yup.object().shape({
-      day: Yup.string(),
-      opensAt: Yup.string(),
+      closed: Yup.string(),
       closesAt: Yup.string(),
+      endDate: Yup.string(),
+      opensAt: Yup.string(),
+      startDate: Yup.string(),
     })
   ),
   transportation: Yup.string(),
@@ -148,6 +150,9 @@ const getInitialValues = () => {
     hoursHolidays: [],
     transportation: '',
     accessibility: {...emptyAccesibility},
+    deletedPhones: [],
+    delete_hoursRegular: [],
+    delete_hoursHolidays: [],
   };
 };
 
@@ -185,27 +190,36 @@ class LocationFormContainer extends PureComponent {
 
   _getHours(schedule) {
     return schedule.map(hour => {
-      const open = getDate(hour.opens_at);
-      const closes = getDate(hour.closes_at);
+      const open = hour.opens_at.split('T')[1].split('.')[0];
+      const closes = hour.closes_at.split('T')[1].split('.')[0];
 
       return {
         id: hour.id,
-        closesAt: timeConversion(closes.time),
-        closes,
-        day: 'Option One',
-        opensAt: timeConversion(open.time),
-        open,
+        closesAt: closes,
+        day: hour.weekday,
+        opensAt: open,
       };
     });
   }
 
-  _getApiHours(schedule) {
-    return schedule.map(hour => {
+  _getHolidays(holidays) {
+    return holidays.map(holiday => {
+      const clean = Object.keys(holiday).reduce((acc, key) => {
+        acc[key] = falsyToString(holiday[key]);
+        return acc;
+      }, {});
+      const open = clean.opens_at.split('T')[1].split('.')[0];
+      const closes = clean.closes_at.split('T')[1].split('.')[0];
+      const startDate = clean.start_date.split('T')[0];
+      const endDate = clean.end_date.split('T')[0];
+
       return {
-        id: hour.id,
-        weekday: hour.open.day,
-        opens_at: hour.open.fullDate,
-        closes_at: hour.closes.fullDate,
+        closed: holiday.closed ? 'true' : 'false',
+        closesAt: closes,
+        endDate,
+        id: holiday.id,
+        opensAt: open,
+        startDate,
       };
     });
   }
@@ -223,37 +237,6 @@ class LocationFormContainer extends PureComponent {
       }));
     }
     return [{...emptyPhone}];
-  }
-
-  _putPhones(phones) {
-    return phones.map(phone => {
-      const mappedPhone = {
-        department: phone.department,
-        extension: phone.ext,
-        number_type: phone.numberType,
-        number: phone.phoneNumber,
-        vanity_number: phone.vanityNumber,
-        country_prefix: phone.countryExt,
-        _destroy: false,
-      };
-
-      if (phone.id) {
-        mappedPhone.id = phone.id;
-      }
-
-      return mappedPhone;
-    });
-  }
-
-  _getApiPhones(phones) {
-    return phones.map(phone => ({
-      id: phone.id,
-      department: phone.department,
-      extension: phone.ext,
-      number: phone.phoneNumber,
-      number_type: phone.numberType,
-      vanity_number: phone.vanityNumber,
-    }));
   }
 
   _getAccessibility(options) {
@@ -282,6 +265,7 @@ class LocationFormContainer extends PureComponent {
 
   _dataToForm(data) {
     this._apiData = data;
+
     return {
       ...getInitialValues(),
       locationName: data.name || '',
@@ -293,7 +277,7 @@ class LocationFormContainer extends PureComponent {
       mailingAddress: this._getAddress(data.mail_address),
       phones: this._getPhones(data.phones),
       hoursRegular: this._getHours(data.regular_schedules),
-      hoursHolidays: this._getHours(data.holiday_schedules),
+      hoursHolidays: this._getHolidays(data.holiday_schedules),
       services: data.services.map(service => ({
         id: service.id,
         name: service.name,
@@ -306,36 +290,6 @@ class LocationFormContainer extends PureComponent {
 
   goToLocation = () => {
     this.props.router.push('/admin/location');
-  };
-
-  _editFormToApi = data => {
-    return {
-      id: this._apiData.id,
-      active: this._apiData.active,
-      admin_emails: this._apiData.admin_emails,
-      alternate_name: data.alternateName,
-      coordinates: this._apiData.coordinates,
-      description: data.description,
-      latitude: this._apiData.latitude,
-      longitude: this._apiData.longitude,
-      name: data.name,
-      short_desc: this._apiData.short_desc,
-      slug: this._apiData.slug,
-      website: data.locationWebsite,
-      updated_at: getDate().fullDate,
-      url: this._apiData.url,
-      accessibility: this._getAccessibilityNames(data.accessibility),
-      email: data.locationEmail,
-      languages: data.languages,
-      transportation: data.transportation,
-      address: this._getApiAddress(data.streetAddress),
-      organization: this._apiData.organization,
-      phones: this._getApiPhones(data.phones),
-      contacts: this._apiData.contacts,
-      mail_address: this._getApiAddress(data.mailingAddress),
-      regular_schedules: this._getApiHours(data.hoursRegular),
-      holiday_schedules: this._getApiHours(data.hoursHolidays),
-    };
   };
 
   _newLocationToApi = data => {
@@ -368,17 +322,24 @@ class LocationFormContainer extends PureComponent {
         enableReinitialize={true}
         initialValues={_initialValues}
         onSubmit={values => {
-          if (mode === 'new') {
-            const location = this._newLocationToApi(values);
+          const location = this._newLocationToApi(values);
 
+          if (mode === 'new') {
             locationActions.createLocation({
               Authorization,
               organizationId,
               location,
+              mode: 'new',
             });
+            console.log(location);
           } else if (mode === 'edit') {
-            //const location = this._editFormToApi(values);
-            //console.log('edit', location, locationId);
+            locationActions.createLocation({
+              Authorization,
+              organizationId,
+              locationId,
+              location,
+              mode: 'edit',
+            });
           }
         }}
         render={_props => {
@@ -423,7 +384,8 @@ class LocationFormContainer extends PureComponent {
 
 const mapStateToProps = _state => {
   const organizationId =
-    _state.user.organizationId || localStorage.getItem('organizationId');
+    String(_state.user.organizationId) ||
+    localStorage.getItem('organizationId');
   const Authorization =
     _state.user.authorization || localStorage.getItem('userAuth');
 
