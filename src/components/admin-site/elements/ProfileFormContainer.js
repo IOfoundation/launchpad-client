@@ -211,7 +211,7 @@ class ProfileFormContainer extends PureComponent {
       updatedOrganization,
     } = this.props;
     let form = <Loading />;
-    let displayName = organization.alternate_name;
+    let displayName = organization.name;
 
     if (Object.keys(organization).length > 0) {
       form = (
@@ -243,8 +243,8 @@ class ProfileFormContainer extends PureComponent {
       );
     }
 
-    if (updatedOrganization.alternate_name) {
-      displayName = updatedOrganization.alternate_name;
+    if (updatedOrganization.name) {
+      displayName = updatedOrganization.name;
     }
 
     return (

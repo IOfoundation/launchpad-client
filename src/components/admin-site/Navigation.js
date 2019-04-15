@@ -164,7 +164,7 @@ class Navigation extends PureComponent {
         />
         <h3 className={classes.title}>{'Your organization'}</h3>
         <p className={classes.description}>
-          {displayName || 'Display name has not been setted.'}
+          {displayName || 'Your organisation display name has not been set.'}
         </p>
         <ul className={navigationClasses.join(' ')}>
           <li>

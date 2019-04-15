@@ -26,7 +26,7 @@ const Modal = props => {
         {'Unpublish'}
       </button>
     );
-    title = 'Are you sure you want to publish your organization?';
+    title = 'Are you sure you want to unpublish your organization?';
     alert = 'It will no longer be visible.';
     cancel = (
       <button
@@ -46,7 +46,7 @@ const Modal = props => {
           {'Publish'}
         </button>
       );
-      title = 'Are you sure you want to unpublish your organization?';
+      title = 'Are you sure you want to publish your organization?';
       alert = 'It will become visible.';
     }
   } else if (schemaFail) {
