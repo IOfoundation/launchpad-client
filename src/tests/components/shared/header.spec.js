@@ -45,7 +45,7 @@ describe('<Header />', () => {
         wrapper.contains(
           <Link
             activeStyle={activeStyles}
-            className="header_link"
+            className="header_link white-link "
             to="/businesses"
           >
             {'Resources'}
@@ -57,7 +57,11 @@ describe('<Header />', () => {
     it('Must have a link to events page', () => {
       expect(
         wrapper.contains(
-          <Link activeStyle={activeStyles} className="header_link" to="/events">
+          <Link
+            activeStyle={activeStyles}
+            className="header_link white-link"
+            to="/events"
+          >
             {'Events'}
           </Link>
         )
@@ -72,9 +76,9 @@ describe('<Header />', () => {
       expect(
         wrapper.contains(
           <Link
-            className="header_link"
-            to="/admin-login"
             activeStyle={activeStyles}
+            className="header_link white-link"
+            to="/admin-login"
           >
             {'Admin Login'}
           </Link>

@@ -22,10 +22,6 @@
   outline: 0;
 }
 
-.headerContainer .header_links-contact .header_link {
-  opacity: 0.75;
-}
-
 .header_link:last-child {
   margin-right: 0;
 }
