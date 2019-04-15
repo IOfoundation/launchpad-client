@@ -21,13 +21,12 @@ class LocationFormRoute extends PureComponent {
   }
 
   render() {
-    const {location, loading, locationByIdSuccess} = this.props;
-    const showForm = !loading && locationByIdSuccess;
+    const {location, loading} = this.props;
     let locationElement = <Loading />;
 
-    if (Object.keys(location).length > 0 || showForm) {
+    if (Object.keys(location).length > 0 || !loading) {
       locationElement = (
-        <LocationFormContainer data={location} loadingFinished={showForm} />
+        <LocationFormContainer data={location} loadingFinished={!loading} />
       );
     }
 

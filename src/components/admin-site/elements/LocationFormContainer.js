@@ -3,6 +3,8 @@ import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {PropTypes} from 'prop-types';
 import {withRouter} from 'react-router';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 import LocationForm from './LocationForm';
 import LandingComponent from '../Landing';
@@ -12,6 +14,9 @@ import Buttons from '../Buttons';
 import {getDate, timeConversion, falsyToString} from '@Utils';
 import {accesibility} from '@StaticData/data';
 import Loading from '@Shared/Loading';
+import * as locationCreateActions from '@Actions/locations/create';
+import * as snackbarActions from '@Actions/snackbar';
+import LocationModel from './Locations/Model';
 
 const LocationSchema = Yup.object().shape({
   locationName: Yup.string().required('Required'),
@@ -297,7 +302,7 @@ class LocationFormContainer extends PureComponent {
     this.props.router.push('/admin/location');
   };
 
-  _formToApi = data => {
+  _editFormToApi = data => {
     return {
       id: this._apiData.id,
       active: this._apiData.active,
@@ -327,12 +332,23 @@ class LocationFormContainer extends PureComponent {
     };
   };
 
+  _newLocationToApi = data => {
+    return new LocationModel(data);
+  };
+
   saveLocation = () => {
     this._submit();
   };
 
-  _getForm = (mode, id) => {
-    const {data, breakpoint, loadingFinished} = this.props;
+  _getForm = (mode, locationId) => {
+    const {
+      data,
+      breakpoint,
+      loadingFinished,
+      locationActions,
+      Authorization,
+      organizationId,
+    } = this.props;
     let _initialValues;
 
     if (mode === 'new') {
@@ -346,11 +362,17 @@ class LocationFormContainer extends PureComponent {
         enableReinitialize={true}
         initialValues={_initialValues}
         onSubmit={values => {
-          const form = this._formToApi(values);
           if (mode === 'new') {
-            console.log('new', form);
+            const location = this._newLocationToApi(values);
+
+            locationActions.createLocation({
+              Authorization,
+              organizationId,
+              location,
+            });
           } else if (mode === 'edit') {
-            console.log('edit', form, id);
+            const location = this._editFormToApi(values);
+            console.log('edit', location, locationId);
           }
         }}
         render={_props => {
@@ -393,15 +415,46 @@ class LocationFormContainer extends PureComponent {
   }
 }
 
+const mapStateToProps = _state => {
+  const organizationId =
+    _state.user.organizationId || localStorage.getItem('organizationId');
+  const Authorization =
+    _state.user.authorization || localStorage.getItem('userAuth');
+
+  return {
+    Authorization,
+    organizationId,
+    error: _state.locationCreate.error,
+    locationUpdated: _state.locationCreate.location,
+    success: _state.locationCreate.success,
+  };
+};
+
+const mapDispatchToProps = _dispatch => {
+  return {
+    locationActions: bindActionCreators(locationCreateActions, _dispatch),
+    snackbar: bindActionCreators(snackbarActions, _dispatch),
+  };
+};
+
 LocationFormContainer.propTypes = {
+  Authorization: PropTypes.string,
   breakpoint: PropTypes.string,
   data: PropTypes.shape({}),
   error: PropTypes.bool,
   isAuth: PropTypes.bool,
   loadingFinished: PropTypes.bool,
+  locationActions: PropTypes.shape({
+    createLocation: PropTypes.func,
+  }),
+  locationUpdated: PropTypes.shape({}),
+  organizationId: PropTypes.string,
   router: PropTypes.shape({
     push: PropTypes.func,
   }),
 };
 
-export default withRouter(LocationFormContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(LocationFormContainer));
