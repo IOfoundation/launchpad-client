@@ -8,10 +8,10 @@ const getUserInformationStart = () => {
   };
 };
 
-const getUserInformationSuccess = featuredEvents => {
+const getUserInformationSuccess = information => {
   return {
     type: types.GET_USER_INFORMATION_SUCCESS,
-    featuredEvents,
+    information,
   };
 };
 

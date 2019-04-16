@@ -10,6 +10,7 @@ import Account from './Account';
 import LandingComponent from '../Landing';
 import Title from '../Title';
 import Modal from './Account/Modal';
+import Loading from '@Shared/Loading';
 
 import * as user from '@Actions/user';
 import * as snackbarActions from '@Actions/snackbar';
@@ -163,23 +164,11 @@ class AccountContainer extends PureComponent {
 
   render() {
     const {userInformation, userActions, Authorization} = this.props;
-    const initialValues = {
-      fullName: userInformation.username,
-      emailAddress: userInformation.email,
-      currentPassword: '',
-      newPassword: '',
-      confirmPassword: '',
-    };
     const {openModal} = this.state;
+    let form = <Loading />;
 
-    return (
-      <LandingComponent navigation={false}>
-        <Modal
-          open={openModal}
-          modalClosed={this.handlerModalVisibility}
-          cancelClicked={this.handlerModalVisibility}
-          deleteClicked={this.deleteUser}
-        />
+    if (Object.keys(userInformation).length > 0) {
+      form = (
         <Formik
           render={_props => {
             this.submitMyForm = _props.submitForm;
@@ -200,7 +189,13 @@ class AccountContainer extends PureComponent {
               </Fragment>
             );
           }}
-          initialValues={initialValues}
+          initialValues={{
+            fullName: userInformation.name || '',
+            emailAddress: userInformation.email || '',
+            currentPassword: '',
+            newPassword: '',
+            confirmPassword: '',
+          }}
           validationSchema={AccountSchema}
           onSubmit={values => {
             const {
@@ -231,13 +226,26 @@ class AccountContainer extends PureComponent {
             }
           }}
         />
+      );
+    }
+
+    return (
+      <LandingComponent navigation={false}>
+        <Modal
+          open={openModal}
+          modalClosed={this.handlerModalVisibility}
+          cancelClicked={this.handlerModalVisibility}
+          deleteClicked={this.deleteUser}
+        />
+        {form}
       </LandingComponent>
     );
   }
 }
 
 const mapStateToProps = _state => {
-  const {userInformation, updateInformation} = _state.user;
+  const {updateInformation} = _state.user;
+
   const {errorsPassword, errorsInfo, errorsDelete} = updateInformation;
   let error = [];
   let deleteAccountError = {};
@@ -258,7 +266,7 @@ const mapStateToProps = _state => {
     error,
     isAuth: _state.user.authorization !== '',
     Authorization: _state.user.authorization,
-    userInformation,
+    userInformation: _state.userInformation.information,
     userUpdated: updateInformation.successInfo,
     passwordUpdated: updateInformation.successPassword,
     userDeleted: updateInformation.successDelete,
