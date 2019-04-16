@@ -55,15 +55,6 @@ export const ProfileSchema = Yup.object().shape({
   ),
 });
 
-const emptyPhone = {
-  phoneNumber: '',
-  ext: '',
-  vanityNumber: '',
-  numberType: '',
-  department: '',
-  countryExt: '',
-};
-
 class ProfileFormContainer extends PureComponent {
   componentDidMount() {
     const {business, organizationId} = this.props;
@@ -128,7 +119,7 @@ class ProfileFormContainer extends PureComponent {
         countryExt: falsyToString(phone.country_prefix),
       }));
     }
-    return [{...emptyPhone}];
+    return [];
   }
   _putPhones(phones) {
     return phones.map(phone => {
@@ -261,8 +252,8 @@ class ProfileFormContainer extends PureComponent {
 
 const mapStateToProps = _state => {
   const organizationId =
-    _state.user.organizationId || localStorage.getItem('organizationId');
-  const auth = _state.user.authorization || localStorage.getItem('userAuth');
+    _state.user.organizationId || sessionStorage.getItem('organizationId');
+  const auth = _state.user.authorization || sessionStorage.getItem('userAuth');
   return {
     auth,
     emailSent: _state.user.emailReset !== '',

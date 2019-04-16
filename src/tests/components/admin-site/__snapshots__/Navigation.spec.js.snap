@@ -340,7 +340,7 @@ exports[`Admin-site <Navigation /> renders snapshot of Navigation 1`] = `
             <p
               className="withRouter-Navigation--description-3"
             >
-              Unpublish
+              Not Published
             </p>
             <button
               className="btn btn__green"

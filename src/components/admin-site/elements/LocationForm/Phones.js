@@ -29,93 +29,115 @@ const Phones = props => {
             name="phones"
             render={arrayHelpers => (
               <Fragment>
-                {values.phones.map((phone, index) => {
-                  const phoneMap = Object.keys(phone).map((key, i) => {
-                    const id = `phones[${index}].${key}`;
-                    const map = phoneNumberSection[i];
-                    const error =
-                      touched.phones &&
-                      touched.phones[index] &&
-                      touched.phones[index][key] &&
-                      Boolean(
-                        errors.phones &&
-                          errors.phones[index] &&
-                          errors.phones[index][key]
+                {values.phones.length > 0 ? (
+                  values.phones.map((phone, index) => {
+                    const phoneMap = Object.keys(phone).map((key, i) => {
+                      const id = `phones[${index}].${key}`;
+                      const map = phoneNumberSection[i];
+                      const error =
+                        touched.phones &&
+                        touched.phones[index] &&
+                        touched.phones[index][key] &&
+                        Boolean(
+                          errors.phones &&
+                            errors.phones[index] &&
+                            errors.phones[index][key]
+                        );
+
+                      return (
+                        <Grid key={id} item={true} xs={12} md={6}>
+                          {map.select ? (
+                            <SelectElement
+                              errors={errors}
+                              field="phones"
+                              handleBlur={handleBlur}
+                              handleChange={handleChange}
+                              id={id}
+                              key={id}
+                              label={map.label}
+                              name={id}
+                              value={phone[key]}
+                            />
+                          ) : (
+                            <FormTextField
+                              autocomplete={map.autocomplete}
+                              error={error}
+                              errors={errors}
+                              field="phones"
+                              handleBlur={handleBlur}
+                              handleChange={handleChange}
+                              helperText={map.helperText}
+                              id={key}
+                              key={id}
+                              label={map.label}
+                              name={id}
+                              value={phone[key]}
+                            />
+                          )}
+                        </Grid>
                       );
+                    });
 
                     return (
-                      <Grid key={id} item={true} xs={12} md={6}>
-                        {map.select ? (
-                          <SelectElement
-                            errors={errors}
-                            field="phones"
-                            handleBlur={handleBlur}
-                            handleChange={handleChange}
-                            id={id}
-                            key={id}
-                            label={map.label}
-                            name={id}
-                            value={phone[key]}
-                          />
-                        ) : (
-                          <FormTextField
-                            autocomplete={map.autocomplete}
-                            error={error}
-                            errors={errors}
-                            field="phones"
-                            handleBlur={handleBlur}
-                            handleChange={handleChange}
-                            helperText={map.helperText}
-                            id={key}
-                            key={id}
-                            label={map.label}
-                            name={id}
-                            value={phone[key]}
-                          />
-                        )}
-                      </Grid>
-                    );
-                  });
-
-                  return (
-                    // eslint-disable-next-line react/no-array-index-key
-                    <Fragment key={index}>
-                      {phoneMap}
-                      <Grid item={true} xs={12}>
-                        <div className={classes.bottomLine}>
+                      // eslint-disable-next-line react/no-array-index-key
+                      <Fragment key={index}>
+                        {phoneMap}
+                        <Grid item={true} xs={12}>
+                          <div className={classes.bottomLine}>
+                            <button
+                              type="button"
+                              className={`btn btn__red ${classes.btn}`}
+                              onClick={() => arrayHelpers.remove(index)}
+                            >
+                              {'Delete Phone Number'}
+                            </button>
+                          </div>
+                        </Grid>
+                        <Grid item={true} xs={12}>
                           <button
                             type="button"
-                            className={`btn btn__red ${classes.btn}`}
-                            disabled={values.phones.length === 1}
-                            onClick={() => arrayHelpers.remove(index)}
+                            className={`btn btn__submit ${classes.btn} ${
+                              classes.lastBtn
+                            }`}
+                            onClick={() =>
+                              arrayHelpers.insert(index, {
+                                phoneNumber: '1',
+                                ext: '',
+                                vanityNumber: '',
+                                numberType: '',
+                                department: '',
+                                countryExt: '',
+                              })
+                            }
                           >
-                            {'Delete Phone Number'}
+                            {'Add New Phone Number'}
                           </button>
-                        </div>
-                      </Grid>
-                      <Grid item={true} xs={12}>
-                        <button
-                          type="button"
-                          className={`btn btn__submit ${classes.btn} ${
-                            classes.lastBtn
-                          }`}
-                          onClick={() =>
-                            arrayHelpers.insert(index, {
-                              phoneNumber: '1',
-                              ext: '',
-                              vanityNumber: '',
-                              numberType: '',
-                              department: '',
-                              countryExt: '',
-                            })
-                          }
-                        >
-                          {'Add New Phone Number'}
-                        </button>
-                      </Grid>
-                    </Fragment>
-                  );
-                })}
+                        </Grid>
+                      </Fragment>
+                    );
+                  })
+                ) : (
+                  <Grid item={true} xs={12}>
+                    <button
+                      type="button"
+                      className={`btn btn__submit ${classes.btn} ${
+                        classes.lastBtn
+                      }`}
+                      onClick={() =>
+                        arrayHelpers.insert({
+                          phoneNumber: '',
+                          ext: '',
+                          vanityNumber: '',
+                          numberType: '',
+                          department: '',
+                          countryExt: '',
+                        })
+                      }
+                    >
+                      {'Add New Phone Number'}
+                    </button>
+                  </Grid>
+                )}
               </Fragment>
             )}
           />
