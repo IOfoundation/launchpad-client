@@ -25,8 +25,10 @@ const LocationSchema = Yup.object().shape({
   isMainLocation: Yup.boolean(),
   locationEmail: Yup.string()
     .email('Invalid email address')
-    .required('Required'),
-  locationWebsite: Yup.string().required('Required'),
+    .notRequired(),
+  locationWebsite: Yup.string()
+    .url()
+    .notRequired(),
   services: Yup.array().of(
     Yup.object().shape({
       name: Yup.string(),
@@ -90,15 +92,6 @@ const LocationSchema = Yup.object().shape({
   }),
 });
 
-const emptyPhone = {
-  phoneNumber: '',
-  ext: '',
-  vanityNumber: '',
-  numberType: '',
-  department: '',
-  countryExt: '',
-};
-
 const emptyAccesibility = {
   cd: false,
   deafInterpreter: false,
@@ -144,7 +137,7 @@ const getInitialValues = () => {
     mailingAddress: {
       ...emptyMailingAddress,
     },
-    phones: [{...emptyPhone}],
+    phones: [],
     languages: [],
     hoursRegular: [],
     hoursHolidays: [],
@@ -157,23 +150,51 @@ const getInitialValues = () => {
 };
 
 class LocationFormContainer extends PureComponent {
+  componentDidUpdate(prevProps) {
+    const {error, errors, snackbar, success, router} = this.props;
+
+    if (error !== prevProps.error) {
+      let message = 'An error has ocurred';
+
+      if (errors.length > 0 && errors[0].title) {
+        message = errors[0].title;
+      }
+
+      if (error) {
+        snackbar.showSnackbar({
+          message,
+        });
+      }
+    }
+
+    if (success !== prevProps.success) {
+      if (success) {
+        snackbar.showSnackbar({
+          message: 'Location created/updated succesfully',
+        });
+        router.push('/admin/location');
+      }
+    }
+  }
+
   _submit;
   _apiData;
+
   _getAddress(address) {
-    if (address !== null) {
+    if (!address) {
       return {
-        id: address.id,
-        address: (address && address.address_1) || '',
-        address2: (address && address.address_2) || '',
-        city: (address && address.city) || '',
-        state: (address && address.state_province) || '',
-        zip: (address && address.postal_code) || '',
-        attention: (address && address.attention) || '',
+        ...emtpyStreetAddress,
       };
     }
 
     return {
-      ...emtpyStreetAddress,
+      id: address.id,
+      address: (address && address.address_1) || '',
+      address2: (address && address.address_2) || '',
+      city: (address && address.city) || '',
+      state: (address && address.state_province) || '',
+      zip: (address && address.postal_code) || '',
+      attention: (address && address.attention) || '',
     };
   }
 
@@ -189,6 +210,9 @@ class LocationFormContainer extends PureComponent {
   }
 
   _getHours(schedule) {
+    if (!schedule) {
+      return [];
+    }
     return schedule.map(hour => {
       const open = hour.opens_at.split('T')[1].split('.')[0];
       const closes = hour.closes_at.split('T')[1].split('.')[0];
@@ -203,6 +227,10 @@ class LocationFormContainer extends PureComponent {
   }
 
   _getHolidays(holidays) {
+    if (!holidays) {
+      return [];
+    }
+
     return holidays.map(holiday => {
       const clean = Object.keys(holiday).reduce((acc, key) => {
         acc[key] = falsyToString(holiday[key]);
@@ -225,7 +253,7 @@ class LocationFormContainer extends PureComponent {
   }
 
   _getPhones(phones) {
-    if (phones.length > 0) {
+    if (phones && phones.length > 0) {
       return phones.map(phone => ({
         id: phone.id,
         department: falsyToString(phone.department),
@@ -236,10 +264,14 @@ class LocationFormContainer extends PureComponent {
         countryExt: falsyToString(phone.country_prefix),
       }));
     }
-    return [{...emptyPhone}];
+    return [];
   }
 
   _getAccessibility(options) {
+    if (!options) {
+      return {...emptyAccesibility};
+    }
+
     return options.reduce(
       (acc, option) => {
         const activeAccesibility = accesibility.find(
@@ -278,10 +310,12 @@ class LocationFormContainer extends PureComponent {
       phones: this._getPhones(data.phones),
       hoursRegular: this._getHours(data.regular_schedules),
       hoursHolidays: this._getHolidays(data.holiday_schedules),
-      services: data.services.map(service => ({
-        id: service.id,
-        name: service.name,
-      })),
+      services:
+        data.services &&
+        data.services.map(service => ({
+          id: service.id,
+          name: service.name,
+        })),
       transportation: data.transportation || '',
       languages: data.languages || [],
       accessibility: this._getAccessibility(data.accessibility),
@@ -331,7 +365,6 @@ class LocationFormContainer extends PureComponent {
               location,
               mode: 'new',
             });
-            console.log(location);
           } else if (mode === 'edit') {
             locationActions.createLocation({
               Authorization,
@@ -385,14 +418,15 @@ class LocationFormContainer extends PureComponent {
 const mapStateToProps = _state => {
   const organizationId =
     String(_state.user.organizationId) ||
-    localStorage.getItem('organizationId');
+    sessionStorage.getItem('organizationId');
   const Authorization =
-    _state.user.authorization || localStorage.getItem('userAuth');
+    _state.user.authorization || sessionStorage.getItem('userAuth');
 
   return {
     Authorization,
     organizationId,
     error: _state.locationCreate.error,
+    errors: _state.locationCreate.errors,
     locationUpdated: _state.locationCreate.location,
     success: _state.locationCreate.success,
   };
@@ -410,6 +444,7 @@ LocationFormContainer.propTypes = {
   breakpoint: PropTypes.string,
   data: PropTypes.shape({}),
   error: PropTypes.bool,
+  errors: PropTypes.arrayOf(PropTypes.shape({})),
   isAuth: PropTypes.bool,
   loadingFinished: PropTypes.bool,
   locationActions: PropTypes.shape({
@@ -420,6 +455,10 @@ LocationFormContainer.propTypes = {
   router: PropTypes.shape({
     push: PropTypes.func,
   }),
+  snackbar: PropTypes.shape({
+    showSnackbar: PropTypes.func,
+  }),
+  success: PropTypes.bool,
 };
 
 export default connect(

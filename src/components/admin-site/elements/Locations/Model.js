@@ -100,7 +100,7 @@ class Location {
       }
     }
 
-    if (phones.length > 1 || phones[0].phoneNumber) {
+    if (phones && phones.length > 1) {
       this.phones_attributes = this._getApiPhones(phones);
 
       if (deletedPhones.length > 0) {
@@ -172,7 +172,7 @@ class Location {
     return Object.keys(checked).reduce((acc, key) => {
       if (checked[key]) {
         const activeAccesibility = accesibility.find(data => key === data.key);
-        acc.push(activeAccesibility.key);
+        acc.push(activeAccesibility.apiValue);
       }
 
       return acc;

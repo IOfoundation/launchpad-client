@@ -34,8 +34,8 @@ class LocationsRoute extends PureComponent {
 
 const mapStateToProps = _state => {
   const organizationId =
-    _state.user.organizationId || localStorage.getItem('organizationId');
-  const auth = _state.user.authorization || localStorage.getItem('userAuth');
+    _state.user.organizationId || sessionStorage.getItem('organizationId');
+  const auth = _state.user.authorization || sessionStorage.getItem('userAuth');
 
   return {
     error: _state.user.error,

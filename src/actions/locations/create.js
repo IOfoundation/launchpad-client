@@ -56,7 +56,11 @@ export const createLocation = ({
 
       dispatch(createLocationSuccess(httpResponse.data));
     } catch (errors) {
-      dispatch(createLocationError(errors.data));
+      if (errors.data && errors.data.errors) {
+        dispatch(createLocationError(errors.data.errors));
+      } else {
+        dispatch(createLocationError(errors.data));
+      }
     }
   };
 };
