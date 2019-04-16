@@ -1,5 +1,6 @@
 import {UserTypes as types} from '../action-types';
 import {httpRequest} from '../utils';
+import * as errorsActions from './errors';
 
 const loginStart = config => {
   return {
@@ -96,10 +97,11 @@ export const signOut = Authorization => {
         null,
         config
       );
-      localStorage.removeItem('userAuth');
-      localStorage.removeItem('userEmail');
-      localStorage.removeItem('organizationId');
+      sessionStorage.removeItem('userAuth');
+      sessionStorage.removeItem('userEmail');
+      sessionStorage.removeItem('organizationId');
       dispatch(signOutSuccess(httpResponse.data));
+      dispatch(errorsActions.userUnauthorized());
     } catch (error) {
       dispatch(signOutError());
     }
@@ -135,10 +137,15 @@ export const login = ({password, email}) => {
         organizationId: httpResponse.data.organization_id,
       };
 
-      localStorage.setItem('userAuth', httpResponse.headers.authorization);
-      localStorage.setItem('userEmail', email);
-      localStorage.setItem('organizationId', httpResponse.data.organization_id);
+      sessionStorage.setItem('userAuth', httpResponse.headers.authorization);
+      sessionStorage.setItem('userEmail', email);
+      sessionStorage.setItem(
+        'organizationId',
+        httpResponse.data.organization_id
+      );
+
       dispatch(loginSuccess(data));
+      dispatch(errorsActions.userAuthorized());
     } catch (errors) {
       dispatch(loginError(errors.data.error));
     }
@@ -227,6 +234,9 @@ export const updateUserInformation = ({Authorization, name, email}) => {
       );
       dispatch(updateUserInformationSuccess(httpResponse.data));
     } catch (errors) {
+      if (errors && errors.status === 401) {
+        dispatch(errorsActions.userUnauthorized());
+      }
       dispatch(updateUserInformationFail(errors.data.errors));
     }
   };
@@ -291,6 +301,9 @@ export const updatePasswordAndInformation = ({
       dispatch(updatePasswordSuccess(passwordResponse.data));
       dispatch(updateUserInformationSuccess(userInformationResponse.data));
     } catch (errors) {
+      if (errors && errors.status === 401) {
+        dispatch(errorsActions.userUnauthorized());
+      }
       dispatch(updatePasswordFail(errors.data.errors));
     }
   };
@@ -326,6 +339,9 @@ export const deleteAccount = ({Authorization}) => {
       const httpResponse = await httpRequest.delete('/api/users', config);
       dispatch(deleteAccountSuccess(httpResponse.data));
     } catch (errors) {
+      if (errors && errors.status === 401) {
+        dispatch(errorsActions.userUnauthorized());
+      }
       dispatch(deleteAccountFail(errors.data));
     }
   };

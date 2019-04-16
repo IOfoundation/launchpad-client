@@ -1,5 +1,6 @@
 import {AdminBlogsTypes as types} from '../action-types';
 import {httpRequest} from '@Utils';
+import * as errorsActions from './errors';
 
 const getAdminPostsStarts = () => {
   return {
@@ -65,8 +66,11 @@ export const getAdminPost = (page, type = 'drafts', organizationId) => {
           getAdminPostedPostsSuccess(httpResponse.data, totalPages, page)
         );
       }
-    } catch (error) {
-      dispatch(getAdminPostsError(error));
+    } catch (errors) {
+      if (errors && errors.status === 401) {
+        dispatch(errorsActions.userUnauthorized());
+      }
+      dispatch(getAdminPostsError(errors));
     }
   };
 };
@@ -121,6 +125,9 @@ export const savePost = ({title, body, category, auth, published}) => {
       );
       dispatch(savePostSuccess(httpResponse.data));
     } catch (errors) {
+      if (errors && errors.status === 401) {
+        dispatch(errorsActions.userUnauthorized());
+      }
       dispatch(savePostFail(errors));
     }
   };
@@ -159,6 +166,9 @@ export const deletePost = ({id, auth}) => {
       );
       dispatch(deletePostSuccess(httpResponse.data));
     } catch (errors) {
+      if (errors && errors.status === 401) {
+        dispatch(errorsActions.userUnauthorized());
+      }
       dispatch(deletePostError(errors));
     }
   };
@@ -200,6 +210,9 @@ export const updatePost = ({id, title, body, category, auth, published}) => {
       );
       dispatch(updatePostSuccess(httpResponse.data));
     } catch (errors) {
+      if (errors && errors.status === 401) {
+        dispatch(errorsActions.userUnauthorized());
+      }
       dispatch(updatePostFail(errors));
     }
   };

@@ -17,6 +17,7 @@ export default {
       '@StaticData': path.resolve(__dirname, 'src/static-data/'),
       '@Styles': path.resolve(__dirname, 'src/styles/'),
       '@Components': path.resolve(__dirname, 'src/components'),
+      '@HOC': path.resolve(__dirname, 'src/hoc'),
     },
   },
   // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool

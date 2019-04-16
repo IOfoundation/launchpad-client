@@ -55,7 +55,7 @@ class AdminHeader extends PureComponent {
 }
 
 const mapStateToProps = _state => {
-  const auth = _state.user.authorization || localStorage.getItem('userAuth');
+  const auth = _state.user.authorization || sessionStorage.getItem('userAuth');
   return {
     auth,
     singOutSuccess: _state.user.signOut.success,

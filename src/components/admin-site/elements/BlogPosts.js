@@ -192,8 +192,8 @@ const mapStateToProps = _state => {
   const drafts = _state.adminBlogs.drafts;
   const posted = _state.adminBlogs.posted;
   const organizationId =
-    _state.user.organizationId || localStorage.getItem('organizationId');
-  const auth = _state.user.authorization || localStorage.getItem('userAuth');
+    _state.user.organizationId || sessionStorage.getItem('organizationId');
+  const auth = _state.user.authorization || sessionStorage.getItem('userAuth');
 
   return {
     drafts: {

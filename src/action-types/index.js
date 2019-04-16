@@ -4,6 +4,8 @@ import BusinessTypes from './business';
 import EventsTypes from './events';
 import SnackbarTypes from './snackbar';
 import UserTypes from './user';
+import ErrorsTypes from './errors';
+import UserInformationTypes from './user-information';
 export {
   AdminBlogsTypes,
   BlogsTypes,
@@ -11,6 +13,8 @@ export {
   EventsTypes,
   SnackbarTypes,
   UserTypes,
+  ErrorsTypes,
+  UserInformationTypes,
 };
 
 export default {
@@ -20,4 +24,6 @@ export default {
   EventsTypes,
   SnackbarTypes,
   UserTypes,
+  ErrorsTypes,
+  UserInformationTypes,
 };

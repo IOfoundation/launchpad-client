@@ -15,7 +15,7 @@ const Container = props => {
   }
 
   return (
-    <div className={['admin-login', classes.container].join(' ')}>
+    <div className={containerClasses.join(' ')}>
       <SnackbarUI />
       <section className={['content-section', classes.content].join(' ')}>
         <Grid container={true} justify="center" alignItems="flex-start">

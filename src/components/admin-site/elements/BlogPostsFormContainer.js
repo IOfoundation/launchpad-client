@@ -193,7 +193,7 @@ class ProfileFormContainer extends PureComponent {
 }
 
 const mapStateToProps = _state => {
-  const auth = _state.user.authorization || localStorage.getItem('userAuth');
+  const auth = _state.user.authorization || sessionStorage.getItem('userAuth');
 
   return {
     error: _state.user.error,
