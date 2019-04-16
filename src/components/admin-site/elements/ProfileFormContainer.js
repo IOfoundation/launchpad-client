@@ -89,7 +89,7 @@ class ProfileFormContainer extends PureComponent {
         snackbar.showSnackbar({
           message: 'Profile updated successfully',
         });
-        this.__initialValues = updatedOrganization;
+        this._initialValues = updatedOrganization;
       }
     }
 
@@ -97,7 +97,7 @@ class ProfileFormContainer extends PureComponent {
       Object.keys(organization).length !==
       Object.keys(prevProps.organization).length
     ) {
-      this.__initialValues = organization;
+      this._initialValues = organization;
     }
   }
 
@@ -203,6 +203,11 @@ class ProfileFormContainer extends PureComponent {
     } = this.props;
     let form = <Loading />;
     let displayName = organization.name;
+    let initialValues = organization;
+
+    if (Object.keys(updatedOrganization).length > 0) {
+      initialValues = updatedOrganization;
+    }
 
     if (Object.keys(organization).length > 0) {
       form = (
@@ -220,7 +225,7 @@ class ProfileFormContainer extends PureComponent {
               <ProfileForm {..._props} breakpoint={breakpoint} />
             </Fragment>
           )}
-          initialValues={this._mapInitialValues(organization)}
+          initialValues={this._mapInitialValues(initialValues)}
           validationSchema={ProfileSchema}
           onSubmit={values => {
             const organizationToServer = this._mapFormToServer(values);

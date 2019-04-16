@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, {PureComponent, Fragment} from 'react';
 import {withRouter} from 'react-router';
 import Chip from '../shared/Chip';
 import FacebookIcon from '../shared/FacebookIcon';
@@ -115,17 +115,26 @@ class Business extends PureComponent {
     const main_location = locations[0];
     const locationText = locations.length === 1 ? ' Location' : ' Locations';
     const totalLocations = locations.length;
+    let address = null;
+
+    if (main_location.address !== null) {
+      address = (
+        <Fragment>
+          <span className="m-x-7">{'|'}</span>
+          <span>
+            {locations.length > 1 && 'Main location in '}
+            {main_location.address.city}
+            {', '}
+            {main_location.address.state_province}
+          </span>
+        </Fragment>
+      );
+    }
 
     return (
       <p className="location text-bold">
         <span>{`${totalLocations} ${locationText}`}</span>
-        <span className="m-x-7">{'|'}</span>
-        <span>
-          {locations.length > 1 && 'Main location in '}
-          {main_location.address.city}
-          {', '}
-          {main_location.address.state_province}
-        </span>
+        {address}
       </p>
     );
   };
@@ -208,7 +217,7 @@ class Business extends PureComponent {
           </div>
           <div className="grid col-lg-12 col-md-12 col-xs-12 full-information p-0">
             <div className="grid col-lg-12 col-md-12 col-xs-12 p-0 m-bot-25">
-              {!isEmpty(main_location) &&
+              {!isEmpty(main_location.address) &&
                 this._renderMainLocations(main_location)}
               {!isEmpty(business.contacts) &&
                 this._renderContacts(business.contacts[0])}
