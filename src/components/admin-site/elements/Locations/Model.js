@@ -100,15 +100,13 @@ class Location {
       }
     }
 
-    if (phones && phones.length > 1) {
+    if (phones && phones.length > 0) {
       this.phones_attributes = this._getApiPhones(phones);
 
       if (deletedPhones.length > 0) {
         this.phones_attributes = [...this.phones_attributes, ...deletedPhones];
       }
     }
-
-    this.virtual = true;
   }
 
   _getApiHours(schedules) {
