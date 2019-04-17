@@ -36,7 +36,14 @@ class Item extends PureComponent {
     } = this.props;
 
     const addHoursOfOperation = arrayHelpers => {
-      arrayHelpers.push({day: '', opensAt: '', closesAt: ''});
+      arrayHelpers.push({
+        day: '',
+        opensAt: '',
+        closesAt: '',
+        closed: '',
+        endDate: '',
+        startDate: '',
+      });
     };
 
     return (
