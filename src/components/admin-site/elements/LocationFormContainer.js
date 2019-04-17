@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, {PureComponent, Fragment} from 'react';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {PropTypes} from 'prop-types';
@@ -22,7 +22,7 @@ const LocationSchema = Yup.object().shape({
   locationName: Yup.string().required('Required'),
   alternateName: Yup.string().required('Required'),
   locationDescription: Yup.string().required('Required'),
-  isMainLocation: Yup.boolean(),
+  isMainLocation: Yup.boolean().nullable(),
   locationEmail: Yup.string()
     .email('Invalid email address')
     .notRequired(),
@@ -306,7 +306,7 @@ class LocationFormContainer extends PureComponent {
       locationDescription: data.description || '',
       locationEmail: data.email || '',
       locationWebsite: data.website || '',
-      isMainLocation: data.is_primary,
+      isMainLocation: Boolean(data.is_primary),
       streetAddress: this._getAddress(data.address),
       mailingAddress: this._getAddress(data.mail_address),
       phones: this._getPhones(data.phones),
@@ -378,8 +378,24 @@ class LocationFormContainer extends PureComponent {
           }
         }}
         render={_props => {
-          this._submit = _props.handleSubmit;
-          return <LocationForm {..._props} breakpoint={breakpoint} />;
+          return (
+            <Fragment>
+              <Title
+                hideCancelAction={false}
+                submitLabel={'Save location'}
+                titleText="Create A Location"
+                cancelClicked={this.goToLocation}
+                submitClicked={_props.submitForm}
+              />
+              <LocationForm {..._props} breakpoint={breakpoint} />
+              <Buttons
+                cancelClicked={this.goToLocation}
+                hideCancelAction={false}
+                submitClicked={_props.submitForm}
+                submitLabel={'Save location'}
+              />
+            </Fragment>
+          );
         }}
         validateOnChange={true}
         validationSchema={LocationSchema}
@@ -397,24 +413,7 @@ class LocationFormContainer extends PureComponent {
       form = this._getForm('edit', router.params.id);
     }
 
-    return (
-      <LandingComponent navigation={false}>
-        <Title
-          hideCancelAction={false}
-          submitLabel={'Save location'}
-          titleText="Create A Location"
-          cancelClicked={this.goToLocation}
-          submitClicked={this.saveLocation}
-        />
-        {form}
-        <Buttons
-          cancelClicked={this.goToLocation}
-          hideCancelAction={false}
-          submitClicked={this.saveLocation}
-          submitLabel={'Save location'}
-        />
-      </LandingComponent>
-    );
+    return <LandingComponent navigation={false}>{form}</LandingComponent>;
   }
 }
 
