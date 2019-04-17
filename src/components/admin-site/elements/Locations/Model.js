@@ -100,7 +100,7 @@ class Location {
       }
     }
 
-    if (phones && phones.length > 0) {
+    if ((phones && phones.length > 0) || deletedPhones.length > 0) {
       this.phones_attributes = this._getApiPhones(phones);
 
       if (deletedPhones.length > 0) {

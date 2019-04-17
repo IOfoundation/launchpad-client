@@ -408,6 +408,7 @@ class LocationFormContainer extends PureComponent {
         <Buttons
           cancelClicked={this.goToLocation}
           hideCancelAction={false}
+          submitClicked={this.saveLocation}
           submitLabel={'Save location'}
         />
       </LandingComponent>

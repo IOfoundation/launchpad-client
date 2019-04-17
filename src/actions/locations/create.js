@@ -39,17 +39,13 @@ export const createLocation = ({
       if (mode === 'new') {
         httpResponse = await httpRequest.post(
           `/api/organizations/${organizationId}/locations`,
-          {
-            ...location,
-          },
+          location,
           config
         );
       } else if (mode === 'edit') {
         httpResponse = await httpRequest.put(
           `/api/locations/${locationId}`,
-          {
-            ...location,
-          },
+          location,
           config
         );
       }
