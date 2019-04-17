@@ -4,7 +4,8 @@ const initialState = {
   error: false,
   errors: [],
   loading: false,
-  location: {},
+  locationId: '',
+  service: {},
   success: false,
 };
 
@@ -15,18 +16,18 @@ export default function(state = initialState, action) {
         error: false,
         errors: [],
         loading: true,
-        location: {},
+        service: {},
         success: false,
       };
     }
 
     case types.CREATE_SERVICE_SUCCESS: {
-      const {location} = action;
+      const {service} = action;
 
       return {
         ...state,
         loading: false,
-        location,
+        service,
         success: true,
       };
     }
@@ -38,6 +39,14 @@ export default function(state = initialState, action) {
         error: true,
         errors,
         loading: false,
+      };
+    }
+
+    case types.SET_LOCATION_ID: {
+      const {locationId} = action;
+      return {
+        ...state,
+        locationId,
       };
     }
 

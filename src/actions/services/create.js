@@ -23,7 +23,7 @@ const createServiceError = errors => {
 
 export const create = ({
   Authorization,
-  location,
+  service,
   locationId,
   serviceId,
   mode,
@@ -39,17 +39,13 @@ export const create = ({
       if (mode === 'new') {
         httpResponse = await httpRequest.post(
           `/api/locations/${locationId}/services`,
-          {
-            ...location,
-          },
+          service,
           config
         );
       } else if (mode === 'edit') {
         httpResponse = await httpRequest.put(
           `/api/locations/${locationId}/services/${serviceId}`,
-          {
-            ...location,
-          },
+          service,
           config
         );
       }
@@ -62,5 +58,14 @@ export const create = ({
         dispatch(createServiceError(errors.data));
       }
     }
+  };
+};
+
+export const setLocationId = locationId => {
+  sessionStorage.setItem('locationId', locationId);
+
+  return {
+    type: types.SET_LOCATION_ID,
+    locationId,
   };
 };

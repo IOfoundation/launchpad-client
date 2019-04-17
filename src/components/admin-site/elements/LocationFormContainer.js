@@ -11,13 +11,15 @@ import LandingComponent from '../Landing';
 import LocationForm from './LocationForm';
 import Modal from './Locations/Modal';
 import Title from '../Title';
+import Buttons from '../Buttons';
+import Loading from '@Shared/Loading';
 
 import {falsyToString} from '@Utils';
 import {accesibility} from '@StaticData/data';
-import Loading from '@Shared/Loading';
 import * as locationCreateActions from '@Actions/locations/create';
 import * as locationDeleteActions from '@Actions/locations/delete';
 import * as snackbarActions from '@Actions/snackbar';
+import * as serviceCreateActions from '@Actions/services/create';
 import LocationModel from './Locations/Model';
 
 const LocationSchema = Yup.object().shape({
@@ -386,6 +388,8 @@ class LocationFormContainer extends PureComponent {
       locationActions,
       Authorization,
       organizationId,
+      router,
+      service,
     } = this.props;
     let _initialValues;
     let sectionTitle;
@@ -439,9 +443,10 @@ class LocationFormContainer extends PureComponent {
               <LocationForm
                 {..._props}
                 breakpoint={breakpoint}
-                mode={mode}
                 deleteClicked={this.handlerModalVisibility}
-                router={props.router}
+                mode={mode}
+                router={router}
+                service={service}
               />
               <Buttons
                 cancelClicked={this.goToLocation}
@@ -525,6 +530,7 @@ const mapDispatchToProps = _dispatch => {
     locationActions: bindActionCreators(locationCreateActions, _dispatch),
     locationDelete: bindActionCreators(locationDeleteActions, _dispatch),
     snackbar: bindActionCreators(snackbarActions, _dispatch),
+    service: bindActionCreators(serviceCreateActions, _dispatch),
   };
 };
 
@@ -549,6 +555,9 @@ LocationFormContainer.propTypes = {
   organizationId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   router: PropTypes.shape({
     push: PropTypes.func,
+  }),
+  service: PropTypes.shape({
+    setLocationId: PropTypes.func,
   }),
   snackbar: PropTypes.shape({
     showSnackbar: PropTypes.func,

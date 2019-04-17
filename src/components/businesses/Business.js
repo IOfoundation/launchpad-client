@@ -67,11 +67,9 @@ class Business extends PureComponent {
     return (
       <div className="col-lg-12 col-md-12 col-xs-12 p-0 grid">
         {otherLocations.map(location => {
-          return (
-            <div
-              key={location.id}
-              className="col-lg-12 col-md-12 col-xs-12 m-bot-24 p-0 grid"
-            >
+          let address = null;
+          if (location.address) {
+            address = (
               <div className="col-lg-6 col-md-6 col-xs-6 p-0 m-right-54">
                 <h4>{location.address.address_1}</h4>
                 {location.address.address_2 && (
@@ -81,6 +79,15 @@ class Business extends PureComponent {
                   location.address.state_province
                 } ${location.address.postal_code}`}</h4>
               </div>
+            );
+          }
+
+          return (
+            <div
+              key={location.id}
+              className="col-lg-12 col-md-12 col-xs-12 m-bot-24 p-0 grid"
+            >
+              {address}
               <div className="col-lg-4 col-md-4 col-xs-6 p-0 m-top-24">
                 {location.phones.length > 0 && (
                   <h4>{location.phones[0].number}</h4>

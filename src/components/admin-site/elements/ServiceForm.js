@@ -19,7 +19,7 @@ import {Industry} from './Service/Industry';
 const ServiceForm = props => {
   const {
     errors,
-    goToServices,
+    goToLocation,
     handleBlur,
     handleChange,
     handleSubmit,
@@ -77,7 +77,7 @@ const ServiceForm = props => {
       <Buttons
         hideCancelAction={false}
         submitLabel={'Save Service'}
-        cancelClicked={goToServices}
+        cancelClicked={goToLocation}
       />
     </Form>
   );
@@ -85,7 +85,7 @@ const ServiceForm = props => {
 
 ServiceForm.propTypes = {
   errors: PropTypes.shape({}),
-  goToServices: PropTypes.func,
+  goToLocation: PropTypes.func,
   handleBlur: PropTypes.func,
   handleChange: PropTypes.func,
   handleSubmit: PropTypes.func,

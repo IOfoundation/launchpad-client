@@ -1,33 +1,6 @@
-export const Service = values => {
-  let mapped;
-
-  /*:interpretation_services,
-  :name,
-  :status,
-  :website,
-  :wait_time,
-  category_ids: [],
-  required_documents: [],
-  keywords: [],
-  service_areas: [],
-  languages: [],
-  : [
-    :id,
-    :opens_at,
-    :closes_at,
-    :weekday,
-    :_destroy
-  ],
-
-  phones_attributes: [
-    :id,
-    :department,
-    :extension,
-    :number,
-    :number_type,
-    :vanity_number,
-    :_destroy
-  ]*/
+/* eslint-disable complexity */
+const Service = values => {
+  const mapped = {};
 
   if (values.acceptedPaymentMethods) {
     mapped.accepted_payments = [values.acceptedPaymentMethods];
@@ -65,23 +38,67 @@ export const Service = values => {
     mapped.funding_sources = [values.fundingSources];
   }
 
-  //businessStage
+  if (values.name) {
+    mapped.name = values.name;
+  }
+
+  if (values.status) {
+    mapped.status = values.status;
+  }
+
+  if (values.website) {
+    mapped.website = values.website;
+  }
+
+  if (values.waitTime) {
+    mapped.wait_time = values.waitTime;
+  }
+
+  /*if (values.serviceCategories) {
+    mapped.category_ids = [values.serviceCategories];
+  }*/
+
+  if (values.requiredDocuments) {
+    mapped.required_documents = [values.requiredDocuments];
+  }
+
+  if (values.keywords) {
+    mapped.keywords = [values.keywords];
+  }
+
+  if (values.servicesAreas) {
+    mapped.service_areas = [values.servicesAreas];
+  }
+
+  if (values.servicesAreas) {
+    mapped.service_areas = [values.servicesAreas];
+  }
+
+  if (values.interpretationServices) {
+    mapped.interpretation_services = [values.interpretationServices];
+  }
+
+  if (values.interpretationServices) {
+    mapped.interpretation_services = [values.interpretationServices];
+  }
+
+  if (values.serviceLanguages) {
+    mapped.languages = [values.serviceLanguages];
+  }
+
+  if (values.phones) {
+    mapped.phones_attributes = [values.phones];
+  }
+
+  // businessStage
   // businessType
+  // underservedCommunities
   // holiday_schedules_attributes // hoursHolidays
   // regular_schedules_attributes // hoursRegular
-  /* industry: {agriculture: false, arts: false, biosciencesServicesandMfg: false, construction: false, education: false, …}
-interpretationServices: ""
-keywords: ""
-locationId: ""
-name: "ASD"
-requiredDocuments: ""
-serviceCategories: {financialManagement: false, capital: false, legalServices: false, marketingSales: false, networking: false, …}
-serviceLanguages: ""
-servicesAreas: ""
-status: ""
-underservedCommunities: {africanAmerican: false, asian: false, hispanic: false, immigrant: false, LGBTQ: false, …}
-waitTime: ""
-website: ""*/
+  /* industry: {agriculture: false, arts: false, biosciencesServicesandMfg: false, construction: false, education: false, …}*/
 
   return mapped;
 };
+/* eslint-disable complexity */
+
+export default Service;

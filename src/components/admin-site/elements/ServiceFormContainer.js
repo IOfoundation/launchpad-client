@@ -1,17 +1,19 @@
-import React, {Fragment} from 'react';
-import ServiceForm from './ServiceForm';
+import React, {Fragment, PureComponent} from 'react';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {PropTypes} from 'prop-types';
-
-import * as user from '../../../actions/user';
-import * as snackbarActions from '../../../actions/snackbar';
-import * as serviceCreateActions from '@Actions/services/create';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {withRouter} from 'react-router';
+
 import LandingComponent from '../Landing';
 import Title from '../Title';
+import ServiceForm from './ServiceForm';
+
+import serviceModel from './Service/Model';
+import * as user from '@Actions/user';
+import * as snackbarActions from '@Actions/snackbar';
+import * as serviceCreateActions from '@Actions/services/create';
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string().required('Required'),
@@ -137,40 +139,97 @@ const initialValues = {
   locationId: '',
 };
 
-const ServiceFormContainer = props => {
-  const goToServices = () => {
-    props.router.push('/admin/services');
+class ServiceFormContainer extends PureComponent {
+  componentDidUpdate(prevProps) {
+    const {
+      serviceCreateError,
+      seriveCreateErrors,
+      snackbar,
+      success,
+    } = this.props;
+
+    if (serviceCreateError !== prevProps.serviceCreateError) {
+      let message = 'An error has ocurred';
+
+      if (seriveCreateErrors.length > 0 && seriveCreateErrors[0].title) {
+        message = seriveCreateErrors[0].title;
+      }
+
+      if (serviceCreateError) {
+        snackbar.showSnackbar({
+          message,
+        });
+      }
+    }
+
+    if (success !== prevProps.success) {
+      if (success) {
+        snackbar.showSnackbar({
+          message: 'Service created/updated succesfully',
+        });
+        this.goToLocation();
+      }
+    }
+  }
+
+  goToLocation = () => {
+    const {router, locationId} = this.props;
+
+    router.push(`/admin/location/${locationId}`);
   };
 
-  return (
-    <LandingComponent>
-      <Formik
-        render={_props => (
-          <Fragment>
-            <Title
-              titleText="Create A Service"
-              hideCancelAction={false}
-              submitLabel={'Save Service'}
-              cancelClicked={goToServices}
-              submitClicked={_props.submitForm}
-            />
-            <ServiceForm {..._props} goToServices={goToServices} />
-          </Fragment>
-        )}
-        initialValues={initialValues}
-        validationSchema={SignupSchema}
-        onSubmit={values => {
-          console.log(values);
-        }}
-      />
-    </LandingComponent>
-  );
-};
+  render() {
+    const {locationId, Authorization, serviceCreate} = this.props;
+
+    return (
+      <LandingComponent>
+        <Formik
+          render={_props => (
+            <Fragment>
+              <Title
+                titleText="Create A Service"
+                hideCancelAction={false}
+                submitLabel={'Save Service'}
+                cancelClicked={this.goToLocation}
+                submitClicked={_props.submitForm}
+              />
+              <ServiceForm {..._props} goToLocation={this.goToLocation} />
+            </Fragment>
+          )}
+          initialValues={initialValues}
+          validationSchema={SignupSchema}
+          onSubmit={values => {
+            serviceCreate.create({
+              service: serviceModel(values),
+              Authorization,
+              locationId,
+              mode: 'new',
+            });
+          }}
+        />
+      </LandingComponent>
+    );
+  }
+}
 
 const mapStateToProps = _state => {
+  const organizationId =
+    _state.user.organizationId || sessionStorage.getItem('organizationId');
+  const Authorization =
+    _state.user.authorization || sessionStorage.getItem('userAuth');
+  const locationId =
+    _state.user.locationId || sessionStorage.getItem('locationId');
+
   return {
+    Authorization,
+    serviceCreateError: _state.serviceCreate.error,
     error: _state.user.error,
+    seriveCreateErrors: _state.serviceCreate.errors,
     isAuth: _state.user.authorization !== '',
+    locationId,
+    organizationId,
+    serviceUpdated: _state.serviceCreate.service,
+    success: _state.serviceCreate.success,
   };
 };
 
@@ -183,17 +242,24 @@ const mapDispatchToProps = _dispatch => {
 };
 
 ServiceFormContainer.propTypes = {
+  Authorization: PropTypes.string,
   error: PropTypes.bool,
   isAuth: PropTypes.bool,
+  locationId: PropTypes.string,
+  organizationId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   router: PropTypes.shape({
     push: PropTypes.func,
   }),
+  seriveCreateErrors: PropTypes.arrayOf(PropTypes.shape({})),
   serviceCreate: PropTypes.shape({
     create: PropTypes.func,
   }),
+  serviceCreateError: PropTypes.bool,
+  serviceUpdated: PropTypes.shape({}),
   snackbar: PropTypes.shape({
     showSnackbar: PropTypes.func,
   }),
+  success: PropTypes.bool,
   userActions: PropTypes.shape({
     login: PropTypes.func,
   }),

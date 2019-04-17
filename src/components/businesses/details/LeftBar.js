@@ -27,7 +27,7 @@ const styles = theme => ({
 
 class LeftBar extends PureComponent {
   state = {
-    selectedEvent: this.props.events[0],
+    selectedEvent: this.props.events && this.props.events[0],
     openModal: false,
     viewMoreEvents: true,
   };

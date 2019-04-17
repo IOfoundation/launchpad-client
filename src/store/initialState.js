@@ -177,7 +177,8 @@ const initialState = {
     error: false,
     errors: [],
     loading: false,
-    location: {},
+    locationId: '',
+    service: {},
     success: false,
   },
 };
