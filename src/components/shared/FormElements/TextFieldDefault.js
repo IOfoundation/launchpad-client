@@ -14,6 +14,14 @@ class FormTextFieldDefault extends PureComponent {
     }
   };
 
+  _isTimePicker(type) {
+    return type === 'time';
+  }
+
+  _isDatePicker(type) {
+    return type === 'date';
+  }
+
   render() {
     const {
       autocomplete,
@@ -30,6 +38,7 @@ class FormTextFieldDefault extends PureComponent {
       novalidate,
     } = this.props;
     let InputLabelProps = null;
+    let InputProps = {};
     let displayError = (
       <div
         className={[
@@ -45,20 +54,21 @@ class FormTextFieldDefault extends PureComponent {
       </div>
     );
 
-    if (type === 'time') {
+    if (this._isDatePicker(type) || this._isTimePicker(type)) {
       InputLabelProps = {
         shrink: true,
+      };
+    }
+
+    if (this._isTimePicker(type)) {
+      InputProps = {
+        autoComplete: autocomplete,
+        step: 300,
       };
     }
 
     if (novalidate) {
       displayError = null;
-    }
-
-    if (type === 'time') {
-      InputLabelProps = {
-        shrink: true,
-      };
     }
 
     return (
@@ -75,10 +85,7 @@ class FormTextFieldDefault extends PureComponent {
           name={name}
           multiline={multiline}
           helperText={helperText}
-          inputProps={{
-            autoComplete: autocomplete,
-            step: 300,
-          }}
+          inputProps={InputProps}
           InputLabelProps={InputLabelProps}
         />
         {displayError}

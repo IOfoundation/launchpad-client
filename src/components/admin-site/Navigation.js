@@ -1,82 +1,223 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, PureComponent} from 'react';
 import {Link} from 'react-router';
 import {withStyles} from '@material-ui/core/styles';
 import {PropTypes} from 'prop-types';
 import {withRouter} from 'react-router';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
-const Navigation = props => {
-  const {classes} = props;
-  const navigationClasses = [classes.navigation];
-  let status = null;
+import * as snackbarActions from '@Actions/snackbar';
+import * as profileActions from '@Actions/admin-profile';
+import * as yupActions from '@Actions/validate-yup';
+import Modal from './Modal';
 
-  if (props.location.pathname === '/admin/profile') {
-    navigationClasses.push(classes.addBorder);
-    status = (
-      <Fragment>
-        <h3 className={`${classes.title} m-top-16`}>{'Status'}</h3>
-        <p className={classes.description}>{'Published'}</p>
-        <button className="btn btn__red">{'Unpublish'}</button>
-      </Fragment>
-    );
+import {ProfileSchema} from './elements/ProfileFormContainer';
+import {falsyToString} from '@Utils';
+
+class Navigation extends PureComponent {
+  state = {
+    openModal: false,
+    statusPicked: false,
+  };
+
+  componentDidUpdate(prevProps) {
+    const {errors, snackbar, success, organization} = this.props;
+
+    if (errors.length !== prevProps.errors.length) {
+      const title = errors[0].title;
+      if (title) {
+        snackbar.showSnackbar({
+          message: title,
+        });
+      }
+    }
+
+    if (success !== prevProps.success) {
+      if (success) {
+        snackbar.showSnackbar({
+          message: organization.is_published
+            ? 'Organization unpublished successfully'
+            : 'Organization published successfully',
+        });
+      }
+    }
   }
 
-  return (
-    <div className={classes.container}>
-      <h3 className={classes.title}>{'Your organization'}</h3>
-      <p className={classes.description}>
-        {"Governor's Office of Business and Economic Development"}
-      </p>
-      <ul className={navigationClasses.join(' ')}>
-        <li>
-          <Link
-            activeStyle={activeStyles}
-            className={classes.link}
-            to="/admin/profile"
+  updatePublishStatus = () => {
+    const {profile, organizationId, auth, schemaValidated} = this.props;
+    const {statusPicked} = this.state;
+
+    if (schemaValidated) {
+      profile.updatePublishStatus({
+        publishStatus: statusPicked,
+        organizationId,
+        auth,
+      });
+    }
+    this.handlerModalVisibility();
+  };
+
+  openModal = status => {
+    this.setState({statusPicked: status});
+    let validate;
+
+    if (Object.keys(this.props.updatedOrganization).length > 0) {
+      validate = this._mapToValidate(this.props.updatedOrganization);
+    } else {
+      validate = this._mapToValidate(this.props.organization);
+    }
+
+    this.props.yupActions.validateSchema(ProfileSchema, validate);
+    this.handlerModalVisibility();
+  };
+
+  _mapToValidate(organization) {
+    const clean = Object.keys(organization).reduce((acc, key) => {
+      acc[key] = falsyToString(organization[key]);
+      return acc;
+    }, {});
+    return {
+      id: clean.id,
+      contactEmail: clean.email,
+      organizationName: clean.alternate_name,
+      name: clean.name,
+      website: clean.website,
+      description: clean.description,
+      dateIncorporation: clean.date_incorporated,
+      legalStatus: '',
+      taxIdentifier: '',
+      taxStatus: '',
+      twitter: clean.twitter,
+      facebook: clean.facebook,
+      linkedin: clean.linkedin,
+    };
+  }
+
+  handlerModalVisibility = () => {
+    this.setState(prevState => {
+      return {
+        openModal: !prevState.openModal,
+      };
+    });
+  };
+  _statusPicked;
+
+  render() {
+    const {
+      classes,
+      organization,
+      location,
+      displayName = '',
+      schemaFail,
+      schemaValidated,
+    } = this.props;
+    const {statusPicked} = this.state;
+    const navigationClasses = [classes.navigation];
+    let status = null;
+
+    if (location.pathname === '/admin/profile') {
+      navigationClasses.push(classes.addBorder);
+      let button = null;
+      let description = null;
+
+      if (organization.is_published) {
+        button = (
+          <button
+            className="btn btn__red"
+            onClick={() => this.openModal(false)}
           >
-            {'Profile'}
-          </Link>
-        </li>
-        <li>
-          <Link
-            activeStyle={activeStyles}
-            className={classes.link}
-            to="/admin/location"
+            {'Unpublish'}
+          </button>
+        );
+        description = 'Published';
+      } else {
+        button = (
+          <button
+            className="btn btn__green"
+            onClick={() => this.openModal(true)}
           >
-            {'Locations'}
-          </Link>
-        </li>
-        <li>
-          <Link
-            activeStyle={activeStyles}
-            className={classes.link}
-            to="/admin/services"
-          >
-            {'Services'}
-          </Link>
-        </li>
-        <li>
-          <Link
-            activeStyle={activeStyles}
-            className={classes.link}
-            to="/admin/blog"
-          >
-            {'Blog Posts'}
-          </Link>
-        </li>
-        <li>
-          <Link
-            activeStyle={activeStyles}
-            className={classes.link}
-            to="/admin/events"
-          >
-            {'Events'}
-          </Link>
-        </li>
-      </ul>
-      {status}
-    </div>
-  );
-};
+            {'Publish'}
+          </button>
+        );
+        description = 'Not Published';
+      }
+
+      status = (
+        <Fragment>
+          <h3 className={`${classes.title} m-top-16`}>{'Status'}</h3>
+          <p className={classes.description}>{description}</p>
+          {button}
+        </Fragment>
+      );
+    }
+
+    return (
+      <div className={classes.container}>
+        <Modal
+          open={this.state.openModal}
+          modalClosed={this.handlerModalVisibility}
+          cancelClicked={this.handlerModalVisibility}
+          statusPicked={statusPicked}
+          activeClicked={this.updatePublishStatus}
+          schemaFail={schemaFail}
+          schemaValidated={schemaValidated}
+        />
+        <h3 className={classes.title}>{'Your organization'}</h3>
+        <p className={classes.description}>
+          {displayName || 'Your organisation display name has not been set.'}
+        </p>
+        <ul className={navigationClasses.join(' ')}>
+          <li>
+            <Link
+              activeStyle={activeStyles}
+              className={classes.link}
+              to="/admin/profile"
+            >
+              {'Profile'}
+            </Link>
+          </li>
+          <li>
+            <Link
+              activeStyle={activeStyles}
+              className={classes.link}
+              to="/admin/location"
+            >
+              {'Locations'}
+            </Link>
+          </li>
+          <li>
+            <Link
+              activeStyle={activeStyles}
+              className={classes.link}
+              to="/admin/services"
+            >
+              {'Services'}
+            </Link>
+          </li>
+          <li>
+            <Link
+              activeStyle={activeStyles}
+              className={classes.link}
+              to="/admin/blog"
+            >
+              {'Blog Posts'}
+            </Link>
+          </li>
+          <li>
+            <Link
+              activeStyle={activeStyles}
+              className={classes.link}
+              to="/admin/events"
+            >
+              {'Events'}
+            </Link>
+          </li>
+        </ul>
+        {status}
+      </div>
+    );
+  }
+}
 
 const activeStyles = {
   color: '#00ba81',
@@ -134,7 +275,33 @@ const styles = theme => {
   };
 };
 
+const mapStateToProps = _state => {
+  const organizationId =
+    _state.user.organizationId || sessionStorage.getItem('organizationId');
+  const auth = _state.user.authorization || sessionStorage.getItem('userAuth');
+
+  return {
+    auth,
+    errors: _state.adminProfile.publishErrors,
+    organization: _state.businesses.organization,
+    organizationId,
+    success: _state.adminProfile.publishSuccess,
+    updatedOrganization: _state.adminProfile.updatedOrganization.data,
+    schemaValidated: _state.validateYup.success,
+    schemaFail: _state.validateYup.error,
+  };
+};
+
+const mapDispatchToProps = _dispatch => {
+  return {
+    snackbar: bindActionCreators(snackbarActions, _dispatch),
+    profile: bindActionCreators(profileActions, _dispatch),
+    yupActions: bindActionCreators(yupActions, _dispatch),
+  };
+};
+
 Navigation.propTypes = {
+  auth: PropTypes.string,
   classes: PropTypes.shape({
     container: PropTypes.string,
     description: PropTypes.string,
@@ -143,9 +310,29 @@ Navigation.propTypes = {
     noBorder: PropTypes.string,
     title: PropTypes.string,
   }),
+  displayName: PropTypes.string,
+  errors: PropTypes.arrayOf(PropTypes.shape({})),
   location: PropTypes.shape({
-    pathname: PropTypes.string,
+    pathname: PropTypes.string.isRequired,
+  }),
+  organization: PropTypes.shape({}),
+  organizationId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  profile: PropTypes.shape({
+    updatePublishStatus: PropTypes.func.isRequired,
+  }),
+  schemaFail: PropTypes.bool,
+  schemaValidated: PropTypes.bool,
+  snackbar: PropTypes.shape({
+    showSnackbar: PropTypes.func.isRequired,
+  }),
+  success: PropTypes.bool,
+  updatedOrganization: PropTypes.shape({}),
+  yupActions: PropTypes.shape({
+    validateSchema: PropTypes.func,
   }),
 };
 
-export default withStyles(styles)(withRouter(Navigation));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(withRouter(Navigation)));

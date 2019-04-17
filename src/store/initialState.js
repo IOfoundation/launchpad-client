@@ -30,6 +30,18 @@ const initialState = {
     },
     hideFooter: false,
   },
+  adminProfile: {
+    updatedOrganization: {
+      data: {},
+      loading: false,
+      success: false,
+      errors: [],
+    },
+    publishStatus: null,
+    publishSuccess: false,
+    publishLoading: false,
+    publishErrors: [],
+  },
   blogs: {
     categories: [],
     category: 'front page',
@@ -132,6 +144,11 @@ const initialState = {
   },
   errors: {
     userAuthorized: true,
+  },
+  validateYup: {
+    loading: false,
+    success: false,
+    error: false,
   },
 };
 

@@ -1,17 +1,21 @@
 import {combineReducers} from 'redux';
 import {routerReducer} from 'react-router-redux';
-import businesses from './businesses';
-import snackbar from './snackbar';
-import events from './events';
-import blogs from './blogs';
-import user from './user';
+
 import adminBlogs from './admin-blogs';
+import adminProfile from './admin-profile';
+import blogs from './blogs';
+import businesses from './businesses';
 import errors from './errors';
+import events from './events';
+import snackbar from './snackbar';
+import user from './user';
 import userInformation from './user-information';
+import validateYup from './validate-yup';
 
 const rootReducer = combineReducers({
   routing: routerReducer,
   adminBlogs,
+  adminProfile,
   blogs,
   businesses,
   errors,
@@ -19,6 +23,7 @@ const rootReducer = combineReducers({
   snackbar,
   user,
   userInformation,
+  validateYup,
 });
 
 export default rootReducer;

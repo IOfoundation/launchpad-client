@@ -1,19 +1,18 @@
-import React, {Fragment} from 'react';
-import {Form, FieldArray} from 'formik';
+import React from 'react';
+import {Form} from 'formik';
 import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
 import FormTextField from '@Shared/FormElements/TextFieldDefault';
-import SelectElement from '@Shared/FormElements/Select';
-
-import {truncate} from '@Utils';
+import Phones from './ProfileForm/Phones';
+import ThreeColumns from './ProfileForm/ThreeColumns';
+import Licenses from './ProfileForm/Licenses';
 
 import {
   sectionOnePhoto,
   sectionOneRegular,
   socialSection,
-  phoneNumberSection,
 } from './ProfileForm/elements';
 
 const ProfileForm = props => {
@@ -27,6 +26,13 @@ const ProfileForm = props => {
     touched,
     values,
   } = props;
+  const shared = {
+    errors,
+    handleBlur,
+    handleChange,
+    touched,
+    values,
+  };
 
   return (
     <Form className="profile-form" onSubmit={handleSubmit} style={{padding: 8}}>
@@ -79,11 +85,14 @@ const ProfileForm = props => {
                 autocomplete={form.autocomplete}
                 value={values[form.key]}
                 helperText={form.helperText}
+                type={form.key === 'dateIncorporation' ? 'date' : 'text'}
               />
             );
           })}
         </Grid>
       </Grid>
+      <ThreeColumns {...shared} />
+      <Licenses {...shared} />
       <div className={`${classes.card} m-top-16`}>
         <div className={classes.cardTitle}>
           <span className={`${classes.cardTitle}__media`}>
@@ -129,105 +138,13 @@ const ProfileForm = props => {
           </span>
         </div>
         <div className={classes.cardContent} style={{padding: 8}}>
-          <Grid container={true} spacing={16}>
-            <FieldArray
-              name="phones"
-              render={arrayHelpers => (
-                <Fragment>
-                  {values.phones.map((phone, index) => {
-                    const phoneMap = Object.keys(phone).map((key, i) => {
-                      const id = `phones[${index}].${key}`;
-                      const map = phoneNumberSection[i];
-                      const error =
-                        touched.phones &&
-                        touched.phones[index] &&
-                        touched.phones[index][key] &&
-                        Boolean(
-                          errors.phones &&
-                            errors.phones[index] &&
-                            errors.phones[index][key]
-                        );
-                      let label = map.label;
-
-                      if (label.split('').length > 25) {
-                        label = truncate(label, 25);
-                      }
-
-                      return (
-                        <Grid key={id} item={true} xs={12} md={6}>
-                          {map.select ? (
-                            <SelectElement
-                              errors={errors}
-                              field="phones"
-                              handleBlur={handleBlur}
-                              handleChange={handleChange}
-                              id={id}
-                              key={id}
-                              label={label}
-                              name={id}
-                              value={phone[key]}
-                            />
-                          ) : (
-                            <FormTextField
-                              autocomplete={map.autocomplete}
-                              error={error}
-                              errors={errors}
-                              field="phones"
-                              handleBlur={handleBlur}
-                              handleChange={handleChange}
-                              helperText={map.helperText}
-                              id={key}
-                              key={id}
-                              label={label}
-                              name={id}
-                              value={phone[key]}
-                            />
-                          )}
-                        </Grid>
-                      );
-                    });
-
-                    return (
-                      // eslint-disable-next-line react/no-array-index-key
-                      <Fragment key={index}>
-                        {phoneMap}
-                        <Grid item={true} xs={12}>
-                          <div className={classes.bottomLine}>
-                            <button
-                              type="button"
-                              className={`btn btn__red ${classes.btn}`}
-                              disabled={values.phones.length === 1}
-                              onClick={() => arrayHelpers.remove(index)}
-                            >
-                              {'Delete Phone Number'}
-                            </button>
-                          </div>
-                        </Grid>
-                        <Grid item={true} xs={12}>
-                          <button
-                            type="button"
-                            className={`btn btn__submit ${classes.btn}`}
-                            onClick={() =>
-                              arrayHelpers.insert(index, {
-                                phoneNumber: '1',
-                                ext: '',
-                                vanityNumber: '',
-                                numberType: '',
-                                department: '',
-                                countryExt: '',
-                              })
-                            }
-                          >
-                            {'Add New Phone Number'}
-                          </button>
-                        </Grid>
-                      </Fragment>
-                    );
-                  })}
-                </Fragment>
-              )}
-            />
-          </Grid>
+          <Phones
+            handleBlur={handleBlur}
+            handleChange={handleChange}
+            values={values}
+            touched={touched}
+            errors={errors}
+          />
         </div>
       </div>
     </Form>
@@ -341,8 +258,27 @@ ProfileForm.propTypes = {
     sectionOnePhotoPhoto: PropTypes.string,
   }),
   errors: PropTypes.shape({
-    email: PropTypes.string,
-    password: PropTypes.string,
+    contactEmail: PropTypes.string,
+    organizationName: PropTypes.string,
+    name: PropTypes.string,
+    website: PropTypes.string,
+    description: PropTypes.string,
+    accreditations: PropTypes.string,
+    dateIncorporation: PropTypes.string,
+    legalStatus: PropTypes.string,
+    fundingSources: PropTypes.string,
+    licenses: PropTypes.string,
+    taxIdentifier: PropTypes.string,
+    taxStatus: PropTypes.string,
+    twitter: PropTypes.string,
+    facebook: PropTypes.string,
+    linkedin: PropTypes.string,
+    phoneNumber: PropTypes.string,
+    ext: PropTypes.string,
+    vanityNumber: PropTypes.string,
+    numberType: PropTypes.string,
+    department: PropTypes.string,
+    countryExt: PropTypes.string,
   }),
   handleBlur: PropTypes.func,
   handleChange: PropTypes.func,
@@ -350,7 +286,6 @@ ProfileForm.propTypes = {
   isSubmitting: PropTypes.bool,
   isValid: PropTypes.bool,
   touched: PropTypes.shape({
-    password: PropTypes.bool,
     contactEmail: PropTypes.bool,
     organizationName: PropTypes.bool,
     name: PropTypes.bool,
@@ -374,7 +309,6 @@ ProfileForm.propTypes = {
     countryExt: PropTypes.bool,
   }),
   values: PropTypes.shape({
-    password: PropTypes.string,
     contactEmail: PropTypes.string,
     organizationName: PropTypes.string,
     name: PropTypes.string,
