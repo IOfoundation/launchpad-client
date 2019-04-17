@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import ServiceForm from './ServiceForm';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
@@ -6,6 +6,7 @@ import {PropTypes} from 'prop-types';
 
 import * as user from '../../../actions/user';
 import * as snackbarActions from '../../../actions/snackbar';
+import * as serviceCreateActions from '@Actions/services/create';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {withRouter} from 'react-router';
@@ -18,10 +19,10 @@ const SignupSchema = Yup.object().shape({
   description: Yup.string().required('Required'),
   email: Yup.string()
     .email('Invalid email address')
-    .required('Required'),
+    .notRequired(),
   website: Yup.string(),
-  status: Yup.string().required('Required'),
-  servicesAreas: Yup.string().required('Required'),
+  status: Yup.string(),
+  servicesAreas: Yup.string(),
   audience: Yup.string(),
   eligibility: Yup.string(),
   fees: Yup.string(),
@@ -143,19 +144,24 @@ const ServiceFormContainer = props => {
 
   return (
     <LandingComponent>
-      <Title
-        titleText="Create A Service"
-        hideCancelAction={false}
-        submitLabel={'Save Service'}
-        cancelClicked={goToServices}
-      />
       <Formik
         render={_props => (
-          <ServiceForm {..._props} goToServices={goToServices} />
+          <Fragment>
+            <Title
+              titleText="Create A Service"
+              hideCancelAction={false}
+              submitLabel={'Save Service'}
+              cancelClicked={goToServices}
+              submitClicked={_props.submitForm}
+            />
+            <ServiceForm {..._props} goToServices={goToServices} />
+          </Fragment>
         )}
         initialValues={initialValues}
         validationSchema={SignupSchema}
-        onSubmit={() => {}}
+        onSubmit={values => {
+          console.log(values);
+        }}
       />
     </LandingComponent>
   );
@@ -172,6 +178,7 @@ const mapDispatchToProps = _dispatch => {
   return {
     userActions: bindActionCreators(user, _dispatch),
     snackbar: bindActionCreators(snackbarActions, _dispatch),
+    serviceCreate: bindActionCreators(serviceCreateActions, _dispatch),
   };
 };
 
@@ -180,6 +187,9 @@ ServiceFormContainer.propTypes = {
   isAuth: PropTypes.bool,
   router: PropTypes.shape({
     push: PropTypes.func,
+  }),
+  serviceCreate: PropTypes.shape({
+    create: PropTypes.func,
   }),
   snackbar: PropTypes.shape({
     showSnackbar: PropTypes.func,

@@ -3,6 +3,7 @@ import AdminProfileTypes from './admin-profile';
 import BlogsTypes from './blogs';
 import BusinessTypes from './business';
 import CreateLocationTypes from './locations/create';
+import CreateServiceTypes from './services/create';
 import DeleteLocationTypes from './locations/delete';
 import ErrorsTypes from './errors';
 import EventsTypes from './events';
@@ -19,6 +20,7 @@ export {
   BlogsTypes,
   BusinessTypes,
   CreateLocationTypes,
+  CreateServiceTypes,
   DeleteLocationTypes,
   ErrorsTypes,
   EventsTypes,
@@ -36,6 +38,7 @@ export default {
   BlogsTypes,
   BusinessTypes,
   CreateLocationTypes,
+  CreateServiceTypes,
   DeleteLocationTypes,
   ErrorsTypes,
   EventsTypes,

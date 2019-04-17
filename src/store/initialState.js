@@ -173,6 +173,13 @@ const initialState = {
     success: false,
     error: false,
   },
+  serviceCreate: {
+    error: false,
+    errors: [],
+    loading: false,
+    location: {},
+    success: false,
+  },
 };
 
 export default initialState;
