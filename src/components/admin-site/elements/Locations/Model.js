@@ -20,6 +20,8 @@ class Location {
     delete_hoursRegular,
     delete_hoursHolidays,
   }) {
+    this.is_primary = isMainLocation;
+
     if (locationName) {
       this.name = locationName;
     }
@@ -32,8 +34,6 @@ class Location {
       this.description = locationDescription;
     }
 
-    this.active = isMainLocation;
-
     if (locationEmail) {
       this.email = locationEmail;
     }
@@ -43,25 +43,11 @@ class Location {
     }
 
     if (streetAddress.address) {
-      this.address_attributes = {
-        address_1: streetAddress.address,
-        address_2: streetAddress.address2,
-        city: streetAddress.city,
-        country: 'US',
-        postal_code: streetAddress.zip,
-        state_province: streetAddress.state,
-      };
+      this.address_attributes = this._getAddress(streetAddress);
     }
 
     if (mailingAddress.address) {
-      this.mail_address_attributes = {
-        address_1: mailingAddress.address,
-        address_2: mailingAddress.address2,
-        city: mailingAddress.city,
-        country: 'US',
-        postal_code: mailingAddress.zip,
-        state_province: mailingAddress.state,
-      };
+      this.mail_address_attributes = this._getAddress(mailingAddress);
     }
 
     if (languages.length > 0) {
@@ -79,38 +65,43 @@ class Location {
     }
 
     if (hoursRegular.length > 0 || delete_hoursRegular.length > 0) {
-      this.regular_schedules_attributes = this._getApiHours(hoursRegular);
-
-      if (delete_hoursRegular.length > 0) {
-        this.regular_schedules_attributes = [
-          ...this.regular_schedules_attributes,
-          ...delete_hoursRegular,
-        ];
-      }
+      this.regular_schedules_attributes = this._getApiHours(
+        hoursRegular,
+        delete_hoursRegular
+      );
     }
 
     if (hoursHolidays.length > 0 || delete_hoursHolidays.length > 0) {
-      this.holiday_schedules_attributes = this._getHolidayHours(hoursHolidays);
-
-      if (delete_hoursHolidays.length > 0) {
-        this.holiday_schedules_attributes = [
-          ...this.holiday_schedules_attributes,
-          ...delete_hoursHolidays,
-        ];
-      }
+      this.holiday_schedules_attributes = this._getHolidayHours(
+        hoursHolidays,
+        delete_hoursHolidays
+      );
     }
 
     if ((phones && phones.length > 0) || deletedPhones.length > 0) {
-      this.phones_attributes = this._getApiPhones(phones);
-
-      if (deletedPhones.length > 0) {
-        this.phones_attributes = [...this.phones_attributes, ...deletedPhones];
-      }
+      this.phones_attributes = this._getApiPhones(phones, deletedPhones);
     }
   }
 
-  _getApiHours(schedules) {
-    return schedules.map(schedule => {
+  _getAddress(address) {
+    const mapped = {
+      address_1: address.address,
+      address_2: address.address2,
+      city: address.city,
+      country: 'US',
+      postal_code: address.zip,
+      state_province: address.state,
+    };
+
+    if (address.attention) {
+      mapped.attention = address.attention;
+    }
+
+    return mapped;
+  }
+
+  _getApiHours(schedules, deleted) {
+    let mapped = schedules.map(schedule => {
       const mapSchedule = {
         weekday: schedule.day,
         opens_at: schedule.opensAt,
@@ -123,10 +114,16 @@ class Location {
 
       return mapSchedule;
     });
+
+    if (deleted.length > 0) {
+      mapped = [...mapped, ...deleted];
+    }
+
+    return mapped;
   }
 
-  _getHolidayHours(schedules) {
-    return schedules.map(schedule => {
+  _getHolidayHours(schedules, deleted) {
+    let mapped = schedules.map(schedule => {
       const mapSchedule = {
         closes_at: schedule.closesAt,
         end_date: schedule.endDate,
@@ -146,10 +143,16 @@ class Location {
 
       return mapSchedule;
     });
+
+    if (deleted.length > 0) {
+      mapped = [...mapped, ...deleted];
+    }
+
+    return mapped;
   }
 
-  _getApiPhones(phones) {
-    return phones.map(phone => {
+  _getApiPhones(phones, deleted) {
+    let mapped = phones.map(phone => {
       const mapPhone = {
         department: phone.department,
         extension: phone.ext,
@@ -164,6 +167,12 @@ class Location {
 
       return mapPhone;
     });
+
+    if (deleted.length > 0) {
+      mapped = [...mapped, ...deleted];
+    }
+
+    return mapped;
   }
 
   _getAccessibilityNames(checked) {

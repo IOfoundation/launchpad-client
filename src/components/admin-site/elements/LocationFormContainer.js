@@ -236,18 +236,19 @@ class LocationFormContainer extends PureComponent {
         acc[key] = falsyToString(holiday[key]);
         return acc;
       }, {});
-      const open = clean.opens_at.split('T')[1].split('.')[0];
-      const closes = clean.closes_at.split('T')[1].split('.')[0];
-      const startDate = clean.start_date.split('T')[0];
-      const endDate = clean.end_date.split('T')[0];
+      const open = clean.opens_at && clean.opens_at.split('T')[1].split('.')[0];
+      const closes =
+        clean.closes_at && clean.closes_at.split('T')[1].split('.')[0];
+      const startDate = clean.start_date && clean.start_date.split('T')[0];
+      const endDate = clean.end_date && clean.end_date.split('T')[0];
 
       return {
         closed: holiday.closed ? 'true' : 'false',
-        closesAt: closes,
-        endDate,
+        closesAt: closes || '',
+        endDate: endDate || '',
         id: holiday.id,
-        opensAt: open,
-        startDate,
+        opensAt: open || '',
+        startDate: startDate || '',
       };
     });
   }
@@ -305,6 +306,7 @@ class LocationFormContainer extends PureComponent {
       locationDescription: data.description || '',
       locationEmail: data.email || '',
       locationWebsite: data.website || '',
+      isMainLocation: data.is_primary,
       streetAddress: this._getAddress(data.address),
       mailingAddress: this._getAddress(data.mail_address),
       phones: this._getPhones(data.phones),
