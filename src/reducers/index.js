@@ -9,6 +9,7 @@ import errors from './errors';
 import events from './events';
 import getLocationByOrganization from './location/getByOrganization';
 import locationCreate from './location/create';
+import locationDelete from './location/delete';
 import locations from './locations';
 import snackbar from './snackbar';
 import user from './user';
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   events,
   getLocationByOrganization,
   locationCreate,
+  locationDelete,
   locations,
   snackbar,
   user,

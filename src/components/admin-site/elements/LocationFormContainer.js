@@ -6,15 +6,17 @@ import {withRouter} from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
-import LocationForm from './LocationForm';
-import LandingComponent from '../Landing';
-import Title from '../Title';
 import Buttons from '../Buttons';
+import LandingComponent from '../Landing';
+import LocationForm from './LocationForm';
+import Modal from './Locations/Modal';
+import Title from '../Title';
 
 import {falsyToString} from '@Utils';
 import {accesibility} from '@StaticData/data';
 import Loading from '@Shared/Loading';
 import * as locationCreateActions from '@Actions/locations/create';
+import * as locationDeleteActions from '@Actions/locations/delete';
 import * as snackbarActions from '@Actions/snackbar';
 import LocationModel from './Locations/Model';
 
@@ -151,6 +153,10 @@ const getInitialValues = () => {
 };
 
 class LocationFormContainer extends PureComponent {
+  state = {
+    openModal: false,
+  };
+
   componentDidUpdate(prevProps) {
     const {error, errors, snackbar, success, router} = this.props;
 
@@ -179,11 +185,44 @@ class LocationFormContainer extends PureComponent {
         router.push('/admin/location');
       }
     }
+
+    this._verifyDeleteSuccess(prevProps);
+    this._verifyDeleteError(prevProps);
   }
 
-  _submit;
   _apiData;
   _setSubmitting;
+
+  _verifyDeleteSuccess = prevProps => {
+    const {deleteSucces, snackbar, router} = this.props;
+
+    if (deleteSucces !== prevProps.deleteSucces) {
+      if (deleteSucces) {
+        snackbar.showSnackbar({
+          message: 'Location deleted succesfully',
+        });
+        router.push('/admin/location');
+      }
+    }
+  };
+
+  _verifyDeleteError = prevProps => {
+    const {deleteError, deleteErrors, snackbar} = this.props;
+
+    if (deleteError !== prevProps.deleteError) {
+      let message = 'An error has ocurred';
+
+      if (deleteErrors.length > 0 && deleteErrors[0].title) {
+        message = deleteErrors[0].title;
+      }
+
+      if (deleteError) {
+        snackbar.showSnackbar({
+          message,
+        });
+      }
+    }
+  };
 
   _getAddress(address, isVirtual) {
     if (!address) {
@@ -339,10 +378,6 @@ class LocationFormContainer extends PureComponent {
     return new LocationModel(data);
   };
 
-  saveLocation = () => {
-    this._submit();
-  };
-
   _getForm = (mode, locationId) => {
     const {
       data,
@@ -376,6 +411,7 @@ class LocationFormContainer extends PureComponent {
             locationActions.createLocation({
               Authorization,
               organizationId,
+              locationId,
               location,
               mode: 'new',
             });
@@ -400,7 +436,12 @@ class LocationFormContainer extends PureComponent {
                 submitClicked={_props.submitForm}
                 disableSubmit={_props.isSubmitting}
               />
-              <LocationForm {..._props} breakpoint={breakpoint} mode={mode} />
+              <LocationForm
+                {..._props}
+                breakpoint={breakpoint}
+                mode={mode}
+                deleteClicked={this.handlerModalVisibility}
+              />
               <Buttons
                 cancelClicked={this.goToLocation}
                 hideCancelAction={false}
@@ -417,8 +458,26 @@ class LocationFormContainer extends PureComponent {
     );
   };
 
+  _deleteLocation = () => {
+    const {locationDelete, router, Authorization} = this.props;
+
+    locationDelete.deleteLocation({
+      Authorization,
+      locationId: router.params.id,
+    });
+  };
+
+  handlerModalVisibility = () => {
+    this.setState(prevState => {
+      return {
+        openModal: !prevState.openModal,
+      };
+    });
+  };
+
   render() {
     const {router, loadingFinished} = this.props;
+    const {openModal} = this.state;
     let form = <Loading />;
 
     if (router.params.id === 'new') {
@@ -427,14 +486,23 @@ class LocationFormContainer extends PureComponent {
       form = this._getForm('edit', router.params.id);
     }
 
-    return <LandingComponent navigation={false}>{form}</LandingComponent>;
+    return (
+      <LandingComponent navigation={false}>
+        <Modal
+          open={openModal}
+          modalClosed={this.handlerModalVisibility}
+          cancelClicked={this.handlerModalVisibility}
+          deleteClicked={this._deleteLocation}
+        />
+        {form}
+      </LandingComponent>
+    );
   }
 }
 
 const mapStateToProps = _state => {
   const organizationId =
-    String(_state.user.organizationId) ||
-    sessionStorage.getItem('organizationId');
+    _state.user.organizationId || sessionStorage.getItem('organizationId');
   const Authorization =
     _state.user.authorization || sessionStorage.getItem('userAuth');
 
@@ -445,12 +513,16 @@ const mapStateToProps = _state => {
     errors: _state.locationCreate.errors,
     locationUpdated: _state.locationCreate.location,
     success: _state.locationCreate.success,
+    deleteSucces: _state.locationDelete.success,
+    deleteError: _state.locationDelete.error,
+    deleteErrors: _state.locationDelete.errors,
   };
 };
 
 const mapDispatchToProps = _dispatch => {
   return {
     locationActions: bindActionCreators(locationCreateActions, _dispatch),
+    locationDelete: bindActionCreators(locationDeleteActions, _dispatch),
     snackbar: bindActionCreators(snackbarActions, _dispatch),
   };
 };
@@ -459,6 +531,9 @@ LocationFormContainer.propTypes = {
   Authorization: PropTypes.string,
   breakpoint: PropTypes.string,
   data: PropTypes.shape({}),
+  deleteError: PropTypes.bool,
+  deleteErrors: PropTypes.arrayOf(PropTypes.shape({})),
+  deleteSucces: PropTypes.bool,
   error: PropTypes.bool,
   errors: PropTypes.arrayOf(PropTypes.shape({})),
   isAuth: PropTypes.bool,
@@ -466,8 +541,11 @@ LocationFormContainer.propTypes = {
   locationActions: PropTypes.shape({
     createLocation: PropTypes.func,
   }),
+  locationDelete: PropTypes.shape({
+    deleteLocation: PropTypes.func,
+  }),
   locationUpdated: PropTypes.shape({}),
-  organizationId: PropTypes.string,
+  organizationId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   router: PropTypes.shape({
     push: PropTypes.func,
   }),

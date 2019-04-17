@@ -24,6 +24,7 @@ const LocationForm = props => {
     touched,
     values,
     mode,
+    deleteClicked,
   } = props;
   const shared = {
     errors,
@@ -45,7 +46,7 @@ const LocationForm = props => {
       <Hours {...shared} />
       <Transportation {...shared} breakpoint={breakpoint} />
       <Accessibility {...shared} />
-      {mode === 'edit' ? <DangerZone /> : null}
+      {mode === 'edit' ? <DangerZone deleteClicked={deleteClicked} /> : null}
     </Form>
   );
 };
@@ -65,6 +66,7 @@ LocationForm.propTypes = {
     sectionOnePhotoElement: PropTypes.string,
     sectionOnePhotoPhoto: PropTypes.string,
   }),
+  deleteClicked: PropTypes.func,
   errors: PropTypes.shape({
     locationName: PropTypes.string,
     alternateName: PropTypes.string,
