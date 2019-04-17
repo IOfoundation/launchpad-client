@@ -441,6 +441,7 @@ class LocationFormContainer extends PureComponent {
                 breakpoint={breakpoint}
                 mode={mode}
                 deleteClicked={this.handlerModalVisibility}
+                router={props.router}
               />
               <Buttons
                 cancelClicked={this.goToLocation}

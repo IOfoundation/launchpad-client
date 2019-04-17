@@ -47,6 +47,7 @@ const SignupSchema = Yup.object().shape({
   interpretationServices: Yup.string(),
   waitTime: Yup.string(),
   keywords: Yup.string(),
+  locationId: Yup.string(),
 });
 
 const initialValues = {
@@ -132,6 +133,7 @@ const initialValues = {
     wholesale: false,
     otherServices: false,
   },
+  locationId: '',
 };
 
 const ServiceFormContainer = props => {

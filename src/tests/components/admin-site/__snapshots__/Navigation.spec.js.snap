@@ -272,29 +272,6 @@ exports[`Admin-site <Navigation /> renders snapshot of Navigation 1`] = `
                   className="withRouter-Navigation--link-6"
                   onlyActiveOnIndex={false}
                   style={Object {}}
-                  to="/admin/services"
-                >
-                  <a
-                    className="withRouter-Navigation--link-6"
-                    onClick={[Function]}
-                    style={Object {}}
-                  >
-                    Services
-                  </a>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  activeStyle={
-                    Object {
-                      "color": "#00ba81",
-                      "fontFamily": "\\"proxima-nova-bold\\", Georgia, sans-serif",
-                      "opacity": 1,
-                    }
-                  }
-                  className="withRouter-Navigation--link-6"
-                  onlyActiveOnIndex={false}
-                  style={Object {}}
                   to="/admin/blog"
                 >
                   <a

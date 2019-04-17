@@ -24,16 +24,21 @@ class AddNewService extends PureComponent {
   };
 
   updateValue = event => {
-    const {handleChange, arrayHelpers} = this.props;
+    const {handleChange, arrayHelpers, optionSelected} = this.props;
     const info = event.target;
 
     handleChange(event);
     this.setState({[event.target.name]: info.value});
     arrayHelpers.push({id: info.value, name: info.name});
+    optionSelected(info.value);
   };
 
   render() {
-    const {classes, createServiceDisable} = this.props;
+    const {
+      classes,
+      createServiceDisable,
+      addAnotherServiceClicked,
+    } = this.props;
 
     return (
       <FormControl className={classes.formControl}>
@@ -42,7 +47,7 @@ class AddNewService extends PureComponent {
             className={`btn btn__submit front ${classes.floating} ${
               classes.front
             }`}
-            onClick={this.handleOpen}
+            onClick={addAnotherServiceClicked}
             disabled={createServiceDisable}
           >
             {'Add Another Service'}
@@ -85,6 +90,7 @@ const styles = () => ({
 });
 
 AddNewService.propTypes = {
+  addAnotherServiceClicked: PropTypes.func,
   arrayHelpers: PropTypes.shape({}),
   classes: PropTypes.shape({
     formControl: PropTypes.string,
@@ -97,6 +103,7 @@ AddNewService.propTypes = {
   }),
   createServiceDisable: PropTypes.bool,
   handleChange: PropTypes.func,
+  optionSelected: PropTypes.func,
 };
 
 export default withStyles(combineStyles(sharedStyles, styles))(AddNewService);
