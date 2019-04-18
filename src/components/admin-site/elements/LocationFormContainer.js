@@ -185,15 +185,17 @@ class LocationFormContainer extends PureComponent {
   _apiData;
   _setSubmitting;
 
-  _getAddress(address) {
+  _getAddress(address, isVirtual) {
     if (!address) {
       return {
         ...emtpyStreetAddress,
+        isVirtual,
       };
     }
 
     return {
       id: address.id,
+      isVirtual: address.virtual,
       address: (address && address.address_1) || '',
       address2: (address && address.address_2) || '',
       city: (address && address.city) || '',
@@ -312,7 +314,7 @@ class LocationFormContainer extends PureComponent {
       locationEmail: data.email || '',
       locationWebsite: data.website || '',
       isMainLocation: Boolean(data.is_primary),
-      streetAddress: this._getAddress(data.address),
+      streetAddress: this._getAddress(data.address, data.virtual),
       mailingAddress: this._getAddress(data.mail_address),
       phones: this._getPhones(data.phones),
       hoursRegular: this._getHours(data.regular_schedules),
