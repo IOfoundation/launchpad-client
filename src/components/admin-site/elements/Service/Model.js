@@ -1,4 +1,14 @@
 /* eslint-disable complexity */
+const createArrayOfIds = checked => {
+  return Object.keys(checked).reduce((acc, key) => {
+    if (checked[key]) {
+      acc.push(key);
+    }
+
+    return acc;
+  }, []);
+};
+
 const Service = values => {
   const mapped = {};
 
@@ -54,9 +64,11 @@ const Service = values => {
     mapped.wait_time = values.waitTime;
   }
 
-  /*if (values.serviceCategories) {
-    mapped.category_ids = [values.serviceCategories];
-  }*/
+  const category_ids = createArrayOfIds(values[1]);
+
+  if (category_ids.length > 0) {
+    mapped.taxonomy_ids = category_ids;
+  }
 
   if (values.requiredDocuments) {
     mapped.required_documents = [values.requiredDocuments];
@@ -89,13 +101,8 @@ const Service = values => {
   if (values.phones) {
     mapped.phones_attributes = [values.phones];
   }
-
-  // businessStage
-  // businessType
-  // underservedCommunities
   // holiday_schedules_attributes // hoursHolidays
   // regular_schedules_attributes // hoursRegular
-  /* industry: {agriculture: false, arts: false, biosciencesServicesandMfg: false, construction: false, education: false, …}*/
 
   return mapped;
 };

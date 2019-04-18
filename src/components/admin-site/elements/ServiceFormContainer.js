@@ -132,97 +132,6 @@ const initialValues = {
   locationId: '',
 };
 
-const formSectionMap = {
-  Categories: 'serviceCategories',
-  Industry: 'industry',
-  'Business Stage': 'businessStage',
-  'Business Type': 'businessType',
-  'Underserved Communities': 'underservedCommunities',
-};
-const taxonomyMap = {
-  Categories: {
-    Capital: 'capital',
-    'Financial Management': 'financialManagement',
-    'Human Resources & Workforce Development':
-      'humanResourcesWorkforceDevelopment',
-    'Legal Services': 'legalServices',
-    'Manufacturing/Logistics': 'manufacturingLogistics',
-    'Marketing/Sales': 'marketingSales',
-    'Mentoring/Counseling': 'mentoringCounseling',
-    Networking: 'networking',
-    'Physical Space': 'physicalSpace',
-    'Planning/Management': 'planningManagement',
-    Procurement: 'procurement',
-    'R&D/Commercialization': 'RDCommercialization',
-    'Regulatory Compliance': 'regulatoryCompliance',
-  },
-  'Business Stage': {
-    'Growth/Expansion/Mature Business': 'growthExpansionMatureBusiness',
-    'Idea/Inception': 'ideaInception',
-    'Proof of Concept/Prototype/Market Intro':
-      'proofOfConceptPrototypeMarketInfo',
-    Rollout: 'rollout',
-  },
-  'Business Type': {
-    ' Main Street or Small Business': 'startupOrHighGrowthBusiness',
-    'Microenterprise or Home Based Business': 'mainStreetOrSmallBusiness',
-    'Startup or High-Growth Business': 'microenterpriseorHomeBasedBusiness',
-  },
-  Industry: {
-    Agriculture: 'agriculture',
-    Arts: 'arts',
-    'Biosciences Services and Manufacturing': 'biosciencesServicesandMfg',
-    Construction: 'construction',
-    Education: 'education',
-    'Energy & Utilities': 'energyUtilities',
-    'Finance & Insurance': 'financeInsurance',
-    'Health & Childcare': 'healthChildcare',
-    'High Tech Services & Manufacturing': 'highTechServicesManufacturing',
-    'Information Technology': 'informationTechnology',
-    Management: 'management',
-    Manufacturing: 'manufacturing',
-    'Not for Profit': 'notforProfit',
-    'Other Services': 'otherServices',
-    'Personal Services': 'personalServices',
-    'Professional Services': 'professionalServices',
-    'Real Estate': 'realEstate',
-    'Restaurant & Hotel': 'restaurantHotel',
-    Retail: 'retail',
-    Tourism: 'tourism',
-    'Transportation & Warehousing': 'transportationWarehousing',
-    Wholesale: 'wholesale',
-  },
-  'Underserved Communities': {
-    'African American': 'africanAmerican',
-    Asian: 'asian',
-    'Ex-Convict': 'exConvict',
-    Hispanic: 'hispanic',
-    Immigrant: 'immigrant',
-    LGBTQ: 'LGBTQ',
-    'Native American': 'nativeAmerican',
-    Other: 'other',
-    Veteran: 'veteran',
-    Woman: 'woman',
-  },
-};
-
-const taxonomyToForm = taxonomies => {
-  return taxonomies.reduce((acc, taxonomy) => {
-    const formSection = formSectionMap[taxonomy.name];
-
-    acc[formSection] = taxonomy.children.reduce((a, prop) => {
-      const name = taxonomyMap[taxonomy.name];
-      const formValue = name[prop.name];
-
-      a[formValue] = true;
-
-      return a;
-    }, {});
-
-    return acc;
-  }, {});
-};
-
 class ServiceFormContainer extends PureComponent {
   componentDidUpdate(prevProps) {
     const {
@@ -268,10 +177,10 @@ class ServiceFormContainer extends PureComponent {
       Authorization,
       serviceCreate,
       locationName,
-      taxonomy,
+      initialTaxonomy,
+      checkboxes,
     } = this.props;
 
-    const _initialState = {...initialValues, ...taxonomyToForm(taxonomy)};
     return (
       <LandingComponent>
         <Formik
@@ -285,10 +194,14 @@ class ServiceFormContainer extends PureComponent {
                 submitClicked={_props.submitForm}
                 subTitle={`for ${locationName}`}
               />
-              <ServiceForm {..._props} goToLocation={this.goToLocation} />
+              <ServiceForm
+                {..._props}
+                goToLocation={this.goToLocation}
+                checkboxes={checkboxes}
+              />
             </Fragment>
           )}
-          initialValues={_initialState}
+          initialValues={{...initialValues, ...initialTaxonomy}}
           validationSchema={SignupSchema}
           onSubmit={values => {
             serviceCreate.create({
@@ -306,7 +219,9 @@ class ServiceFormContainer extends PureComponent {
 
 ServiceFormContainer.propTypes = {
   Authorization: PropTypes.string,
+  checkboxes: PropTypes.arrayOf(PropTypes.shape({})),
   error: PropTypes.bool,
+  initialTaxonomy: PropTypes.shape({}),
   isAuth: PropTypes.bool,
   locationId: PropTypes.string,
   locationName: PropTypes.string,

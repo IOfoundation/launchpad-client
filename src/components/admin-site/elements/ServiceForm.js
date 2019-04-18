@@ -10,12 +10,6 @@ import Keywords from './Service/Keywords';
 import DangerZone from './LocationForm/DangerZone';
 import Buttons from '../Buttons';
 
-import {Categories} from './Service/Categories';
-import {BusinessType} from './Service/BusinessType';
-import {BusinessStage} from './Service/BusinessStage';
-import {UnderservedCommunities} from './Service/UnderservedCommunities';
-import {Industry} from './Service/Industry';
-
 const ServiceForm = props => {
   const {
     errors,
@@ -25,6 +19,7 @@ const ServiceForm = props => {
     handleSubmit,
     touched,
     values,
+    checkboxes,
   } = props;
   const shared = {
     errors,
@@ -33,6 +28,14 @@ const ServiceForm = props => {
     handleChange,
     values,
   };
+  const findCheckbox = id => {
+    return checkboxes.find(checkbox => checkbox.id === id);
+  };
+  const Categories = findCheckbox(1);
+  const BusinessType = findCheckbox(141);
+  const BusinessStage = findCheckbox(145);
+  const UnderservedCommunities = findCheckbox(150);
+  const Industry = findCheckbox(161);
 
   return (
     <Form className="profile-form" onSubmit={handleSubmit}>
@@ -42,33 +45,33 @@ const ServiceForm = props => {
       <CheckboxGroup
         {...shared}
         data={{...Categories}}
-        group="serviceCategories"
+        group={`${Categories.id}`}
         title="Service Categories"
         md={6}
       />
       <CheckboxGroup
         {...shared}
         data={{...BusinessType}}
-        group="businessType"
+        group={`${BusinessType.id}`}
         title="Business Type"
       />
       <CheckboxGroup
         {...shared}
         data={{...BusinessStage}}
-        group="businessStage"
+        group={`${BusinessStage.id}`}
         title="Business Stage"
       />
       <CheckboxGroup
         {...shared}
         data={{...UnderservedCommunities}}
-        group="underservedCommunities"
+        group={`${UnderservedCommunities.id}`}
         title="Underserved Communities"
         md={6}
       />
       <CheckboxGroup
         {...shared}
         data={{...Industry}}
-        group="industry"
+        group={`${Industry.id}`}
         title="Industry"
         md={6}
       />
@@ -84,6 +87,7 @@ const ServiceForm = props => {
 };
 
 ServiceForm.propTypes = {
+  checkboxes: PropTypes.arrayOf(PropTypes.shape({})),
   errors: PropTypes.shape({}),
   goToLocation: PropTypes.func,
   handleBlur: PropTypes.func,

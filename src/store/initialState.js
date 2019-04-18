@@ -183,10 +183,11 @@ const initialState = {
     success: false,
   },
   serviceTaxonomy: {
+    checkboxes: [],
     error: false,
     errors: [],
-    loading: false,
-    data: [],
+    initialForm: {},
+    loading: true,
     success: false,
   },
 };

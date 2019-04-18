@@ -18,10 +18,10 @@ class ServiceRoute extends PureComponent {
   }
 
   render() {
-    const {router, taxonomy} = this.props;
+    const {router, checkboxes} = this.props;
     let serviceContainer = <Loading />;
 
-    if (taxonomy.length > 0) {
+    if (checkboxes.length > 0) {
       serviceContainer = <ServiceFormContainer {...this.props} />;
     }
 
@@ -50,7 +50,8 @@ const mapStateToProps = _state => {
     serviceCreateError: _state.serviceCreate.error,
     serviceUpdated: _state.serviceCreate.service,
     success: _state.serviceCreate.success,
-    taxonomy: _state.serviceTaxonomy.data,
+    initialTaxonomy: _state.serviceTaxonomy.initialForm,
+    checkboxes: _state.serviceTaxonomy.checkboxes,
   };
 };
 
@@ -65,7 +66,9 @@ const mapDispatchToProps = _dispatch => {
 
 ServiceRoute.propTypes = {
   Authorization: PropTypes.string,
+  checkboxes: PropTypes.arrayOf(PropTypes.shape({})),
   error: PropTypes.bool,
+  initialTaxonomy: PropTypes.shape({}),
   isAuth: PropTypes.bool,
   locationId: PropTypes.string,
   locationName: PropTypes.string,
@@ -86,7 +89,6 @@ ServiceRoute.propTypes = {
     showSnackbar: PropTypes.func,
   }),
   success: PropTypes.bool,
-  taxonomy: PropTypes.arrayOf(PropTypes.shape({})),
   userActions: PropTypes.shape({
     login: PropTypes.func,
   }),
