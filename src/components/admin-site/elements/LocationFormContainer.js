@@ -351,10 +351,13 @@ class LocationFormContainer extends PureComponent {
       organizationId,
     } = this.props;
     let _initialValues;
+    let sectionTitle;
 
     if (mode === 'new') {
+      sectionTitle = 'Create A Location';
       _initialValues = getInitialValues();
     } else if (loadingFinished) {
+      sectionTitle = 'Edit A Location';
       _initialValues = this._dataToForm(data);
     }
 
@@ -390,12 +393,12 @@ class LocationFormContainer extends PureComponent {
               <Title
                 hideCancelAction={false}
                 submitLabel={'Save location'}
-                titleText="Create A Location"
+                titleText={sectionTitle}
                 cancelClicked={this.goToLocation}
                 submitClicked={_props.submitForm}
                 disableSubmit={_props.isSubmitting}
               />
-              <LocationForm {..._props} breakpoint={breakpoint} />
+              <LocationForm {..._props} breakpoint={breakpoint} mode={mode} />
               <Buttons
                 cancelClicked={this.goToLocation}
                 hideCancelAction={false}

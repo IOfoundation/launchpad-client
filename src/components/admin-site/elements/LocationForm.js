@@ -23,6 +23,7 @@ const LocationForm = props => {
     handleSubmit,
     touched,
     values,
+    mode,
   } = props;
   const shared = {
     errors,
@@ -36,7 +37,7 @@ const LocationForm = props => {
     <Form className="location-form" onSubmit={handleSubmit}>
       <Overview {...shared} />
       <Details {...shared} />
-      <Services {...shared} />
+      <Services {...shared} mode={mode} />
       <StreetAddress {...shared} />
       <MailingAddress {...shared} />
       <Phones {...shared} />
@@ -44,7 +45,7 @@ const LocationForm = props => {
       <Hours {...shared} />
       <Transportation {...shared} breakpoint={breakpoint} />
       <Accessibility {...shared} />
-      <DangerZone />
+      {mode === 'edit' ? <DangerZone /> : null}
     </Form>
   );
 };
@@ -76,6 +77,7 @@ LocationForm.propTypes = {
   handleSubmit: PropTypes.func,
   isSubmitting: PropTypes.bool,
   isValid: PropTypes.bool,
+  mode: PropTypes.string,
   touched: PropTypes.shape({
     password: PropTypes.bool,
     contactEmail: PropTypes.bool,

@@ -9,7 +9,7 @@ import Item from './Services/Item';
 import {sharedStyles, sharedClasses} from './styles';
 
 const Services = props => {
-  const {values, classes, handleChange} = props;
+  const {values, classes, handleChange, mode} = props;
 
   return (
     <div className={classes.card}>
@@ -42,10 +42,18 @@ const Services = props => {
                   />
                 </Fragment>
               ) : (
-                <AddNewService
-                  arrayHelpers={arrayHelpers}
-                  handleChange={handleChange}
-                />
+                <Fragment>
+                  {mode === 'new' && (
+                    <p className={classes.content}>
+                      {'Please create this Location before adding Services.'}
+                    </p>
+                  )}
+                  <AddNewService
+                    arrayHelpers={arrayHelpers}
+                    handleChange={handleChange}
+                    createServiceDisable={mode === 'new'}
+                  />
+                </Fragment>
               )}
             </Fragment>
           )}
@@ -60,6 +68,7 @@ Services.propTypes = {
   errors: PropTypes.shape({}),
   handleBlur: PropTypes.func,
   handleChange: PropTypes.func,
+  mode: PropTypes.string,
   touched: PropTypes.shape({}),
   values: PropTypes.shape({}),
 };
