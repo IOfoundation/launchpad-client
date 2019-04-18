@@ -61,6 +61,61 @@ class Item extends PureComponent {
                   const opensAt = `${field}[${index}].opensAt`;
                   const closesAt = `${field}[${index}].closesAt`;
 
+                  let hours = null;
+                  let deleteElement = (
+                    <Grid item={true} xs={1}>
+                      <i
+                        className="material-icons title-as-link"
+                        style={{color: 'black'}}
+                        aria-owns={'delete-hour'}
+                        aria-haspopup="true"
+                        onClick={() =>
+                          this._deleteItem(arrayHelpers, index, hour.id)
+                        }
+                      >
+                        {'delete'}
+                      </i>
+                    </Grid>
+                  );
+
+                  if (hour.closed === 'false') {
+                    hours = (
+                      <Grid container={true} spacing={16} alignItems="center">
+                        <Grid item={true} xs={4}>
+                          <FormTextField
+                            autocomplete={'off'}
+                            errors={errors}
+                            handleBlur={handleBlur}
+                            handleChange={handleChange}
+                            name={opensAt}
+                            id={opensAt}
+                            label="Opens At"
+                            field={field}
+                            value={hour.opensAt}
+                            type="time"
+                          />
+                        </Grid>
+
+                        <Grid item={true} xs={4}>
+                          <FormTextField
+                            autocomplete={'off'}
+                            errors={errors}
+                            handleBlur={handleBlur}
+                            handleChange={handleChange}
+                            name={closesAt}
+                            label="Closes At"
+                            id={closesAt}
+                            field={field}
+                            value={hour.closesAt}
+                            type="time"
+                          />
+                        </Grid>
+                        {deleteElement}
+                      </Grid>
+                    );
+                    deleteElement = null;
+                  }
+
                   return (
                     // eslint-disable-next-line react/no-array-index-key
                     <Fragment key={index}>
@@ -109,52 +164,9 @@ class Item extends PureComponent {
                             selectOptions={closes}
                           />
                         </Grid>
+                        {deleteElement}
                       </Grid>
-
-                      <Grid container={true} spacing={16} alignItems="center">
-                        <Grid item={true} xs={4}>
-                          <FormTextField
-                            autocomplete={'off'}
-                            errors={errors}
-                            handleBlur={handleBlur}
-                            handleChange={handleChange}
-                            name={opensAt}
-                            id={opensAt}
-                            label="Opens At"
-                            field={field}
-                            value={hour.opensAt}
-                            type="time"
-                          />
-                        </Grid>
-
-                        <Grid item={true} xs={4}>
-                          <FormTextField
-                            autocomplete={'off'}
-                            errors={errors}
-                            handleBlur={handleBlur}
-                            handleChange={handleChange}
-                            name={closesAt}
-                            label="Closes At"
-                            id={closesAt}
-                            field={field}
-                            value={hour.closesAt}
-                            type="time"
-                          />
-                        </Grid>
-                        <Grid item={true} xs={1}>
-                          <i
-                            className="material-icons title-as-link"
-                            style={{color: 'black'}}
-                            aria-owns={'delete-hour'}
-                            aria-haspopup="true"
-                            onClick={() =>
-                              this._deleteItem(arrayHelpers, index, hour.id)
-                            }
-                          >
-                            {'delete'}
-                          </i>
-                        </Grid>
-                      </Grid>
+                      {hours}
                     </Fragment>
                   );
                 })}

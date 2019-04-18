@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import Layout from '../Layout';
+import Layout from './Layout';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {PropTypes} from 'prop-types';

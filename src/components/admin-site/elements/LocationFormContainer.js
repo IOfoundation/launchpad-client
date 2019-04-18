@@ -106,6 +106,7 @@ const emptyAccesibility = {
 };
 
 const emtpyStreetAddress = {
+  isVirtual: false,
   address: '',
   address2: '',
   city: '',
@@ -155,6 +156,7 @@ class LocationFormContainer extends PureComponent {
 
     if (error !== prevProps.error) {
       let message = 'An error has ocurred';
+      this._setSubmitting(false);
 
       if (errors.length > 0 && errors[0].title) {
         message = errors[0].title;
@@ -168,6 +170,8 @@ class LocationFormContainer extends PureComponent {
     }
 
     if (success !== prevProps.success) {
+      this._setSubmitting(true);
+
       if (success) {
         snackbar.showSnackbar({
           message: 'Location created/updated succesfully',
@@ -179,6 +183,7 @@ class LocationFormContainer extends PureComponent {
 
   _submit;
   _apiData;
+  _setSubmitting;
 
   _getAddress(address) {
     if (!address) {
@@ -357,9 +362,11 @@ class LocationFormContainer extends PureComponent {
       <Formik
         enableReinitialize={true}
         initialValues={_initialValues}
-        onSubmit={values => {
+        onSubmit={(values, {setSubmitting}) => {
           const location = this._newLocationToApi(values);
 
+          this._setSubmitting = setSubmitting;
+          this._setSubmitting(true);
           if (mode === 'new') {
             locationActions.createLocation({
               Authorization,
@@ -386,6 +393,7 @@ class LocationFormContainer extends PureComponent {
                 titleText="Create A Location"
                 cancelClicked={this.goToLocation}
                 submitClicked={_props.submitForm}
+                disableSubmit={_props.isSubmitting}
               />
               <LocationForm {..._props} breakpoint={breakpoint} />
               <Buttons
@@ -393,6 +401,7 @@ class LocationFormContainer extends PureComponent {
                 hideCancelAction={false}
                 submitClicked={_props.submitForm}
                 submitLabel={'Save location'}
+                disableSubmit={_props.isSubmitting}
               />
             </Fragment>
           );

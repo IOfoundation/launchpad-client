@@ -43,7 +43,14 @@ class Location {
     }
 
     if (streetAddress.address) {
-      this.address_attributes = this._getAddress(streetAddress);
+      if (streetAddress.isVirtual === false) {
+        this.virtual = false;
+        this.address_attributes = this._getAddress(streetAddress);
+      } else {
+        this.virtual = true;
+      }
+    } else {
+      this.virtual = streetAddress.isVirtual;
     }
 
     if (mailingAddress.address) {
