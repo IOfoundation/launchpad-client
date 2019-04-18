@@ -24,10 +24,10 @@ const LocationSchema = Yup.object().shape({
   locationDescription: Yup.string().required('Required'),
   isMainLocation: Yup.boolean().nullable(),
   locationEmail: Yup.string()
-    .email('Invalid email address')
+    .email('Invalid Location Email Address')
     .notRequired(),
   locationWebsite: Yup.string()
-    .url()
+    .url('Location website must be a valid URL')
     .notRequired(),
   services: Yup.array().of(
     Yup.object().shape({

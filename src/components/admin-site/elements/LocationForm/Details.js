@@ -24,7 +24,7 @@ export const Details = props => {
             id={'locationEmail'}
             label={'Location Email Address'}
             value={values.locationEmail}
-            helperText="The location's general email."
+            helperText="General email for this Location"
           />
         </Grid>
         <Grid item={true} xs={12} md={6}>

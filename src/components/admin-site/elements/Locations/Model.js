@@ -166,6 +166,7 @@ class Location {
         number: phone.phoneNumber,
         number_type: phone.numberType,
         vanity_number: phone.vanityNumber,
+        country_prefix: phone.countryExt,
       };
 
       if (phone.id) {
