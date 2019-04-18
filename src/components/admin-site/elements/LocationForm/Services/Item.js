@@ -21,7 +21,7 @@ class Item extends PureComponent {
     this.setState({anchorEl: null});
   };
 
-  handleMenuCloseAndDetele = () => {
+  handleMenuCloseAndDelete = () => {
     const {arrayHelpers, id} = this.props;
 
     this.setState({anchorEl: null});
@@ -39,7 +39,7 @@ class Item extends PureComponent {
           {service.id}
         </span>
         <i
-          className="material-icons"
+          className="material-icons item-dropdown"
           aria-owns={anchorEl ? 'service-menu-item' : null}
           aria-haspopup="true"
           onClick={this.handleMenuClick}
@@ -52,10 +52,10 @@ class Item extends PureComponent {
           open={Boolean(anchorEl)}
           onClose={this.handleMenuClose}
         >
-          <MenuItem onClick={this.handleMenuClose}>{'View More'}</MenuItem>
-          <MenuItem onClick={this.handleMenuCloseAndDetele}>
+          <MenuItem onClick={this.handleMenuClose}>{'View'}</MenuItem>
+          {/* <MenuItem onClick={this.handleMenuCloseAndDelete}>
             {'Remove'}
-          </MenuItem>
+          </MenuItem> */}
         </Menu>
       </div>
     );

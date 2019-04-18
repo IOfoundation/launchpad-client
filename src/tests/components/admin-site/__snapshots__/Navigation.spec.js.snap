@@ -210,7 +210,9 @@ exports[`Admin-site <Navigation /> renders snapshot of Navigation 1`] = `
             </h3>
             <p
               className="withRouter-Navigation--description-3"
-            />
+            >
+              Your organization display name has not been set.
+            </p>
             <ul
               className="withRouter-Navigation--navigation-4 withRouter-Navigation--addBorder-5"
             >
