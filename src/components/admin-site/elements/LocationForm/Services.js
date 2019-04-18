@@ -19,7 +19,7 @@ const Services = props => {
   } = props;
 
   return (
-    <div className={classes.card} id="services-at-location">
+    <div className={classes.card}>
       <div className={classes.cardTitle}>
         <span className={`${classes.cardTitle}__media`}>
           {'Services at this Location'}

@@ -41,7 +41,7 @@ class AddNewService extends PureComponent {
     } = this.props;
 
     return (
-      <FormControl className={classes.formControl}>
+      <FormControl className={`${classes.formControl} m-top-8`}>
         <div className={classes.hideSelect}>
           <button
             className={`btn btn__submit front ${classes.floating} ${

@@ -178,6 +178,7 @@ const initialState = {
     errors: [],
     loading: false,
     locationId: '',
+    locationName: '',
     service: {},
     success: false,
   },

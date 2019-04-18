@@ -61,11 +61,13 @@ export const create = ({
   };
 };
 
-export const setLocationId = locationId => {
+export const setLocationId = ({locationId, locationName}) => {
   sessionStorage.setItem('locationId', locationId);
+  sessionStorage.setItem('locationName', locationName);
 
   return {
     type: types.SET_LOCATION_ID,
     locationId,
+    locationName,
   };
 };

@@ -21,6 +21,7 @@ const LocationForm = props => {
     handleBlur,
     handleChange,
     handleSubmit,
+    locationName,
     mode,
     router,
     service,
@@ -38,12 +39,12 @@ const LocationForm = props => {
   };
 
   const addAnotherService = () => {
-    service.setLocationId(router.params.id);
+    service.setLocationId({locationId: router.params.id, locationName});
     router.push('/admin/services/new');
   };
 
   const editService = () => {
-    service.setLocationId(router.params.id);
+    service.setLocationId({locationId: router.params.id, locationName});
     router.push(`/admin/services/${router.params.id}`);
   };
 
@@ -98,6 +99,7 @@ LocationForm.propTypes = {
   handleSubmit: PropTypes.func,
   isSubmitting: PropTypes.bool,
   isValid: PropTypes.bool,
+  locationName: PropTypes.string,
   mode: PropTypes.string,
   router: PropTypes.shape({
     push: PropTypes.func,

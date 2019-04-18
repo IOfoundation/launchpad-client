@@ -179,10 +179,14 @@ class LocationFormContainer extends PureComponent {
 
     if (success !== prevProps.success) {
       this._setSubmitting(true);
+      const message =
+        router.params.id === 'new'
+          ? 'Location created succesfully'
+          : 'Location updated succesfully';
 
       if (success) {
         snackbar.showSnackbar({
-          message: 'Location created/updated succesfully',
+          message,
         });
         router.push('/admin/location');
       }
@@ -447,6 +451,7 @@ class LocationFormContainer extends PureComponent {
                 mode={mode}
                 router={router}
                 service={service}
+                locationName={_initialValues.locationName}
               />
               <Buttons
                 cancelClicked={this.goToLocation}
@@ -482,7 +487,7 @@ class LocationFormContainer extends PureComponent {
   };
 
   render() {
-    const {router, loadingFinished} = this.props;
+    const {router, loadingFinished, breakpoint} = this.props;
     const {openModal} = this.state;
     let form = <Loading />;
 
@@ -493,7 +498,7 @@ class LocationFormContainer extends PureComponent {
     }
 
     return (
-      <LandingComponent navigation={false}>
+      <LandingComponent breakpoint={breakpoint} navigation={false}>
         <Modal
           open={openModal}
           modalClosed={this.handlerModalVisibility}

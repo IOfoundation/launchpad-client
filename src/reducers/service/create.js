@@ -5,6 +5,7 @@ const initialState = {
   errors: [],
   loading: false,
   locationId: '',
+  locationName: '',
   service: {},
   success: false,
 };
@@ -43,10 +44,11 @@ export default function(state = initialState, action) {
     }
 
     case types.SET_LOCATION_ID: {
-      const {locationId} = action;
+      const {locationId, locationName} = action;
       return {
         ...state,
         locationId,
+        locationName,
       };
     }
 

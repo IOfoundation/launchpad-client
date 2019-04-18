@@ -179,7 +179,7 @@ class ServiceFormContainer extends PureComponent {
   };
 
   render() {
-    const {locationId, Authorization, serviceCreate} = this.props;
+    const {locationId, Authorization, serviceCreate, locationName} = this.props;
 
     return (
       <LandingComponent>
@@ -192,6 +192,7 @@ class ServiceFormContainer extends PureComponent {
                 submitLabel={'Save Service'}
                 cancelClicked={this.goToLocation}
                 submitClicked={_props.submitForm}
+                subTitle={`for ${locationName}`}
               />
               <ServiceForm {..._props} goToLocation={this.goToLocation} />
             </Fragment>
@@ -215,6 +216,8 @@ class ServiceFormContainer extends PureComponent {
 const mapStateToProps = _state => {
   const organizationId =
     _state.user.organizationId || sessionStorage.getItem('organizationId');
+  const locationName =
+    _state.user.locationName || sessionStorage.getItem('locationName');
   const Authorization =
     _state.user.authorization || sessionStorage.getItem('userAuth');
   const locationId =
@@ -222,12 +225,13 @@ const mapStateToProps = _state => {
 
   return {
     Authorization,
-    serviceCreateError: _state.serviceCreate.error,
     error: _state.user.error,
-    seriveCreateErrors: _state.serviceCreate.errors,
     isAuth: _state.user.authorization !== '',
     locationId,
+    locationName,
     organizationId,
+    seriveCreateErrors: _state.serviceCreate.errors,
+    serviceCreateError: _state.serviceCreate.error,
     serviceUpdated: _state.serviceCreate.service,
     success: _state.serviceCreate.success,
   };
@@ -246,6 +250,7 @@ ServiceFormContainer.propTypes = {
   error: PropTypes.bool,
   isAuth: PropTypes.bool,
   locationId: PropTypes.string,
+  locationName: PropTypes.string,
   organizationId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   router: PropTypes.shape({
     push: PropTypes.func,
