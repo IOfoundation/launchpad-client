@@ -7,7 +7,6 @@ import {PropTypes} from 'prop-types';
 import Locations from '../../components/admin-site/elements/Locations';
 import Loading from '@Shared/Loading';
 
-//import * as locationsActions from '@Actions/locations';
 import * as locationsActions from '@Actions/locations/getByOrganization';
 
 class LocationsRoute extends PureComponent {
