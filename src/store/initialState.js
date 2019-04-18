@@ -182,6 +182,13 @@ const initialState = {
     service: {},
     success: false,
   },
+  serviceTaxonomy: {
+    error: false,
+    errors: [],
+    loading: false,
+    data: [],
+    success: false,
+  },
 };
 
 export default initialState;

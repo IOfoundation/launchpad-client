@@ -2,18 +2,12 @@ import React, {Fragment, PureComponent} from 'react';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {PropTypes} from 'prop-types';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {withRouter} from 'react-router';
 
 import LandingComponent from '../Landing';
 import Title from '../Title';
 import ServiceForm from './ServiceForm';
 
 import serviceModel from './Service/Model';
-import * as user from '@Actions/user';
-import * as snackbarActions from '@Actions/snackbar';
-import * as serviceCreateActions from '@Actions/services/create';
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string().required('Required'),
@@ -106,7 +100,6 @@ const initialValues = {
     hispanic: false,
     immigrant: false,
     LGBTQ: false,
-    manufacturingLogistics: false,
     nativeAmerican: false,
     veteran: false,
     woman: false,
@@ -137,6 +130,97 @@ const initialValues = {
     otherServices: false,
   },
   locationId: '',
+};
+
+const formSectionMap = {
+  Categories: 'serviceCategories',
+  Industry: 'industry',
+  'Business Stage': 'businessStage',
+  'Business Type': 'businessType',
+  'Underserved Communities': 'underservedCommunities',
+};
+const taxonomyMap = {
+  Categories: {
+    Capital: 'capital',
+    'Financial Management': 'financialManagement',
+    'Human Resources & Workforce Development':
+      'humanResourcesWorkforceDevelopment',
+    'Legal Services': 'legalServices',
+    'Manufacturing/Logistics': 'manufacturingLogistics',
+    'Marketing/Sales': 'marketingSales',
+    'Mentoring/Counseling': 'mentoringCounseling',
+    Networking: 'networking',
+    'Physical Space': 'physicalSpace',
+    'Planning/Management': 'planningManagement',
+    Procurement: 'procurement',
+    'R&D/Commercialization': 'RDCommercialization',
+    'Regulatory Compliance': 'regulatoryCompliance',
+  },
+  'Business Stage': {
+    'Growth/Expansion/Mature Business': 'growthExpansionMatureBusiness',
+    'Idea/Inception': 'ideaInception',
+    'Proof of Concept/Prototype/Market Intro':
+      'proofOfConceptPrototypeMarketInfo',
+    Rollout: 'rollout',
+  },
+  'Business Type': {
+    ' Main Street or Small Business': 'startupOrHighGrowthBusiness',
+    'Microenterprise or Home Based Business': 'mainStreetOrSmallBusiness',
+    'Startup or High-Growth Business': 'microenterpriseorHomeBasedBusiness',
+  },
+  Industry: {
+    Agriculture: 'agriculture',
+    Arts: 'arts',
+    'Biosciences Services and Manufacturing': 'biosciencesServicesandMfg',
+    Construction: 'construction',
+    Education: 'education',
+    'Energy & Utilities': 'energyUtilities',
+    'Finance & Insurance': 'financeInsurance',
+    'Health & Childcare': 'healthChildcare',
+    'High Tech Services & Manufacturing': 'highTechServicesManufacturing',
+    'Information Technology': 'informationTechnology',
+    Management: 'management',
+    Manufacturing: 'manufacturing',
+    'Not for Profit': 'notforProfit',
+    'Other Services': 'otherServices',
+    'Personal Services': 'personalServices',
+    'Professional Services': 'professionalServices',
+    'Real Estate': 'realEstate',
+    'Restaurant & Hotel': 'restaurantHotel',
+    Retail: 'retail',
+    Tourism: 'tourism',
+    'Transportation & Warehousing': 'transportationWarehousing',
+    Wholesale: 'wholesale',
+  },
+  'Underserved Communities': {
+    'African American': 'africanAmerican',
+    Asian: 'asian',
+    'Ex-Convict': 'exConvict',
+    Hispanic: 'hispanic',
+    Immigrant: 'immigrant',
+    LGBTQ: 'LGBTQ',
+    'Native American': 'nativeAmerican',
+    Other: 'other',
+    Veteran: 'veteran',
+    Woman: 'woman',
+  },
+};
+
+const taxonomyToForm = taxonomies => {
+  return taxonomies.reduce((acc, taxonomy) => {
+    const formSection = formSectionMap[taxonomy.name];
+
+    acc[formSection] = taxonomy.children.reduce((a, prop) => {
+      const name = taxonomyMap[taxonomy.name];
+      const formValue = name[prop.name];
+
+      a[formValue] = true;
+
+      return a;
+    }, {});
+
+    return acc;
+  }, {});
 };
 
 class ServiceFormContainer extends PureComponent {
@@ -179,8 +263,15 @@ class ServiceFormContainer extends PureComponent {
   };
 
   render() {
-    const {locationId, Authorization, serviceCreate, locationName} = this.props;
+    const {
+      locationId,
+      Authorization,
+      serviceCreate,
+      locationName,
+      taxonomy,
+    } = this.props;
 
+    const _initialState = {...initialValues, ...taxonomyToForm(taxonomy)};
     return (
       <LandingComponent>
         <Formik
@@ -197,7 +288,7 @@ class ServiceFormContainer extends PureComponent {
               <ServiceForm {..._props} goToLocation={this.goToLocation} />
             </Fragment>
           )}
-          initialValues={initialValues}
+          initialValues={_initialState}
           validationSchema={SignupSchema}
           onSubmit={values => {
             serviceCreate.create({
@@ -213,38 +304,6 @@ class ServiceFormContainer extends PureComponent {
   }
 }
 
-const mapStateToProps = _state => {
-  const organizationId =
-    _state.user.organizationId || sessionStorage.getItem('organizationId');
-  const locationName =
-    _state.user.locationName || sessionStorage.getItem('locationName');
-  const Authorization =
-    _state.user.authorization || sessionStorage.getItem('userAuth');
-  const locationId =
-    _state.user.locationId || sessionStorage.getItem('locationId');
-
-  return {
-    Authorization,
-    error: _state.user.error,
-    isAuth: _state.user.authorization !== '',
-    locationId,
-    locationName,
-    organizationId,
-    seriveCreateErrors: _state.serviceCreate.errors,
-    serviceCreateError: _state.serviceCreate.error,
-    serviceUpdated: _state.serviceCreate.service,
-    success: _state.serviceCreate.success,
-  };
-};
-
-const mapDispatchToProps = _dispatch => {
-  return {
-    userActions: bindActionCreators(user, _dispatch),
-    snackbar: bindActionCreators(snackbarActions, _dispatch),
-    serviceCreate: bindActionCreators(serviceCreateActions, _dispatch),
-  };
-};
-
 ServiceFormContainer.propTypes = {
   Authorization: PropTypes.string,
   error: PropTypes.bool,
@@ -256,6 +315,9 @@ ServiceFormContainer.propTypes = {
     push: PropTypes.func,
   }),
   seriveCreateErrors: PropTypes.arrayOf(PropTypes.shape({})),
+  serviceCategoriesActions: PropTypes.shape({
+    getCategories: PropTypes.func,
+  }),
   serviceCreate: PropTypes.shape({
     create: PropTypes.func,
   }),
@@ -270,7 +332,4 @@ ServiceFormContainer.propTypes = {
   }),
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(ServiceFormContainer));
+export default ServiceFormContainer;
