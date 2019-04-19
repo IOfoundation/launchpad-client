@@ -63,7 +63,7 @@ const MailingAddress = props => {
                   values={values}
                 />
               </Grid>
-              <Grid item={true} xs={6}>
+              <Grid item={true} xs={12} sm={6}>
                 <FormTextField
                   autocomplete={'off'}
                   errors={errors}
@@ -76,7 +76,7 @@ const MailingAddress = props => {
                   values={values}
                 />
               </Grid>
-              <Grid item={true} xs={3}>
+              <Grid item={true} xs={12} sm={3}>
                 <SelectElement
                   errors={errors}
                   handleBlur={handleBlur}
@@ -88,7 +88,7 @@ const MailingAddress = props => {
                   selectOptions={states}
                 />
               </Grid>
-              <Grid item={true} xs={3}>
+              <Grid item={true} xs={12} sm={3}>
                 <FormTextField
                   autocomplete={'off'}
                   errors={errors}

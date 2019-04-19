@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import Layout from '../Layout';
+import Layout from './Layout';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {PropTypes} from 'prop-types';
@@ -21,12 +21,16 @@ class LocationFormRoute extends PureComponent {
   }
 
   render() {
-    const {location, loading} = this.props;
+    const {location, loading, breakpoint} = this.props;
     let locationElement = <Loading />;
 
     if (Object.keys(location).length > 0 || !loading) {
       locationElement = (
-        <LocationFormContainer data={location} loadingFinished={!loading} />
+        <LocationFormContainer
+          data={location}
+          loadingFinished={!loading}
+          breakpoint={breakpoint}
+        />
       );
     }
 
@@ -51,6 +55,7 @@ const mapDispatchToProps = _dispatch => {
 };
 
 LocationFormRoute.propTypes = {
+  breakpoint: PropTypes.string,
   error: PropTypes.bool,
   isAuth: PropTypes.bool,
   loading: PropTypes.bool,

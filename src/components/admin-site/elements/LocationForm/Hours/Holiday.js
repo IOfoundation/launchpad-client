@@ -81,7 +81,7 @@ class Item extends PureComponent {
                   if (hour.closed === 'false') {
                     hours = (
                       <Grid container={true} spacing={16} alignItems="center">
-                        <Grid item={true} xs={4}>
+                        <Grid item={true} xs={10} sm={4}>
                           <FormTextField
                             autocomplete={'off'}
                             errors={errors}
@@ -97,7 +97,7 @@ class Item extends PureComponent {
                           />
                         </Grid>
 
-                        <Grid item={true} xs={4}>
+                        <Grid item={true} xs={10} sm={4}>
                           <FormTextField
                             autocomplete={'off'}
                             errors={errors}
@@ -122,7 +122,7 @@ class Item extends PureComponent {
                     // eslint-disable-next-line react/no-array-index-key
                     <Fragment key={index}>
                       <Grid container={true} spacing={16} alignItems="center">
-                        <Grid item={true} xs={4}>
+                        <Grid item={true} xs={10} sm={4}>
                           <FormTextField
                             autocomplete={'off'}
                             errors={errors}
@@ -136,7 +136,7 @@ class Item extends PureComponent {
                             type="date"
                           />
                         </Grid>
-                        <Grid item={true} xs={4}>
+                        <Grid item={true} xs={10} sm={4}>
                           <FormTextField
                             autocomplete={'off'}
                             errors={errors}
@@ -152,7 +152,7 @@ class Item extends PureComponent {
                         </Grid>
                       </Grid>
                       <Grid container={true} spacing={16} alignItems="center">
-                        <Grid item={true} xs={8}>
+                        <Grid item={true} xs={10} sm={8}>
                           <SelectElement
                             errors={errors}
                             field={field}

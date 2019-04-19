@@ -60,7 +60,7 @@ class Item extends PureComponent {
                       spacing={16}
                       alignItems="center"
                     >
-                      <Grid item={true} xs={4}>
+                      <Grid item={true} xs={10} sm={4}>
                         <SelectElement
                           errors={errors}
                           field={field}
@@ -74,7 +74,7 @@ class Item extends PureComponent {
                           selectOptions={weekdays}
                         />
                       </Grid>
-                      <Grid item={true} xs={3}>
+                      <Grid item={true} xs={10} sm={3}>
                         <FormTextField
                           autocomplete={'off'}
                           errors={errors}
@@ -90,7 +90,7 @@ class Item extends PureComponent {
                         />
                       </Grid>
 
-                      <Grid item={true} xs={3}>
+                      <Grid item={true} xs={10} sm={3}>
                         <FormTextField
                           autocomplete={'off'}
                           errors={errors}
