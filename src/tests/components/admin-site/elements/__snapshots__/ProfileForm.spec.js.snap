@@ -10046,6 +10046,11 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                           >
                                             <WithStyles(WithFormControlContext(InputLabel))
                                               htmlFor="phones[0].numberType"
+                                              style={
+                                                Object {
+                                                  "minWidth": "300px",
+                                                }
+                                              }
                                             >
                                               <WithFormControlContext(InputLabel)
                                                 classes={
@@ -10064,6 +10069,11 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                                   }
                                                 }
                                                 htmlFor="phones[0].numberType"
+                                                style={
+                                                  Object {
+                                                    "minWidth": "300px",
+                                                  }
+                                                }
                                               >
                                                 <InputLabel
                                                   classes={
@@ -10099,6 +10109,11 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                                       "variant": "standard",
                                                     }
                                                   }
+                                                  style={
+                                                    Object {
+                                                      "minWidth": "300px",
+                                                    }
+                                                  }
                                                 >
                                                   <WithStyles(WithFormControlContext(FormLabel))
                                                     className="MuiInputLabel-root-116 MuiInputLabel-formControl-121 MuiInputLabel-animated-124"
@@ -10112,6 +10127,11 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                                     }
                                                     data-shrink={false}
                                                     htmlFor="phones[0].numberType"
+                                                    style={
+                                                      Object {
+                                                        "minWidth": "300px",
+                                                      }
+                                                    }
                                                   >
                                                     <WithFormControlContext(FormLabel)
                                                       className="MuiInputLabel-root-116 MuiInputLabel-formControl-121 MuiInputLabel-animated-124"
@@ -10128,6 +10148,11 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                                       }
                                                       data-shrink={false}
                                                       htmlFor="phones[0].numberType"
+                                                      style={
+                                                        Object {
+                                                          "minWidth": "300px",
+                                                        }
+                                                      }
                                                     >
                                                       <FormLabel
                                                         className="MuiInputLabel-root-116 MuiInputLabel-formControl-121 MuiInputLabel-animated-124"
@@ -10161,11 +10186,21 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
                                                             "variant": "standard",
                                                           }
                                                         }
+                                                        style={
+                                                          Object {
+                                                            "minWidth": "300px",
+                                                          }
+                                                        }
                                                       >
                                                         <label
                                                           className="MuiFormLabel-root-127 MuiInputLabel-root-116 MuiInputLabel-formControl-121 MuiInputLabel-animated-124"
                                                           data-shrink={false}
                                                           htmlFor="phones[0].numberType"
+                                                          style={
+                                                            Object {
+                                                              "minWidth": "300px",
+                                                            }
+                                                          }
                                                         >
                                                           Number Type
                                                         </label>

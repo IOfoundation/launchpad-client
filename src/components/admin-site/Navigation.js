@@ -105,14 +105,16 @@ class Navigation extends PureComponent {
   render() {
     const {
       classes,
-      organization,
+      displayName,
       location,
-      displayName = '',
+      organization,
       schemaFail,
       schemaValidated,
+      updatedOrganization,
     } = this.props;
     const {statusPicked} = this.state;
     const navigationClasses = [classes.navigation];
+    const name = displayName || updatedOrganization.name || organization.name;
     let status = null;
 
     if (location.pathname === '/admin/profile') {
@@ -163,9 +165,7 @@ class Navigation extends PureComponent {
           schemaValidated={schemaValidated}
         />
         <h3 className={classes.title}>{'Your organization'}</h3>
-        <p className={classes.description}>
-          {displayName || 'Your organisation display name has not been set.'}
-        </p>
+        <p className={classes.description}>{name}</p>
         <ul className={navigationClasses.join(' ')}>
           <li>
             <Link

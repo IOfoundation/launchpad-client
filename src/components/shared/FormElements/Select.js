@@ -84,7 +84,9 @@ class SelectElement extends PureComponent {
 
     return (
       <FormControl style={{minWidth: '100%'}}>
-        <InputLabel htmlFor={id}>{label}</InputLabel>
+        <InputLabel htmlFor={id} style={{minWidth: '300px'}}>
+          {label}
+        </InputLabel>
         <Select
           id={id}
           error={error}
