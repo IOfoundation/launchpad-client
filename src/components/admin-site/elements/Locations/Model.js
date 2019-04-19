@@ -65,11 +65,7 @@ class Location {
       this.transportation = transportation;
     }
 
-    const accessibilityNames = this._getAccessibilityNames(accessibility);
-
-    if (accessibilityNames.length > 0) {
-      this.accessibility = accessibilityNames;
-    }
+    this.accessibility = this._getAccessibilityNames(accessibility);
 
     if (hoursRegular.length > 0 || delete_hoursRegular.length > 0) {
       this.regular_schedules_attributes = this._getApiHours(

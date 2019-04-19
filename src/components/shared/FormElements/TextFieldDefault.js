@@ -36,6 +36,7 @@ class FormTextFieldDefault extends PureComponent {
       type = 'text',
       value,
       novalidate,
+      step = 300,
     } = this.props;
     let InputLabelProps = null;
     let InputProps = {};
@@ -63,7 +64,7 @@ class FormTextFieldDefault extends PureComponent {
     if (this._isTimePicker(type)) {
       InputProps = {
         autoComplete: autocomplete,
-        step: 300,
+        step,
       };
     }
 
@@ -109,6 +110,7 @@ FormTextFieldDefault.propTypes = {
   name: PropTypes.string,
   novalidate: PropTypes.bool,
   phones: PropTypes.string,
+  step: PropTypes.number,
   type: PropTypes.string,
   value: PropTypes.string,
 };
