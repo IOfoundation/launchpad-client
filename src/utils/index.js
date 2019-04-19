@@ -16,3 +16,4 @@ export {timeConversion} from './timeConversion';
 export {timeToTwelveHourFormat} from './timeToTwelveHourFormat';
 export {truncate, maxCharacters} from './truncate';
 export {viewport} from './viewport';
+export {getApiHours, getHolidayHours, getApiPhones} from './apiModel';

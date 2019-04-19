@@ -1,3 +1,5 @@
+import {getHolidayHours, getApiHours} from '@Utils';
+
 /* eslint-disable complexity */
 const createArrayOfIds = checked => {
   return Object.keys(checked).reduce((acc, key) => {
@@ -9,100 +11,120 @@ const createArrayOfIds = checked => {
   }, []);
 };
 
-const Service = values => {
+const Service = ({
+  acceptedPaymentMethods,
+  applicationProcess,
+  audience,
+  delete_hoursHolidays,
+  delete_hoursRegular,
+  description,
+  displayName,
+  eligibility,
+  email,
+  fees,
+  fundingSources,
+  hoursHolidays,
+  hoursRegular,
+  interpretationServices,
+  keywords,
+  name,
+  requiredDocuments,
+  serviceLanguages,
+  servicesAreas,
+  status,
+  taxonomy,
+  waitTime,
+  website,
+}) => {
   const mapped = {};
 
-  if (values.acceptedPaymentMethods) {
-    mapped.accepted_payments = [values.acceptedPaymentMethods];
+  if (acceptedPaymentMethods) {
+    mapped.accepted_payments = [acceptedPaymentMethods];
   }
 
-  if (values.applicationProcess) {
-    mapped.application_process = values.applicationProcess;
+  if (applicationProcess) {
+    mapped.application_process = applicationProcess;
   }
 
-  if (values.audience) {
-    mapped.audience = values.audience;
+  if (audience) {
+    mapped.audience = audience;
   }
 
-  if (values.description) {
-    mapped.description = values.description;
+  if (description) {
+    mapped.description = description;
   }
 
-  if (values.displayName) {
-    mapped.alternate_name = values.displayName;
+  if (displayName) {
+    mapped.alternate_name = displayName;
   }
 
-  if (values.eligibility) {
-    mapped.eligibility = values.eligibility;
+  if (eligibility) {
+    mapped.eligibility = eligibility;
   }
 
-  if (values.email) {
-    mapped.email = values.email;
+  if (email) {
+    mapped.email = email;
   }
 
-  if (values.fees) {
-    mapped.fees = values.fees;
+  if (fees) {
+    mapped.fees = fees;
   }
 
-  if (values.fundingSources) {
-    mapped.funding_sources = [values.fundingSources];
+  if (fundingSources) {
+    mapped.funding_sources = [fundingSources];
   }
 
-  if (values.name) {
-    mapped.name = values.name;
+  if (name) {
+    mapped.name = name;
   }
 
-  if (values.status) {
-    mapped.status = values.status;
+  if (status) {
+    mapped.status = status;
   }
 
-  if (values.website) {
-    mapped.website = values.website;
+  if (website) {
+    mapped.website = website;
   }
 
-  if (values.waitTime) {
-    mapped.wait_time = values.waitTime;
+  if (waitTime) {
+    mapped.wait_time = waitTime;
   }
 
-  const category_ids = createArrayOfIds(values[1]);
+  mapped.taxonomy_ids = createArrayOfIds(taxonomy.serviceCategories);
 
-  if (category_ids.length > 0) {
-    mapped.taxonomy_ids = category_ids;
+  if (requiredDocuments) {
+    mapped.required_documents = [requiredDocuments];
   }
 
-  if (values.requiredDocuments) {
-    mapped.required_documents = [values.requiredDocuments];
+  if (keywords) {
+    mapped.keywords = [keywords];
   }
 
-  if (values.keywords) {
-    mapped.keywords = [values.keywords];
+  if (servicesAreas) {
+    mapped.service_areas = [servicesAreas];
   }
 
-  if (values.servicesAreas) {
-    mapped.service_areas = [values.servicesAreas];
+  if (interpretationServices) {
+    mapped.interpretation_services = [interpretationServices];
   }
 
-  if (values.servicesAreas) {
-    mapped.service_areas = [values.servicesAreas];
+  if (serviceLanguages) {
+    mapped.languages = [serviceLanguages];
   }
 
-  if (values.interpretationServices) {
-    mapped.interpretation_services = [values.interpretationServices];
+  if (hoursHolidays.length > 0 || delete_hoursHolidays.length > 0) {
+    mapped.holiday_schedules_attributes = getHolidayHours(
+      hoursHolidays,
+      delete_hoursHolidays
+    );
   }
 
-  if (values.interpretationServices) {
-    mapped.interpretation_services = [values.interpretationServices];
+  if (hoursRegular.length > 0 || delete_hoursRegular.length > 0) {
+    mapped.regular_schedules_attributes = getApiHours(
+      hoursRegular,
+      delete_hoursRegular
+    );
   }
-
-  if (values.serviceLanguages) {
-    mapped.languages = [values.serviceLanguages];
-  }
-
-  if (values.phones) {
-    mapped.phones_attributes = [values.phones];
-  }
-  // holiday_schedules_attributes // hoursHolidays
-  // regular_schedules_attributes // hoursRegular
 
   return mapped;
 };
