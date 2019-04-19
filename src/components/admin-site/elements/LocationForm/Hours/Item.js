@@ -86,6 +86,7 @@ class Item extends PureComponent {
                           field={field}
                           value={hour.opensAt}
                           type="time"
+                          step={900}
                         />
                       </Grid>
 
@@ -101,6 +102,7 @@ class Item extends PureComponent {
                           field={field}
                           value={hour.closesAt}
                           type="time"
+                          step={900}
                         />
                       </Grid>
                       <Grid item={true} xs={1}>
