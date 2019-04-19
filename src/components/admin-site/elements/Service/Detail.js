@@ -4,10 +4,11 @@ import {withStyles} from '@material-ui/core/styles';
 import {sharedStyles} from '../LocationForm/styles';
 import Grid from '@material-ui/core/Grid';
 
-import FormTextField from '../../../shared/FormElements/TextFieldDefault';
-import SelectElement from '../../../shared/FormElements/Select';
+import FormTextField from '@Shared/FormElements/TextFieldDefault';
+import SelectElement from '@Shared/FormElements/Select';
 
-import {combineStyles} from '../../../../utils';
+import {combineStyles} from '@Utils';
+import {requiredDocuments, languages} from '@StaticData/data';
 
 const Detail = props => {
   const {values, classes, handleChange, handleBlur, errors} = props;
@@ -51,6 +52,7 @@ const Detail = props => {
               helperText={
                 'Select which documents are required to receive this service.'
               }
+              selectOptions={requiredDocuments}
             />
           </Grid>
           <Grid item={true} xs={12} className={classes.mBot8}>
@@ -63,6 +65,7 @@ const Detail = props => {
               name={'serviceLanguages'}
               novalidate={true}
               value={values.serviceLanguages}
+              selectOptions={languages}
               helperText={
                 'Select which languages this service is provided in. '
               }

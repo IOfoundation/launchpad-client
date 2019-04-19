@@ -2,9 +2,28 @@ import {getHolidayHours, getApiHours} from '@Utils';
 
 /* eslint-disable complexity */
 const createArrayOfIds = checked => {
-  return Object.keys(checked).reduce((acc, key) => {
-    if (checked[key]) {
-      acc.push(key);
+  const taxonomiesKeys = Object.keys(checked);
+
+  return taxonomiesKeys.reduce((acc, key) => {
+    const category = Object.keys(checked[key]);
+    const activeIds = category.reduce((idsArray, categoryId) => {
+      if (checked[key][categoryId]) {
+        idsArray.push(categoryId);
+      }
+
+      return idsArray;
+    }, []);
+
+    acc.push(...activeIds);
+
+    return acc;
+  }, []);
+};
+
+const createKeywordsArray = keywords => {
+  return keywords.split(',').reduce((acc, keyword) => {
+    if (keyword) {
+      acc.push(keyword.trim());
     }
 
     return acc;
@@ -90,14 +109,14 @@ const Service = ({
     mapped.wait_time = waitTime;
   }
 
-  mapped.taxonomy_ids = createArrayOfIds(taxonomy.serviceCategories);
+  mapped.taxonomy_ids = createArrayOfIds(taxonomy);
 
   if (requiredDocuments) {
     mapped.required_documents = [requiredDocuments];
   }
 
   if (keywords) {
-    mapped.keywords = [keywords];
+    mapped.keywords = createKeywordsArray(keywords);
   }
 
   if (servicesAreas) {

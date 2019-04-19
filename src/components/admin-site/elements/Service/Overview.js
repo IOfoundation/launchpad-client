@@ -1,10 +1,17 @@
 import React from 'react';
+import Grid from '@material-ui/core/Grid';
 import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
-import FormTextField from '../../../shared/FormElements/TextFieldDefault';
+
+import FormTextField from '@Shared/FormElements/TextFieldDefault';
+import SelectElement from '@Shared/FormElements/Select';
+
 import {sharedStyles, sharedClasses} from '../LocationForm/styles';
-import Grid from '@material-ui/core/Grid';
-import SelectElement from '../../../shared/FormElements/Select';
+import {
+  servicesAreas,
+  acceptedPayments,
+  fundingSources,
+} from '@StaticData/data';
 
 export const Overview = props => {
   const {errors, touched, handleBlur, handleChange, values, classes} = props;
@@ -100,6 +107,7 @@ export const Overview = props => {
             name={'servicesAreas'}
             value={values.servicesAreas}
             helperText={'What city or county does the location serve?'}
+            selectOptions={servicesAreas}
           />
         </Grid>
         <Grid item={true} xs={12}>
@@ -153,6 +161,7 @@ export const Overview = props => {
             name={'acceptedPaymentMethods'}
             value={values.acceptedPaymentMethods}
             helperText={'Select one or more payment methods'}
+            selectOptions={acceptedPayments}
           />
         </Grid>
         <Grid item={true} xs={12}>
@@ -165,6 +174,7 @@ export const Overview = props => {
             name={'fundingSources'}
             value={values.fundingSources}
             helperText={'How is this service funded?'}
+            selectOptions={fundingSources}
           />
         </Grid>
       </Grid>

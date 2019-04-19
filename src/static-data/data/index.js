@@ -4,3 +4,7 @@ export {accesibility} from './accesibility';
 export {languages} from './languages';
 export {weekdays} from './weekdays';
 export {closes} from './closes';
+export {servicesAreas} from './servicesAreas';
+export {fundingSources} from './fundingSources';
+export {acceptedPayments} from './acceptedPayments';
+export {requiredDocuments} from './requiredDocuments';
