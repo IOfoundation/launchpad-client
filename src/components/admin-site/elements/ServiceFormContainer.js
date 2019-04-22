@@ -6,6 +6,7 @@ import {PropTypes} from 'prop-types';
 import LandingComponent from '../Landing';
 import Title from '../Title';
 import ServiceForm from './ServiceForm';
+import Buttons from '../Buttons';
 
 import serviceModel from './Service/Model';
 
@@ -142,6 +143,12 @@ class ServiceFormContainer extends PureComponent {
                 {..._props}
                 goToLocation={this.goToLocation}
                 checkboxes={checkboxes}
+              />
+              <Buttons
+                hideCancelAction={false}
+                submitLabel={'Save Service'}
+                cancelClicked={this.goToLocation}
+                submitClicked={_props.submitForm}
               />
             </Fragment>
           )}

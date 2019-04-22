@@ -5,7 +5,6 @@ import {sharedStyles} from '../LocationForm/styles';
 import Grid from '@material-ui/core/Grid';
 
 import FormTextField from '@Shared/FormElements/TextFieldDefault';
-import SelectElement from '@Shared/FormElements/Select';
 
 import {combineStyles} from '@Utils';
 import {requiredDocuments, languages} from '@StaticData/data';

@@ -8,12 +8,10 @@ import Detail from './Service/Detail';
 import CheckboxGroup from './Service/CheckboxGroup';
 import Keywords from './Service/Keywords';
 import DangerZone from './LocationForm/DangerZone';
-import Buttons from '../Buttons';
 
 const ServiceForm = props => {
   const {
     errors,
-    goToLocation,
     handleBlur,
     handleChange,
     handleSubmit,
@@ -76,12 +74,7 @@ const ServiceForm = props => {
         md={6}
       />
       <Keywords {...shared} />
-      <DangerZone />
-      <Buttons
-        hideCancelAction={false}
-        submitLabel={'Save Service'}
-        cancelClicked={goToLocation}
-      />
+      <DangerZone name="service" />
     </Form>
   );
 };
@@ -89,7 +82,6 @@ const ServiceForm = props => {
 ServiceForm.propTypes = {
   checkboxes: PropTypes.arrayOf(PropTypes.shape({})),
   errors: PropTypes.shape({}),
-  goToLocation: PropTypes.func,
   handleBlur: PropTypes.func,
   handleChange: PropTypes.func,
   handleSubmit: PropTypes.func,
