@@ -7,10 +7,12 @@ const getAllEventsRequestStart = () => {
   };
 };
 
-const getAllEventsRequestSuccess = data => {
+const getAllEventsRequestSuccess = (data, totalPages, page) => {
   return {
     type: types.GET_ALL_EVENTS_REQUEST_SUCCESS,
     data,
+    totalPages,
+    page,
   };
 };
 
@@ -151,30 +153,36 @@ export const getEventsByMonth = (months, filterBy = 'default') => {
   };
 };
 
-export const getAllEventsAfter = () => {
+export const getAllEventsAfter = page => {
   return async dispatch => {
     try {
       const today = getDate();
       dispatch(getAllEventsRequestStart());
       const httpResponse = await httpRequest.get(
-        `/api/events?starting_after="${today.date.toISOString()}"`
+        `/api/events?starting_after="${today.date.toISOString()}"&per_page=5&page=${page}`
       );
-      dispatch(getAllEventsRequestSuccess(httpResponse.data));
+      const totalPages =
+        parseInt(httpResponse.headers['x-total-count'], 10) / 5;
+
+      dispatch(getAllEventsRequestSuccess(httpResponse.data, totalPages, page));
     } catch (errors) {
       dispatch(getAllEventsRequestError({errors: true}));
     }
   };
 };
 
-export const getAllEventsBefore = () => {
+export const getAllEventsBefore = page => {
   return async dispatch => {
     try {
       const date = getDate();
       dispatch(getAllEventsRequestStart());
       const httpResponse = await httpRequest.get(
-        `/api/events?ending_before="${date.date.toISOString()}"`
+        `/api/events?ending_before="${date.date.toISOString()}"&per_page=5&page=${page}`
       );
-      dispatch(getAllEventsRequestSuccess(httpResponse.data));
+      const totalPages =
+        parseInt(httpResponse.headers['x-total-count'], 10) / 5;
+
+      dispatch(getAllEventsRequestSuccess(httpResponse.data, totalPages, page));
     } catch (errors) {
       dispatch(getAllEventsRequestError({errors: true}));
     }
