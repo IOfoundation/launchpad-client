@@ -33,7 +33,7 @@ class AddNewService extends PureComponent {
   };
 
   render() {
-    const {classes} = this.props;
+    const {classes, createServiceDisable} = this.props;
 
     return (
       <FormControl className={classes.formControl}>
@@ -43,6 +43,7 @@ class AddNewService extends PureComponent {
               classes.front
             }`}
             onClick={this.handleOpen}
+            disabled={createServiceDisable}
           >
             {'Add Another Service'}
           </button>
@@ -78,6 +79,9 @@ const styles = () => ({
   icon: {
     color: '#272729',
   },
+  message: {
+    color: 'black',
+  },
 });
 
 AddNewService.propTypes = {
@@ -89,7 +93,9 @@ AddNewService.propTypes = {
     front: PropTypes.string,
     back: PropTypes.string,
     icon: PropTypes.string,
+    message: PropTypes.string,
   }),
+  createServiceDisable: PropTypes.bool,
   handleChange: PropTypes.func,
 };
 

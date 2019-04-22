@@ -3,6 +3,7 @@ import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 
 import Item from './Hours/Item';
+import Holiday from './Hours/Holiday';
 
 import {sharedStyles, sharedClasses} from './styles';
 
@@ -25,8 +26,9 @@ const Hours = props => {
           formValue={values.hoursRegular}
           titleLabel="Regular Hours"
           buttonLabel="Add Hours of Operation"
+          values={values}
         />
-        <Item
+        <Holiday
           handleBlur={handleBlur}
           handleChange={handleChange}
           errors={errors}
@@ -34,6 +36,7 @@ const Hours = props => {
           formValue={values.hoursHolidays}
           titleLabel="Holiday Hours"
           buttonLabel="Add Hours of Operation"
+          values={values}
         />
       </div>
     </div>

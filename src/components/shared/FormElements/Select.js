@@ -27,17 +27,17 @@ class SelectElement extends PureComponent {
 
   render() {
     const {
+      classes,
+      displayEmpty,
       error,
       handleBlur,
+      helperText,
       id,
       label,
       marginBottom,
-      value,
-      helperText,
-      displayEmpty,
-      classes,
       novalidate,
       selectOptions,
+      value,
     } = this.props;
     let Options = [
       <MenuItem value="" key={1}>
@@ -53,7 +53,6 @@ class SelectElement extends PureComponent {
         {'Option Three'}
       </MenuItem>,
     ];
-
     let displayError = (
       <div
         className={[
@@ -85,7 +84,9 @@ class SelectElement extends PureComponent {
 
     return (
       <FormControl style={{minWidth: '100%'}}>
-        <InputLabel htmlFor={id}>{label}</InputLabel>
+        <InputLabel htmlFor={id} style={{minWidth: '300px'}}>
+          {label}
+        </InputLabel>
         <Select
           id={id}
           error={error}
@@ -133,7 +134,11 @@ SelectElement.propTypes = {
     })
   ),
   type: PropTypes.string,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+    PropTypes.number,
+  ]),
 };
 
 export default withStyles(styles)(SelectElement);

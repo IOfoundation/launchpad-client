@@ -1,12 +1,15 @@
 import AdminBlogsTypes from './admin-blogs';
+import AdminProfileTypes from './admin-profile';
 import BlogsTypes from './blogs';
 import BusinessTypes from './business';
-import EventsTypes from './events';
-import SnackbarTypes from './snackbar';
-import UserTypes from './user';
+import CreateLocationTypes from './locations/create';
 import ErrorsTypes from './errors';
+import EventsTypes from './events';
+import GetLocationByOrganizationTypes from './locations/getByOrganization';
+import LocationsTypes from './locations';
+import SnackbarTypes from './snackbar';
 import UserInformationTypes from './user-information';
-import AdminProfileTypes from './admin-profile';
+import UserTypes from './user';
 import ValidateYupTypes from './validate-yup';
 
 export {
@@ -14,8 +17,11 @@ export {
   AdminProfileTypes,
   BlogsTypes,
   BusinessTypes,
+  CreateLocationTypes,
   ErrorsTypes,
   EventsTypes,
+  GetLocationByOrganizationTypes,
+  LocationsTypes,
   SnackbarTypes,
   UserInformationTypes,
   UserTypes,
@@ -27,8 +33,11 @@ export default {
   AdminProfileTypes,
   BlogsTypes,
   BusinessTypes,
+  CreateLocationTypes,
   ErrorsTypes,
   EventsTypes,
+  GetLocationByOrganizationTypes,
+  LocationsTypes,
   SnackbarTypes,
   UserInformationTypes,
   UserTypes,

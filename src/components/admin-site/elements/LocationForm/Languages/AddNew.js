@@ -9,6 +9,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 
 import {combineStyles} from '@Utils';
+import {languages} from '@StaticData/data';
 
 class AddNew extends PureComponent {
   state = {
@@ -49,12 +50,11 @@ class AddNew extends PureComponent {
             },
           }}
         >
-          <MenuItem value="">
-            <em>{'None'}</em>
-          </MenuItem>
-          <MenuItem value={'Language One'}>{'Language One'}</MenuItem>
-          <MenuItem value={'Language Two'}>{'Language Two'}</MenuItem>
-          <MenuItem value={'Language Three'}>{'Language Three'}</MenuItem>
+          {languages.map(language => (
+            <MenuItem key={language.code} value={language.name}>
+              {language.name}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
     );

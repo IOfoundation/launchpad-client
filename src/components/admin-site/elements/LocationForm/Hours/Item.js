@@ -8,13 +8,21 @@ import SelectElement from '@Shared/FormElements/Select';
 import FormTextField from '@Shared/FormElements/TextFieldDefault';
 
 import {sharedStyles, sharedClasses} from '../styles';
+import {weekdays} from '@StaticData/data';
 
 class Item extends PureComponent {
-  deleteItem = () => {
-    const {arrayHelpers, id} = this.props;
+  _deleteItem(arrayHelpers, index, id) {
+    const {values, field} = this.props;
 
-    arrayHelpers.remove(id);
-  };
+    if (id) {
+      values[`delete_${field}`].push({
+        id,
+        _destroy: true,
+      });
+    }
+
+    arrayHelpers.remove(index);
+  }
 
   render() {
     const {
@@ -52,7 +60,7 @@ class Item extends PureComponent {
                       spacing={16}
                       alignItems="center"
                     >
-                      <Grid item={true} xs={4}>
+                      <Grid item={true} xs={10} sm={4}>
                         <SelectElement
                           errors={errors}
                           field={field}
@@ -62,10 +70,11 @@ class Item extends PureComponent {
                           key={day}
                           label="Day"
                           name={day}
-                          value={hour.day}
+                          value={String(hour.day)}
+                          selectOptions={weekdays}
                         />
                       </Grid>
-                      <Grid item={true} xs={3}>
+                      <Grid item={true} xs={10} sm={3}>
                         <FormTextField
                           autocomplete={'off'}
                           errors={errors}
@@ -75,12 +84,13 @@ class Item extends PureComponent {
                           id={opensAt}
                           label="Opens At"
                           field={field}
-                          value={hour.closesAt}
+                          value={hour.opensAt}
                           type="time"
+                          step={900}
                         />
                       </Grid>
 
-                      <Grid item={true} xs={3}>
+                      <Grid item={true} xs={10} sm={3}>
                         <FormTextField
                           autocomplete={'off'}
                           errors={errors}
@@ -92,6 +102,7 @@ class Item extends PureComponent {
                           field={field}
                           value={hour.closesAt}
                           type="time"
+                          step={900}
                         />
                       </Grid>
                       <Grid item={true} xs={1}>
@@ -100,7 +111,9 @@ class Item extends PureComponent {
                           style={{color: 'black'}}
                           aria-owns={'delete-hour'}
                           aria-haspopup="true"
-                          onClick={() => arrayHelpers.remove(index)}
+                          onClick={() =>
+                            this._deleteItem(arrayHelpers, index, hour.id)
+                          }
                         >
                           {'delete'}
                         </i>
@@ -144,8 +157,8 @@ Item.propTypes = {
   handleBlur: PropTypes.func,
   handleChange: PropTypes.func,
   hour: PropTypes.string,
-  id: PropTypes.number,
   titleLabel: PropTypes.string,
+  values: PropTypes.shape({}),
 };
 
 export default withStyles(sharedStyles)(Item);

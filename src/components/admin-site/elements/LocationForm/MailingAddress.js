@@ -8,6 +8,7 @@ import FormTextField from '@Shared/FormElements/TextFieldDefault';
 import SelectElement from '@Shared/FormElements/Select';
 
 import {sharedStyles, sharedClasses} from './styles';
+import {states} from '@StaticData/data';
 
 const MailingAddress = props => {
   const {values, classes, handleChange, handleBlur, errors} = props;
@@ -62,7 +63,7 @@ const MailingAddress = props => {
                   values={values}
                 />
               </Grid>
-              <Grid item={true} xs={6}>
+              <Grid item={true} xs={12} sm={6}>
                 <FormTextField
                   autocomplete={'off'}
                   errors={errors}
@@ -75,7 +76,7 @@ const MailingAddress = props => {
                   values={values}
                 />
               </Grid>
-              <Grid item={true} xs={3}>
+              <Grid item={true} xs={12} sm={3}>
                 <SelectElement
                   errors={errors}
                   handleBlur={handleBlur}
@@ -84,9 +85,10 @@ const MailingAddress = props => {
                   label={'State'}
                   name={'mailingAddress.state'}
                   value={values.mailingAddress.state}
+                  selectOptions={states}
                 />
               </Grid>
-              <Grid item={true} xs={3}>
+              <Grid item={true} xs={12} sm={3}>
                 <FormTextField
                   autocomplete={'off'}
                   errors={errors}

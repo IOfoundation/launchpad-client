@@ -138,6 +138,10 @@ export const sharedStyles = theme => {
     bottomLine: {
       borderBottom: '1px solid #E0E0E0',
     },
+    content: {
+      color: '#070709',
+      marginBottom: '16px',
+    },
   };
 };
 
@@ -163,4 +167,5 @@ export const sharedClasses = PropTypes.shape({
   title: PropTypes.string,
   width70: PropTypes.string,
   wrapper: PropTypes.string,
+  content: PropTypes.string,
 });
