@@ -11,6 +11,7 @@ import {
   servicesAreas,
   acceptedPayments,
   fundingSources,
+  serviceStatus,
 } from '@StaticData/data';
 
 export const Overview = props => {
@@ -85,16 +86,16 @@ export const Overview = props => {
           />
         </Grid>
         <Grid item={true} xs={12} md={4}>
-          <FormTextField
-            autocomplete={'off'}
-            error={touched.status && Boolean(errors.status)}
+          <SelectElement
             errors={errors}
             handleBlur={handleBlur}
             handleChange={handleChange}
             id={'status'}
             label={'Service Status'}
-            helperText={'Is this service active, inactive, or defunct?'}
+            name={'status'}
             value={values.status}
+            helperText={'Is this service active, inactive, or defunct?'}
+            selectOptions={serviceStatus}
           />
         </Grid>
         <Grid item={true} xs={12}>
