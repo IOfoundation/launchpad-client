@@ -33,7 +33,7 @@ const styles = theme => {
 };
 
 const DangerZone = props => {
-  const {classes} = props;
+  const {classes, deleteClicked} = props;
 
   return (
     <div className={classes.card}>
@@ -49,7 +49,11 @@ const DangerZone = props => {
                 'Once you delete a location, there is no going back. Please be certain.'
               }
             </p>
-            <button className={`btn btn__red ${classes.dangerButton}`}>
+            <button
+              className={`btn btn__red ${classes.dangerButton}`}
+              onClick={deleteClicked}
+              type="button"
+            >
               {'PERMANENTLY DELETE THIS LOCATION'}
             </button>
           </Grid>
@@ -68,6 +72,7 @@ DangerZone.propTypes = {
     dangerDescription: PropTypes.string,
     dangerTitle: PropTypes.string,
   }),
+  deleteClicked: PropTypes.func,
 };
 
 export default withStyles(combineStyles(sharedStyles, styles))(DangerZone);
