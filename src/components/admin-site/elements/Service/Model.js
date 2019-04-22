@@ -58,7 +58,7 @@ const Service = ({
   const mapped = {};
 
   if (acceptedPaymentMethods) {
-    mapped.accepted_payments = [acceptedPaymentMethods];
+    mapped.accepted_payments = acceptedPaymentMethods;
   }
 
   if (applicationProcess) {

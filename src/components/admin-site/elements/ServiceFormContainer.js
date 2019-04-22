@@ -58,7 +58,7 @@ const initialValues = {
   audience: '',
   eligibility: '',
   fees: '',
-  acceptedPaymentMethods: '',
+  acceptedPaymentMethods: [],
   fundingSources: '',
   hoursRegular: [],
   delete_hoursRegular: [],

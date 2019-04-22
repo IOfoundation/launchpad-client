@@ -8,11 +8,10 @@ import {bindActionCreators} from 'redux';
 
 import Buttons from '../Buttons';
 import LandingComponent from '../Landing';
+import Loading from '@Shared/Loading';
 import LocationForm from './LocationForm';
 import Modal from './Locations/Modal';
 import Title from '../Title';
-import Buttons from '../Buttons';
-import Loading from '@Shared/Loading';
 
 import {falsyToString} from '@Utils';
 import {accesibility} from '@StaticData/data';

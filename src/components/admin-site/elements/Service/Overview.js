@@ -5,6 +5,7 @@ import {withStyles} from '@material-ui/core/styles';
 
 import FormTextField from '@Shared/FormElements/TextFieldDefault';
 import SelectElement from '@Shared/FormElements/Select';
+import MultiSelectElement from '@Shared/FormElements/MultiSelect';
 
 import {sharedStyles, sharedClasses} from '../LocationForm/styles';
 import {
@@ -153,7 +154,7 @@ export const Overview = props => {
           />
         </Grid>
         <Grid item={true} xs={12}>
-          <SelectElement
+          <MultiSelectElement
             errors={errors}
             handleBlur={handleBlur}
             handleChange={handleChange}

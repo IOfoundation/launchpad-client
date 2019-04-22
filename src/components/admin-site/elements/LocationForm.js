@@ -17,6 +17,7 @@ import Hours from './LocationForm/Hours';
 const LocationForm = props => {
   const {
     breakpoint,
+    deleteClicked,
     errors,
     handleBlur,
     handleChange,
@@ -27,8 +28,6 @@ const LocationForm = props => {
     service,
     touched,
     values,
-    mode,
-    deleteClicked,
   } = props;
   const shared = {
     errors,
