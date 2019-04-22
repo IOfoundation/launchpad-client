@@ -9,6 +9,7 @@ import ServiceForm from './ServiceForm';
 import Buttons from '../Buttons';
 
 import serviceModel from './Service/Model';
+import getInitialValues from './Service/initialValues';
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string().required('Required'),
@@ -124,7 +125,25 @@ class ServiceFormContainer extends PureComponent {
       locationName,
       initialTaxonomy,
       checkboxes,
+      serviceData,
+      router,
     } = this.props;
+    let formModel;
+    let mode;
+
+    if (router.params.id === 'new') {
+      mode = 'new';
+      formModel = {
+        ...initialValues,
+        ...initialTaxonomy,
+      };
+    } else {
+      mode = 'edit';
+      formModel = {
+        ...initialValues,
+        ...getInitialValues(serviceData, initialTaxonomy),
+      };
+    }
 
     return (
       <LandingComponent>
@@ -152,14 +171,15 @@ class ServiceFormContainer extends PureComponent {
               />
             </Fragment>
           )}
-          initialValues={{...initialValues, ...initialTaxonomy}}
+          initialValues={{...formModel}}
           validationSchema={SignupSchema}
           onSubmit={values => {
             serviceCreate.create({
               service: serviceModel(values),
               Authorization,
               locationId,
-              mode: 'new',
+              serviceId: router.params.id,
+              mode,
             });
           }}
         />
@@ -178,7 +198,10 @@ ServiceFormContainer.propTypes = {
   locationName: PropTypes.string,
   organizationId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   router: PropTypes.shape({
-    push: PropTypes.func,
+    push: PropTypes.func.isRequired,
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
   }),
   seriveCreateErrors: PropTypes.arrayOf(PropTypes.shape({})),
   serviceCategoriesActions: PropTypes.shape({
@@ -187,8 +210,9 @@ ServiceFormContainer.propTypes = {
   serviceCreate: PropTypes.shape({
     create: PropTypes.func,
   }),
-  serviceCreateError: PropTypes.bool,
-  serviceUpdated: PropTypes.shape({}),
+  serviceCreateError: PropTypes.bool.isRequired,
+  serviceData: PropTypes.shape({}).isRequired,
+  serviceUpdated: PropTypes.shape({}).isRequired,
   snackbar: PropTypes.shape({
     showSnackbar: PropTypes.func,
   }),

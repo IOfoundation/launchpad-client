@@ -190,6 +190,13 @@ const initialState = {
     loading: true,
     success: false,
   },
+  serviceGet: {
+    data: {},
+    error: false,
+    errors: [],
+    loading: true,
+    success: false,
+  },
 };
 
 export default initialState;

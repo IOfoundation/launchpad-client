@@ -8,6 +8,7 @@ import DeleteLocationTypes from './locations/delete';
 import ErrorsTypes from './errors';
 import EventsTypes from './events';
 import GetLocationByOrganizationTypes from './locations/getByOrganization';
+import GetServiceTypes from './services/get';
 import LocationsTypes from './locations';
 import ServiceTaxonomyTypes from './services/taxonomy';
 import SnackbarTypes from './snackbar';
@@ -26,6 +27,7 @@ export {
   ErrorsTypes,
   EventsTypes,
   GetLocationByOrganizationTypes,
+  GetServiceTypes,
   LocationsTypes,
   ServiceTaxonomyTypes,
   SnackbarTypes,
@@ -45,6 +47,7 @@ export default {
   ErrorsTypes,
   EventsTypes,
   GetLocationByOrganizationTypes,
+  GetServiceTypes,
   LocationsTypes,
   ServiceTaxonomyTypes,
   SnackbarTypes,
