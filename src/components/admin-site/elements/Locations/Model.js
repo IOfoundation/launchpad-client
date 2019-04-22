@@ -43,7 +43,7 @@ class Location {
     }
 
     if (streetAddress.address) {
-      if (streetAddress.isVirtual === false) {
+      if (Boolean(streetAddress.isVirtual) === false) {
         this.virtual = false;
         this.address_attributes = this._getAddress(streetAddress);
       } else {
