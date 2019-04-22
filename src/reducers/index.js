@@ -12,6 +12,7 @@ import locationCreate from './location/create';
 import locationDelete from './location/delete';
 import locations from './locations';
 import serviceCreate from './service/create';
+import serviceDelete from './service/delete';
 import serviceGet from './service/get';
 import serviceTaxonomy from './service/taxonomy';
 import snackbar from './snackbar';
@@ -32,6 +33,7 @@ const rootReducer = combineReducers({
   locationDelete,
   locations,
   serviceCreate,
+  serviceDelete,
   serviceGet,
   serviceTaxonomy,
   snackbar,

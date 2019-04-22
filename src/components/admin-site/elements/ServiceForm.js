@@ -11,13 +11,14 @@ import DangerZone from './LocationForm/DangerZone';
 
 const ServiceForm = props => {
   const {
+    checkboxes,
+    openModal,
     errors,
     handleBlur,
     handleChange,
     handleSubmit,
     touched,
     values,
-    checkboxes,
   } = props;
   const shared = {
     errors,
@@ -74,7 +75,7 @@ const ServiceForm = props => {
         md={6}
       />
       <Keywords {...shared} />
-      <DangerZone name="service" />
+      <DangerZone name="service" deleteClicked={openModal} />
     </Form>
   );
 };
@@ -87,6 +88,7 @@ ServiceForm.propTypes = {
   handleSubmit: PropTypes.func,
   isSubmitting: PropTypes.bool,
   isValid: PropTypes.bool,
+  openModal: PropTypes.func,
   touched: PropTypes.shape({}),
   values: PropTypes.shape({}),
 };

@@ -1,5 +1,12 @@
 import {falsyToString} from '@Utils';
 
+const normalizeArray = arrayArg => {
+  if (arrayArg && arrayArg.length > 0) {
+    return arrayArg;
+  }
+  return [];
+};
+
 const normalizeArrayData = (arrayArg, join = '') => {
   if (arrayArg) {
     return arrayArg.join(join);
@@ -89,7 +96,7 @@ const getInitialValues = (
 ) => {
   const formModel = {};
 
-  formModel.acceptedPaymentMethods = normalizeArrayData(accepted_payments);
+  formModel.acceptedPaymentMethods = normalizeArray(accepted_payments);
   formModel.applicationProcess = application_process || '';
   formModel.audience = audience || '';
   formModel.description = description || '';
@@ -97,15 +104,13 @@ const getInitialValues = (
   formModel.eligibility = eligibility || '';
   formModel.email = email || '';
   formModel.fees = fees || '';
-  formModel.fundingSources = normalizeArrayData(funding_sources);
-  formModel.interpretationServices = normalizeArrayData(
-    interpretation_services
-  );
+  formModel.fundingSources = normalizeArray(funding_sources);
+  formModel.interpretationServices = interpretation_services || '';
   formModel.keywords = normalizeArrayData(keywords, ', ');
   formModel.name = name || '';
-  formModel.requiredDocuments = normalizeArrayData(required_documents);
-  formModel.serviceLanguages = normalizeArrayData(languages);
-  formModel.servicesAreas = normalizeArrayData(service_areas);
+  formModel.requiredDocuments = normalizeArray(required_documents);
+  formModel.serviceLanguages = normalizeArray(languages);
+  formModel.servicesAreas = normalizeArray(service_areas);
   formModel.status = status || '';
   formModel.waitTime = wait_time || '';
   formModel.website = website || '';

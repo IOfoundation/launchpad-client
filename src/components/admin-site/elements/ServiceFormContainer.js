@@ -3,10 +3,11 @@ import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {PropTypes} from 'prop-types';
 
-import LandingComponent from '../Landing';
-import Title from '../Title';
-import ServiceForm from './ServiceForm';
 import Buttons from '../Buttons';
+import LandingComponent from '../Landing';
+import Modal from './Service/Modal';
+import ServiceForm from './ServiceForm';
+import Title from '../Title';
 
 import serviceModel from './Service/Model';
 import getInitialValues from './Service/initialValues';
@@ -79,6 +80,10 @@ const initialValues = {
 };
 
 class ServiceFormContainer extends PureComponent {
+  state = {
+    openModal: false,
+  };
+
   componentDidUpdate(prevProps) {
     const {
       serviceCreateError,
@@ -109,12 +114,58 @@ class ServiceFormContainer extends PureComponent {
         this.goToLocation();
       }
     }
+
+    this._deleteSuccess(prevProps);
+    this._deleteError(prevProps);
   }
+
+  _deleteSuccess = prevProps => {
+    const {serviceDeleteSuccess, snackbar} = this.props;
+
+    if (serviceDeleteSuccess !== prevProps.serviceDeleteSuccess) {
+      if (serviceDeleteSuccess) {
+        snackbar.showSnackbar({
+          message: 'Service deleted succesfully',
+        });
+        this.goToLocation();
+      }
+    }
+  };
+
+  _deleteError = prevProps => {
+    const {serviceDeleteError, snackbar} = this.props;
+
+    if (serviceDeleteError !== prevProps.serviceDeleteError) {
+      if (serviceDeleteError) {
+        snackbar.showSnackbar({
+          message: 'There was a problem trying to delete the service',
+        });
+      }
+    }
+  };
 
   goToLocation = () => {
     const {router, locationId} = this.props;
 
     router.push(`/admin/location/${locationId}`);
+  };
+
+  handlerModalVisibility = () => {
+    this.setState(prevState => {
+      return {
+        openModal: !prevState.openModal,
+      };
+    });
+  };
+
+  deleteService = () => {
+    const {Authorization, serviceDelete, locationId, router} = this.props;
+
+    serviceDelete.remove({
+      Authorization,
+      serviceId: router.params.id,
+      locationId,
+    });
   };
 
   render() {
@@ -147,6 +198,12 @@ class ServiceFormContainer extends PureComponent {
 
     return (
       <LandingComponent>
+        <Modal
+          open={this.state.openModal}
+          modalClosed={this.handlerModalVisibility}
+          cancelClicked={this.handlerModalVisibility}
+          deleteClicked={this.deleteService}
+        />
         <Formik
           render={_props => (
             <Fragment>
@@ -162,6 +219,7 @@ class ServiceFormContainer extends PureComponent {
                 {..._props}
                 goToLocation={this.goToLocation}
                 checkboxes={checkboxes}
+                openModal={this.handlerModalVisibility}
               />
               <Buttons
                 hideCancelAction={false}
@@ -212,6 +270,11 @@ ServiceFormContainer.propTypes = {
   }),
   serviceCreateError: PropTypes.bool.isRequired,
   serviceData: PropTypes.shape({}).isRequired,
+  serviceDelete: PropTypes.shape({
+    remove: PropTypes.func.isRequired,
+  }),
+  serviceDeleteError: PropTypes.bool.isRequired,
+  serviceDeleteSuccess: PropTypes.bool.isRequired,
   serviceUpdated: PropTypes.shape({}).isRequired,
   snackbar: PropTypes.shape({
     showSnackbar: PropTypes.func,

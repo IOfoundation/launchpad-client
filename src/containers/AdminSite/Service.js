@@ -12,6 +12,7 @@ import * as snackbarActions from '@Actions/snackbar';
 import * as serviceCreateActions from '@Actions/services/create';
 import * as serviceTaxonomy from '@Actions/services/taxonomy';
 import * as serviceGetActions from '@Actions/services/get';
+import * as serviceDeleteActions from '@Actions/services/delete';
 
 class ServiceRoute extends PureComponent {
   componentDidMount() {
@@ -70,6 +71,8 @@ const mapStateToProps = _state => {
     serviceDataSuccess: _state.serviceGet.success,
     serviceDataError: _state.serviceGet.error,
     serviceDataLoading: _state.serviceGet.loading,
+    serviceDeleteSuccess: _state.serviceDelete.success,
+    serviceDeleteError: _state.serviceDelete.error,
   };
 };
 
@@ -80,6 +83,7 @@ const mapDispatchToProps = _dispatch => {
     serviceCreate: bindActionCreators(serviceCreateActions, _dispatch),
     serviceTaxonomyActions: bindActionCreators(serviceTaxonomy, _dispatch),
     serviceGet: bindActionCreators(serviceGetActions, _dispatch),
+    serviceDelete: bindActionCreators(serviceDeleteActions, _dispatch),
   };
 };
 
@@ -102,6 +106,11 @@ ServiceRoute.propTypes = {
   serviceCreateError: PropTypes.bool,
   serviceData: PropTypes.shape({}),
   serviceDataLoading: PropTypes.bool,
+  serviceDelete: PropTypes.shape({
+    remove: PropTypes.func,
+  }),
+  serviceDeleteError: PropTypes.bool,
+  serviceDeleteSuccess: PropTypes.bool,
   serviceError: PropTypes.bool,
   serviceGet: PropTypes.shape({
     get: PropTypes.func,
