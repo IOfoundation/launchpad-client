@@ -181,8 +181,10 @@ class ServiceFormContainer extends PureComponent {
     } = this.props;
     let formModel;
     let mode;
+    let title;
 
     if (router.params.id === 'new') {
+      title = 'Create A Service';
       mode = 'new';
       formModel = {
         ...initialValues,
@@ -190,6 +192,7 @@ class ServiceFormContainer extends PureComponent {
       };
     } else {
       mode = 'edit';
+      title = 'Edit A Service';
       formModel = {
         ...initialValues,
         ...getInitialValues(serviceData, initialTaxonomy),
@@ -208,7 +211,7 @@ class ServiceFormContainer extends PureComponent {
           render={_props => (
             <Fragment>
               <Title
-                titleText="Create A Service"
+                titleText={title}
                 hideCancelAction={false}
                 submitLabel={'Save Service'}
                 cancelClicked={this.goToLocation}
