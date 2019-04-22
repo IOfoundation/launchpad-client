@@ -9,6 +9,7 @@ import SelectElement from '@Shared/FormElements/Select';
 
 import {combineStyles} from '@Utils';
 import {requiredDocuments, languages} from '@StaticData/data';
+import MultiSelectElement from '@Shared/FormElements/MultiSelect';
 
 const Detail = props => {
   const {values, classes, handleChange, handleBlur, errors} = props;
@@ -40,7 +41,7 @@ const Detail = props => {
             />
           </Grid>
           <Grid item={true} xs={12} className={classes.mBot8}>
-            <SelectElement
+            <MultiSelectElement
               errors={errors}
               handleBlur={handleBlur}
               handleChange={handleChange}
@@ -56,7 +57,7 @@ const Detail = props => {
             />
           </Grid>
           <Grid item={true} xs={12} className={classes.mBot8}>
-            <SelectElement
+            <MultiSelectElement
               errors={errors}
               handleBlur={handleBlur}
               handleChange={handleChange}

@@ -90,7 +90,7 @@ const Service = ({
   }
 
   if (fundingSources) {
-    mapped.funding_sources = [fundingSources];
+    mapped.funding_sources = fundingSources;
   }
 
   if (name) {
@@ -112,7 +112,7 @@ const Service = ({
   mapped.taxonomy_ids = createArrayOfIds(taxonomy);
 
   if (requiredDocuments) {
-    mapped.required_documents = [requiredDocuments];
+    mapped.required_documents = requiredDocuments;
   }
 
   if (keywords) {
@@ -120,15 +120,15 @@ const Service = ({
   }
 
   if (servicesAreas) {
-    mapped.service_areas = [servicesAreas];
+    mapped.service_areas = servicesAreas;
   }
 
   if (interpretationServices) {
-    mapped.interpretation_services = [interpretationServices];
+    mapped.interpretation_services = interpretationServices;
   }
 
   if (serviceLanguages) {
-    mapped.languages = [serviceLanguages];
+    mapped.languages = serviceLanguages;
   }
 
   if (hoursHolidays.length > 0 || delete_hoursHolidays.length > 0) {

@@ -100,7 +100,7 @@ export const Overview = props => {
           />
         </Grid>
         <Grid item={true} xs={12}>
-          <SelectElement
+          <MultiSelectElement
             errors={errors}
             handleBlur={handleBlur}
             handleChange={handleChange}
@@ -167,7 +167,7 @@ export const Overview = props => {
           />
         </Grid>
         <Grid item={true} xs={12}>
-          <SelectElement
+          <MultiSelectElement
             errors={errors}
             handleBlur={handleBlur}
             handleChange={handleChange}
