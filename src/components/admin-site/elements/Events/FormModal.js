@@ -4,9 +4,29 @@ import {withStyles} from '@material-ui/core/styles';
 import {PropTypes} from 'prop-types';
 
 import FormWrapper from './FormWrapper';
+import Loading from '@Shared/Loading';
 
 const FormModal = props => {
-  const {openModal, handlerModalVisibility, classes, refreshData} = props;
+  const {
+    openModal,
+    handlerModalVisibility,
+    classes,
+    refreshData,
+    selectedEvent,
+    dataLoading,
+  } = props;
+  let form = <Loading />;
+
+  if (!dataLoading) {
+    form = (
+      <FormWrapper
+        closeClicked={handlerModalVisibility}
+        refreshData={refreshData}
+        selectedEvent={selectedEvent}
+      />
+    );
+  }
+
   return (
     <ModalUi open={openModal} onClose={handlerModalVisibility}>
       <div className={classes.paper}>
@@ -16,10 +36,7 @@ const FormModal = props => {
         >
           {'close'}
         </i>
-        <FormWrapper
-          closeClicked={handlerModalVisibility}
-          refreshData={refreshData}
-        />
+        {form}
       </div>
     </ModalUi>
   );
@@ -52,6 +69,7 @@ FormModal.propTypes = {
   classes: PropTypes.shape({
     paper: PropTypes.string,
   }),
+  dataLoading: PropTypes.bool,
   handlerModalVisibility: PropTypes.func,
   openModal: PropTypes.bool,
   refreshData: PropTypes.func,

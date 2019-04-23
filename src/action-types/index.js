@@ -9,6 +9,7 @@ import DeleteServiceTypes from './services/delete';
 import ErrorsTypes from './errors';
 import EventsCreateTypes from './events/create';
 import EventsTypes from './events';
+import GetEventTypes from './events/get';
 import GetLocationByOrganizationTypes from './locations/getByOrganization';
 import GetServiceTypes from './services/get';
 import LocationsTypes from './locations';
@@ -30,6 +31,7 @@ export {
   ErrorsTypes,
   EventsCreateTypes,
   EventsTypes,
+  GetEventTypes,
   GetLocationByOrganizationTypes,
   GetServiceTypes,
   LocationsTypes,
@@ -52,6 +54,7 @@ export default {
   ErrorsTypes,
   EventsCreateTypes,
   EventsTypes,
+  GetEventTypes,
   GetLocationByOrganizationTypes,
   GetServiceTypes,
   LocationsTypes,

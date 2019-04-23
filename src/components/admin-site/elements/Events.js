@@ -14,12 +14,14 @@ import FormModal from './Events/FormModal';
 
 import * as eventActions from '@Actions/events';
 import * as snackbarActions from '@Actions/snackbar';
+import * as eventsGetActions from '@Actions/events/get';
 import {htmlStripper, truncate, getDate} from '@Utils';
 import itemMenuOptions from './Events/ItemMenuOptions';
 
 class Events extends PureComponent {
   state = {
     selectedEvent: {},
+    selectedEventId: '',
     openModal: false,
     openEditModal: false,
   };
@@ -106,8 +108,11 @@ class Events extends PureComponent {
     });
   };
 
-  handlerSubmenuOptions = option => {
+  handlerSubmenuOptions = (option, eventId) => {
+    const {eventsGet} = this.props;
+
     if (option === itemMenuOptions.Edit) {
+      eventsGet.get(eventId);
       this.handlerEditModalVisibility();
     }
   };
@@ -116,7 +121,15 @@ class Events extends PureComponent {
   _tabSelected = 'Upcoming';
 
   render() {
-    const {events, noResults, loading, totalPages, page} = this.props;
+    const {
+      events,
+      noResults,
+      loading,
+      totalPages,
+      page,
+      eventData,
+      eventLoading,
+    } = this.props;
     const {openModal, selectedEvent, openEditModal} = this.state;
     let upcomingElements = <Loading />;
     let pastEventsElements = <Loading />;
@@ -162,6 +175,8 @@ class Events extends PureComponent {
           openModal={openEditModal}
           handlerModalVisibility={this.handlerEditModalVisibility}
           refreshData={this.handleChangePage}
+          selectedEvent={eventData}
+          dataLoading={eventLoading}
         />
         <Title
           titleText="Your Events"
@@ -221,6 +236,11 @@ const mapStateToProps = _state => {
     loading: events.loading,
     errors: events.errors,
     organizationId,
+    eventSucces: _state.eventsGet.success,
+    eventLoading: _state.eventsGet.loading,
+    eventError: _state.eventsGet.error,
+    eventErrors: _state.eventsGet.errors,
+    eventData: _state.eventsGet.data,
   };
 };
 
@@ -228,6 +248,7 @@ const mapDispatchToProps = _dispatch => {
   return {
     actions: bindActionCreators(eventActions, _dispatch),
     snackbar: bindActionCreators(snackbarActions, _dispatch),
+    eventsGet: bindActionCreators(eventsGetActions, _dispatch),
   };
 };
 
@@ -237,8 +258,17 @@ Events.propTypes = {
     getAllEventsAfter: PropTypes.func,
     getAllEventsBefore: PropTypes.func,
   }),
+  Authorization: PropTypes.string,
   errors: PropTypes.shape({errors: PropTypes.bool}),
+  eventData: PropTypes.shape({}),
+  eventError: PropTypes.bool,
+  eventErrors: PropTypes.arrayOf(PropTypes.shape({})),
+  eventLoading: PropTypes.bool,
   events: PropTypes.arrayOf(PropTypes.shape({})),
+  eventsGet: PropTypes.shape({
+    get: PropTypes.func,
+  }),
+  eventSucces: PropTypes.bool,
   loading: PropTypes.bool,
   noResults: PropTypes.bool,
   organizationId: PropTypes.string,

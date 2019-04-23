@@ -12,6 +12,7 @@ import * as user from '@Actions/user';
 import * as snackbarActions from '@Actions/snackbar';
 import * as eventsCreateActions from '@Actions/events/create';
 import formModel from './Model';
+import mapInitialValues from './initialValues';
 
 export const FormSchema = Yup.object().shape({
   title: Yup.string().required('Required'),
@@ -30,22 +31,6 @@ export const FormSchema = Yup.object().shape({
   endTime: Yup.string(),
   allDay: Yup.string(),
 });
-
-const initialValues = {
-  title: '',
-  website: '',
-  description: '',
-  address: '',
-  address2: '',
-  city: '',
-  state: '',
-  zip: '',
-  startDate: '',
-  endDate: '',
-  startTime: '',
-  endTime: '',
-  allDay: '',
-};
 
 class FormWrapper extends PureComponent {
   componentDidUpdate(prevProps) {
@@ -88,11 +73,12 @@ class FormWrapper extends PureComponent {
 
   render() {
     const {
+      Authorization,
       breakpoint,
       closeClicked,
-      Authorization,
       eventsCreate,
       organizationId,
+      selectedEvent,
     } = this.props;
 
     return (
@@ -108,7 +94,7 @@ class FormWrapper extends PureComponent {
             />
           </Fragment>
         )}
-        initialValues={initialValues}
+        initialValues={mapInitialValues(selectedEvent)}
         validationSchema={FormSchema}
         onSubmit={values => {
           eventsCreate.create({
@@ -170,6 +156,7 @@ FormWrapper.propTypes = {
   router: PropTypes.shape({
     push: PropTypes.func,
   }),
+  selectedEvent: PropTypes.shape({}),
   snackbar: PropTypes.shape({
     showSnackbar: PropTypes.func,
   }),

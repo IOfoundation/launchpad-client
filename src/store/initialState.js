@@ -211,6 +211,13 @@ const initialState = {
     loading: false,
     success: false,
   },
+  eventsGet: {
+    data: {},
+    error: false,
+    errors: [],
+    loading: true,
+    success: false,
+  },
 };
 
 export default initialState;
