@@ -62,14 +62,22 @@ class Locations extends PureComponent {
             </h2>
           );
         }
-        const address = `${location.address.address_1}, ${
-          location.address.address_2
-        }, ${location.address.state_province} ${location.address.postal_code}`;
+        let address = '';
+        let title = '';
+
+        if (location.address) {
+          address = `${location.address.address_1}, ${
+            location.address.address_2
+          }, ${location.address.state_province} ${
+            location.address.postal_code
+          }`;
+          title = location.address.city;
+        }
 
         return (
           <Location
             address={address}
-            title={location.address.city}
+            title={title}
             email="email@domaninname.com"
             phone="(916) 514-7044"
             key={location.id}
@@ -104,18 +112,26 @@ class Locations extends PureComponent {
       } else {
         otherLocationElements = [...otherLocations];
       }
+      const mainLocation = locations[0];
+      let address = '';
+      let title = '';
+
+      if (mainLocation.address) {
+        address = `${mainLocation.address.address_1}, ${
+          mainLocation.address.address_2
+        }, ${mainLocation.address.state_province} ${
+          mainLocation.address.postal_code
+        }`;
+        title = mainLocation.address.city;
+      }
 
       mainLocationsElements = (
         <Location
-          address={`${locations[0].address.address_1}, ${
-            locations[0].address.address_2
-          }, ${locations[0].address.state_province} ${
-            locations[0].address.postal_code
-          }`}
-          title={locations[0].address.city}
+          address={address}
+          title={title}
           email="email@domaninname.com"
           phone="(916) 514-7044"
-          onDetailsClicked={() => this.detailsClickedHandler(locations[0])}
+          onDetailsClicked={() => this.detailsClickedHandler(mainLocation)}
         />
       );
     }

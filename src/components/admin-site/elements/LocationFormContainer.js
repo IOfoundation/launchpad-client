@@ -8,16 +8,17 @@ import {bindActionCreators} from 'redux';
 
 import Buttons from '../Buttons';
 import LandingComponent from '../Landing';
+import Loading from '@Shared/Loading';
 import LocationForm from './LocationForm';
 import Modal from './Locations/Modal';
 import Title from '../Title';
 
 import {falsyToString} from '@Utils';
 import {accesibility} from '@StaticData/data';
-import Loading from '@Shared/Loading';
 import * as locationCreateActions from '@Actions/locations/create';
 import * as locationDeleteActions from '@Actions/locations/delete';
 import * as snackbarActions from '@Actions/snackbar';
+import * as serviceCreateActions from '@Actions/services/create';
 import LocationModel from './Locations/Model';
 
 const LocationSchema = Yup.object().shape({
@@ -177,10 +178,14 @@ class LocationFormContainer extends PureComponent {
 
     if (success !== prevProps.success) {
       this._setSubmitting(true);
+      const message =
+        router.params.id === 'new'
+          ? 'Location created succesfully'
+          : 'Location updated succesfully';
 
       if (success) {
         snackbar.showSnackbar({
-          message: 'Location created/updated succesfully',
+          message,
         });
         router.push('/admin/location');
       }
@@ -386,6 +391,8 @@ class LocationFormContainer extends PureComponent {
       locationActions,
       Authorization,
       organizationId,
+      router,
+      service,
     } = this.props;
     let _initialValues;
     let sectionTitle;
@@ -439,8 +446,11 @@ class LocationFormContainer extends PureComponent {
               <LocationForm
                 {..._props}
                 breakpoint={breakpoint}
-                mode={mode}
                 deleteClicked={this.handlerModalVisibility}
+                mode={mode}
+                router={router}
+                service={service}
+                locationName={_initialValues.locationName}
               />
               <Buttons
                 cancelClicked={this.goToLocation}
@@ -476,7 +486,7 @@ class LocationFormContainer extends PureComponent {
   };
 
   render() {
-    const {router, loadingFinished} = this.props;
+    const {router, loadingFinished, breakpoint} = this.props;
     const {openModal} = this.state;
     let form = <Loading />;
 
@@ -487,7 +497,7 @@ class LocationFormContainer extends PureComponent {
     }
 
     return (
-      <LandingComponent navigation={false}>
+      <LandingComponent breakpoint={breakpoint} navigation={false}>
         <Modal
           open={openModal}
           modalClosed={this.handlerModalVisibility}
@@ -524,6 +534,7 @@ const mapDispatchToProps = _dispatch => {
     locationActions: bindActionCreators(locationCreateActions, _dispatch),
     locationDelete: bindActionCreators(locationDeleteActions, _dispatch),
     snackbar: bindActionCreators(snackbarActions, _dispatch),
+    service: bindActionCreators(serviceCreateActions, _dispatch),
   };
 };
 
@@ -548,6 +559,9 @@ LocationFormContainer.propTypes = {
   organizationId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   router: PropTypes.shape({
     push: PropTypes.func,
+  }),
+  service: PropTypes.shape({
+    setLocationId: PropTypes.func,
   }),
   snackbar: PropTypes.shape({
     showSnackbar: PropTypes.func,

@@ -33,7 +33,9 @@ const styles = theme => {
 };
 
 const DangerZone = props => {
-  const {classes, deleteClicked} = props;
+  const {classes, deleteClicked, name = 'LOCATION'} = props;
+  const lowerCase = name.toLowerCase();
+  const upperCase = name.toUpperCase();
 
   return (
     <div className={classes.card}>
@@ -43,18 +45,19 @@ const DangerZone = props => {
       <div className={classes.cardContent}>
         <Grid container={true} spacing={16}>
           <Grid item={true} xs={12}>
-            <p className={classes.dangerTitle}>{'Delete this Location'}</p>
-            <p className={classes.dangerDescription}>
-              {
-                'Once you delete a location, there is no going back. Please be certain.'
-              }
+            <p className={classes.dangerTitle}>
+              {'Delete this '}
+              <span className="capitalize">{lowerCase}</span>
             </p>
+            <p
+              className={classes.dangerDescription}
+            >{`Once you delete a ${lowerCase}, there is no going back. Please be certain.`}</p>
             <button
               className={`btn btn__red ${classes.dangerButton}`}
               onClick={deleteClicked}
               type="button"
             >
-              {'PERMANENTLY DELETE THIS LOCATION'}
+              {`PERMANENTLY DELETE THIS ${upperCase}`}
             </button>
           </Grid>
         </Grid>
@@ -73,6 +76,7 @@ DangerZone.propTypes = {
     dangerTitle: PropTypes.string,
   }),
   deleteClicked: PropTypes.func,
+  name: PropTypes.string,
 };
 
 export default withStyles(combineStyles(sharedStyles, styles))(DangerZone);

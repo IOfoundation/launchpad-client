@@ -17,14 +17,17 @@ import Hours from './LocationForm/Hours';
 const LocationForm = props => {
   const {
     breakpoint,
+    deleteClicked,
     errors,
     handleBlur,
     handleChange,
     handleSubmit,
+    locationName,
+    mode,
+    router,
+    service,
     touched,
     values,
-    mode,
-    deleteClicked,
   } = props;
   const shared = {
     errors,
@@ -34,11 +37,26 @@ const LocationForm = props => {
     values,
   };
 
+  const addAnotherService = () => {
+    service.setLocationId({locationId: router.params.id, locationName});
+    router.push('/admin/services/new');
+  };
+
+  const editService = () => {
+    service.setLocationId({locationId: router.params.id, locationName});
+    router.push(`/admin/services/${router.params.id}`);
+  };
+
   return (
     <Form className="location-form" onSubmit={handleSubmit}>
       <Overview {...shared} />
       <Details {...shared} />
-      <Services {...shared} mode={mode} />
+      <Services
+        {...shared}
+        mode={mode}
+        addAnotherService={addAnotherService}
+        optionSelected={editService}
+      />
       <StreetAddress {...shared} />
       <MailingAddress {...shared} />
       <Phones {...shared} />
@@ -52,6 +70,7 @@ const LocationForm = props => {
 };
 
 LocationForm.propTypes = {
+  addAnotherServiceClicked: PropTypes.func,
   breakpoint: PropTypes.string,
   classes: PropTypes.shape({
     btn: PropTypes.string,
@@ -79,7 +98,14 @@ LocationForm.propTypes = {
   handleSubmit: PropTypes.func,
   isSubmitting: PropTypes.bool,
   isValid: PropTypes.bool,
+  locationName: PropTypes.string,
   mode: PropTypes.string,
+  router: PropTypes.shape({
+    push: PropTypes.func,
+  }),
+  service: PropTypes.shape({
+    setLocationId: PropTypes.func,
+  }),
   touched: PropTypes.shape({
     password: PropTypes.bool,
     contactEmail: PropTypes.bool,

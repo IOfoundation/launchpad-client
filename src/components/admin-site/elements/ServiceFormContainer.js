@@ -1,16 +1,14 @@
-import React from 'react';
-import ServiceForm from './ServiceForm';
+import React, {Fragment, PureComponent} from 'react';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {PropTypes} from 'prop-types';
 
-import * as user from '../../../actions/user';
-import * as snackbarActions from '../../../actions/snackbar';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {withRouter} from 'react-router';
 import LandingComponent from '../Landing';
 import Title from '../Title';
+import ServiceForm from './ServiceForm';
+import Buttons from '../Buttons';
+
+import serviceModel from './Service/Model';
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string().required('Required'),
@@ -18,10 +16,10 @@ const SignupSchema = Yup.object().shape({
   description: Yup.string().required('Required'),
   email: Yup.string()
     .email('Invalid email address')
-    .required('Required'),
+    .notRequired(),
   website: Yup.string(),
-  status: Yup.string().required('Required'),
-  servicesAreas: Yup.string().required('Required'),
+  status: Yup.string(),
+  servicesAreas: Yup.string(),
   audience: Yup.string(),
   eligibility: Yup.string(),
   fees: Yup.string(),
@@ -47,6 +45,7 @@ const SignupSchema = Yup.object().shape({
   interpretationServices: Yup.string(),
   waitTime: Yup.string(),
   keywords: Yup.string(),
+  locationId: Yup.string(),
 });
 
 const initialValues = {
@@ -56,138 +55,147 @@ const initialValues = {
   email: '',
   website: '',
   status: '',
-  servicesAreas: '',
+  servicesAreas: [],
   audience: '',
   eligibility: '',
   fees: '',
-  acceptedPaymentMethods: '',
-  fundingSources: '',
+  acceptedPaymentMethods: [],
+  fundingSources: [],
   hoursRegular: [],
+  delete_hoursRegular: [],
   hoursHolidays: [],
+  delete_hoursHolidays: [],
   applicationProcess: '',
-  requiredDocuments: '',
-  serviceLanguages: '',
+  requiredDocuments: [],
+  serviceLanguages: [],
   interpretationServices: '',
   waitTime: '',
   keywords: '',
-  serviceCategories: {
-    financialManagement: false,
-    capital: false,
-    legalServices: false,
-    marketingSales: false,
-    networking: false,
-    manufacturingLogistics: false,
-    procurement: false,
-    planningManagement: false,
-    RDCommercialization: false,
-    regulatoryCompliance: false,
-    physicalSpace: false,
-    mentoringCounseling: false,
-    humanResourcesWorkforceDevelopment: false,
-  },
-  businessType: {
-    startupOrHighGrowthBusiness: false,
-    mainStreetOrSmallBusiness: false,
-    microenterpriseorHomeBasedBusiness: false,
-  },
-  businessStage: {
-    ideaInception: false,
-    proofOfConceptPrototypeMarketInfo: false,
-    rollout: false,
-    growthExpansionMatureBusiness: false,
-  },
-  underservedCommunities: {
-    africanAmerican: false,
-    asian: false,
-    hispanic: false,
-    immigrant: false,
-    LGBTQ: false,
-    manufacturingLogistics: false,
-    nativeAmerican: false,
-    veteran: false,
-    woman: false,
-    exConvict: false,
-    other: false,
-  },
-  industry: {
-    agriculture: false,
-    arts: false,
-    biosciencesServicesandMfg: false,
-    construction: false,
-    education: false,
-    energyUtilities: false,
-    financeInsurance: false,
-    healthChildcare: false,
-    highTechServicesManufacturing: false,
-    informationTechnology: false,
-    management: false,
-    notforProfit: false,
-    personalServices: false,
-    professionalServices: false,
-    realEstate: false,
-    restaurantHotel: false,
-    retail: false,
-    tourism: false,
-    transportationWarehousing: false,
-    wholesale: false,
-    otherServices: false,
-  },
+  taxonomy: {},
+  locationId: '',
+  phones: [],
+  deletedPhones: [],
 };
 
-const ServiceFormContainer = props => {
-  const goToServices = () => {
-    props.router.push('/admin/services');
+class ServiceFormContainer extends PureComponent {
+  componentDidUpdate(prevProps) {
+    const {
+      serviceCreateError,
+      seriveCreateErrors,
+      snackbar,
+      success,
+    } = this.props;
+
+    if (serviceCreateError !== prevProps.serviceCreateError) {
+      let message = 'An error has ocurred';
+
+      if (seriveCreateErrors.length > 0 && seriveCreateErrors[0].title) {
+        message = seriveCreateErrors[0].title;
+      }
+
+      if (serviceCreateError) {
+        snackbar.showSnackbar({
+          message,
+        });
+      }
+    }
+
+    if (success !== prevProps.success) {
+      if (success) {
+        snackbar.showSnackbar({
+          message: 'Service created/updated succesfully',
+        });
+        this.goToLocation();
+      }
+    }
+  }
+
+  goToLocation = () => {
+    const {router, locationId} = this.props;
+
+    router.push(`/admin/location/${locationId}`);
   };
 
-  return (
-    <LandingComponent>
-      <Title
-        titleText="Create A Service"
-        hideCancelAction={false}
-        submitLabel={'Save Service'}
-        cancelClicked={goToServices}
-      />
-      <Formik
-        render={_props => (
-          <ServiceForm {..._props} goToServices={goToServices} />
-        )}
-        initialValues={initialValues}
-        validationSchema={SignupSchema}
-        onSubmit={() => {}}
-      />
-    </LandingComponent>
-  );
-};
+  render() {
+    const {
+      locationId,
+      Authorization,
+      serviceCreate,
+      locationName,
+      initialTaxonomy,
+      checkboxes,
+    } = this.props;
 
-const mapStateToProps = _state => {
-  return {
-    error: _state.user.error,
-    isAuth: _state.user.authorization !== '',
-  };
-};
-
-const mapDispatchToProps = _dispatch => {
-  return {
-    userActions: bindActionCreators(user, _dispatch),
-    snackbar: bindActionCreators(snackbarActions, _dispatch),
-  };
-};
+    return (
+      <LandingComponent>
+        <Formik
+          render={_props => (
+            <Fragment>
+              <Title
+                titleText="Create A Service"
+                hideCancelAction={false}
+                submitLabel={'Save Service'}
+                cancelClicked={this.goToLocation}
+                submitClicked={_props.submitForm}
+                subTitle={`for ${locationName}`}
+              />
+              <ServiceForm
+                {..._props}
+                goToLocation={this.goToLocation}
+                checkboxes={checkboxes}
+              />
+              <Buttons
+                hideCancelAction={false}
+                submitLabel={'Save Service'}
+                cancelClicked={this.goToLocation}
+                submitClicked={_props.submitForm}
+              />
+            </Fragment>
+          )}
+          initialValues={{...initialValues, ...initialTaxonomy}}
+          validationSchema={SignupSchema}
+          onSubmit={values => {
+            serviceCreate.create({
+              service: serviceModel(values),
+              Authorization,
+              locationId,
+              mode: 'new',
+            });
+          }}
+        />
+      </LandingComponent>
+    );
+  }
+}
 
 ServiceFormContainer.propTypes = {
+  Authorization: PropTypes.string,
+  checkboxes: PropTypes.arrayOf(PropTypes.shape({})),
   error: PropTypes.bool,
+  initialTaxonomy: PropTypes.shape({}),
   isAuth: PropTypes.bool,
+  locationId: PropTypes.string,
+  locationName: PropTypes.string,
+  organizationId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   router: PropTypes.shape({
     push: PropTypes.func,
   }),
+  seriveCreateErrors: PropTypes.arrayOf(PropTypes.shape({})),
+  serviceCategoriesActions: PropTypes.shape({
+    getCategories: PropTypes.func,
+  }),
+  serviceCreate: PropTypes.shape({
+    create: PropTypes.func,
+  }),
+  serviceCreateError: PropTypes.bool,
+  serviceUpdated: PropTypes.shape({}),
   snackbar: PropTypes.shape({
     showSnackbar: PropTypes.func,
   }),
+  success: PropTypes.bool,
   userActions: PropTypes.shape({
     login: PropTypes.func,
   }),
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(ServiceFormContainer));
+export default ServiceFormContainer;

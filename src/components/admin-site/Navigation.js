@@ -185,7 +185,7 @@ class Navigation extends PureComponent {
               {'Locations'}
             </Link>
           </li>
-          <li>
+          {/*<li>
             <Link
               activeStyle={activeStyles}
               className={classes.link}
@@ -193,7 +193,7 @@ class Navigation extends PureComponent {
             >
               {'Services'}
             </Link>
-          </li>
+        </li>*/}
           <li>
             <Link
               activeStyle={activeStyles}

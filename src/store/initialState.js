@@ -173,6 +173,23 @@ const initialState = {
     success: false,
     error: false,
   },
+  serviceCreate: {
+    error: false,
+    errors: [],
+    loading: false,
+    locationId: '',
+    locationName: '',
+    service: {},
+    success: false,
+  },
+  serviceTaxonomy: {
+    checkboxes: [],
+    error: false,
+    errors: [],
+    initialForm: {},
+    loading: true,
+    success: false,
+  },
 };
 
 export default initialState;

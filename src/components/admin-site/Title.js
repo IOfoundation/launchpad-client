@@ -16,6 +16,7 @@ const Title = props => {
     noMargin,
     submitClicked,
     submitLabel,
+    subTitle,
     titleText,
   } = props;
   const containerClasses = [classes.Container];
@@ -32,6 +33,7 @@ const Title = props => {
     >
       <Grid item={true} xs={12} md={5}>
         <h1 className={classes.Title}>{titleText}</h1>
+        {subTitle && <h2 className={classes.subTitle}>{subTitle}</h2>}
       </Grid>
       <Grid item={true} xs={12} md={7}>
         <Buttons
@@ -83,6 +85,10 @@ const styles = theme => {
         marginBottom: '16px',
       },
     },
+    subTitle: {
+      fontSize: '14px',
+      color: '#070709',
+    },
   };
 };
 
@@ -92,6 +98,7 @@ Title.propTypes = {
     Buttons: PropTypes.string,
     Container: PropTypes.string,
     Title: PropTypes.string,
+    subTitle: PropTypes.string,
   }),
   disableSubmit: PropTypes.bool,
   extraClicked: PropTypes.func,
@@ -100,6 +107,7 @@ Title.propTypes = {
   noMargin: PropTypes.bool,
   submitClicked: PropTypes.func,
   submitLabel: PropTypes.string,
+  subTitle: PropTypes.string,
   titleText: PropTypes.string,
 };
 

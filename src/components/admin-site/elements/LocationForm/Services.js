@@ -9,7 +9,14 @@ import Item from './Services/Item';
 import {sharedStyles, sharedClasses} from './styles';
 
 const Services = props => {
-  const {values, classes, handleChange, mode} = props;
+  const {
+    values,
+    classes,
+    handleChange,
+    addAnotherService,
+    optionSelected,
+    mode,
+  } = props;
 
   return (
     <div className={classes.card}>
@@ -37,8 +44,10 @@ const Services = props => {
                     );
                   })}
                   <AddNewService
+                    addAnotherServiceClicked={addAnotherService}
                     arrayHelpers={arrayHelpers}
                     handleChange={handleChange}
+                    optionSelected={optionSelected}
                   />
                 </Fragment>
               ) : (
@@ -49,9 +58,11 @@ const Services = props => {
                     </p>
                   )}
                   <AddNewService
+                    addAnotherServiceClicked={addAnotherService}
                     arrayHelpers={arrayHelpers}
-                    handleChange={handleChange}
                     createServiceDisable={mode === 'new'}
+                    handleChange={handleChange}
+                    optionSelected={optionSelected}
                   />
                 </Fragment>
               )}
@@ -64,11 +75,13 @@ const Services = props => {
 };
 
 Services.propTypes = {
+  addAnotherService: PropTypes.func,
   classes: sharedClasses,
   errors: PropTypes.shape({}),
   handleBlur: PropTypes.func,
   handleChange: PropTypes.func,
   mode: PropTypes.string,
+  optionSelected: PropTypes.func,
   touched: PropTypes.shape({}),
   values: PropTypes.shape({}),
 };

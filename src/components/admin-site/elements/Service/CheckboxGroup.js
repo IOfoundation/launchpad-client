@@ -31,9 +31,12 @@ class CheckboxGroup extends PureComponent {
                       // eslint-disable-next-line react/no-array-index-key
                       key={index}
                       label={item.label}
-                      name={`${group}.${item.key}`}
+                      name={`taxonomy.${group}.${item.key}`}
                       onChange={this.handleChange}
-                      value={values[group] && values[group][item.key]}
+                      value={
+                        values.taxonomy[group] &&
+                        values.taxonomy[group][item.key]
+                      }
                     />
                   );
                 })}
@@ -46,9 +49,12 @@ class CheckboxGroup extends PureComponent {
                       // eslint-disable-next-line react/no-array-index-key
                       key={index}
                       label={item.label}
-                      name={`${group}.${item.key}`}
+                      name={`taxonomy.${group}.${item.key}`}
                       onChange={this.handleChange}
-                      value={values[group] && values[group][item.key]}
+                      value={
+                        values.taxonomy[group] &&
+                        values.taxonomy[group][item.key]
+                      }
                     />
                   );
                 })}
