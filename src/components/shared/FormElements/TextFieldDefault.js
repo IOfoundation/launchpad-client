@@ -35,6 +35,8 @@ class FormTextFieldDefault extends PureComponent {
       name,
       type = 'text',
       value,
+      rows,
+      rowsMax,
       novalidate,
       step = 300,
     } = this.props;
@@ -77,17 +79,19 @@ class FormTextFieldDefault extends PureComponent {
         <TextField
           error={error}
           fullWidth={true}
-          id={id}
-          type={type}
-          label={label}
-          onChange={event => this.changeHandler(name, event)}
-          onBlur={handleBlur}
-          value={value}
-          name={name}
-          multiline={multiline}
           helperText={helperText}
-          inputProps={InputProps}
+          id={id}
           InputLabelProps={InputLabelProps}
+          inputProps={InputProps}
+          label={label}
+          multiline={multiline}
+          name={name}
+          onBlur={handleBlur}
+          onChange={event => this.changeHandler(name, event)}
+          rows={rows}
+          rowsMax={rowsMax}
+          type={type}
+          value={value}
         />
         {displayError}
       </Fragment>
@@ -110,6 +114,8 @@ FormTextFieldDefault.propTypes = {
   name: PropTypes.string,
   novalidate: PropTypes.bool,
   phones: PropTypes.string,
+  rows: PropTypes.string,
+  rowsMax: PropTypes.string,
   step: PropTypes.number,
   type: PropTypes.string,
   value: PropTypes.string,

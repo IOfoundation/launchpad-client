@@ -10,6 +10,7 @@ import Pagination from '../../businesses/Pagination';
 import CustomTabs from '@Shared/Tabs';
 import Loading from '@Shared/Loading';
 import Modal from './Events/Modal';
+import FormModal from './Events/FormModal';
 
 import * as eventActions from '@Actions/events';
 import * as snackbarActions from '@Actions/snackbar';
@@ -19,6 +20,7 @@ class Events extends PureComponent {
   state = {
     selectedEvent: {},
     openModal: false,
+    openEditModal: false,
   };
 
   componentDidMount() {
@@ -39,11 +41,6 @@ class Events extends PureComponent {
 
   menuChanged = index => {
     this._tabSelected = this._tabOptions[index];
-    /*if (this._tabSelected === this._tabOptions[0]) {
-      this.props.actions.getAllEventsAfter(1);
-    } else if (this._tabSelected === this._tabOptions[1]) {
-      this.props.actions.getAllEventsBefore(1);
-    }*/
     this.handleChangePage(1);
   };
 
@@ -100,12 +97,26 @@ class Events extends PureComponent {
     });
   };
 
+  handlerEditModalVisibility = () => {
+    this.setState(prevState => {
+      return {
+        openEditModal: !prevState.openEditModal,
+      };
+    });
+  };
+
+  handlerSubmenuOptions = option => {
+    if (option === 'Edit') {
+      this.handlerEditModalVisibility();
+    }
+  };
+
   _tabOptions = ['Upcoming', 'Past Events'];
   _tabSelected = 'Upcoming';
 
   render() {
     const {events, noResults, loading, totalPages, page} = this.props;
-    const {openModal, selectedEvent} = this.state;
+    const {openModal, selectedEvent, openEditModal} = this.state;
     let upcomingElements = <Loading />;
     let pastEventsElements = <Loading />;
     let pagination = null;
@@ -124,6 +135,7 @@ class Events extends PureComponent {
           items={events}
           titleClicked={this.handlerModalVisibility}
           urlClicked={this.handlerModalVisibility}
+          optionSelected={this.handlerSubmenuOptions}
         />
       );
       pastEventsElements = (
@@ -132,6 +144,7 @@ class Events extends PureComponent {
           items={events}
           titleClicked={this.handlerModalVisibility}
           urlClicked={this.handlerModalVisibility}
+          optionSelected={this.handlerSubmenuOptions}
         />
       );
       pagination = this._getPagination(page, totalPages);
@@ -144,10 +157,15 @@ class Events extends PureComponent {
           selectedEvent={selectedEvent}
           handlerModalVisibility={this.handlerModalVisibility}
         />
+        <FormModal
+          openModal={openEditModal}
+          handlerModalVisibility={this.handlerEditModalVisibility}
+        />
         <Title
           titleText="Your Events"
           hideCancelAction={true}
           submitLabel="Create an Event"
+          submitClicked={this.handlerEditModalVisibility}
         />
         <CustomTabs tabs={this._tabOptions} changed={this.menuChanged}>
           {upcomingElements}
