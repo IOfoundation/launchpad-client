@@ -16,16 +16,15 @@ class Item extends PureComponent {
     this.setState({anchorEl: event.currentTarget});
   };
 
-  handleMenuClose = () => {
+  handleMenuClose = event => {
+    const {optionSelected} = this.props;
+
     this._indexMenuOpen = null;
     this.setState({anchorEl: null});
-  };
 
-  handleMenuCloseAndDelete = () => {
-    const {arrayHelpers, id} = this.props;
-
-    this.setState({anchorEl: null});
-    arrayHelpers.remove(id);
+    if (event.target.value === 0) {
+      optionSelected();
+    }
   };
 
   render() {
@@ -105,6 +104,7 @@ Item.propTypes = {
   }),
   handleChange: PropTypes.func,
   id: PropTypes.number,
+  optionSelected: PropTypes.func,
   service: PropTypes.shape({name: PropTypes.string, id: PropTypes.number}),
 };
 

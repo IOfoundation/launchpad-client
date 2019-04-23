@@ -5,9 +5,11 @@ import BusinessTypes from './business';
 import CreateLocationTypes from './locations/create';
 import CreateServiceTypes from './services/create';
 import DeleteLocationTypes from './locations/delete';
+import DeleteServiceTypes from './services/delete';
 import ErrorsTypes from './errors';
 import EventsTypes from './events';
 import GetLocationByOrganizationTypes from './locations/getByOrganization';
+import GetServiceTypes from './services/get';
 import LocationsTypes from './locations';
 import ServiceTaxonomyTypes from './services/taxonomy';
 import SnackbarTypes from './snackbar';
@@ -23,9 +25,11 @@ export {
   CreateLocationTypes,
   CreateServiceTypes,
   DeleteLocationTypes,
+  DeleteServiceTypes,
   ErrorsTypes,
   EventsTypes,
   GetLocationByOrganizationTypes,
+  GetServiceTypes,
   LocationsTypes,
   ServiceTaxonomyTypes,
   SnackbarTypes,
@@ -42,9 +46,11 @@ export default {
   CreateLocationTypes,
   CreateServiceTypes,
   DeleteLocationTypes,
+  DeleteServiceTypes,
   ErrorsTypes,
   EventsTypes,
   GetLocationByOrganizationTypes,
+  GetServiceTypes,
   LocationsTypes,
   ServiceTaxonomyTypes,
   SnackbarTypes,

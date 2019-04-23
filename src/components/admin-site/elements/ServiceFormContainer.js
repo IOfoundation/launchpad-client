@@ -3,12 +3,14 @@ import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {PropTypes} from 'prop-types';
 
-import LandingComponent from '../Landing';
-import Title from '../Title';
-import ServiceForm from './ServiceForm';
 import Buttons from '../Buttons';
+import LandingComponent from '../Landing';
+import Modal from './Service/Modal';
+import ServiceForm from './ServiceForm';
+import Title from '../Title';
 
 import serviceModel from './Service/Model';
+import getInitialValues from './Service/initialValues';
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string().required('Required'),
@@ -78,6 +80,10 @@ const initialValues = {
 };
 
 class ServiceFormContainer extends PureComponent {
+  state = {
+    openModal: false,
+  };
+
   componentDidUpdate(prevProps) {
     const {
       serviceCreateError,
@@ -108,12 +114,58 @@ class ServiceFormContainer extends PureComponent {
         this.goToLocation();
       }
     }
+
+    this._deleteSuccess(prevProps);
+    this._deleteError(prevProps);
   }
+
+  _deleteSuccess = prevProps => {
+    const {serviceDeleteSuccess, snackbar} = this.props;
+
+    if (serviceDeleteSuccess !== prevProps.serviceDeleteSuccess) {
+      if (serviceDeleteSuccess) {
+        snackbar.showSnackbar({
+          message: 'Service deleted succesfully',
+        });
+        this.goToLocation();
+      }
+    }
+  };
+
+  _deleteError = prevProps => {
+    const {serviceDeleteError, snackbar} = this.props;
+
+    if (serviceDeleteError !== prevProps.serviceDeleteError) {
+      if (serviceDeleteError) {
+        snackbar.showSnackbar({
+          message: 'There was a problem trying to delete the service',
+        });
+      }
+    }
+  };
 
   goToLocation = () => {
     const {router, locationId} = this.props;
 
     router.push(`/admin/location/${locationId}`);
+  };
+
+  handlerModalVisibility = () => {
+    this.setState(prevState => {
+      return {
+        openModal: !prevState.openModal,
+      };
+    });
+  };
+
+  deleteService = () => {
+    const {Authorization, serviceDelete, locationId, router} = this.props;
+
+    serviceDelete.remove({
+      Authorization,
+      serviceId: router.params.id,
+      locationId,
+    });
   };
 
   render() {
@@ -124,15 +176,42 @@ class ServiceFormContainer extends PureComponent {
       locationName,
       initialTaxonomy,
       checkboxes,
+      serviceData,
+      router,
     } = this.props;
+    let formModel;
+    let mode;
+    let title;
+
+    if (router.params.id === 'new') {
+      title = 'Create A Service';
+      mode = 'new';
+      formModel = {
+        ...initialValues,
+        ...initialTaxonomy,
+      };
+    } else {
+      mode = 'edit';
+      title = 'Edit A Service';
+      formModel = {
+        ...initialValues,
+        ...getInitialValues(serviceData, initialTaxonomy),
+      };
+    }
 
     return (
       <LandingComponent>
+        <Modal
+          open={this.state.openModal}
+          modalClosed={this.handlerModalVisibility}
+          cancelClicked={this.handlerModalVisibility}
+          deleteClicked={this.deleteService}
+        />
         <Formik
           render={_props => (
             <Fragment>
               <Title
-                titleText="Create A Service"
+                titleText={title}
                 hideCancelAction={false}
                 submitLabel={'Save Service'}
                 cancelClicked={this.goToLocation}
@@ -143,6 +222,7 @@ class ServiceFormContainer extends PureComponent {
                 {..._props}
                 goToLocation={this.goToLocation}
                 checkboxes={checkboxes}
+                openModal={this.handlerModalVisibility}
               />
               <Buttons
                 hideCancelAction={false}
@@ -152,14 +232,15 @@ class ServiceFormContainer extends PureComponent {
               />
             </Fragment>
           )}
-          initialValues={{...initialValues, ...initialTaxonomy}}
+          initialValues={{...formModel}}
           validationSchema={SignupSchema}
           onSubmit={values => {
             serviceCreate.create({
               service: serviceModel(values),
               Authorization,
               locationId,
-              mode: 'new',
+              serviceId: router.params.id,
+              mode,
             });
           }}
         />
@@ -178,7 +259,10 @@ ServiceFormContainer.propTypes = {
   locationName: PropTypes.string,
   organizationId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   router: PropTypes.shape({
-    push: PropTypes.func,
+    push: PropTypes.func.isRequired,
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
   }),
   seriveCreateErrors: PropTypes.arrayOf(PropTypes.shape({})),
   serviceCategoriesActions: PropTypes.shape({
@@ -187,8 +271,14 @@ ServiceFormContainer.propTypes = {
   serviceCreate: PropTypes.shape({
     create: PropTypes.func,
   }),
-  serviceCreateError: PropTypes.bool,
-  serviceUpdated: PropTypes.shape({}),
+  serviceCreateError: PropTypes.bool.isRequired,
+  serviceData: PropTypes.shape({}).isRequired,
+  serviceDelete: PropTypes.shape({
+    remove: PropTypes.func.isRequired,
+  }),
+  serviceDeleteError: PropTypes.bool.isRequired,
+  serviceDeleteSuccess: PropTypes.bool.isRequired,
+  serviceUpdated: PropTypes.shape({}).isRequired,
   snackbar: PropTypes.shape({
     showSnackbar: PropTypes.func,
   }),

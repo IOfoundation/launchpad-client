@@ -42,9 +42,9 @@ const LocationForm = props => {
     router.push('/admin/services/new');
   };
 
-  const editService = () => {
+  const editService = serviceId => {
     service.setLocationId({locationId: router.params.id, locationName});
-    router.push(`/admin/services/${router.params.id}`);
+    router.push(`/admin/services/${serviceId}`);
   };
 
   return (
