@@ -47,8 +47,7 @@ class SchedulerContainer extends PureComponent {
       const mappedEvents = nextProps.events.data.map(event => {
         const start = getDate(event.starting_at);
         const end = getDate(event.ending_at);
-
-        return {
+        const mapped = {
           ID: event.id,
           title: event.title,
           start: new Date(start.pacificTime),
@@ -56,6 +55,12 @@ class SchedulerContainer extends PureComponent {
           description: event.body,
           recurrenceId: event.organization_id,
         };
+
+        if (event.is_all_day) {
+          mapped.isAllDay = event.is_all_day;
+        }
+
+        return mapped;
       });
 
       return {events: mappedEvents};
