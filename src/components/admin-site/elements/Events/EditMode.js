@@ -20,7 +20,7 @@ const EditMode = props => {
   } = props;
 
   return (
-    <Form className="profile-form">
+    <Form className="profile-form" style={{padding: 8}}>
       <Grid container={true} spacing={16}>
         <Grid item={true} xs={12} md={6}>
           <FormTextField
@@ -81,129 +81,138 @@ const EditMode = props => {
             label="Address (Line 2)"
             value={values.address2}
           />
-          <Grid container={true} spacing={16}>
-            <Grid item={true} xs={12} sm={6}>
-              <FormTextField
-                autocomplete="off"
-                error={touched.city && Boolean(errors.city)}
-                errors={errors}
-                handleBlur={handleBlur}
-                handleChange={handleChange}
-                id="city"
-                name="city"
-                label="City"
-                value={values.city}
-              />
+          <div style={{padding: 8}}>
+            <Grid container={true} spacing={16}>
+              <Grid item={true} xs={12} sm={6}>
+                <FormTextField
+                  autocomplete="off"
+                  error={touched.city && Boolean(errors.city)}
+                  errors={errors}
+                  handleBlur={handleBlur}
+                  handleChange={handleChange}
+                  id="city"
+                  name="city"
+                  label="City"
+                  value={values.city}
+                />
+              </Grid>
+              <Grid item={true} xs={12} sm={3}>
+                <SelectElement
+                  errors={errors}
+                  handleBlur={handleBlur}
+                  handleChange={handleChange}
+                  id={'state'}
+                  label={'State'}
+                  name={'state'}
+                  selectOptions={states}
+                  value={values.state}
+                />
+              </Grid>
+              <Grid item={true} xs={12} sm={3}>
+                <FormTextField
+                  autocomplete="off"
+                  error={touched.zip && Boolean(errors.zip)}
+                  errors={errors}
+                  handleBlur={handleBlur}
+                  handleChange={handleChange}
+                  id="zip"
+                  name="zip"
+                  label="Zipcode"
+                  value={values.zip}
+                />
+              </Grid>
             </Grid>
-            <Grid item={true} xs={12} sm={3}>
-              <SelectElement
-                errors={errors}
-                handleBlur={handleBlur}
-                handleChange={handleChange}
-                id={'state'}
-                label={'State'}
-                name={'state'}
-                selectOptions={states}
-                value={values.state}
-              />
+          </div>
+          <div style={{padding: 8}}>
+            <Grid container={true} spacing={16}>
+              <Grid item={true} xs={5}>
+                <FormTextField
+                  errors={errors}
+                  handleBlur={handleBlur}
+                  handleChange={handleChange}
+                  id="startDate"
+                  label="Start Date"
+                  name="startDate"
+                  value={values.startDate}
+                  type="date"
+                />
+              </Grid>
+              <Grid item={true} xs={3}>
+                <FormTextField
+                  autocomplete="off"
+                  errors={errors}
+                  handleBlur={handleBlur}
+                  handleChange={handleChange}
+                  id="startTime"
+                  label="Start Time"
+                  name="startTime"
+                  value={values.startTime}
+                  type="time"
+                />
+              </Grid>
             </Grid>
-            <Grid item={true} xs={12} sm={3}>
-              <FormTextField
-                autocomplete="off"
-                error={touched.zip && Boolean(errors.zip)}
-                errors={errors}
-                handleBlur={handleBlur}
-                handleChange={handleChange}
-                id="zip"
-                name="zip"
-                label="Zipcode"
-                value={values.zip}
-              />
-            </Grid>
-          </Grid>
+          </div>
 
-          <Grid container={true} spacing={16}>
-            <Grid item={true} xs={5}>
-              <FormTextField
-                errors={errors}
-                handleBlur={handleBlur}
-                handleChange={handleChange}
-                id="startDate"
-                label="Start Date"
-                name="startDate"
-                value={values.startDate}
-                type="date"
-              />
+          <div style={{padding: 8}}>
+            <Grid container={true} spacing={16}>
+              <Grid item={true} xs={5}>
+                <FormTextField
+                  errors={errors}
+                  handleBlur={handleBlur}
+                  handleChange={handleChange}
+                  id="endDate"
+                  label="End Date"
+                  name="endDate"
+                  value={values.endDate}
+                  type="date"
+                />
+              </Grid>
+              <Grid item={true} xs={3}>
+                <FormTextField
+                  autocomplete="off"
+                  errors={errors}
+                  handleBlur={handleBlur}
+                  handleChange={handleChange}
+                  id="endTime"
+                  label="End Date"
+                  name="endTime"
+                  value={values.endTime}
+                  type="time"
+                />
+              </Grid>
             </Grid>
-            <Grid item={true} xs={3}>
-              <FormTextField
-                autocomplete="off"
-                errors={errors}
-                handleBlur={handleBlur}
-                handleChange={handleChange}
-                id="startTime"
-                label="Start Time"
-                name="startTime"
-                value={values.startTime}
-                type="time"
-              />
-            </Grid>
-          </Grid>
-          <Grid container={true} spacing={16}>
-            <Grid item={true} xs={5}>
-              <FormTextField
-                errors={errors}
-                handleBlur={handleBlur}
-                handleChange={handleChange}
-                id="endDate"
-                label="End Date"
-                name="endDate"
-                value={values.endDate}
-                type="date"
-              />
-            </Grid>
-            <Grid item={true} xs={3}>
-              <FormTextField
-                autocomplete="off"
-                errors={errors}
-                handleBlur={handleBlur}
-                handleChange={handleChange}
-                id="endTime"
-                label="End Date"
-                name="endTime"
-                value={values.endTime}
-                type="time"
-              />
-            </Grid>
-          </Grid>
+          </div>
+
           <Checkbox
             label="All Day Event"
             name="allDay"
             onChange={handleChange}
             value={values.allDay}
           />
-          <Grid
-            container={true}
-            spacing={16}
-            justify="flex-end"
-            alignContent="center"
-            alignItems="center"
-          >
-            <Grid item={true} className="m-x-8">
-              <button
-                className="btn btn__outline"
-                type="button"
-                onClick={closeClicked}
-              >
-                {'Cancel'}
-              </button>
+          <div style={{padding: 8}}>
+            <Grid
+              container={true}
+              spacing={16}
+              justify="flex-end"
+              alignContent="center"
+              alignItems="center"
+            >
+              <Grid item={true} className="m-x-8">
+                <button
+                  className="btn btn__outline"
+                  type="button"
+                  onClick={closeClicked}
+                >
+                  {'Cancel'}
+                </button>
+              </Grid>
+              <Grid item={true}>
+                <button className="btn btn__black p-x-24" type="submit">
+                  {'Create Event'}
+                </button>
+              </Grid>
             </Grid>
-            <Grid item={true}>
-              <button className="btn btn__black p-x-24" type="submit">
-                {'Create Event'}
-              </button>
-            </Grid>
-          </Grid>
+          </div>
         </Grid>
       </Grid>
     </Form>
