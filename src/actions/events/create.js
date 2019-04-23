@@ -7,10 +7,10 @@ const createEventStart = () => {
   };
 };
 
-const createEventSuccess = service => {
+const createEventSuccess = data => {
   return {
     type: types.CREATE_EVENT_SUCCESS,
-    service,
+    data,
   };
 };
 
@@ -21,7 +21,12 @@ const createEventError = errors => {
   };
 };
 
-export const create = ({Authorization, event, mode}) => {
+export const create = ({
+  Authorization,
+  organizationId: organization_id,
+  event,
+  mode,
+}) => {
   return async dispatch => {
     try {
       dispatch(createEventStart());
@@ -31,9 +36,17 @@ export const create = ({Authorization, event, mode}) => {
       let httpResponse;
 
       if (mode === 'new') {
-        httpResponse = await httpRequest.post('/api/events', event, config);
+        httpResponse = await httpRequest.post(
+          '/api/events',
+          {...event, organization_id},
+          config
+        );
       } else if (mode === 'edit') {
-        httpResponse = await httpRequest.put('/api/events', event, config);
+        httpResponse = await httpRequest.put(
+          '/api/events',
+          {...event, organization_id},
+          config
+        );
       }
 
       dispatch(createEventSuccess(httpResponse.data));
