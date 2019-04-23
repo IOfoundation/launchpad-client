@@ -3,8 +3,8 @@ import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
-import FormTextField from '../../../shared/FormElements/TextFieldDefault';
-import Checkbox from '../../../shared/FormElements/Checkbox';
+import FormTextField from '@Shared/FormElements/TextFieldDefault';
+import Checkbox from '@Shared/FormElements/Checkbox';
 
 import {sharedStyles, sharedClasses} from './styles';
 
