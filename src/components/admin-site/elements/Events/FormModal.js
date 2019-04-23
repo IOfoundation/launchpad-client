@@ -39,7 +39,7 @@ const styles = theme => ({
     width: '100%',
     maxWidth: '930px',
     boxSizing: 'border-box',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: '100%',
     },
   },

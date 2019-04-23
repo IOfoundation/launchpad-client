@@ -90,7 +90,7 @@ class Item extends PureComponent {
       </div>
     );
 
-    if (truncateUrl.split('').length > 70) {
+    if (truncateUrl && truncateUrl.split('').length > 70) {
       truncateUrl = truncate(label, 70);
     }
 
