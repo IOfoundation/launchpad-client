@@ -211,33 +211,14 @@ const EditMode = props => {
 };
 
 EditMode.propTypes = {
-  closeClicked: PropTypes.func,
-  errors: PropTypes.shape({
-    fullName: PropTypes.string,
-    contactEmail: PropTypes.string,
-    currentPassword: PropTypes.string,
-    newPassword: PropTypes.string,
-    confirmPassword: PropTypes.string,
-  }),
+  closeClicked: PropTypes.func.isRequired,
+  errors: PropTypes.shape({}).isRequired,
   handleBlur: PropTypes.func,
   handleChange: PropTypes.func,
   handleSubmit: PropTypes.func,
   isSubmitting: PropTypes.bool,
-  isValid: PropTypes.bool,
-  touched: PropTypes.shape({
-    fullName: PropTypes.bool,
-    contactEmail: PropTypes.bool,
-    currentPassword: PropTypes.bool,
-    newPassword: PropTypes.bool,
-    confirmPassword: PropTypes.bool,
-  }),
-  values: PropTypes.shape({
-    fullName: PropTypes.string,
-    contactEmail: PropTypes.string,
-    currentPassword: PropTypes.string,
-    newPassword: PropTypes.string,
-    confirmPassword: PropTypes.string,
-  }),
+  touched: PropTypes.shape({}).isRequired,
+  values: PropTypes.shape({}).isRequired,
 };
 
 export default EditMode;

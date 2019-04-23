@@ -7,6 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 import {truncate} from '@Utils';
 import {Colors} from '@Styles/Colors';
+import ItemMenuOptions from './ItemMenuOptions';
 
 class Item extends PureComponent {
   state = {
@@ -76,12 +77,15 @@ class Item extends PureComponent {
           }}
           className={`${classes.floating} ${classes.back}`}
         >
-          <MenuItem value="Edit" className={classes.menuListCss}>
-            {'Edit'}
-          </MenuItem>
-          <MenuItem value="Delete" className={classes.menuListCss}>
-            {'Delete'}
-          </MenuItem>
+          {Object.keys(ItemMenuOptions).map(option => (
+            <MenuItem
+              key={option}
+              value={option}
+              className={classes.menuListCss}
+            >
+              {option}
+            </MenuItem>
+          ))}
         </Select>
       </div>
     );

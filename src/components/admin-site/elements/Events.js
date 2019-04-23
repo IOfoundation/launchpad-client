@@ -15,6 +15,7 @@ import FormModal from './Events/FormModal';
 import * as eventActions from '@Actions/events';
 import * as snackbarActions from '@Actions/snackbar';
 import {htmlStripper, truncate, getDate} from '@Utils';
+import itemMenuOptions from './Events/ItemMenuOptions';
 
 class Events extends PureComponent {
   state = {
@@ -106,7 +107,7 @@ class Events extends PureComponent {
   };
 
   handlerSubmenuOptions = option => {
-    if (option === 'Edit') {
+    if (option === itemMenuOptions.Edit) {
       this.handlerEditModalVisibility();
     }
   };
