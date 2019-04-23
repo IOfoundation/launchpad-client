@@ -29,7 +29,6 @@ const styles = () => ({
 
 AddNewService.propTypes = {
   addAnotherServiceClicked: PropTypes.func,
-  arrayHelpers: PropTypes.shape({}),
   classes: PropTypes.shape({
     formControl: PropTypes.string,
   }),
