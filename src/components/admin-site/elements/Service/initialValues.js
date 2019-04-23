@@ -1,4 +1,4 @@
-import {falsyToString} from '@Utils';
+import {falsyToString, deepCopy} from '@Utils';
 
 const normalizeArray = arrayArg => {
   if (arrayArg && arrayArg.length > 0) {
@@ -15,13 +15,15 @@ const normalizeArrayData = (arrayArg, join = '') => {
 };
 
 const mapCategories = (categories, initialTaxonomy) => {
+  const taxonomy = deepCopy(initialTaxonomy);
+
   if (categories) {
     categories.forEach(element => {
-      initialTaxonomy[element.parent_id][element.taxonomy_id] = true;
+      taxonomy[element.parent_id][element.taxonomy_id] = true;
     });
   }
 
-  return initialTaxonomy;
+  return taxonomy;
 };
 
 const getHours = schedule => {
