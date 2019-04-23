@@ -22,7 +22,7 @@ class Events extends PureComponent {
   };
 
   componentDidMount() {
-    this.props.actions.getAllEventsAfter();
+    this.props.actions.getAllEventsAfter(1);
   }
 
   componentDidUpdate(prevProps) {
@@ -39,14 +39,21 @@ class Events extends PureComponent {
 
   menuChanged = index => {
     this._tabSelected = this._tabOptions[index];
-    if (this._tabSelected === this._tabOptions[0]) {
-      this.props.actions.getAllEventsAfter();
+    /*if (this._tabSelected === this._tabOptions[0]) {
+      this.props.actions.getAllEventsAfter(1);
     } else if (this._tabSelected === this._tabOptions[1]) {
-      this.props.actions.getAllEventsBefore();
-    }
+      this.props.actions.getAllEventsBefore(1);
+    }*/
+    this.handleChangePage(1);
   };
 
-  handleChangePage = () => {};
+  handleChangePage = page => {
+    if (this._tabSelected === this._tabOptions[0]) {
+      this.props.actions.getAllEventsAfter(page);
+    } else if (this._tabSelected === this._tabOptions[1]) {
+      this.props.actions.getAllEventsBefore(page);
+    }
+  };
 
   getEvents = () => {
     this.props.actions.getAllEventsBefore();
@@ -55,7 +62,7 @@ class Events extends PureComponent {
   _getPagination = (page, totalPages) => {
     return (
       <Pagination
-        appliedFilters={{category: 'admin-posts', page}}
+        appliedFilters={{category: 'admin-events', page}}
         handleChangePage={this.handleChangePage}
         metadata={{
           pagination: {
@@ -97,11 +104,11 @@ class Events extends PureComponent {
   _tabSelected = 'Upcoming';
 
   render() {
-    const {events, noResults, loading} = this.props;
+    const {events, noResults, loading, totalPages, page} = this.props;
     const {openModal, selectedEvent} = this.state;
     let upcomingElements = <Loading />;
     let pastEventsElements = <Loading />;
-    const pagination = null;
+    let pagination = null;
 
     if (noResults && !loading) {
       upcomingElements = (
@@ -127,6 +134,7 @@ class Events extends PureComponent {
           urlClicked={this.handlerModalVisibility}
         />
       );
+      pagination = this._getPagination(page, totalPages);
     }
 
     return (
@@ -185,6 +193,8 @@ const mapStateToProps = _state => {
     rawEvents: events.data,
     events: eventsToItemsProps(events.data),
     noResults: events.data.length === 0,
+    page: events.page,
+    totalPages: events.totalPages,
     loading: events.loading,
     errors: events.errors,
   };
@@ -207,6 +217,7 @@ Events.propTypes = {
   events: PropTypes.arrayOf(PropTypes.shape({})),
   loading: PropTypes.bool,
   noResults: PropTypes.bool,
+  page: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   rawEvents: PropTypes.arrayOf(PropTypes.shape({})),
   router: PropTypes.shape({
     push: PropTypes.func,
@@ -214,6 +225,7 @@ Events.propTypes = {
   snackbar: PropTypes.shape({
     showSnackbar: PropTypes.func,
   }),
+  totalPages: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
 export default connect(
