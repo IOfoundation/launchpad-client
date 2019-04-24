@@ -2,13 +2,15 @@ import {BlogsTypes as types} from '../action-types';
 
 const initialState = {
   categories: [],
+  categoriesLoading: true,
   category: 'front page',
   featuredPosts: [],
+  getFeaturedPostloading: true,
+  getPostIdSuccess: false,
   noResults: false,
   organizationPosts: [],
   page: 1,
   post: {},
-  getPostIdSuccess: false,
   posts: [],
   totalPages: 0,
 };
@@ -20,6 +22,7 @@ export default function(state = initialState, action) {
         ...state,
         noResults: false,
         featuredPosts: [],
+        getFeaturedPostloading: true,
       };
     }
 
@@ -28,6 +31,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         featuredPosts,
+        getFeaturedPostloading: false,
       };
     }
 
@@ -36,6 +40,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         error,
+        getFeaturedPostloading: false,
       };
     }
 
@@ -94,6 +99,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         categories: [],
+        categoriesLoading: true,
       };
     }
 
@@ -102,6 +108,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         categories,
+        categoriesLoading: false,
       };
     }
 
@@ -110,6 +117,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         error,
+        categoriesLoading: false,
       };
     }
 

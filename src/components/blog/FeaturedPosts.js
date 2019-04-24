@@ -33,13 +33,13 @@ class FeaturedPosts extends PureComponent {
   }
 
   render() {
-    const {classes, posts, router} = this.props;
-    let resultsElements = (
+    const {classes, posts, router, loading} = this.props;
+    let content = (
       <Loading elementConfig={{style: {margin: '0 auto', padding: 0}}} />
     );
 
     if (posts.results.length > 0) {
-      resultsElements = posts.results.slice(0, 4).map(post => {
+      const resultsElements = posts.results.slice(0, 4).map(post => {
         let description = htmlStripper(post.body);
         let title = post.title;
 
@@ -62,15 +62,19 @@ class FeaturedPosts extends PureComponent {
           </Grid>
         );
       });
+
+      content = (
+        <div className={classes.container}>
+          <Grid container={true} spacing={24} className={classes.featuredPosts}>
+            {resultsElements}
+          </Grid>
+        </div>
+      );
+    } else if (!loading) {
+      content = null;
     }
 
-    return (
-      <div className={classes.container}>
-        <Grid container={true} spacing={24} className={classes.featuredPosts}>
-          {resultsElements}
-        </Grid>
-      </div>
-    );
+    return content;
   }
 }
 
@@ -82,6 +86,7 @@ FeaturedPosts.propTypes = {
     container: PropTypes.string,
     featuredPosts: PropTypes.string,
   }),
+  loading: PropTypes.bool,
   posts: PropTypes.shape({
     results: PropTypes.arrayOf(PropTypes.shape({})),
     noResults: PropTypes.bool,
@@ -96,6 +101,7 @@ const mapStateToProps = _state => {
 
   return {
     posts: {results: _blogs.featuredPosts, noResults: _blogs.noResults},
+    loading: _blogs.getFeaturedPostloading,
   };
 };
 

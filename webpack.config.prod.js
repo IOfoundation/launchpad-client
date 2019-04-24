@@ -83,9 +83,6 @@ export default {
       trackJSToken: '',
     }),
 
-    // Minify JS
-    // new webpack.optimize.UglifyJsPlugin({sourceMap: true}),
-
     new webpack.LoaderOptionsPlugin({
       minimize: true,
       debug: false,
