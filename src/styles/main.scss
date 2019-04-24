@@ -1,8 +1,8 @@
-//abstracts
+/*abstracts*/
 @import 'abstracts/variables';
 @import 'abstracts/helpers';
 
-//base
+/*base*/
 @import 'base/normalize';
 @import 'base/typography';
 @import 'base/margin';
@@ -12,7 +12,7 @@
 @import 'base/images';
 @import 'base/titles';
 
-//Components
+/*Components*/
 @import 'components/search';
 @import 'components/links';
 @import 'components/buttons';
@@ -28,7 +28,7 @@
 @import './components/events/_events.scss';
 @import './components/shared/loading_background';
 
-//layout
+/*layout*/
 @import 'layout/header';
 @import 'layout/container';
 @import 'layout/grid';
@@ -39,15 +39,15 @@
 @import 'layout/search-nav-mobile';
 @import 'layout/_result-page-mobile';
 
-//Kendo
+/*Kendo*/
 @import '~@progress/kendo-theme-default/scss/button';
 @import '~@progress/kendo-theme-default/scss/window';
 @import '~@progress/kendo-theme-default/scss/scheduler';
 @import '~@progress/kendo-theme-default/scss/datetime';
 
-//Kendo overwrites
+/*Kendo overwrites*/
 @import './kendo/scheduler';
 @import './kendo/datetime';
 
-//Medium draft
+/*Medium draft*/
 @import './medium-draft/styles';
