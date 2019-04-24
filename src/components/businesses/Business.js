@@ -33,21 +33,27 @@ class Business extends PureComponent {
         <hr />
         <div className="col-lg-12 col-md-12 col-xs-12 grid p-0">
           {otherLocations.map(location => {
+            const {address} = location;
+            let addressElement;
+
+            if (address) {
+              addressElement = (
+                <div className="col-xs-12 p-0 m-right-54">
+                  <p className="business-title">{'Other Location:'}</p>
+                  <h4>{address.address_1}</h4>
+                  {address.address_2 && <h4>{address.address_2}</h4>}
+                  <h4>{`${address.city}, ${address.state_province} ${
+                    address.postal_code
+                  }`}</h4>
+                </div>
+              );
+            }
             return (
               <div
                 key={location.id}
                 className="col-lg-12 col-md-12 col-xs-12 m-bot-24 p-0 grid"
               >
-                <div className="col-xs-12 p-0 m-right-54">
-                  <p className="business-title">{'Other Location:'}</p>
-                  <h4>{location.address.address_1}</h4>
-                  {location.address.address_2 && (
-                    <h4>{location.address.address_2}</h4>
-                  )}
-                  <h4>{`${location.address.city}, ${
-                    location.address.state_province
-                  } ${location.address.postal_code}`}</h4>
-                </div>
+                {addressElement}
                 {(location.phones.length > 0 || location.email) && (
                   <div className="col-xs-12 p-0 m-top-16">
                     <p className="business-title">{'Contact:'}</p>
