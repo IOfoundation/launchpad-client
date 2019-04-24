@@ -8,7 +8,11 @@ import toJson from 'enzyme-to-json';
 
 import Header from '../../../components/shared/Header';
 
-const initialState = {};
+const initialState = {
+  user: {
+    Authorization: 'auth',
+  },
+};
 const props = {
   homePage: false,
 };

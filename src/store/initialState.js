@@ -141,7 +141,6 @@ const initialState = {
     passwordResetSuccess: false,
     organizationId: 0,
     signOut: {
-      data: {},
       errors: {},
       success: false,
       loading: false,

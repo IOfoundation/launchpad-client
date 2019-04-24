@@ -5,9 +5,10 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {withRouter} from 'react-router';
 
-import BarsIcon from '../shared/barsIcon';
+import BarsIcon from '@Shared/barsIcon';
 
 import * as userActions from '@Actions/user';
+import {getAuthorization} from '@Utils';
 
 class AdminHeader extends PureComponent {
   componentDidUpdate(prevProps) {
@@ -55,7 +56,8 @@ class AdminHeader extends PureComponent {
 }
 
 const mapStateToProps = _state => {
-  const auth = _state.user.authorization || sessionStorage.getItem('userAuth');
+  const auth = getAuthorization(_state);
+
   return {
     auth,
     singOutSuccess: _state.user.signOut.success,

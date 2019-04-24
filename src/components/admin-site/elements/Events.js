@@ -16,7 +16,7 @@ import * as eventActions from '@Actions/events';
 import * as snackbarActions from '@Actions/snackbar';
 import * as eventsGetActions from '@Actions/events/get';
 import * as eventDeleteActions from '@Actions/events/delete';
-import {htmlStripper, truncate, getDate} from '@Utils';
+import {htmlStripper, truncate, getDate, getAuthorization} from '@Utils';
 import itemMenuOptions from './Events/ItemMenuOptions';
 
 class Events extends PureComponent {
@@ -266,8 +266,7 @@ const mapStateToProps = _state => {
   const {events} = _state.events;
   const organizationId =
     _state.user.organizationId || sessionStorage.getItem('organizationId');
-  const Authorization =
-    _state.user.authorization || sessionStorage.getItem('userAuth');
+  const Authorization = getAuthorization(_state);
 
   return {
     Authorization,

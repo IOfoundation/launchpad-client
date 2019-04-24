@@ -5,7 +5,7 @@ import {bindActionCreators} from 'redux';
 
 import AdminLayout from '../../components/layouts/Admin';
 
-import {viewport, sizeCheck} from '@Utils';
+import {viewport, sizeCheck, getAuthorization} from '@Utils';
 import * as snackbarActions from '@Actions/snackbar';
 import withErrorHandler from '@HOC/withErrorHandler';
 
@@ -52,7 +52,8 @@ class Layout extends PureComponent {
 }
 
 const mapStateToProps = _state => {
-  const auth = _state.user.authorization || sessionStorage.getItem('userAuth');
+  const auth = getAuthorization(_state);
+
   return {
     auth: auth !== '',
     hideFooter: _state.adminBlogs.hideFooter,

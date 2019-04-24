@@ -8,6 +8,7 @@ import Locations from '../../components/admin-site/elements/Locations';
 import Loading from '@Shared/Loading';
 
 import * as locationsActions from '@Actions/locations/getByOrganization';
+import {getAuthorization} from '@Utils';
 
 class LocationsRoute extends PureComponent {
   componentDidMount() {
@@ -34,7 +35,7 @@ class LocationsRoute extends PureComponent {
 const mapStateToProps = _state => {
   const organizationId =
     _state.user.organizationId || sessionStorage.getItem('organizationId');
-  const auth = _state.user.authorization || sessionStorage.getItem('userAuth');
+  const auth = getAuthorization(_state);
 
   return {
     error: _state.user.error,

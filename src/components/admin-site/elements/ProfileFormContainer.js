@@ -15,7 +15,7 @@ import * as user from '@Actions/user';
 import * as snackbarActions from '@Actions/snackbar';
 import * as businessActions from '@Actions/business';
 import * as profileActions from '@Actions/admin-profile';
-import {falsyToString} from '@Utils';
+import {falsyToString, getAuthorization} from '@Utils';
 
 export const ProfileSchema = Yup.object().shape({
   contactEmail: Yup.string()
@@ -258,7 +258,8 @@ class ProfileFormContainer extends PureComponent {
 const mapStateToProps = _state => {
   const organizationId =
     _state.user.organizationId || sessionStorage.getItem('organizationId');
-  const auth = _state.user.authorization || sessionStorage.getItem('userAuth');
+  const auth = getAuthorization(_state);
+
   return {
     auth,
     emailSent: _state.user.emailReset !== '',

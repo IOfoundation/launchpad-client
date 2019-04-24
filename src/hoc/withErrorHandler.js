@@ -5,6 +5,7 @@ import {PropTypes} from 'prop-types';
 
 import * as snackbarActions from '@Actions/snackbar';
 import * as userInformationActions from '@Actions/user-information';
+import {getAuthorization} from '@Utils';
 
 const withErrorHandler = WrapperComponent => {
   class WithErrorHandler extends PureComponent {
@@ -52,8 +53,7 @@ const withErrorHandler = WrapperComponent => {
   }
 
   function mapStateToProps(_state) {
-    const auth =
-      _state.user.authorization || sessionStorage.getItem('userAuth');
+    const auth = getAuthorization(_state);
 
     return {
       userAuthorized: _state.errors.userAuthorized,

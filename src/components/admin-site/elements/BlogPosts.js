@@ -13,7 +13,7 @@ import Modal from './BlogPosts/Modal';
 
 import * as snackbarActions from '@Actions/snackbar';
 import * as adminPostActions from '@Actions/admin-blogs';
-import {htmlStripper, truncate, getDate} from '@Utils';
+import {htmlStripper, truncate, getDate, getAuthorization} from '@Utils';
 
 class BlogPosts extends PureComponent {
   state = {
@@ -193,7 +193,7 @@ const mapStateToProps = _state => {
   const posted = _state.adminBlogs.posted;
   const organizationId =
     _state.user.organizationId || sessionStorage.getItem('organizationId');
-  const auth = _state.user.authorization || sessionStorage.getItem('userAuth');
+  const auth = getAuthorization(_state);
 
   return {
     drafts: {

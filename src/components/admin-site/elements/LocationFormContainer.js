@@ -13,7 +13,7 @@ import LocationForm from './LocationForm';
 import Modal from './Locations/Modal';
 import Title from '../Title';
 
-import {falsyToString} from '@Utils';
+import {falsyToString, getAuthorization} from '@Utils';
 import {accesibility} from '@StaticData/data';
 import * as locationCreateActions from '@Actions/locations/create';
 import * as locationDeleteActions from '@Actions/locations/delete';
@@ -513,8 +513,7 @@ class LocationFormContainer extends PureComponent {
 const mapStateToProps = _state => {
   const organizationId =
     _state.user.organizationId || sessionStorage.getItem('organizationId');
-  const Authorization =
-    _state.user.authorization || sessionStorage.getItem('userAuth');
+  const Authorization = getAuthorization(_state);
 
   return {
     Authorization,
