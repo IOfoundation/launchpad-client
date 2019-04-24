@@ -26,6 +26,7 @@ class Business extends PureComponent {
       </div>
     );
   };
+
   _renderOtherLocationsMobile = otherLocations => {
     return (
       <div className="col-xs-12 grid p-0">
