@@ -7,7 +7,6 @@ import autoprefixer from 'autoprefixer';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import DotenvPlugin from 'webpack-dotenv-plugin';
 import path from 'path';
-import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 import cssnano from 'cssnano';
 
 const GLOBALS = {
@@ -45,11 +44,7 @@ export default {
     filename: '[name].[chunkhash].js',
   },
   optimization: {
-    minimizer: [
-      new UglifyJsPlugin({
-        sourceMap: true,
-      }),
-    ],
+    minimize: false,
   },
   plugins: [
     new DotenvPlugin({
@@ -89,7 +84,7 @@ export default {
     }),
 
     // Minify JS
-    new webpack.optimize.UglifyJsPlugin({sourceMap: true}),
+    // new webpack.optimize.UglifyJsPlugin({sourceMap: true}),
 
     new webpack.LoaderOptionsPlugin({
       minimize: true,

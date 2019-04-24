@@ -4,7 +4,8 @@
   "description": "",
   "engines": {
     "npm": "6.4.1",
-    "node": ">=8.0.0 <11.0.0"
+    "node": "10.15.0",
+    "yarn": "1.15.2"
   },
   "scripts": {
     "preinstall": "node tools/nodeVersionCheck.js",
@@ -17,7 +18,7 @@
     "lint:watch": "npm run lint -- --watch",
     "clean-dist": "npm run remove-dist && mkdir dist",
     "remove-dist": "rimraf ./dist",
-    "prebuild": "npm run clean-dist && npm run test",
+    "prebuild": "npm run clean-dist",
     "pre-commit": "lint-staged",
     "build": "babel-node tools/build.js",
     "test": "jest",
