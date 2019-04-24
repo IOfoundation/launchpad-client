@@ -13,7 +13,7 @@ const Jumbotron = props => {
     <div
       className="jumbotron"
       style={{
-        backgroundImage: `url(/static-data/backgrounds/${background}.png)`,
+        backgroundImage: `url(/static-data/images/${background}.png)`,
       }}
     >
       <div className="jumbotron__container">

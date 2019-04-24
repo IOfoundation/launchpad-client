@@ -44,7 +44,7 @@ export default {
     filename: '[name].[chunkhash].js',
   },
   optimization: {
-    minimize: false,
+    minimize: true,
   },
   plugins: [
     new DotenvPlugin({
@@ -173,14 +173,14 @@ export default {
           {
             loader: 'css-loader',
             options: {
-              sourceMap: true,
+              sourceMap: false,
             },
           },
           {
             loader: 'postcss-loader',
             options: {
               plugins: () => [cssnano, autoprefixer],
-              sourceMap: true,
+              sourceMap: false,
             },
           },
         ],
@@ -194,7 +194,7 @@ export default {
           {
             loader: 'css-loader',
             options: {
-              sourceMap: true,
+              sourceMap: false,
             },
           },
           {
@@ -204,7 +204,7 @@ export default {
             loader: 'postcss-loader',
             options: {
               plugins: () => [cssnano, autoprefixer],
-              sourceMap: true,
+              sourceMap: false,
             },
           },
         ],

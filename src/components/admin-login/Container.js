@@ -39,7 +39,7 @@ const styles = theme => ({
   container: {
     alignItems: 'center',
     backgroundColor: '#4a4a4a',
-    backgroundImage: "url('/static-data/backgrounds/admin-login.png')",
+    backgroundImage: "url('/static-data/images/admin-login.png')",
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     display: 'flex',
