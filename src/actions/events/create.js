@@ -25,6 +25,7 @@ export const create = ({
   Authorization,
   organizationId: organization_id,
   event,
+  eventId,
   mode,
 }) => {
   return async dispatch => {
@@ -43,7 +44,7 @@ export const create = ({
         );
       } else if (mode === 'edit') {
         httpResponse = await httpRequest.put(
-          '/api/events',
+          `/api/events/${eventId}`,
           {...event, organization_id},
           config
         );

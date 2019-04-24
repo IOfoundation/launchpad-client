@@ -24,6 +24,7 @@ class Events extends PureComponent {
     selectedEventId: '',
     openModal: false,
     openEditModal: false,
+    mode: '',
   };
 
   componentDidMount() {
@@ -32,14 +33,21 @@ class Events extends PureComponent {
     actions.getAllEventsAfter(1, organizationId);
   }
 
-  componentDidUpdate(prevProps) {
-    const {errors, snackbar} = this.props;
+  componentDidUpdate(prevProps, prevState) {
+    const {errors, snackbar, eventsGet} = this.props;
+    const {mode} = this.state;
 
     if (errors.errors !== prevProps.errors.errors) {
       if (errors.errors) {
         snackbar.showSnackbar({
           message: 'An error has ocurred',
         });
+      }
+    }
+
+    if (mode !== prevState.mode) {
+      if (mode === 'new') {
+        eventsGet.setLoading(false);
       }
     }
   }
@@ -100,10 +108,11 @@ class Events extends PureComponent {
     });
   };
 
-  handlerEditModalVisibility = () => {
+  handlerEditModalVisibility = mode => {
     this.setState(prevState => {
       return {
         openEditModal: !prevState.openEditModal,
+        mode,
       };
     });
   };
@@ -113,7 +122,7 @@ class Events extends PureComponent {
 
     if (option === itemMenuOptions.Edit) {
       eventsGet.get(eventId);
-      this.handlerEditModalVisibility();
+      this.handlerEditModalVisibility('edit');
     }
   };
 
@@ -130,7 +139,7 @@ class Events extends PureComponent {
       eventData,
       eventLoading,
     } = this.props;
-    const {openModal, selectedEvent, openEditModal} = this.state;
+    const {openModal, selectedEvent, openEditModal, mode} = this.state;
     let upcomingElements = <Loading />;
     let pastEventsElements = <Loading />;
     let pagination = null;
@@ -173,16 +182,17 @@ class Events extends PureComponent {
         />
         <FormModal
           openModal={openEditModal}
-          handlerModalVisibility={this.handlerEditModalVisibility}
+          handlerModalVisibility={() => this.handlerEditModalVisibility('')}
           refreshData={this.handleChangePage}
           selectedEvent={eventData}
           dataLoading={eventLoading}
+          mode={mode}
         />
         <Title
           titleText="Your Events"
           hideCancelAction={true}
           submitLabel="Create an Event"
-          submitClicked={this.handlerEditModalVisibility}
+          submitClicked={() => this.handlerEditModalVisibility('new')}
         />
         <CustomTabs tabs={this._tabOptions} changed={this.menuChanged}>
           {upcomingElements}
@@ -267,6 +277,7 @@ Events.propTypes = {
   events: PropTypes.arrayOf(PropTypes.shape({})),
   eventsGet: PropTypes.shape({
     get: PropTypes.func,
+    setLoading: PropTypes.func,
   }),
   eventSucces: PropTypes.bool,
   loading: PropTypes.bool,

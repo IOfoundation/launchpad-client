@@ -14,6 +14,7 @@ const FormModal = props => {
     refreshData,
     selectedEvent,
     dataLoading,
+    mode,
   } = props;
   let form = <Loading />;
 
@@ -21,6 +22,7 @@ const FormModal = props => {
     form = (
       <FormWrapper
         closeClicked={handlerModalVisibility}
+        mode={mode}
         refreshData={refreshData}
         selectedEvent={selectedEvent}
       />
@@ -71,6 +73,7 @@ FormModal.propTypes = {
   }),
   dataLoading: PropTypes.bool,
   handlerModalVisibility: PropTypes.func,
+  mode: PropTypes.string,
   openModal: PropTypes.bool,
   refreshData: PropTypes.func,
   selectedEvent: PropTypes.shape({}),
