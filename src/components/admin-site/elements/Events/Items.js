@@ -15,7 +15,7 @@ const Items = props => {
           {...item}
           titleClicked={() => titleClicked(item)}
           urlClicked={() => urlClicked(item)}
-          optionSelected={optionSelected}
+          optionSelected={option => optionSelected(option, item.id)}
         />
       ))}
     </div>

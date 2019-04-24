@@ -14,14 +14,18 @@ import FormModal from './Events/FormModal';
 
 import * as eventActions from '@Actions/events';
 import * as snackbarActions from '@Actions/snackbar';
+import * as eventsGetActions from '@Actions/events/get';
+import * as eventDeleteActions from '@Actions/events/delete';
 import {htmlStripper, truncate, getDate} from '@Utils';
 import itemMenuOptions from './Events/ItemMenuOptions';
 
 class Events extends PureComponent {
   state = {
     selectedEvent: {},
+    selectedEventId: '',
     openModal: false,
     openEditModal: false,
+    mode: '',
   };
 
   componentDidMount() {
@@ -30,8 +34,9 @@ class Events extends PureComponent {
     actions.getAllEventsAfter(1, organizationId);
   }
 
-  componentDidUpdate(prevProps) {
-    const {errors, snackbar} = this.props;
+  componentDidUpdate(prevProps, prevState) {
+    const {errors, snackbar, eventsGet} = this.props;
+    const {mode} = this.state;
 
     if (errors.errors !== prevProps.errors.errors) {
       if (errors.errors) {
@@ -40,7 +45,40 @@ class Events extends PureComponent {
         });
       }
     }
+
+    if (mode !== prevState.mode) {
+      if (mode === 'new') {
+        eventsGet.setLoading(false);
+      }
+    }
+    this._deleteSuccess(prevProps);
+    this._deleteError(prevProps);
   }
+
+  _deleteSuccess = prevProps => {
+    const {eventDeleteSuccess, snackbar} = this.props;
+
+    if (eventDeleteSuccess !== prevProps.eventDeleteSuccess) {
+      if (eventDeleteSuccess) {
+        snackbar.showSnackbar({
+          message: 'Event deleted succesfully',
+        });
+        this.handleChangePage(1);
+      }
+    }
+  };
+
+  _deleteError = prevProps => {
+    const {eventDeleteError, snackbar} = this.props;
+
+    if (eventDeleteError !== prevProps.eventDeleteError) {
+      if (eventDeleteError) {
+        snackbar.showSnackbar({
+          message: 'There was a problem trying to delete the event',
+        });
+      }
+    }
+  };
 
   menuChanged = index => {
     this._tabSelected = this._tabOptions[index];
@@ -98,17 +136,23 @@ class Events extends PureComponent {
     });
   };
 
-  handlerEditModalVisibility = () => {
+  handlerEditModalVisibility = mode => {
     this.setState(prevState => {
       return {
         openEditModal: !prevState.openEditModal,
+        mode,
       };
     });
   };
 
-  handlerSubmenuOptions = option => {
+  handlerSubmenuOptions = (option, eventId) => {
+    const {eventsGet, eventDelete, Authorization} = this.props;
+
     if (option === itemMenuOptions.Edit) {
-      this.handlerEditModalVisibility();
+      eventsGet.get(eventId);
+      this.handlerEditModalVisibility('edit');
+    } else if (option === itemMenuOptions.Delete) {
+      eventDelete.remove({Authorization, eventId});
     }
   };
 
@@ -116,8 +160,16 @@ class Events extends PureComponent {
   _tabSelected = 'Upcoming';
 
   render() {
-    const {events, noResults, loading, totalPages, page} = this.props;
-    const {openModal, selectedEvent, openEditModal} = this.state;
+    const {
+      events,
+      noResults,
+      loading,
+      totalPages,
+      page,
+      eventData,
+      eventLoading,
+    } = this.props;
+    const {openModal, selectedEvent, openEditModal, mode} = this.state;
     let upcomingElements = <Loading />;
     let pastEventsElements = <Loading />;
     let pagination = null;
@@ -160,14 +212,17 @@ class Events extends PureComponent {
         />
         <FormModal
           openModal={openEditModal}
-          handlerModalVisibility={this.handlerEditModalVisibility}
+          handlerModalVisibility={() => this.handlerEditModalVisibility('')}
           refreshData={this.handleChangePage}
+          selectedEvent={eventData}
+          dataLoading={eventLoading}
+          mode={mode}
         />
         <Title
           titleText="Your Events"
           hideCancelAction={true}
           submitLabel="Create an Event"
-          submitClicked={this.handlerEditModalVisibility}
+          submitClicked={() => this.handlerEditModalVisibility('new')}
         />
         <CustomTabs tabs={this._tabOptions} changed={this.menuChanged}>
           {upcomingElements}
@@ -211,8 +266,11 @@ const mapStateToProps = _state => {
   const {events} = _state.events;
   const organizationId =
     _state.user.organizationId || sessionStorage.getItem('organizationId');
+  const Authorization =
+    _state.user.authorization || sessionStorage.getItem('userAuth');
 
   return {
+    Authorization,
     rawEvents: events.data,
     events: eventsToItemsProps(events.data),
     noResults: events.data.length === 0,
@@ -221,6 +279,13 @@ const mapStateToProps = _state => {
     loading: events.loading,
     errors: events.errors,
     organizationId,
+    eventSucces: _state.eventsGet.success,
+    eventLoading: _state.eventsGet.loading,
+    eventError: _state.eventsGet.error,
+    eventErrors: _state.eventsGet.errors,
+    eventData: _state.eventsGet.data,
+    eventDeleteSuccess: _state.eventDelete.success,
+    eventDeleteError: _state.eventDelete.error,
   };
 };
 
@@ -228,6 +293,8 @@ const mapDispatchToProps = _dispatch => {
   return {
     actions: bindActionCreators(eventActions, _dispatch),
     snackbar: bindActionCreators(snackbarActions, _dispatch),
+    eventsGet: bindActionCreators(eventsGetActions, _dispatch),
+    eventDelete: bindActionCreators(eventDeleteActions, _dispatch),
   };
 };
 
@@ -237,8 +304,23 @@ Events.propTypes = {
     getAllEventsAfter: PropTypes.func,
     getAllEventsBefore: PropTypes.func,
   }),
+  Authorization: PropTypes.string,
   errors: PropTypes.shape({errors: PropTypes.bool}),
+  eventData: PropTypes.shape({}),
+  eventDelete: PropTypes.shape({
+    remove: PropTypes.func,
+  }),
+  eventDeleteError: PropTypes.bool,
+  eventDeleteSuccess: PropTypes.bool,
+  eventError: PropTypes.bool,
+  eventErrors: PropTypes.arrayOf(PropTypes.shape({})),
+  eventLoading: PropTypes.bool,
   events: PropTypes.arrayOf(PropTypes.shape({})),
+  eventsGet: PropTypes.shape({
+    get: PropTypes.func,
+    setLoading: PropTypes.func,
+  }),
+  eventSucces: PropTypes.bool,
   loading: PropTypes.bool,
   noResults: PropTypes.bool,
   organizationId: PropTypes.string,

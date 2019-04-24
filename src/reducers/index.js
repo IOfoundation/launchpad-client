@@ -6,8 +6,10 @@ import adminProfile from './admin-profile';
 import blogs from './blogs';
 import businesses from './businesses';
 import errors from './errors';
+import eventDelete from './events/delete';
 import events from './events';
 import eventsCreate from './events/create';
+import eventsGet from './events/get';
 import getLocationByOrganization from './location/getByOrganization';
 import locationCreate from './location/create';
 import locationDelete from './location/delete';
@@ -28,8 +30,10 @@ const rootReducer = combineReducers({
   blogs,
   businesses,
   errors,
+  eventDelete,
   events,
   eventsCreate,
+  eventsGet,
   getLocationByOrganization,
   locationCreate,
   locationDelete,

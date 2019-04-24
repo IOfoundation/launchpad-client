@@ -12,6 +12,7 @@ import * as user from '@Actions/user';
 import * as snackbarActions from '@Actions/snackbar';
 import * as eventsCreateActions from '@Actions/events/create';
 import formModel from './Model';
+import mapInitialValues from './initialValues';
 
 export const FormSchema = Yup.object().shape({
   title: Yup.string().required('Required'),
@@ -31,22 +32,6 @@ export const FormSchema = Yup.object().shape({
   allDay: Yup.string(),
 });
 
-const initialValues = {
-  title: '',
-  website: '',
-  description: '',
-  address: '',
-  address2: '',
-  city: '',
-  state: '',
-  zip: '',
-  startDate: '',
-  endDate: '',
-  startTime: '',
-  endTime: '',
-  allDay: '',
-};
-
 class FormWrapper extends PureComponent {
   componentDidUpdate(prevProps) {
     this._verifyCreateSuccess(prevProps);
@@ -54,12 +39,23 @@ class FormWrapper extends PureComponent {
   }
 
   _verifyCreateSuccess = prevProps => {
-    const {createSucces, snackbar, closeClicked, refreshData} = this.props;
+    const {
+      createSucces,
+      snackbar,
+      closeClicked,
+      refreshData,
+      mode,
+    } = this.props;
 
     if (createSucces !== prevProps.createSucces) {
       if (createSucces) {
+        const message =
+          mode === 'edit'
+            ? 'Event updated succesfully'
+            : 'Event created succesfully';
+
         snackbar.showSnackbar({
-          message: 'Event created succesfully',
+          message,
         });
         closeClicked();
         refreshData();
@@ -88,23 +84,50 @@ class FormWrapper extends PureComponent {
 
   render() {
     const {
+      Authorization,
       breakpoint,
       closeClicked,
-      Authorization,
       eventsCreate,
       organizationId,
+      selectedEvent,
+      mode,
     } = this.props;
+    let title;
+    let initialValues;
+
+    if (mode === 'edit') {
+      title = 'Edit An Event';
+      initialValues = mapInitialValues(selectedEvent);
+    } else {
+      title = 'Create An Event';
+      initialValues = {
+        city: '',
+        title: '',
+        website: '',
+        description: '',
+        address: '',
+        address2: '',
+        state: '',
+        zip: '',
+        startDate: '',
+        startTime: '',
+        endDate: '',
+        endTime: '',
+        allDay: false,
+      };
+    }
 
     return (
       <Formik
         enableReinitialize={true}
         render={_props => (
           <Fragment>
-            <h1 className="events-form-title">{'Create An Event'}</h1>
+            <h1 className="events-form-title">{title}</h1>
             <EditMode
               {..._props}
               breakpoint={breakpoint}
               closeClicked={closeClicked}
+              mode={mode}
             />
           </Fragment>
         )}
@@ -114,7 +137,8 @@ class FormWrapper extends PureComponent {
           eventsCreate.create({
             Authorization,
             event: formModel(values),
-            mode: 'new',
+            mode,
+            eventId: selectedEvent.id,
             organizationId,
           });
         }}
@@ -161,6 +185,7 @@ FormWrapper.propTypes = {
     create: PropTypes.func,
   }),
   isAuth: PropTypes.bool,
+  mode: PropTypes.string,
   organization: PropTypes.shape({}),
   organizationId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   profile: PropTypes.shape({
@@ -170,6 +195,7 @@ FormWrapper.propTypes = {
   router: PropTypes.shape({
     push: PropTypes.func,
   }),
+  selectedEvent: PropTypes.shape({}),
   snackbar: PropTypes.shape({
     showSnackbar: PropTypes.func,
   }),

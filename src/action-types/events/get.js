@@ -1,0 +1,9 @@
+const GetEventTypes = {
+  GET_EVENT_START: 'GET_EVENT_START',
+  GET_EVENT_SUCCESS: 'GET_EVENT_SUCCESS',
+  GET_EVENT_ERROR: 'GET_EVENT_ERROR',
+
+  SET_LOADING: 'SET_LOADING',
+};
+
+export default GetEventTypes;

@@ -211,6 +211,20 @@ const initialState = {
     loading: false,
     success: false,
   },
+  eventsGet: {
+    data: {},
+    error: false,
+    errors: [],
+    loading: true,
+    success: false,
+  },
+  eventDelete: {
+    data: {},
+    error: false,
+    errors: [],
+    loading: false,
+    success: false,
+  },
 };
 
 export default initialState;

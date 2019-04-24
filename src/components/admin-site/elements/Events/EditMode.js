@@ -17,9 +17,11 @@ const EditMode = props => {
     handleChange,
     touched,
     values,
+    mode,
   } = props;
   let startTime;
   let endTime;
+  const buttonLabel = mode === 'edit' ? 'Update Event' : 'Create Event';
 
   if (!values.allDay) {
     startTime = (
@@ -167,7 +169,7 @@ const EditMode = props => {
                 type="date"
               />
             </Grid>
-            <Grid item={true} xs={12} sm={3}>
+            <Grid item={true} xs={12} sm={4}>
               {startTime}
             </Grid>
           </Grid>
@@ -184,7 +186,7 @@ const EditMode = props => {
                 type="date"
               />
             </Grid>
-            <Grid item={true} xs={12} sm={3}>
+            <Grid item={true} xs={12} sm={4}>
               {endTime}
             </Grid>
           </Grid>
@@ -213,7 +215,7 @@ const EditMode = props => {
             </Grid>
             <Grid item={true}>
               <button className="btn btn__black p-x-24" type="submit">
-                {'Create Event'}
+                {buttonLabel}
               </button>
             </Grid>
           </Grid>
@@ -230,6 +232,7 @@ EditMode.propTypes = {
   handleChange: PropTypes.func,
   handleSubmit: PropTypes.func,
   isSubmitting: PropTypes.bool,
+  mode: PropTypes.string,
   touched: PropTypes.shape({}).isRequired,
   values: PropTypes.shape({}).isRequired,
 };
