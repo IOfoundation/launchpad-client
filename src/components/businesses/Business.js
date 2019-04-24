@@ -158,6 +158,24 @@ class Business extends PureComponent {
     const locations = business.locations;
     const [main_location, ...other_locations] = locations;
     let description = business.description;
+    let addressElement;
+    let contactElement;
+
+    if (main_location) {
+      const {address, contacts} = main_location;
+
+      if (address) {
+        addressElement =
+          !isEmpty(main_location.address) &&
+          this._renderMainLocations(main_location);
+      }
+
+      if (contacts) {
+        contactElement =
+          !isEmpty(business.contacts) &&
+          this._renderContacts(business.contacts[0]);
+      }
+    }
 
     if (description.split('').length > maxCharacters) {
       description = truncate(description);
@@ -231,10 +249,8 @@ class Business extends PureComponent {
           </div>
           <div className="grid col-lg-12 col-md-12 col-xs-12 full-information p-0">
             <div className="grid col-lg-12 col-md-12 col-xs-12 p-0 m-bot-25">
-              {!isEmpty(main_location.address) &&
-                this._renderMainLocations(main_location)}
-              {!isEmpty(business.contacts) &&
-                this._renderContacts(business.contacts[0])}
+              {addressElement}
+              {contactElement}
             </div>
             <hr />
             <p className="business-title col-lg-12 col-md-12 col-xs-12 p-0">
