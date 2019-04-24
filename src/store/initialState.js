@@ -218,6 +218,13 @@ const initialState = {
     loading: true,
     success: false,
   },
+  eventDelete: {
+    data: {},
+    error: false,
+    errors: [],
+    loading: false,
+    success: false,
+  },
 };
 
 export default initialState;

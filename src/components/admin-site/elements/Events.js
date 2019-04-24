@@ -15,6 +15,7 @@ import FormModal from './Events/FormModal';
 import * as eventActions from '@Actions/events';
 import * as snackbarActions from '@Actions/snackbar';
 import * as eventsGetActions from '@Actions/events/get';
+import * as eventDeleteActions from '@Actions/events/delete';
 import {htmlStripper, truncate, getDate} from '@Utils';
 import itemMenuOptions from './Events/ItemMenuOptions';
 
@@ -50,7 +51,34 @@ class Events extends PureComponent {
         eventsGet.setLoading(false);
       }
     }
+    this._deleteSuccess(prevProps);
+    this._deleteError(prevProps);
   }
+
+  _deleteSuccess = prevProps => {
+    const {eventDeleteSuccess, snackbar} = this.props;
+
+    if (eventDeleteSuccess !== prevProps.eventDeleteSuccess) {
+      if (eventDeleteSuccess) {
+        snackbar.showSnackbar({
+          message: 'Event deleted succesfully',
+        });
+        this.handleChangePage(1);
+      }
+    }
+  };
+
+  _deleteError = prevProps => {
+    const {eventDeleteError, snackbar} = this.props;
+
+    if (eventDeleteError !== prevProps.eventDeleteError) {
+      if (eventDeleteError) {
+        snackbar.showSnackbar({
+          message: 'There was a problem trying to delete the event',
+        });
+      }
+    }
+  };
 
   menuChanged = index => {
     this._tabSelected = this._tabOptions[index];
@@ -118,11 +146,13 @@ class Events extends PureComponent {
   };
 
   handlerSubmenuOptions = (option, eventId) => {
-    const {eventsGet} = this.props;
+    const {eventsGet, eventDelete, Authorization} = this.props;
 
     if (option === itemMenuOptions.Edit) {
       eventsGet.get(eventId);
       this.handlerEditModalVisibility('edit');
+    } else if (option === itemMenuOptions.Delete) {
+      eventDelete.remove({Authorization, eventId});
     }
   };
 
@@ -236,8 +266,11 @@ const mapStateToProps = _state => {
   const {events} = _state.events;
   const organizationId =
     _state.user.organizationId || sessionStorage.getItem('organizationId');
+  const Authorization =
+    _state.user.authorization || sessionStorage.getItem('userAuth');
 
   return {
+    Authorization,
     rawEvents: events.data,
     events: eventsToItemsProps(events.data),
     noResults: events.data.length === 0,
@@ -251,6 +284,8 @@ const mapStateToProps = _state => {
     eventError: _state.eventsGet.error,
     eventErrors: _state.eventsGet.errors,
     eventData: _state.eventsGet.data,
+    eventDeleteSuccess: _state.eventDelete.success,
+    eventDeleteError: _state.eventDelete.error,
   };
 };
 
@@ -259,6 +294,7 @@ const mapDispatchToProps = _dispatch => {
     actions: bindActionCreators(eventActions, _dispatch),
     snackbar: bindActionCreators(snackbarActions, _dispatch),
     eventsGet: bindActionCreators(eventsGetActions, _dispatch),
+    eventDelete: bindActionCreators(eventDeleteActions, _dispatch),
   };
 };
 
@@ -271,6 +307,11 @@ Events.propTypes = {
   Authorization: PropTypes.string,
   errors: PropTypes.shape({errors: PropTypes.bool}),
   eventData: PropTypes.shape({}),
+  eventDelete: PropTypes.shape({
+    remove: PropTypes.func,
+  }),
+  eventDeleteError: PropTypes.bool,
+  eventDeleteSuccess: PropTypes.bool,
   eventError: PropTypes.bool,
   eventErrors: PropTypes.arrayOf(PropTypes.shape({})),
   eventLoading: PropTypes.bool,
