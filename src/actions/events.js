@@ -158,9 +158,13 @@ export const getAllEventsAfter = page => {
     try {
       const today = getDate();
       dispatch(getAllEventsRequestStart());
-      const httpResponse = await httpRequest.get(
-        `/api/events?starting_after="${today.date.toISOString()}"&per_page=5&page=${page}`
-      );
+      const [httpResponse] = await Promise.all([
+        httpRequest.get(
+          `/api/events?starting_after="${today.date.toISOString()}"&per_page=5&page=${page}`
+        ),
+        new Promise(resolve => setTimeout(resolve, 1000)),
+      ]);
+
       const totalPages =
         parseInt(httpResponse.headers['x-total-count'], 10) / 5;
 
@@ -176,9 +180,12 @@ export const getAllEventsBefore = page => {
     try {
       const date = getDate();
       dispatch(getAllEventsRequestStart());
-      const httpResponse = await httpRequest.get(
-        `/api/events?ending_before="${date.date.toISOString()}"&per_page=5&page=${page}`
-      );
+      const [httpResponse] = await Promise.all([
+        httpRequest.get(
+          `/api/events?ending_before="${date.date.toISOString()}"&per_page=5&page=${page}`
+        ),
+        new Promise(resolve => setTimeout(resolve, 1000)),
+      ]);
       const totalPages =
         parseInt(httpResponse.headers['x-total-count'], 10) / 5;
 

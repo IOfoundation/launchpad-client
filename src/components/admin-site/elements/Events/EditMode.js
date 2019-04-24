@@ -123,65 +123,60 @@ const EditMode = props => {
               </Grid>
             </Grid>
           </div>
-          <div style={{padding: 8}}>
-            <Grid container={true} spacing={16}>
-              <Grid item={true} xs={5}>
-                <FormTextField
-                  errors={errors}
-                  handleBlur={handleBlur}
-                  handleChange={handleChange}
-                  id="startDate"
-                  label="Start Date"
-                  name="startDate"
-                  value={values.startDate}
-                  type="date"
-                />
-              </Grid>
-              <Grid item={true} xs={3}>
-                <FormTextField
-                  autocomplete="off"
-                  errors={errors}
-                  handleBlur={handleBlur}
-                  handleChange={handleChange}
-                  id="startTime"
-                  label="Start Time"
-                  name="startTime"
-                  value={values.startTime}
-                  type="time"
-                />
-              </Grid>
+          <Grid container={true} spacing={16}>
+            <Grid item={true} xs={12} sm={5}>
+              <FormTextField
+                errors={errors}
+                handleBlur={handleBlur}
+                handleChange={handleChange}
+                id="startDate"
+                label="Start Date"
+                name="startDate"
+                value={values.startDate}
+                type="date"
+              />
             </Grid>
-          </div>
-
-          <div style={{padding: 8}}>
-            <Grid container={true} spacing={16}>
-              <Grid item={true} xs={5}>
-                <FormTextField
-                  errors={errors}
-                  handleBlur={handleBlur}
-                  handleChange={handleChange}
-                  id="endDate"
-                  label="End Date"
-                  name="endDate"
-                  value={values.endDate}
-                  type="date"
-                />
-              </Grid>
-              <Grid item={true} xs={3}>
-                <FormTextField
-                  autocomplete="off"
-                  errors={errors}
-                  handleBlur={handleBlur}
-                  handleChange={handleChange}
-                  id="endTime"
-                  label="End Date"
-                  name="endTime"
-                  value={values.endTime}
-                  type="time"
-                />
-              </Grid>
+            <Grid item={true} xs={12} sm={3}>
+              <FormTextField
+                autocomplete="off"
+                errors={errors}
+                handleBlur={handleBlur}
+                handleChange={handleChange}
+                id="startTime"
+                label="Start Time"
+                name="startTime"
+                value={values.startTime}
+                type="time"
+              />
             </Grid>
-          </div>
+          </Grid>
+          <Grid container={true} spacing={16}>
+            <Grid item={true} xs={12} sm={5}>
+              <FormTextField
+                errors={errors}
+                handleBlur={handleBlur}
+                handleChange={handleChange}
+                id="endDate"
+                label="End Date"
+                name="endDate"
+                value={values.endDate}
+                type="date"
+              />
+            </Grid>
+            <Grid item={true} xs={12} sm={3}>
+              <FormTextField
+                autocomplete="off"
+                errors={errors}
+                handleBlur={handleBlur}
+                handleChange={handleChange}
+                id="endTime"
+                label="End Date"
+                name="endTime"
+                value={values.endTime}
+                type="time"
+              />
+            </Grid>
+          </Grid>
 
           <Checkbox
             label="All Day Event"
@@ -189,30 +184,28 @@ const EditMode = props => {
             onChange={handleChange}
             value={values.allDay}
           />
-          <div style={{padding: 8}}>
-            <Grid
-              container={true}
-              spacing={16}
-              justify="flex-end"
-              alignContent="center"
-              alignItems="center"
-            >
-              <Grid item={true} className="m-x-8">
-                <button
-                  className="btn btn__outline"
-                  type="button"
-                  onClick={closeClicked}
-                >
-                  {'Cancel'}
-                </button>
-              </Grid>
-              <Grid item={true}>
-                <button className="btn btn__black p-x-24" type="submit">
-                  {'Create Event'}
-                </button>
-              </Grid>
+          <Grid
+            container={true}
+            spacing={16}
+            justify="flex-end"
+            alignContent="center"
+            alignItems="center"
+          >
+            <Grid item={true} className="m-x-8">
+              <button
+                className="btn btn__outline"
+                type="button"
+                onClick={closeClicked}
+              >
+                {'Cancel'}
+              </button>
             </Grid>
-          </div>
+            <Grid item={true}>
+              <button className="btn btn__black p-x-24" type="submit">
+                {'Create Event'}
+              </button>
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </Form>
