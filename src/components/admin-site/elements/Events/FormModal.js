@@ -6,7 +6,7 @@ import {PropTypes} from 'prop-types';
 import FormWrapper from './FormWrapper';
 
 const FormModal = props => {
-  const {openModal, handlerModalVisibility, classes} = props;
+  const {openModal, handlerModalVisibility, classes, refreshData} = props;
   return (
     <ModalUi open={openModal} onClose={handlerModalVisibility}>
       <div className={classes.paper}>
@@ -16,7 +16,10 @@ const FormModal = props => {
         >
           {'close'}
         </i>
-        <FormWrapper closeClicked={handlerModalVisibility} />
+        <FormWrapper
+          closeClicked={handlerModalVisibility}
+          refreshData={refreshData}
+        />
       </div>
     </ModalUi>
   );
@@ -51,6 +54,7 @@ FormModal.propTypes = {
   }),
   handlerModalVisibility: PropTypes.func,
   openModal: PropTypes.bool,
+  refreshData: PropTypes.func,
   selectedEvent: PropTypes.shape({}),
 };
 

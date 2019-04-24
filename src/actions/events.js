@@ -153,14 +153,14 @@ export const getEventsByMonth = (months, filterBy = 'default') => {
   };
 };
 
-export const getAllEventsAfter = page => {
+export const getAllEventsAfter = (page, organizationId) => {
   return async dispatch => {
     try {
       const today = getDate();
       dispatch(getAllEventsRequestStart());
       const [httpResponse] = await Promise.all([
         httpRequest.get(
-          `/api/events?starting_after="${today.date.toISOString()}"&per_page=5&page=${page}`
+          `/api/events?starting_after="${today.date.toISOString()}"&per_page=5&page=${page}&organization_id=${organizationId}`
         ),
         new Promise(resolve => setTimeout(resolve, 1000)),
       ]);
@@ -175,14 +175,14 @@ export const getAllEventsAfter = page => {
   };
 };
 
-export const getAllEventsBefore = page => {
+export const getAllEventsBefore = (page, organizationId) => {
   return async dispatch => {
     try {
       const date = getDate();
       dispatch(getAllEventsRequestStart());
       const [httpResponse] = await Promise.all([
         httpRequest.get(
-          `/api/events?ending_before="${date.date.toISOString()}"&per_page=5&page=${page}`
+          `/api/events?ending_before="${date.date.toISOString()}"&per_page=5&page=${page}&organization_id=${organizationId}`
         ),
         new Promise(resolve => setTimeout(resolve, 1000)),
       ]);

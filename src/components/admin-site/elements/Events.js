@@ -25,7 +25,9 @@ class Events extends PureComponent {
   };
 
   componentDidMount() {
-    this.props.actions.getAllEventsAfter(1);
+    const {actions, organizationId} = this.props;
+
+    actions.getAllEventsAfter(1, organizationId);
   }
 
   componentDidUpdate(prevProps) {
@@ -46,15 +48,13 @@ class Events extends PureComponent {
   };
 
   handleChangePage = page => {
-    if (this._tabSelected === this._tabOptions[0]) {
-      this.props.actions.getAllEventsAfter(page);
-    } else if (this._tabSelected === this._tabOptions[1]) {
-      this.props.actions.getAllEventsBefore(page);
-    }
-  };
+    const {actions, organizationId} = this.props;
 
-  getEvents = () => {
-    this.props.actions.getAllEventsBefore();
+    if (this._tabSelected === this._tabOptions[0]) {
+      actions.getAllEventsAfter(page, organizationId);
+    } else if (this._tabSelected === this._tabOptions[1]) {
+      actions.getAllEventsBefore(page, organizationId);
+    }
   };
 
   _getPagination = (page, totalPages) => {
@@ -124,10 +124,10 @@ class Events extends PureComponent {
 
     if (noResults && !loading) {
       upcomingElements = (
-        <p className="text-regular paragraph">{'No posts available.'}</p>
+        <p className="text-regular paragraph">{'No events available.'}</p>
       );
       pastEventsElements = (
-        <p className="text-regular paragraph">{'No posts available.'}</p>
+        <p className="text-regular paragraph">{'No events available.'}</p>
       );
     } else if (events.length > 0 && !loading) {
       upcomingElements = (
@@ -161,6 +161,7 @@ class Events extends PureComponent {
         <FormModal
           openModal={openEditModal}
           handlerModalVisibility={this.handlerEditModalVisibility}
+          refreshData={this.handleChangePage}
         />
         <Title
           titleText="Your Events"
@@ -180,16 +181,16 @@ class Events extends PureComponent {
 
 function eventsToItemsProps(events) {
   return events.map(event => {
-    const date = getDate(event.posted_at);
-    const start = getDate(event.starting_at);
-    let description = htmlStripper(event.body);
+    const date = event.posted_at && getDate(event.posted_at);
+    const start = event.starting_at && getDate(event.starting_at);
+    let description = event.body && htmlStripper(event.body);
     let title = event.title;
 
-    if (description.split('').length > 190) {
+    if (description && description.split('').length > 190) {
       description = truncate(description, 190);
     }
 
-    if (title.split('').length > 130) {
+    if (title && title.split('').length > 130) {
       title = truncate(title, 130);
     }
 
@@ -208,6 +209,9 @@ function eventsToItemsProps(events) {
 
 const mapStateToProps = _state => {
   const {events} = _state.events;
+  const organizationId =
+    _state.user.organizationId || sessionStorage.getItem('organizationId');
+
   return {
     rawEvents: events.data,
     events: eventsToItemsProps(events.data),
@@ -216,6 +220,7 @@ const mapStateToProps = _state => {
     totalPages: events.totalPages,
     loading: events.loading,
     errors: events.errors,
+    organizationId,
   };
 };
 
@@ -236,6 +241,7 @@ Events.propTypes = {
   events: PropTypes.arrayOf(PropTypes.shape({})),
   loading: PropTypes.bool,
   noResults: PropTypes.bool,
+  organizationId: PropTypes.string,
   page: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   rawEvents: PropTypes.arrayOf(PropTypes.shape({})),
   router: PropTypes.shape({

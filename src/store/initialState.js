@@ -204,6 +204,13 @@ const initialState = {
     loading: false,
     success: false,
   },
+  eventsCreate: {
+    data: {},
+    error: false,
+    errors: [],
+    loading: false,
+    success: false,
+  },
 };
 
 export default initialState;

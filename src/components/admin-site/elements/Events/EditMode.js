@@ -18,6 +18,37 @@ const EditMode = props => {
     touched,
     values,
   } = props;
+  let startTime;
+  let endTime;
+
+  if (!values.allDay) {
+    startTime = (
+      <FormTextField
+        autocomplete="off"
+        errors={errors}
+        handleBlur={handleBlur}
+        handleChange={handleChange}
+        id="startTime"
+        label="Start Time"
+        name="startTime"
+        value={values.startTime}
+        type="time"
+      />
+    );
+    endTime = (
+      <FormTextField
+        autocomplete="off"
+        errors={errors}
+        handleBlur={handleBlur}
+        handleChange={handleChange}
+        id="endTime"
+        label="End Date"
+        name="endTime"
+        value={values.endTime}
+        type="time"
+      />
+    );
+  }
 
   return (
     <Form className="profile-form" style={{padding: 8}}>
@@ -137,17 +168,7 @@ const EditMode = props => {
               />
             </Grid>
             <Grid item={true} xs={12} sm={3}>
-              <FormTextField
-                autocomplete="off"
-                errors={errors}
-                handleBlur={handleBlur}
-                handleChange={handleChange}
-                id="startTime"
-                label="Start Time"
-                name="startTime"
-                value={values.startTime}
-                type="time"
-              />
+              {startTime}
             </Grid>
           </Grid>
           <Grid container={true} spacing={16}>
@@ -164,17 +185,7 @@ const EditMode = props => {
               />
             </Grid>
             <Grid item={true} xs={12} sm={3}>
-              <FormTextField
-                autocomplete="off"
-                errors={errors}
-                handleBlur={handleBlur}
-                handleChange={handleChange}
-                id="endTime"
-                label="End Date"
-                name="endTime"
-                value={values.endTime}
-                type="time"
-              />
+              {endTime}
             </Grid>
           </Grid>
 
