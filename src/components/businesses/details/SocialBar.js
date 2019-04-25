@@ -79,6 +79,7 @@ const SocialBar = props => {
             href={website}
             rel="noopener noreferrer"
           >
+            <i className="material-icons">{'web'}</i>
             {'Go to Website'}
           </a>
         </Grid>
