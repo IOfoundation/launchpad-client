@@ -10,13 +10,22 @@ const DEFAULT_VALUES = {
 };
 
 const styles = () => ({
-  root: {},
-  checkboxRoot: {},
+  root: {
+    '& input': {
+      borderRadius: '0',
+    },
+  },
+  checkboxRoot: {
+    fontFamily: '"proxima-nova-regular", Georgia, sans-serif',
+  },
   label: {
     paddingLeft: 0,
+    fontFamily: '"proxima-nova-regular", Georgia, sans-serif',
+    fontSize: '16px',
+    lineHeight: '24px',
   },
   labelRoot: {
-    fontFamily: '"proxima-nova", Georgia, sans-serif',
+    fontFamily: '"proxima-nova-regular", Georgia, sans-serif',
     paddingLeft: 0,
     position: 'relative',
     fontSize: '16px',

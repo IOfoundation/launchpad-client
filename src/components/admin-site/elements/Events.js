@@ -322,7 +322,7 @@ Events.propTypes = {
   eventSucces: PropTypes.bool,
   loading: PropTypes.bool,
   noResults: PropTypes.bool,
-  organizationId: PropTypes.string,
+  organizationId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   page: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   rawEvents: PropTypes.arrayOf(PropTypes.shape({})),
   router: PropTypes.shape({

@@ -3,7 +3,7 @@ import {Form} from 'formik';
 import {PropTypes} from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 
-import FormTextField from '@Shared/FormElements/TextFieldDefault';
+import FormTextField from '@Shared/FormElements/EventTextField';
 import Checkbox from '@Shared/FormElements/Checkbox';
 import SelectElement from '@Shared/FormElements/Select';
 
@@ -114,7 +114,7 @@ const EditMode = props => {
             label="Address (Line 2)"
             value={values.address2}
           />
-          <div style={{padding: 8}}>
+          <div style={{padding: '8px 0'}}>
             <Grid container={true} spacing={16}>
               <Grid item={true} xs={12} sm={6}>
                 <FormTextField
