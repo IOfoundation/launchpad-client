@@ -1,31 +1,16 @@
 import React, {PureComponent} from 'react';
-import {containerStyles} from '../../utils';
-import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {withRouter} from 'react-router';
-
-import * as actions from '../../actions/blogs';
-import FeaturedPost from './FeaturedPost';
-import {withStyles} from '@material-ui/core/styles';
+import {connect} from 'react-redux';
 import {PropTypes} from 'prop-types';
+import {withRouter} from 'react-router';
+import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Loading from '../shared/Loading';
-import {truncate, htmlStripper} from '../../utils';
 
-const styles = theme => ({
-  container: {
-    ...containerStyles(theme),
-    alignItems: 'center',
-    display: 'flex',
-    margin: '0 auto 32px',
-    minHeight: '297px',
-    padding: 12,
-    overflowX: 'auto',
-  },
-  featuredPosts: {
-    minWidth: '960px',
-  },
-});
+import FeaturedPost from './FeaturedPost';
+import Loading from '@Shared/Loading';
+
+import * as actions from '@Actions/blogs';
+import {truncate, htmlStripper, containerStyles} from '@Utils';
 
 class FeaturedPosts extends PureComponent {
   componentDidMount() {
@@ -77,6 +62,21 @@ class FeaturedPosts extends PureComponent {
     return content;
   }
 }
+
+const styles = theme => ({
+  container: {
+    ...containerStyles(theme),
+    alignItems: 'center',
+    display: 'flex',
+    margin: '0 auto 32px',
+    minHeight: '297px',
+    padding: 12,
+    overflowX: 'auto',
+  },
+  featuredPosts: {
+    minWidth: '960px',
+  },
+});
 
 FeaturedPosts.propTypes = {
   actions: PropTypes.shape({

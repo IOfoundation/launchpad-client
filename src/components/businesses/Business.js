@@ -1,12 +1,15 @@
 import React, {PureComponent, Fragment} from 'react';
 import {withRouter} from 'react-router';
-import Chip from '../shared/Chip';
-import FacebookIcon from '../shared/FacebookIcon';
-import TwitterIcon from '../shared/TwitterIcon';
-import LinkedinIcon from '../shared/LinkedinIcon';
+
 import {PropTypes} from 'prop-types';
 import {isEmpty} from 'lodash';
-import {truncate, maxCharacters} from '../../utils';
+
+import Chip from '@Shared/Chip';
+import FacebookIcon from '@Shared/FacebookIcon';
+import TwitterIcon from '@Shared/TwitterIcon';
+import LinkedinIcon from '@Shared/LinkedinIcon';
+
+import {truncate, maxCharacters} from '@Utils';
 
 class Business extends PureComponent {
   navigateToDetails = () => {

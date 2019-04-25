@@ -1,15 +1,16 @@
 import React, {PureComponent} from 'react';
-import MainLayout from '../components/layouts/Main';
-import BusinessDetailsContent from '../components/businesses/BusinessDetails';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {withRouter} from 'react-router';
-import * as business from '../actions/business';
-import * as events from '../actions/events';
-import {sizeCheck, viewport} from '../utils';
-import * as blogs from '../actions/blogs';
-
 import {PropTypes} from 'prop-types';
+
+import MainLayout from '../components/layouts/Main';
+import BusinessDetailsContent from '../components/businesses/BusinessDetails';
+
+import * as business from '@Actions/business';
+import * as events from '@Actions/events';
+import {sizeCheck, viewport} from '@Utils';
+import * as blogs from '@Actions/blogs';
 
 class BusinessDetails extends PureComponent {
   state = {
@@ -35,7 +36,7 @@ class BusinessDetails extends PureComponent {
   };
 
   render() {
-    const {width, homePage} = this.state;
+    const {width, homePage, breakpoint} = this.state;
     const {organization, eventsData} = this.props;
 
     return (
@@ -43,6 +44,7 @@ class BusinessDetails extends PureComponent {
         <BusinessDetailsContent
           organization={organization}
           events={eventsData}
+          breakpoint={breakpoint}
         />
       </MainLayout>
     );

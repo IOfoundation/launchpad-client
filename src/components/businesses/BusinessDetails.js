@@ -1,22 +1,17 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
+import {withStyles} from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 
 import MainSection from './details/MainSection';
 import SocialBar from './details/SocialBar';
-import {withStyles} from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import {containerStyles} from '../../utils';
-
-const styles = theme => ({
-  content: {
-    ...containerStyles(theme),
-  },
-});
 import LeftBar from './details/LeftBar';
 import MainContent from './details/MainContent';
 
+import {containerStyles} from '@Utils';
+
 const BusinessDetails = props => {
-  const {organization, classes, events} = props;
+  const {organization, classes, events, breakpoint} = props;
 
   let $details = (
     <div className="load-div">
@@ -41,7 +36,10 @@ const BusinessDetails = props => {
     $details = (
       <div className="business-deatils-wrapper">
         <MainSection organization={organization} />
-        <SocialBar socialInformation={socialInformation} />
+        <SocialBar
+          socialInformation={socialInformation}
+          breakpoint={breakpoint}
+        />
         <section className={'content-section'}>
           <Grid container={true} className={classes.content}>
             <Grid item={true} xs={12} md={9} className="right-line">
@@ -59,7 +57,14 @@ const BusinessDetails = props => {
   return $details;
 };
 
+const styles = theme => ({
+  content: {
+    ...containerStyles(theme),
+  },
+});
+
 BusinessDetails.propTypes = {
+  breakpoint: PropTypes.string,
   classes: PropTypes.shape({
     content: PropTypes.string,
   }),

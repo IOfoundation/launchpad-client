@@ -10,15 +10,6 @@ import {withRouter} from 'react-router';
 import Loading from '@Shared/Loading';
 import {truncate, htmlStripper, getDate} from '@Utils';
 
-const styles = () => ({
-  featuredPosts: {
-    boxSizing: 'border-box',
-    flexGrow: 1,
-    maxWidth: '675px',
-    marginBottom: '20px',
-  },
-});
-
 class DetailFeaturedPosts extends PureComponent {
   state = {
     viewMore: true,
@@ -126,6 +117,16 @@ class DetailFeaturedPosts extends PureComponent {
     return postsElements;
   }
 }
+
+const styles = () => ({
+  featuredPosts: {
+    boxSizing: 'border-box',
+    flexGrow: 1,
+    maxWidth: '675px',
+    marginBottom: '20px',
+    padding: '8px',
+  },
+});
 
 DetailFeaturedPosts.propTypes = {
   classes: PropTypes.shape({

@@ -2,6 +2,10 @@
   .content-section {
     background-color: #f7f9fd;
     padding: 40px 0 32px;
+
+    @media (max-width: 60em) {
+      padding: 0 0 32px;
+    }
   }
 
   .right-line {
@@ -22,6 +26,12 @@
         display: none;
       }
     }
+  }
+}
+
+.main-content {
+  @media (max-width: 60em) {
+    margin: 32px;
   }
 }
 
