@@ -1,5 +1,5 @@
 import {UserTypes as types} from '../action-types';
-import {httpRequest} from '../utils';
+import {httpRequest, verifyUnauthorizedErrors} from '../utils';
 import * as errorsActions from './errors';
 
 const loginStart = config => {
@@ -230,9 +230,7 @@ export const updateUserInformation = ({Authorization, name, email}) => {
       );
       dispatch(updateUserInformationSuccess(httpResponse.data));
     } catch (errors) {
-      if (errors && errors.status === 401) {
-        dispatch(errorsActions.userUnauthorized());
-      }
+      verifyUnauthorizedErrors(dispatch, errors);
       dispatch(updateUserInformationFail(errors.data.errors));
     }
   };
@@ -297,9 +295,7 @@ export const updatePasswordAndInformation = ({
       dispatch(updatePasswordSuccess(passwordResponse.data));
       dispatch(updateUserInformationSuccess(userInformationResponse.data));
     } catch (errors) {
-      if (errors && errors.status === 401) {
-        dispatch(errorsActions.userUnauthorized());
-      }
+      verifyUnauthorizedErrors(dispatch, errors);
       dispatch(updatePasswordFail(errors.data.errors));
     }
   };
@@ -335,9 +331,7 @@ export const deleteAccount = ({Authorization}) => {
       const httpResponse = await httpRequest.delete('/api/users', config);
       dispatch(deleteAccountSuccess(httpResponse.data));
     } catch (errors) {
-      if (errors && errors.status === 401) {
-        dispatch(errorsActions.userUnauthorized());
-      }
+      verifyUnauthorizedErrors(dispatch, errors);
       dispatch(deleteAccountFail(errors.data));
     }
   };

@@ -1,5 +1,5 @@
 import {AdminProfileTypes as types} from '../action-types';
-import {httpRequest} from '@Utils';
+import {httpRequest, verifyUnauthorizedErrors} from '@Utils';
 import {fetchOrganizationByIdSuccessObject} from './business';
 
 const updateCompanyStart = () => {
@@ -38,6 +38,7 @@ export const updateCompany = ({organization, organizationId, auth}) => {
       );
       dispatch(updateCompanySuccess(httpResponse.data[0]));
     } catch (errors) {
+      verifyUnauthorizedErrors(dispatch, errors);
       dispatch(updateCompanyFail(errors.data.errors));
     }
   };
@@ -80,6 +81,7 @@ export const updatePublishStatus = ({publishStatus, organizationId, auth}) => {
       dispatch(updatePublishStatusSuccess(httpResponse.data[0].is_published));
       dispatch(fetchOrganizationByIdSuccessObject(httpResponse.data[0]));
     } catch (errors) {
+      verifyUnauthorizedErrors(dispatch, errors);
       dispatch(updatePublishStatusFail(errors.data.errors));
     }
   };

@@ -17,4 +17,5 @@ export {sizeCheck} from './sizeCheck';
 export {timeConversion} from './timeConversion';
 export {timeToTwelveHourFormat} from './timeToTwelveHourFormat';
 export {truncate, maxCharacters} from './truncate';
+export {verifyUnauthorizedErrors} from './verifyUnauthorizedErrors';
 export {viewport} from './viewport';

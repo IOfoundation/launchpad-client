@@ -1,5 +1,5 @@
 import {GetLocationByOrganizationTypes as types} from '../../action-types';
-import {httpRequest} from '@Utils';
+import {httpRequest, verifyUnauthorizedErrors} from '@Utils';
 
 const getLocationByOrganizationStart = () => {
   return {
@@ -34,6 +34,7 @@ export const getLocationByOrganization = ({Authorization, organizationId}) => {
       );
       dispatch(getLocationByOrganizationSuccess(httpResponse.data));
     } catch (errors) {
+      verifyUnauthorizedErrors(dispatch, errors);
       dispatch(getLocationByOrganizationError(errors.data));
     }
   };

@@ -1,5 +1,5 @@
 import {EventDeleteTypes as types} from '../../action-types';
-import {httpRequest} from '@Utils';
+import {httpRequest, verifyUnauthorizedErrors} from '@Utils';
 
 const deleteEventStart = () => {
   return {
@@ -38,6 +38,7 @@ export const remove = ({Authorization, eventId}) => {
       if (errors.data && errors.data.errors) {
         dispatch(deleteEventError(errors.data.errors));
       } else {
+        verifyUnauthorizedErrors(dispatch, errors);
         dispatch(deleteEventError(errors.data));
       }
     }

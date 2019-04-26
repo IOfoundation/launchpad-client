@@ -1,5 +1,6 @@
 import React, {Fragment, PureComponent} from 'react';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router';
 import {bindActionCreators} from 'redux';
 import {PropTypes} from 'prop-types';
 
@@ -84,7 +85,7 @@ const withErrorHandler = WrapperComponent => {
   return connect(
     mapStateToProps,
     mapDispatchToProps
-  )(WithErrorHandler);
+  )(withRouter(WithErrorHandler));
 };
 
 export default withErrorHandler;

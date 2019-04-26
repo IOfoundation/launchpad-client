@@ -1,5 +1,5 @@
 import {GetServiceTypes as types} from '../../action-types';
-import {httpRequest} from '@Utils';
+import {httpRequest, verifyUnauthorizedErrors} from '@Utils';
 
 const getServiceStart = () => {
   return {
@@ -35,6 +35,7 @@ export const get = ({Authorization, locationId, serviceId}) => {
 
       dispatch(getServiceSuccess(httpResponse.data));
     } catch (errors) {
+      verifyUnauthorizedErrors(dispatch, errors);
       if (errors.data && errors.data.errors) {
         dispatch(getServiceError(errors.data.errors));
       } else {

@@ -1,5 +1,5 @@
 import {DeleteServiceTypes as types} from '../../action-types';
-import {httpRequest} from '@Utils';
+import {httpRequest, verifyUnauthorizedErrors} from '@Utils';
 
 const deleteServiceStart = () => {
   return {
@@ -35,6 +35,7 @@ export const remove = ({Authorization, locationId, serviceId}) => {
 
       dispatch(deleteServiceSuccess(httpResponse.data));
     } catch (errors) {
+      verifyUnauthorizedErrors(dispatch, errors);
       if (errors.data && errors.data.errors) {
         dispatch(deleteServiceError(errors.data.errors));
       } else {
