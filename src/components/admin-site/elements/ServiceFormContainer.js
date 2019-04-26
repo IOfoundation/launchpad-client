@@ -36,7 +36,7 @@ const SignupSchema = Yup.object().shape({
         then: Yup.string().test(
           'opensAt',
           'Can\'t be lower or equal to "Opens at"',
-          function(closesAt) {
+          function validateHours(closesAt) {
             const regex = new RegExp(':', 'g');
             const opensAt = this.resolve(Yup.ref('opensAt'));
 
@@ -59,7 +59,7 @@ const SignupSchema = Yup.object().shape({
         then: Yup.string().test(
           'opensAt',
           'Can\'t be lower or equal to "Opens at"',
-          function(closesAt) {
+          function validateHours(closesAt) {
             const regex = new RegExp(':', 'g');
             const opensAt = this.resolve(Yup.ref('opensAt'));
 
