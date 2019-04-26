@@ -1,6 +1,7 @@
 import React, {PureComponent, cloneElement} from 'react';
 import {PropTypes} from 'prop-types';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router';
 import {bindActionCreators} from 'redux';
 
 import AdminLayout from '../../components/layouts/Admin';
@@ -84,4 +85,4 @@ Layout.propTypes = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withErrorHandler(Layout));
+)(withRouter(withErrorHandler(Layout)));

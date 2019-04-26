@@ -34,7 +34,7 @@ const Header = props => {
           {'Logout'}
         </a>
         <Link className="header_link white-link" to="/admin/profile">
-          {'Admin Section'}
+          {'Admin'}
         </Link>
       </Fragment>
     );
