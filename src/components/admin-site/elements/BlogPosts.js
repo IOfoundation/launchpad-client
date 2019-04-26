@@ -163,8 +163,7 @@ class BlogPosts extends PureComponent {
 
 function postToBlogPosts(posts, draft = false) {
   return posts.map(post => {
-    const category =
-      (post.categories && post.categories[0].name) || 'No Category';
+    const category = (post.categories[0] || {}).name || 'No Category';
     const date = getDate(post.posted_at);
     let description = htmlStripper(post.body);
     let title = post.title;
