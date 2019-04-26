@@ -18,15 +18,68 @@ class CustomImageSideButton extends PureComponent {
   onChange = e => {
     const file = e.target.files[0];
     if (file.type.indexOf('image/') === 0) {
-      const src = URL.createObjectURL(file);
-      this.props.setEditorState(
-        addNewBlock(this.props.getEditorState(), Block.IMAGE, {
-          src,
-        })
-      );
+      // This is a post request to server endpoint with image as `image`
+      const formData = new FormData();
+      formData.append('image', file);
+      fetch('http://localhost:3002/api/blog_post_images', {
+        method: 'POST',
+        body: formData,
+      }).then(response => {
+        if (response.status === 200) {
+          // Assuming server responds with
+          // `{ "url": "http://example-cdn.com/image.jpg"}`
+          return response.json().then(data => {
+            if (data.url) {
+              this.props.setEditorState(
+                addNewBlock(this.props.getEditorState(), Block.IMAGE, {
+                  src: data.url,
+                })
+              );
+            }
+          });
+        }
+      });
     }
     this.props.close();
   };
+
+  // onChange = e => {
+  //   const file = e.target.files[0];
+  //   if (file.type.indexOf('image/') === 0) {
+  //     // This is a post request to server endpoint with image as `image`
+  //     const formData = new FormData();
+  //     formData.append('image', file);
+  //     formData.append('local_identifier', URL.createObjectURL(file));
+  //     fetch('http://localhost:3002/api/blog_post_images', {
+  //       method: 'POST',
+  //       body: formData,
+  //     }).then((response) => {
+  //       if (response.status === 200) {
+  //         // Assuming server responds with
+  //         // `{ "url": "http://example-cdn.com/image.jpg"}`
+  //         return response.json().then(data => {
+
+  //           console.log("GOT RESPONSE:"+data.url);
+
+  //           if (data.url) {
+  //             this.props.setEditorState(addNewBlock(
+  //               this.props.getEditorState(),
+  //               Block.IMAGE, {
+  //                 src: data.url,
+  //               }
+  //             ));
+  //           }
+  //         });
+  //       }
+
+  //     // const src = URL.createObjectURL(file);
+  //     // this.props.setEditorState(
+  //     //   addNewBlock(this.props.getEditorState(), Block.IMAGE, {
+  //     //     src,
+  //     //   })
+  //     // );
+  //   this.props.close();
+  // };
 
   render() {
     return (
