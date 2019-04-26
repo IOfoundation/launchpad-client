@@ -13,7 +13,7 @@ import LocationForm from './LocationForm';
 import Modal from './Locations/Modal';
 import Title from '../Title';
 
-import {falsyToString, getAuthorization} from '@Utils';
+import {falsyToString, getAuthorization, yupValidations} from '@Utils';
 import {accesibility} from '@StaticData/data';
 import * as locationCreateActions from '@Actions/locations/create';
 import * as locationDeleteActions from '@Actions/locations/delete';
@@ -68,13 +68,45 @@ const LocationSchema = Yup.object().shape({
     Yup.object().shape({
       day: Yup.string(),
       opensAt: Yup.string(),
-      closesAt: Yup.string(),
+      closesAt: Yup.string().when('opensAt', {
+        is: val => Boolean(val),
+        then: Yup.string().test(
+          'opensAt',
+          'Can\'t be lower or equal to "Opens at"',
+          function(closesAt) {
+            const regex = new RegExp(':', 'g');
+            const opensAt = this.resolve(Yup.ref('opensAt'));
+
+            return (
+              parseInt(opensAt.replace(regex, ''), 10) <
+              parseInt(closesAt.replace(regex, ''), 10)
+            );
+          }
+        ),
+        otherwise: Yup.string().notRequired(),
+      }),
     })
   ),
   hoursHolidays: Yup.array().of(
     Yup.object().shape({
       closed: Yup.string(),
-      closesAt: Yup.string(),
+      closesAt: Yup.string().when('opensAt', {
+        is: val => Boolean(val),
+        then: Yup.string().test(
+          'opensAt',
+          'Can\'t be lower or equal to "Opens at"',
+          function(closesAt) {
+            const regex = new RegExp(':', 'g');
+            const opensAt = this.resolve(Yup.ref('opensAt'));
+
+            return (
+              parseInt(opensAt.replace(regex, ''), 10) <
+              parseInt(closesAt.replace(regex, ''), 10)
+            );
+          }
+        ),
+        otherwise: Yup.string().notRequired(),
+      }),
       endDate: Yup.string(),
       opensAt: Yup.string(),
       startDate: Yup.string(),
