@@ -195,3 +195,9 @@ export const getAllEventsBefore = (page, organizationId) => {
     }
   };
 };
+
+export const reset = () => {
+  return {
+    type: types.RESET,
+  };
+};

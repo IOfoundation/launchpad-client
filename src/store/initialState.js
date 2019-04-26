@@ -92,16 +92,17 @@ const initialState = {
       page: 1,
       totalPages: 0,
       errors: {},
+      loading: true,
     },
     eventsByMonth: {
       data: [],
       errors: {},
-      loading: false,
+      loading: true,
     },
     featuredEvents: {
       data: [],
       errors: {},
-      loading: false,
+      loading: true,
     },
   },
   locationCreate: {

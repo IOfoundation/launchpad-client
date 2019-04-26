@@ -37,8 +37,4 @@ describe('<FeaturedEvents />', () => {
   it('renders snapshot of FeaturedEvents', () => {
     expect(toJson(wrapper)).toMatchSnapshot();
   });
-
-  it('should get events by month', () => {
-    expect(getEventsByMonth).toHaveBeenCalled();
-  });
 });

@@ -19,11 +19,13 @@ Date = class extends Date {
 };
 /*eslint-enable */
 
-const getAllEventsByMonth = jest.fn();
 const props = {
   events: {data: [...EVENTS], loading: false},
   actions: {
-    getAllEventsByMonth,
+    getAllEventsByMonth: jest.fn(),
+  },
+  currentDate: {
+    monthNumeric: 1,
   },
 };
 let wrapper;
@@ -36,9 +38,5 @@ describe('<SchedulerContainer />', () => {
   it('renders snapshot of SchedulerContainer', () => {
     global.Date = jest.fn().mockReturnValue('9/5/1989');
     expect(toJson(wrapper)).toMatchSnapshot();
-  });
-
-  it('should get all the events', () => {
-    expect(getAllEventsByMonth).toHaveBeenCalled();
   });
 });

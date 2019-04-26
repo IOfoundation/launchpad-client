@@ -1283,6 +1283,11 @@ exports[`<Events /> renders snapshot of Events 1`] = `
   }
 >
   <Connect(WithStyles(Events))
+    actions={
+      Object {
+        "getAllEventsByMonth": [MockFunction],
+      }
+    }
     breakpoint="sm"
   />
 </ContextProvider>

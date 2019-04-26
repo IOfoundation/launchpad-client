@@ -4,19 +4,12 @@ exports[`<SchedulerContainer /> renders snapshot of SchedulerContainer 1`] = `
 <WithStyles(SchedulerContainer)
   actions={
     Object {
-      "getAllEventsByMonth": [MockFunction] {
-        "calls": Array [
-          Array [
-            "5",
-          ],
-        ],
-        "results": Array [
-          Object {
-            "type": "return",
-            "value": undefined,
-          },
-        ],
-      },
+      "getAllEventsByMonth": [MockFunction],
+    }
+  }
+  currentDate={
+    Object {
+      "monthNumeric": 1,
     }
   }
   events={
@@ -1290,25 +1283,18 @@ exports[`<SchedulerContainer /> renders snapshot of SchedulerContainer 1`] = `
   <SchedulerContainer
     actions={
       Object {
-        "getAllEventsByMonth": [MockFunction] {
-          "calls": Array [
-            Array [
-              "5",
-            ],
-          ],
-          "results": Array [
-            Object {
-              "type": "return",
-              "value": undefined,
-            },
-          ],
-        },
+        "getAllEventsByMonth": [MockFunction],
       }
     }
     classes={
       Object {
         "container": "SchedulerContainer-container-1",
         "paper": "SchedulerContainer-paper-2",
+      }
+    }
+    currentDate={
+      Object {
+        "monthNumeric": 1,
       }
     }
     events={
@@ -2829,7 +2815,6 @@ exports[`<SchedulerContainer /> renders snapshot of SchedulerContainer 1`] = `
             },
           ]
         }
-        date={1989-05-08T04:00:00.000Z}
         editable={false}
         height={660}
         mobile={false}
