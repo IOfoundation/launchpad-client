@@ -83,7 +83,6 @@ class SignUpFormContainer extends PureComponent {
                 setSubmitting(false);
               });
           }}
-          validateOnChange={false}
         />
       </Grid>
     );

@@ -139,6 +139,7 @@ class Main extends Component {
 
     if (locations && locations.length > 0) {
       const {center, zoom, options} = this._createMapSettings();
+
       map = (
         <GoogleMap
           center={center}
@@ -172,8 +173,9 @@ class Main extends Component {
     if (showLoading) {
       return (
         <GoogleMap
-          center={false}
-          zoom={false}
+          defaultZoom={0}
+          center={{lat: 0, lng: 0}}
+          zoom={3}
           resetBoundsOnResize={true}
           options={loadingStyles}
           bootstrapURLKeys={{key: process.env.GOOGLE_MAP_API_KEY}}

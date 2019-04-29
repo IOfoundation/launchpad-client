@@ -68,11 +68,7 @@ const SingUpForm = props => {
         type="password"
         value={password}
       />
-      <button
-        className="btn btn__submit"
-        type="submit"
-        disabled={!isValid || isSubmitting}
-      >
+      <button className="btn btn__submit" type="submit" disabled={isSubmitting}>
         {'Create Account'}
       </button>
     </Form>
