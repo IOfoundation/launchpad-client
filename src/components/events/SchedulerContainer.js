@@ -70,7 +70,6 @@ class SchedulerContainer extends PureComponent {
   }
 
   componentDidMount() {
-    this.props.actions.getAllEventsByMonth(this._date.monthNumeric);
     this._schedulerRef.widgetInstance.element[0].addEventListener(
       'click',
       this._schedulerClicked
@@ -123,7 +122,7 @@ class SchedulerContainer extends PureComponent {
   };
   _changeName = true;
   _date = getDate();
-  _month = this._date.monthNumeric;
+  _month = this.props.currentDate.monthNumeric;
 
   openModal = text => {
     const modalInformation = this.props.events.data.find(
@@ -175,7 +174,7 @@ class SchedulerContainer extends PureComponent {
   };
 
   render() {
-    const {classes, breakpoint} = this.props;
+    const {classes, breakpoint, currentDate} = this.props;
     const {startTime, views, events} = this.state;
 
     return (
@@ -184,7 +183,7 @@ class SchedulerContainer extends PureComponent {
           height={660}
           views={views}
           dataSource={events}
-          date={this._date.date}
+          date={currentDate.date}
           startTime={startTime}
           mobile={breakpoint === 'xs'}
           editable={false}
@@ -207,6 +206,9 @@ SchedulerContainer.propTypes = {
   classes: PropTypes.shape({
     container: PropTypes.string,
     paper: PropTypes.string,
+  }),
+  currentDate: PropTypes.shape({
+    monthNumeric: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   }),
   events: PropTypes.shape({
     data: PropTypes.arrayOf(PropTypes.shape({})),

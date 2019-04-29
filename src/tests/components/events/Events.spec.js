@@ -30,6 +30,9 @@ const initialState = {
 const mockStore = configureStore([thunk]);
 const props = {
   breakpoint: 'sm',
+  actions: {
+    getAllEventsByMonth: jest.fn(),
+  },
 };
 let store;
 let wrapper;

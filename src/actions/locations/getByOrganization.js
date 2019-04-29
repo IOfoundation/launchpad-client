@@ -32,7 +32,12 @@ export const getLocationByOrganization = ({Authorization, organizationId}) => {
         `/api/organizations/${organizationId}/locations`,
         config
       );
-      dispatch(getLocationByOrganizationSuccess(httpResponse.data));
+
+      const data = httpResponse.data.sort((a, b) => {
+        return a.name.localeCompare(b.name);
+      });
+
+      dispatch(getLocationByOrganizationSuccess(data));
     } catch (errors) {
       verifyUnauthorizedErrors(dispatch, errors);
       dispatch(getLocationByOrganizationError(errors.data));

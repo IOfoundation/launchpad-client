@@ -4,7 +4,7 @@ const initialState = {
   events: {
     data: [],
     errors: {},
-    loading: false,
+    loading: true,
     noResults: false,
     page: 1,
     totalPages: 0,
@@ -12,12 +12,12 @@ const initialState = {
   eventsByMonth: {
     data: [],
     errors: {},
-    loading: false,
+    loading: true,
   },
   featuredEvents: {
     data: [],
     errors: {},
-    loading: false,
+    loading: true,
   },
 };
 
@@ -131,6 +131,29 @@ export default function(state = initialState, action) {
           ...state.eventsByMonth,
           error,
           loading: false,
+        },
+      };
+    }
+
+    case types.RESET: {
+      return {
+        events: {
+          data: [],
+          errors: {},
+          loading: true,
+          noResults: false,
+          page: 1,
+          totalPages: 0,
+        },
+        eventsByMonth: {
+          data: [],
+          errors: {},
+          loading: true,
+        },
+        featuredEvents: {
+          data: [],
+          errors: {},
+          loading: true,
         },
       };
     }

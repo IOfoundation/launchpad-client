@@ -38,7 +38,7 @@ class AddNew extends PureComponent {
         <Select
           errors={errors}
           open={this.state.open}
-          value={this.state.language}
+          value=""
           onChange={this.updateValue}
           onClose={this.handleClose}
           onOpen={this.handleOpen}

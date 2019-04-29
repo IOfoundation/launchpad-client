@@ -1,5 +1,5 @@
 import React from 'react';
-import {Form} from 'formik';
+import {Form, Field} from 'formik';
 import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -8,6 +8,7 @@ import FormTextField from '@Shared/FormElements/TextFieldDefault';
 import Phones from './ProfileForm/Phones';
 import ThreeColumns from './ProfileForm/ThreeColumns';
 import Licenses from './ProfileForm/Licenses';
+import CustomImageInput from '@Shared/FormElements/CustomImageInput';
 
 import {
   sectionOnePhoto,
@@ -25,6 +26,7 @@ const ProfileForm = props => {
     handleSubmit,
     touched,
     values,
+    setFieldValue,
   } = props;
   const shared = {
     errors,
@@ -65,7 +67,16 @@ const ProfileForm = props => {
           <div
             className={`img-wrapper img-wrapper--border ${classes.imageHeight}`}
           >
-            <img src="https://via.placeholder.com/150" />
+            <Field
+              name="image"
+              component={CustomImageInput}
+              title="Select a file"
+              setFieldValue={setFieldValue}
+              errorMessage={errors.image ? errors.image : null}
+              touched={touched.image}
+              style={{display: 'flex'}}
+              onBlur={handleBlur}
+            />
           </div>
         </Grid>
       </Grid>
@@ -285,6 +296,7 @@ ProfileForm.propTypes = {
   handleSubmit: PropTypes.func,
   isSubmitting: PropTypes.bool,
   isValid: PropTypes.bool,
+  setFieldValue: PropTypes.func,
   touched: PropTypes.shape({
     contactEmail: PropTypes.bool,
     organizationName: PropTypes.bool,
