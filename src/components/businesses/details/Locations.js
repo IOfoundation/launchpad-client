@@ -46,6 +46,18 @@ class Locations extends PureComponent {
     });
   };
 
+  _getAddress = ({address_1, address_2, state_province, city, postal_code}) => {
+    let address = '';
+
+    if (address_2) {
+      address = `${address_1}, ${address_2}, ${city}, ${state_province}, ${postal_code}`;
+    } else {
+      address = `${address_1}, ${city}, ${state_province}, ${postal_code}`;
+    }
+
+    return address;
+  };
+
   render() {
     const {locations, classes} = this.props;
     const {organizationSelected, viewMore} = this.state;
@@ -66,11 +78,7 @@ class Locations extends PureComponent {
         let title = '';
 
         if (location.address) {
-          address = `${location.address.address_1}, ${
-            location.address.address_2
-          }, ${location.address.state_province} ${
-            location.address.postal_code
-          }`;
+          address = this._getAddress(location.address);
           title = location.address.city;
         }
 
@@ -117,11 +125,7 @@ class Locations extends PureComponent {
       let title = '';
 
       if (mainLocation.address) {
-        address = `${mainLocation.address.address_1}, ${
-          mainLocation.address.address_2
-        }, ${mainLocation.address.state_province} ${
-          mainLocation.address.postal_code
-        }`;
+        address = this._getAddress(mainLocation.address);
         title = mainLocation.address.city;
       }
 
