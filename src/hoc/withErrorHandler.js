@@ -36,7 +36,7 @@ const withErrorHandler = WrapperComponent => {
       const {snackbar, router} = this.props;
 
       snackbar.showSnackbar({
-        message: 'Unauthorized, please login again',
+        message: 'Unauthorized, please log in',
       });
       router.push('/admin-login');
       sessionStorage.removeItem('userAuth');
