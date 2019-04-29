@@ -16,6 +16,10 @@ import * as snackbarActions from '@Actions/snackbar';
 import * as businessActions from '@Actions/business';
 import * as profileActions from '@Actions/admin-profile';
 import {falsyToString, getAuthorization} from '@Utils';
+import {
+  FILE_SIZE,
+  SUPPORTED_FORMATS,
+} from '@Shared/FormElements/CustomImageInput';
 
 export const ProfileSchema = Yup.object().shape({
   contactEmail: Yup.string()
@@ -53,6 +57,18 @@ export const ProfileSchema = Yup.object().shape({
       countryExt: Yup.string(),
     })
   ),
+  image: Yup.mixed()
+    .required('A file is required')
+    .test(
+      'fileSize',
+      'Maximum file size exceeds (3 MB)',
+      value => value && value.size <= FILE_SIZE
+    )
+    .test(
+      'fileFormat',
+      `Invalid file type \nSupported: ${SUPPORTED_FORMATS.join(', ')}`,
+      value => value && SUPPORTED_FORMATS.includes(value.type)
+    ),
 });
 
 class ProfileFormContainer extends PureComponent {
@@ -187,6 +203,7 @@ class ProfileFormContainer extends PureComponent {
       tax_id: values.taxIdentifier,
       legal_status: values.legalStatus,
       date_incorporated: values.dateIncorporation,
+      image: values.image,
     };
   }
 
@@ -220,7 +237,9 @@ class ProfileFormContainer extends PureComponent {
                 hideCancelAction={false}
                 submitLabel={'Save Changes'}
                 submitClicked={_props.submitForm}
-                cancelClicked={() => _props.resetForm(this._initialValues)}
+                cancelClicked={() =>
+                  _props.resetForm(this._mapInitialValues(this._initialValues))
+                }
               />
               <ProfileForm {..._props} breakpoint={breakpoint} />
             </Fragment>

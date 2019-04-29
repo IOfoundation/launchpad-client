@@ -10,7 +10,6 @@ const SingUpForm = props => {
     errors,
     touched,
     handleSubmit,
-    isValid,
     handleBlur,
     handleChange,
     isSubmitting,

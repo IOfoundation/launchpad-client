@@ -1,5 +1,5 @@
 import React from 'react';
-import {mount} from 'enzyme';
+import {shallow} from 'enzyme';
 import toJson from 'enzyme-to-json';
 
 import ProfileForm from '../../../../components/admin-site/elements/ProfileForm';
@@ -37,12 +37,16 @@ const props = {
         countryExt: '',
       },
     ],
+    images: {},
+  },
+  formik: {
+    registerField: jest.fn(),
   },
 };
 
 describe('Admin-site <ProfileForm />', () => {
   it('renders snapshot of ProfileForm', () => {
-    const wrapper = mount(<ProfileForm {...props} />);
+    const wrapper = shallow(<ProfileForm {...props} />);
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 });
