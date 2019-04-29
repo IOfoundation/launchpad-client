@@ -336,3 +336,36 @@ export const deleteAccount = ({Authorization}) => {
     }
   };
 };
+
+const passwordResetStart = () => {
+  return {
+    type: types.PASSWORD_RESET_REQUEST,
+  };
+};
+
+const passwordResetSuccess = () => {
+  return {
+    type: types.PASSWORD_RESET_SUCCESS,
+  };
+};
+
+const passwordResetError = singUpErrors => {
+  return {
+    type: types.PASSWORD_RESET_ERROR,
+    singUpErrors,
+  };
+};
+
+export const passwordReset = (token, password, newPassword) => {
+  return async dispatch => {
+    try {
+      dispatch(passwordResetStart());
+      await httpRequest.put(
+        `/users/password?user[reset_password_token]=${token}&user[password]=${password}&user[password_confirmation]=${newPassword}`
+      );
+      dispatch(passwordResetSuccess());
+    } catch (error) {
+      dispatch(passwordResetError(error));
+    }
+  };
+};

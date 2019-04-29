@@ -278,6 +278,31 @@ const deleteAccountFail = (action, state) => {
   };
 };
 
+const passwordResetRequest = state => {
+  return {
+    ...state,
+    passwordResetSuccess: false,
+  };
+};
+
+const passwordResetSuccess = state => {
+  return {
+    ...state,
+    loading: false,
+    passwordResetSuccess: true,
+    error: false,
+  };
+};
+
+const passwordResetError = state => {
+  return {
+    ...state,
+    error: true,
+    passwordResetSuccess: false,
+    loading: false,
+  };
+};
+
 /* eslint-disable complexity */
 export default function(state = initialState, action) {
   switch (action.type) {
@@ -367,6 +392,18 @@ export default function(state = initialState, action) {
 
     case types.DELETE_ACCOUNT_FAIL: {
       return deleteAccountFail(action, state);
+    }
+
+    case types.PASSWORD_RESET_REQUEST: {
+      return passwordResetRequest(state);
+    }
+
+    case types.PASSWORD_RESET_SUCCESS: {
+      return passwordResetSuccess(state);
+    }
+
+    case types.PASSWORD_RESET_ERROR: {
+      return passwordResetError(state);
     }
 
     default:
