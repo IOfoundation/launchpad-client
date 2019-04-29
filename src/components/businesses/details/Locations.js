@@ -86,7 +86,7 @@ class Locations extends PureComponent {
           <Location
             address={address}
             title={title}
-            email="email@domaninname.com"
+            email={location.email}
             phone="(916) 514-7044"
             key={location.id}
             onDetailsClicked={() => this.detailsClickedHandler(location)}
@@ -133,7 +133,7 @@ class Locations extends PureComponent {
         <Location
           address={address}
           title={title}
-          email="email@domaninname.com"
+          email={mainLocation.email}
           phone="(916) 514-7044"
           onDetailsClicked={() => this.detailsClickedHandler(mainLocation)}
         />

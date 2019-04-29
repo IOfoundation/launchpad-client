@@ -5,13 +5,31 @@ import Section from './LocationDetails/Section';
 import RegularSchedules from './LocationDetails/RegularSchedules';
 import FromString from './LocationDetails/FromString';
 
+const getAddress = ({
+  address_1,
+  address_2,
+  state_province,
+  city,
+  postal_code,
+}) => {
+  let address = '';
+
+  if (address_2) {
+    address = `${address_1}, ${address_2}, ${city}, ${state_province}, ${postal_code}`;
+  } else {
+    address = `${address_1}, ${city}, ${state_province}, ${postal_code}`;
+  }
+
+  return address;
+};
+
 const LocationDetails = props => {
   const {organization, closeModal} = props;
+  let address = '';
 
-  const address = `${organization.address.address_1}, ${
-    organization.address.address_2
-  },
-  ${organization.address.state_province} ${organization.address.postal_code}`;
+  if (organization.address) {
+    address = getAddress(organization.address);
+  }
 
   return (
     <div className="location-details">
