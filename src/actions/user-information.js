@@ -1,6 +1,5 @@
 import {UserInformationTypes as types} from '../action-types';
-import {httpRequest} from '@Utils';
-import * as errorsActions from './errors';
+import {httpRequest, verifyUnauthorizedErrors} from '@Utils';
 
 const getUserInformationStart = () => {
   return {
@@ -32,9 +31,7 @@ export const getUserInformation = ({Authorization}) => {
       const httpResponse = await httpRequest.get('/api/users', config);
       dispatch(getUserInformationSuccess(httpResponse.data));
     } catch (errors) {
-      if (errors && errors.status === 401) {
-        dispatch(errorsActions.userUnauthorized());
-      }
+      verifyUnauthorizedErrors(dispatch, errors);
       dispatch(getUserInformationError(errors.data));
     }
   };

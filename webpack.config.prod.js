@@ -44,7 +44,7 @@ export default {
     filename: '[name].[chunkhash].js',
   },
   optimization: {
-    minimize: false,
+    minimize: true,
   },
   plugins: [
     new DotenvPlugin({
@@ -82,9 +82,6 @@ export default {
       // To track JavaScript errors via TrackJS, sign up for a free trial at TrackJS.com and enter your token below.
       trackJSToken: '',
     }),
-
-    // Minify JS
-    // new webpack.optimize.UglifyJsPlugin({sourceMap: true}),
 
     new webpack.LoaderOptionsPlugin({
       minimize: true,
@@ -173,14 +170,14 @@ export default {
           {
             loader: 'css-loader',
             options: {
-              sourceMap: true,
+              sourceMap: false,
             },
           },
           {
             loader: 'postcss-loader',
             options: {
               plugins: () => [cssnano, autoprefixer],
-              sourceMap: true,
+              sourceMap: false,
             },
           },
         ],
@@ -194,7 +191,7 @@ export default {
           {
             loader: 'css-loader',
             options: {
-              sourceMap: true,
+              sourceMap: false,
             },
           },
           {
@@ -204,7 +201,7 @@ export default {
             loader: 'postcss-loader',
             options: {
               plugins: () => [cssnano, autoprefixer],
-              sourceMap: true,
+              sourceMap: false,
             },
           },
         ],

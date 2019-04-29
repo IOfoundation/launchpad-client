@@ -30,7 +30,7 @@ class Categories extends PureComponent {
   };
 
   render() {
-    const {categories, categorySelected} = this.props;
+    const {categories, categorySelected, categoryLoading} = this.props;
     const {viewMore, onViewMoreActive} = this.state;
     let categoriesElements = <CategoriesLoading />;
     let viewMoreElement = null;
@@ -63,6 +63,8 @@ class Categories extends PureComponent {
           );
         });
       }
+    } else if (!categoryLoading) {
+      categoriesElements = <p>{'No categories'}</p>;
     }
 
     if (categories.length > onViewMoreActive) {
@@ -97,6 +99,7 @@ const mapStateToProps = _state => {
   return {
     categories: _blogs.categories,
     categorySelected: _blogs.category,
+    categoryLoading: _blogs.categoriesLoading,
   };
 };
 
@@ -117,6 +120,7 @@ Categories.propTypes = {
       name: PropTypes.string,
     })
   ),
+  categoryLoading: PropTypes.bool,
   categorySelected: PropTypes.string,
   postsCategories: PropTypes.arrayOf(PropTypes.shape({})),
 };

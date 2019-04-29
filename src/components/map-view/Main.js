@@ -137,7 +137,7 @@ class Main extends Component {
     const {locations, showLoading} = this.props;
     let map = <p>{'There is no locations'}</p>;
 
-    if (locations.length > 0) {
+    if (locations && locations.length > 0) {
       const {center, zoom, options} = this._createMapSettings();
       map = (
         <GoogleMap

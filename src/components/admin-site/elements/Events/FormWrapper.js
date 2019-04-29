@@ -13,6 +13,7 @@ import * as snackbarActions from '@Actions/snackbar';
 import * as eventsCreateActions from '@Actions/events/create';
 import formModel from './Model';
 import mapInitialValues from './initialValues';
+import {getAuthorization} from '@Utils';
 
 export const FormSchema = Yup.object().shape({
   title: Yup.string().required('Required'),
@@ -150,8 +151,7 @@ class FormWrapper extends PureComponent {
 const mapStateToProps = _state => {
   const organizationId =
     _state.user.organizationId || sessionStorage.getItem('organizationId');
-  const Authorization =
-    _state.user.authorization || sessionStorage.getItem('userAuth');
+  const Authorization = getAuthorization(_state);
 
   return {
     Authorization,

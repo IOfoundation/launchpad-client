@@ -15,6 +15,7 @@ import * as user from '@Actions/user';
 import * as blogs from '@Actions/blogs';
 import * as adminBlogs from '@Actions/admin-blogs';
 import * as snackbarActions from '@Actions/snackbar';
+import {getAuthorization} from '@Utils';
 
 const blogPostsSchema = Yup.object().shape({
   category: Yup.string().required('Category is Required'),
@@ -193,7 +194,7 @@ class ProfileFormContainer extends PureComponent {
 }
 
 const mapStateToProps = _state => {
-  const auth = _state.user.authorization || sessionStorage.getItem('userAuth');
+  const auth = getAuthorization(_state);
 
   return {
     error: _state.user.error,

@@ -1,12 +1,15 @@
 import React, {PureComponent, Fragment} from 'react';
 import {withRouter} from 'react-router';
-import Chip from '../shared/Chip';
-import FacebookIcon from '../shared/FacebookIcon';
-import TwitterIcon from '../shared/TwitterIcon';
-import LinkedinIcon from '../shared/LinkedinIcon';
+
 import {PropTypes} from 'prop-types';
 import {isEmpty} from 'lodash';
-import {truncate, maxCharacters} from '../../utils';
+
+import Chip from '@Shared/Chip';
+import FacebookIcon from '@Shared/FacebookIcon';
+import TwitterIcon from '@Shared/TwitterIcon';
+import LinkedinIcon from '@Shared/LinkedinIcon';
+
+import {truncate, maxCharacters} from '@Utils';
 
 class Business extends PureComponent {
   navigateToDetails = () => {
@@ -26,27 +29,34 @@ class Business extends PureComponent {
       </div>
     );
   };
+
   _renderOtherLocationsMobile = otherLocations => {
     return (
       <div className="col-xs-12 grid p-0">
         <hr />
         <div className="col-lg-12 col-md-12 col-xs-12 grid p-0">
           {otherLocations.map(location => {
+            const {address} = location;
+            let addressElement;
+
+            if (address) {
+              addressElement = (
+                <div className="col-xs-12 p-0 m-right-54">
+                  <p className="business-title">{'Other Location:'}</p>
+                  <h4>{address.address_1}</h4>
+                  {address.address_2 && <h4>{address.address_2}</h4>}
+                  <h4>{`${address.city}, ${address.state_province} ${
+                    address.postal_code
+                  }`}</h4>
+                </div>
+              );
+            }
             return (
               <div
                 key={location.id}
                 className="col-lg-12 col-md-12 col-xs-12 m-bot-24 p-0 grid"
               >
-                <div className="col-xs-12 p-0 m-right-54">
-                  <p className="business-title">{'Other Location:'}</p>
-                  <h4>{location.address.address_1}</h4>
-                  {location.address.address_2 && (
-                    <h4>{location.address.address_2}</h4>
-                  )}
-                  <h4>{`${location.address.city}, ${
-                    location.address.state_province
-                  } ${location.address.postal_code}`}</h4>
-                </div>
+                {addressElement}
                 {(location.phones.length > 0 || location.email) && (
                   <div className="col-xs-12 p-0 m-top-16">
                     <p className="business-title">{'Contact:'}</p>
@@ -151,6 +161,24 @@ class Business extends PureComponent {
     const locations = business.locations;
     const [main_location, ...other_locations] = locations;
     let description = business.description;
+    let addressElement;
+    let contactElement;
+
+    if (main_location) {
+      const {address, contacts} = main_location;
+
+      if (address) {
+        addressElement =
+          !isEmpty(main_location.address) &&
+          this._renderMainLocations(main_location);
+      }
+
+      if (contacts) {
+        contactElement =
+          !isEmpty(business.contacts) &&
+          this._renderContacts(business.contacts[0]);
+      }
+    }
 
     if (description.split('').length > maxCharacters) {
       description = truncate(description);
@@ -224,10 +252,8 @@ class Business extends PureComponent {
           </div>
           <div className="grid col-lg-12 col-md-12 col-xs-12 full-information p-0">
             <div className="grid col-lg-12 col-md-12 col-xs-12 p-0 m-bot-25">
-              {!isEmpty(main_location.address) &&
-                this._renderMainLocations(main_location)}
-              {!isEmpty(business.contacts) &&
-                this._renderContacts(business.contacts[0])}
+              {addressElement}
+              {contactElement}
             </div>
             <hr />
             <p className="business-title col-lg-12 col-md-12 col-xs-12 p-0">

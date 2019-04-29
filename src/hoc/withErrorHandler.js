@@ -1,10 +1,12 @@
 import React, {Fragment, PureComponent} from 'react';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router';
 import {bindActionCreators} from 'redux';
 import {PropTypes} from 'prop-types';
 
 import * as snackbarActions from '@Actions/snackbar';
 import * as userInformationActions from '@Actions/user-information';
+import {getAuthorization} from '@Utils';
 
 const withErrorHandler = WrapperComponent => {
   class WithErrorHandler extends PureComponent {
@@ -34,7 +36,7 @@ const withErrorHandler = WrapperComponent => {
       const {snackbar, router} = this.props;
 
       snackbar.showSnackbar({
-        message: 'Unauthorized, please login again',
+        message: 'Unauthorized, please log in',
       });
       router.push('/admin-login');
       sessionStorage.removeItem('userAuth');
@@ -52,8 +54,7 @@ const withErrorHandler = WrapperComponent => {
   }
 
   function mapStateToProps(_state) {
-    const auth =
-      _state.user.authorization || sessionStorage.getItem('userAuth');
+    const auth = getAuthorization(_state);
 
     return {
       userAuthorized: _state.errors.userAuthorized,
@@ -84,7 +85,7 @@ const withErrorHandler = WrapperComponent => {
   return connect(
     mapStateToProps,
     mapDispatchToProps
-  )(WithErrorHandler);
+  )(withRouter(WithErrorHandler));
 };
 
 export default withErrorHandler;

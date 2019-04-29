@@ -1,5 +1,5 @@
 import {EventsCreateTypes as types} from '../../action-types';
-import {httpRequest} from '@Utils';
+import {httpRequest, verifyUnauthorizedErrors} from '@Utils';
 
 const createEventStart = () => {
   return {
@@ -55,6 +55,7 @@ export const create = ({
       if (errors.data && errors.data.errors) {
         dispatch(createEventError(errors.data.errors));
       } else {
+        verifyUnauthorizedErrors(dispatch, errors);
         dispatch(createEventError(errors.data));
       }
     }

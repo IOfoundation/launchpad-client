@@ -12,7 +12,7 @@ const RegularSchedules = props => {
 
     return (
       <p
-        key={schedule.weekday}
+        key={schedule.id}
       >{`${day}: Opens at ${opens}, Closes at ${closes}`}</p>
     );
   });

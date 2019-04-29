@@ -25,7 +25,6 @@ const initialState = {
   passwordResetSuccess: false,
   organizationId: 0,
   signOut: {
-    data: {},
     errors: {},
     success: false,
     loading: false,
@@ -136,8 +135,8 @@ const passwordRecoveryError = state => {
 const signOutRequest = state => {
   return {
     ...state,
+    authorization: '',
     signOut: {
-      data: {},
       errors: {},
       success: false,
       loading: true,
@@ -145,13 +144,11 @@ const signOutRequest = state => {
   };
 };
 
-const signOutSuccess = (action, state) => {
-  const {response} = action;
+const signOutSuccess = state => {
   return {
     ...state,
     signOut: {
       ...state.signOut,
-      data: response,
       success: true,
       loading: false,
     },
@@ -325,7 +322,7 @@ export default function(state = initialState, action) {
     }
 
     case types.SIGN_OUT_SUCCESS: {
-      return signOutSuccess(action, state);
+      return signOutSuccess(state);
     }
 
     case types.SIGN_OUT_ERROR: {

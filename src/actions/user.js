@@ -1,5 +1,5 @@
 import {UserTypes as types} from '../action-types';
-import {httpRequest} from '../utils';
+import {httpRequest, verifyUnauthorizedErrors} from '../utils';
 import * as errorsActions from './errors';
 
 const loginStart = config => {
@@ -72,10 +72,9 @@ const signOutStart = config => {
   };
 };
 
-const signOutSuccess = response => {
+const signOutSuccess = () => {
   return {
     type: types.SIGN_OUT_SUCCESS,
-    response,
   };
 };
 
@@ -92,15 +91,12 @@ export const signOut = Authorization => {
         headers: {Authorization},
       };
       dispatch(signOutStart());
-      const httpResponse = await httpRequest.delete(
-        '/api/users/sign_out',
-        null,
-        config
-      );
+      await httpRequest.delete('/api/users/sign_out', null, config);
+
       sessionStorage.removeItem('userAuth');
       sessionStorage.removeItem('userEmail');
       sessionStorage.removeItem('organizationId');
-      dispatch(signOutSuccess(httpResponse.data));
+      dispatch(signOutSuccess());
       dispatch(errorsActions.userUnauthorized());
     } catch (error) {
       dispatch(signOutError());
@@ -234,9 +230,7 @@ export const updateUserInformation = ({Authorization, name, email}) => {
       );
       dispatch(updateUserInformationSuccess(httpResponse.data));
     } catch (errors) {
-      if (errors && errors.status === 401) {
-        dispatch(errorsActions.userUnauthorized());
-      }
+      verifyUnauthorizedErrors(dispatch, errors);
       dispatch(updateUserInformationFail(errors.data.errors));
     }
   };
@@ -301,9 +295,7 @@ export const updatePasswordAndInformation = ({
       dispatch(updatePasswordSuccess(passwordResponse.data));
       dispatch(updateUserInformationSuccess(userInformationResponse.data));
     } catch (errors) {
-      if (errors && errors.status === 401) {
-        dispatch(errorsActions.userUnauthorized());
-      }
+      verifyUnauthorizedErrors(dispatch, errors);
       dispatch(updatePasswordFail(errors.data.errors));
     }
   };
@@ -339,9 +331,7 @@ export const deleteAccount = ({Authorization}) => {
       const httpResponse = await httpRequest.delete('/api/users', config);
       dispatch(deleteAccountSuccess(httpResponse.data));
     } catch (errors) {
-      if (errors && errors.status === 401) {
-        dispatch(errorsActions.userUnauthorized());
-      }
+      verifyUnauthorizedErrors(dispatch, errors);
       dispatch(deleteAccountFail(errors.data));
     }
   };

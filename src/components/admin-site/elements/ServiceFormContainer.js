@@ -31,14 +31,46 @@ const SignupSchema = Yup.object().shape({
     Yup.object().shape({
       day: Yup.string(),
       opensAt: Yup.string(),
-      closesAt: Yup.string(),
+      closesAt: Yup.string().when('opensAt', {
+        is: val => Boolean(val),
+        then: Yup.string().test(
+          'opensAt',
+          'Can\'t be lower or equal to "Opens at"',
+          function validateHours(closesAt) {
+            const regex = new RegExp(':', 'g');
+            const opensAt = this.resolve(Yup.ref('opensAt'));
+
+            return (
+              parseInt(opensAt.replace(regex, ''), 10) <
+              parseInt(closesAt.replace(regex, ''), 10)
+            );
+          }
+        ),
+        otherwise: Yup.string().notRequired(),
+      }),
     })
   ),
   hoursHolidays: Yup.array().of(
     Yup.object().shape({
       day: Yup.string(),
       opensAt: Yup.string(),
-      closesAt: Yup.string(),
+      closesAt: Yup.string().when('opensAt', {
+        is: val => Boolean(val),
+        then: Yup.string().test(
+          'opensAt',
+          'Can\'t be lower or equal to "Opens at"',
+          function validateHours(closesAt) {
+            const regex = new RegExp(':', 'g');
+            const opensAt = this.resolve(Yup.ref('opensAt'));
+
+            return (
+              parseInt(opensAt.replace(regex, ''), 10) <
+              parseInt(closesAt.replace(regex, ''), 10)
+            );
+          }
+        ),
+        otherwise: Yup.string().notRequired(),
+      }),
     })
   ),
   applicationProcess: Yup.string(),

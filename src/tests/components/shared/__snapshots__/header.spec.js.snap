@@ -17,6 +17,7 @@ exports[`<Header /> Nav Bar Must have a link to blog page 1`] = `
     homePage={false}
   >
     <Header
+      Authorization=""
       actions={
         Object {
           "getAllPosts": [Function],
@@ -30,6 +31,19 @@ exports[`<Header /> Nav Bar Must have a link to blog page 1`] = `
         }
       }
       homePage={false}
+      isAuth={false}
+      user={
+        Object {
+          "deleteAccount": [Function],
+          "login": [Function],
+          "passwordRecovery": [Function],
+          "resetError": [Function],
+          "signOut": [Function],
+          "singUp": [Function],
+          "updatePasswordAndInformation": [Function],
+          "updateUserInformation": [Function],
+        }
+      }
     >
       <header
         className="headerContainer"

@@ -12,7 +12,7 @@ import * as yupActions from '@Actions/validate-yup';
 import Modal from './Modal';
 
 import {ProfileSchema} from './elements/ProfileFormContainer';
-import {falsyToString} from '@Utils';
+import {falsyToString, getAuthorization} from '@Utils';
 
 class Navigation extends PureComponent {
   state = {
@@ -278,7 +278,7 @@ const styles = theme => {
 const mapStateToProps = _state => {
   const organizationId =
     _state.user.organizationId || sessionStorage.getItem('organizationId');
-  const auth = _state.user.authorization || sessionStorage.getItem('userAuth');
+  const auth = getAuthorization(_state);
 
   return {
     auth,

@@ -1,5 +1,5 @@
 import {CreateLocationTypes as types} from '../../action-types';
-import {httpRequest} from '@Utils';
+import {httpRequest, verifyUnauthorizedErrors} from '@Utils';
 
 const createLocationStart = () => {
   return {
@@ -52,6 +52,7 @@ export const createLocation = ({
 
       dispatch(createLocationSuccess(httpResponse.data));
     } catch (errors) {
+      verifyUnauthorizedErrors(dispatch, errors);
       if (errors.data && errors.data.errors) {
         dispatch(createLocationError(errors.data.errors));
       } else {

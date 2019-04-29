@@ -1,5 +1,5 @@
 import {DeleteLocationTypes as types} from '../../action-types';
-import {httpRequest} from '@Utils';
+import {httpRequest, verifyUnauthorizedErrors} from '@Utils';
 
 const deleteLocationStart = () => {
   return {
@@ -36,6 +36,7 @@ export const deleteLocation = ({Authorization, locationId}) => {
 
       dispatch(deleteLocationSuccess(httpResponse.data));
     } catch (errors) {
+      verifyUnauthorizedErrors(dispatch, errors);
       if (errors.data && errors.data.errors) {
         dispatch(deleteLocationError(errors.data.errors));
       } else {

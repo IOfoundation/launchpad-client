@@ -1,5 +1,5 @@
 import {CreateServiceTypes as types} from '../../action-types';
-import {httpRequest} from '@Utils';
+import {httpRequest, verifyUnauthorizedErrors} from '@Utils';
 
 const createServiceStart = () => {
   return {
@@ -52,6 +52,7 @@ export const create = ({
 
       dispatch(createServiceSuccess(httpResponse.data));
     } catch (errors) {
+      verifyUnauthorizedErrors(dispatch, errors);
       if (errors.data && errors.data.errors) {
         dispatch(createServiceError(errors.data.errors));
       } else {

@@ -1,9 +1,5 @@
 .details-social-bar {
-  align-items: center;
   background-color: $tenth-color;
-  display: flex;
-  height: 56px;
-  justify-content: center;
 
   a {
     outline: 0;
@@ -18,8 +14,22 @@
       background-color: $ninth-color;
       border: 0;
       color: $white-color;
+      display: block;
+      display: flex;
       font-size: 12px;
+      max-height: 15px;
       padding: 5px 8px;
+      align-items: center;
+      justify-content: center;
+
+      .material-icons {
+        padding-right: 5px;
+        font-size: 14px;
+      }
+
+      &:hover {
+        background-color: $green-btn-hover;
+      }
     }
 
     &--icon {

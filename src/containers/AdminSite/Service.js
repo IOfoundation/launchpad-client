@@ -13,6 +13,7 @@ import * as serviceCreateActions from '@Actions/services/create';
 import * as serviceTaxonomy from '@Actions/services/taxonomy';
 import * as serviceGetActions from '@Actions/services/get';
 import * as serviceDeleteActions from '@Actions/services/delete';
+import {getAuthorization} from '@Utils';
 
 class ServiceRoute extends PureComponent {
   componentDidMount() {
@@ -49,8 +50,7 @@ const mapStateToProps = _state => {
     _state.user.organizationId || sessionStorage.getItem('organizationId');
   const locationName =
     _state.user.locationName || sessionStorage.getItem('locationName');
-  const Authorization =
-    _state.user.authorization || sessionStorage.getItem('userAuth');
+  const Authorization = getAuthorization(_state);
   const locationId =
     _state.user.locationId || sessionStorage.getItem('locationId');
 

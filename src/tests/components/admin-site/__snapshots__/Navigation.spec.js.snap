@@ -21,7 +21,7 @@ exports[`Admin-site <Navigation /> renders snapshot of Navigation 1`] = `
     }
   >
     <WithStyles(withRouter(Navigation))
-      auth={null}
+      auth=""
       errors={Array []}
       location={
         Object {
@@ -54,7 +54,7 @@ exports[`Admin-site <Navigation /> renders snapshot of Navigation 1`] = `
       }
     >
       <withRouter(Navigation)
-        auth={null}
+        auth=""
         classes={
           Object {
             "addBorder": "withRouter-Navigation--addBorder-5",
@@ -97,7 +97,7 @@ exports[`Admin-site <Navigation /> renders snapshot of Navigation 1`] = `
         }
       >
         <Navigation
-          auth={null}
+          auth=""
           classes={
             Object {
               "addBorder": "withRouter-Navigation--addBorder-5",

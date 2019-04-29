@@ -13,7 +13,7 @@ import Modal from './BlogPosts/Modal';
 
 import * as snackbarActions from '@Actions/snackbar';
 import * as adminPostActions from '@Actions/admin-blogs';
-import {htmlStripper, truncate, getDate} from '@Utils';
+import {htmlStripper, truncate, getDate, getAuthorization} from '@Utils';
 
 class BlogPosts extends PureComponent {
   state = {
@@ -163,8 +163,7 @@ class BlogPosts extends PureComponent {
 
 function postToBlogPosts(posts, draft = false) {
   return posts.map(post => {
-    const category =
-      (post.categories && post.categories[0].name) || 'No Category';
+    const category = (post.categories[0] || {}).name || 'No Category';
     const date = getDate(post.posted_at);
     let description = htmlStripper(post.body);
     let title = post.title;
@@ -193,7 +192,7 @@ const mapStateToProps = _state => {
   const posted = _state.adminBlogs.posted;
   const organizationId =
     _state.user.organizationId || sessionStorage.getItem('organizationId');
-  const auth = _state.user.authorization || sessionStorage.getItem('userAuth');
+  const auth = getAuthorization(_state);
 
   return {
     drafts: {

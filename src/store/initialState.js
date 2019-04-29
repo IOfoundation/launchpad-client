@@ -45,12 +45,14 @@ const initialState = {
   blogs: {
     categories: [],
     category: 'front page',
+    categoriesLoading: true,
     featuredPosts: [],
+    getFeaturedPostloading: true,
+    getPostIdSuccess: false,
     noResults: false,
     organizationPosts: [],
     page: 1,
     post: {},
-    getPostIdSuccess: false,
     posts: [],
     totalPages: 0,
   },
@@ -139,7 +141,6 @@ const initialState = {
     passwordResetSuccess: false,
     organizationId: 0,
     signOut: {
-      data: {},
       errors: {},
       success: false,
       loading: false,

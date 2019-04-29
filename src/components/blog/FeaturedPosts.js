@@ -1,31 +1,16 @@
 import React, {PureComponent} from 'react';
-import {containerStyles} from '../../utils';
-import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {withRouter} from 'react-router';
-
-import * as actions from '../../actions/blogs';
-import FeaturedPost from './FeaturedPost';
-import {withStyles} from '@material-ui/core/styles';
+import {connect} from 'react-redux';
 import {PropTypes} from 'prop-types';
+import {withRouter} from 'react-router';
+import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Loading from '../shared/Loading';
-import {truncate, htmlStripper} from '../../utils';
 
-const styles = theme => ({
-  container: {
-    ...containerStyles(theme),
-    alignItems: 'center',
-    display: 'flex',
-    margin: '0 auto 32px',
-    minHeight: '297px',
-    padding: 12,
-    overflowX: 'auto',
-  },
-  featuredPosts: {
-    minWidth: '960px',
-  },
-});
+import FeaturedPost from './FeaturedPost';
+import Loading from '@Shared/Loading';
+
+import * as actions from '@Actions/blogs';
+import {truncate, htmlStripper, containerStyles} from '@Utils';
 
 class FeaturedPosts extends PureComponent {
   componentDidMount() {
@@ -33,13 +18,13 @@ class FeaturedPosts extends PureComponent {
   }
 
   render() {
-    const {classes, posts, router} = this.props;
-    let resultsElements = (
+    const {classes, posts, router, loading} = this.props;
+    let content = (
       <Loading elementConfig={{style: {margin: '0 auto', padding: 0}}} />
     );
 
     if (posts.results.length > 0) {
-      resultsElements = posts.results.slice(0, 4).map(post => {
+      const resultsElements = posts.results.slice(0, 4).map(post => {
         let description = htmlStripper(post.body);
         let title = post.title;
 
@@ -62,17 +47,36 @@ class FeaturedPosts extends PureComponent {
           </Grid>
         );
       });
+
+      content = (
+        <div className={classes.container}>
+          <Grid container={true} spacing={24} className={classes.featuredPosts}>
+            {resultsElements}
+          </Grid>
+        </div>
+      );
+    } else if (!loading) {
+      content = null;
     }
 
-    return (
-      <div className={classes.container}>
-        <Grid container={true} spacing={24} className={classes.featuredPosts}>
-          {resultsElements}
-        </Grid>
-      </div>
-    );
+    return content;
   }
 }
+
+const styles = theme => ({
+  container: {
+    ...containerStyles(theme),
+    alignItems: 'center',
+    display: 'flex',
+    margin: '0 auto 32px',
+    minHeight: '297px',
+    padding: 12,
+    overflowX: 'auto',
+  },
+  featuredPosts: {
+    minWidth: '960px',
+  },
+});
 
 FeaturedPosts.propTypes = {
   actions: PropTypes.shape({
@@ -82,6 +86,7 @@ FeaturedPosts.propTypes = {
     container: PropTypes.string,
     featuredPosts: PropTypes.string,
   }),
+  loading: PropTypes.bool,
   posts: PropTypes.shape({
     results: PropTypes.arrayOf(PropTypes.shape({})),
     noResults: PropTypes.bool,
@@ -96,6 +101,7 @@ const mapStateToProps = _state => {
 
   return {
     posts: {results: _blogs.featuredPosts, noResults: _blogs.noResults},
+    loading: _blogs.getFeaturedPostloading,
   };
 };
 
