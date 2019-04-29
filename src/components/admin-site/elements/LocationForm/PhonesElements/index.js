@@ -66,6 +66,7 @@ class Phones extends PureComponent {
                           label={'Number'}
                           name={`phones[${index}].phoneNumber`}
                           value={phone.phoneNumber}
+                          mask="USPhone"
                         />
                       </Grid>
                       <Grid item={true} xs={12} md={6}>

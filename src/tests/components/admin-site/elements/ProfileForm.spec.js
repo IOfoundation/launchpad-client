@@ -39,9 +39,6 @@ const props = {
     ],
     images: {},
   },
-  formik: {
-    registerField: jest.fn(),
-  },
 };
 
 describe('Admin-site <ProfileForm />', () => {
