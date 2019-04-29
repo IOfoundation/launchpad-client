@@ -40,7 +40,7 @@ export default {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: './',
+    publicPath: '/',
     filename: '[name].[chunkhash].js',
   },
   optimization: {
