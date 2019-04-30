@@ -22,7 +22,7 @@ class BusinessDetails extends PureComponent {
 
   componentDidMount() {
     this.props.business.fetchOrganizationById(this.props.params.id);
-    this.props.events.getAllEventsById(this.props.params.id);
+    this.props.events.getAllEventsAfter(1, this.props.params.id, 200);
     this.props.blogs.getFeaturedPostById(this.props.params.id);
     window.addEventListener('resize', this.state.listener);
   }
@@ -60,7 +60,7 @@ BusinessDetails.propTypes = {
   }),
   events: PropTypes.shape({
     getAllEvents: PropTypes.func.isRequired,
-    getAllEventsById: PropTypes.func.isRequired,
+    getAllEventsAfter: PropTypes.func.isRequired,
   }),
   eventsData: PropTypes.arrayOf(PropTypes.shape({})),
   organization: PropTypes.shape({}),
@@ -74,7 +74,7 @@ const mapStateToProps = _state => {
 
   return {
     organization: businesses.organization,
-    eventsData: _events.data,
+    eventsData: _events.events.data,
   };
 };
 

@@ -153,46 +153,57 @@ export const getEventsByMonth = (months, filterBy = 'default') => {
   };
 };
 
-export const getAllEventsAfter = (page, organizationId) => {
+const getAllEventsWithFilter = async ({
+  dispatch,
+  mode,
+  page,
+  organizationId,
+  perPage = 5,
+}) => {
+  const today = getDate();
+  let url = '';
+
+  if (mode === 'after') {
+    url = `/api/events?starting_after="${today.date.toISOString()}"&per_page=${perPage}&page=${page}&organization_id=${organizationId}`;
+  } else {
+    url = `/api/events?ending_before="${today.date.toISOString()}"&per_page=${perPage}&page=${page}&organization_id=${organizationId}`;
+  }
+
+  try {
+    dispatch(getAllEventsRequestStart());
+    const [httpResponse] = await Promise.all([
+      httpRequest.get(url),
+      new Promise(resolve => setTimeout(resolve, 1000)),
+    ]);
+
+    const totalPages = parseInt(httpResponse.headers['x-total-count'], 10) / 5;
+
+    dispatch(getAllEventsRequestSuccess(httpResponse.data, totalPages, page));
+  } catch (errors) {
+    dispatch(getAllEventsRequestError({errors: true}));
+  }
+};
+
+export const getAllEventsAfter = (page, organizationId, perPage) => {
   return async dispatch => {
-    try {
-      const today = getDate();
-      dispatch(getAllEventsRequestStart());
-      const [httpResponse] = await Promise.all([
-        httpRequest.get(
-          `/api/events?starting_after="${today.date.toISOString()}"&per_page=5&page=${page}&organization_id=${organizationId}`
-        ),
-        new Promise(resolve => setTimeout(resolve, 1000)),
-      ]);
-
-      const totalPages =
-        parseInt(httpResponse.headers['x-total-count'], 10) / 5;
-
-      dispatch(getAllEventsRequestSuccess(httpResponse.data, totalPages, page));
-    } catch (errors) {
-      dispatch(getAllEventsRequestError({errors: true}));
-    }
+    await getAllEventsWithFilter({
+      dispatch,
+      mode: 'after',
+      page,
+      perPage,
+      organizationId,
+    });
   };
 };
 
 export const getAllEventsBefore = (page, organizationId) => {
   return async dispatch => {
-    try {
-      const date = getDate();
-      dispatch(getAllEventsRequestStart());
-      const [httpResponse] = await Promise.all([
-        httpRequest.get(
-          `/api/events?ending_before="${date.date.toISOString()}"&per_page=5&page=${page}&organization_id=${organizationId}`
-        ),
-        new Promise(resolve => setTimeout(resolve, 1000)),
-      ]);
-      const totalPages =
-        parseInt(httpResponse.headers['x-total-count'], 10) / 5;
-
-      dispatch(getAllEventsRequestSuccess(httpResponse.data, totalPages, page));
-    } catch (errors) {
-      dispatch(getAllEventsRequestError({errors: true}));
-    }
+    await getAllEventsWithFilter({
+      dispatch,
+      mode: 'before',
+      page,
+      organizationId,
+    });
   };
 };
 

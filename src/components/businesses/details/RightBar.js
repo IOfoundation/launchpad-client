@@ -25,7 +25,7 @@ const styles = theme => ({
   },
 });
 
-class LeftBar extends PureComponent {
+class RightBar extends PureComponent {
   state = {
     selectedEvent: this.props.events && this.props.events[0],
     openModal: false,
@@ -134,7 +134,7 @@ class LeftBar extends PureComponent {
   }
 }
 
-LeftBar.propTypes = {
+RightBar.propTypes = {
   classes: PropTypes.shape({
     modal: PropTypes.string,
   }),
@@ -145,4 +145,4 @@ LeftBar.propTypes = {
   }),
 };
 
-export default withStyles(styles)(LeftBar);
+export default withStyles(styles)(RightBar);
