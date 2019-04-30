@@ -5,12 +5,14 @@ const initialState = {
       noResults: false,
       page: 1,
       totalPages: 0,
+      loading: true,
     },
     posted: {
       data: [],
       noResults: false,
       page: 1,
       totalPages: 0,
+      loading: true,
     },
     noResults: false,
     savePost: {

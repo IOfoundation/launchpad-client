@@ -82,7 +82,6 @@ class BlogPosts extends PureComponent {
     this._idSelected = id;
     if (option === 'Delete') {
       this.handlerModalVisibility();
-      //this.deletePost({id, auth: this.props.auth});
     } else if (option === 'Edit') {
       this.props.router.push(`/admin/blog/${id}`);
     }
@@ -111,21 +110,21 @@ class BlogPosts extends PureComponent {
     let postedElements = <Loading />;
     let pagination = null;
 
-    if (drafts.noResults) {
+    if (drafts.noResults && !drafts.loading) {
       draftsElements = (
         <p className="text-regular paragraph">{'No posts available.'}</p>
       );
-    } else {
+    } else if (!drafts.loading) {
       draftsElements = (
         <Items items={drafts.data} optionSelected={this.optionSelected} />
       );
     }
 
-    if (posted.noResults) {
+    if (posted.noResults && !posted.loading) {
       postedElements = (
         <p className="text-regular paragraph">{'No posts available.'}</p>
       );
-    } else {
+    } else if (!posted.loading) {
       postedElements = (
         <Items items={posted.data} optionSelected={this.optionSelected} />
       );
@@ -200,12 +199,14 @@ const mapStateToProps = _state => {
       noResults: drafts.data.length === 0,
       page: drafts.page,
       totalPages: drafts.totalPages,
+      loading: drafts.loading,
     },
     posted: {
       data: postToBlogPosts(posted.data),
       noResults: posted.data.length === 0,
       page: posted.page,
       totalPages: posted.totalPages,
+      loading: posted.loading,
     },
     noResults: _state.adminBlogs.noResults,
     organizationId,
@@ -232,6 +233,7 @@ BlogPosts.propTypes = {
     data: PropTypes.arrayOf(PropTypes.shape({})),
     page: PropTypes.number,
     totalPages: PropTypes.number,
+    loading: PropTypes.bool,
   }),
   noResults: PropTypes.bool,
   organizationId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -239,6 +241,7 @@ BlogPosts.propTypes = {
     data: PropTypes.arrayOf(PropTypes.shape({})),
     page: PropTypes.number,
     totalPages: PropTypes.number,
+    loading: PropTypes.bool,
   }),
   router: PropTypes.shape({
     push: PropTypes.func,

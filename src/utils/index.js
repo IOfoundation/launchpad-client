@@ -12,6 +12,7 @@ export {getVideoSrc} from './getVideoSrc';
 export {htmlStripper} from './htmlStripper';
 export {httpRequest} from './httpRequest';
 export {mobileDaysMap} from './mobileDaysMap';
+export {createUrlWithParams} from './createUrlWithParams';
 export {openUrl} from './utility';
 export {sizeCheck} from './sizeCheck';
 export {timeConversion} from './timeConversion';

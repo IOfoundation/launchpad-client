@@ -22,7 +22,11 @@ class BusinessDetails extends PureComponent {
 
   componentDidMount() {
     this.props.business.fetchOrganizationById(this.props.params.id);
-    this.props.events.getAllEventsAfter(1, this.props.params.id, 200);
+    this.props.events.getAllEventsAfter({
+      page: 1,
+      organizationId: this.props.params.id,
+      perPage: 200,
+    });
     this.props.blogs.getFeaturedPostById(this.props.params.id);
     window.addEventListener('resize', this.state.listener);
   }
