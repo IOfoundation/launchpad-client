@@ -25,6 +25,18 @@ const styles = theme => ({
   },
 });
 
+const getAddress = ({street_1, street_2, state_abbr, city, zip}) => {
+  let address = '';
+
+  if (street_2) {
+    address = `${street_1}, ${street_2}, ${city}, ${state_abbr}, ${zip}`;
+  } else {
+    address = `${street_1}, ${city}, ${state_abbr}, ${zip}`;
+  }
+
+  return address;
+};
+
 class RightBar extends PureComponent {
   state = {
     selectedEvent: this.props.events && this.props.events[0],
@@ -108,9 +120,7 @@ class RightBar extends PureComponent {
               postedBy={selectedEvent.organization}
               start={selectedEvent.starting_at}
               end={selectedEvent.ending_at}
-              address={`${selectedEvent.street_1}, ${selectedEvent.street_2}, ${
-                selectedEvent.state_abbr
-              }, ${selectedEvent.zip}`}
+              address={getAddress(selectedEvent)}
               link={selectedEvent.external_url}
               description={selectedEvent.body}
               closed={this.handlerModalVisibility}

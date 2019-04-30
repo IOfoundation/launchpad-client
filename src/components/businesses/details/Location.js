@@ -34,7 +34,7 @@ const Location = props => {
 
 Location.propTypes = {
   address: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
+  email: PropTypes.string,
   extraClasses: PropTypes.arrayOf(PropTypes.string),
   onDetailsClicked: PropTypes.func,
   phone: PropTypes.string.isRequired,
