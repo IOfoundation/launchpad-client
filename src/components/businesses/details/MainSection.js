@@ -1,25 +1,38 @@
 import React from 'react';
-import Detail from './Detail';
 import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import {containerStyles} from '../../../utils/containerStyles';
-import {truncate, maxCharacters} from '../../../utils';
-import Description from './Service/Description';
 
-const styles = theme => ({
-  content: {
-    ...containerStyles(theme),
-    margin: '40px auto',
-  },
-});
+import Description from './Service/Description';
+import IncorporatedDate from './MainSection/IncorporatedDate';
+import Accreditations from './MainSection/Accreditations';
+import Licenses from './MainSection/Licenses';
+import LegalStatus from './MainSection/LegalStatus';
+
+import {truncate, maxCharacters, containerStyles} from '@Utils';
 
 const MainSection = props => {
   const {organization, classes} = props;
+  const {
+    date_incorporated,
+    accreditations,
+    licenses,
+    legal_status,
+  } = organization;
   let description = organization.description;
+  let image = null;
 
   if (description.split('').length > maxCharacters) {
     description = truncate(organization.description);
+  }
+
+  if (organization.logo_url) {
+    image = (
+      <img
+        className="business-details-section__logo__img"
+        src={organization.logo_url}
+      />
+    );
   }
 
   return (
@@ -33,27 +46,20 @@ const MainSection = props => {
               {organization.name || organization.alternate_name}
             </h2>
             <Description description={organization.description} />
-            <div className="business-details-section__information__data">
-              <Detail title="Date of Incorporation" content="March 1, 2013" />
-              <Detail
-                title="Accreditations"
-                content="Parturient Fusce Ultricies Risus Vulputate"
-              />
-              <Detail title="Licenses" content="Purus Tellus Cras Ipsum" />
-              <Detail title="Legal Status" content="Non-Profit" />
+            <div className={classes.details}>
+              <Grid container={true} spacing={16}>
+                <IncorporatedDate incorporatedDate={date_incorporated} />
+                <Accreditations accreditations={accreditations} />
+                <Licenses licenses={licenses} />
+                <LegalStatus legalStatus={legal_status} />
+              </Grid>
             </div>
           </div>
         </Grid>
         <Grid item={true} xs={12} md={4}>
-          <div className="business-details-section__logo">
+          <div className={`business-details-section__logo ${classes.logo}`}>
             <div className="business-details-section__logo__container">
-              <img
-                className="business-details-section__logo__img"
-                src={organization.logo_url || '/static-data/images/cs-logo.png'}
-                style={
-                  organization.logo_url ? null : {backgroundColor: 'black'}
-                }
-              />
+              {image}
             </div>
           </div>
         </Grid>
@@ -62,9 +68,29 @@ const MainSection = props => {
   );
 };
 
+const styles = theme => ({
+  content: {
+    ...containerStyles(theme),
+    margin: '40px auto',
+  },
+  details: {
+    padding: '8px',
+    [theme.breakpoints.down('sm')]: {
+      marginBottom: '12px',
+    },
+  },
+  logo: {
+    [theme.breakpoints.down('sm')]: {
+      marginBottom: '12px',
+    },
+  },
+});
+
 MainSection.propTypes = {
   classes: PropTypes.shape({
     content: PropTypes.string,
+    details: PropTypes.string,
+    logo: PropTypes.string,
   }),
   organization: PropTypes.shape({
     alternate_name: PropTypes.string,

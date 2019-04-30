@@ -12,7 +12,7 @@ const NewColumn = props => {
     );
 
     $content = (
-      <Grid className="service-column" item={true} xs={12} sm={3}>
+      <Grid className="service-column" item={true} xs={12} sm={'auto'}>
         <h3 className="service-column__title text-semi">{title}</h3>
         {children || $contentParagraph}
       </Grid>

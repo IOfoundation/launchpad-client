@@ -45,14 +45,21 @@ class Service extends PureComponent {
     if (viewMore) {
       $extraInformation = (
         <Fragment>
-          <Grid container={true} className="service--margin-bottom ">
-            <NewColumn title="Service Email" content={email} />
-            <NewColumn
-              title="Service Phone"
-              content={phone && phone[0].number}
-            />
-            <Website website={website} />
-          </Grid>
+          <div style={{padding: '8px 8px 8px 0'}}>
+            <Grid
+              container={true}
+              className="service--margin-bottom "
+              spacing={16}
+            >
+              <NewColumn title="Service Email" content={email} />
+              <NewColumn
+                title="Service Phone"
+                content={phone && phone[0].number}
+              />
+              <Website website={website} />
+            </Grid>
+          </div>
+
           <Content title="Audience" content={audience} />
           <Content title="Eligibility" content={eligibility} />
           <Content title="Fees" content={fees} />
