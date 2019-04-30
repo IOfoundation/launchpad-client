@@ -160,8 +160,8 @@ class SchedulerContainer extends PureComponent {
     }
   };
 
-  handlerDataBinding = event => {
-    if (event.action === 'rebind' && event.items.length > 0) {
+  handlerDataBinding = (event, loading) => {
+    if ((event.action === 'rebind' && event.items.length > 0) || !loading) {
       this.setLoadingStatusOnScheduler(false);
     } else {
       this.setLoadingStatusOnScheduler(true);
@@ -191,7 +191,7 @@ class SchedulerContainer extends PureComponent {
             this._schedulerRef = _ref;
           }}
           dataBound={event => this.updateCalendar(event)}
-          dataBinding={event => this.handlerDataBinding(event)}
+          dataBinding={event => this.handlerDataBinding(event, events.loading)}
         />
       </div>
     );
