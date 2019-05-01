@@ -5,7 +5,6 @@ import {bindActionCreators} from 'redux';
 import {PropTypes} from 'prop-types';
 
 import Locations from '../../components/admin-site/elements/Locations';
-import Loading from '@Shared/Loading';
 
 import * as locationsActions from '@Actions/locations/getByOrganization';
 import {getAuthorization} from '@Utils';
@@ -21,14 +20,11 @@ class LocationsRoute extends PureComponent {
   }
 
   render() {
-    const {locations, loading} = this.props;
-    let locationsElement = <Loading />;
-
-    if (locations.length > 0 || !loading) {
-      locationsElement = <Locations locations={locations} />;
-    }
-
-    return <Layout>{locationsElement}</Layout>;
+    return (
+      <Layout>
+        <Locations {...this.props} />
+      </Layout>
+    );
   }
 }
 
