@@ -11,6 +11,7 @@ export {getUrlInformationFromString} from './getUrlInformationFromString';
 export {getVideoSrc} from './getVideoSrc';
 export {htmlStripper} from './htmlStripper';
 export {httpRequest} from './httpRequest';
+export {imageRequest} from './imageRequest';
 export {mobileDaysMap} from './mobileDaysMap';
 export {openUrl} from './utility';
 export {sizeCheck} from './sizeCheck';
