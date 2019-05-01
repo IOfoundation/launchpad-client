@@ -133,7 +133,9 @@ class ProfileFormContainer extends PureComponent {
   }
   _getPhones(phones) {
     if (phones.length > 0) {
-      return phones.map(phone => ({
+      const sorted = phones.sort((a, b) => a.id - b.id);
+
+      return sorted.map(phone => ({
         id: phone.id,
         department: falsyToString(phone.department),
         ext: falsyToString(phone.extension),
