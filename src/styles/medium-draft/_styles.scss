@@ -36,5 +36,16 @@
 
   figure.md-block-image {
     background: none;
+
+    .md-block-image-inner-container  {
+      text-align: center;
+    }
+  }
+}
+
+.post-details {
+  figure.md-block-image {
+    background: none;
+    text-align: center;
   }
 }
