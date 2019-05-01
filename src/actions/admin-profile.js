@@ -32,7 +32,7 @@ export const updateCompany = ({organization, organizationId, auth}) => {
       };
       const formData = new FormData();
       formData.append('image', image);
-
+      formData.append('organization_id', organizationId);
       if (image) {
         const imageHttpResponse = await imageRequest.post(
           '/api/org_profile_images',
