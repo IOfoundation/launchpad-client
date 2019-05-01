@@ -10,6 +10,7 @@ import Pagination from '../../businesses/Pagination';
 import CustomTabs from '@Shared/Tabs';
 import Loading from '@Shared/Loading';
 import Modal from './Events/Modal';
+import CloseModal from './Events/CloseModal';
 import FormModal from './Events/FormModal';
 
 import * as eventActions from '@Actions/events';
@@ -24,6 +25,7 @@ class Events extends PureComponent {
     selectedEvent: {},
     selectedEventId: '',
     openModal: false,
+    deleteModal: false,
     openEditModal: false,
     mode: '',
   };
@@ -157,18 +159,36 @@ class Events extends PureComponent {
   };
 
   handlerSubmenuOptions = (option, eventId) => {
-    const {eventsGet, eventDelete, Authorization} = this.props;
+    const {eventsGet} = this.props;
 
     if (option === itemMenuOptions.Edit) {
       eventsGet.get(eventId);
       this.handlerEditModalVisibility('edit');
     } else if (option === itemMenuOptions.Delete) {
-      eventDelete.remove({Authorization, eventId});
+      //eventDelete.remove({Authorization, eventId});
+      this._eventId = eventId;
+      this.handlerDeleteModalVisibility();
     }
+  };
+
+  handlerDeleteModalVisibility = () => {
+    this.setState(prevState => {
+      return {
+        deleteModal: !prevState.deleteModal,
+      };
+    });
+  };
+
+  removeEvent = () => {
+    const {eventDelete, Authorization} = this.props;
+
+    eventDelete.remove({Authorization, eventId: this._eventId});
+    this.handlerDeleteModalVisibility();
   };
 
   _tabOptions = ['Upcoming', 'Past Events'];
   _tabSelected = 'Upcoming';
+  _eventId;
 
   render() {
     const {
@@ -180,7 +200,13 @@ class Events extends PureComponent {
       eventData,
       eventLoading,
     } = this.props;
-    const {openModal, selectedEvent, openEditModal, mode} = this.state;
+    const {
+      openModal,
+      selectedEvent,
+      openEditModal,
+      mode,
+      deleteModal,
+    } = this.state;
     let upcomingElements = <Loading />;
     let pastEventsElements = <Loading />;
     let pagination = null;
@@ -220,6 +246,12 @@ class Events extends PureComponent {
           openModal={openModal}
           selectedEvent={selectedEvent}
           handlerModalVisibility={this.handlerModalVisibility}
+        />
+        <CloseModal
+          open={deleteModal}
+          handlerModalVisibility={this.handlerDeleteModalVisibility}
+          deleteClicked={this.removeEvent}
+          cancelClicked={this.handlerDeleteModalVisibility}
         />
         <FormModal
           openModal={openEditModal}
