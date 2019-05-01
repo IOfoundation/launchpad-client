@@ -76,6 +76,7 @@ const ProfileForm = props => {
               touched={touched.image}
               style={{display: 'flex'}}
               onBlur={handleBlur}
+              logo={values.logo}
             />
           </div>
         </Grid>

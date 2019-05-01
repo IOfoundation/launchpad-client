@@ -4,10 +4,10 @@ export const imageRequest = Axios.create({
   baseURL: process.env.API_URL,
   timeout: 10000,
   headers: {
-    Accept: 'multipart/form-data',
-    ContentType: 'multipart/form-data',
+    Accept: 'application/json; multipart/form-data;',
+    ContentType: 'multipart/form-data; application/json;',
   },
-  responseType: 'blob',
+  responseType: 'application/json',
 });
 
 imageRequest.interceptors.response.use(

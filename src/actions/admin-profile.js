@@ -31,27 +31,38 @@ export const updateCompany = ({organization, organizationId, auth}) => {
         headers: {Authorization: auth},
       };
       const formData = new FormData();
+      let httpResponse;
+
       formData.append('image', image);
       formData.append('organization_id', organizationId);
+
       if (image) {
         const imageHttpResponse = await imageRequest.post(
           '/api/org_profile_images',
           formData,
           config
         );
-        console.log(imageHttpResponse.data);
-      }
-
-      const httpResponse = await httpRequest.put(
-        `/api/organizations/${organizationId}`,
-        {
-          organization: {
-            ...org,
-            logo_url: '',
+        httpResponse = await httpRequest.put(
+          `/api/organizations/${organizationId}`,
+          {
+            organization: {
+              ...org,
+              logo_url: imageHttpResponse.data.url,
+            },
           },
-        },
-        config
-      );
+          config
+        );
+      } else {
+        httpResponse = await httpRequest.put(
+          `/api/organizations/${organizationId}`,
+          {
+            organization: {
+              ...org,
+            },
+          },
+          config
+        );
+      }
 
       dispatch(updateCompanySuccess(httpResponse.data[0]));
     } catch (errors) {

@@ -47,7 +47,7 @@ class CustomImageInput extends Component {
   }
 
   showPreloadImage() {
-    const {title, classes, errorMessage} = this.props;
+    const {title, classes, errorMessage, logo} = this.props;
     const {file, imagePreviewUrl} = this.state;
 
     let comp = (
@@ -60,7 +60,9 @@ class CustomImageInput extends Component {
       </button>
     );
 
-    if (file && !errorMessage) {
+    if (!file && logo && !errorMessage) {
+      comp = <img src={logo} alt="..." onClick={this.showFileUpload} />;
+    } else {
       comp = (
         <img src={imagePreviewUrl} alt="..." onClick={this.showFileUpload} />
       );
@@ -116,6 +118,7 @@ CustomImageInput.propTypes = {
   field: PropTypes.shape({
     name: PropTypes.string,
   }),
+  logo: PropTypes.string,
   setFieldValue: PropTypes.func,
   title: PropTypes.string,
 };
