@@ -1,7 +1,10 @@
 import React, {Fragment, PureComponent} from 'react';
-import {PropTypes} from 'prop-types';
-import TextField from '@material-ui/core/TextField';
 import {ErrorMessage, getIn} from 'formik';
+import {PropTypes} from 'prop-types';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import TextField from '@material-ui/core/TextField';
+
+import Masks from './Masks';
 
 class FormTextFieldDefault extends PureComponent {
   changeHandler = (name, event) => {
@@ -38,9 +41,13 @@ class FormTextFieldDefault extends PureComponent {
       rows,
       rowsMax,
       novalidate,
+      startAdornment,
+      endAdornment,
+      mask,
       step = 300,
     } = this.props;
     let InputLabelProps = null;
+    let inputProps = {};
     let InputProps = {};
     let displayError = (
       <div
@@ -64,7 +71,7 @@ class FormTextFieldDefault extends PureComponent {
     }
 
     if (this._isTimePicker(type)) {
-      InputProps = {
+      inputProps = {
         autoComplete: autocomplete,
         step,
       };
@@ -74,6 +81,18 @@ class FormTextFieldDefault extends PureComponent {
       displayError = null;
     }
 
+    if (mask) {
+      InputProps = {
+        inputComponent: Masks[mask],
+        startAdornment: startAdornment ? (
+          <InputAdornment position="start">{startAdornment}</InputAdornment>
+        ) : null,
+        endAdornment: endAdornment ? (
+          <InputAdornment position="end">{endAdornment}</InputAdornment>
+        ) : null,
+      };
+    }
+
     return (
       <Fragment>
         <TextField
@@ -81,8 +100,9 @@ class FormTextFieldDefault extends PureComponent {
           fullWidth={true}
           helperText={helperText}
           id={id}
+          InputProps={InputProps}
           InputLabelProps={InputLabelProps}
-          inputProps={InputProps}
+          inputProps={inputProps}
           label={label}
           multiline={multiline}
           name={name}
@@ -101,6 +121,7 @@ class FormTextFieldDefault extends PureComponent {
 
 FormTextFieldDefault.propTypes = {
   autocomplete: PropTypes.string,
+  endAdornment: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   error: PropTypes.bool,
   errors: PropTypes.shape({}),
   field: PropTypes.string,
@@ -110,12 +131,14 @@ FormTextFieldDefault.propTypes = {
   id: PropTypes.string,
   label: PropTypes.string,
   marginBottom: PropTypes.bool,
+  mask: PropTypes.string,
   multiline: PropTypes.bool,
   name: PropTypes.string,
   novalidate: PropTypes.bool,
   phones: PropTypes.string,
   rows: PropTypes.string,
   rowsMax: PropTypes.string,
+  startAdornment: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   step: PropTypes.number,
   type: PropTypes.string,
   value: PropTypes.string,

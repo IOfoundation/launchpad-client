@@ -113,7 +113,7 @@ const ProfileForm = props => {
             {'Please enter the full URL for social media sites.'}
           </span>
         </div>
-        <div className={`${classes.cardContent}`} style={{padding: 8}}>
+        <div className={`${classes.cardContent}`} style={{padding: 16}}>
           <Grid container={true} spacing={16}>
             <Grid item={true} xs={12}>
               {socialSection.map(form => {
@@ -148,7 +148,7 @@ const ProfileForm = props => {
             }
           </span>
         </div>
-        <div className={classes.cardContent} style={{padding: 8}}>
+        <div className={classes.cardContent} style={{padding: 16}}>
           <Phones
             handleBlur={handleBlur}
             handleChange={handleChange}

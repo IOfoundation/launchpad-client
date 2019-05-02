@@ -21,11 +21,6 @@ exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
     }
   }
   errors={Object {}}
-  formik={
-    Object {
-      "registerField": [MockFunction],
-    }
-  }
   handleBlur={[MockFunction]}
   handleChange={[MockFunction]}
   handleSubmit={[MockFunction]}

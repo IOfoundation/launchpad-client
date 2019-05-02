@@ -18,7 +18,7 @@ const Phones = props => {
           }
         </span>
       </div>
-      <div className={classes.cardContent} style={{padding: 8}}>
+      <div className={classes.cardContent} style={{padding: 16}}>
         <PhonesElements
           handleBlur={handleBlur}
           handleChange={handleChange}
