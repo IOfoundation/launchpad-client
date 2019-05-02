@@ -64,12 +64,11 @@ class Locations extends PureComponent {
   _renderLocations = locations => {
     const elements = locations.map(location => {
       const phones = sortArrayBy(location.phones, 'id');
+      const title = location.alternate_name || location.name;
       let address = '';
-      let title = '';
 
       if (location.address) {
         address = this._getAddress(location.address);
-        title = location.address.city;
       }
 
       return (
@@ -84,13 +83,13 @@ class Locations extends PureComponent {
       );
     });
 
-    return [
-      <h2 key={1} className="detail-locations__title text-bold" key={0}>
-        {'Other Location'}
-      </h2>,
-      ...elements,
-      ,
-    ];
+    const title = (
+      <h2 className="detail-locations__title text-bold" key={0}>
+        {'Other Locations'}
+      </h2>
+    );
+
+    return [title, ...elements];
   };
 
   _getFirstPhone = phones => {
@@ -104,15 +103,13 @@ class Locations extends PureComponent {
   render() {
     const {locations, classes} = this.props;
     const {organizationSelected, viewMore} = this.state;
-    let otherLocations;
-    let otherLocationElements = null;
-    let mainLocationsElements = null;
     const main = locations.find(location => location.is_primary);
     const other = locations.filter(location => !location.is_primary);
+    const otherLocations = this._renderLocations(other);
+    let otherLocationElements = null;
+    let mainLocationsElements = null;
 
-    if (locations.length > 1) {
-      otherLocations = this._renderLocations(other);
-
+    if (other.length > 1) {
       if (!viewMore) {
         otherLocationElements = [
           ...otherLocations,
@@ -136,28 +133,38 @@ class Locations extends PureComponent {
             {'View All Locations'}
           </Link>,
         ];
-      } else {
-        otherLocationElements = [...otherLocations];
       }
+    } else if (other.length === 1) {
+      otherLocationElements = [...otherLocations];
+    }
 
+    if (main) {
       const phones = sortArrayBy(main.phones, 'id');
+      const title = main.alternate_name || main.name;
       let address = '';
-      let title = '';
 
       if (main.address) {
         address = this._getAddress(main.address);
-        title = main.address.city;
       }
 
       mainLocationsElements = (
-        <Location
-          address={address}
-          title={title}
-          email={main.email}
-          phone={this._getFirstPhone(phones)}
-          onDetailsClicked={() => this.detailsClickedHandler(main)}
-        />
+        <Fragment>
+          <h2 className="details-title details-title--small-space text-bold">
+            {'Main Location'}
+          </h2>
+          <Location
+            address={address}
+            title={title}
+            email={main.email}
+            phone={this._getFirstPhone(phones)}
+            onDetailsClicked={() => this.detailsClickedHandler(main)}
+          />
+        </Fragment>
       );
+    }
+
+    if (!main && other.length === 0) {
+      mainLocationsElements = <p>{'Location is not available.'}</p>;
     }
 
     return (
@@ -170,9 +177,6 @@ class Locations extends PureComponent {
             />
           </div>
         </Modal>
-        <h2 className="details-title details-title--small-space text-bold">
-          {'Main Location'}
-        </h2>
         {mainLocationsElements}
         {otherLocationElements}
       </div>

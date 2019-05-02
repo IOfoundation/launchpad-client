@@ -31,23 +31,23 @@ const LocationDetails = props => {
     address = getAddress(organization.address);
   }
 
+  const title = organization.alternate_name || organization.name;
+
   return (
     <div className="location-details">
       <i className="material-icons location-details__icon" onClick={closeModal}>
         {'close'}
       </i>
-      <h2 className="location-details__title">{organization.address.city}</h2>
-      <SmallSection title="Street Address" content={address} />
-      <SmallSection
-        title="Phone"
-        content={organization.phone && organization.phone[0].number}
-      />
-      <SmallSection title="Email" content={organization.email} />
-      <SmallSection
-        title="Website"
-        content={organization.website}
-        extraSpace={true}
-      />
+      <h2 className="location-details__title">{title}</h2>
+      <div className="m-bot-20">
+        <SmallSection title="Street Address" content={address} />
+        <SmallSection
+          title="Phone"
+          content={organization.phone && organization.phone[0].number}
+        />
+        <SmallSection title="Email" content={organization.email} />
+        <SmallSection title="Website" content={organization.website} />
+      </div>
       <Section title="Description" content={organization.description} />
       <RegularSchedules schedules={organization.regular_schedules} />
       <FromString
