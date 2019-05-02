@@ -1,5 +1,5 @@
 import {AdminProfileTypes as types} from '../action-types';
-import {httpRequest, verifyUnauthorizedErrors} from '@Utils';
+import {httpRequest, imageRequest, verifyUnauthorizedErrors} from '@Utils';
 import {fetchOrganizationByIdSuccessObject} from './business';
 
 const updateCompanyStart = () => {
@@ -25,21 +25,52 @@ const updateCompanyFail = errors => {
 export const updateCompany = ({organization, organizationId, auth}) => {
   return async dispatch => {
     try {
+      dispatch(updateCompanyStart());
+      const {image, ...org} = organization;
       const config = {
         headers: {Authorization: auth},
       };
-      dispatch(updateCompanyStart());
-      const httpResponse = await httpRequest.put(
-        `/api/organizations/${organizationId}`,
-        {
-          organization,
-        },
-        config
-      );
+      const formData = new FormData();
+      let httpResponse;
+
+      formData.append('image', image);
+      formData.append('organization_id', organizationId);
+
+      if (image) {
+        const imageHttpResponse = await imageRequest.post(
+          '/api/org_profile_images',
+          formData,
+          config
+        );
+        httpResponse = await httpRequest.put(
+          `/api/organizations/${organizationId}`,
+          {
+            organization: {
+              ...org,
+              logo_url: imageHttpResponse.data.url,
+            },
+          },
+          config
+        );
+      } else {
+        httpResponse = await httpRequest.put(
+          `/api/organizations/${organizationId}`,
+          {
+            organization: {
+              ...org,
+            },
+          },
+          config
+        );
+      }
+
       dispatch(updateCompanySuccess(httpResponse.data[0]));
     } catch (errors) {
       verifyUnauthorizedErrors(dispatch, errors);
-      dispatch(updateCompanyFail(errors.data.errors));
+
+      if (errors.status !== 404) {
+        dispatch(updateCompanyFail(errors.data.errors));
+      }
     }
   };
 };

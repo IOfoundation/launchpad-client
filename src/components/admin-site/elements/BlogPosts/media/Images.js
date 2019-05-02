@@ -21,7 +21,7 @@ class CustomImageSideButton extends PureComponent {
       // This is a post request to server endpoint with image as `image`
       const formData = new FormData();
       formData.append('image', file);
-      fetch('https://io-launchpad-api.herokuapp.com/api/blog_post_images', {
+      fetch('http://localhost:3000/api/blog_post_images', {
         method: 'POST',
         body: formData,
       }).then(response => {

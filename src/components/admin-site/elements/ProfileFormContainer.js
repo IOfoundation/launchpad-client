@@ -169,7 +169,8 @@ class ProfileFormContainer extends PureComponent {
       acc[key] = falsyToString(organization[key]);
       return acc;
     }, {});
-    return {
+
+    const map = {
       id: clean.id,
       contactEmail: clean.email,
       organizationName: clean.alternate_name,
@@ -189,6 +190,12 @@ class ProfileFormContainer extends PureComponent {
       phones: this._getPhones(clean.phones),
       deletedPhones: [],
     };
+
+    if (clean.logo_url) {
+      map.logo = clean.logo_url;
+    }
+
+    return map;
   }
   _mapFormToServer(values) {
     return {
