@@ -36,6 +36,7 @@
 
   figure.md-block-image {
     background: none;
+    text-align: center;
 
     .md-block-image-inner-container  {
       text-align: center;
@@ -47,5 +48,9 @@
   figure.md-block-image {
     background: none;
     text-align: center;
+
+    .md-block-image-inner-container {
+      text-align: center;
+    }
   }
 }
