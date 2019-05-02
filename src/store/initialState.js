@@ -46,9 +46,10 @@ const initialState = {
   },
   blogs: {
     categories: [],
-    category: 'front page',
     categoriesLoading: true,
+    category: 'front page',
     featuredPosts: [],
+    getAllPostLoading: true,
     getFeaturedPostloading: true,
     getPostIdSuccess: false,
     noResults: false,

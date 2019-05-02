@@ -5,6 +5,7 @@ const initialState = {
   categoriesLoading: true,
   category: 'front page',
   featuredPosts: [],
+  getAllPostLoading: true,
   getFeaturedPostloading: true,
   getPostIdSuccess: false,
   noResults: false,
@@ -73,6 +74,7 @@ export default function(state = initialState, action) {
         ...state,
         noResults: false,
         posts: [],
+        getAllPostLoading: true,
       };
     }
 
@@ -84,6 +86,7 @@ export default function(state = initialState, action) {
         totalPages,
         page,
         category,
+        getAllPostLoading: false,
       };
     }
 
@@ -92,6 +95,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         error,
+        getAllPostLoading: false,
       };
     }
 
