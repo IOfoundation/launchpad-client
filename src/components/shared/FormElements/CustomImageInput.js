@@ -62,7 +62,7 @@ class CustomImageInput extends Component {
 
     if (!file && logo && !errorMessage) {
       comp = <img src={logo} alt="..." onClick={this.showFileUpload} />;
-    } else {
+    } else if (imagePreviewUrl) {
       comp = (
         <img src={imagePreviewUrl} alt="..." onClick={this.showFileUpload} />
       );
