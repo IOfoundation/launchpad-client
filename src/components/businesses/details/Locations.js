@@ -22,9 +22,17 @@ const styles = theme => ({
     position: 'absolute',
     top: '45%',
     transform: 'translate(-50%, -50%)',
-    width: theme.spacing.unit * 70,
+    width: '500px',
   },
 });
+
+export const getFirstPhoneNumber = phones => {
+  if (phones.length > 0) {
+    return phones[0].number;
+  }
+
+  return '';
+};
 
 class Locations extends PureComponent {
   state = {
@@ -53,9 +61,9 @@ class Locations extends PureComponent {
     let address = '';
 
     if (address_2) {
-      address = `${address_1}, ${address_2}, ${city}, ${state_province}, ${postal_code}`;
+      address = `${address_1}, ${address_2}\n ${city}, ${state_province} ${postal_code}`;
     } else {
-      address = `${address_1}, ${city}, ${state_province}, ${postal_code}`;
+      address = `${address_1}\n ${city}, ${state_province} ${postal_code}`;
     }
 
     return address;
@@ -76,7 +84,7 @@ class Locations extends PureComponent {
           address={address}
           title={title}
           email={location.email}
-          phone={this._getFirstPhone(phones)}
+          phone={getFirstPhoneNumber(phones)}
           key={location.id}
           onDetailsClicked={() => this.detailsClickedHandler(location)}
         />
@@ -90,14 +98,6 @@ class Locations extends PureComponent {
     );
 
     return [title, ...elements];
-  };
-
-  _getFirstPhone = phones => {
-    if (phones.length > 0) {
-      return phones[0].number;
-    }
-
-    return '';
   };
 
   render() {
@@ -156,7 +156,7 @@ class Locations extends PureComponent {
             address={address}
             title={title}
             email={main.email}
-            phone={this._getFirstPhone(phones)}
+            phone={getFirstPhoneNumber(phones)}
             onDetailsClicked={() => this.detailsClickedHandler(main)}
           />
         </Fragment>

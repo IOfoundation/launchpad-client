@@ -1,9 +1,13 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
+
 import SmallSection from './LocationDetails/SmallSection';
+import Website from './LocationDetails/Website';
 import Section from './LocationDetails/Section';
 import RegularSchedules from './LocationDetails/RegularSchedules';
 import FromString from './LocationDetails/FromString';
+
+import {getFirstPhoneNumber} from './Locations';
 
 const getAddress = ({
   address_1,
@@ -15,9 +19,9 @@ const getAddress = ({
   let address = '';
 
   if (address_2) {
-    address = `${address_1}, ${address_2}, ${city}, ${state_province}, ${postal_code}`;
+    address = `${address_1}, ${address_2}, ${city}, ${state_province} ${postal_code}`;
   } else {
-    address = `${address_1}, ${city}, ${state_province}, ${postal_code}`;
+    address = `${address_1}, ${city}, ${state_province} ${postal_code}`;
   }
 
   return address;
@@ -43,12 +47,16 @@ const LocationDetails = props => {
         <SmallSection title="Street Address" content={address} />
         <SmallSection
           title="Phone"
-          content={organization.phone && organization.phone[0].number}
+          content={getFirstPhoneNumber(organization.phones)}
         />
         <SmallSection title="Email" content={organization.email} />
-        <SmallSection title="Website" content={organization.website} />
+        <Website title="Website" content={organization.website} />
       </div>
-      <Section title="Description" content={organization.description} />
+      <Section
+        title="Description"
+        append=""
+        content={organization.description}
+      />
       <RegularSchedules schedules={organization.regular_schedules} />
       <FromString
         title="Languages This Service is Provided In"
@@ -56,6 +64,7 @@ const LocationDetails = props => {
       />
       <Section
         title="Transportation Services"
+        append=""
         content={organization.transportation}
       />
       <FromString

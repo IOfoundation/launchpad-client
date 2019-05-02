@@ -2,8 +2,8 @@ import React, {Fragment} from 'react';
 import {PropTypes} from 'prop-types';
 
 const Section = props => {
-  const {title, content, children} = props;
-  const appendedTitle = `${title}: `;
+  const {title, content, children, append = ': '} = props;
+  const appendedTitle = `${title}${append}`;
   let $content = null;
 
   if (content) {
@@ -30,8 +30,9 @@ const Section = props => {
 };
 
 Section.propTypes = {
-  content: PropTypes.string,
-  title: PropTypes.string,
+  append: PropTypes.string,
+  content: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default Section;
