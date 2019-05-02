@@ -1,7 +1,7 @@
 import {sortArrayBy, falsyToString} from '@Utils';
 
 export const getPhonesToApi = phones => {
-  if (phones.length > 0) {
+  if (phones && phones.length > 0) {
     const sorted = sortArrayBy(phones, 'id');
 
     return sorted.map(phone => ({
