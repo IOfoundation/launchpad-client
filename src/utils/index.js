@@ -16,6 +16,7 @@ export {mobileDaysMap} from './mobileDaysMap';
 export {createUrlWithParams} from './createUrlWithParams';
 export {openUrl} from './utility';
 export {sizeCheck} from './sizeCheck';
+export {sortArrayBy} from './sortArrayBy';
 export {timeConversion} from './timeConversion';
 export {timeToTwelveHourFormat} from './timeToTwelveHourFormat';
 export {truncate, maxCharacters} from './truncate';

@@ -2,9 +2,10 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 
 const Location = props => {
-  const {onDetailsClicked, extraClasses} = props;
+  const {onDetailsClicked, extraClasses, title, address} = props;
 
   const detailLocationClass = ['detail-location'];
+  const mappedAddress = address || 'Virtual location';
 
   if (extraClasses) {
     extraClasses.forEach(extraClass => {
@@ -18,10 +19,10 @@ const Location = props => {
         className="detail-location__title text-semi"
         onClick={onDetailsClicked}
       >
-        {props.title}
+        {title}
       </h3>
-      <p className="detail-location__content">{props.address}</p>
-      <p className="detail-location__content">{props.phone}</p>
+      <p className="detail-location__content">{mappedAddress}</p>
+      {props.phone && <p className="detail-location__content">{props.phone}</p>}
       <a
         className="detail-location__content detail-location__content--hover"
         href={`mailto:${props.email}`}

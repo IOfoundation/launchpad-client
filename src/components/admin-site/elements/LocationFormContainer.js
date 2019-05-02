@@ -20,6 +20,7 @@ import * as locationDeleteActions from '@Actions/locations/delete';
 import * as snackbarActions from '@Actions/snackbar';
 import * as serviceCreateActions from '@Actions/services/create';
 import LocationModel from './Locations/Model';
+import {getPhonesToApi} from './ProfileForm/phonesToApi';
 
 const LocationSchema = Yup.object().shape({
   locationName: Yup.string().required('Required'),
@@ -336,23 +337,6 @@ class LocationFormContainer extends PureComponent {
     });
   }
 
-  _getPhones(phones) {
-    if (phones && phones.length > 0) {
-      const sorted = phones.sort((a, b) => a.id - b.id);
-
-      return sorted.map(phone => ({
-        id: phone.id,
-        department: falsyToString(phone.department),
-        ext: falsyToString(phone.extension),
-        numberType: falsyToString(phone.number_type),
-        phoneNumber: falsyToString(phone.number),
-        vanityNumber: falsyToString(phone.vanity_number),
-        countryExt: falsyToString(phone.country_prefix),
-      }));
-    }
-    return [];
-  }
-
   _getAccessibility(options) {
     if (!options) {
       return {...emptyAccesibility};
@@ -394,7 +378,7 @@ class LocationFormContainer extends PureComponent {
       isMainLocation: Boolean(data.is_primary),
       streetAddress: this._getAddress(data.address, data.virtual),
       mailingAddress: this._getAddress(data.mail_address),
-      phones: this._getPhones(data.phones),
+      phones: getPhonesToApi(data.phones),
       hoursRegular: this._getHours(data.regular_schedules),
       hoursHolidays: this._getHolidays(data.holiday_schedules),
       services:

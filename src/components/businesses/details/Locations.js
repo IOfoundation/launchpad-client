@@ -1,10 +1,13 @@
-import React, {PureComponent} from 'react';
+import React, {PureComponent, Fragment} from 'react';
 import {withStyles} from '@material-ui/core/styles';
 import {Link} from 'react-router';
-import Location from './Location';
 import {PropTypes} from 'prop-types';
 import Modal from '@material-ui/core/Modal';
+
 import LocationDetails from './LocationDetails';
+import Location from './Location';
+
+import {sortArrayBy} from '@Utils';
 
 const styles = theme => ({
   paper: {
@@ -58,41 +61,57 @@ class Locations extends PureComponent {
     return address;
   };
 
+  _renderLocations = locations => {
+    const elements = locations.map(location => {
+      const phones = sortArrayBy(location.phones, 'id');
+      let address = '';
+      let title = '';
+
+      if (location.address) {
+        address = this._getAddress(location.address);
+        title = location.address.city;
+      }
+
+      return (
+        <Location
+          address={address}
+          title={title}
+          email={location.email}
+          phone={this._getFirstPhone(phones)}
+          key={location.id}
+          onDetailsClicked={() => this.detailsClickedHandler(location)}
+        />
+      );
+    });
+
+    return [
+      <h2 key={1} className="detail-locations__title text-bold" key={0}>
+        {'Other Location'}
+      </h2>,
+      ...elements,
+      ,
+    ];
+  };
+
+  _getFirstPhone = phones => {
+    if (phones.length > 0) {
+      return phones[0].number;
+    }
+
+    return '';
+  };
+
   render() {
     const {locations, classes} = this.props;
     const {organizationSelected, viewMore} = this.state;
     let otherLocations;
     let otherLocationElements = null;
     let mainLocationsElements = null;
+    const main = locations.find(location => location.is_primary);
+    const other = locations.filter(location => !location.is_primary);
 
     if (locations.length > 1) {
-      otherLocations = locations.map((location, index) => {
-        if (index === 0) {
-          return (
-            <h2 key={1} className="detail-locations__title text-bold">
-              {'Other Location'}
-            </h2>
-          );
-        }
-        let address = '';
-        let title = '';
-
-        if (location.address) {
-          address = this._getAddress(location.address);
-          title = location.address.city;
-        }
-
-        return (
-          <Location
-            address={address}
-            title={title}
-            email={location.email}
-            phone="(916) 514-7044"
-            key={location.id}
-            onDetailsClicked={() => this.detailsClickedHandler(location)}
-          />
-        );
-      });
+      otherLocations = this._renderLocations(other);
 
       if (!viewMore) {
         otherLocationElements = [
@@ -120,22 +139,23 @@ class Locations extends PureComponent {
       } else {
         otherLocationElements = [...otherLocations];
       }
-      const mainLocation = locations[0];
+
+      const phones = sortArrayBy(main.phones, 'id');
       let address = '';
       let title = '';
 
-      if (mainLocation.address) {
-        address = this._getAddress(mainLocation.address);
-        title = mainLocation.address.city;
+      if (main.address) {
+        address = this._getAddress(main.address);
+        title = main.address.city;
       }
 
       mainLocationsElements = (
         <Location
           address={address}
           title={title}
-          email={mainLocation.email}
-          phone="(916) 514-7044"
-          onDetailsClicked={() => this.detailsClickedHandler(mainLocation)}
+          email={main.email}
+          phone={this._getFirstPhone(phones)}
+          onDetailsClicked={() => this.detailsClickedHandler(main)}
         />
       );
     }
