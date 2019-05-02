@@ -2,10 +2,19 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 
 const Location = props => {
-  const {onDetailsClicked, extraClasses, title, address} = props;
+  const {
+    onDetailsClicked,
+    extraClasses,
+    title,
+    address,
+    addressSecondLine,
+  } = props;
 
   const detailLocationClass = ['detail-location'];
   const mappedAddress = address || 'Virtual location';
+  const mappedSecondLine = addressSecondLine ? (
+    <p className="detail-location__content">{addressSecondLine}</p>
+  ) : null;
 
   if (extraClasses) {
     extraClasses.forEach(extraClass => {
@@ -22,6 +31,7 @@ const Location = props => {
         {title}
       </h3>
       <p className="detail-location__content">{mappedAddress}</p>
+      {mappedSecondLine}
       {props.phone && <p className="detail-location__content">{props.phone}</p>}
       <a
         className="detail-location__content detail-location__content--hover"
@@ -35,6 +45,7 @@ const Location = props => {
 
 Location.propTypes = {
   address: PropTypes.string.isRequired,
+  addressSecondLine: PropTypes.string,
   email: PropTypes.string,
   extraClasses: PropTypes.arrayOf(PropTypes.string),
   onDetailsClicked: PropTypes.func,

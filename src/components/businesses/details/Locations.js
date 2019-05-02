@@ -58,15 +58,21 @@ class Locations extends PureComponent {
   };
 
   _getAddress = ({address_1, address_2, state_province, city, postal_code}) => {
-    let address = '';
+    let firstLine = '';
+    let seconLine = '';
 
     if (address_2) {
-      address = `${address_1}, ${address_2}\n ${city}, ${state_province} ${postal_code}`;
+      firstLine = `${address_1}, ${address_2}`;
+      seconLine = `${city}, ${state_province} ${postal_code}`;
     } else {
-      address = `${address_1}\n ${city}, ${state_province} ${postal_code}`;
+      firstLine = `${address_1}`;
+      seconLine = `${city}, ${state_province} ${postal_code}`;
     }
 
-    return address;
+    return {
+      firstLine,
+      seconLine,
+    };
   };
 
   _renderLocations = locations => {
@@ -81,7 +87,8 @@ class Locations extends PureComponent {
 
       return (
         <Location
-          address={address}
+          address={address.firstLine}
+          addressSecondLine={address.seconLine}
           title={title}
           email={location.email}
           phone={getFirstPhoneNumber(phones)}
@@ -153,7 +160,8 @@ class Locations extends PureComponent {
             {'Main Location'}
           </h2>
           <Location
-            address={address}
+            address={address.firstLine}
+            addressSecondLine={address.seconLine}
             title={title}
             email={main.email}
             phone={getFirstPhoneNumber(phones)}
