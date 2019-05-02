@@ -168,10 +168,6 @@ export const getAllPosts = (page, category) => {
         );
       }
 
-      if (httpResponse.data.length === 0) {
-        dispatch(noResults(true));
-      }
-
       const formatedData = httpResponse.data.map(data => {
         data.posted_at = getDate(data.posted_at);
 

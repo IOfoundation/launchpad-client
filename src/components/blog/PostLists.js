@@ -22,12 +22,12 @@ class PostLists extends PureComponent {
   };
 
   render() {
-    const {posts, router} = this.props;
+    const {posts, router, getAllPostLoading} = this.props;
     let resultsElements = null;
     let titleElement = null;
     let paginationElement = <PostListLoading />;
 
-    if (posts.noResults) {
+    if (!getAllPostLoading && posts.results.length === 0) {
       titleElement = (
         <h2 className="blog-posts__title capitalize">{posts.category}</h2>
       );
@@ -101,6 +101,7 @@ const mapStateToProps = _state => {
       category: _blogs.category,
       pickCategory: _blogs.pickCategory,
     },
+    getAllPostLoading: _blogs.getAllPostLoading,
   };
 };
 
@@ -114,6 +115,7 @@ PostLists.propTypes = {
   actions: PropTypes.shape({
     getAllPosts: PropTypes.func,
   }),
+  getAllPostLoading: PropTypes.bool,
   posts: PropTypes.shape({
     category: PropTypes.string,
     results: PropTypes.arrayOf(PropTypes.shape({})),
