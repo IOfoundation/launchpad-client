@@ -80,6 +80,7 @@ class Events extends PureComponent {
       );
       this._loaded = true;
     }
+
     return (
       <div className="events-container">
         <Modal open={openModal} onClose={this.handlerModalVisibility}>

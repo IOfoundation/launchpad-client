@@ -23,6 +23,14 @@ const styles = theme => ({
   },
 });
 
+const eventsHasData = events => {
+  const map = events.reduce((acc, event) => {
+    return acc || event.length > 0;
+  }, false);
+
+  return map;
+};
+
 const FeaturedEvents = props => {
   const mapDataToModal = info => {
     return {
@@ -75,7 +83,7 @@ const FeaturedEvents = props => {
         </Grid>
       </div>
     );
-  } else if (events.length === 0 && !loading) {
+  } else if (!eventsHasData(events) && !loading) {
     featuredEventsElements = null;
   }
 
