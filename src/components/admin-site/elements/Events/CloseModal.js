@@ -11,7 +11,7 @@ const CloseModal = props => {
     <ModalUi open={open} onClose={modalClosed}>
       <div className={classes.modal}>
         <h2 className={classes.title}>
-          {'Are you sure you want to delete this post?'}
+          {'Are you sure you want to delete this event?'}
         </h2>
         <Grid container={true} justify={'flex-end'}>
           <Grid item={true}>
