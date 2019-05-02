@@ -13,11 +13,35 @@ const Modal = props => {
     cancelClicked,
     statusPicked,
     schemaFail,
-    schemaValidated,
   } = props;
   let button, title, alert, cancel;
 
-  if (schemaValidated) {
+  if (statusPicked) {
+    button = (
+      <button
+        className={`btn btn__green p-x-24 ${classes.btn}`}
+        onClick={activeClicked}
+      >
+        {'Publish'}
+      </button>
+    );
+    title = 'Are you sure you want to publish your organization?';
+    alert = 'It will become visible.';
+
+    if (schemaFail) {
+      button = (
+        <button
+          className={`btn btn__green p-x-24 ${classes.btn}`}
+          onClick={activeClicked}
+        >
+          {'OK'}
+        </button>
+      );
+      title =
+        'The organization cannot be published until the required fields are completed.';
+      alert = '';
+    }
+  } else {
     button = (
       <button
         className={`btn btn__red p-x-24 ${classes.btn}`}
@@ -36,30 +60,6 @@ const Modal = props => {
         {'Cancel'}
       </button>
     );
-
-    if (statusPicked) {
-      button = (
-        <button
-          className={`btn btn__green p-x-24 ${classes.btn}`}
-          onClick={activeClicked}
-        >
-          {'Publish'}
-        </button>
-      );
-      title = 'Are you sure you want to publish your organization?';
-      alert = 'It will become visible.';
-    }
-  } else if (schemaFail) {
-    button = (
-      <button
-        className={`btn btn__green p-x-24 ${classes.btn}`}
-        onClick={activeClicked}
-      >
-        {'OK'}
-      </button>
-    );
-    title =
-      'The organization cannot be published until the required fields are completed.';
   }
 
   return (

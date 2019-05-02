@@ -90,6 +90,7 @@ class Navigation extends PureComponent {
       twitter: clean.twitter,
       facebook: clean.facebook,
       linkedin: clean.linkedin,
+      image: null,
     };
   }
 

@@ -58,16 +58,24 @@ export const ProfileSchema = Yup.object().shape({
     })
   ),
   image: Yup.mixed()
-    .required('A file is required')
-    .test(
-      'fileSize',
-      'Maximum file size exceeds (3 MB)',
-      value => value && value.size <= FILE_SIZE
-    )
+    .notRequired()
+    .test('fileSize', 'Maximum file size exceeds (3 MB)', value => {
+      if (!value) {
+        return true;
+      }
+
+      return value && value.size <= FILE_SIZE;
+    })
     .test(
       'fileFormat',
       `Invalid file type \nSupported: ${SUPPORTED_FORMATS.join(', ')}`,
-      value => value && SUPPORTED_FORMATS.includes(value.type)
+      value => {
+        if (!value) {
+          return true;
+        }
+
+        return value && SUPPORTED_FORMATS.includes(value.type);
+      }
     ),
 });
 

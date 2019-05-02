@@ -1,5 +1,5 @@
 import {EventsTypes as types} from '../action-types';
-import {httpRequest, getDate} from '@Utils';
+import {httpRequest, getDate, createUrlWithParams} from '@Utils';
 
 const getAllEventsRequestStart = () => {
   return {
@@ -79,12 +79,14 @@ export const getAllEventsByMonth = month => {
   return async dispatch => {
     try {
       dispatch(getAllEventsByMonthStart());
-      const httpResponse = await httpRequest.get(`/api/events?month=${month}`);
+      const httpResponse = await httpRequest.get(
+        createUrlWithParams('/api/events', {month})
+      );
       const totalCount = parseInt(httpResponse.headers['x-total-count'], 10);
 
       if (totalCount > 200) {
         const totalHttpResponse = await httpRequest.get(
-          `/api/events?month=${month}&perPage=${totalCount}`
+          createUrlWithParams('/api/events', {month, perPage: totalCount})
         );
         dispatch(getAllEventsByMonthSuccess(totalHttpResponse.data));
       } else {
@@ -96,12 +98,12 @@ export const getAllEventsByMonth = month => {
   };
 };
 
-export const getAllEventsById = id => {
+export const getAllEventsById = organization_id => {
   return async dispatch => {
     try {
       dispatch(getAllEventsRequestStart());
       const httpResponse = await httpRequest.get(
-        `/api/events?organization_id=${id}`
+        createUrlWithParams('/api/events', {organization_id})
       );
       dispatch(getAllEventsRequestSuccess(httpResponse.data));
     } catch (error) {
@@ -118,8 +120,11 @@ export const getEventsByMonth = (months, filterBy = 'default') => {
       const responses = await Promise.all(
         months.map(async month => {
           const url = {
-            featured: `/api/events?month=${month}&featured=true`,
-            default: `/api/events?month=${month}`,
+            featured: createUrlWithParams('/api/events', {
+              month,
+              featured: true,
+            }),
+            default: createUrlWithParams('/api/events', {month}),
           };
 
           const httpResponse = await httpRequest.get(url[filterBy]);
@@ -153,46 +158,116 @@ export const getEventsByMonth = (months, filterBy = 'default') => {
   };
 };
 
-export const getAllEventsAfter = (page, organizationId) => {
+const eventsParams = ({
+  page,
+  organization_id,
+  perPage,
+  ignoreOrgPublish,
+  starting_after,
+  ending_before,
+}) => {
+  const params = {
+    per_page: perPage,
+    page,
+    organization_id,
+  };
+
+  if (starting_after) {
+    params.starting_after = starting_after;
+  }
+
+  if (ending_before) {
+    params.ending_before = ending_before;
+  }
+
+  if (ignoreOrgPublish) {
+    params.ignore_org_publish = ignoreOrgPublish;
+  }
+
+  return params;
+};
+
+const getAllEventsWithFilter = async ({
+  dispatch,
+  mode,
+  page,
+  organizationId: organization_id,
+  perPage = 5,
+  ignoreOrgPublish,
+}) => {
+  let url = '';
+  const today = getDate();
+
+  if (mode === 'after') {
+    url = createUrlWithParams(
+      '/api/events',
+      eventsParams({
+        starting_after: today.date.toISOString(),
+        page,
+        organization_id,
+        perPage,
+        ignoreOrgPublish,
+      })
+    );
+  } else {
+    url = createUrlWithParams(
+      '/api/events',
+      eventsParams({
+        ending_before: today.date.toISOString(),
+        page,
+        organization_id,
+        perPage,
+        ignoreOrgPublish,
+      })
+    );
+  }
+
+  try {
+    dispatch(getAllEventsRequestStart());
+    const [httpResponse] = await Promise.all([
+      httpRequest.get(url),
+      new Promise(resolve => setTimeout(resolve, 1000)),
+    ]);
+
+    const totalPages = parseInt(httpResponse.headers['x-total-count'], 10) / 5;
+
+    dispatch(getAllEventsRequestSuccess(httpResponse.data, totalPages, page));
+  } catch (errors) {
+    dispatch(getAllEventsRequestError({errors: true}));
+  }
+};
+
+export const getAllEventsAfter = ({
+  page,
+  organizationId,
+  perPage,
+  ignoreOrgPublish,
+}) => {
   return async dispatch => {
-    try {
-      const today = getDate();
-      dispatch(getAllEventsRequestStart());
-      const [httpResponse] = await Promise.all([
-        httpRequest.get(
-          `/api/events?starting_after="${today.date.toISOString()}"&per_page=5&page=${page}&organization_id=${organizationId}`
-        ),
-        new Promise(resolve => setTimeout(resolve, 1000)),
-      ]);
-
-      const totalPages =
-        parseInt(httpResponse.headers['x-total-count'], 10) / 5;
-
-      dispatch(getAllEventsRequestSuccess(httpResponse.data, totalPages, page));
-    } catch (errors) {
-      dispatch(getAllEventsRequestError({errors: true}));
-    }
+    await getAllEventsWithFilter({
+      dispatch,
+      ignoreOrgPublish,
+      mode: 'after',
+      organizationId,
+      page,
+      perPage,
+    });
   };
 };
 
-export const getAllEventsBefore = (page, organizationId) => {
+export const getAllEventsBefore = ({
+  page,
+  organizationId,
+  ignoreOrgPublish,
+}) => {
   return async dispatch => {
-    try {
-      const date = getDate();
-      dispatch(getAllEventsRequestStart());
-      const [httpResponse] = await Promise.all([
-        httpRequest.get(
-          `/api/events?ending_before="${date.date.toISOString()}"&per_page=5&page=${page}&organization_id=${organizationId}`
-        ),
-        new Promise(resolve => setTimeout(resolve, 1000)),
-      ]);
-      const totalPages =
-        parseInt(httpResponse.headers['x-total-count'], 10) / 5;
-
-      dispatch(getAllEventsRequestSuccess(httpResponse.data, totalPages, page));
-    } catch (errors) {
-      dispatch(getAllEventsRequestError({errors: true}));
-    }
+    await getAllEventsWithFilter({
+      dispatch,
+      ignoreOrgPublish,
+      mode: 'before',
+      organizationId,
+      page,
+    });
   };
 };
 

@@ -1,5 +1,9 @@
 import {AdminBlogsTypes as types} from '../action-types';
-import {httpRequest, verifyUnauthorizedErrors} from '@Utils';
+import {
+  httpRequest,
+  verifyUnauthorizedErrors,
+  createUrlWithParams,
+} from '@Utils';
 
 const getAdminPostsStarts = () => {
   return {
@@ -42,11 +46,23 @@ export const getAdminPost = (page, type = 'drafts', organizationId) => {
 
       if (typeNormalized === 'drafts') {
         httpResponse = await httpRequest.get(
-          `/api/blog_posts?page=${page}&per_page=5&filter[draft]=true&filter[organization_id]=${organizationId}`
+          createUrlWithParams('/api/blog_posts', {
+            page,
+            per_page: 5,
+            'filter[draft]': true,
+            'filter[organization_id]': organizationId,
+            ignore_org_publish: true,
+          })
         );
       } else if (typeNormalized === 'posted') {
         httpResponse = await httpRequest.get(
-          `/api/blog_posts?page=${page}&per_page=5&filter[draft]=false&filter[organization_id]=${organizationId}`
+          createUrlWithParams('/api/blog_posts', {
+            page,
+            per_page: 5,
+            'filter[draft]': false,
+            'filter[organization_id]': organizationId,
+            ignore_org_publish: true,
+          })
         );
       }
       const totalPages =

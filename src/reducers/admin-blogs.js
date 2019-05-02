@@ -6,12 +6,14 @@ const initialState = {
     noResults: false,
     page: 1,
     totalPages: 0,
+    loading: true,
   },
   posted: {
     data: [],
     noResults: false,
     page: 1,
     totalPages: 0,
+    loading: true,
   },
   noResults: false,
   savePost: {
@@ -42,12 +44,14 @@ export default function(state = initialState, action) {
           noResults: false,
           page: 1,
           totalPages: 0,
+          loading: true,
         },
         posted: {
           data: [],
           noResults: false,
           page: 1,
           totalPages: 0,
+          loading: true,
         },
       };
     }
@@ -60,6 +64,7 @@ export default function(state = initialState, action) {
           data: drafts,
           page,
           totalPages,
+          loading: false,
         },
       };
     }
@@ -72,6 +77,7 @@ export default function(state = initialState, action) {
           data: posted,
           page,
           totalPages,
+          loading: false,
         },
       };
     }

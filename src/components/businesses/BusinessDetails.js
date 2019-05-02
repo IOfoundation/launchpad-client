@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 
 import MainSection from './details/MainSection';
 import SocialBar from './details/SocialBar';
-import LeftBar from './details/LeftBar';
+import RightBar from './details/RightBar';
 import MainContent from './details/MainContent';
 
 import {containerStyles} from '@Utils';
@@ -46,7 +46,7 @@ const BusinessDetails = props => {
               <MainContent services={organization.services} />
             </Grid>
             <Grid item={true} xs={12} md={3}>
-              <LeftBar organization={organization} events={events} />
+              <RightBar organization={organization} events={events} />
             </Grid>
           </Grid>
         </section>

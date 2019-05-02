@@ -30,8 +30,11 @@ class Events extends PureComponent {
 
   componentDidMount() {
     const {actions, organizationId} = this.props;
-
-    actions.getAllEventsAfter(1, organizationId);
+    actions.getAllEventsAfter({
+      page: 1,
+      organizationId,
+      ignoreOrgPublish: true,
+    });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -89,9 +92,17 @@ class Events extends PureComponent {
     const {actions, organizationId} = this.props;
 
     if (this._tabSelected === this._tabOptions[0]) {
-      actions.getAllEventsAfter(page, organizationId);
+      actions.getAllEventsAfter({
+        page: 1,
+        organizationId,
+        ignoreOrgPublish: true,
+      });
     } else if (this._tabSelected === this._tabOptions[1]) {
-      actions.getAllEventsBefore(page, organizationId);
+      actions.getAllEventsBefore({
+        page,
+        organizationId,
+        ignoreOrgPublish: true,
+      });
     }
   };
 
