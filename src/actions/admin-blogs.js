@@ -36,6 +36,15 @@ const getAdminPostsError = error => {
   };
 };
 
+const httpPostRequest = async params => {
+  const [httpResponse] = await Promise.all([
+    httpRequest.get(createUrlWithParams('/api/blog_posts', params)),
+    new Promise(resolve => setTimeout(resolve, 1000)),
+  ]);
+
+  return httpResponse;
+};
+
 export const getAdminPost = (page, type = 'drafts', organizationId) => {
   return async dispatch => {
     try {
@@ -45,25 +54,21 @@ export const getAdminPost = (page, type = 'drafts', organizationId) => {
       dispatch(getAdminPostsStarts());
 
       if (typeNormalized === 'drafts') {
-        httpResponse = await httpRequest.get(
-          createUrlWithParams('/api/blog_posts', {
-            page,
-            per_page: 5,
-            'filter[draft]': true,
-            'filter[organization_id]': organizationId,
-            ignore_org_publish: true,
-          })
-        );
+        httpResponse = await httpPostRequest({
+          page,
+          per_page: 5,
+          'filter[draft]': true,
+          'filter[organization_id]': organizationId,
+          ignore_org_publish: true,
+        });
       } else if (typeNormalized === 'posted') {
-        httpResponse = await httpRequest.get(
-          createUrlWithParams('/api/blog_posts', {
-            page,
-            per_page: 5,
-            'filter[draft]': false,
-            'filter[organization_id]': organizationId,
-            ignore_org_publish: true,
-          })
-        );
+        httpResponse = await httpPostRequest({
+          page,
+          per_page: 5,
+          'filter[draft]': false,
+          'filter[organization_id]': organizationId,
+          ignore_org_publish: true,
+        });
       }
       const totalPages =
         parseInt(httpResponse.headers['x-total-count'], 10) / 5;

@@ -58,7 +58,7 @@ class ProfileFormContainer extends PureComponent {
       if (postSaved) {
         snackbar.showSnackbar({
           message: this._isPublished
-            ? 'Post published successfully'
+            ? 'Your post has been published'
             : 'Draft created successfully',
         });
         router.push('/admin/blog');
@@ -69,7 +69,7 @@ class ProfileFormContainer extends PureComponent {
       if (postUpdated) {
         snackbar.showSnackbar({
           message: this._isPublished
-            ? 'Post updated successfully'
+            ? 'Your post has been published'
             : 'Draft updated successfully',
         });
         router.push('/admin/blog');
