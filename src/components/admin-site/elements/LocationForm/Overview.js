@@ -22,13 +22,7 @@ export const Overview = props => {
 
   const disableMainLocation =
     !initalIsMainLocation && primaryLocation && primaryLocation.is_primary;
-  let mainLocationLabel = 'Check if this is the main location';
-
-  if (disableMainLocation) {
-    mainLocationLabel = `${
-      primaryLocation.name
-    } has already been marked as main location.`;
-  }
+  const mainLocationLabel = 'Check if this is the main location';
 
   return (
     <div className="m-bot-8" style={{padding: 8}}>
@@ -40,7 +34,14 @@ export const Overview = props => {
         value={values.isMainLocation}
         disabled={disableMainLocation}
       />
-      <Grid container={true} spacing={16}>
+
+      {disableMainLocation && (
+        <div style={{color: 'rgba(0, 0, 0, 0.38)'}}>{`'${
+          primaryLocation.name
+        }' has already been marked as the main location.`}</div>
+      )}
+
+      <Grid container={true} spacing={16} style={{marginTop: '1.5em'}}>
         <Grid item={true} xs={12} md={6}>
           <FormTextField
             autocomplete="off"
