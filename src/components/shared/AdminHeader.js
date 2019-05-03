@@ -21,7 +21,7 @@ class AdminHeader extends PureComponent {
 
   signOut = () => {
     const {actions, auth} = this.props;
-    actions.signOut(auth);
+    actions.signOut(auth, true);
   };
 
   render() {

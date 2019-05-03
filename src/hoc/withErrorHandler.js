@@ -33,10 +33,15 @@ const withErrorHandler = WrapperComponent => {
     }
 
     _displayErrorAndRedirect() {
-      const {snackbar, router} = this.props;
+      const {snackbar, router, isSigningOut} = this.props;
+      let message = 'Unauthorized, please log in';
+
+      if (isSigningOut) {
+        message = 'You have been signed out';
+      }
 
       snackbar.showSnackbar({
-        message: 'Unauthorized, please log in',
+        message,
       });
       router.push('/admin-login');
       sessionStorage.removeItem('userAuth');
@@ -57,8 +62,9 @@ const withErrorHandler = WrapperComponent => {
     const auth = getAuthorization(_state);
 
     return {
-      userAuthorized: _state.errors.userAuthorized,
       Authorization: auth,
+      isSigningOut: _state.errors.isSigningOut,
+      userAuthorized: _state.errors.userAuthorized,
     };
   }
   function mapDispatchToProps(_dispatch) {
@@ -70,6 +76,7 @@ const withErrorHandler = WrapperComponent => {
 
   WithErrorHandler.propTypes = {
     Authorization: PropTypes.string,
+    isSigningOut: PropTypes.bool,
     router: PropTypes.shape({
       push: PropTypes.func.isRequired,
     }),

@@ -1,8 +1,9 @@
 import {ErrorsTypes as types} from '../action-types';
 
-export const userUnauthorized = () => {
+export const userUnauthorized = (isSigningOut = false) => {
   return {
     type: types.USER_UNAUTHORIZED,
+    isSigningOut,
   };
 };
 

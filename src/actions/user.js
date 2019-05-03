@@ -84,7 +84,7 @@ const signOutError = () => {
   };
 };
 
-export const signOut = Authorization => {
+export const signOut = (Authorization, isSigningOut) => {
   return async dispatch => {
     try {
       const config = {
@@ -97,7 +97,7 @@ export const signOut = Authorization => {
       sessionStorage.removeItem('userEmail');
       sessionStorage.removeItem('organizationId');
       dispatch(signOutSuccess());
-      dispatch(errorsActions.userUnauthorized());
+      dispatch(errorsActions.userUnauthorized(isSigningOut));
     } catch (error) {
       dispatch(signOutError());
     }
