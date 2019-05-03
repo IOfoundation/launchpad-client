@@ -172,6 +172,7 @@ const initialState = {
   },
   errors: {
     userAuthorized: true,
+    isSigningOut: false,
   },
   validateYup: {
     loading: false,

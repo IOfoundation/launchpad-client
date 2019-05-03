@@ -23,7 +23,7 @@ const Header = props => {
     const {user, Authorization, router} = props;
 
     event.preventDefault();
-    user.signOut(Authorization);
+    user.signOut(Authorization, true);
     router.push('/admin-login');
   };
 
