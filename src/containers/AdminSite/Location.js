@@ -7,29 +7,42 @@ import {PropTypes} from 'prop-types';
 import LocationFormContainer from '../../components/admin-site/elements/LocationFormContainer';
 import Loading from '@Shared/Loading';
 
-import * as locationsActions from '@Actions/locations';
+import * as _locationsActions from '@Actions/locations';
+import * as getByOrganizationActions from '@Actions/locations/getByOrganization';
+import {getAuthorization} from '@Utils';
 
 class LocationFormRoute extends PureComponent {
   componentDidMount() {
-    const {routeParams} = this.props;
+    const {
+      routeParams,
+      locationsActions,
+      Authorization,
+      organizationId,
+      getByOrganization,
+    } = this.props;
 
     if (routeParams.id === 'new') {
-      this.props.locationsActions.setLoading(false);
+      locationsActions.setLoading(false);
     } else {
-      this.props.locationsActions.getLocatonById(routeParams.id);
+      locationsActions.getLocatonById(routeParams.id);
+      getByOrganization.getLocationByOrganization({
+        organizationId,
+        Authorization,
+      });
     }
   }
 
   render() {
-    const {location, loading, breakpoint} = this.props;
+    const {location, loading, breakpoint, primaryLocation} = this.props;
     let locationElement = <Loading />;
 
     if (Object.keys(location).length > 0 || !loading) {
       locationElement = (
         <LocationFormContainer
+          breakpoint={breakpoint}
           data={location}
           loadingFinished={!loading}
-          breakpoint={breakpoint}
+          primaryLocation={primaryLocation}
         />
       );
     }
@@ -39,25 +52,38 @@ class LocationFormRoute extends PureComponent {
 }
 
 const mapStateToProps = _state => {
+  const Authorization = getAuthorization(_state);
+  const organizationId =
+    _state.user.organizationId || sessionStorage.getItem('organizationId');
+  const primaryLocation = _state.getLocationByOrganization.locations.find(
+    location => location.is_primary
+  );
+
   return {
     error: _state.user.error,
-    isAuth: _state.user.authorization !== '',
     location: _state.locations.location,
     locationByIdSuccess: _state.locations.locationByIdSuccess,
     loading: _state.locations.loading,
+    Authorization,
+    organizationId,
+    primaryLocation,
   };
 };
 
 const mapDispatchToProps = _dispatch => {
   return {
-    locationsActions: bindActionCreators(locationsActions, _dispatch),
+    locationsActions: bindActionCreators(_locationsActions, _dispatch),
+    getByOrganization: bindActionCreators(getByOrganizationActions, _dispatch),
   };
 };
 
 LocationFormRoute.propTypes = {
+  Authorization: PropTypes.string,
   breakpoint: PropTypes.string,
   error: PropTypes.bool,
-  isAuth: PropTypes.bool,
+  getByOrganization: PropTypes.shape({
+    getLocationByOrganization: PropTypes.func,
+  }),
   loading: PropTypes.bool,
   location: PropTypes.shape({}),
   locationByIdSuccess: PropTypes.bool,
@@ -65,6 +91,8 @@ LocationFormRoute.propTypes = {
     getLocatonById: PropTypes.func,
     setLoading: PropTypes.func,
   }),
+  organizationId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  primaryLocation: PropTypes.shape({}),
   routeParams: PropTypes.shape({
     id: PropTypes.string,
   }),

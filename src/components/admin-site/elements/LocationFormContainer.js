@@ -411,6 +411,7 @@ class LocationFormContainer extends PureComponent {
       organizationId,
       router,
       service,
+      primaryLocation,
     } = this.props;
     let _initialValues;
     let sectionTitle;
@@ -465,10 +466,12 @@ class LocationFormContainer extends PureComponent {
                 {..._props}
                 breakpoint={breakpoint}
                 deleteClicked={this.handlerModalVisibility}
+                locationName={_initialValues.locationName}
+                initalIsMainLocation={_initialValues.isMainLocation}
                 mode={mode}
+                primaryLocation={primaryLocation}
                 router={router}
                 service={service}
-                locationName={_initialValues.locationName}
               />
               <Buttons
                 cancelClicked={this.goToLocation}
@@ -574,6 +577,7 @@ LocationFormContainer.propTypes = {
   }),
   locationUpdated: PropTypes.shape({}),
   organizationId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  primaryLocation: PropTypes.shape({}),
   router: PropTypes.shape({
     push: PropTypes.func,
   }),
