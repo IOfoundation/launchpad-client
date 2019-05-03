@@ -42,7 +42,7 @@ class Business extends PureComponent {
             if (address) {
               addressElement = (
                 <div className="col-xs-12 p-0 m-right-54">
-                  <p className="business-title">{'Other Location:'}</p>
+                  <p className="business-title">{'Other Locations:'}</p>
                   <h4>{address.address_1}</h4>
                   {address.address_2 && <h4>{address.address_2}</h4>}
                   <h4>{`${address.city}, ${address.state_province} ${

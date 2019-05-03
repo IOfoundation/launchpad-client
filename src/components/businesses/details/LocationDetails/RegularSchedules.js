@@ -19,7 +19,9 @@ const RegularSchedules = props => {
 
   return (
     $displayHoursOfOperations.length !== 0 && (
-      <Section title="Hours of Operation">{$displayHoursOfOperations}</Section>
+      <Section title="Hours of Operation" append="">
+        {$displayHoursOfOperations}
+      </Section>
     )
   );
 };

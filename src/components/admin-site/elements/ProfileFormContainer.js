@@ -16,6 +16,7 @@ import * as snackbarActions from '@Actions/snackbar';
 import * as businessActions from '@Actions/business';
 import * as profileActions from '@Actions/admin-profile';
 import {falsyToString, getAuthorization} from '@Utils';
+import {getPhonesToApi} from './ProfileForm/phonesToApi';
 import {
   FILE_SIZE,
   SUPPORTED_FORMATS,
@@ -131,20 +132,7 @@ class ProfileFormContainer extends PureComponent {
     }
     return '';
   }
-  _getPhones(phones) {
-    if (phones.length > 0) {
-      return phones.map(phone => ({
-        id: phone.id,
-        department: falsyToString(phone.department),
-        ext: falsyToString(phone.extension),
-        numberType: falsyToString(phone.number_type),
-        phoneNumber: falsyToString(phone.number),
-        vanityNumber: falsyToString(phone.vanity_number),
-        countryExt: falsyToString(phone.country_prefix),
-      }));
-    }
-    return [];
-  }
+
   _putPhones(phones) {
     return phones.map(phone => {
       const mappedPhone = {
@@ -187,7 +175,7 @@ class ProfileFormContainer extends PureComponent {
       twitter: clean.twitter,
       facebook: clean.facebook,
       linkedin: clean.linkedin,
-      phones: this._getPhones(clean.phones),
+      phones: getPhonesToApi(clean.phones),
       deletedPhones: [],
     };
 

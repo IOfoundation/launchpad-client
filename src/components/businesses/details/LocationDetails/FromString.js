@@ -10,7 +10,7 @@ const FromString = props => {
   if (content) {
     $content = (
       <Fragment>
-        <Section title={title} content={contentSplit} />
+        <Section title={title} content={contentSplit} append="" />
       </Fragment>
     );
   }

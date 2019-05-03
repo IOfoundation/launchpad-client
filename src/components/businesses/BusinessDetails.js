@@ -30,7 +30,9 @@ const BusinessDetails = props => {
     };
 
     if (organization.phones.length > 0) {
-      socialInformation.phone = organization.phones[0].number;
+      const sorted = organization.phones.sort((a, b) => a.id - b.id);
+
+      socialInformation.phone = sorted[0].number;
     }
 
     $details = (

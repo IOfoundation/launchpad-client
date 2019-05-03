@@ -40,54 +40,64 @@ const SocialBar = props => {
             alignItems="center"
             spacing={16}
           >
-            <Grid item={true}>
-              <a
-                href={facebook}
-                target="_blank"
-                className="details-social-bar__icon"
-                rel="noopener noreferrer"
-              >
-                <FacebookIcon size={24} />
-              </a>
-            </Grid>
-            <Grid item={true}>
-              <a
-                href={twitter}
-                target="_blank"
-                className="details-social-bar__icon details-social-bar__icon--twitter"
-                rel="noopener noreferrer"
-              >
-                <TwitterIcon size={30} />
-              </a>
-            </Grid>
-            <Grid item={true}>
-              <a
-                href={linkedin}
-                target="_blank"
-                className="details-social-bar__icon"
-                rel="noopener noreferrer"
-              >
-                <LinkedinIcon size={24} />
-              </a>
-            </Grid>
+            {facebook && (
+              <Grid item={true}>
+                <a
+                  href={facebook}
+                  target="_blank"
+                  className="details-social-bar__icon"
+                  rel="noopener noreferrer"
+                >
+                  <FacebookIcon size={24} />
+                </a>
+              </Grid>
+            )}
+            {twitter && (
+              <Grid item={true}>
+                <a
+                  href={twitter}
+                  target="_blank"
+                  className="details-social-bar__icon details-social-bar__icon--twitter"
+                  rel="noopener noreferrer"
+                >
+                  <TwitterIcon size={30} />
+                </a>
+              </Grid>
+            )}
+            {linkedin && (
+              <Grid item={true}>
+                <a
+                  href={linkedin}
+                  target="_blank"
+                  className="details-social-bar__icon"
+                  rel="noopener noreferrer"
+                >
+                  <LinkedinIcon size={24} />
+                </a>
+              </Grid>
+            )}
           </Grid>
         </Grid>
-        <Grid item={true}>
-          <a
-            className="details-social-bar__item details-social-bar__item--button"
-            target="_blank"
-            href={website}
-            rel="noopener noreferrer"
-          >
-            <i className="material-icons">{'web'}</i>
-            {'Go to Website'}
-          </a>
-        </Grid>
-        <Grid item={true}>
-          <span className="details-social-bar__text details-social-bar__text--mr">
-            {phone}
-          </span>
-        </Grid>
+        {website && (
+          <Grid item={true}>
+            <a
+              className="details-social-bar__item details-social-bar__item--button"
+              target="_blank"
+              href={website}
+              rel="noopener noreferrer"
+            >
+              <i className="material-icons">{'web'}</i>
+              {'Go to Website'}
+            </a>
+          </Grid>
+        )}
+        {phone && (
+          <Grid item={true}>
+            <span className="details-social-bar__text details-social-bar__text--mr">
+              {phone}
+            </span>
+          </Grid>
+        )}
         <Grid item={true}>
           <span className="details-social-bar__text">{email}</span>
         </Grid>

@@ -1,9 +1,13 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
+
 import SmallSection from './LocationDetails/SmallSection';
+import Website from './LocationDetails/Website';
 import Section from './LocationDetails/Section';
 import RegularSchedules from './LocationDetails/RegularSchedules';
 import FromString from './LocationDetails/FromString';
+
+import {getFirstPhoneNumber} from './Locations';
 
 const getAddress = ({
   address_1,
@@ -15,9 +19,9 @@ const getAddress = ({
   let address = '';
 
   if (address_2) {
-    address = `${address_1}, ${address_2}, ${city}, ${state_province}, ${postal_code}`;
+    address = `${address_1}, ${address_2}, ${city}, ${state_province} ${postal_code}`;
   } else {
-    address = `${address_1}, ${city}, ${state_province}, ${postal_code}`;
+    address = `${address_1}, ${city}, ${state_province} ${postal_code}`;
   }
 
   return address;
@@ -31,24 +35,28 @@ const LocationDetails = props => {
     address = getAddress(organization.address);
   }
 
+  const title = organization.alternate_name || organization.name;
+
   return (
     <div className="location-details">
       <i className="material-icons location-details__icon" onClick={closeModal}>
         {'close'}
       </i>
-      <h2 className="location-details__title">{organization.address.city}</h2>
-      <SmallSection title="Street Address" content={address} />
-      <SmallSection
-        title="Phone"
-        content={organization.phone && organization.phone[0].number}
+      <h2 className="location-details__title">{title}</h2>
+      <div className="m-bot-20">
+        <SmallSection title="Street Address" content={address} />
+        <SmallSection
+          title="Phone"
+          content={getFirstPhoneNumber(organization.phones)}
+        />
+        <SmallSection title="Email" content={organization.email} />
+        <Website title="Website" content={organization.website} />
+      </div>
+      <Section
+        title="Description"
+        append=""
+        content={organization.description}
       />
-      <SmallSection title="Email" content={organization.email} />
-      <SmallSection
-        title="Website"
-        content={organization.website}
-        extraSpace={true}
-      />
-      <Section title="Description" content={organization.description} />
       <RegularSchedules schedules={organization.regular_schedules} />
       <FromString
         title="Languages This Service is Provided In"
@@ -56,6 +64,7 @@ const LocationDetails = props => {
       />
       <Section
         title="Transportation Services"
+        append=""
         content={organization.transportation}
       />
       <FromString
