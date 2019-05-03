@@ -28,6 +28,8 @@ const LocationForm = props => {
     service,
     touched,
     values,
+    initalIsMainLocation,
+    primaryLocation,
   } = props;
   const shared = {
     errors,
@@ -49,7 +51,11 @@ const LocationForm = props => {
 
   return (
     <Form className="location-form" onSubmit={handleSubmit}>
-      <Overview {...shared} />
+      <Overview
+        {...shared}
+        initalIsMainLocation={initalIsMainLocation}
+        primaryLocation={primaryLocation}
+      />
       <Details {...shared} />
       <Services
         {...shared}
@@ -96,10 +102,12 @@ LocationForm.propTypes = {
   handleBlur: PropTypes.func,
   handleChange: PropTypes.func,
   handleSubmit: PropTypes.func,
+  initalIsMainLocation: PropTypes.bool,
   isSubmitting: PropTypes.bool,
   isValid: PropTypes.bool,
   locationName: PropTypes.string,
   mode: PropTypes.string,
+  primaryLocation: PropTypes.shape({}),
   router: PropTypes.shape({
     push: PropTypes.func,
   }),

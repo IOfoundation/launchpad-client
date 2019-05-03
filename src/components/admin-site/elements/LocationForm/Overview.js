@@ -9,18 +9,39 @@ import Checkbox from '@Shared/FormElements/Checkbox';
 import {sharedStyles, sharedClasses} from './styles';
 
 export const Overview = props => {
-  const {errors, touched, handleBlur, handleChange, values, classes} = props;
+  const {
+    errors,
+    touched,
+    handleBlur,
+    handleChange,
+    values,
+    classes,
+    primaryLocation,
+    initalIsMainLocation,
+  } = props;
+
+  const disableMainLocation =
+    !initalIsMainLocation && primaryLocation && primaryLocation.is_primary;
+  const mainLocationLabel = 'Check if this is the main location';
 
   return (
     <div className="m-bot-8" style={{padding: 8}}>
       <h2 className={classes.title}>{'Overview'}</h2>
       <Checkbox
-        label="Check if this is the main location"
+        label={mainLocationLabel}
         name="isMainLocation"
         onChange={handleChange}
         value={values.isMainLocation}
+        disabled={disableMainLocation}
       />
-      <Grid container={true} spacing={16}>
+
+      {disableMainLocation && (
+        <div style={{color: 'rgba(0, 0, 0, 0.38)'}}>{`'${
+          primaryLocation.name
+        }' has already been marked as the main location.`}</div>
+      )}
+
+      <Grid container={true} spacing={16} style={{marginTop: '1.5em'}}>
         <Grid item={true} xs={12} md={6}>
           <FormTextField
             autocomplete="off"
@@ -74,6 +95,8 @@ Overview.propTypes = {
   errors: PropTypes.shape({}),
   handleBlur: PropTypes.func,
   handleChange: PropTypes.func,
+  initalIsMainLocation: PropTypes.bool,
+  primaryLocation: PropTypes.shape({}),
   touched: PropTypes.shape({}),
   values: PropTypes.shape({}),
 };
