@@ -130,7 +130,14 @@ export const getEventsByMonth = (months, filterBy = 'default') => {
           const httpResponse = await httpRequest.get(url[filterBy]);
           let groupedData = [];
           if (httpResponse.data.length > 0) {
-            groupedData = httpResponse.data.slice(0, 3).reduce((acc, data) => {
+            let group;
+            if (httpResponse.data.length > 3) {
+              group = httpResponse.data.slice(0, 3);
+            } else {
+              group = httpResponse.data;
+            }
+
+            groupedData = group.reduce((acc, data) => {
               data.starting_at = getDate(data.starting_at);
               data.posted_at = getDate(data.posted_at);
               acc.title = data.starting_at.monthLarge;
@@ -150,7 +157,7 @@ export const getEventsByMonth = (months, filterBy = 'default') => {
         })
       );
 
-      const filtered = responses.filter(response => response);
+      const filtered = responses.filter(response => response.key);
       dispatch(getEventsByMonthSuccess(filtered));
     } catch (error) {
       dispatch(getEventsByMonthError(error));
