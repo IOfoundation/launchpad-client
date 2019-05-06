@@ -129,7 +129,7 @@ class Business extends PureComponent {
   };
 
   _renderLocationInfo = locations => {
-    const main_location = locations[0];
+    const main_location = locations.find(location => location.is_primary);
     const locationText = locations.length === 1 ? ' Location' : ' Locations';
     const totalLocations = locations.length;
     let address = null;
@@ -159,7 +159,8 @@ class Business extends PureComponent {
   render() {
     const {business, isMobile} = this.props;
     const locations = business.locations;
-    const [main_location, ...other_locations] = locations;
+    const main_location = locations.find(location => location.is_primary);
+    const other_locations = locations.filter(location => !location.is_primary);
     let description = business.description;
     let addressElement;
     let contactElement;
