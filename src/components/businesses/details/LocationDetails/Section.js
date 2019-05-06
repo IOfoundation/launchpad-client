@@ -31,7 +31,7 @@ const Section = props => {
 
 Section.propTypes = {
   append: PropTypes.string,
-  content: PropTypes.string.isRequired,
+  content: PropTypes.string,
   title: PropTypes.string.isRequired,
 };
 

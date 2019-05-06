@@ -1,13 +1,7 @@
-export const dayOfWeekAsInteger = day => {
-  const days = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-  ];
+import {weekdays} from '@StaticData/data';
 
-  return days[day];
+export const dayOfWeekAsInteger = day => {
+  const select = weekdays.find(weekday => weekday.value === String(day));
+
+  return select && select.name;
 };
