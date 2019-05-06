@@ -12,6 +12,8 @@ import Loading from '@Shared/Loading';
 import * as actions from '@Actions/blogs';
 import {truncate, htmlStripper, containerStyles} from '@Utils';
 
+const regexImg = /<img src="(.*?)"/;
+
 class FeaturedPosts extends PureComponent {
   componentDidMount() {
     this.props.actions.getFeaturedPost();
@@ -27,6 +29,7 @@ class FeaturedPosts extends PureComponent {
       const resultsElements = posts.results.slice(0, 4).map(post => {
         let description = htmlStripper(post.body);
         let title = post.title;
+        let imgSrc = '';
 
         if (description.split('').length > 30) {
           description = truncate(description, 30);
@@ -36,10 +39,18 @@ class FeaturedPosts extends PureComponent {
           title = truncate(title, 80);
         }
 
+        if (post.blog_post_attachments.length > 0) {
+          imgSrc = post.blog_post_attachments[0].file_url;
+        }
+
+        if (regexImg.test(post.body)) {
+          imgSrc = post.body.match(regexImg)[1];
+        }
+
         return (
           <Grid item={true} xs={3} key={post.id}>
             <FeaturedPost
-              imageSrc={post.blog_post_attachments[0].file_url}
+              imageSrc={imgSrc}
               title={title}
               description={description}
               clicked={() => router.push(`/blog/${post.id}`)}
