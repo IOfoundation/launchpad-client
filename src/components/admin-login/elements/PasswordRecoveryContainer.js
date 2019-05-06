@@ -39,7 +39,7 @@ class PasswordRecoveryContainer extends PureComponent {
     if (success !== prevProps.success) {
       if (success) {
         snackbar.showSnackbar({
-          message: 'Password changes, please login',
+          message: 'Your password has been successfully set',
         });
         router.push('/admin-login');
       }
