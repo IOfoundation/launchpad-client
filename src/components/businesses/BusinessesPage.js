@@ -14,10 +14,13 @@ class BusinessesPage extends Component {
     );
   }
 
-  _handleOnChangeFilterOptions = (type, name) => {
+  _handleOnChangeFilterOptions = (type, name, remove) => {
     const filters = this.props.businesses.appliedFilters.category;
+
     if (isArray(filters) && filters.find(item => item === name)) {
       this.props.handleOnChangeFilterOptions(type, name, true);
+    } else if (remove) {
+      this.props.handleOnChangeFilterOptions(type, name, remove);
     } else {
       this.props.handleOnChangeFilterOptions(type, name);
     }

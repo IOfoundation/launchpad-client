@@ -389,11 +389,17 @@ function _addLocationFilter(newFilters, filterValue) {
     _removePaginationFilters(newFilters);
   }
   newFilters.id = [];
-  newFilters.sw_lat = filterValue.sw.lat;
-  newFilters.sw_lng = filterValue.sw.lng;
-  newFilters.ne_lat = filterValue.ne.lat;
-  newFilters.ne_lng = filterValue.ne.lng;
-  return newFilters;
+
+  if (filterValue.sw && filterValue.ne) {
+    newFilters.sw_lat = filterValue.sw.lat;
+    newFilters.sw_lng = filterValue.sw.lng;
+    newFilters.ne_lat = filterValue.ne.lat;
+    newFilters.ne_lng = filterValue.ne.lng;
+
+    return newFilters;
+  }
+
+  return {page: 1, id: []};
 }
 
 function _removeLocationFilter(newFilters) {
