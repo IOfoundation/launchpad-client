@@ -124,7 +124,9 @@ class FilterByText extends Component {
         {this.props.items.map(item => (
           <li
             key={item.id}
-            className={item.searchable_type === 'Organization' && 'text-thin'}
+            className={
+              item.searchable_type === 'Organization' ? 'text-thin' : ''
+            }
           >
             <a onClick={e => this.handleDropdownOnClick(item, e)}>
               {item.content}

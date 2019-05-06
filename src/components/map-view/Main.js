@@ -135,7 +135,7 @@ class Main extends Component {
 
   render() {
     const {locations, showLoading} = this.props;
-    let map = <p>{'There is no locations'}</p>;
+    let map = <p>{'There are no locations to show'}</p>;
 
     if (locations && locations.length > 0) {
       const {center, zoom, options} = this._createMapSettings();
