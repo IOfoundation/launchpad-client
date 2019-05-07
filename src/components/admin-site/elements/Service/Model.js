@@ -1,7 +1,7 @@
 import {getHolidayHours, getApiHours} from '@Utils';
 
 /* eslint-disable complexity */
-const createArrayOfIds = checked => {
+export const createArrayOfIds = checked => {
   const taxonomiesKeys = Object.keys(checked);
 
   return taxonomiesKeys.reduce((acc, key) => {

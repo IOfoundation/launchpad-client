@@ -5,22 +5,43 @@ import {sharedStyles, sharedClasses} from '../LocationForm/styles';
 import Grid from '@material-ui/core/Grid';
 
 import Checkbox from '../../../shared/FormElements/Checkbox';
+import WarningCategoryModal from './WarningCategoryModal';
 
 class CheckboxGroup extends PureComponent {
-  handleChange = event => {
-    const {handleChange} = this.props;
-    handleChange(event);
+  state = {
+    openModal: false,
+  };
+
+  handleChange = (event, update) => {
+    const {handleChange, disable} = this.props;
+
+    if (!disable || update) {
+      handleChange(event);
+    }
+  };
+
+  handlerModalVisibility = () => {
+    this.setState(prevState => {
+      return {
+        openModal: !prevState.openModal,
+      };
+    });
   };
 
   render() {
-    const {values, classes, data, group, title, md = 12} = this.props;
+    const {values, classes, data, group, title, md = 12, disable} = this.props;
 
     return (
       <div className={classes.card}>
+        <WarningCategoryModal
+          open={this.state.openModal}
+          modalClosed={this.handlerModalVisibility}
+          cancelClicked={this.handlerModalVisibility}
+          deleteClicked={this.handlerModalVisibility}
+        />
         <div className={classes.cardTitle}>
           <span className={`${classes.cardTitle}__media`}>{title}</span>
         </div>
-
         <div className={classes.cardContent}>
           <Grid container={true} spacing={16}>
             <Grid item={true} xs={12} md={md} className="p-bot-0">
@@ -32,11 +53,15 @@ class CheckboxGroup extends PureComponent {
                       key={index}
                       label={item.label}
                       name={`taxonomy.${group}.${item.key}`}
-                      onChange={this.handleChange}
+                      handlerModalVisibility={this.handlerModalVisibility}
+                      onChange={(event, update) =>
+                        this.handleChange(event, update)
+                      }
                       value={
                         values.taxonomy[group] &&
                         values.taxonomy[group][item.key]
                       }
+                      maxPicks={disable}
                     />
                   );
                 })}
@@ -50,11 +75,13 @@ class CheckboxGroup extends PureComponent {
                       key={index}
                       label={item.label}
                       name={`taxonomy.${group}.${item.key}`}
+                      handlerModalVisibility={this.handlerModalVisibility}
                       onChange={this.handleChange}
                       value={
                         values.taxonomy[group] &&
                         values.taxonomy[group][item.key]
                       }
+                      maxPicks={disable}
                     />
                   );
                 })}
@@ -82,6 +109,7 @@ CheckboxGroup.propTypes = {
       })
     ),
   }),
+  disable: PropTypes.bool,
   errors: PropTypes.shape({}),
   group: PropTypes.string,
   handleBlur: PropTypes.func,

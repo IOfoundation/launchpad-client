@@ -36,10 +36,29 @@ const styles = () => ({
 
 export class Checkbox extends PureComponent {
   _handleChange = ({target: {checked}}) => {
-    const {name, onChange, field = {}, values = DEFAULT_VALUES} = this.props;
+    const {
+      name,
+      onChange,
+      field = {},
+      values = DEFAULT_VALUES,
+      maxPicks,
+      handlerModalVisibility,
+    } = this.props;
     const inputName = name || field.name;
     const inputOnChange = onChange || field.onChange;
-    inputOnChange({target: {name: inputName, value: values[checked]}});
+
+    if (maxPicks) {
+      if (values[checked]) {
+        handlerModalVisibility();
+      } else {
+        inputOnChange(
+          {target: {name: inputName, value: values[checked]}},
+          !values[checked]
+        );
+      }
+    } else {
+      inputOnChange({target: {name: inputName, value: values[checked]}});
+    }
   };
 
   render() {
@@ -91,7 +110,9 @@ Checkbox.propTypes = {
   dataTest: PropTypes.string,
   disabled: PropTypes.bool,
   field: PropTypes.shape({}),
+  handlerModalVisibility: PropTypes.func,
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  maxPicks: PropTypes.bool,
   name: PropTypes.string,
   onChange: PropTypes.func,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
