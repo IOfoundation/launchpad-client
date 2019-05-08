@@ -9,6 +9,8 @@ import CheckboxGroup from './Service/CheckboxGroup';
 import Keywords from './Service/Keywords';
 import DangerZone from './LocationForm/DangerZone';
 
+import {createArrayOfIds} from './Service/Model';
+
 const ServiceForm = props => {
   const {
     checkboxes,
@@ -35,6 +37,7 @@ const ServiceForm = props => {
   const BusinessStage = findCheckbox(145);
   const UnderservedCommunities = findCheckbox(150);
   const Industry = findCheckbox(161);
+  const disable = createArrayOfIds(values.taxonomy).length > 4;
 
   return (
     <Form className="profile-form" onSubmit={handleSubmit}>
@@ -47,18 +50,21 @@ const ServiceForm = props => {
         group={`${Categories.id}`}
         title="Service Categories"
         md={6}
+        disable={disable}
       />
       <CheckboxGroup
         {...shared}
         data={{...BusinessType}}
         group={`${BusinessType.id}`}
         title="Business Type"
+        disable={disable}
       />
       <CheckboxGroup
         {...shared}
         data={{...BusinessStage}}
         group={`${BusinessStage.id}`}
         title="Business Stage"
+        disable={disable}
       />
       <CheckboxGroup
         {...shared}
@@ -66,6 +72,7 @@ const ServiceForm = props => {
         group={`${UnderservedCommunities.id}`}
         title="Underserved Communities"
         md={6}
+        disable={disable}
       />
       <CheckboxGroup
         {...shared}
@@ -73,6 +80,7 @@ const ServiceForm = props => {
         group={`${Industry.id}`}
         title="Industry"
         md={6}
+        disable={disable}
       />
       <Keywords {...shared} />
       <DangerZone name="service" deleteClicked={openModal} />

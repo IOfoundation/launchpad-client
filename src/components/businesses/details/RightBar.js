@@ -74,7 +74,7 @@ class RightBar extends PureComponent {
     if (events && events.length > 0) {
       if (viewMoreEvents) {
         eventsElement = events.slice(0, 3).map(event => {
-          const date = getDate(event.posted_at);
+          const date = getDate(event.starting_at);
 
           return (
             <UpcomingEvents
@@ -88,7 +88,7 @@ class RightBar extends PureComponent {
         });
       } else {
         eventsElement = events.map(event => {
-          const date = getDate(event.posted_at);
+          const date = getDate(event.starting_at);
 
           return (
             <UpcomingEvents

@@ -1,7 +1,7 @@
 import React from 'react';
 import Content from './Content';
 import {PropTypes} from 'prop-types';
-import {formatAMPM, dayOfWeekAsInteger} from '../../../../utils';
+import {formatAMPM, dayOfWeekAsInteger} from '@Utils';
 
 const RegularSchedules = props => {
   const {schedules} = props;

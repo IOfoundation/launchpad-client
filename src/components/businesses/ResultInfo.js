@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
+import Grid from '@material-ui/core/Grid';
+
 import ArrowRight from '../shared/ArrowRight';
 
 class ResultInfo extends Component {
@@ -15,67 +17,73 @@ class ResultInfo extends Component {
 
   renderButtonBusinessTypeContainer() {
     return (
-      <div className="business-type-container col-lg-12 p-0 grid">
-        <div className="col-xs-4 col-md-4 col-lg-4 m-bot-16 p-0">
-          <button
-            className="btn btn-search btn-outline btn--padding"
-            key={this.props.filterOptions[0].id}
-            onClick={() => this._onClick(this.props.filterOptions[0])}
-          >
-            <div className="btn-search-text text-bold">
-              <span className="desktop-devices">{'Startup or High'}</span>
-              <span className="desktop-devices">{'Growth Business'}</span>
-              <span className="mobile-devices">
-                {'Startup or High Growth Business'}
-              </span>
-            </div>
-            <ArrowRight
-              className="btn-search-icon"
-              size={20}
-              style={{color: '#000', verticalAlign: 'middle'}}
-            />
-          </button>
-        </div>
-        <div className="col-xs-4 col-md-4 col-lg-4 m-bot-16 p-right-0">
-          <button
-            className="btn btn-search btn-outline btn--padding"
-            key={this.props.filterOptions[1].id}
-            onClick={() => this._onClick(this.props.filterOptions[1])}
-          >
-            <div className="btn-search-text text-bold">
-              <span className="desktop-devices">{'Main Street/'}</span>
-              <span className="desktop-devices">{'Small Business'}</span>
-              <span className="mobile-devices">
-                {'Main Street/Small Business'}
-              </span>
-            </div>
-            <ArrowRight
-              className="btn-search-icon"
-              size={20}
-              style={{color: '#000', verticalAlign: 'middle'}}
-            />
-          </button>
-        </div>
-        <div className="col-xs-4 col-md-4 col-lg-4 m-bot-16 p-right-0">
-          <button
-            className="btn btn-search btn-outline btn--padding"
-            key={this.props.filterOptions[2].id}
-            onClick={() => this._onClick(this.props.filterOptions[2])}
-          >
-            <div className="btn-search-text text-bold">
-              <span className="desktop-devices">{'Microenterprise or'}</span>
-              <span className="desktop-devices">{'Home-Based Business'}</span>
-              <span className="mobile-devices">
-                {'Microenterprise or Home-Based Business'}
-              </span>
-            </div>
-            <ArrowRight
-              className="btn-search-icon"
-              size={20}
-              style={{color: '#000', verticalAlign: 'middle'}}
-            />
-          </button>
-        </div>
+      <div style={{padding: '8px'}}>
+        <Grid
+          container={true}
+          className="business-type-containerx"
+          spacing={16}
+        >
+          <Grid item={true} xs={12} md={4}>
+            <button
+              className="btn btn-search btn-outline btn--padding"
+              key={this.props.filterOptions[0].id}
+              onClick={() => this._onClick(this.props.filterOptions[0])}
+            >
+              <div className="btn-search-text text-bold">
+                <span className="desktop-devices">{'Startup or High'}</span>
+                <span className="desktop-devices">{'Growth Business'}</span>
+                <span className="mobile-devices">
+                  {'Startup or High Growth Business'}
+                </span>
+              </div>
+              <ArrowRight
+                className="btn-search-icon"
+                size={20}
+                style={{color: '#000', verticalAlign: 'middle'}}
+              />
+            </button>
+          </Grid>
+          <Grid item={true} xs={12} md={4}>
+            <button
+              className="btn btn-search btn-outline btn--padding"
+              key={this.props.filterOptions[1].id}
+              onClick={() => this._onClick(this.props.filterOptions[1])}
+            >
+              <div className="btn-search-text text-bold">
+                <span className="desktop-devices">{'Main Street/'}</span>
+                <span className="desktop-devices">{'Small Business'}</span>
+                <span className="mobile-devices">
+                  {'Main Street/Small Business'}
+                </span>
+              </div>
+              <ArrowRight
+                className="btn-search-icon"
+                size={20}
+                style={{color: '#000', verticalAlign: 'middle'}}
+              />
+            </button>
+          </Grid>
+          <Grid item={true} xs={12} md={4}>
+            <button
+              className="btn btn-search btn-outline btn--padding"
+              key={this.props.filterOptions[2].id}
+              onClick={() => this._onClick(this.props.filterOptions[2])}
+            >
+              <div className="btn-search-text text-bold">
+                <span className="desktop-devices">{'Microenterprise or'}</span>
+                <span className="desktop-devices">{'Home-Based Business'}</span>
+                <span className="mobile-devices">
+                  {'Microenterprise or Home-Based Business'}
+                </span>
+              </div>
+              <ArrowRight
+                className="btn-search-icon"
+                size={20}
+                style={{color: '#000', verticalAlign: 'middle'}}
+              />
+            </button>
+          </Grid>
+        </Grid>
       </div>
     );
   }

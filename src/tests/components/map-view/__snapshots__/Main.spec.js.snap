@@ -2,6 +2,6 @@
 
 exports[`<Main /> renders snapshot of map-view/Main 1`] = `
 <p>
-  There is no locations
+  There are no locations to show
 </p>
 `;
