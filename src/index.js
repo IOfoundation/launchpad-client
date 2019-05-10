@@ -7,7 +7,6 @@ import {AppContainer} from 'react-hot-loader';
 import Root from './components/Root';
 import configureStore from './store/configureStore';
 import initialState from './store/initialState';
-import '../node_modules/flexboxgrid/css/flexboxgrid.min.css';
 import './styles/styles.css';
 import './fonts/fonts.min.css';
 

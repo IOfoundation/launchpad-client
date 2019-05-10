@@ -1,10 +1,11 @@
 import React from 'react';
 import {Link} from 'react-router';
-import ArrowRight from '../shared/ArrowRight';
-import FacebookIcon from '../shared/FacebookIcon';
-import TwitterIcon from '../shared/TwitterIcon';
-import LinkedinIcon from '../shared/LinkedinIcon';
-import GitIcon from '../shared/GitIcon';
+
+import ArrowRight from '@Shared/ArrowRight';
+import FacebookIcon from '@Shared/FacebookIcon';
+import TwitterIcon from '@Shared/TwitterIcon';
+import LinkedinIcon from '@Shared/LinkedinIcon';
+import GitIcon from '@Shared/GitIcon';
 
 const MobileFooter = () => {
   return (
