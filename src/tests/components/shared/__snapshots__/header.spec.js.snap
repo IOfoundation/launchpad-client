@@ -38,6 +38,7 @@ exports[`<Header /> Nav Bar Must have a link to blog page 1`] = `
           "login": [Function],
           "passwordRecovery": [Function],
           "passwordReset": [Function],
+          "reset": [Function],
           "resetError": [Function],
           "signOut": [Function],
           "singUp": [Function],

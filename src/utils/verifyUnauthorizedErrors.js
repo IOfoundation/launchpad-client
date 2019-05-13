@@ -9,5 +9,9 @@ export const verifyUnauthorizedErrors = (dispatch, errors) => {
 
   if (is(401) || is(403)) {
     dispatch(errorsActions.userUnauthorized());
+
+    return false;
   }
+
+  return true;
 };

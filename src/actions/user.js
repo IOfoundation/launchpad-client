@@ -369,3 +369,13 @@ export const passwordReset = (token, password, newPassword) => {
     }
   };
 };
+
+export const reset = () => {
+  sessionStorage.removeItem('userAuth');
+  sessionStorage.removeItem('userEmail');
+  sessionStorage.removeItem('organizationId');
+
+  return {
+    type: types.RESET,
+  };
+};

@@ -4,7 +4,6 @@ import * as Yup from 'yup';
 import {PropTypes} from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {withRouter} from 'react-router';
 
 import ProfileForm from './ProfileForm';
 import LandingComponent from '../Landing';
@@ -332,4 +331,4 @@ ProfileFormContainer.propTypes = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRouter(ProfileFormContainer));
+)(ProfileFormContainer);

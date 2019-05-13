@@ -31,8 +31,9 @@ export const getUserInformation = ({Authorization}) => {
       const httpResponse = await httpRequest.get('/api/users', config);
       dispatch(getUserInformationSuccess(httpResponse.data));
     } catch (errors) {
-      verifyUnauthorizedErrors(dispatch, errors);
-      dispatch(getUserInformationError(errors.data));
+      if (!verifyUnauthorizedErrors(dispatch, errors)) {
+        dispatch(getUserInformationError(errors.data));
+      }
     }
   };
 };

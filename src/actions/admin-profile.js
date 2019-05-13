@@ -66,10 +66,8 @@ export const updateCompany = ({organization, organizationId, auth}) => {
 
       dispatch(updateCompanySuccess(httpResponse.data[0]));
     } catch (errors) {
-      verifyUnauthorizedErrors(dispatch, errors);
-
-      if (errors.status !== 404) {
-        dispatch(updateCompanyFail(errors.data.errors));
+      if (!verifyUnauthorizedErrors(dispatch, errors)) {
+        updateCompanyFail(errors.data.errors);
       }
     }
   };

@@ -6,6 +6,7 @@ import {PropTypes} from 'prop-types';
 
 import * as snackbarActions from '@Actions/snackbar';
 import * as userInformationActions from '@Actions/user-information';
+import * as userActions from '@Actions/user';
 import {getAuthorization} from '@Utils';
 
 const withErrorHandler = WrapperComponent => {
@@ -33,7 +34,7 @@ const withErrorHandler = WrapperComponent => {
     }
 
     _displayErrorAndRedirect() {
-      const {snackbar, router, isSigningOut} = this.props;
+      const {snackbar, router, isSigningOut, user} = this.props;
       let message = 'Unauthorized, please log in';
 
       if (isSigningOut) {
@@ -43,10 +44,8 @@ const withErrorHandler = WrapperComponent => {
       snackbar.showSnackbar({
         message,
       });
-      router.push('/admin-login');
-      sessionStorage.removeItem('userAuth');
-      sessionStorage.removeItem('userEmail');
-      sessionStorage.removeItem('organizationId');
+      user.reset();
+      router.replace('/admin-login');
     }
 
     render() {
@@ -71,6 +70,7 @@ const withErrorHandler = WrapperComponent => {
     return {
       snackbar: bindActionCreators(snackbarActions, _dispatch),
       userInformation: bindActionCreators(userInformationActions, _dispatch),
+      user: bindActionCreators(userActions, _dispatch),
     };
   }
 
@@ -82,6 +82,9 @@ const withErrorHandler = WrapperComponent => {
     }),
     snackbar: PropTypes.shape({
       showSnackbar: PropTypes.func.isRequired,
+    }),
+    user: PropTypes.shape({
+      reset: PropTypes.func.isRequired,
     }),
     userAuthorized: PropTypes.bool.isRequired,
     userInformation: PropTypes.shape({

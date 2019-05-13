@@ -303,6 +303,33 @@ const passwordResetError = state => {
   };
 };
 
+const reset = () => {
+  return {
+    loading: false,
+    authorization: '',
+    error: false,
+    emailReset: '',
+    signUpSuccessfully: false,
+    singUpErrors: {
+      model: '',
+      errors: {},
+    },
+    loginError: '',
+    passwordResetSuccess: false,
+    organizationId: 0,
+    signOut: {
+      errors: {},
+      success: false,
+      loading: false,
+    },
+    userInformation: {
+      username: '',
+      email: '',
+    },
+    updateInformation: {...initialUpdateInformation},
+  };
+};
+
 /* eslint-disable complexity */
 export default function(state = initialState, action) {
   switch (action.type) {
@@ -404,6 +431,10 @@ export default function(state = initialState, action) {
 
     case types.PASSWORD_RESET_ERROR: {
       return passwordResetError(state);
+    }
+
+    case types.RESET: {
+      return reset(state);
     }
 
     default:
