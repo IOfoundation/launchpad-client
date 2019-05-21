@@ -151,7 +151,7 @@ class PostDetails extends PureComponent {
                 router={router}
               />
             </Grid>
-            {images.length > 0 && (
+            {images && images.length > 0 && (
               <Grid item={true} xs={12} md={10} className={classes.figure}>
                 <img src={images[0].file_url} alt={images[0].file_legend} />
                 <figcaption>{images[0].file_legend}</figcaption>
