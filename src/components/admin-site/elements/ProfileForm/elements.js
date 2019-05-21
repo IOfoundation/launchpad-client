@@ -3,15 +3,15 @@ import {numberType} from '@StaticData/data';
 export const sectionOnePhoto = [
   {
     key: 'name',
-    label: 'Name',
+    label: 'Display Name',
     autocomplete: 'off',
   },
-  {
-    key: 'organizationName',
-    label: 'Organization Display Name',
-    autocomplete: 'off',
-    helperText: 'This is how the name will appear to other users.',
-  },
+  // {
+  //   key: 'organizationName',
+  //   label: 'Organization Display Name',
+  //   autocomplete: 'off',
+  //   helperText: 'This is how the name will appear to other users.',
+  // },
   {
     key: 'website',
     label: 'Organization Website',
