@@ -17,9 +17,7 @@ const Main = ({items, getTextSearchResults}) => {
                 {"California's Capital Region"}
               </h2>
               <h3 className="sub-title desktop-devices">
-                {
-                  'Over 650 resources to help your business grow est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.'
-                }
+                {'Over 650 resources to help your business grow.'}
               </h3>
               <h2 className="mobile-devices text-bold">
                 {
