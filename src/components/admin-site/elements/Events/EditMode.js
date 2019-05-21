@@ -44,7 +44,7 @@ const EditMode = props => {
         handleBlur={handleBlur}
         handleChange={handleChange}
         id="endTime"
-        label="End Date"
+        label="End Time"
         name="endTime"
         value={values.endTime}
         type="time"
