@@ -31,15 +31,18 @@ class FeaturedPosts extends PureComponent {
         let title = post.title;
         let imgSrc = '';
 
-        // if (description.split('').length > 30) {
-        //   description = truncate(description, 30);
-        // }
+        if (description.split('').length > 30) {
+          description = truncate(description, 30);
+        }
 
-        // if (title.split('').length > 80) {
-        //   title = truncate(title, 80);
-        // }
+        if (title.split('').length > 80) {
+          title = truncate(title, 80);
+        }
 
-        if (post.blog_post_attachments.length > 0) {
+        if (
+          post.blog_post_attachments &&
+          post.blog_post_attachments.length > 0
+        ) {
           imgSrc = post.blog_post_attachments[0].file_url;
         }
 
