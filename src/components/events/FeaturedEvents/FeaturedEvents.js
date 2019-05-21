@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import FeaturedEvent from './FeaturedEvent';
 import FeaturedEventLoading from './FeaturedEventLoading';
 
-import {containerStyles} from '@Utils';
+import {containerStyles, truncate, htmlStripper} from '@Utils';
 
 const styles = theme => ({
   container: {
@@ -52,11 +52,22 @@ const FeaturedEvents = props => {
   if (events.length > 0 && !Array.isArray(events[0]) && !loading) {
     featuredEventsElements = events.map(month => {
       const infoElements = month[month.key].map(info => {
+        let description = htmlStripper(info.body);
+        let title = info.title;
+
+        if (description.split('').length > 100) {
+          description = truncate(description, 100);
+        }
+
+        if (title.split('').length > 30) {
+          title = truncate(title, 30);
+        }
+
         return (
           <FeaturedEvent
             key={info.id}
-            title={info.title}
-            description={info.body}
+            title={title}
+            description={description}
             date={`${info.starting_at.monthLarge} ${info.starting_at.day}, ${
               info.starting_at.year
             }`}

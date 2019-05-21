@@ -1893,7 +1893,7 @@ exports[`<FeaturedEvents /> renders snapshot of FeaturedEvents 1`] = `
                     handlerModalVisibility={[Function]}
                     key="290"
                     name="Brakus-Harvey"
-                    title="Forward Administration Producer"
+                    title="Forward Administration Produce..."
                   >
                     <div
                       className="featured-event"
@@ -1902,7 +1902,7 @@ exports[`<FeaturedEvents /> renders snapshot of FeaturedEvents 1`] = `
                         className="featured-event__title text-bold"
                         onClick={[Function]}
                       >
-                        Forward Administration Producer
+                        Forward Administration Produce...
                       </h3>
                       <p
                         className="featured-event__description"
