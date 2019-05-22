@@ -37,7 +37,7 @@ const ServiceForm = props => {
   const BusinessStage = findCheckbox(145);
   const UnderservedCommunities = findCheckbox(150);
   const Industry = findCheckbox(161);
-  const disable = createArrayOfIds(values.taxonomy).length > 4;
+  const disable = createArrayOfIds(values.taxonomy).length > 14;
 
   return (
     <Form className="profile-form" onSubmit={handleSubmit}>

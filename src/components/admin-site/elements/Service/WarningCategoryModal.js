@@ -11,7 +11,7 @@ const WarningCategoryModal = props => {
     <ModalUi open={open} onClose={modalClosed}>
       <div className={classes.modal}>
         <p className={`text-bold ${classes.alert}`}>
-          {'Please only select a maximum of 5 categories'}
+          {'Please only select a maximum of 15 categories'}
         </p>
         <Grid container={true} justify={'flex-end'}>
           <Grid item={true}>
