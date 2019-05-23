@@ -9,142 +9,133 @@ exports[`<ResultInfo /> renders snapshot of ResultInfo 1`] = `
   >
     Select a business type that represents you.
   </p>
-  <div
-    style={
-      Object {
-        "padding": "8px",
-      }
-    }
+  <WithStyles(Grid)
+    container={true}
+    spacing={16}
   >
     <WithStyles(Grid)
-      className="business-type-containerx"
-      container={true}
-      spacing={16}
+      item={true}
+      md={4}
+      xs={12}
     >
-      <WithStyles(Grid)
-        item={true}
-        md={4}
-        xs={12}
+      <button
+        className="btn btn-search btn-outline btn--padding"
+        key="142"
+        onClick={[Function]}
       >
-        <button
-          className="btn btn-search btn-outline btn--padding"
-          key="142"
-          onClick={[Function]}
+        <div
+          className="btn-search-text text-bold"
         >
-          <div
-            className="btn-search-text text-bold"
+          <span
+            className="desktop-devices"
           >
-            <span
-              className="desktop-devices"
-            >
-              Startup or High
-            </span>
-            <span
-              className="desktop-devices"
-            >
-              Growth Business
-            </span>
-            <span
-              className="mobile-devices"
-            >
-              Startup or High Growth Business
-            </span>
-          </div>
-          <ArrowRight
-            className="btn-search-icon"
-            size={20}
-            style={
-              Object {
-                "color": "#000",
-                "verticalAlign": "middle",
-              }
-            }
-          />
-        </button>
-      </WithStyles(Grid)>
-      <WithStyles(Grid)
-        item={true}
-        md={4}
-        xs={12}
-      >
-        <button
-          className="btn btn-search btn-outline btn--padding"
-          key="143"
-          onClick={[Function]}
-        >
-          <div
-            className="btn-search-text text-bold"
+            Startup or High
+          </span>
+          <span
+            className="desktop-devices"
           >
-            <span
-              className="desktop-devices"
-            >
-              Main Street/
-            </span>
-            <span
-              className="desktop-devices"
-            >
-              Small Business
-            </span>
-            <span
-              className="mobile-devices"
-            >
-              Main Street/Small Business
-            </span>
-          </div>
-          <ArrowRight
-            className="btn-search-icon"
-            size={20}
-            style={
-              Object {
-                "color": "#000",
-                "verticalAlign": "middle",
-              }
-            }
-          />
-        </button>
-      </WithStyles(Grid)>
-      <WithStyles(Grid)
-        item={true}
-        md={4}
-        xs={12}
-      >
-        <button
-          className="btn btn-search btn-outline btn--padding"
-          key="144"
-          onClick={[Function]}
-        >
-          <div
-            className="btn-search-text text-bold"
+            Growth Business
+          </span>
+          <span
+            className="mobile-devices"
           >
-            <span
-              className="desktop-devices"
-            >
-              Microenterprise or
-            </span>
-            <span
-              className="desktop-devices"
-            >
-              Home-Based Business
-            </span>
-            <span
-              className="mobile-devices"
-            >
-              Microenterprise or Home-Based Business
-            </span>
-          </div>
-          <ArrowRight
-            className="btn-search-icon"
-            size={20}
-            style={
-              Object {
-                "color": "#000",
-                "verticalAlign": "middle",
-              }
+            Startup or High Growth Business
+          </span>
+        </div>
+        <ArrowRight
+          className="btn-search-icon"
+          size={20}
+          style={
+            Object {
+              "color": "#000",
+              "verticalAlign": "middle",
             }
-          />
-        </button>
-      </WithStyles(Grid)>
+          }
+        />
+      </button>
     </WithStyles(Grid)>
-  </div>
+    <WithStyles(Grid)
+      item={true}
+      md={4}
+      xs={12}
+    >
+      <button
+        className="btn btn-search btn-outline btn--padding"
+        key="143"
+        onClick={[Function]}
+      >
+        <div
+          className="btn-search-text text-bold"
+        >
+          <span
+            className="desktop-devices"
+          >
+            Main Street/
+          </span>
+          <span
+            className="desktop-devices"
+          >
+            Small Business
+          </span>
+          <span
+            className="mobile-devices"
+          >
+            Main Street/Small Business
+          </span>
+        </div>
+        <ArrowRight
+          className="btn-search-icon"
+          size={20}
+          style={
+            Object {
+              "color": "#000",
+              "verticalAlign": "middle",
+            }
+          }
+        />
+      </button>
+    </WithStyles(Grid)>
+    <WithStyles(Grid)
+      item={true}
+      md={4}
+      xs={12}
+    >
+      <button
+        className="btn btn-search btn-outline btn--padding"
+        key="144"
+        onClick={[Function]}
+      >
+        <div
+          className="btn-search-text text-bold"
+        >
+          <span
+            className="desktop-devices"
+          >
+            Microenterprise or
+          </span>
+          <span
+            className="desktop-devices"
+          >
+            Home-Based Business
+          </span>
+          <span
+            className="mobile-devices"
+          >
+            Microenterprise or Home-Based Business
+          </span>
+        </div>
+        <ArrowRight
+          className="btn-search-icon"
+          size={20}
+          style={
+            Object {
+              "color": "#000",
+              "verticalAlign": "middle",
+            }
+          }
+        />
+      </button>
+    </WithStyles(Grid)>
+  </WithStyles(Grid)>
 </div>
 `;

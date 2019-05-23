@@ -27,7 +27,12 @@
       display: inline-block;
       line-height: 24px;
       vertical-align: middle;
+      white-space: normal;
       width: 84%;
+
+      @media (max-width: 60em) {
+        line-height: initial;
+      }
     }
 
     span {
