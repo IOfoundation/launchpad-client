@@ -2,12 +2,11 @@ import React, {PureComponent} from 'react';
 import {PropTypes} from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
+
+import ItemSelect from './ItemSelect';
 
 import {truncate} from '@Utils';
 import {Colors} from '@Styles/Colors';
-import ItemMenuOptions from './ItemMenuOptions';
 
 class Item extends PureComponent {
   state = {
@@ -47,55 +46,12 @@ class Item extends PureComponent {
     } = this.props;
     const containerClasses = [classes.container];
     let truncateUrl = url;
-    let selectElement = (
-      <div className={classes.hideSelect}>
-        <i
-          className={`material-icons ${classes.floating} ${classes.front}`}
-          onClick={this.handleOpen}
-        >
-          {'keyboard_arrow_down'}
-        </i>
-        <Select
-          open={this.state.open}
-          value={this.state.option}
-          onChange={this.updateValue}
-          onClose={this.handleClose}
-          onOpen={this.handleOpen}
-          inputProps={{
-            name: 'service',
-            id: 'service-options',
-            classes: {
-              icon: classes.icon,
-            },
-          }}
-          MenuProps={{
-            MenuListProps: {
-              classes: {
-                root: classes.rootMenuListCss,
-              },
-            },
-          }}
-          className={`${classes.floating} ${classes.back}`}
-        >
-          {Object.keys(ItemMenuOptions).map(option => (
-            <MenuItem
-              key={option}
-              value={option}
-              className={classes.menuListCss}
-            >
-              {option}
-            </MenuItem>
-          ))}
-        </Select>
-      </div>
-    );
 
     if (truncateUrl && truncateUrl.split('').length > 70) {
       truncateUrl = truncate(label, 70);
     }
 
     if (disable) {
-      selectElement = null;
       containerClasses.push(classes.disable);
     }
 
@@ -131,7 +87,14 @@ class Item extends PureComponent {
           <Grid className={classes.date}>
             <span>{date}</span>
           </Grid>
-          {selectElement}
+          <ItemSelect
+            classes={classes}
+            handleOpen={this.handleOpen}
+            handleClose={this.handleClose}
+            updateValue={this.updateValue}
+            open={this.state.open}
+            option={this.state.option}
+          />
           <Grid className={classes.category}>{category}</Grid>
         </Grid>
       </div>
