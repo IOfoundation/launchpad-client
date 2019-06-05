@@ -10,7 +10,9 @@ const FilterBoxMobile = ({
   businesses: {appliedFilters, filters, items, organizations},
 }) => {
   return (
-    <div className="container-invert">
+    // override marginTop as nothing is above this element on mobile
+    // and it produces an ugly white strip between the header and filter
+    <div className="container-invert" style={{marginTop: 0}}>
       <FilterByOptions
         filterOptions={filters}
         handleOnChangeFilterOptions={handleOnChangeFilterOptions}
