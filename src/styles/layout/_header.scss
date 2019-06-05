@@ -88,3 +88,10 @@
     }
   }
 }
+
+// make the body background match the header color
+// so that elastic scrolling in Mobile Safari doesn't create
+// an incongruous white region below the header
+// making #app white prevents this from being visible otherwise
+body { background: $primary-color; }
+#app { background: #fff; }
