@@ -199,7 +199,9 @@ const mapStateToProps = _state => {
   return {
     error: _state.user.error,
     auth,
-    categories: _state.blogs.categories,
+    categories: _state.blogs.categories.filter(
+      cat => cat.name !== 'front page'
+    ),
     savePostError: Object.keys(_state.adminBlogs.savePost.errors).length > 0,
     hideFooter: _state.adminBlogs.hideFooter,
     postSaved: Object.keys(_state.adminBlogs.savePost.data).length > 0,
