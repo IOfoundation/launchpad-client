@@ -2,16 +2,11 @@
   cursor: pointer;
 
   &__img-container {
-    align-items: center;
-    display: flex;
-    height: 225px;
-    justify-content: center;
+    @include aspect-box(1);
     margin-bottom: 12px;
-    overflow: hidden;
 
     &__img {
-      height: 100%;
-      width: auto;
+      object-fit: cover;
     }
   }
 

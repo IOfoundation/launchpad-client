@@ -51,7 +51,7 @@ class FeaturedPosts extends PureComponent {
         }
 
         return (
-          <Grid item={true} sm={3} xs={12} wrap="wrap" key={post.id}>
+          <Grid item={true} sm={3} xs={12} key={post.id}>
             <FeaturedPost
               imageSrc={imgSrc}
               title={title}
