@@ -207,7 +207,14 @@ const mapStateToProps = _state => {
     postSaved: Object.keys(_state.adminBlogs.savePost.data).length > 0,
     postUpdated: Object.keys(_state.adminBlogs.updatePost.data).length > 0,
     post: {
-      result: _state.blogs.post,
+      result: _state.blogs.getPostIdSuccess
+        ? {
+            ..._state.blogs.post,
+            categories: _state.blogs.post.categories.filter(
+              cat => cat.name !== 'front page' && cat.name !== 'featured'
+            ),
+          }
+        : _state.blogs.post,
       noResults: _state.blogs.noResults,
     },
     getPostIdSuccess: _state.blogs.getPostIdSuccess,
