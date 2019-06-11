@@ -162,7 +162,10 @@ class ProfileFormContainer extends PureComponent {
     } else if (getPostIdSuccess) {
       form = this._getForm(
         {
-          category: post.result.categories[0].name,
+          category:
+            post.result.categories.length > 0
+              ? post.result.categories[0].name
+              : '',
           title: post.result.title,
           body: post.result.body,
         },
