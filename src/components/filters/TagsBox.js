@@ -28,7 +28,7 @@ const TagsBox = ({filters, clearAll, deleteFilter}) => {
         ? _renderChips()
         : ''}
       {!isEmpty(filters.category) && (
-        <a className="search-filter-clear text-thin" onClick={clearAll}>
+        <a className="search-filter-clear" onClick={clearAll}>
           <span>{'Clear All'}</span>
         </a>
       )}
