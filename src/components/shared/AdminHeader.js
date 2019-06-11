@@ -30,7 +30,7 @@ class AdminHeader extends PureComponent {
         <div className="contentContainer header grid between-xs middle-xs text-semi">
           <div className="header_links-title">
             <span className="header_title">
-              <Link to="/" className="white-link">
+              <Link to="/" className="white-link" style={{opacity: '1'}}>
                 {'Welcome to Resource Finder'}
               </Link>
             </span>
@@ -43,7 +43,6 @@ class AdminHeader extends PureComponent {
             <div
               className="header_link title-as-link"
               to="#"
-              style={{opacity: '1'}}
               onClick={this.signOut}
             >
               {'Log Out'}

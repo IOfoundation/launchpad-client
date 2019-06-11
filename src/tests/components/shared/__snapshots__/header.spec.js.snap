@@ -61,29 +61,32 @@ exports[`<Header /> Nav Bar Must have a link to blog page 1`] = `
               className="header_title"
             >
               <IndexLink
-                activeStyle={
+                className="white-link text-bold"
+                style={
                   Object {
                     "opacity": "1",
                   }
                 }
-                className="white-link text-bold"
                 to="/"
               >
                 <Link
-                  activeStyle={
+                  className="white-link text-bold"
+                  onlyActiveOnIndex={true}
+                  style={
                     Object {
                       "opacity": "1",
                     }
                   }
-                  className="white-link text-bold"
-                  onlyActiveOnIndex={true}
-                  style={Object {}}
                   to="/"
                 >
                   <a
                     className="white-link text-bold"
                     onClick={[Function]}
-                    style={Object {}}
+                    style={
+                      Object {
+                        "opacity": "1",
+                      }
+                    }
                   >
                     Welcome to Resource Finder
                   </a>
