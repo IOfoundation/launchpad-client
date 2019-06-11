@@ -30,12 +30,12 @@ export class Businesses extends PureComponent {
   }
 
   componentDidMount() {
-    window.onpopstate = this.onBackButtonEvent;
+    window.addEventListener('resize', this.handleWindowSizeChange);
+    window.addEventListener('popstate', this.onBackButtonEvent);
 
     const {params} = this.props;
     this.props.actions.fetchFilterOptions();
     const locationToggleSwitch = 'ne_lat' in params;
-    window.addEventListener('resize', this.handleWindowSizeChange);
     this.props.actions.changeFilterDisplayOptions(
       this.checkBusinessType(params.category),
       locationToggleSwitch
@@ -49,6 +49,7 @@ export class Businesses extends PureComponent {
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleWindowSizeChange);
+    window.removeEventListener('popstate', this.onBackButtonEvent);
   }
 
   onBackButtonEvent = () => {

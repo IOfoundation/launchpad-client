@@ -51,7 +51,7 @@ class FeaturedPosts extends PureComponent {
         }
 
         return (
-          <Grid item={true} xs={3} key={post.id}>
+          <Grid item={true} sm={3} xs={12} key={post.id}>
             <FeaturedPost
               imageSrc={imgSrc}
               title={title}
@@ -86,9 +86,6 @@ const styles = theme => ({
     minHeight: '297px',
     padding: 12,
     overflowX: 'auto',
-  },
-  featuredPosts: {
-    minWidth: '960px',
   },
 });
 
