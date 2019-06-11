@@ -10,17 +10,18 @@
   &-outline {
     align-items: center;
     background-color: transparent;
-    border: 1px solid $primary-color;
     display: flex;
+
+    border: 1px solid $primary-color;
+
+    &:hover {
+      border-width: 2px;
+      padding: 18px 22px;
+    }
   }
 
   &-search {
     width: 100%;
-
-    .btn-outline {
-      background-color: transparent;
-      border: 1px solid $primary-color;
-    }
 
     &-text {
       color: #000;
@@ -249,6 +250,10 @@
 
   &--padding {
     padding: 1em;
+
+    &.btn-outline:hover {
+      padding: calc(1em - 1px);
+    }
   }
 }
 
