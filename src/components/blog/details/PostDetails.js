@@ -118,7 +118,6 @@ class PostDetails extends PureComponent {
   render() {
     const {classes, post, posts, actions, router} = this.props;
     const images = post.blog_post_attachments;
-    const category = post.categories && post.categories[0].name;
     const id = this.props.post.organization && this.props.post.organization.id;
     let postsDetailsElement = <Loading />;
 
@@ -135,12 +134,25 @@ class PostDetails extends PureComponent {
             <Grid item={true} xs={12} md={8}>
               <div className={classes.categories}>
                 <i className="material-icons">{'label'}</i>
-                <span
-                  className="text-semi title-as-link"
-                  onClick={() => this.navigateToBlogIndexWithCategory(category)}
-                >
-                  {category}
-                </span>
+                {post.categories &&
+                  post.categories.map(cat => {
+                    if (cat.name === 'front page' || cat.name === 'featured') {
+                      return null;
+                    }
+
+                    return (
+                      <span
+                        key={cat.name}
+                        className="text-semi title-as-link"
+                        style={{marginRight: '1em'}}
+                        onClick={() =>
+                          this.navigateToBlogIndexWithCategory(cat.name)
+                        }
+                      >
+                        {cat.name}
+                      </span>
+                    );
+                  })}
               </div>
               <h1 className={[classes.title, 'text-bold'].join(' ')}>
                 {post.title}
