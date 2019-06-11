@@ -52,7 +52,7 @@ const FeaturedEvents = props => {
   if (events.length > 0 && !Array.isArray(events[0]) && !loading) {
     featuredEventsElements = events.map(month => {
       const infoElements = month[month.key].map(info => {
-        let description = htmlStripper(info.body);
+        let description = info.body ? htmlStripper(info.body) : '';
         let title = info.title;
 
         if (description.split('').length > 100) {
