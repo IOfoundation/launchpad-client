@@ -114,22 +114,20 @@ const EditMode = props => {
             label="Address (Line 2)"
             value={values.address2}
           />
+          <FormTextField
+            autocomplete="off"
+            error={touched.city && Boolean(errors.city)}
+            errors={errors}
+            handleBlur={handleBlur}
+            handleChange={handleChange}
+            id="city"
+            name="city"
+            label="City"
+            value={values.city}
+          />
           <div style={{padding: '8px 0'}}>
             <Grid container={true} spacing={16}>
-              <Grid item={true} xs={12} sm={6}>
-                <FormTextField
-                  autocomplete="off"
-                  error={touched.city && Boolean(errors.city)}
-                  errors={errors}
-                  handleBlur={handleBlur}
-                  handleChange={handleChange}
-                  id="city"
-                  name="city"
-                  label="City"
-                  value={values.city}
-                />
-              </Grid>
-              <Grid item={true} xs={12} sm={3}>
+              <Grid item={true} xs={12} sm={8}>
                 <SelectElement
                   errors={errors}
                   handleBlur={handleBlur}
@@ -141,7 +139,7 @@ const EditMode = props => {
                   value={values.state}
                 />
               </Grid>
-              <Grid item={true} xs={12} sm={3}>
+              <Grid item={true} xs={12} sm={4}>
                 <FormTextField
                   autocomplete="off"
                   error={touched.zip && Boolean(errors.zip)}
