@@ -18,9 +18,6 @@ const styles = theme => ({
     ...containerStyles(theme),
     maxHeight: '270px',
   },
-  featuredEvents: {
-    minWidth: theme.breakpoints.values.md,
-  },
 });
 
 const eventsHasData = events => {
@@ -80,7 +77,7 @@ const FeaturedEvents = props => {
       });
 
       return (
-        <Grid item={true} xs={4} key={month.key}>
+        <Grid item={true} sm={4} xs={12} key={month.key}>
           <h2 className="featured-events__title text-bold">{month.title}</h2>
           {infoElements}
         </Grid>
