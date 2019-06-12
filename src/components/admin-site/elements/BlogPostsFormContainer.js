@@ -162,7 +162,10 @@ class ProfileFormContainer extends PureComponent {
     } else if (getPostIdSuccess) {
       form = this._getForm(
         {
-          category: post.result.categories[0].name,
+          category:
+            post.result.categories.length > 0
+              ? post.result.categories[0].name
+              : '',
           title: post.result.title,
           body: post.result.body,
         },
@@ -199,13 +202,22 @@ const mapStateToProps = _state => {
   return {
     error: _state.user.error,
     auth,
-    categories: _state.blogs.categories,
+    categories: _state.blogs.categories.filter(
+      cat => cat.name !== 'front page'
+    ),
     savePostError: Object.keys(_state.adminBlogs.savePost.errors).length > 0,
     hideFooter: _state.adminBlogs.hideFooter,
     postSaved: Object.keys(_state.adminBlogs.savePost.data).length > 0,
     postUpdated: Object.keys(_state.adminBlogs.updatePost.data).length > 0,
     post: {
-      result: _state.blogs.post,
+      result: _state.blogs.getPostIdSuccess
+        ? {
+            ..._state.blogs.post,
+            categories: _state.blogs.post.categories.filter(
+              cat => cat.name !== 'front page' && cat.name !== 'featured'
+            ),
+          }
+        : _state.blogs.post,
       noResults: _state.blogs.noResults,
     },
     getPostIdSuccess: _state.blogs.getPostIdSuccess,
