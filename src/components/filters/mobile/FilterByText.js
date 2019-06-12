@@ -108,7 +108,7 @@ class FilterByTextMobile extends PureComponent {
                 : this.state.searchText
             }
             onChange={e => this.handleKeyPress(e)}
-            className="search-by-text text-thin"
+            className="search-by-text"
             placeholder="Or search by name"
           />
           <img

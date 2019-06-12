@@ -122,12 +122,7 @@ class FilterByText extends Component {
     return (
       <ul className="option-dropdown-list">
         {this.props.items.map(item => (
-          <li
-            key={item.id}
-            className={
-              item.searchable_type === 'Organization' ? 'text-thin' : ''
-            }
-          >
+          <li key={item.id}>
             <a onClick={e => this.handleDropdownOnClick(item, e)}>
               {item.content}
             </a>
@@ -153,15 +148,15 @@ class FilterByText extends Component {
           <div
             className={
               this.state.inputOnFocus
-                ? 'col-lg-8 col-md-7 col-xs-7 no-padding'
-                : 'filter-by-text-transition col-lg-9 col-md-8 col-xs-8 no-padding'
+                ? 'col-lg-7 col-md-6 col-xs-6 no-padding'
+                : 'filter-by-text-transition col-lg-8 col-md-7 col-xs-7 no-padding'
             }
           >
             {this.renderChipsContainer(appliedFilters)}
             <h3
               className={
                 isEmpty(appliedFilters.category)
-                  ? 'text-thin filter-result-text'
+                  ? 'filter-result-text'
                   : 'hide-filter'
               }
             >
@@ -171,13 +166,13 @@ class FilterByText extends Component {
           <div
             className={
               this.state.inputOnFocus
-                ? 'filter-by-text-transition col-lg-4 col-md-5 col-xs-5 no-padding position-relative'
-                : 'filter-by-text-transition col-lg-3 col-md-4 col-xs-4 no-padding position-relative'
+                ? 'filter-by-text-transition col-lg-5 col-md-6 col-xs-6 no-padding position-relative'
+                : 'filter-by-text-transition col-lg-4 col-md-5 col-xs-5 no-padding position-relative'
             }
           >
             <input
               type="text"
-              className="search-by-text text-thin"
+              className="search-by-text"
               value={this.state.searchText}
               onChange={e => this.handleKeyPress(e)}
               onClick={() => this.handleInputClicked()}
@@ -194,7 +189,7 @@ class FilterByText extends Component {
                   ? {opacity: 0}
                   : {opacity: 1}
               }
-              className="fake-placeholder text-thin"
+              className="fake-placeholder"
             >
               {'Or '}
               <span className="underline-text">{'search'}</span> {'by name'}

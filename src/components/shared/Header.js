@@ -58,7 +58,7 @@ const Header = props => {
             <IndexLink
               to="/"
               className="white-link text-bold"
-              activeStyle={activeStyles}
+              style={activeStyles}
             >
               {'Welcome to Resource Finder'}
             </IndexLink>

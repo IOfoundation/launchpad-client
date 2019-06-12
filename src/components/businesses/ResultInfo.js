@@ -11,8 +11,8 @@ class ResultInfo extends Component {
 
   displayOrganizationLabel = totalOrganizations => {
     return totalOrganizations === 1
-      ? `${totalOrganizations} Organization Available`
-      : `${totalOrganizations} Organizations Available`;
+      ? `${totalOrganizations} Resource Available`
+      : `${totalOrganizations} Resources Available`;
   };
 
   renderButtonBusinessTypeContainer() {
@@ -98,7 +98,7 @@ class ResultInfo extends Component {
           <div className="col-lg-12 col-md-12 col-xs-12 p-0 desktop-devices">
             <h3 className="m-top-24 col-xs-12 col-md-12 col-lg-12 no-padding">
               {showLoading
-                ? 'Loading Organizations'
+                ? 'Loading Resources'
                 : this.displayOrganizationLabel(totalOrganizations)}
             </h3>
             <hr className="m-bot-24 m-top-16" />
