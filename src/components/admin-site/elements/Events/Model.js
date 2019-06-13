@@ -35,6 +35,8 @@ const formModel = ({
 
   if (description) {
     mapped.body = description;
+  } else {
+    mapped.body = null;
   }
 
   if (endDate) {
