@@ -48,6 +48,7 @@
     "draft-convert": "2.1.4",
     "draft-js-video-plugin": "2.0.1",
     "express": "4.16.2",
+    "express-force-https": "1.0.0",
     "flexboxgrid": "6.3.1",
     "formik": "1.5.1",
     "google-map-react": "1.1.4",

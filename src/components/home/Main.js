@@ -33,6 +33,12 @@ const Main = ({items, getTextSearchResults}) => {
               <div className="margin-auto margin-y-20 text-thin">
                 <Link
                   className="link hero-link p-bot-10 margin-x-16 m-bot-16"
+                  to="/businesses?category=COVID-19"
+                >
+                  {'COVID-19'}
+                </Link>
+                <Link
+                  className="link hero-link p-bot-10 margin-x-16 m-bot-16"
                   to="/businesses?category=Planning/Management"
                 >
                   {'Business Planning/Managment'}
