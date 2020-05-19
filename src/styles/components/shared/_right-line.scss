@@ -1,0 +1,48 @@
+.right-line {
+  position: relative;
+
+  &:after {
+    background: #e1e1e1;
+    content: '';
+    height: 100%;
+    position: absolute;
+    right: -1px;
+    top: 0;
+    width: 1px;
+  }
+
+  @media (max-width: 60em) {
+    &:after {
+      display: none;
+    }
+  }
+
+  &--text {
+    &:after {
+      background: #070709;
+      height: 65%;
+      top: 4px;
+    }
+
+    @media (max-width: 60em) {
+      &:after {
+        display: block;
+      }
+    }
+  }
+}
+
+.bottom-line {
+  position: relative;
+
+  &:after {
+    background: $green-color;
+    content: '';
+    height: 2px;
+    position: absolute;
+    right: 50%;
+    bottom: -2px;
+    width: 60px;
+    transform: translateX(calc(-50% + 60px));
+  }
+}

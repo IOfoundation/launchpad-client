@@ -1,93 +1,124 @@
 .business-details-container {
   .business-information {
     max-width: 95%;
+
+    .title {
+      font-size: 16px;
+      line-height: 24px;
+      margin-bottom: 4px;
+    }
   }
+
   .website-icon {
-    color: #fff;
     background-color: #2bd587;
+    color: #fff;
+    display: inline-block;
     font-size: 12px;
     padding: 2px 8px;
     vertical-align: top;
-    display: inline-block;
   }
+
   .social-icon {
     display: inline-block;
     height: 18px;
     outline: 0;
   }
 }
+
 .business {
-  transition: .4s ease all;
   cursor: pointer;
+  transition: 0.4s ease all;
+
   @media (max-width: 1200px) {
     padding-left: 0px !important;
   }
 }
+
 .business-img {
+  cursor: pointer;
   max-width: 0px;
   overflow: hidden;
-  cursor: pointer;
+
   .business-logo {
+    transition: 0.4s ease all;
     width: 0px;
-    transition: .4s ease all;
   }
 }
-.business-logo{
+
+.business-logo {
+  transition: 0.4s ease all;
   width: 88px;
-  transition: .4s ease all;
+
   @media (max-width: 60em) {
     width: 88px;
   }
 }
+
 .business-card {
   background-color: rgba(0, 0, 0, 0.05);
-  padding: 20px 24px;
+  cursor: pointer;
   margin-bottom: 12px;
   overflow-y: hidden;
+  padding: 16px 24px;
+
+  &--bg-gray {
+    background-color: $sixth-color;
+  }
+
   .business-service {
     p {
       font-size: 14px;
     }
   }
+
   .full-information {
-    transition: .4s ease all;
+    transition: 0.4s ease all;
+
     .business-title {
-      opacity: 0.5;
       font-size: 14px;
+      opacity: 0.5;
     }
   }
+
   &-collapse,
   &-expand {
     position: relative;
+
     .business-description {
       font-size: 14px;
-      margin-top: 4px;
       line-height: 20px;
-   }
-   .details {
-     display: none;
-   }
-  .location {
-     font-size: 12px;
-     margin-top: 12px;
+    }
+
+    .details {
+      display: none;
+    }
+
+    .location {
+      font-size: 12px;
+      margin-top: 12px;
     }
   }
+
   &-collapse {
     .business-description {
       opacity: 0.5;
     }
+
     .full-information {
       max-height: 0px;
       overflow: hidden;
     }
   }
+
   &-expand {
     .business-description {
       opacity: 1;
     }
+
     .location {
       display: none;
     }
+
     .full-information {
       max-height: 2000px;
     }
@@ -96,41 +127,54 @@
   .business-title {
     margin-bottom: 8px;
   }
+
   hr {
-    margin-top: 0;
+    border: 1px solid rgba(96, 125, 139, 0.25);
     margin-bottom: 25px;
-    border: 1px solid rgba(96,125,139,0.25);
+    margin-top: 0;
     opacity: 0.25;
-    width: 100%
+    width: 100%;
   }
+
   h4 {
-    margin-bottom: 4px;
     font-weight: normal;
-    line-height: 24px
+    line-height: 24px;
+    margin-bottom: 4px;
   }
+
   .social-icons {
     margin-bottom: 32px;
-    transition: .4s ease all;
+    transition: 0.4s ease all;
+
     &-hide {
       display: none;
     }
+
     .icon-svg {
       margin-right: 8px;
     }
   }
+
   .search-filter-label {
-    padding: 4px 7px;
-    font-weight: 300;
-    font-size: 10px;
-    margin-right: 4px;
-    pointer-events: none;
     cursor: auto;
+    font-size: 10px;
+    font-weight: 300;
+    margin-right: 4px;
+    padding: 4px 7px;
+    pointer-events: none;
   }
+
+  &:hover {
+    background-color: $fifth-color;
+  }
+
   @media (max-width: 60em) {
     overflow-y: scroll;
+
     .service-description {
       padding-right: 0px;
     }
+
     .main-contact {
       margin-top: 16px;
     }
@@ -141,23 +185,26 @@
   .business-type-label {
     font-size: 14px;
   }
+
   .business-type {
     width: 100%;
   }
+
   @media (max-width: 60em) {
     overflow: hidden;
     white-space: nowrap;
     margin: 10px 8px;
+
     .business-type-container {
-      overflow-x: scroll;
-      white-space: nowrap;
-      display: inline-block;
+      display: flex;
+      flex-direction: column;
+
       div {
-        margin-right: 8px;
-        display: inline-block;
-        max-width: 240%;
+        flex: 1;
+        box-sizing: border-box;
+        //margin-right: 8px;
+        max-width: none;
       }
     }
   }
-
 }

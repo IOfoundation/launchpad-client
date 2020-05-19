@@ -1,0 +1,48 @@
+.business-deatils-wrapper {
+  .content-section {
+    background-color: #f7f9fd;
+    padding: 40px 0 32px;
+
+    @media (max-width: 60em) {
+      padding: 0 0 32px;
+    }
+  }
+
+  .right-line {
+    position: relative;
+
+    &:after {
+      background: #e1e1e1;
+      content: '';
+      height: 100%;
+      position: absolute;
+      right: -1px;
+      top: 0;
+      width: 1px;
+    }
+
+    @media (max-width: 60em) {
+      &:after {
+        display: none;
+      }
+    }
+  }
+}
+
+.main-content {
+  @media (max-width: 60em) {
+    margin: 32px;
+  }
+}
+
+@import './details/main-section';
+@import './details/detail';
+@import './details/services-offered';
+@import './details/service';
+@import './details/locations';
+@import './details/location';
+@import './details/social-bar';
+@import './details/location_details';
+@import './details/upcoming-events';
+@import './details//left-bar';
+@import './details/detail-featured-post';

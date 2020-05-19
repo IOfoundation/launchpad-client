@@ -1,0 +1,7 @@
+const ValidateYupTypes = {
+  VALIDATE_REQUEST: 'VALIDATE_REQUEST',
+  VALIDATE_SUCCESS: 'VALIDATE_SUCCESS',
+  VALIDATE_FAIL: 'VALIDATE_FAIL',
+};
+
+export default ValidateYupTypes;

@@ -1,0 +1,14 @@
+.blog-container {
+  width: 100%;
+
+  &__content {
+    @include container;
+  }
+}
+
+@import './featured-posts';
+@import './featured-post';
+@import './categories';
+@import './post-lists';
+@import './post-list-item';
+@import './post-details';

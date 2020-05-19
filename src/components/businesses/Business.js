@@ -1,18 +1,19 @@
-import React, {PureComponent} from 'react';
-import Chip from '../shared/Chip';
-import FacebookIcon from '../shared/FacebookIcon';
-import TwitterIcon from '../shared/TwitterIcon';
-import LinkedinIcon from '../shared/LinkedinIcon';
+import React, {PureComponent, Fragment} from 'react';
+import {withRouter} from 'react-router';
+
 import {PropTypes} from 'prop-types';
 import {isEmpty} from 'lodash';
 
-class Business extends PureComponent {
-  state = {
-    expanded: this.props.expanded,
-  };
+import Chip from '@Shared/Chip';
+import FacebookIcon from '@Shared/FacebookIcon';
+import TwitterIcon from '@Shared/TwitterIcon';
+import LinkedinIcon from '@Shared/LinkedinIcon';
 
-  toggleCard = () => {
-    this.setState({expanded: !this.state.expanded});
+import {truncate, maxCharacters} from '@Utils';
+
+class Business extends PureComponent {
+  navigateToDetails = () => {
+    this.props.router.push('/businesses/' + this.props.business.id);
   };
 
   _renderContacts = subject => {
@@ -28,28 +29,34 @@ class Business extends PureComponent {
       </div>
     );
   };
+
   _renderOtherLocationsMobile = otherLocations => {
     return (
       <div className="col-xs-12 grid p-0">
         <hr />
         <div className="col-lg-12 col-md-12 col-xs-12 grid p-0">
           {otherLocations.map(location => {
+            const {address} = location;
+            let addressElement;
+
+            if (address) {
+              addressElement = (
+                <div className="col-xs-12 p-0 m-right-54">
+                  <p className="business-title">{'Other Locations:'}</p>
+                  <h4>{address.address_1}</h4>
+                  {address.address_2 && <h4>{address.address_2}</h4>}
+                  <h4>{`${address.city}, ${address.state_province} ${
+                    address.postal_code
+                  }`}</h4>
+                </div>
+              );
+            }
             return (
               <div
                 key={location.id}
                 className="col-lg-12 col-md-12 col-xs-12 m-bot-24 p-0 grid"
               >
-                <div className="col-xs-12 p-0 m-right-54">
-                  <p className="business-title">{'Other Location:'}</p>
-                  <h4>{location.address.address_1}</h4>
-                  {location.address.address_2 && (
-                    <h4>{location.address.address_2}</h4>
-                  )}
-                  <h4>
-                    {`${location.address.city}, ${location.address
-                      .state_province} ${location.address.postal_code}`}
-                  </h4>
-                </div>
+                {addressElement}
                 {(location.phones.length > 0 || location.email) && (
                   <div className="col-xs-12 p-0 m-top-16">
                     <p className="business-title">{'Contact:'}</p>
@@ -70,21 +77,27 @@ class Business extends PureComponent {
     return (
       <div className="col-lg-12 col-md-12 col-xs-12 p-0 grid">
         {otherLocations.map(location => {
-          return (
-            <div
-              key={location.id}
-              className="col-lg-12 col-md-12 col-xs-12 m-bot-24 p-0 grid"
-            >
+          let address = null;
+          if (location.address) {
+            address = (
               <div className="col-lg-6 col-md-6 col-xs-6 p-0 m-right-54">
                 <h4>{location.address.address_1}</h4>
                 {location.address.address_2 && (
                   <h4>{location.address.address_2}</h4>
                 )}
-                <h4>
-                  {`${location.address.city}, ${location.address
-                    .state_province} ${location.address.postal_code}`}
-                </h4>
+                <h4>{`${location.address.city}, ${
+                  location.address.state_province
+                } ${location.address.postal_code}`}</h4>
               </div>
+            );
+          }
+
+          return (
+            <div
+              key={location.id}
+              className="col-lg-12 col-md-12 col-xs-12 m-bot-24 p-0 grid"
+            >
+              {address}
               <div className="col-lg-4 col-md-4 col-xs-6 p-0 m-top-24">
                 {location.phones.length > 0 && (
                   <h4>{location.phones[0].number}</h4>
@@ -97,32 +110,88 @@ class Business extends PureComponent {
       </div>
     );
   };
-  render() {
-    const {business, isSelected, isMobile} = this.props;
-    const locations = business.locations;
-    const [main_location, ...other_locations] = locations;
+
+  _renderMainLocations = main_location => {
+    return (
+      <div className="col-lg-4 col-md-4 col-xs-12 p-0 m-right-52 main-location">
+        <p className="business-title">{'Main Location:'}</p>
+        <h4>{main_location.address.address_1}</h4>
+        {main_location.address.address_2 ? (
+          <h4>{main_location.address.address_2}</h4>
+        ) : (
+          ''
+        )}
+        <h4>{`${main_location.address.city}, ${
+          main_location.address.state_province
+        }`}</h4>
+      </div>
+    );
+  };
+
+  _renderLocationInfo = locations => {
+    const main_location = locations.find(location => location.is_primary);
     const locationText = locations.length === 1 ? ' Location' : ' Locations';
     const totalLocations = locations.length;
+    let address = null;
+
+    if (main_location.address !== null) {
+      address = (
+        <Fragment>
+          <span className="m-x-7">{'|'}</span>
+          <span>
+            {locations.length > 1 && 'Main location in '}
+            {main_location.address.city}
+            {', '}
+            {main_location.address.state_province}
+          </span>
+        </Fragment>
+      );
+    }
+
+    return (
+      <p className="location text-bold">
+        <span>{`${totalLocations} ${locationText}`}</span>
+        {address}
+      </p>
+    );
+  };
+
+  render() {
+    const {business, isMobile} = this.props;
+    const locations = business.locations;
+    const main_location = locations.find(location => location.is_primary);
+    const other_locations = locations.filter(location => !location.is_primary);
+    let description = business.description;
+    let addressElement;
+    let contactElement;
+
+    if (main_location) {
+      const {address, contacts} = main_location;
+
+      if (address) {
+        addressElement =
+          !isEmpty(main_location.address) &&
+          this._renderMainLocations(main_location);
+      }
+
+      if (contacts) {
+        contactElement =
+          !isEmpty(business.contacts) &&
+          this._renderContacts(business.contacts[0]);
+      }
+    }
+
+    if (description.split('').length > maxCharacters) {
+      description = truncate(description);
+    }
+
     return (
       <div
-        className="business-card"
-        style={{backgroundColor: isSelected ? '#E5E5E5' : '#F2F2F2'}}
+        className="business-card busines-card--bg-gray"
+        onClick={this.navigateToDetails}
       >
-        <div
-          className={
-            this.state.expanded
-              ? 'business-card-expand grid'
-              : 'business-card-collapse grid'
-          }
-        >
-          <div
-            className={
-              this.state.expanded
-                ? 'business col-lg-2 col-md-3 col-xs-12 p-0 m-bot-20'
-                : 'business business-img'
-            }
-            onClick={this.toggleCard}
-          >
+        <div className="business-card-collapse grid">
+          <div className="business business-img">
             <img
               className="business-logo"
               src={
@@ -132,30 +201,19 @@ class Business extends PureComponent {
               }
             />
           </div>
-          <div
-            className={
-              this.state.expanded
-                ? 'business expanded col-lg-10 col-md-9 col-xs-12 p-right-0'
-                : 'business col-lg-12 col-md-12 col-xs-12 p-0'
-            }
-          >
+          <div className="business col-lg-12 col-md-12 col-xs-12 p-0">
             <div className="business-details-container">
-              <div className="business-information" onClick={this.toggleCard}>
-                <h3 className="title m-bot-8">{business.name}</h3>
-                <p className="business-description">{business.description}</p>
+              <div className="business-information">
+                <h3 className="title text-semi">{business.name}</h3>
+                <p className="business-description">{description}</p>
               </div>
-              <div
-                className={
-                  this.state.expanded
-                    ? 'col-lg-12 social-icons p-0 m-top-20'
-                    : 'social-icons-hide'
-                }
-              >
+              <div className="social-icons-hide">
                 {business.facebook && (
                   <a
                     href={business.facebook}
                     target="_blank"
                     className="social-icon"
+                    rel="noopener noreferrer"
                   >
                     <FacebookIcon className={'icon-svg'} size={18} />
                   </a>
@@ -165,6 +223,7 @@ class Business extends PureComponent {
                     href={business.twitter}
                     target="_blank"
                     className="social-icon"
+                    rel="noopener noreferrer"
                   >
                     <TwitterIcon className={'icon-svg'} size={18} />
                   </a>
@@ -174,6 +233,7 @@ class Business extends PureComponent {
                     href={business.linkedin}
                     target="_blank"
                     className="social-icon"
+                    rel="noopener noreferrer"
                   >
                     <LinkedinIcon className={'icon-svg'} size={18} />
                   </a>
@@ -183,40 +243,18 @@ class Business extends PureComponent {
                     className="website-icon"
                     href={business.website}
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <span>{'Go to Website'}</span>
                   </a>
                 )}
               </div>
             </div>
-            <img
-              className="business-card-icon"
-              onClick={this.toggleCard}
-              style={{float: 'right'}}
-              src={
-                this.state.expanded
-                  ? 'static-data/images/collapse-icon.png'
-                  : 'static-data/images/expand-icon.png'
-              }
-            />
           </div>
           <div className="grid col-lg-12 col-md-12 col-xs-12 full-information p-0">
             <div className="grid col-lg-12 col-md-12 col-xs-12 p-0 m-bot-25">
-              <div className="col-lg-4 col-md-4 col-xs-12 p-0 m-right-52 main-location">
-                <p className="business-title">{'Main Location:'}</p>
-                <h4>{main_location.address.address_1}</h4>
-                {main_location.address.address_2 ? (
-                  <h4>{main_location.address.address_2}</h4>
-                ) : (
-                  ''
-                )}
-                <h4>
-                  {`${main_location.address.city}, ${main_location.address
-                    .state_province}`}
-                </h4>
-              </div>
-              {!isEmpty(business.contacts) &&
-                this._renderContacts(business.contacts[0])}
+              {addressElement}
+              {contactElement}
             </div>
             <hr />
             <p className="business-title col-lg-12 col-md-12 col-xs-12 p-0">
@@ -260,29 +298,19 @@ class Business extends PureComponent {
             {!isEmpty(other_locations) &&
               isMobile &&
               this._renderOtherLocationsMobile(other_locations)}
-            {!isEmpty(other_locations) &&
-              !isMobile && (
-                <div className="col-lg-12 col-md-12 col-xs-12 grid p-0">
-                  <div className="col-lg-6 col-md-6 col-xs-6 p-0 m-right-54">
-                    <p className="business-title">{'Other Locations'}</p>
-                  </div>
-                  <div className="col-lg-4 col-md-4 col-xs-6 p-0">
-                    <p className="business-title">{'Contact:'}</p>
-                  </div>
-                  {this._renderOtherLocations(other_locations)}
+            {!isEmpty(other_locations) && !isMobile && (
+              <div className="col-lg-12 col-md-12 col-xs-12 grid p-0">
+                <div className="col-lg-6 col-md-6 col-xs-6 p-0 m-right-54">
+                  <p className="business-title">{'Other Locations'}</p>
                 </div>
-              )}
+                <div className="col-lg-4 col-md-4 col-xs-6 p-0">
+                  <p className="business-title">{'Contact:'}</p>
+                </div>
+                {this._renderOtherLocations(other_locations)}
+              </div>
+            )}
           </div>
-          <p className="location text-bold">
-            <span>{`${totalLocations} ${locationText}`}</span>
-            <span className="m-x-7">{'|'}</span>
-            <span>
-              {locations.length > 1 && 'Main location in '}
-              {main_location.address.city}
-              {', '}
-              {main_location.address.state_province}
-            </span>
-          </p>
+          {!isEmpty(main_location) && this._renderLocationInfo(locations)}
         </div>
       </div>
     );
@@ -295,9 +323,10 @@ Business.propTypes = {
     name: PropTypes.string,
     description: PropTypes.string,
   }).isRequired,
-  expanded: PropTypes.bool.isRequired,
   isMobile: PropTypes.bool.isRequired,
-  isSelected: PropTypes.bool.isRequired,
+  router: PropTypes.shape({
+    push: PropTypes.func,
+  }),
 };
 
-export default Business;
+export default withRouter(Business);

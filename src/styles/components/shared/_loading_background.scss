@@ -1,0 +1,83 @@
+@keyframes placeHolderShimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+.animated-background {
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  background: #f6f7f8;
+  background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+  background-size: 800px 104px;
+  position: relative;
+
+  &--dark {
+    background: #000000;
+    background: linear-gradient(266deg, #7b7c7e, #969696, #7b7c7e);
+  }
+}
+
+.animated-bg-dark {
+  background: linear-gradient(266deg, #000000, #6e6e6e, #e4e4e4);
+  background-size: 600% 600%;
+
+  -webkit-animation: animated-bg-dark 30s ease infinite;
+  -moz-animation: animated-bg-dark 30s ease infinite;
+  -o-animation: animated-bg-dark 30s ease infinite;
+  animation: animated-bg-dark 30s ease infinite;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+
+  @-webkit-keyframes animated-bg-dark {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  @-moz-keyframes animated-bg-dark {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  @-o-keyframes animated-bg-dark {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  @keyframes animated-bg-dark {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+}

@@ -3,7 +3,6 @@ import {PropTypes} from 'prop-types';
 import {isEmpty} from 'lodash';
 import MapView from '../map-view/Main';
 import ResultPage from '../businesses/mobile/ResultPage';
-import Pagination from '../businesses/Pagination';
 
 class ContentMap extends Component {
   shouldComponentUpdate(nextProps) {
@@ -163,8 +162,8 @@ class ContentMap extends Component {
             <div
               className={
                 (expanded
-                  ? 'col-md-12 col-xs-12 businessList p-left-0'
-                  : 'col-md-12 col-xs-12 businessList--reduced p-left-0') +
+                  ? 'col-md-12 col-xs-12 businessList p-left-0 p-right-2'
+                  : 'col-md-12 col-xs-12 businessList--reduced p-left-0 p-right-2') +
                 ' list'
               }
             >
@@ -179,13 +178,12 @@ class ContentMap extends Component {
     const {
       onBoundsChange,
       highlightOrgCard,
-      businesses: {locations, organizations, metadata, appliedFilters},
+      businesses: {locations, organizations},
       topBar,
       expanded,
       toggleSwitch,
       isMobile,
       showLoading,
-      handleChangePage,
     } = this.props;
     return (
       <div className="businessesContainer">
@@ -215,13 +213,6 @@ class ContentMap extends Component {
             />
           </div>
           {expanded ? this._renderReduceButton() : this._renderExpandButton()}
-          <div className="map-pagination">
-            <Pagination
-              appliedFilters={appliedFilters}
-              handleChangePage={handleChangePage}
-              metadata={metadata}
-            />
-          </div>
         </div>
         {isEmpty(organizations)
           ? this._renderNoSearchResults()

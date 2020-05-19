@@ -1,10 +1,8 @@
 import {BusinessTypes as types} from '../action-types';
 import {isEmpty} from 'lodash';
 
-type STATE = {};
-type ACTION = {};
-
-const initialState: STATE = {
+const initialState = {
+  organization: {},
   organizations: [],
   locations: [],
   filters: null,
@@ -20,7 +18,7 @@ const initialState: STATE = {
   },
 };
 
-export default function(state: STATE = initialState, action: ACTION): STATE {
+export default function(state = initialState, action) {
   switch (action.type) {
     case types.FETCH_ORGANIZATIONS_REQUEST: {
       return {
@@ -114,6 +112,28 @@ export default function(state: STATE = initialState, action: ACTION): STATE {
       return {
         ...state,
         appliedFilters,
+      };
+    }
+
+    case types.FETCH_ORGANIZATION_BY_ID_REQUEST: {
+      return {
+        ...state,
+      };
+    }
+
+    case types.FETCH_ORGANIZATION_BY_ID_SUCCESS: {
+      const {organization} = action;
+      return {
+        ...state,
+        organization,
+      };
+    }
+
+    case types.FETCH_ORGANIZATION_BY_ID_ERROR: {
+      const {error} = action;
+      return {
+        ...state,
+        error,
       };
     }
 

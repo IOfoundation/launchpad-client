@@ -280,7 +280,11 @@ class BusinessesForm extends Component {
 
   render() {
     return (
-      <form onKeyDown={this._formOnKeyDown} onMouseMove={this._onMouseMove}>
+      <form
+        className="businesses-form"
+        onKeyDown={this._formOnKeyDown}
+        onMouseMove={this._onMouseMove}
+      >
         <input
           type="text"
           value={this.state.searchText}
@@ -289,14 +293,14 @@ class BusinessesForm extends Component {
           placeholder={
             this.state.showDropdown || this.state.showPreviewDropdown
               ? ''
-              : 'Search for businesses or services'
+              : 'Search for businesses and services'
           }
-          className="hero_input businessesName text-thin"
+          className="hero_input text-thin"
         />
         <img
           onClick={() => this.inputOnClick(false)}
           className="text-search-icon"
-          src="/static-data/images/Dropdown-arrow.svg"
+          src="/static-data/images/search.png"
         />
         <div
           className={

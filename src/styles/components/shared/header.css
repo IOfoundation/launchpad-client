@@ -1,4 +1,3 @@
-
 .header_title {
   margin-right: 16px;
   white-space: nowrap;
@@ -9,8 +8,20 @@
   font-weight: bold;
   line-height: 16px;
 }
+
 .header_link {
   color: white;
-  margin-left: 24px;
+  margin-right: 24px;
   line-height: 16px;
+  outline: 0;
+}
+
+.header_link:hover,
+.header_link:active,
+.header_link:focus {
+  outline: 0;
+}
+
+.header_link:last-child {
+  margin-right: 0;
 }

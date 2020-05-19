@@ -1,14 +1,16 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
-import Header from '../shared/Header';
-import Footer from '../shared/Footer';
-import MobileFooter from '../shared/MobileFooter';
+import {withRouter} from 'react-router';
 
-const MainLayout = ({children, windowWidth, homePage}) => {
+import Header from '@Shared/Header';
+import Footer from '@Shared/Footer';
+import MobileFooter from '@Shared/MobileFooter';
+
+const MainLayout = ({children, windowWidth, homePage, router}) => {
   const isMobile = windowWidth <= 960;
   return (
     <div>
-      <Header homePage={homePage} />
+      <Header homePage={homePage} router={router} />
       {children}
       {!isMobile && <Footer />}
       {isMobile && <MobileFooter />}
@@ -19,7 +21,8 @@ const MainLayout = ({children, windowWidth, homePage}) => {
 MainLayout.propTypes = {
   children: PropTypes.element,
   homePage: PropTypes.bool.isRequired,
+  router: PropTypes.shape({}),
   windowWidth: PropTypes.number,
 };
 
-export default MainLayout;
+export default withRouter(MainLayout);

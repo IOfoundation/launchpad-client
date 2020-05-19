@@ -92,7 +92,7 @@ class FilterByOptions extends Component {
     return (
       <div className="col-md-3 col-xs-3 no-padding filter-btn-container text-xs-margin">
         <button
-          className="filter-btn text-thin"
+          className="filter-btn"
           onClick={() => this._toggleDropdownOptions()}
         >
           <span

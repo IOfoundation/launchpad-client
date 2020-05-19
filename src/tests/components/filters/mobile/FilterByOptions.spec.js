@@ -10,7 +10,7 @@ const props = {
   handleOnChangeFilterOptions: jest.fn(),
 };
 
-describe('<FilterByText />', () => {
+xdescribe('<FilterByText />', () => {
   it('renders snapshot for mobile FilterByOptions component', () => {
     const wrapper = shallow(<FilterByOptions {...props} />);
     expect(toJson(wrapper)).toMatchSnapshot();

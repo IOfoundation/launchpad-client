@@ -1,74 +1,97 @@
 .headerContainer {
   background-color: $primary-color;
-  height: 40px;
-  font-size: 12px;
-  .header_title {
+  font-size: 14px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+
+  .white-link {
     color: #fff;
+    opacity: 0.75;
+
+    &:hover {
+      opacity: 1;
+    }
   }
-  .contentContainer {
-    padding: 12px;
-  }
+
   input {
     display: none;
   }
+
   .collapse-menu-icon,
   img {
-    vertical-align: middle;
-    width: 32px;
     display: none;
     margin-right: 8px;
+    vertical-align: middle;
+    width: 32px;
   }
+
   .collapse-menu-icon {
     float: right;
   }
+
   @media (max-width: 60em) {
+    font-size: 14px;
     height: auto;
     position: fixed;
-    width: 100%;
-    font-size: 14px;
-    z-index: 3;
     top: 0px;
+    width: 100%;
+    z-index: 4;
+
     .collapse-menu-icon,
     img {
       display: initial;
     }
+
     input:checked ~ nav.header_links-contact {
       height: 100vh;
       transition: height 0.5s ease-in;
     }
+
     .header_links {
       &-title {
         max-width: 30%;
         display: inline-block;
       }
-      &-contact{
+
+      &-contact {
         max-width: 70%;
         display: inline-block;
       }
     }
     nav.header_links-contact {
-      max-width: 100%;
       display: inline-block;
       height: 0px;
+      max-width: 100%;
       overflow: hidden;
       transition: height 0.5s ease-out;
       width: 100%;
+
       .header_link {
         display: block;
-        text-align: left;
         margin: 40px 0;
+        text-align: left;
       }
     }
+
     .header {
+      color: #fff;
       font-size: 14px;
       padding: 12px 16px;
+      text-align: center;
       white-space: nowrap;
       width: 100%;
-      text-align: center;
-      color: #fff;
     }
+
     .header_leftLink {
       display: none;
     }
   }
 }
+
+// make the body background match the header color
+// so that elastic scrolling in Mobile Safari doesn't create
+// an incongruous white region below the header
+// making #app white prevents this from being visible otherwise
+body { background: $primary-color; }
+#app { background: #F7F9FD; }

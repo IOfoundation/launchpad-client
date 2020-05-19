@@ -12,10 +12,10 @@ exports[`<ContentMap /> renders snapshot of ContentMap 1`] = `
     >
       <Main
         expanded={false}
-        highlightOrgCard={[Function]}
+        highlightOrgCard={[MockFunction]}
         isMobile={false}
         locations={Array []}
-        onBoundsChange={[Function]}
+        onBoundsChange={[MockFunction]}
         organizations={
           Array [
             Object {
@@ -221,7 +221,7 @@ exports[`<ContentMap /> renders snapshot of ContentMap 1`] = `
     >
       <button
         className="expand-btn map-btn btn-link btn-link-primary text-bold text-xs-margin p-0 m-bot-8 m-top-5"
-        onClick={[Function]}
+        onClick={[MockFunction]}
       >
         Expand Map
       </button>
@@ -233,43 +233,18 @@ exports[`<ContentMap /> renders snapshot of ContentMap 1`] = `
         >
           <button
             className="toggle-btn toggle-off"
-            onClick={[Function]}
+            onClick={[MockFunction]}
           >
             <span />
           </button>
           <button
             className="btn-link btn-link-primary underline text-xs-margin text-bold"
-            onClick={[Function]}
+            onClick={[MockFunction]}
           >
             Search in Map Area
           </button>
         </div>
       </div>
-    </div>
-    <div
-      className="map-pagination"
-    >
-      <Pagination
-        appliedFilters={
-          Object {
-            "pagination": Object {
-              "currentPage": 1,
-              "first": Object {
-                "page": 1,
-                "per_page": 4,
-              },
-              "last": Object {},
-              "next": Object {},
-            },
-          }
-        }
-        handleChangePage={[Function]}
-        metadata={
-          Object {
-            "totalOrganization": "50",
-          }
-        }
-      />
     </div>
   </div>
   <div>
@@ -277,7 +252,7 @@ exports[`<ContentMap /> renders snapshot of ContentMap 1`] = `
       className="result-container-hide desktop-devices"
     >
       <div
-        className="col-md-12 col-xs-12 businessList--reduced p-left-0 list"
+        className="col-md-12 col-xs-12 businessList--reduced p-left-0 p-right-2 list"
       />
     </div>
   </div>

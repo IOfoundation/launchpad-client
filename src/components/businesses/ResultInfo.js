@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
+import Grid from '@material-ui/core/Grid';
+
 import ArrowRight from '../shared/ArrowRight';
 
 class ResultInfo extends Component {
@@ -9,16 +11,16 @@ class ResultInfo extends Component {
 
   displayOrganizationLabel = totalOrganizations => {
     return totalOrganizations === 1
-      ? `${totalOrganizations} Organization Available`
-      : `${totalOrganizations} Organizations Available`;
+      ? `${totalOrganizations} Resource Available`
+      : `${totalOrganizations} Resources Available`;
   };
 
   renderButtonBusinessTypeContainer() {
     return (
-      <div className="business-type-container col-lg-12 p-0 grid">
-        <div className="col-xs-4 col-md-4 col-lg-4 m-bot-16 p-0">
+      <Grid container={true} spacing={16}>
+        <Grid item={true} xs={12} md={4}>
           <button
-            className="btn btn-search btn-outline"
+            className="btn btn-search btn-outline btn--padding"
             key={this.props.filterOptions[0].id}
             onClick={() => this._onClick(this.props.filterOptions[0])}
           >
@@ -35,10 +37,10 @@ class ResultInfo extends Component {
               style={{color: '#000', verticalAlign: 'middle'}}
             />
           </button>
-        </div>
-        <div className="col-xs-4 col-md-4 col-lg-4 m-bot-16 p-right-0">
+        </Grid>
+        <Grid item={true} xs={12} md={4}>
           <button
-            className="btn btn-search btn-outline"
+            className="btn btn-search btn-outline btn--padding"
             key={this.props.filterOptions[1].id}
             onClick={() => this._onClick(this.props.filterOptions[1])}
           >
@@ -55,10 +57,10 @@ class ResultInfo extends Component {
               style={{color: '#000', verticalAlign: 'middle'}}
             />
           </button>
-        </div>
-        <div className="col-xs-4 col-md-4 col-lg-4 m-bot-16 p-right-0">
+        </Grid>
+        <Grid item={true} xs={12} md={4}>
           <button
-            className="btn btn-search btn-outline"
+            className="btn btn-search btn-outline btn--padding"
             key={this.props.filterOptions[2].id}
             onClick={() => this._onClick(this.props.filterOptions[2])}
           >
@@ -75,8 +77,8 @@ class ResultInfo extends Component {
               style={{color: '#000', verticalAlign: 'middle'}}
             />
           </button>
-        </div>
-      </div>
+        </Grid>
+      </Grid>
     );
   }
 
@@ -96,7 +98,7 @@ class ResultInfo extends Component {
           <div className="col-lg-12 col-md-12 col-xs-12 p-0 desktop-devices">
             <h3 className="m-top-24 col-xs-12 col-md-12 col-lg-12 no-padding">
               {showLoading
-                ? 'Loading Organizations'
+                ? 'Loading Resources'
                 : this.displayOrganizationLabel(totalOrganizations)}
             </h3>
             <hr className="m-bot-24 m-top-16" />
@@ -115,7 +117,7 @@ ResultInfo.propTypes = {
       first: PropTypes.object,
       last: PropTypes.object,
       next: PropTypes.object,
-      currentPage: PropTypes.number,
+      currentPage: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     }),
     totalOrganization: PropTypes.string,
   }).isRequired,

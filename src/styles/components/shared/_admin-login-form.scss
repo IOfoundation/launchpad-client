@@ -1,0 +1,14 @@
+.admin-login-form {
+  &__input {
+    &__error-wrapper {
+      align-items: center;
+      display: flex;
+      height: 25px;
+    }
+  }
+
+  &__error {
+    color: #d61600;
+    font-size: 12px;
+  }
+}

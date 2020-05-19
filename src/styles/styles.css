@@ -1,4 +1,5 @@
 /* Set defaults */
+@import "~flexboxgrid/css/flexboxgrid.min.css";
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
 @font-face {
@@ -20,11 +21,51 @@
   src: url(../fonts/Mark Simonson - Proxima Nova Semibold-webfont.woff2);
 }
 
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../fonts/MaterialIcons-Regular.eot);
+  src: local('Material Icons'), local('MaterialIcons-Regular'), url(../fonts/MaterialIcons-Regular.woff2) format('woff2'),
+    url(../fonts/MaterialIcons-Regular.woff) format('woff'), url(../fonts/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px; /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
 a {
   text-decoration: none;
   color: black;
 }
-h1,h2,h3,h4,h5,p, a {
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+a {
   margin: 0;
 }
 .row {
@@ -51,10 +92,10 @@ input[type=text]::-ms-clear {
 }
 /* Useful Classes */
 .primary {
-  color: #3F51B5;
+  color: #3f51b5;
 }
 .secondary {
-  color: #0C0033;
+  color: #0c0033;
 }
 .white {
   color: #ffffff;
@@ -98,7 +139,7 @@ input[type=text]::-ms-clear {
 }
 .underline-text {
   text-decoration: none;
-    border-bottom: 1px solid #00D3A7;
+  border-bottom: 1px solid #00d3a7;
 }
 .position-relative {
   position: relative;

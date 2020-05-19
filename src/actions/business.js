@@ -1,6 +1,6 @@
 import {BusinessTypes as types} from '../action-types';
 import {CategoriesConstants} from '../constants';
-import httpRequest from '../utils/httpRequest';
+import {httpRequest} from '../utils';
 import {browserHistory} from 'react-router';
 import queryString from 'query-string';
 import {isEmpty, isString, cloneDeep, debounce} from 'lodash';
@@ -25,6 +25,26 @@ const fetchOrganizationsSuccessObject = (organizations, metadata) => {
 const fetchOrganizationsErrorObject = error => {
   return {
     type: types.FETCH_ORGANIZATIONS_ERROR,
+    error,
+  };
+};
+
+const fetchOrganizationByIdRequestObject = () => {
+  return {
+    type: types.FETCH_ORGANIZATION_BY_ID_REQUEST,
+  };
+};
+
+export const fetchOrganizationByIdSuccessObject = organization => {
+  return {
+    type: types.FETCH_ORGANIZATION_BY_ID_SUCCESS,
+    organization,
+  };
+};
+
+const fetchOrganizationByIdErrorObject = error => {
+  return {
+    type: types.FETCH_ORGANIZATION_BY_ID_ERROR,
     error,
   };
 };
@@ -131,13 +151,25 @@ const paginationMetadata = links => {
   return _paginationMetadata;
 };
 
+export function fetchOrganizationById(id) {
+  return async dispatch => {
+    dispatch(fetchOrganizationByIdRequestObject());
+    try {
+      const httpResponse = await httpRequest.get(`api/organizations/${id}`);
+      dispatch(fetchOrganizationByIdSuccessObject(httpResponse.data));
+    } catch (error) {
+      dispatch(fetchOrganizationByIdErrorObject(error));
+    }
+  };
+}
+
 export function filterOrganizations(
   filterType,
   currentFilters,
   filterValue,
   removeFilter
 ) {
-  return async (dispatch: Function) => {
+  return async dispatch => {
     dispatch(fetchOrganizationsRequestObject());
     const filters = filtersObject(
       filterType,
@@ -150,7 +182,7 @@ export function filterOrganizations(
 }
 
 export function changePage(page, currentParams) {
-  return async (dispatch: Function) => {
+  return async dispatch => {
     dispatch(fetchOrganizationsRequestObject());
 
     const filters = {
@@ -162,7 +194,7 @@ export function changePage(page, currentParams) {
 }
 
 export function updateAppliedFiltersCurrentPage(page, filters) {
-  return async (dispatch: Function) => {
+  return async dispatch => {
     const appliedFilters = {
       ...filters,
       page,
@@ -173,7 +205,7 @@ export function updateAppliedFiltersCurrentPage(page, filters) {
 }
 
 export function fetchFilterOptions() {
-  return async (dispatch: Function) => {
+  return async dispatch => {
     try {
       dispatch(fetchFilterOptionsRequestObject());
       const httpResponse = await httpRequest.get('/api/categories');
@@ -218,7 +250,7 @@ export function fetchFilterOptions() {
 }
 
 export function fetchSearchResults(filter) {
-  return async (dispatch: Function) => {
+  return async dispatch => {
     _debouncedfetchSearchResults(filter, dispatch);
   };
 }
@@ -227,7 +259,7 @@ export function changeFilterDisplayOptions(
   showBusinessTypes,
   locationToggleSwitch
 ) {
-  return async (dispatch: Function) => {
+  return async dispatch => {
     const displayOptions = {
       showBusinessTypes,
       locationToggleSwitch,
@@ -242,7 +274,7 @@ export function updateChipFilters(
   filterValue,
   removeFilter
 ) {
-  return (dispatch: Function) => {
+  return dispatch => {
     const appliedFilters = filtersObject(
       filterType,
       currentFilters,
@@ -357,11 +389,17 @@ function _addLocationFilter(newFilters, filterValue) {
     _removePaginationFilters(newFilters);
   }
   newFilters.id = [];
-  newFilters.sw_lat = filterValue.sw.lat;
-  newFilters.sw_lng = filterValue.sw.lng;
-  newFilters.ne_lat = filterValue.ne.lat;
-  newFilters.ne_lng = filterValue.ne.lng;
-  return newFilters;
+
+  if (filterValue.sw && filterValue.ne) {
+    newFilters.sw_lat = filterValue.sw.lat;
+    newFilters.sw_lng = filterValue.sw.lng;
+    newFilters.ne_lat = filterValue.ne.lat;
+    newFilters.ne_lng = filterValue.ne.lng;
+
+    return newFilters;
+  }
+
+  return {page: 1, id: []};
 }
 
 function _removeLocationFilter(newFilters) {

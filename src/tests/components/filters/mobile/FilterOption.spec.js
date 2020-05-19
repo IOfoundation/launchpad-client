@@ -13,7 +13,7 @@ const createProps = props => {
   };
 };
 
-describe('<FilterByText />', () => {
+xdescribe('<FilterByText />', () => {
   it('renders snapshot for mobile FilterOption component', () => {
     const props = createProps({
       filterName: 'Business Services',

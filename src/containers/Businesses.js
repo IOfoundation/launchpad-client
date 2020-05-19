@@ -9,17 +9,33 @@ import * as actions from '../actions/business';
 
 export class Businesses extends PureComponent {
   state = {
-    width: window.innerWidth,
-    showLoading: true,
-    homePage: false,
     businessPageLoaded: false,
+    homePage: false,
+    listener: () => this.handleWindowSizeChange(),
+    organizations: this.props.businesses.organizations,
+    showLoading: true,
+    width: window.innerWidth,
   };
 
-  componentWillMount(_nextProps) {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.businesses.organizations !== prevState.organizations) {
+      return {
+        organizations: nextProps.businesses.organizations,
+        showLoading: false,
+        businessPageLoaded: true,
+      };
+    }
+
+    return null;
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.handleWindowSizeChange);
+    window.addEventListener('popstate', this.onBackButtonEvent);
+
     const {params} = this.props;
     this.props.actions.fetchFilterOptions();
     const locationToggleSwitch = 'ne_lat' in params;
-    window.addEventListener('resize', () => this.handleWindowSizeChange());
     this.props.actions.changeFilterDisplayOptions(
       this.checkBusinessType(params.category),
       locationToggleSwitch
@@ -31,19 +47,9 @@ export class Businesses extends PureComponent {
     }
   }
 
-  componentDidMount() {
-    window.onpopstate = this.onBackButtonEvent;
-  }
-
-  componentWillReceiveProps(newProps) {
-    const {organizations} = this.props.businesses;
-    if (newProps.businesses.organizations !== organizations) {
-      this.setState({showLoading: false, businessPageLoaded: true});
-    }
-  }
-
-  componentWillUnMount() {
-    window.addEventListener('resize', () => this.handleWindowSizeChange());
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleWindowSizeChange);
+    window.removeEventListener('popstate', this.onBackButtonEvent);
   }
 
   onBackButtonEvent = () => {
@@ -249,4 +255,7 @@ const mapDispatchToProps = _dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Businesses);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Businesses);

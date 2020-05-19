@@ -1,0 +1,233 @@
+.k-scheduler {
+  border: 1px solid $primary-color;
+
+  .k-scheduler-monthview {
+    border-color: #eaebec;
+  }
+}
+
+.k-scheduler-toolbar,
+.k-scheduler-footer {
+  background-color: $black-color;
+  color: $white-color;
+}
+
+.k-scheduler-toolbar {
+  padding: 0 1.6em;
+  height: 46px;
+}
+.k-scheduler-navigation,
+.k-scheduler-views {
+  height: 100%;
+}
+
+.k-scheduler-views li,
+.k-scheduler-navigation .k-nav-today,
+.k-scheduler-navigation .k-nav-prev,
+.k-scheduler-navigation .k-nav-next {
+  align-items: center;
+  border-radius: 0;
+  box-sizing: border-box;
+  display: flex;
+  height: 100%;
+}
+
+.k-scheduler-toolbar li .k-link {
+  font-size: 12px;
+  opacity: 0.75;
+  padding: 0 1.5em;
+  text-transform: uppercase;
+  outline: 0;
+}
+
+.k-scheduler-navigation .k-nav-current {
+  .k-link {
+    text-transform: none;
+    opacity: 1;
+  }
+
+  .k-icon {
+    margin-right: 10px;
+  }
+}
+
+.k-scheduler-navigation .k-nav-prev,
+.k-scheduler-navigation .k-nav-next {
+  .k-link {
+    padding: 0 2em;
+    opacity: 1;
+  }
+}
+
+.k-scheduler-navigation .k-nav-today:hover,
+.k-scheduler-navigation .k-nav-prev:hover,
+.k-scheduler-navigation .k-nav-next:hover,
+.k-scheduler-views li:hover {
+  background: $green-color;
+  color: $white-color;
+
+  .k-link {
+    opacity: 1;
+  }
+}
+
+.k-link {
+  height: 100%;
+  outline: 0;
+}
+
+.k-scheduler-navigation .k-nav-today,
+.k-scheduler-navigation .k-nav-prev,
+.k-scheduler-navigation .k-nav-next {
+  background: none;
+  border: 0;
+  color: $white-color;
+}
+
+.k-scheduler-views li {
+  background: none;
+  color: $white-color;
+  opacity: 0.75;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &.k-state-selected {
+    background: none;
+    border-bottom: 5px solid $green-color;
+    border-radius: 0;
+    opacity: 1;
+    padding-top: 5px;
+
+    .k-link {
+      opacity: 1;
+    }
+  }
+}
+
+.k-scheduler-header-wrap {
+  border: 0;
+}
+
+.k-scheduler-content {
+  overflow-y: overlay;
+}
+
+.k-scheduler-content .k-event {
+  background-color: $primary-color;
+
+  &:before {
+    background-color: transparent;
+  }
+
+  &:hover {
+    .k-event-actions {
+      opacity: 1;
+    }
+
+    .k-resize-handle {
+      visibility: hidden;
+    }
+  }
+
+  .k-i-reload {
+    font-size: 11px;
+  }
+
+  .k-i-close {
+    color: $green-color;
+    opacity: 1;
+  }
+
+  .k-event-actions:first-child {
+    margin: 1px 0.4ex 0 4px;
+  }
+}
+
+.k-more-events.k-button:hover {
+  background: $green-color;
+  color: $white-color;
+  border-color: $green-color;
+}
+
+.k-scheduler-table {
+  th {
+    font-size: 12px;
+    color: #7a7f89;
+  }
+
+  td {
+    background: #ffffff;
+    padding: 6px 4px 8px;
+
+    .k-link.k-nav-day {
+      font-size: 12px;
+    }
+  }
+
+  td.k-other-month {
+    background: #f5f5f5;
+
+    .k-link.k-nav-day {
+      color: rgba(122, 127, 137, 0.54);
+    }
+  }
+}
+
+@import './schedule-mobile';
+@import './scheduler-ipad';
+
+.k-event-actions,
+.k-event-top-actions,
+.k-event-bottom-actions {
+  display: none;
+}
+
+.k-event-template {
+  cursor: pointer;
+  width: 100%;
+}
+
+.k-event {
+  background: $green-color;
+
+  & > div {
+    z-index: 1;
+  }
+}
+
+.k-scheduler-footer {
+  padding: 0 1.6em;
+  height: 45px;
+
+  .k-header {
+    height: 100%;
+  }
+
+  li {
+    height: 100%;
+    display: flex;
+    background: transparent;
+    box-sizing: border-box;
+    border-radius: 0;
+
+    .k-link {
+      color: white;
+      height: 100%;
+    }
+
+    &:hover {
+      background: $green-color;
+    }
+  }
+}
+
+.k-event .k-event-template {
+  font-size: 11px;
+  overflow: hidden;
+  padding: 2px 0 0 6px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-sizing: border-box;
+}

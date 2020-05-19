@@ -1,6 +1,15 @@
 .search-nav {
   margin-top: 28px;
   padding-bottom: 0px;
+
+  // fix for elastic scrolling in Mobile Safari
+  // prevents an incongruous white area when scrolling past the top
+  // caused by margin within this container, which is white
+  @media (max-width: 60em) {
+    margin-top: 52px;
+    & .body-container, & .container-invert { margin-top: 0; }
+  }
+
   h2 {
     font-weight: normal;
   }
@@ -80,7 +89,7 @@
   font-size: 20px;
   font-weight: lighter;
   position: absolute;
-  left: 0;
+  right: 40px;
 }
 //Dropdown
 .dropdown {

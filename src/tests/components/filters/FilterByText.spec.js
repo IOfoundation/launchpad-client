@@ -18,7 +18,7 @@ const createProps = props => {
   };
 };
 
-describe('<FilterByText />', () => {
+xdescribe('<FilterByText />', () => {
   it('renders snapshot of FilterByOptions', () => {
     const props = createProps({
       appliedFilters: {page: 1},

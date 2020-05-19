@@ -9,14 +9,23 @@ const Pagination = props => {
     const selected = data.selected + 1;
     props.handleChangePage(selected);
   };
-
   const {last} = props.metadata.pagination;
   const {page} = props.appliedFilters;
+  const {noMargin} = props;
+  let classes = '';
+
+  if (noMargin) {
+    classes = 'pagination between-xs middle-xs';
+  } else {
+    classes = 'pagination between-xs middle-xs m-bot-100';
+  }
+
   if (!last.page) {
     return null;
   }
+
   return (
-    <div className={'pagination between-xs middle-xs m-bot-100'}>
+    <div className={classes}>
       <ReactPaginate
         previousLabel={
           <ArrowLeft
@@ -39,7 +48,7 @@ const Pagination = props => {
         containerClassName={'pagination-index text-bold'}
         subContainerClassName={'pagination-numbers '}
         activeClassName={'active'}
-        forcePage={page - 1}
+        forcePage={Number(page) - 1}
       />
     </div>
   );
@@ -50,7 +59,7 @@ Pagination.propTypes = {
       PropTypes.string,
       PropTypes.arrayOf(PropTypes.string),
     ]),
-    page: PropTypes.number,
+    page: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   }).isRequired,
   handleChangePage: PropTypes.func.isRequired,
   metadata: PropTypes.shape({
@@ -58,10 +67,11 @@ Pagination.propTypes = {
       first: PropTypes.object,
       last: PropTypes.object,
       next: PropTypes.object,
-      currentPage: PropTypes.number,
+      currentPage: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     }),
     totalOrganization: PropTypes.string,
   }).isRequired,
+  noMargin: PropTypes.bool,
 };
 
 export default Pagination;

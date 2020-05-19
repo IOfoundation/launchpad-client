@@ -1,0 +1,330 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Categories /> renders snapshot of Categories 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <Connect(Categories)>
+    <Categories
+      actions={
+        Object {
+          "getAllPosts": [Function],
+          "getCategories": [Function],
+          "getFeaturedPost": [Function],
+          "getFeaturedPostById": [Function],
+          "getPostById": [Function],
+          "noResults": [Function],
+          "resetPostByID": [Function],
+          "setCategory": [Function],
+        }
+      }
+      categories={
+        Array [
+          Object {
+            "id": 10,
+            "name": "health",
+            "taggings_count": 0,
+          },
+          Object {
+            "id": 11,
+            "name": "work",
+            "taggings_count": 0,
+          },
+          Object {
+            "id": 16,
+            "name": "spanish",
+            "taggings_count": 0,
+          },
+          Object {
+            "id": 18,
+            "name": "motorcycle",
+            "taggings_count": 0,
+          },
+          Object {
+            "id": 21,
+            "name": "music",
+            "taggings_count": 0,
+          },
+          Object {
+            "id": 25,
+            "name": "decorations",
+            "taggings_count": 0,
+          },
+          Object {
+            "id": 1,
+            "name": "featured",
+            "taggings_count": 6,
+          },
+          Object {
+            "id": 2,
+            "name": "front page",
+            "taggings_count": 6,
+          },
+          Object {
+            "id": 17,
+            "name": "home",
+            "taggings_count": 2,
+          },
+          Object {
+            "id": 24,
+            "name": "outdoors",
+            "taggings_count": 2,
+          },
+          Object {
+            "id": 20,
+            "name": "clothes",
+            "taggings_count": 3,
+          },
+          Object {
+            "id": 13,
+            "name": "rock",
+            "taggings_count": 1,
+          },
+          Object {
+            "id": 14,
+            "name": "rap",
+            "taggings_count": 1,
+          },
+          Object {
+            "id": 6,
+            "name": "drink",
+            "taggings_count": 1,
+          },
+          Object {
+            "id": 12,
+            "name": "basketball",
+            "taggings_count": 1,
+          },
+          Object {
+            "id": 15,
+            "name": "country",
+            "taggings_count": 3,
+          },
+          Object {
+            "id": 19,
+            "name": "shoes",
+            "taggings_count": 1,
+          },
+          Object {
+            "id": 9,
+            "name": "entertainment",
+            "taggings_count": 2,
+          },
+          Object {
+            "id": 3,
+            "name": "soccer",
+            "taggings_count": 1,
+          },
+          Object {
+            "id": 4,
+            "name": "games",
+            "taggings_count": 4,
+          },
+          Object {
+            "id": 7,
+            "name": "programming",
+            "taggings_count": 3,
+          },
+          Object {
+            "id": 22,
+            "name": "fashion",
+            "taggings_count": 3,
+          },
+          Object {
+            "id": 5,
+            "name": "food",
+            "taggings_count": 3,
+          },
+          Object {
+            "id": 23,
+            "name": "wear",
+            "taggings_count": 2,
+          },
+          Object {
+            "id": 8,
+            "name": "study",
+            "taggings_count": 4,
+          },
+        ]
+      }
+      categorySelected="front page"
+    >
+      <div
+        className="blog-categories"
+      >
+        <h3
+          className="blog-categories__title text-bold"
+        >
+          <i
+            className="material-icons blog-categories__title__icon"
+          >
+            label
+          </i>
+          <span>
+            Categories
+          </span>
+        </h3>
+        <ul
+          className="blog-categories__list"
+        >
+          <Category
+            className="blog-categories__list__item"
+            clicked={[Function]}
+            isSelected={false}
+            key="10"
+            label="health"
+          >
+            <li
+              className="blog-categories capitalize blog-categories__list__item"
+              onClick={[Function]}
+            >
+              health
+            </li>
+          </Category>
+          <Category
+            className="blog-categories__list__item"
+            clicked={[Function]}
+            isSelected={false}
+            key="11"
+            label="work"
+          >
+            <li
+              className="blog-categories capitalize blog-categories__list__item"
+              onClick={[Function]}
+            >
+              work
+            </li>
+          </Category>
+          <Category
+            className="blog-categories__list__item"
+            clicked={[Function]}
+            isSelected={false}
+            key="16"
+            label="spanish"
+          >
+            <li
+              className="blog-categories capitalize blog-categories__list__item"
+              onClick={[Function]}
+            >
+              spanish
+            </li>
+          </Category>
+          <Category
+            className="blog-categories__list__item"
+            clicked={[Function]}
+            isSelected={false}
+            key="18"
+            label="motorcycle"
+          >
+            <li
+              className="blog-categories capitalize blog-categories__list__item"
+              onClick={[Function]}
+            >
+              motorcycle
+            </li>
+          </Category>
+          <Category
+            className="blog-categories__list__item"
+            clicked={[Function]}
+            isSelected={false}
+            key="21"
+            label="music"
+          >
+            <li
+              className="blog-categories capitalize blog-categories__list__item"
+              onClick={[Function]}
+            >
+              music
+            </li>
+          </Category>
+          <Category
+            className="blog-categories__list__item"
+            clicked={[Function]}
+            isSelected={false}
+            key="25"
+            label="decorations"
+          >
+            <li
+              className="blog-categories capitalize blog-categories__list__item"
+              onClick={[Function]}
+            >
+              decorations
+            </li>
+          </Category>
+          <Category
+            className="blog-categories__list__item"
+            clicked={[Function]}
+            isSelected={false}
+            key="1"
+            label="featured"
+          >
+            <li
+              className="blog-categories capitalize blog-categories__list__item"
+              onClick={[Function]}
+            >
+              featured
+            </li>
+          </Category>
+          <Category
+            className="blog-categories__list__item"
+            clicked={[Function]}
+            isSelected={true}
+            key="2"
+            label="front page"
+          >
+            <li
+              className="blog-categories capitalize blog-categories__list__item blog-categories__list__selected"
+              onClick={[Function]}
+            >
+              front page
+            </li>
+          </Category>
+          <Category
+            className="blog-categories__list__item"
+            clicked={[Function]}
+            isSelected={false}
+            key="17"
+            label="home"
+          >
+            <li
+              className="blog-categories capitalize blog-categories__list__item"
+              onClick={[Function]}
+            >
+              home
+            </li>
+          </Category>
+          <Category
+            className="blog-categories__list__item"
+            clicked={[Function]}
+            isSelected={false}
+            key="24"
+            label="outdoors"
+          >
+            <li
+              className="blog-categories capitalize blog-categories__list__item"
+              onClick={[Function]}
+            >
+              outdoors
+            </li>
+          </Category>
+        </ul>
+        <button
+          className="button-outline view-more text-bold"
+          onClick={[Function]}
+        >
+          More Categories
+        </button>
+      </div>
+    </Categories>
+  </Connect(Categories)>
+</Provider>
+`;

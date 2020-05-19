@@ -56,10 +56,10 @@ exports[`<ResultsPage /> renders snapshot of ResultsPage 1`] = `
         className="map-container"
       >
         <Main
-          highlightOrgCard={[Function]}
+          highlightOrgCard={[MockFunction]}
           isMobile={false}
           locations={Array []}
-          onBoundsChange={[Function]}
+          onBoundsChange={[MockFunction]}
           organizations={
             Array [
               Object {

@@ -17,7 +17,7 @@ const createProps = props => {
   };
 };
 
-describe('<Pagination />', () => {
+xdescribe('<Pagination />', () => {
   it('No prevPage button when the currentPage is 1', () => {
     const props = createProps({
       page: 1,

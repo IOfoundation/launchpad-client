@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Content /> renders snapshot of Modal Content 1`] = `
+<Fragment>
+  <i
+    className="material-icons modal-events__close"
+    onClick={[MockFunction]}
+  >
+    close
+  </i>
+  <h1
+    className="modal-events__title"
+  >
+    Title
+  </h1>
+  <PostedBy
+    name="name"
+    url="website"
+  />
+  <DateSection
+    end="end"
+    start="Starts"
+  />
+  <Section
+    content="Address"
+    modifiers={
+      Array [
+        "extra-space",
+      ]
+    }
+  />
+  <Link
+    link="url"
+  />
+  <Section
+    content="Descripton"
+  />
+</Fragment>
+`;

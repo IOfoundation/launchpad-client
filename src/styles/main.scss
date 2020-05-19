@@ -1,30 +1,53 @@
+/*abstracts*/
+@import 'abstracts/variables';
+@import 'abstracts/helpers';
 
-//abstracts
-@import "abstracts/variables";
-@import "abstracts/helpers";
+/*base*/
+@import 'base/normalize';
+@import 'base/typography';
+@import 'base/margin';
+@import 'base/padding';
+@import 'base/details-titles';
+@import 'base/transforms';
+@import 'base/images';
+@import 'base/titles';
 
-//base
-@import "base/normalize";
-@import "base/typography";
-@import "base/margin";
-@import "base/padding";
+/*Components*/
+@import 'components/search';
+@import 'components/links';
+@import 'components/buttons';
+@import 'components/pagination';
+@import 'components/home/hero';
+@import 'components/businesses/resultInfo';
+@import 'components/shared/snackbar';
+@import 'components/shared/jumbotron';
+@import 'components/shared/admin-login-form';
+@import 'components/shared/right-line';
+@import 'components/businesses/business-details';
+@import 'components/blog/blog';
+@import './components/events/_events.scss';
+@import './components/shared/loading_background';
 
+/*layout*/
+@import 'layout/header';
+@import 'layout/container';
+@import 'layout/grid';
+@import 'layout/footer';
+@import 'layout/mobile-footer';
+@import 'layout/search-nav';
+@import 'layout/business';
+@import 'layout/search-nav-mobile';
+@import 'layout/_result-page-mobile';
 
-//Components
-@import "components/search";
-@import "components/links";
-@import "components/buttons";
-@import "components/pagination";
-@import "components/home/hero";
-@import "components/businesses/resultInfo";
+/*Kendo*/
+@import '~@progress/kendo-theme-default/scss/button';
+@import '~@progress/kendo-theme-default/scss/window';
+@import '~@progress/kendo-theme-default/scss/scheduler';
+@import '~@progress/kendo-theme-default/scss/datetime';
 
-//layout
-@import "layout/header";
-@import "layout/container";
-@import "layout/grid";
-@import "layout/footer";
-@import "layout/mobile-footer";
-@import "layout/search-nav";
-@import "layout/business";
-@import "layout/search-nav-mobile";
-@import "layout/_result-page-mobile";
+/*Kendo overwrites*/
+@import './kendo/scheduler';
+@import './kendo/datetime';
+
+/*Medium draft*/
+@import './medium-draft/styles';

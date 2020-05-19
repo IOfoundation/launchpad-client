@@ -1,19 +1,92 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<BusinessesForm /> Search box renders results 1`] = `
-<BusinessesForm
-  disableOnClickOutside={[Function]}
-  enableOnClickOutside={[Function]}
+<OnClickOutside(BusinessesForm)
   eventTypes={
     Array [
       "mousedown",
       "touchstart",
     ]
   }
-  getTextSearchResults={[Function]}
-  items={Array []}
+  excludeScrollbar={false}
+  getTextSearchResults={[MockFunction]}
+  items={
+    Array [
+      Object {
+        "content": "content",
+        "id": 1,
+        "searchable_type": "Category",
+      },
+    ]
+  }
   outsideClickIgnoreClass="ignore-react-onclickoutside"
   preventDefault={false}
   stopPropagation={false}
-/>
+>
+  <BusinessesForm
+    disableOnClickOutside={[Function]}
+    enableOnClickOutside={[Function]}
+    eventTypes={
+      Array [
+        "mousedown",
+        "touchstart",
+      ]
+    }
+    getTextSearchResults={[MockFunction]}
+    items={
+      Array [
+        Object {
+          "content": "content",
+          "id": 1,
+          "searchable_type": "Category",
+        },
+      ]
+    }
+    outsideClickIgnoreClass="ignore-react-onclickoutside"
+    preventDefault={false}
+    stopPropagation={false}
+  >
+    <form
+      className="businesses-form"
+      onKeyDown={[Function]}
+      onMouseMove={[Function]}
+    >
+      <input
+        className="hero_input text-thin"
+        onChange={[Function]}
+        onClick={[Function]}
+        placeholder="Search for businesses and services"
+        type="text"
+        value=""
+      />
+      <img
+        className="text-search-icon"
+        onClick={[Function]}
+        src="/static-data/images/search.png"
+      />
+      <div
+        className="hero_input-dropdown hero_input-hide"
+      >
+        <div>
+          <ul
+            className="hero-dropdown-list scroll-list"
+          >
+            <li
+              className="text-regular"
+              key="1"
+              onMouseOver={[Function]}
+              value={1}
+            >
+              <a
+                href="/businesses?category=content"
+              >
+                content
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </form>
+  </BusinessesForm>
+</OnClickOutside(BusinessesForm)>
 `;

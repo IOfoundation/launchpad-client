@@ -1,0 +1,73 @@
+.details-social-bar {
+  background-color: $tenth-color;
+
+  a {
+    outline: 0;
+  }
+
+  &__item {
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 16px;
+
+    &--button {
+      background-color: $ninth-color;
+      border: 0;
+      color: $white-color;
+      display: block;
+      display: flex;
+      font-size: 12px;
+      max-height: 15px;
+      padding: 5px 8px;
+      align-items: center;
+      justify-content: center;
+
+      .material-icons {
+        padding-right: 5px;
+        font-size: 14px;
+      }
+
+      &:hover {
+        background-color: $green-btn-hover;
+      }
+    }
+
+    &--icon {
+      width: 24px;
+      height: auto;
+    }
+  }
+
+  &__text {
+    line-height: 20px;
+    opacity: 0.87;
+
+    &--mr {
+      margin-right: 16px;
+    }
+  }
+
+  &__icon {
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 16px;
+
+    rect {
+      fill: black;
+    }
+
+    path {
+      fill: white;
+    }
+
+    &--twitter {
+      rect {
+        fill: $tenth-color;
+      }
+
+      path {
+        fill: black;
+      }
+    }
+  }
+}

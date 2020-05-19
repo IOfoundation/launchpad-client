@@ -26,7 +26,7 @@ BusinessesList.propTypes = {
   isMobile: PropTypes.bool.isRequired,
   organizations: PropTypes.arrayOf(PropTypes.object),
   selectedOrg: PropTypes.number.isRequired,
-  totalOrganizations: PropTypes.number.isRequired,
+  totalOrganizations: PropTypes.string,
 };
 
 export default BusinessesList;

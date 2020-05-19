@@ -1,0 +1,28 @@
+.detail-location {
+  margin-bottom: 20px;
+
+  &__title {
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 8px;
+
+    &:hover {
+      color: $ninth-color;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+
+  &__content {
+    color: $eighth-color;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 4px;
+    opacity: 0.87;
+
+    &--hover:hover {
+      color: $ninth-color;
+      text-decoration: underline;
+    }
+  }
+}

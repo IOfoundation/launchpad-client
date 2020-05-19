@@ -1,0 +1,7 @@
+const EventDeleteTypes = {
+  DELETE_EVENT_START: 'DELETE_EVENT_START',
+  DELETE_EVENT_SUCCESS: 'DELETE_EVENT_SUCCESS',
+  DELETE_EVENT_ERROR: 'DELETE_EVENT_ERROR',
+};
+
+export default EventDeleteTypes;

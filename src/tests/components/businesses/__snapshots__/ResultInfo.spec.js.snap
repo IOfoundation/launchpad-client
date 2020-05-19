@@ -9,14 +9,17 @@ exports[`<ResultInfo /> renders snapshot of ResultInfo 1`] = `
   >
     Select a business type that represents you.
   </p>
-  <div
-    className="business-type-container col-lg-12 p-0 grid"
+  <WithStyles(Grid)
+    container={true}
+    spacing={16}
   >
-    <div
-      className="col-xs-4 col-md-4 col-lg-4 m-bot-16 p-0"
+    <WithStyles(Grid)
+      item={true}
+      md={4}
+      xs={12}
     >
       <button
-        className="btn btn-search btn-outline"
+        className="btn btn-search btn-outline btn--padding"
         key="142"
         onClick={[Function]}
       >
@@ -50,12 +53,14 @@ exports[`<ResultInfo /> renders snapshot of ResultInfo 1`] = `
           }
         />
       </button>
-    </div>
-    <div
-      className="col-xs-4 col-md-4 col-lg-4 m-bot-16 p-right-0"
+    </WithStyles(Grid)>
+    <WithStyles(Grid)
+      item={true}
+      md={4}
+      xs={12}
     >
       <button
-        className="btn btn-search btn-outline"
+        className="btn btn-search btn-outline btn--padding"
         key="143"
         onClick={[Function]}
       >
@@ -89,12 +94,14 @@ exports[`<ResultInfo /> renders snapshot of ResultInfo 1`] = `
           }
         />
       </button>
-    </div>
-    <div
-      className="col-xs-4 col-md-4 col-lg-4 m-bot-16 p-right-0"
+    </WithStyles(Grid)>
+    <WithStyles(Grid)
+      item={true}
+      md={4}
+      xs={12}
     >
       <button
-        className="btn btn-search btn-outline"
+        className="btn btn-search btn-outline btn--padding"
         key="144"
         onClick={[Function]}
       >
@@ -128,7 +135,7 @@ exports[`<ResultInfo /> renders snapshot of ResultInfo 1`] = `
           }
         />
       </button>
-    </div>
-  </div>
+    </WithStyles(Grid)>
+  </WithStyles(Grid)>
 </div>
 `;

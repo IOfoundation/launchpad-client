@@ -1,6 +1,6 @@
 import Axios from 'axios';
 
-const httpRequest = Axios.create({
+export const httpRequest = Axios.create({
   baseURL: process.env.API_URL,
   timeout: 10000,
   headers: {
@@ -9,4 +9,9 @@ const httpRequest = Axios.create({
   },
 });
 
-export default httpRequest;
+httpRequest.interceptors.response.use(
+  response => response,
+  error => {
+    return Promise.reject(error.response);
+  }
+);

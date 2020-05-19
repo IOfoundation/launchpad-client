@@ -1,24 +1,33 @@
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import autoprefixer from 'autoprefixer';
 import path from 'path';
 import DotenvPlugin from 'webpack-dotenv-plugin';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 export default {
+  mode: 'development',
   resolve: {
-    modules: [path.resolve('src'), 'node_modules'],
+    modules: ['babel-polyfill', path.resolve('src'), 'node_modules'],
     extensions: ['*', '.js', '.json'],
+    alias: {
+      '@Actions': path.resolve(__dirname, 'src/actions/'),
+      '@Shared': path.resolve(__dirname, 'src/components/shared/'),
+      '@Utils': path.resolve(__dirname, 'src/utils/'),
+      '@StaticData': path.resolve(__dirname, 'src/static-data/'),
+      '@Styles': path.resolve(__dirname, 'src/styles/'),
+      '@Components': path.resolve(__dirname, 'src/components'),
+      '@HOC': path.resolve(__dirname, 'src/hoc'),
+    },
   },
   // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool
   devtool: 'eval-source-map',
   entry: [
     // must be first entry to properly set public path
-    'babel-polyfill',
     './src/webpack-public-path',
     'react-hot-loader/patch',
     'webpack-hot-middleware/client?reload=true',
-    path.resolve(__dirname, 'src/index.js'), // Defining path seems necessary for this to work consistently on Windows machines.
+    path.resolve(__dirname, 'src/index.js'),
   ],
   // necessary per https://webpack.github.io/docs/testing.html#compile-and-test
   target: 'web',
@@ -53,9 +62,10 @@ export default {
       },
       inject: true,
     }),
-    // Generate an external css file with a hash in the filename
-    new ExtractTextPlugin('[name].[contenthash].css'),
-    new webpack.LoaderOptionsPlugin({
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css',
+    }),
+    /* new webpack.LoaderOptionsPlugin({
       minimize: false,
       debug: true,
       // set to false to see a list of every file being bundled.
@@ -64,41 +74,109 @@ export default {
         context: '/',
         postcss: () => [autoprefixer],
       },
-    }),
+    }),*/
   ],
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        loaders: ['babel-loader'],
+        use: ['babel-loader'],
       },
-      {test: /\.eot(\?v=\d+.\d+.\d+)?$/, loader: 'file-loader'},
+      {
+        test: /\.eot(\?v=\d+.\d+.\d+)?$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              name: '[name].[ext]',
+            },
+          },
+        ],
+      },
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'url-loader?limit=10000&mimetype=application/font-woff',
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+              mimetype: 'application/font-woff',
+              name: '[name].[ext]',
+            },
+          },
+        ],
       },
       {
         test: /\.[ot]tf(\?v=\d+.\d+.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=application/octet-stream',
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+              mimetype: 'application/octet-stream',
+              name: '[name].[ext]',
+            },
+          },
+        ],
       },
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
         exclude: /node_modules/,
-        loader: 'url-loader?limit=10000&mimetype=image/svg+xml',
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+              mimetype: 'image/svg+xml',
+              name: '[name].[ext]',
+            },
+          },
+        ],
       },
-      {test: /\.(jpe?g|png|gif)$/i, loader: 'file-loader?name=[name].[ext]'},
-      {test: /\.ico$/, loader: 'file-loader?name=[name].[ext]'},
+      {
+        test: /\.(jpe?g|png|gif|ico)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+            },
+          },
+        ],
+      },
       {
         test: /(\.css)$/,
-        loaders: ['style-loader', 'css-loader?sourceMap', 'postcss-loader'],
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [autoprefixer],
+              sourceMap: true,
+            },
+          },
+        ],
       },
       {
         test: /(\.scss)$/,
-        loader: ExtractTextPlugin.extract({
-          loader: ['css-loader', 'sass-loader'],
-          fallbackLoader: 'style-loader',
-        }),
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'sass-loader',
+          },
+        ],
       },
     ],
   },

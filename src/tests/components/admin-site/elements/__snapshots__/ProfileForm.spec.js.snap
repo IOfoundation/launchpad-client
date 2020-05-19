@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Admin-site <ProfileForm /> renders snapshot of ProfileForm 1`] = `
+<ProfileForm
+  classes={
+    Object {
+      "bottomLine": "ProfileForm-bottomLine-13",
+      "btn": "ProfileForm-btn-12",
+      "btnWrapper": "ProfileForm-btnWrapper-11",
+      "card": "ProfileForm-card-6",
+      "cardContent": "ProfileForm-cardContent-8",
+      "cardTitle": "ProfileForm-cardTitle-7",
+      "containerFlex": "ProfileForm-containerFlex-1",
+      "imageHeight": "ProfileForm-imageHeight-14",
+      "phoneItem": "ProfileForm-phoneItem-10",
+      "phoneItemWrapper": "ProfileForm-phoneItemWrapper-9",
+      "sectionOneItem": "ProfileForm-sectionOneItem-5",
+      "sectionOnePhotoElement": "ProfileForm-sectionOnePhotoElement-2",
+      "sectionOnePhotoPhoto": "ProfileForm-sectionOnePhotoPhoto-3",
+      "sectionOneRegular": "ProfileForm-sectionOneRegular-4",
+    }
+  }
+  errors={Object {}}
+  handleBlur={[MockFunction]}
+  handleChange={[MockFunction]}
+  handleSubmit={[MockFunction]}
+  touched={Object {}}
+  values={
+    Object {
+      "accreditations": "",
+      "contactEmail": "",
+      "dateIncorporation": "",
+      "description": "",
+      "facebook": "",
+      "fundingSources": "",
+      "images": Object {},
+      "legalStatus": "",
+      "licenses": "",
+      "linkedin": "",
+      "name": "",
+      "organizationName": "",
+      "password": "",
+      "phones": Array [
+        Object {
+          "countryExt": "",
+          "department": "",
+          "ext": "",
+          "numberType": "",
+          "phoneNumber": "",
+          "vanityNumber": "",
+        },
+      ],
+      "taxIdentifier": "",
+      "taxStatus": "",
+      "twitter": "",
+      "website": "",
+    }
+  }
+/>
+`;

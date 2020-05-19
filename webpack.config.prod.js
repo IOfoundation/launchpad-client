@@ -1,12 +1,13 @@
 // For info about this file refer to webpack and webpack-hot-middleware documentation
 // For info on how we're generating bundles with hashed filenames for cache busting: https://medium.com/@okonetchnikov/long-term-caching-of-static-assets-with-webpack-1ecb139adb95#.w99i89nsz
 import webpack from 'webpack';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import WebpackMd5Hash from 'webpack-md5-hash';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import autoprefixer from 'autoprefixer';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import DotenvPlugin from 'webpack-dotenv-plugin';
 import path from 'path';
+import cssnano from 'cssnano';
 
 const GLOBALS = {
   'process.env.NODE_ENV': JSON.stringify('production'),
@@ -15,13 +16,23 @@ const GLOBALS = {
 };
 
 export default {
+  mode: 'production',
   resolve: {
-    modules: [path.resolve('src'), 'node_modules'],
+    modules: ['babel-polyfill', path.resolve('src'), 'node_modules'],
     extensions: ['*', '.js', '.json'],
+    alias: {
+      '@Actions': path.resolve(__dirname, 'src/actions/'),
+      '@Shared': path.resolve(__dirname, 'src/components/shared/'),
+      '@Utils': path.resolve(__dirname, 'src/utils/'),
+      '@StaticData': path.resolve(__dirname, 'src/static-data/'),
+      '@Styles': path.resolve(__dirname, 'src/styles/'),
+      '@Components': path.resolve(__dirname, 'src/components'),
+      '@HOC': path.resolve(__dirname, 'src/hoc'),
+    },
   },
   // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool
-  devtool: 'source-map',
-  entry: ['babel-polyfill', path.resolve(__dirname, 'src/index')],
+  devtool: false,
+  entry: [path.resolve(__dirname, 'src/index')],
   // necessary per https://webpack.github.io/docs/testing.html#compile-and-test
   target: 'web',
   node: {
@@ -29,8 +40,11 @@ export default {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: './',
+    publicPath: '/',
     filename: '[name].[chunkhash].js',
+  },
+  optimization: {
+    minimize: true,
   },
   plugins: [
     new DotenvPlugin({
@@ -44,7 +58,9 @@ export default {
     new webpack.DefinePlugin(GLOBALS),
 
     // Generate an external css file with a hash in the filename
-    new ExtractTextPlugin('[name].[contenthash].css'),
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css',
+    }),
 
     // Generate HTML file that contains references to generated bundles. See here for how this works: https://github.com/ampedandwired/html-webpack-plugin#basic-usage
     new HtmlWebpackPlugin({
@@ -67,9 +83,6 @@ export default {
       trackJSToken: '',
     }),
 
-    // Minify JS
-    new webpack.optimize.UglifyJsPlugin({sourceMap: true}),
-
     new webpack.LoaderOptionsPlugin({
       minimize: true,
       debug: false,
@@ -84,62 +97,114 @@ export default {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
+        use: ['babel-loader'],
       },
       {
         test: /\.eot(\?v=\d+.\d+.\d+)?$/,
-        loader: 'url-loader?name=[name].[ext]',
-        options: {
-          limit: 100,
-        },
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              name: '[name].[ext]',
+              limit: 100,
+            },
+          },
+        ],
       },
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'url-loader?name=[name].[ext]',
-        options: {
-          limit: 100,
-        },
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+              mimetype: 'application/font-woff',
+              name: '[name].[ext]',
+            },
+          },
+        ],
       },
       {
         test: /\.[ot]tf(\?v=\d+.\d+.\d+)?$/,
-        loader: 'url-loader?name=[name].[ext]',
-        options: {
-          limit: 100,
-        },
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+              mimetype: 'application/octet-stream',
+              name: '[name].[ext]',
+            },
+          },
+        ],
       },
       {
         test: /\.svg(\?v=\d+.\d+.\d+)?$/,
-        loader: 'url-loader?name=[name].[ext]',
-        options: {
-          limit: 100,
-        },
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+              mimetype: 'image/svg+xml',
+              name: '[name].[ext]',
+            },
+          },
+        ],
       },
       {
-        test: /\.(png|jpg)$/,
-        loader: 'url-loader',
+        test: /\.(jpe?g|png|gif|ico)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: './static-data/images/[name].[ext]',
+            },
+          },
+        ],
       },
-      {
-        test: /\.(jpe?g|png|gif)$/i,
-        loader: 'file-loader',
-        options: {
-          name: './static-data/images/[name].[ext]',
-        },
-      },
-      {test: /\.ico$/, loader: 'file-loader?name=[name].[ext]'},
       {
         test: /(\.css)$/,
-        loader: ExtractTextPlugin.extract(
-          'css-loader?sourceMap!postcss-loader'
-        ),
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: false,
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [cssnano, autoprefixer],
+              sourceMap: false,
+            },
+          },
+        ],
       },
       {
         test: /(\.scss)$/,
-        loader: ExtractTextPlugin.extract({
-          loader: ['css-loader', 'sass-loader'],
-          fallbackLoader: 'style-loader',
-        }),
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: false,
+            },
+          },
+          {
+            loader: 'sass-loader',
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [cssnano, autoprefixer],
+              sourceMap: false,
+            },
+          },
+        ],
       },
     ],
   },

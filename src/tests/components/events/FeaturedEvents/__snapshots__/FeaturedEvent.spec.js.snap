@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FeaturedEvent /> renders snapshot of FeaturedEvent 1`] = `
+<div
+  className="featured-event"
+>
+  <h3
+    className="featured-event__title text-bold"
+  >
+    title:
+  </h3>
+  <p
+    className="featured-event__description"
+  >
+    description
+  </p>
+  <p
+    className="featured-event__information"
+  >
+    <span
+      className="featured-event__information__date text-bold"
+    >
+      date
+    </span>
+     
+    by
+     
+    <span>
+      name
+    </span>
+  </p>
+</div>
+`;
