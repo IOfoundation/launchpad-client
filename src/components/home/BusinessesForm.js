@@ -293,7 +293,7 @@ class BusinessesForm extends Component {
           placeholder={
             this.state.showDropdown || this.state.showPreviewDropdown
               ? ''
-              : 'Search for businesses and services'
+              : 'Search all businesses and services'
           }
           className="hero_input text-thin"
         />

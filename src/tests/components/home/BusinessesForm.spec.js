@@ -22,7 +22,7 @@ describe('<BusinessesForm />', () => {
 
   it('Should call set the correct placeholder', () => {
     expect(wrapper.find('input').prop('placeholder')).toEqual(
-      'Search for businesses and services'
+      'Search all businesses and services'
     );
   });
 
