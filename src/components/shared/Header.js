@@ -60,7 +60,7 @@ const Header = props => {
               className="white-link text-bold"
               style={activeStyles}
             >
-              {'Welcome to Resource Finder'}
+              {'iFinder'}
             </IndexLink>
           </span>
         </div>

@@ -26,8 +26,10 @@
   font-style: normal;
   font-weight: 400;
   src: url(../fonts/MaterialIcons-Regular.eot);
-  src: local('Material Icons'), local('MaterialIcons-Regular'), url(../fonts/MaterialIcons-Regular.woff2) format('woff2'),
-    url(../fonts/MaterialIcons-Regular.woff) format('woff'), url(../fonts/MaterialIcons-Regular.ttf) format('truetype');
+  src: local('Material Icons'), local('MaterialIcons-Regular'),
+    url(../fonts/MaterialIcons-Regular.woff2) format('woff2'),
+    url(../fonts/MaterialIcons-Regular.woff) format('woff'),
+    url(../fonts/MaterialIcons-Regular.ttf) format('truetype');
 }
 
 .material-icons {
@@ -76,7 +78,7 @@ a {
   max-width: 1300px;
   margin: 0 auto;
 }
-input[type=text]::-ms-clear {
+input[type='text']::-ms-clear {
   display: none;
 }
 .body-container {
@@ -110,13 +112,13 @@ input[type=text]::-ms-clear {
   font-size: 12px;
 }
 .opacity75 {
-  opacity: .75;
+  opacity: 0.75;
 }
 .break-word {
   word-wrap: break-word;
 }
 .opacity50 {
-  opacity: .5;
+  opacity: 0.5;
 }
 .no-padding {
   padding: 0;
@@ -176,6 +178,7 @@ input[type=text]::-ms-clear {
 .website-link span {
   vertical-align: middle;
 }
+
 /* Import Components */
 @import './components/shared/header.css';
 @import './components/shared/CheckBox.css';

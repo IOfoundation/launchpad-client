@@ -55,7 +55,7 @@ exports[`<BusinessesForm /> Search box renders results 1`] = `
         className="hero_input text-thin"
         onChange={[Function]}
         onClick={[Function]}
-        placeholder="Search for businesses and services"
+        placeholder="Search all businesses and services"
         type="text"
         value=""
       />

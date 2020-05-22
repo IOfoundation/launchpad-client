@@ -41,6 +41,20 @@
   }
 }
 
+.main-btn-container {
+  a {
+    align-items: center;
+    background: #00d3a7;
+    border: 0;
+    color: white;
+    display: flex;
+    height: 40px;
+    margin: 0 auto;
+    justify-content: center;
+    width: 300px;
+  }
+}
+
 .hero_input {
   background: transparent;
   border-radius: 0;

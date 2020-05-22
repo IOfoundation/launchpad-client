@@ -88,7 +88,7 @@ exports[`<Header /> Nav Bar Must have a link to blog page 1`] = `
                       }
                     }
                   >
-                    Welcome to Resource Finder
+                    iFinder
                   </a>
                 </Link>
               </IndexLink>

@@ -21,12 +21,12 @@ describe('<HomePage />', () => {
   });
 
   it('Should macth the remarks, title and subtitle', () => {
-    expect(wrapper.find('.remark').text()).toEqual('Resource Finder');
+    expect(wrapper.find('.remark').text()).toEqual('iFinder');
     expect(wrapper.find('.main-title').text()).toEqual(
-      "Where startups and small business connect inCalifornia's Capital Region"
+      'Regional Resources To Help Your Business Launch, Scale, and Grow'
     );
     expect(wrapper.find('.mobile-devices').text()).toEqual(
-      "Where startups and small business connect in California's Capital Region"
+      'Regional Resources To Help Your Business Launch, Scale, and Grow'
     );
   });
 });

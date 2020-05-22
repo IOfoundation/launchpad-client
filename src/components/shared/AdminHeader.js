@@ -31,7 +31,7 @@ class AdminHeader extends PureComponent {
           <div className="header_links-title">
             <span className="header_title">
               <Link to="/" className="white-link" style={{opacity: '1'}}>
-                {'Welcome to Resource Finder'}
+                {'iFinder'}
               </Link>
             </span>
           </div>
