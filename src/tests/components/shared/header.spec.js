@@ -49,8 +49,7 @@ describe('<Header />', () => {
         wrapper.contains(
           <Link
             activeStyle={activeStyles}
-            className="header_link white-link "
-            to="/businesses"
+            className="header_link white-link not-clickable"
           >
             {'Resources'}
           </Link>
@@ -63,8 +62,7 @@ describe('<Header />', () => {
         wrapper.contains(
           <Link
             activeStyle={activeStyles}
-            className="header_link white-link"
-            to="/events"
+            className="header_link white-link not-clickable"
           >
             {'Events'}
           </Link>
