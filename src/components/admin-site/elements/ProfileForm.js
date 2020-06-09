@@ -59,6 +59,7 @@ const ProfileForm = props => {
                 autocomplete={form.autocomplete}
                 value={values[form.key]}
                 helperText={form.helperText}
+                placeholder={form.placeholder}
               />
             );
           })}

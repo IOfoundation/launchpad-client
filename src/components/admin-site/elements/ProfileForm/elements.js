@@ -16,6 +16,7 @@ export const sectionOnePhoto = [
     key: 'website',
     label: 'Organization Website',
     autocomplete: 'off',
+    placeholder: 'https://test.com',
   },
 ];
 

@@ -30,7 +30,7 @@ class AdminHeader extends PureComponent {
         <div className="contentContainer header grid between-xs middle-xs text-semi">
           <div className="header_links-title">
             <span className="header_title">
-              <Link to="/" className="white-link" style={{opacity: '1'}}>
+              <Link className="white-link not-clickable" style={{opacity: '1'}}>
                 {'iFinder'}
               </Link>
             </span>

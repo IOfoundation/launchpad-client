@@ -32,6 +32,7 @@ class FormTextFieldDefault extends PureComponent {
       handleBlur,
       helperText,
       id,
+      placeholder,
       label,
       marginBottom,
       multiline,
@@ -112,6 +113,7 @@ class FormTextFieldDefault extends PureComponent {
           rowsMax={rowsMax}
           type={type}
           value={value}
+          placeholder={placeholder}
         />
         {displayError}
       </Fragment>
@@ -136,6 +138,7 @@ FormTextFieldDefault.propTypes = {
   name: PropTypes.string,
   novalidate: PropTypes.bool,
   phones: PropTypes.string,
+  placeholder: PropTypes.string,
   rows: PropTypes.string,
   rowsMax: PropTypes.string,
   startAdornment: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),

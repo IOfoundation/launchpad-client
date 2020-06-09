@@ -27,9 +27,7 @@ export const ProfileSchema = Yup.object().shape({
     .required('Required'),
   organizationName: Yup.string(),
   name: Yup.string().required('Required'),
-  website: Yup.string()
-    .url('URL invalid')
-    .required('Required'),
+  website: Yup.string().required('Required'),
   description: Yup.string().required('Required'),
   accreditations: Yup.string(),
   dateIncorporation: Yup.string(),
