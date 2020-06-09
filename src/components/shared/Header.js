@@ -56,8 +56,7 @@ const Header = props => {
         <div className="header_links-title">
           <span className="header_title">
             <IndexLink
-              to="/"
-              className="white-link text-bold"
+              className="white-link text-bold not-clickable"
               style={activeStyles}
             >
               {'iFinder'}
@@ -71,22 +70,19 @@ const Header = props => {
         <nav className="header_links-contact text-bold">
           <Link
             activeStyle={activeStyles}
-            className="header_link white-link "
-            to="/businesses"
+            className="header_link white-link not-clickable"
           >
             {'Resources'}
           </Link>
           <Link
             activeStyle={activeStyles}
-            className="header_link white-link"
-            to="/events"
+            className="header_link white-link not-clickable"
           >
             {'Events'}
           </Link>
           <Link
             activeStyle={activeStyles}
-            className="header_link white-link"
-            to="/blog"
+            className="header_link white-link not-clickable"
             onClick={setDefaultCategory}
           >
             {'Blog'}

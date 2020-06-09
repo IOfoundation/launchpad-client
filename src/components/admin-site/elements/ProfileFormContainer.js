@@ -25,7 +25,7 @@ export const ProfileSchema = Yup.object().shape({
   contactEmail: Yup.string()
     .email('Invalid email address')
     .required('Required'),
-  organizationName: Yup.string().required('Required'),
+  organizationName: Yup.string(),
   name: Yup.string().required('Required'),
   website: Yup.string()
     .url('URL invalid')

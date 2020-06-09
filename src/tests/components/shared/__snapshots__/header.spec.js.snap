@@ -61,26 +61,24 @@ exports[`<Header /> Nav Bar Must have a link to blog page 1`] = `
               className="header_title"
             >
               <IndexLink
-                className="white-link text-bold"
+                className="white-link text-bold not-clickable"
                 style={
                   Object {
                     "opacity": "1",
                   }
                 }
-                to="/"
               >
                 <Link
-                  className="white-link text-bold"
+                  className="white-link text-bold not-clickable"
                   onlyActiveOnIndex={true}
                   style={
                     Object {
                       "opacity": "1",
                     }
                   }
-                  to="/"
                 >
                   <a
-                    className="white-link text-bold"
+                    className="white-link text-bold not-clickable"
                     onClick={[Function]}
                     style={
                       Object {
@@ -130,13 +128,12 @@ exports[`<Header /> Nav Bar Must have a link to blog page 1`] = `
                   "opacity": "1",
                 }
               }
-              className="header_link white-link "
+              className="header_link white-link not-clickable"
               onlyActiveOnIndex={false}
               style={Object {}}
-              to="/businesses"
             >
               <a
-                className="header_link white-link "
+                className="header_link white-link not-clickable"
                 onClick={[Function]}
                 style={Object {}}
               >
@@ -149,13 +146,12 @@ exports[`<Header /> Nav Bar Must have a link to blog page 1`] = `
                   "opacity": "1",
                 }
               }
-              className="header_link white-link"
+              className="header_link white-link not-clickable"
               onlyActiveOnIndex={false}
               style={Object {}}
-              to="/events"
             >
               <a
-                className="header_link white-link"
+                className="header_link white-link not-clickable"
                 onClick={[Function]}
                 style={Object {}}
               >
@@ -168,14 +164,13 @@ exports[`<Header /> Nav Bar Must have a link to blog page 1`] = `
                   "opacity": "1",
                 }
               }
-              className="header_link white-link"
+              className="header_link white-link not-clickable"
               onClick={[Function]}
               onlyActiveOnIndex={false}
               style={Object {}}
-              to="/blog"
             >
               <a
-                className="header_link white-link"
+                className="header_link white-link not-clickable"
                 onClick={[Function]}
                 style={Object {}}
               >

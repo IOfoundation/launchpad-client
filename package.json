@@ -5,7 +5,7 @@
   "engines": {
     "npm": "6.4.1",
     "node": "10.15.0",
-    "yarn": "1.15.2"
+    "yarn": "1.19.1"
   },
   "scripts": {
     "preinstall": "node tools/nodeVersionCheck.js",
@@ -50,7 +50,7 @@
     "express": "4.16.2",
     "express-force-https": "1.0.0",
     "flexboxgrid": "6.3.1",
-    "formik": "1.5.1",
+    "formik": "1.5.8",
     "google-map-react": "1.1.4",
     "jsonapi-serializer": "3.5.5",
     "medium-draft": "0.5.12",
