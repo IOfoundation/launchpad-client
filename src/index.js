@@ -25,6 +25,7 @@ require('static-data/images/expand-icon.png');
 require('static-data/images/expand-icon.png');
 require('static-data/images/filter.png');
 require('static-data/images/hero.png');
+require('static-data/images/bg.png');
 require('static-data/images/ic_map_green.png');
 require('static-data/images/ic_map_grey.png');
 require('static-data/images/ic_map_list-view-Green.png');
