@@ -41,7 +41,7 @@
     "@progress/kendo-scheduler-react-wrapper": "2018.3.1017",
     "@progress/kendo-theme-default": "3.3.1",
     "@progress/kendo-ui": "2019.1.227",
-    "axios": "0.17.0",
+    "axios": "0.21.1",
     "chai": "4.1.2",
     "deep-freeze": "^0.0.1",
     "dompurify": "1.0.10",
