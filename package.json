@@ -73,7 +73,7 @@
     "react-test-renderer": "16.8.1",
     "redux": "4.0.1",
     "redux-thunk": "^2.3.0",
-    "url-parse": "1.4.4",
+    "url-parse": "1.5.2",
     "webpack-dotenv-plugin": "^2.1.0",
     "yup": "0.26.10"
   },
