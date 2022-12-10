@@ -47,7 +47,7 @@
     "dompurify": "1.0.10",
     "draft-convert": "2.1.4",
     "draft-js-video-plugin": "2.0.1",
-    "express": "4.16.2",
+    "express": "4.17.3",
     "express-force-https": "1.0.0",
     "flexboxgrid": "6.3.1",
     "formik": "1.5.8",
